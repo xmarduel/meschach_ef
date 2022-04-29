@@ -6,3 +6,6 @@ my **very** old finite element library, based on the meschach library.
 - 3D
 
 Very nice python wrapper
+
+
+WARNING: some external dependencies not yet in repo.
