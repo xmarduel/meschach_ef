@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/xavier/DEVELOPPEMENT/SANDBOX_PROJECTS/MESCHACH_WORK/MESCHACH_EF/SRCS/all_params_read.c"
+         timestampString = "438375716.959821"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "95"
+         endingLineNumber = "95">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/xavier/DEVELOPPEMENT/SANDBOX_PROJECTS/MESCHACH_WORK/DRIVERS_C/2D/PDE_2D_SOLVE.c"
+         timestampString = "438375692.012971"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
+         landmarkName = "main()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/xavier/DEVELOPPEMENT/SANDBOX_PROJECTS/MESCHACH_WORK/MESCHACH_EF/SRCS/all_params_json_utils.c"
+         timestampString = "438376762.194203"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "88"
+         endingLineNumber = "88"
+         landmarkName = "cut_comments()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/MESCHACH_CPGPLOT/SRCS/graphics1D_pgplot_stationnary_xt_window.c"
+         timestampString = "446815344.895728"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "266"
+         endingLineNumber = "266">
+      </FileBreakpoint>
+   </FileBreakpoints>
+</Bucket>

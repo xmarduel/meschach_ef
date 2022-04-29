@@ -1,0 +1,85 @@
+#!/usr/bin/env gnuplot
+#
+# Domaine d'interpolation :
+#
+set dummy t
+set grid
+set size square
+#
+#
+
+x0= -2
+Fx0(t) = (t>x0)?(t-x0)**2:0
+#
+x1= -1
+Fx1(t) = (t>x1)?(t-x1)**2:0
+#
+x2= 0
+Fx2(t) = (t>x2)?(t-x2)**2:0
+#
+x3= 1
+Fx3(t) = (t>x3)?(t-x3)**2:0
+#
+#
+D3F(t) =  Fx0(t) - 3*Fx1(t) + 3*Fx2(t) - Fx3(t)
+plot [-4:3][-1:4] D3F(t)
+pause -1
+#
+#
+# ##################################
+#       DEF of SPLINE :            #
+# ##################################
+h=1
+#
+#
+# ###############################
+# Many splines
+# ###############################
+#
+h = 1
+#
+F1(x,t) = (t-x)**2
+F2(x,t) = h**2 + 2*h*(t-x-1) - 2*h*(t-x-1)**2
+F3(x,t) = (x+3-t)**2
+#
+# 
+spline1(x,t) = (t>x)? \
+              (t>x+1)? \
+                (t>x+2)? \
+                  (t>x+3)? \
+                   0:F3(x,t):F2(x,t):F1(x,t):0
+#
+# peridicity
+splineR(x,t)  = (t>x-4)? \
+                 (t>x-3)? \
+                  (t>x-2)? \
+                   (t>x-1)? \
+                    (t>x)? \
+                     (t>x+1)? \
+                      (t>x+2)? \
+                  0:F2(x,t):F1(x,t):0:0:0:F1(x-3,t):0
+#
+# peridicity
+splineL(x,t) =  (t>x)? \
+                 (t>x+1)? \
+                  (t>x+2)? \
+                   (t>x+3)? \
+                    (t>x+4)? \
+                     (t>x+5)? \
+                      (t>x+6)? \
+                       (t>x+7)? \
+                   0:F3(x+3,t):0:0:0:F3(x,t):F2(x,t):0:0
+#
+#
+plot [0:6][-1:4] \
+  splineL(-1,t),spline1(0,t),spline1(1,t),spline1(2,t),spline1(3,t),splineR(4,t), \
+  splineL(-1,t)+spline1(0,t)+spline1(1,t)+spline1(2,t)+spline1(3,t)+splineR(4,t), \
+  2*splineL(-1,t)+0*spline1(0,t)+2*spline1(1,t)+0*spline1(2,t)+2*spline1(3,t)+0*splineR(4,t)   
+              
+pause -1
+
+plot [-2:2][-1:3] \
+   spline1(-2,t),spline1(-1,t), \
+   0.25*(-spline1(-2,t)+spline1(-1,t) ), \
+   0.50*( spline1(-2,t)+spline1(-1,t) )
+pause -1

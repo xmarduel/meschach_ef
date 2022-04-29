@@ -1,0 +1,60 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "title":"MESH_2D schema",
+    "description":"",
+    "type" : "object",
+    "properties" : {
+        
+        "MESH_03" : { "$ref": "#/mesh2D" },
+        "MESH_04" : { "$ref": "#/mesh2D" },
+        "MESH_05" : { "$ref": "#/mesh2D" },
+        "MESH_06" : { "$ref": "#/mesh2D" },
+        "MESH_10" : { "$ref": "#/mesh2D" },
+        "MESH_20" : { "$ref": "#/mesh2D" },
+        "MESH_40" : { "$ref": "#/mesh2D" },
+        "MESH_50" : { "$ref": "#/mesh2D" }
+    },
+    
+    "mesh2D" : { "type":"object", "description":"",
+        "properties" : {
+            
+            "NX"   : { "type":"integer", "description":"number of segments" },
+            "NY"   : { "type":"integer", "description":"number of segments" },
+                
+            "X_AXIS_SEGMENTS" : { "type":"array", "description":"" , "items" : { "type":"number", "description":"" } },
+            "Y_AXIS_SEGMENTS" : { "type":"array", "description":"" , "items" : { "type":"number", "description":"" } },
+            
+            "SIDES_INFOS" : { "type": "object", 
+                "properties" : {
+                    "NB_REFS"  : { "type":"integer", "description":"number of refs" },
+                    "SIDES_IDX" : { "type":"object", 
+                        "properties": {
+                            "SOUTH" : { "type":"array", "description":"" , "items" : { "type":"integer", "description":"" } },
+                            "EAST"  : { "type":"array", "description":"" , "items" : { "type":"integer", "description":"" } },
+                            "NORTH" : { "type":"array", "description":"" , "items" : { "type":"integer", "description":"" } },
+                            "WEST"  : { "type":"array", "description":"" , "items" : { "type":"integer", "description":"" } }
+                        }
+                    },
+                    "required" : ["SOUTH", "EAST", "NORTH", "WEST"],
+                    "additionalProperties": false
+                },
+                "required" : ["SIDES_IDX"],
+                "additionalProperties": false
+            },
+            
+            "VERTICES_INFOS" : { "type": "object", 
+                "properties" : {
+                    "NB_REFS"      : { "type":"integer", "description":"number of refs" },
+                    "VERTICES_IDX" : { "type":"array", "items" : {
+                         "type":"array", "items" : { "type":"integer" }
+                         }
+                    },
+                    "required" : ["VERTICES_IDX"],
+                    "additionalProperties": false
+                }
+            }      
+        },
+        "required" : ["NX", "NY", "X_AXIS_SEGMENTS", "Y_AXIS_SEGMENTS", "SIDES_INFOS", "VERTICES_INFOS"],
+        "additionalProperties": false
+    }
+}

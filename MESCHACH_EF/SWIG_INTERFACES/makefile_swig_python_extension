@@ -1,0 +1,46 @@
+#! /bin/sh
+#
+#/////////////////////////////////////////////////////////
+#//
+#// interface file for MESCHACH_EF-SWIG
+#//
+#/////////////////////////////////////////////////////////
+#
+MODULE               = meschach_ef
+#
+PYTHON_EXTENSION     = $(MODULE).so
+SWIG_INTERFACE_FILE  = $(MODULE).i
+#
+SRC_WRAP = $(MODULE)_wrap.c
+OBJ_WRAP = $(SRC_WRAP:.c=.o)
+#
+SWIG_DEPENDANCIES =  $(SWIG_INTERFACE_FILE) \
+         SWIG_INTERFACE_M_EF_assemblage.i \
+         SWIG_INTERFACE_M_EF_apply_bc.i \
+         SWIG_INTERFACE_M_EF_boundary_conditions.i \
+         SWIG_INTERFACE_M_EF_finite_element.i \
+         SWIG_INTERFACE_M_EF_functions_defs.i \
+         SWIG_INTERFACE_M_EF_functions_structs.i \
+         SWIG_INTERFACE_M_EF_geometry.i \
+         SWIG_INTERFACE_M_EF_graphics.i \
+         SWIG_INTERFACE_M_EF_miscellaneous.i \
+         SWIG_INTERFACE_M_EF_params.i \
+         SWIG_INTERFACE_M_EF_problem_solvers.i \
+         SWIG_INTERFACE_M_EF_rhs.i \
+         SWIG_INTERFACE_M_EF_adv.i \
+         SWIG_INTERFACE_M_EF_algo_navierstokes.i \
+         SWIG_INTERFACE_M_EF_algo_stokes.i
+#
+#
+DYLIBS_LINKED_TO_BUNDLE = $(LIB_MESCHACH_EF) \
+   $(LIB_MESCHACH_ADDS) \
+   $(LIB_MESCHACH_SPOOLES) \
+   $(LIB_MESCHACH_LAPACK) \
+   $(LIB_MESCHACH)
+#
+#
+TOP = ../..
+#
+include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk
+#
+#

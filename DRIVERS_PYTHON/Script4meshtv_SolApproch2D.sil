@@ -1,0 +1,10 @@
+#! /usr/bin/env meshtvx
+#
+# File automatically generated  - changes will not be kept - 
+# silo version : 4.8
+#
+#  host[] meshtvx -s name_of_the_file 
+# 
+open "./SolApproch2D.silo";
+surf surfcol=z,legend=on,var="vitesse";
+plot surf

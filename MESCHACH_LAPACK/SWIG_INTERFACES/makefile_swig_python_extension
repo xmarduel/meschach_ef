@@ -1,0 +1,29 @@
+#! /bin/sh
+#
+#/////////////////////////////////////////////////////////
+#//
+#// interface file for MESCHACH_LAPACK
+#//
+#///////////////////////////////////////////////////////// 
+#
+MODULE               = meschach_lapack
+#
+PYTHON_EXTENSION     = $(MODULE).so
+SWIG_INTERFACE_FILE  = $(MODULE).i
+#
+#
+SRC_WRAP = $(MODULE)_wrap.c
+OBJ_WRAP = $(SRC_WRAP:.c=.o)
+#
+SWIG_DEPENDANCIES =  $(SWIG_INTERFACE_FILE) \
+	SWIG_INTERFACE_M_LAPACK.i
+#
+DYLIBS_LINKED_TO_BUNDLE = $(LIB_MESCHACH) \
+	$(LIB_MESCHACH_LAPACK)
+#
+#
+TOP = ../..
+#
+include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk
+#
+#

@@ -1,0 +1,6 @@
+# call with the python executable (on MAC OS X)
+> python DRIVER_1D.py
+
+# view with vtk
+> vtkpython Script4vtk ....
+

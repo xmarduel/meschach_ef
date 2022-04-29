@@ -1,0 +1,275 @@
+{  
+    "PDE" : "LAPLACIAN",   # "LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"
+    
+    "COORDS_DIMS" : 2,
+    "TARGET_DIMS" : 1,
+    
+    "PDE_PARAMATERS" : {
+        "KAPPA"    : 1.000,
+        "SIGMA"    : 0.0,
+        "EPSILON"  : 0.0
+    },
+
+    "PDE_TIME_PARAMETERS" : {
+        "TIME_INI" : 0.0, 
+        "TIME_END" : 2.0,
+        "DELTA_T"  : 0.001
+    },
+
+    # resolution -------------------------------------
+
+    "PDE_RESOLUTION" : {
+        "EF" : "P1" ,         # "P1", "P2", "H3", "S3", "S5"
+
+        "LAPLACIAN_ALGO" : {
+            "METHOD" : "ITERATIVE-METHOD",
+				
+            "ITERATIVE-METHOD" : {
+                "METHOD"          : "CG" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
+                "PRECONDITIONER"  : "ILU" ,      # null, "ICH", "ILU", "DIAG"
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 250,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : "residuals.dat"
+                }
+            }
+        },
+
+        "CONVECTION_DIFFUSION_ALGO" : {
+	    "METHOD" : "ITERATIVE-METHOD",
+            "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
+            "DELTA" : 10.0,
+            
+            "ITERATIVE-METHOD" : {
+                "METHOD"           : "CG" ,
+                "PRECONDITIONER"   : "ILU",
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 250,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : null
+                }
+            }
+        },
+
+        "BURGERS_ALGO" : {
+            "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
+            "DELTA" : 10.0,
+            
+            "NB_OUTER_ITERATIONS" : 100,
+            
+            "INNER-METHOD": "ITERATIVE-METHOD",
+
+            "ITERATIVE-METHOD" : {
+                "METHOD"           : "BiCGStab" ,
+                "PRECONDITIONER"   : "ILU",
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 250,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : null
+                }
+            }
+        },
+		  
+        "STOKES_ALGO" : {             
+            "STOKES_METHOD"    : "PRESSUREMATRIX"
+
+        },
+        
+        "STOKES_ALGO" : {             
+            "STOKES_METHOD"    : "Uzawa",
+            "USAWA_PARAMETERS" : { 
+                "RHO" : 1.0
+            }
+        },
+
+        "NAVIERSTOKES_ALGO" : {             
+            "METHOD"    : "NEWTON-EXACT",
+            "RHO"       : 1.50, 
+            "NAVIERSTOKES_ITERATIVE_METHOD_PARAMETERS" : {
+                "NMAX_ITER" : 250
+            }
+        },
+        
+        "EIGEN_ALGO" : {
+            "EIGEN_PROBLEM" : "ORDINARY_SYMMETRIC",
+            "EIGEN_OPTION"  : "LOWER",
+
+            "NB_EIGENS"     : 10,
+
+            "LOWER_IBOUND"  : 5,
+            "UPPER_IBOUND"  : 9,
+            
+            "LOWER_RBOUND"  : 1.0,
+            "UPPER_RBOUND"  : 1.0
+        } 
+        
+    },
+
+    # pde def -------------------------------------------------------------------------
+    
+    "PDE_INITIAL_CONDITION" : {
+        "FUNC_DIM1_NAME" : "Zero2D",
+        "FUNC_DIM2_NAME" : "yy",
+        "FUNC_DIM3_NAME" : "zz"
+    },
+    
+    "PDE_RHS" : {
+        "FUNC_DIM1_NAME" : "Src2D_08",
+        "FUNC_DIM2_NAME" : null,
+        "FUNC_DIM3_NAME" : null 
+    },
+
+    "PDE_BOUNDARY_CONDITIONS" : {
+        
+        "NB_BCS" : 4,
+         
+        "DIM1" : [
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" },
+           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" },
+           { "IDX" : 4 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" }
+        ],
+        
+        "DIM2" :  [
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
+           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" }
+        ],
+        
+        "DIM3" : [
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
+           { "IDX" : 3 , "BC_TYPE" : "CAUCHY"    , "FUNC_NAME" : "sphere" },
+           { "IDX" : 4 , "BC_TYPE" : "NEUMANN"   , "FUNC_NAME" : "sphere" },
+           { "IDX" : 5 , "BC_TYPE" : "ROBIN"     , "FUNC_NAME" : ["x", "y"]}
+        ]
+    },
+
+    "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : {
+        
+        "1-DIM" : {
+           "FUNC_dudx" : "x",
+           "FUNC_dudy" : "y",
+           "FUNC_dudz" : "z"
+        },
+        
+        "2-DIM" : {
+           "DIM1" : {
+               "FUNC_dudx" : "x",
+               "FUNC_dudy" : "y",
+               "FUNC_dudz" : "y",
+               "FUNC_dvdx" : null,
+               "FUNC_dvdy" : null,
+               "FUNC_dvdz" : null 
+           },
+           "DIM2" : {
+               "FUNC_dudx" : "x",
+               "FUNC_dudy" : "y",
+               "FUNC_dudz" : "y",
+               "FUNC_dvdx" : null,
+               "FUNC_dvdy" : null,
+               "FUNC_dvdz" : null 
+           }
+        }
+    },
+    
+    "PDE_EXACT_SOL" : {
+        "FUNC_DIM1_NAME" : "spheric",
+        "FUNC_DIM2_NAME" : null,
+        "FUNC_DIM3_NAME" : null 
+    },
+    
+    # mesh --------------------------------
+        
+    "MESH_2D" : {
+    
+       #"MESHFILEDEFINITION" : {
+       #        "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/mesh2D.quad",
+       #     "MESHNAME" : "MESH_40",     # "MESH_03", "MESH_04", "MESH_05", "MESH_06", "MESH_10", "MESH_20", "MESH_40", "MESH_50"
+       #     "MESHTYPE" : "quad2"        # "quad1", "quad2", "quad3"
+       # }
+        
+        #"MESHFILEDEFINITION" : {
+        #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CUBE_11.emc2",
+        #    "MESHNAME" : "",
+        #    "MESHTYPE" : "emc2"
+        #}
+        
+        "MESHFILEDEFINITION" : {
+            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/cube2D_P1_v3.gmsh",
+            "MESHNAME" : "",
+            "MESHTYPE" : "gmsh"
+        }
+    },
+
+    # infos ----------------------------------------
+
+    "MISC_OUTPUT" : { 
+        "ITPRINT"          : 4,
+        "ITSAVE"           : 1,
+        "ITSTAT"           : 1,
+        "ITGRAPH"          : 20
+    },
+    
+    # graphics ---------------------------
+    
+    "MISC_GRAPHICS" : { 
+        "IMTXPROF"         : false,
+        "IGEOMVIEW"        : false,
+        "IGEOMCONTOURVIEW" : false,
+        "IGEOMTOTALVIEW"   : false
+    },
+
+    "GRAPHICS_2D_OUTPUT" : {
+        "GNUPLOT"    : false,
+        "MATLAB"     : false,
+        "VTK"        : false,
+        "SILO"       : false, 
+        "VOGLE"      : true,
+        "MATPLOTLIB" : false
+    },
+	 
+    # 2D interactive - graphics library ploting parameters ------------
+    
+    "GRAPHICS_2D" : {
+        "DRIVER" : "/XWINDOW" , 
+        "WINDOW_SIZE" : [600, 600] ,
+        "LABELS_SIZE" : 1.2 ,
+        
+        "SUB_WINDOWS" :
+        [
+            { 
+                "IDXS"         : [1,1] ,
+                
+                #"GRAPHICS_TYPE"    : "CONTOURS",
+                "GRAPHICS_TYPE"    : "SURFACE",
+                
+                "LEGEND"       : "contours" , 
+                
+                "WINDOW"       : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":0.0 , "Y_MAX":1.0 },
+                
+                "CONTOURS"     : {
+                    "NB_LEVELS"    : 11 ,
+                    "LEVELS"       : [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3 ]
+                },
+                
+                "SURFACE"      : {
+                    "DUMMY"    : true
+                }
+            }
+        ]
+    },
+    
+    # logging -------------------------------------------------
+    
+    "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/2D_TRANSIENT/OUTPUT_PDE_2D_TRANSIENT.dat" 
+}

@@ -1,0 +1,61 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "title":"MESH_1D schema",
+    "description":"",
+    "type" : "object",
+    "properties" : {
+        
+        "MESH_10" : { "$ref": "#/mesh1D" },
+        "MESH_20" : { "$ref": "#/mesh1D" },
+        "MESH_40" : { "$ref": "#/mesh1D" }
+    },
+    
+    "mesh1D" : { "type":"object", "description":"",
+        "properties" : {
+            "XMIN" : { "type":"number", "description":"" },
+            "XMAX" : { "type":"number", "description":"" },
+            "NX"   : { "type":"integer", "description":"number of segments" },
+                
+            "SEGMENTS" : { "type":"array", "description":"" , "items" : { "type":"number", "description":"" } },
+            
+            "PERIODICITY" : { "type":"boolean", "description":"" },
+            
+            "SIDES_INFOS" : { "type": "object", 
+                "properties" : {
+                    "NB_REFS"  : { "type":"integer", "description":"number of refs" },
+                    "SIDES_IDX" : { "type":"object", 
+                        "properties": {
+                            "LEFT"     : { "type":"integer", "description":"" },
+                            "RIGHT"    : { "type":"integer", "description":"" }
+                        },
+                        "required": ["LEFT", "RIGHT"],
+                        "additionalProperties": false
+                    }
+                },
+                "required" : ["SIDES_IDX"],
+                "additionalProperties": false
+            },
+            
+            "VERTICES_INFOS" : { "type": "object", 
+                "properties" : {
+                    "NB_REFS"  : { "type":"integer", "description":"number of refs" },
+                    "VERTICES_IDX" : { "type":"object", 
+                        "properties": {
+                            "LEFT"     : { "type":"integer", "description":"" },
+                            "RIGHT"    : { "type":"integer", "description":"" }
+                        },
+                        "required": ["LEFT", "RIGHT"],
+                        "additionalProperties": false
+                    }
+                },
+                "required" : ["VERTICES_IDX"],
+                "additionalProperties": false
+            }   
+        },
+        "required" : ["XMIN", "XMAX", "NX", "SEGMENTS", "PERIODICITY", "SIDES_INFOS", "VERTICES_INFOS" ],
+        "additionalProperties": false
+    }
+}
+        
+        
+                

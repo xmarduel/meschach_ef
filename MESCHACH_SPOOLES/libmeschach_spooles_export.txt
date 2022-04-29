@@ -1,0 +1,5 @@
+_spCHresolution_spooles
+_spLUresolution_spooles
+_sp_bandwr_spooles
+
+_sp_eigen_spooles

@@ -1,0 +1,35 @@
+#! /bin/sh
+#
+#/////////////////////////////////////////////////////////
+#//
+#// interface file for MESCHACH-VOGLE
+#//
+#/////////////////////////////////////////////////////////
+#
+MODULE               = meschach_vogle
+#
+PYTHON_EXTENSION     = $(MODULE).so
+SWIG_INTERFACE_FILE  = $(MODULE).i
+#
+SRC_WRAP = $(MODULE)_wrap.c	
+OBJ_WRAP = $(SRC_WRAP:.c=.o)
+#
+SWIG_DEPENDANCIES =  $(SWIG_INTERFACE_FILE) \
+   SWIG_INTERFACE_M_VOGLE_WRAPPER.i
+#
+DYLIBS_LINKED_TO_BUNDLE = $(LIB_MESCHACH_VOGLE) \
+   $(LIB_MESCHACH_ADDS) \
+   $(LIB_MESCHACH_LAPACK) \
+   $(LIB_MESCHACH_SPOOLES) \
+   $(LIB_MESCHACH) \
+   $(LIB_SPOOLES) \
+   $(LIB_AMD) \
+   $(LIB_VOPL) \
+   $(LIB_VOGLE)
+#
+#
+TOP = ../..
+#
+include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk
+#
+#

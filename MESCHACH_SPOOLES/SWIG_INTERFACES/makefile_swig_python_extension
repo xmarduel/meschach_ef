@@ -1,0 +1,34 @@
+#! /bin/sh
+#
+#/////////////////////////////////////////////////////////
+#//
+#// interface file for MESCHACH_SPOOLES
+#//
+#///////////////////////////////////////////////////////// 
+#
+MODULE               = meschach_spooles
+#
+PYTHON_EXTENSION     = $(MODULE).so
+SWIG_INTERFACE_FILE  = $(MODULE).i
+#
+#
+SRC_WRAP = $(MODULE)_wrap.c
+OBJ_WRAP = $(SRC_WRAP:.c=.o)
+#
+SWIG_DEPENDANCIES =  $(SWIG_INTERFACE_FILE) \
+   SWIG_INTERFACE_M_SPOOLES_allwrappers.i
+#
+DYLIBS_LINKED_TO_BUNDLE = $(LIB_MESCHACH_SPOOLES) \
+   $(LIB_MESCHACH) \
+   $(LIB_SPOOLES)
+#
+#
+TOP = ../..
+#
+# find spooles headers
+CFLAGS = -I/Users/xavier/x_local/spooles
+#
+#
+include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk
+#
+#

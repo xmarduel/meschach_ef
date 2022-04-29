@@ -1,0 +1,106 @@
+--------------------------------------------------------------------------------------
+ NUMERICAL RESOLUTION OF PDE 1D - WITH FINITE ELEMENT P1, P2 ...
+--------------------------------------------------------------------------------------
+LAPLACIAN          * problem (Laplacian) (Convection-Diffusion)
+--------------------------------------------------------------------------------------
+P1                 * Type d'EF : "P1","P2", "H3", "S3", "S5"
+CG                 * Methode : DIRECT-METHOD, CG, CGS, GMRES(k), BiCGStab, etc...
+0  1               * BANDWIDTHREDUCTION : METHOD + OPTION ( -1->NIX, 0->MESCHACH, 1->SPOOLES, 2->AMD) (BAND=0 or PROFILE=1)
+ILU                * Preconditionnement NULL, LLT, ILU, DIAG.
+020                * k of GMRES(k)
+PressureMATRIX  1.50  * Stokes params : method (Uzawa - PressureMATRIX), rho parameter for Uzawa method
+/Users/xavier/DEVELOPPEMENT/SANDBOX_PROJECTS/MESCHACH_WORK/EF_MESHES/mesh2D.quad       * Mesh File ("name.dat") ( MESH_P1.quad[1-2-3]  CUBE_11.emc2 cube2D_P1_v2.gmsh )
+MESH_20 quad2      * meshname meshtype (quad[1-2-3], emc2, gmsh)
+0.0  1.0  10  0  0 * xmin, xmax, nx, distribution, periodicity
+0 0 0 0 0 0 0 1 0  * GNUPLOT,GRAPH,MATLAB,MATPLOTLIB,VTK,SILO,PGPLOT,VOGLE,LIBSCIPLOT   (0=NO;1=YES)
+4  1  1  10        * ITPRINT, ITSAVE, ITSTAT, ITGRAPH
+0 0 0 0            * IMTXPROF, IGEOMVIEW , IGEOMCONTOURVIEW, IGEOMTOTALVIEW
+0  2   0.001       * TPS_INI, TPS_FIN, DT
+-physical parameters------------------------------------------------------------------
+1.000      0.0   0.0  * kappa,sigma,epsilon de   -k*LAPLACIEN(u)+ eps.BILAPL(u) +sigma.u =F
+-parameter for the resolution of the linear system------------------------------------
+250                * max_iter Nombre max d'iter de la methode iterative
+1.e-12             * eps_iter Epsilon arret des iterations "  "  "   "
+3                  * iter_info (0 , 1=stdout, 2=file iter_file)
+the_residuals.dat  * iter_file le nom du fichier "iter_file" pour les residus
+--------------------------------------------------------------------------------------
+-initial condition--------------------------------------------------------------------
+9                  * choix de CI_u
+9                  * choix de CI_v
+-rhs parameters-----------------------------------------------------------------------
+10                 * choix de F1  -e*DD(u) + b.D(u) +sigma.u = F1 (axe1)
+0                  * choix de F2  -e*DD(u) + b.D(u) +sigma.u = F2 (axe2)
+-sol exacte-----------------------------------------------------------------------
+3                  * Sol_Exacte
+3                  * Sol_Exacte
+-boundary conditions------------------------------------------------------------------
+bc mask -- ( which references belong to which type of bc ) --
+5          * nb_BC
+0 0 0 0 0  * AXEe_X (0->dirichlet 1->Neumann 2->Cauchy 3->Robin)
+0 0 0 0 0  * AXEe_Y (0->dirichlet 1->Neumann 2->Cauchy 3->Robin)
+bc dirichlet ---------- type
+10 10 10 10 10         * tab phi  (axe 1) (must be consistent with geometry)
+0 0 0 0 0          * tab phi  (axe 2) (must be consistent with geometry)
+bc neumann ------------ type
+0 0 0 0 0          * tab phi  (axe 1)
+0 0 0 0 0          * tab phi  (axe 2)
+bc cauchy -------------- type
+0 0 0 0 0          * tab phi (axe 1)
+0 0 0 0 0          * tab phi (axe 2)
+bc robin (1) ----------- type
+0 0 0 0 0          * tab phi (axe 1)
+0 0 0 0 0          * tab phi (axe 2)
+bc robin (2) ----------- type
+0 0 0 0 0          * tab phi (axe 1)
+0 0 0 0 0          * tab phi (axe 2)
+-convection parameters/functions------------------------------------------------------
+10.0  GALS         * delta, method stabilisation (SUPG,GALS,DWG)
+1 1  0 0           * choice of b=(b1,b2) or b=(b111,b112,b121,b122) in -e*DD(u) + b.D(u) +sigma.u = F1
+0 0  0 0           * choicd of b=(b1,b2) or b=(b211,b212,b221,b222) in -e*DD(u) + b.D(u) +sigma.u = F2
+--------------------------------------------------------------------------------------
+- graphics library ploting parameters
+/XWINDOW        * Driver PGPLOT
+500 500         * SIZE_WINDOW X- Y in pixels
+1.5             * SIZE_LABEL
+---------------------------------------
+2 2             * NX NY sub-windows
+---------------------------------------
+1 1                           * the sub-window number
+"U(x,t)"                      * legend
+"(x)"                         *
+"(y)"                         *
+0                             * MARKER
+0                             * MARKER_END
+0 6.28318   -8 8              * X_MIN X_MAX Y_MIN YMAX
+2 1                           * the sub-window number
+"KS - L2 Norm of Sol"         * legend
+"(t)"                         *
+"|U(x,t)|"                    *
+0                             * MARKER
+0                             * MARKER_END
+0 100    0 12                 * X_MIN X_MAX Y_MIN YMAX
+1 2                           * the sub-window number
+"KS - L2 Norm of Sol (Zoom)"  * legend
+"(t)"                         *
+"|U(x,t)|"                    *
+0                             * MARKER
+0                             * MARKER_END
+20 30    5 12                 * X_MIN X_MAX Y_MIN YMAX
+2 2                           * the sub-window number
+"KS - Phase Plane representation"  * legend
+"|U|"                         *
+"d/dt |U|"                    *
+0                             * MARKER
+6                             * MARKER_END
+6 10     -7 7                 * X_MIN X_MAX Y_MIN YMAX
+---------------------------------------
+
+6.2831853071795862
+3.1415926535897931
+
+problem : Laplacian
+          Convection-Diffusion
+
+4  1  1   5  0     * IPRINT, ISAVE, ISTAT , Sol_Exacte , IHBF
+5                  * choix de F -e*DD(u) + b.D(u) +sigma.u =F
+4   5 5 6 7        * nb _BCdirichlet, tab phi (must be consistent with geometry)

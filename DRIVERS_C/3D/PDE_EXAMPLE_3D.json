@@ -1,0 +1,234 @@
+{  
+    "PDE" : "LAPLACIAN",   # "LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"
+    
+    "COORDS_DIMS" : 3,
+    "TARGET_DIMS" : 1,
+    
+    "PDE_PARAMATERS" : {
+        "KAPPA"    : 1.000,
+        "SIGMA"    : 0.0,
+        "EPSILON"  : 0.0
+    },
+
+    # resolution -------------------------------------
+
+    "PDE_RESOLUTION" : {
+        "EF" : "P2" ,         # "P1", "P2"
+
+        "LAPLACIAN_ALGO" : {
+            "METHOD" : "ITERATIVE-METHOD",
+				
+	"ITERATIVE-METHOD" : {
+                "METHOD"          : "CG" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
+                "PRECONDITIONER"  : "null" ,     # "null", "ICH", "ILU", "DIAG"
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 250,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : "residuals.dat"
+                }
+            }
+        },
+
+        "CONVECTION_DIFFUSION_ALGO" : {
+            "METHOD" : "ITERATIVE-METHOD",
+            "METHOD_STABILIZATION" : "GALS" ,   # "null", "GALS", "SUPG", "DWG"
+            "DELTA" : 10.0,
+            
+            "ITERATIVE-METHOD" : {
+                "METHOD"           : "CG" ,
+                "PRECONDITIONER"   : "ILU",
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 250,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : null
+                }
+            }
+        },
+
+        "BURGERS_ALGO" : {
+            "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
+            "DELTA" : 10.0,
+            
+            "NB_OUTER_ITERATIONS" : 100,
+            
+            "INNER-METHOD": "ITERATIVE-METHOD",
+
+            "ITERATIVE-METHOD" : {
+                "METHOD"           : "BiCGStab" ,
+                "PRECONDITIONER"   : "ILU",
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 250,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : null
+                }
+            }
+        },
+		  
+        "STOKES_ALGO" : {             
+            "STOKES_METHOD"    : "PRESSUREMATRIX"
+        },
+        
+        "STOKES_ALGO" : {             
+            "STOKES_METHOD"    : "UZAWA",
+            "USAWA_PARAMETERS" : { 
+                "RHO" : 1.0
+            }
+        },
+
+        "NAVIERSTOKES_ALGO" : {             
+            "METHOD"    : "NEWTON-EXACT"
+        },
+        
+        "EIGEN_ALGO" : {
+            "EIGEN_PROBLEM" : "ORDINARY_SYMMETRIC",
+            "EIGEN_OPTION"  : "LOWER",
+
+            "NB_EIGENS"     : 10,
+
+            "LOWER_IBOUND"  : 5,
+            "UPPER_IBOUND"  : 9,
+            
+            "LOWER_RBOUND"  : 1.0,
+            "UPPER_RBOUND"  : 1.0
+        } 
+        
+        
+    },
+
+    # pde def -------------------------------------------------------------------------
+    
+   "PDE_INITIAL_CONDITION" : {
+        "FUNC_DIM1_NAME" : null,
+        "FUNC_DIM2_NAME" : null,
+        "FUNC_DIM3_NAME" : null
+    },
+	 
+	"PDE_RHS" : {
+        "FUNC_DIM1_NAME" : "Src3D_03",
+        "FUNC_DIM2_NAME" : null,
+        "FUNC_DIM3_NAME" : null 
+    },
+
+    "PDE_EXACT_SOL" : {
+        "FUNC_DIM1_NAME" : "Sol3D_03",
+        "FUNC_DIM2_NAME" : null,
+        "FUNC_DIM3_NAME" : null 
+    },
+	 
+    "PDE_BOUNDARY_CONDITIONS" : {
+        
+        "NB_BCS" : 6,
+         
+        "DIM1" : [
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
+           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
+           { "IDX" : 4 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
+           #{ "IDX" : 5 , "BC_TYPE" : "NEUMANN"   , "FUNC_NAME" : "Phi3D_02" }, # df/dx
+           { "IDX" : 5 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
+           { "IDX" : 6 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" }
+        ]
+
+    },
+
+    "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : {
+        
+        "1-DIM" : {
+           "FUNC_dudx" : "x",
+           "FUNC_dudy" : "y",
+           "FUNC_dudz" : "z"
+        },
+        
+        "2-DIM" : {
+           "DIM1" : {
+               "FUNC_dudx" : "x",
+               "FUNC_dudy" : "y",
+               "FUNC_dudz" : "y",
+               "FUNC_dvdx" : null,
+               "FUNC_dvdy" : null,
+               "FUNC_dvdz" : null 
+           },
+           "DIM2" : {
+               "FUNC_dudx" : "x",
+               "FUNC_dudy" : "y",
+               "FUNC_dudz" : "y",
+               "FUNC_dvdx" : null,
+               "FUNC_dvdy" : null,
+               "FUNC_dvdz" : null 
+           }
+        },
+
+        "3-DIM" : {
+           "DIM1" : {
+               "FUNC_dudx" : "x",
+               "FUNC_dudy" : "y",
+               "FUNC_dudz" : "y",
+               "FUNC_dvdx" : null,
+               "FUNC_dvdy" : null,
+               "FUNC_dvdz" : null,
+               "FUNC_dwdx" : null,
+               "FUNC_dwdy" : null,
+               "FUNC_dwdz" : null
+           },
+           "DIM2" : {
+               "FUNC_dudx" : null,
+               "FUNC_dudy" : null,
+               "FUNC_dudz" : null,
+               "FUNC_dvdx" : "x",
+               "FUNC_dvdy" : "y",
+               "FUNC_dvdz" : "z",
+               "FUNC_dwdx" : null,
+               "FUNC_dwdy" : null,
+               "FUNC_dwdz" : null
+           },
+           "DIM3" : {
+               "FUNC_dudx" : null,
+               "FUNC_dudy" : null,
+               "FUNC_dudz" : null,
+               "FUNC_dvdx" : null,
+               "FUNC_dvdy" : null,
+               "FUNC_dvdz" : null,
+               "FUNC_dwdx" : "x",
+               "FUNC_dwdy" : "x",
+               "FUNC_dwdz" : "z"
+           }
+        }
+    },
+    
+    # mesh --------------------------------
+
+    "MESH_3D" : {
+        #"MESHFILEDEFINITION" : {
+        #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube",
+        #    "MESHNAME" : "MESH_10", # "MESH_10", "MESH_20"
+        #    "MESHTYPE" : "cube"
+        #}
+        
+        "MESHFILEDEFINITION" : {
+            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v4.gmsh", # cube3D_P1_v[4-5-6-7-8].gmsh   
+            "MESHNAME" : "null",
+            "MESHTYPE" : "gmsh"
+        }
+    },
+    
+    # graphics ---------------------------
+    
+    "GRAPHICS_3D_OUTPUT" : {
+        "VTK"        : false,
+        "SILO"       : true 
+    },
+    
+    # logging -------------------------------------------------
+    
+    "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/3D/OUTPUT_PDE_3D.dat"
+
+}

@@ -1,0 +1,37 @@
+#! /bin/sh
+#
+#/////////////////////////////////////////////////////////
+#//
+#// interface file for MESCHACH_LIBSCIPLOT
+#//
+#/////////////////////////////////////////////////////////
+#
+MODULE               = meschach_libsciplot
+#
+PYTHON_EXTENSION     = $(MODULE).so
+SWIG_INTERFACE_FILE  = $(MODULE).i
+#
+SRC_WRAP = $(MODULE)_wrap.c	
+OBJ_WRAP = $(SRC_WRAP:.c=.o)
+#
+SWIG_DEPENDANCIES =  $(SWIG_INTERFACE_FILE) \
+   SWIG_INTERFACE_M_LIBSCIPLOT_WRAPPER.i
+#
+DYLIBS_LINKED_TO_BUNDLE = $(LIB_MESCHACH_LIBSCIPLOT) \
+   $(LIB_MESCHACH_ADDS) \
+   $(LIB_MESCHACH_SPOOLES) \
+   $(LIB_MESCHACH_LAPACK) \
+   $(LIB_MESCHACH) \
+   $(LIB_SPOOLES) \
+   $(LIB_AMD)
+#
+#
+TOP = ../..
+#
+# find X11 headers
+CFLAGS = -DHAVE_X11
+#
+#
+include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk
+#
+#

@@ -1,0 +1,37 @@
+#! /bin/sh
+#
+#/////////////////////////////////////////////////////////
+#//
+#// interface file for MESCHACH
+#//
+#///////////////////////////////////////////////////////// 
+#
+MODULE              = meschach
+#
+PYTHON_EXTENSION    = $(MODULE).so
+SWIG_INTERFACE_FILE = $(MODULE).i
+#
+SRC_WRAP = $(MODULE)_wrap.c
+OBJ_WRAP = $(SRC_WRAP:.c=.o)
+#	
+SWIG_DEPENDANCIES =  $(SWIG_INTERFACE_FILE) \
+         SWIG_INTERFACE_M_M_err.i \
+         SWIG_INTERFACE_M_M_iter.i \
+         SWIG_INTERFACE_M_M_machine.i \
+         SWIG_INTERFACE_M_M_matlab.i \
+         SWIG_INTERFACE_M_M_matrix.i \
+         SWIG_INTERFACE_M_M_matrix2.i \
+         SWIG_INTERFACE_M_M_sparse.i \
+         SWIG_INTERFACE_M_M_sparse2.i \
+         SWIG_INTERFACE_M_M_meminfo.i \
+         SWIG_INTERFACE_M_M_zmatrix.i \
+         SWIG_INTERFACE_M_M_zmatrix2.i
+#
+DYLIBS_LINKED_TO_BUNDLE      = $(LIB_MESCHACH)
+#
+#
+TOP = ../..
+#
+include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk
+#
+#

@@ -1,0 +1,41 @@
+#! /bin/sh
+#
+#/////////////////////////////////////////////////////////
+#//
+#// interface file for MESCHACH_ADDS
+#// 
+#/////////////////////////////////////////////////////////
+#
+MODULE               = meschach_adds
+#
+PYTHON_EXTENSION     = $(MODULE).so
+SWIG_INTERFACE_FILE  = $(MODULE).i
+#
+SRC_WRAP = $(MODULE)_wrap.c
+OBJ_WRAP = $(SRC_WRAP:.c=.o)
+#
+SWIG_DEPENDANCIES =  $(SWIG_INTERFACE_FILE) \
+	SWIG_INTERFACE_M_ADDS_amd.i \
+	SWIG_INTERFACE_M_ADDS_control.i \
+	SWIG_INTERFACE_M_ADDS_eigen.i \
+	SWIG_INTERFACE_M_ADDS_gpskmesh.i \
+	SWIG_INTERFACE_M_ADDS_iter_adds.i \
+	SWIG_INTERFACE_M_ADDS_matrix_adds.i \
+	SWIG_INTERFACE_M_ADDS_sparse_adds.i \
+	SWIG_INTERFACE_M_ADDS_sparse2_adds.i \
+	SWIG_INTERFACE_M_ADDS_spmat2format.i \
+	SWIG_INTERFACE_M_ADDS_svqueue.i
+#
+DYLIBS_LINKED_TO_BUNDLE = $(LIB_MESCHACH_ADDS) \
+   $(LIB_MESCHACH_SPOOLES) \
+   $(LIB_MESCHACH_LAPACK) \
+   $(LIB_MESCHACH) \
+   $(LIB_SPOOLES) \
+   $(LIB_AMD)
+#
+#
+TOP = ../..
+#
+include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk
+#
+#

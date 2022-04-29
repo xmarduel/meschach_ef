@@ -1,0 +1,114 @@
+
+{
+
+    "MESH_10" : {
+          
+        "XMIN" : 0.0,
+        "XMAX" : 1.0,
+        
+        "NX"   : 10, 
+        
+        "SEGMENTS" : [ 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+        
+        "PERIODICITY" : false,
+        
+        # ----------- references sur les aretes du bord -----------
+        
+        "SIDES_INFOS" : {
+            "NB_REFS" : 2,
+        
+            "SIDES_IDX" : {
+                "LEFT"   : 1,
+                "RIGHT"  : 2
+            }
+        },
+        
+        # ----------- references sur les sommets -----------------
+        
+        "VERTICES_INFOS" : {
+            "NB_REFS" : 2,      # nb refs sur les sommets (CL Dirichlet)
+            
+            "VERTICES_IDX" : {
+                "LEFT"  : 1 ,
+                "RIGHT" : 2
+            }
+        }
+    },
+
+    # ------------------------------------------------------------------------------------
+    
+    "MESH_20" : {
+          
+        "XMIN" : 0.0,
+        "XMAX" : 1.0,
+        
+        "NX"   : 20, 
+        
+        "SEGMENTS" : [ 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05,
+                       0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05 ],
+                       
+        "PERIODICITY" : false,
+        
+        # ----------- references sur les aretes du bord -----------
+        
+        "SIDES_INFOS" : {
+            "NB_REFS" : 2,
+        
+            "SIDES_IDX" : {
+                "LEFT"   : 1,
+                "RIGHT"  : 2
+            }
+        },
+        
+        # ----------- references sur les sommets -----------------
+        
+        "VERTICES_INFOS" : {
+            "NB_REFS" : 2,      # nb refs sur les sommets (CL Dirichlet)
+            
+            "VERTICES_IDX" : {
+                "LEFT"  : 1 ,
+                "RIGHT" : 2
+            }
+        }
+    },
+    
+    # ------------------------------------------------------------------------------------
+    
+    "MESH_40" : {
+          
+        "XMIN" : 0.0,
+        "XMAX" : 1.0,
+        
+        "NX"   : 40, 
+        
+        "SEGMENTS" : [ 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025,
+                       0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025,
+                       0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025,
+                       0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025 ],
+                       
+        "PERIODICITY" : false,
+        
+        # ----------- references sur les aretes du bord -----------
+        
+        "SIDES_INFOS" : {
+            "NB_REFS" : 2,
+        
+            "SIDES_IDX" : {
+                "LEFT"   : 1,
+                "RIGHT"  : 2
+            }
+        },
+        
+        # ----------- references sur les sommets -----------------
+        
+        "VERTICES_INFOS" : {
+            "NB_REFS" : 2,      # nb refs sur les sommets (CL Dirichlet)
+            
+            "VERTICES_IDX" : {
+                "LEFT"  : 1 ,
+                "RIGHT" : 2
+            }
+        }
+    }
+    
+}

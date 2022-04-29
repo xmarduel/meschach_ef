@@ -1,0 +1,62 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "title":"MESH_3D schema",
+    "description":"",
+    "type" : "object",
+    "properties" : {
+        
+        "MESH_10" : { "$ref": "#/mesh3D" },
+        "MESH_20" : { "$ref": "#/mesh3D" }
+    },
+    
+    "mesh3D" : { "type":"object", "description":"",
+        "properties" : {
+            
+            "NX"   : { "type":"integer", "description":"number of segments" },
+            "NY"   : { "type":"integer", "description":"number of segments" },
+            "NZ"   : { "type":"integer", "description":"number of segments" },
+                
+            "X_AXIS_SEGMENTS" : { "type":"array", "description":"" , "items" : { "type":"number", "description":"" } },
+            "Y_AXIS_SEGMENTS" : { "type":"array", "description":"" , "items" : { "type":"number", "description":"" } },
+            "Z_AXIS_SEGMENTS" : { "type":"array", "description":"" , "items" : { "type":"number", "description":"" } },
+            
+            "VERTICES_INFOS" : { "type": "object", 
+                "properties" : {
+                    "NB_REFS"   : { "type":"integer", "description":"number of refs" },
+                    "VERTICES_IDX" : { "type":"object", "description":"",
+                        "properties" : {
+						    "TOP_FACE" : { "type":"array", "items" : {
+							     "type":"array", "items" : { "type":"integer" }
+							     }
+						    },
+    						"BOTTOM_FACE" : { "type":"array", "items" : {
+	    						 "type":"array", "items" : { "type":"integer" }
+		    					 }
+							},
+							"FRONT_FACE" : { "type":"array", "items" : {
+								 "type":"array", "items" : { "type":"integer" }
+								 }
+							},
+							"BACK_FACE" : { "type":"array", "items" : {
+								 "type":"array", "items" : { "type":"integer" }
+								 }
+							},
+							"RIGHT_FACE" : { "type":"array", "items" : {
+								 "type":"array", "items" : { "type":"integer" }
+								 }
+							},
+							"LEFT_FACE" : { "type":"array", "items" : {
+								 "type":"array", "items" : { "type":"integer" }
+								 }
+							}
+						}
+					}
+                },
+                "required" : ["VERTICES_IDX"],
+                "additionalProperties": false
+            }
+        },
+        "required" : ["NX", "NY", "NZ", "X_AXIS_SEGMENTS", "Y_AXIS_SEGMENTS", "Z_AXIS_SEGMENTS"],
+        "additionalProperties": false
+    }
+}

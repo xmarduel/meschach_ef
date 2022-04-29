@@ -1,0 +1,101 @@
+#!/usr/bin/env gnuplot
+#
+# Domaine d'interpolation :
+#
+set dummy t
+set grid
+#
+#
+
+x0= -2
+Fx0(t) = (t>x0)?(t-x0)**2:0
+#
+x1= -1
+Fx1(t) = (t>x1)?(t-x1)**2:0
+#
+x2= 0
+Fx2(t) = (t>x2)?(t-x2)**2:0
+#
+x3= 1
+Fx3(t) = (t>x3)?(t-x3)**2:0
+#
+#
+#
+#
+plot [-4:5][-1:5] \
+   Fx0(t) , \
+   Fx1(t) , \
+   Fx2(t) , \
+   Fx3(t)
+pause -1
+#
+#
+D3F(t) =  Fx0(t) - 3*Fx1(t) + 3*Fx2(t) - Fx3(t)
+plot [-4:3][-1:4] D3F(t)
+pause -1
+#
+#
+# ##################################
+#       DEF of SPLINE :            #
+# ##################################
+h=1
+#
+F1(t) = (t-x0)**2
+F2(t) = h**2 + 2*h*(t-x1) - 2*h*(t-x1)**2
+F3(t) = (x3-t)**2
+# 
+#
+# F1(t) = Fx0(t)
+# F2(t) = Fx0(t) - 3*Fx1(t)
+# F3(t) = Fx0(t) - 3*Fx1(t) + 3*Fx2(t)
+#
+spline(t) = (t>x0)? \
+              (t>x1)? \
+                (t>x2)? \
+                  (t>x3)? \
+                   0:F3(t):F2(t):F1(t):0
+#
+plot [-4:3][-1:3] spline(t) with lines , \
+                  D3F(t) with points
+pause -1
+#
+#
+DF1(t) = 2*(t-x0)
+DF2(t) = 2*h - 2*2*h*(t-x1)
+DF3(t) = -2*(x3-t)
+#
+#
+Dspline(t) = (t>x0)? \
+              (t>x1)? \
+                (t>x2)? \
+                  (t>x3)? \
+                   0:DF3(t):DF2(t):DF1(t):0
+#
+plot [-4:3][-1:3] Dspline(t) with lines
+pause -1
+#
+#
+#
+#
+BASE1(t) = (1-t)**2
+BASE2(t) =  1 + 2*(1-t) - 2*(1-t)**2
+BASE3(t) =  t**2
+# 
+# On somme les 3 fonctions de base
+SOMME(t) = BASE1(t) + BASE2(t) + BASE3(t)
+#
+plot [0:1] BASE1(t), \
+           BASE2(t), \
+           BASE3(t), \
+	   SOMME(t) 
+pause -1
+
+dBASE1(t) = -2*(1-t)
+dBASE2(t) =  -2 + 4*(1-t)
+dBASE3(t) =  t*2
+#
+plot [0:1] dBASE1(t), \
+           dBASE2(t), \
+           dBASE3(t)
+pause -1
+

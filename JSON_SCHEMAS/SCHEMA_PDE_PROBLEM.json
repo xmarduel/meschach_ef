@@ -1,0 +1,634 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "title":"PDE_CONFIG",
+    "description":"",
+    "type" : "object",
+    "properties" : {
+        "PDE" : { "type":"string", "description":"", "enum":["LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"]},
+        
+        "COORDS_DIMS": { "type":"integer", "description":"x,y,z coordinates", "enum" : [1,2,3] },
+        "TARGET_DIMS": { "type":"integer", "description":"u,v,w",             "enum" : [1,2,3] },
+        
+        "PDE_PARAMATERS" : { "type":"object", "description":"",
+            "properties" : {
+                "KAPPA"  : { "type":"number", "description":"coeff for -Uxx" },
+                "SIGMA"  : { "type":"number", "description":"coeff for U" },
+                "EPSILON": { "type":"number", "description":"coeff for Uxxxx" }
+            }
+        },
+        
+        "PDE_TIME_PARAMETERS" : { "type":"object", "description":"",
+            "properties" : {
+                "TIME_INI" : { "type":"number", "description":"" },
+                "TIME_END" : { "type":"number", "description":"" },
+                "DELTA_T"  : { "type":"number", "description":"" }
+            },
+            "required" : ["TIME_INI", "TIME_END", "DELTA_T"]
+        },
+        
+        "PDE_RESOLUTION" : { "type":"object", "description":"",
+            "properties" : {
+                "EF"             : { "type":"string", "description":"" , "enum":["P1", "P2", "H3", "S3", "S5"] },           
+                
+                "LAPLACIAN_ALGO" : { "type":"object", "description":"",
+                    "properties" : {
+                        "METHOD"        : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "properties" : {
+                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] }, 
+                                        "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                    }
+                                }
+                            }
+                        },
+                        "ITERATIVE-METHOD" : { "type":"object", "description":"",
+                            "properties" : {
+                                "METHOD"           : { "type":"string", "description":"", "enum":["CG", "CGS", "BiCGStab"] },
+                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU", "DIAG"] },
+                                "PARAMETERS" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "NMAX_ITER" : { "type":"integer", "description":"" },
+                                        "EPSILON"   : { "type":"number", "description":"" }
+                                    }
+                                },
+                                "OUTPUT" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "STDOUT" :  { "type":"boolean", "description":"" },
+                                        "FILE"   :  { "type":["null", "string"], "description":"" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "CONVECTION_DIFFUSION_ALGO" : { "type":"object", "description":"",
+                    "properties" : {
+                        "METHOD"        : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                        "METHOD_STABILIZATION" : { "type":"string", "description":"", "enum":["null", "GALS", "SUPG", "DWG"] },
+                        "DELTA"                : { "type":"number", "description":"" },
+                        
+                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "properties" : {
+                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                        "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                    }
+                                }
+                            }
+                        },
+                        "ITERATIVE-METHOD" : { "type":"object", "description":"",
+                            "properties" : {
+                                "METHOD"           : { "type":"string", "description":"", "enum":["CG", "CGS", "BiCGStab"] },
+                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU", "DIAG"] },
+                                "PARAMETERS" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "NMAX_ITER" : { "type":"integer", "description":"" },
+                                        "EPSILON"   : { "type":"number", "description":"" }
+                                    }
+                                },
+                                "OUTPUT" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "STDOUT" :  { "type":"boolean", "description":"" },
+                                        "FILE"   :  { "type":["null", "string"], "description":"" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                
+                "BURGERS_ALGO"      : { "type":"object", "description":"", 
+                    "properties" : {
+                        "METHOD"               : { "type":"string", "description":"", "enum":["NEWTON-EXACT", "NEWTON-APPROCH"] },
+                        "METHOD_STABILIZATION" : { "type":"string", "description":"", "enum":["null", "GALS", "SUPG", "DWG"] },
+                        "DELTA"                : { "type":"number", "description":"" },
+                        
+                        "NB_OUTER_ITERATIONS": { "type":"number", "description":"for the non linear iterations" },
+                        
+                        "INNER_METHOD": { "type":"number", "description":"for the non linear iterations", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                        
+                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "properties" : {
+                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                        "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                    }
+                                }
+                            }
+                        },
+                        "ITERATIVE-METHOD" : { "type":"object", "description":"",
+                            "properties" : {
+                                "METHOD"           : { "type":"string", "description":"", "enum":["CG", "CGS", "BiCGStab"] },
+                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU", "DIAG"] },
+                                "PARAMETERS" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "NMAX_ITER" : { "type":"integer", "description":"" },
+                                        "EPSILON"   : { "type":"number", "description":"" }
+                                    }
+                                },
+                                "OUTPUT" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "STDOUT" :  { "type":"boolean", "description":"" },
+                                        "FILE"   :  { "type":["null", "string"], "description":"" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                
+                "STOKES_ALGO"       : { "type":"object", "description":"",
+                    "properties" : {
+                        "METHOD" : { "type":"string", "description":"", "enum":["PRESSUREMATRIX", "UZAWA", "AUGMENTEDLAGR"] },
+                        "UZAWA_PARAMETERS" : { "type":"object", "description":"",
+                            "properties" : {
+                                "RHO"       : { "type":"number", "description":"" },
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "METHOD" : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "properties" : {
+                                            "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                            "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                         }
+                                    },
+                                    "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                    "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                }
+                            }
+                        },
+                        "PRESSUREMATRIX_PARAMETERS" : { "type":"object", "description":"",
+                            "properties" : {
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"residual of the CG method" },
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "properties": {
+                                        "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                            "properties" : {
+                                                "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                                "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                            }
+                                        },
+                                        "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                        "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                    }
+                                }
+                            }
+                        },
+                        "AUGMENTEDLAGR_PARAMETERS" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "RHO" : { "type":"number", "description":"" },
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "properties": {
+                                        "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                            "properties" : {
+                                                "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                                "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                            }
+                                        },
+                                        "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                        "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "NAVIERSTOKES_ALGO" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "METHOD" : { "type":"string", "description":"", "enum":["NEWTON-EXACT", "NEWTON-APPROCH"] },
+                        
+                        "NMAX_ITER" : { "type":"integer", "description":"" },
+                        "EPSILON" : { "type":"number", "description":"" },
+                        
+                        "OUTER_METHOD" : { "type":"string", "description":"", "enum":["UZAWA", "PRESSUREMATRIX"] },
+
+                        "UZAWA_PARAMETERS" : { "type":"object", "description":"",
+                            "properties" : {
+                                "RHO"       : { "type":"number", "description":"" },
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "METHOD" : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "properties" : {
+                                            "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                            "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                         }
+                                    },
+                                    "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                    "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                }
+                            }
+                        },
+                        "PRESSUREMATRIX_PARAMETERS" : { "type":"object", "description":"",
+                            "properties" : {
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"residual of the CG method" }, 
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "properties": {
+                                        "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                            "properties" : {
+                                                "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                                "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                            }
+                                        },
+                                        "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                        "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "HELMHOLZ_ALGO"     : { "type":"object", "description":"", 
+                    "properties" : {
+                        "EIGEN_PROBLEM" : { "type":"string", "description":"", "enum" : ["ORDINARY_SYMMETRIC", "GENERALIZED_SYMMETRIC_1", "GENERALIZED_SYMMETRIC_2"] },
+                        "EIGEN_OPTION"  : { "type":"string", "description":"", "enum" : ["LOWER", "UPPER", "NEAREST_1", "NEAREST_2", "IBOUNDS", "RBOUNDS", "ALL"] },
+                        "NB_EIGENS"     : { "type":"integer", "description":"" },
+                        "LOWER_IBOUND"  : { "type":"integer", "description":"" },
+                        "UPPER_IBOUND"  : { "type":"integer", "description":"" },
+                        "LOWER_RBOUND"  : { "type":"number", "description":"" },
+                        "UPPER_RBOUND"  : { "type":"number", "description":"" }
+                    },
+                    "required" : ["EIGEN_PROBLEM", "EIGEN_OPTION", "NB_EIGENS", "LOWER_IBOUND", "UPPER_IBOUND", "LOWER_RBOUND", "UPPER_RBOUND"]
+                },
+                
+                "KURAMOTO-SIVASHINSKI_ALGO" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "METHOD" : { "type":"string", "description":"", "enum" : ["NORMAL", "SPLITTED"] }
+                    },
+                    "required" : ["METHOD"]
+                }
+            },
+            "required" : ["EF"]
+        },
+        
+        "PDE_INITIAL_CONDITION" : { "type":"object", "description":"", 
+            "properties" : {
+                "FUNC_DIM1_NAME" : { "type":["null", "string"], "description":"" },
+                "FUNC_DIM2_NAME" : { "type":["null", "string"], "description":"" },
+                "FUNC_DIM3_NAME" : { "type":["null", "string"], "description":"" }
+            }
+        },
+        
+        "PDE_RHS" : { "type":"object", "description":"",
+            "properties" : {
+                "FUNC_DIM1_NAME" : { "type":["null", "string"], "description":"" },
+                "FUNC_DIM2_NAME" : { "type":["null", "string"], "description":"" },
+                "FUNC_DIM3_NAME" : { "type":["null", "string"], "description":"" }
+            }
+        },
+        
+        "PDE_BOUNDARY_CONDITIONS" : { "type":"object", "description":"",
+            "properties" : {
+                "NB_BCS" : { "type":"integer", "description":"" },
+                "DIM1" : { "type":"array", "description":"" , "items" : 
+                    { "type":"object", "description":"" , 
+                        "properties" : {
+                            "IDX"       : { "type":"integer", "description":"" },
+                            "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
+                            "FUNC_NAME" : { "oneOf" : 
+                                [
+                                    { "type":"string" },
+                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                ]
+                            }
+                        },
+                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
+                        "additionalProperties": false
+                    }
+                },
+                "DIM2" : { "type":"array", "description":"" , "items" : 
+                    { "type":"object", "description":"" , 
+                        "properties" : {
+                            "IDX"       : { "type":"integer", "description":"" },
+                            "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
+                            "FUNC_NAME" : { "oneOf" : 
+                                [
+                                    { "type":"string" },
+                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                ]
+                            }
+                        },
+                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
+                        "additionalProperties": false
+                    }
+                },
+                "DIM3" : { "type":"array", "description":"" , "items" : 
+                    { "type":"object", "description":"" ,
+                        "properties" : {
+                            "IDX"       : { "type":"integer", "description":"" },
+                            "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
+                            "FUNC_NAME" : { "oneOf" : 
+                                [
+                                    { "type":"string" },
+                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                ]
+                            }
+                        },
+                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
+                        "additionalProperties": false
+                    }
+                }
+            }
+        },
+
+        "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : { "type":"object", "description":"", 
+            "properties" : {
+                
+                "1-DIM" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                        "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                        "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" }
+                    },
+                    "additionalProperties": false
+                },
+                "2-DIM" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "DIM1" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties": false
+                        },
+                        "DIM2": { "type":"object", "description":"", 
+                            "properties" : {
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "required" : ["DIM1", "DIM2"],
+                    "additionalProperties": false
+                },
+                "3-DIM" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "DIM1" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties": false
+                        },
+                        "DIM2" : { "type":"object", "description":"", 
+                            "properties" : { 
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties": false
+                        },
+                        "DIM3" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties" : false
+                        }
+                    },
+                    "required" : ["DIM1", "DIM2", "DIM3"],
+                    "additionalProperties": false
+                }
+            }
+        },
+
+        "PDE_EXACT_SOL" : { "type":"object", "description":"for tests, exact solution of the pde",
+            "properties" : {
+                "FUNC_DIM1_NAME" : { "type":["null", "string"], "description":"optional function name" },
+                "FUNC_DIM2_NAME" : { "type":["null", "string"], "description":"optional function name" },
+                "FUNC_DIM3_NAME" : { "type":["null", "string"], "description":"optional function name" }
+            }
+        },
+        
+        "MESH_1D" : { "type":"object", "description":"", 
+            "properties" : {  
+                "MESHFILEDEFINITION" : { "type":"object", "description":"",
+                    "properties": {
+                        "MESHFILE" : { "type": "string", "description":"" },
+                        "MESHNAME" : { "type": ["null", "string"], "description":"can be null" },
+                        "MESHTYPE" : { "type": ["null", "string"], "description":"" , "enum" : ["line"] }
+                    },
+                    "required": ["MESHFILE", "MESHTYPE"],
+                    "additionalProperties" : false
+                },
+                    
+                "MESHDATADEFINITION" : { "type":"object", "description":"",
+                    "properties" : {
+                        "XMIN"         : { "type":"number", "description":"" },
+                        "XMAX"         : { "type":"number", "description":"" }, 
+                        "NX"           : { "type":"integer", "description":"" }, 
+                        "DISTRIBUTION" : { "type":"string", "enum" : ["UNIFORM","NON-UNIFORM-RIGHT-DENSITY","NON-UNIFORM-LEFT-DENSITY"] },
+                        "PERIODIC"     : { "type":"boolean", "description":"" }
+                    },
+                    "required": ["XMIN", "XMAX" , "NX", "DISTRIBUTION", "PERIODIC"],
+                    "additionalProperties" : false
+                }
+            },
+            "additionalProperties" : false
+        },
+        "MESH_2D" : { "type":"object", "description":"", 
+            "properties" : {
+                "MESHFILEDEFINITION" : { "type":"object", "description":"",
+                    "properties": {
+                        "MESHFILE" : { "type":"string", "description":"" },
+                        "MESHNAME" : { "type": ["null", "string"], "description":"only if mesh2D.quad file" },
+                        "MESHTYPE" : { "type":"string", "description":"", "enum" : ["quad1", "quad2", "quad3", "emc2", "gmsh"] }
+                    },
+                    "required": ["MESHFILE", "MESHTYPE" ],
+                    "additionalProperties" : false
+                }
+            },
+            "required" : ["MESHFILEDEFINITION"],
+            "additionalProperties" : false
+        },
+        "MESH_3D" : { "type":"object", "description":"", 
+            "properties" : {
+                "MESHFILEDEFINITION" : { "type":"object", "description":"",
+                    "properties": {
+                        "MESHFILE" : { "type":"string", "description":""  },
+                        "MESHNAME" : { "type": ["null", "string"], "description":"only if mesh3D.cube file" },
+                        "MESHTYPE" : { "type":"string", "description":"", "enum" : ["cube", "gmsh"] }
+                    },
+                    "required": ["MESHFILE", "MESHTYPE" ],
+                    "additionalProperties" : false
+                }
+            },
+            "required" : ["MESHFILEDEFINITION"],
+            "additionalProperties" : false
+        },
+        
+        "MISC_OUTPUT" : { "type":"object", "description":"",
+            "properties" : {
+                "ITPRINT"          : { "type":"integer", "description":"" },
+                "ITSAVE"           : { "type":"integer", "description":"" },
+                "ITSTAT"           : { "type":"integer", "description":"" },
+                "ITGRAPH"          : { "type":"integer", "description":"" }
+            }
+        },
+
+        "MISC_GRAPHICS" : { "type":"object", "description":"", 
+            "properties" : {
+                "IMTXPROF"         : { "type":"boolean", "description":"" },
+                "IGEOMVIEW"        : { "type":"boolean", "description":"" },
+                "IGEOMCONTOURVIEW" : { "type":"boolean", "description":"" },
+                "IGEOMTOTALVIEW"   : { "type":"boolean", "description":"" }
+            }
+        },
+
+        "GRAPHICS_1D_OUTPUT" : { "type":"object", "description":"", 
+            "properties" : {
+                "GNUPLOT"    : { "type":"boolean", "description":"" },
+                "GRAPH"      : { "type":"boolean", "description":"" },
+                "MATLAB"     : { "type":"boolean", "description":"" },
+                "VTK"        : { "type":"boolean", "description":"" },
+                "SILO"       : { "type":"boolean", "description":"" },
+                "PGPLOT"     : { "type":"boolean", "description":"" },
+                "VOGLE"      : { "type":"boolean", "description":"" },
+                "LIBSCIPLOT" : { "type":"boolean", "description":"" },
+                "MATPLOTLIB" : { "type":"boolean", "description":"" }
+            }
+        },
+        
+        "GRAPHICS_2D_OUTPUT" : { "type":"object", "description":"", 
+            "properties" : {
+                "GNUPLOT"    : { "type":"boolean", "description":"" },
+                "MATLAB"     : { "type":"boolean", "description":"" },
+                "VTK"        : { "type":"boolean", "description":"" },
+                "SILO"       : { "type":"boolean", "description":"" },
+                "VOGLE"      : { "type":"boolean", "description":"" },
+                "MATPLOTLIB" : { "type":"boolean", "description":"" }
+            }
+        },
+        
+        "GRAPHICS_3D_OUTPUT" : { "type":"object", "description":"", 
+            "properties" : {
+                "VTK"        : { "type":"boolean", "description":"" },
+                "SILO"       : { "type":"boolean", "description":"" }
+            }
+        },
+        
+        "GRAPHICS_1D" : { "type":"object", "description":"", 
+            "properties" : {
+                "DRIVER" : { "type":"string", "description":"Driver PGPLOT-VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
+                "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
+                    "items" : { "type":"integer", "description":"in pixels" },
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                "LABELS_SIZE" : { "type":"number", "description":"" },
+                "SUB_WINDOWS" : { "type":"array", "description":"array of sub windows at position I,J in the window",
+                    "items" : { "type":"object", "description":"sub-window object", 
+								"properties" : {
+                            "IDXS"  : { "type":"array", "description":"position in array of subwindows", "minItems": 2, "maxItems": 2,
+                                "items" : { "type":"integer", "minimum":1, "maximum":3 , "description":"array position" }
+                            },
+							"LEGEND"       : { "type":"string", "description":"" },
+                            "LEGEND_AXE_X" : { "type":"string", "description":"" },
+                            "LEGEND_AXE_Y" : { "type":"string", "description":"" },
+                            "MARKER"       : { "type":"integer", "description":"" },
+                            "MARKER_END"   : { "type":"integer", "description":"" },
+                            "WINDOW"       : { "type":"object", "description":"",
+                                "properties" : {
+                                    "X_MIN"    : { "type":"number", "description":"" },
+                                    "X_MAX"    : { "type":"number", "description":"" },
+                                    "Y_MIN"    : { "type":"number", "description":"" },
+									"Y_MAX"    : { "type":"number", "description":"" }
+										  }
+                            }
+                        }
+                    }
+                }
+            },
+            "GRAPHICS_2D" : { "type":"object", "description":"", 
+                "properties" : {
+                    "DRIVER" : { "type":"string", "description":"Driver VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
+                    "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
+                        "items" : { "type":"integer", "description":"in pixels" },
+                        "minItems": 2,
+                        "maxItems": 2
+                    },
+                    "LABELS_SIZE" : { "type":"number", "description":"" },
+                    "SUB_WINDOWS" : { "type":"array", "description":"array of sub-windows", 
+						      "items": { "type":"object", "description":"sub-window object", 
+						          "properties" : {
+								        "IDXS"  : { "type":"array", "description":"position in array of subwindows", "minItems": 2, "maxItems": 2,
+                                    "items" : { "type":"integer", "minimum":1, "maximum":3, "description":"array position" }
+									     },
+										  "GRAPHICS_TYPE" : {"type":"string", "description":"", "enum":["SURFACE", "CONTOURS"] },
+										  "LEGEND"        : { "type":"string", "description":"" },
+                                          "WINDOW"       : { "type":"object", "description":"",
+                                              "properties" : {
+                                                  "X_MIN"    : { "type":"number", "description":"" },
+                                                  "X_MAX"    : { "type":"number", "description":"" },
+                                                  "Y_MIN"    : { "type":"number", "description":"" },
+                                                  "Y_MAX"    : { "type":"number", "description":"" }
+                                              }
+										  },
+                                          "CONTOURS": { "type":"object", "description":"",
+                                              "properties" :  {
+                                                  "NB_LEVELS" : { "type":"integer", "description":"" },
+                                                  "LEVELS"    : { "type":"array", "description":"", "items": { "type":"number", "description":"" }}
+                                              }
+                                          },
+                                          "SURFACE": { "type":"object", "description":"",
+                                              "properties" : {
+                                                 "DUMMY" : { "type":"boolean", "description":"" }
+                                          }
+                                    }
+                              }
+                         }
+                    }
+                }
+            }
+        }
+    },
+
+    "OUTPUT_LOG_FILE" : { "type":"string", "description":""},
+        
+    "required": ["PDE", "COORDS_DIMS", "TARGET_DIMS", "PDE_PARAMATERS", "PDE_RESOLUTION", "PDE_RHS", "PDE_BOUNDARY_CONDITIONS", "OUTPUT_LOG_FILE"]
+}
