@@ -30,7 +30,7 @@ void * vopl_contour_with_xt_toolkit(void *pdata); /* function sent to the thread
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-int  graphics1D_vopl_plotcurve()
+int  graphics1D_vopl_plotcurve(void)
 {
    int rc;
 
@@ -60,7 +60,7 @@ int  graphics1D_vopl_plotcurve()
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-int  graphics1D_vopl_plotcontour()
+int  graphics1D_vopl_plotcontour(void)
 
 {
    int rc;

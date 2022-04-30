@@ -1,6 +1,8 @@
 *.so
 *_wrap.c
 *_wrap.o
+*.o
+*.lo
 MESCHACH_PROJECT/build
 DRIVERS_PYTHON/without_comments.json
 DRIVERS_PYTHON/SolApproch2D.dat

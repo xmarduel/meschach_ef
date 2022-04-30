@@ -109,6 +109,10 @@
 #define ANSI_C 1
 #endif
 
+#ifndef PROTOTYPES_IN_STRUCT
+#define PROTOTYPES_IN_STRUCT 1
+#endif
+
 #endif
 
 /* standard headers */

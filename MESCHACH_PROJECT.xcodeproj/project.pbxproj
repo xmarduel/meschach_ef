@@ -3818,7 +3818,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo `pwd`; make --directory MESCHACH/SWIG_INTERFACES -f makefile_swig_python_extension all";
+			shellScript = "echo `pwd`; make --directory MESCHACH/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
 		};
 		257820FE11CE717600293CB2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6369,9 +6369,9 @@
 				HEADER_SEARCH_PATHS = /Users/xavier/DEVELOPMENT/MESCHACH_WORK;
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/lib/amd,
-					/Users/xavier/x_local/lib/spooles/LinSol/srcST,
-					/Users/xavier/x_local/lib/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -6420,9 +6420,9 @@
 				HEADER_SEARCH_PATHS = /Users/xavier/DEVELOPMENT/MESCHACH_WORK;
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/lib/amd,
-					/Users/xavier/x_local/lib/spooles/LinSol/srcST,
-					/Users/xavier/x_local/lib/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;

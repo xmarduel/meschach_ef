@@ -277,7 +277,7 @@ void setup_objects(void * data)
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-VOGLE_SURFACE_DATA *surfacedata_new()
+VOGLE_SURFACE_DATA *surfacedata_new(void)
 {
    VOGLE_SURFACE_DATA * out = malloc( sizeof(VOGLE_SURFACE_DATA) );
 

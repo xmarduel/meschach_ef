@@ -41,7 +41,7 @@ VOPL_GRAPH_DATA * pdata_vopl_set_static(VOPL_GRAPH_DATA *data)
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-VOPL_CURVE_DATA *curvedata_new()
+VOPL_CURVE_DATA *curvedata_new(void)
 {
    VOPL_CURVE_DATA *pdata = malloc ( sizeof(VOPL_CURVE_DATA) );
 
@@ -141,7 +141,7 @@ void set_drawfunc_voplcurve(VOPL_CURVE_DATA* pdata, VOPL_CURVE_DRAW_FUNC drawfun
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-VOPL_CONTOUR_DATA *contourdata_new()
+VOPL_CONTOUR_DATA *contourdata_new(void)
 {
    VOPL_CONTOUR_DATA * pdata = malloc( sizeof(VOPL_CONTOUR_DATA) );
 	

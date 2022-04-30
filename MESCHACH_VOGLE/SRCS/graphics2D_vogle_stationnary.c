@@ -30,8 +30,7 @@ void * vogle_surface_with_xt_toolkit(void *pdata);
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-int  graphics2D_vogle_plotsurface()
-
+int graphics2D_vogle_plotsurface(void)
 {
    int rc;
    

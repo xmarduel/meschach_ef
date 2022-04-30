@@ -65,7 +65,7 @@ int  main()
 
    ADV_3D   *MyADV;
    
-   VEC      *SOL;
+   VEC      *SOL = NULL;
 
    PARAMS   *MyParams ;
 
@@ -185,7 +185,9 @@ int  main()
    BC_3D_FREE(MyBC);
    RHS_3D_FREE(MyRHS);
 
-   V_FREE(SOL);
+   if (SOL != NULL) {
+      V_FREE(SOL);
+   }
 
    /*------------------------------------------------------------------------*/
 

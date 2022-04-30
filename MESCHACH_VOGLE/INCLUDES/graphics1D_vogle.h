@@ -92,7 +92,7 @@ typedef struct VOPL_CURVE_DATA_
 
 typedef void (*VOPL_CURVE_DRAW_FUNC)(const VOPL_CURVE_DATA *curvedata);
 
-VOPL_CURVE_DATA *curvedata_new  ();
+VOPL_CURVE_DATA *curvedata_new  (void);
 void            *curvedata_free (VOPL_CURVE_DATA *in);
 VOPL_CURVE_DATA *curvedata_clone(VOPL_CURVE_DATA *in);
 
@@ -172,7 +172,7 @@ typedef struct VOPL_CONTOUR_DATA_
 		
 } VOPL_CONTOUR_DATA;
 	
-VOPL_CONTOUR_DATA  *contourdata_new();
+VOPL_CONTOUR_DATA  *contourdata_new(void);
 void               *contourdata_free (VOPL_CONTOUR_DATA *in);
 VOPL_CONTOUR_DATA  *contourdata_clone(VOPL_CONTOUR_DATA *in);
 	

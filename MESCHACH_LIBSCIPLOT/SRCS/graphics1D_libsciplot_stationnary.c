@@ -194,7 +194,7 @@ int graphics1D_libsciplot_setup_window(int ix, int iy, VEC *X, VEC *Y)
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-int  graphics1D_libsciplot_plotcurve()
+int  graphics1D_libsciplot_plotcurve(void)
 {
    int rc;
 

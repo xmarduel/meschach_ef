@@ -21,7 +21,7 @@ int  graphics1D_libsciplot_subp(int nx, int ny);
 void graphics1D_libsciplot_initialize(const char *driver, int window_size_x, int window_size_y, int nx, int ny );
 int  graphics1D_libsciplot_finalize(void);
 
-int  graphics1D_libsciplot_plotcurve();
+int  graphics1D_libsciplot_plotcurve(void);
 int  graphics1D_libsciplot_draw_all(void);
 
 void graphics1D_libsciplot_set_plotdata_in_queue(void);

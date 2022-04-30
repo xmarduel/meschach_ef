@@ -27,7 +27,7 @@ void * pgplot_curve_with_xt_toolkit(void *pdata); /* function sent to the thread
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-int  graphics1D_cpgplot_plotcurve()
+int  graphics1D_cpgplot_plotcurve(void)
 {
    int rc;
 
