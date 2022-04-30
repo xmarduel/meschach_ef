@@ -1,11 +1,16 @@
 # meschach_ef
 my **very** old finite element library, based on the meschach library.
 
-- 1D
+- 1D -> lots of ef
 - 2D
 - 3D
 
-Very nice python wrapper
+
+with triangles/tetrahedras only
+
+Very nice python wrapper (2.7)
 
 
-WARNING: some external dependencies not yet in repo.
+As Xcode project (10.14)
+
+External libs to compile separately.
