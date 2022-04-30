@@ -11,6 +11,6 @@ with triangles/tetrahedras only
 Very nice python wrapper (2.7)
 
 
-As Xcode project (10.14)
+As Xcode project (10.1) for macOS 10.14
 
 External libs to compile separately.
