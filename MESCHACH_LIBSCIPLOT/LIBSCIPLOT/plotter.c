@@ -110,9 +110,9 @@
    There is also a function end_polyline_and_flush(), which is useful for
    real-time display. */
 
-#include "sys-defines.h"
-#include "libcommon.h"
-#include "plot.h"
+#include "plotutils-2.6/include/sys-defines.h"
+#include "plotutils-2.6/include/libcommon.h"
+#include "plotutils-2.6/include/plot.h"
 #include "extern.h"
 
 #include "plotter.h"

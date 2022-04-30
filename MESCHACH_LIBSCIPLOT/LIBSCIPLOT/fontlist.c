@@ -28,8 +28,8 @@
    and _pl_get_stick_font_info. */
 
 
-#include "libcommon.h"
-#include "plot.h"
+#include "plotutils-2.6/include/libcommon.h"
+#include "plotutils-2.6/include/plot.h"
 
 #include "fontlist.h"
 

@@ -23,8 +23,8 @@
    color as well; see explanation at head of plotter.c.  NO_OF_LINEMODES is
    defined in extern.h. */
 
-#include "sys-defines.h"
-#include "plot.h"
+#include "plotutils-2.6/include/sys-defines.h"
+#include "plotutils-2.6/include/plot.h"
 #include "extern.h"
 
 /* following line types are the five used by Unix graph(1) */

@@ -69,7 +69,7 @@ typedef struct WIDGET_USERDATA_STRUCT_
 /* ------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------- */
 
-WIDGET_USERDATA_STRUCT * widget_data; /* the static data containing the plotdata */
+WIDGET_USERDATA_STRUCT * widget_data_tr; /* the static data containing the plotdata */
 
 /* ------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------- */
@@ -298,12 +298,12 @@ static Boolean idle_workproc (XtPointer data)
 
 static void quit(Widget widget, XEvent *ev, String *params, Cardinal *n_params)
 {
-   widget_data->xaw_win->exit = 1;
+   widget_data_tr->xaw_win->exit = 1;
 }
 
 static void repaint(Widget widget, XEvent *ev, String *params, Cardinal *n_params)
 {
-   drawscene(widget_data->pdata);
+   drawscene(widget_data_tr->pdata);
 }
 
 static void resize(Widget widget, XEvent *ev, String *params, Cardinal *n_params)
@@ -313,10 +313,10 @@ static void resize(Widget widget, XEvent *ev, String *params, Cardinal *n_params
    XtVaGetValues (widget, XtNwidth , &w, NULL);
    XtVaGetValues (widget, XtNheight, &h, NULL);
 
-   vo_xt_win_size(widget_data->xaw_win->vogle_win, (int)w, (int)h);
+   vo_xt_win_size(widget_data_tr->xaw_win->vogle_win, (int)w, (int)h);
    calcviewport();
 
-   drawscene(widget_data->pdata);
+   drawscene(widget_data_tr->pdata);
 }
 
 static void stop_run(Widget w, XEvent *ev, String *params, Cardinal *n_params)
@@ -324,15 +324,15 @@ static void stop_run(Widget w, XEvent *ev, String *params, Cardinal *n_params)
    Arg wargs[1];
 
    /* >>> change the label of the Xaw button */
-   switch (widget_data->xaw_win->stop)
+   switch (widget_data_tr->xaw_win->stop)
    {
       case 0: XtSetArg(wargs[0], XtNlabel, "Run"); break;
       case 1: XtSetArg(wargs[0], XtNlabel, "Stop"); break;
    }
-   XtSetValues(*widget_data->xaw_win->buttonStopRun, wargs, 1);
+   XtSetValues(*widget_data_tr->xaw_win->buttonStopRun, wargs, 1);
    /* <<< change the label of the Xaw button */
 
-   widget_data->xaw_win->stop = (widget_data->xaw_win->stop==0) ? 1 : 0 ;
+   widget_data_tr->xaw_win->stop = (widget_data_tr->xaw_win->stop==0) ? 1 : 0 ;
 }
 
 /*--------------------------------------------------------------------------------------*/
@@ -343,10 +343,10 @@ static void step(Widget w, XEvent *ev, String *params, Cardinal *n_params)
 
    /* >>> change the label of the Xaw button */
    XtSetArg(wargs[0], XtNlabel, "Run");
-   XtSetValues(*widget_data->xaw_win->buttonStopRun, wargs, 1);
+   XtSetValues(*widget_data_tr->xaw_win->buttonStopRun, wargs, 1);
    /* <<< change the label of the Xaw button */
 
-   widget_data->xaw_win->step = 1;
+   widget_data_tr->xaw_win->step = 1;
 }
 
 /*--------------------------------------------------------------------------------------*/
@@ -689,7 +689,7 @@ void * vopl_curve_with_xt_toolkit_transient(void* data)
    /* set a idle_workproc who will be removed at quit/exit */
    xawWidgetUserdata.xaw_win->id_idleworkproc = id_idleworkproc;
 
-   widget_data = &xawWidgetUserdata; /* assign static data pointer */
+   widget_data_tr = &xawWidgetUserdata; /* assign static data pointer */
 
    /* the event-loop */
    XtAppMainLoop(app_con);

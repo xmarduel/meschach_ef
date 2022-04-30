@@ -1,7 +1,7 @@
 #ifndef LIBSCIPLOT__H
 #define LIBSCIPLOT__H
 
-#include "libcommon.h"
+#include "plotutils-2.6/include/libcommon.h"
 #include "plotter.h"
 
 

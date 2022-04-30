@@ -1,5 +1,5 @@
 
-#include "amd/amd.h"
+#include "EXTERNAL_LIBS/amd/amd.h"
 
 #include "MESCHACH_ADDS/INCLUDES/amd_wrapper.h"
 #include "MESCHACH_ADDS/INCLUDES/matrix_adds.h"

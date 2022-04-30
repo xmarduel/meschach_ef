@@ -28,7 +28,7 @@
 
    array_bounds() is called in graph.c, just before a graph is begun. */
 
-#include "sys-defines.h"
+#include "plotutils-2.6/include/sys-defines.h"
 #include "extern.h"
 
 /* bit fields for return value from Cohen-Sutherland clipper */

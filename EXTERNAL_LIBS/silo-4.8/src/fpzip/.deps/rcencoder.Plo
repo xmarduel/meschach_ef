@@ -1,0 +1,8 @@
+rcencoder.lo rcencoder.o: rcencoder.cpp rcencoder.h rcmodel.h \
+  rcencoder.inl
+
+rcencoder.h:
+
+rcmodel.h:
+
+rcencoder.inl:

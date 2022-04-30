@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		250EEED2193BC01900C0EE46 /* all_params_json_config.c in Sources */ = {isa = PBXBuildFile; fileRef = 25C5AA58193786E500280DFA /* all_params_json_config.c */; };
 		251B99A714ADC7EF004D2D46 /* cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 251B99A614ADC7EF004D2D46 /* cocoa.m */; };
-		252C4B8E14B9999200DF2D2B /* test_vogle_cocoa-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 251E82EB14B8FA8A0055F7BF /* test_vogle_cocoa-Info.plist */; };
 		25442C531AAB287F004BDDA1 /* test1_libsciplot.c in Sources */ = {isa = PBXBuildFile; fileRef = 2583E8B40A8536CD00B218E6 /* test1_libsciplot.c */; };
 		25442C7A1AAB2F1C004BDDA1 /* gui.c in Sources */ = {isa = PBXBuildFile; fileRef = 25442C441AAB280A004BDDA1 /* gui.c */; };
 		254457161A8DFA7400915E85 /* cexcontour.c in Sources */ = {isa = PBXBuildFile; fileRef = 254456AB1A8DF17D00915E85 /* cexcontour.c */; };
@@ -3593,7 +3592,7 @@
 		25459F160A7B655C004F50D1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 1010;
 			};
 			buildConfigurationList = 25459F170A7B655C004F50D1 /* Build configuration list for PBXProject "MESCHACH_PROJECT" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3639,7 +3638,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				252C4B8E14B9999200DF2D2B /* test_vogle_cocoa-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4555,10 +4553,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = "$(HOME)/x_local/Applications";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -4582,8 +4580,8 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = test_vogle_cocoa;
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 			};
@@ -4593,10 +4591,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = "$(HOME)/x_local/Applications";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4619,7 +4617,7 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = test_vogle_cocoa;
 				ZERO_LINK = NO;
 			};
@@ -4629,16 +4627,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = $HOME/x_local/bin;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = "";
 				INSTALL_PATH = $HOME/x_local/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PREBINDING = NO;
 				PRODUCT_NAME = test_static_analyser;
 			};
 			name = Debug;
@@ -4647,15 +4644,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = $HOME/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_VERSION = "";
 				INSTALL_PATH = $HOME/x_local/bin;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PREBINDING = NO;
 				PRODUCT_NAME = test_static_analyser;
 				ZERO_LINK = NO;
 			};
@@ -4664,6 +4660,7 @@
 		254456E91A8DF88800915E85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4692,7 +4689,6 @@
 					"-lvopl-2.0",
 				);
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = test_vopl.exe;
 				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
@@ -4704,6 +4700,7 @@
 		254456EA1A8DF88800915E85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -4742,11 +4739,37 @@
 		25459F180A7B655C004F50D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_MODEL_TUNING = "";
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-v";
@@ -4756,9 +4779,34 @@
 		25459F190A7B655C004F50D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-v";
@@ -4768,6 +4816,7 @@
 		2578205511CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4777,13 +4826,14 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6/include",
-					"$HOME/x_local/plotutils-2.6",
+					$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS,
+					"$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6",
+					"$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/include",
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6/lib",
-					"$HOME/x_local/plotutils-2.6/libplot/.libs",
+					"$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/lib",
+					"$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/libplot/.libs",
 					/opt/X11/lib,
 				);
 				LIBRARY_STYLE = DYNAMIC;
@@ -4819,6 +4869,7 @@
 		2578205611CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4828,13 +4879,14 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"/Users/xavier/x_local/plotutils-2.6/include",
-					"/Users/xavier/x_local/plotutils-2.6",
+					$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS,
+					"$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6",
+					"$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/include",
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6/lib",
-					"$HOME/x_local/plotutils-2.6/libplot/.libs",
+					"$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/lib",
+					"$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/libplot/.libs",
 					/opt/X11/lib,
 				);
 				LIBRARY_STYLE = DYNAMIC;
@@ -4869,6 +4921,7 @@
 		2578208611CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4930,6 +4983,7 @@
 		2578208711CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4989,6 +5043,7 @@
 		257820A011CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5022,6 +5077,7 @@
 		257820A111CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5054,6 +5110,7 @@
 		257820F011CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5092,6 +5149,7 @@
 		257820F111CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5128,6 +5186,7 @@
 		2578210011CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5169,6 +5228,7 @@
 		2578210111CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5208,6 +5268,7 @@
 		2578211011CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5218,14 +5279,15 @@
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					/Users/xavier/x_local,
-					/Users/xavier/x_local/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/spooles/spooles,
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/x_local/lib,
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5252,6 +5314,7 @@
 		2578211111CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5262,14 +5325,15 @@
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					/Users/xavier/x_local,
-					/Users/xavier/x_local/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/spooles/spooles,
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/x_local/lib,
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5296,6 +5360,7 @@
 		2578213411CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5311,14 +5376,14 @@
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					/Users/xavier/x_local/amd,
+					/Users/xavier/DEVELOPMENT/EXTERNAL_LIBS/amd,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/spooles/spooles,
-					/Users/xavier/x_local/amd/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5349,6 +5414,7 @@
 		2578213511CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5364,14 +5430,14 @@
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					/Users/xavier/x_local/amd,
+					/Users/xavier/DEVELOPMENT/EXTERNAL_LIBS/amd,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/spooles/spooles,
-					/Users/xavier/x_local/amd/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5401,6 +5467,7 @@
 		2578215511CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5454,6 +5521,7 @@
 		2578215611CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5507,6 +5575,7 @@
 		2578216C11CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5530,7 +5599,7 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					$HOME/x_local/pgplot,
+					$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/pgplot,
 					/opt/X11/lib,
 					/usr/local/gfortran/lib,
 				);
@@ -5573,6 +5642,7 @@
 		2578216D11CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5590,7 +5660,7 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					$HOME/x_local/pgplot,
+					$HOME/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/pgplot,
 					/opt/X11/lib,
 					/usr/local/gfortran/lib,
 				);
@@ -5631,6 +5701,7 @@
 		2578218411CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5647,14 +5718,14 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
-					"/Users/xavier/x_local/plotutils-2.6/include",
-					"/Users/xavier/x_local/plotutils-2.6/graph",
-					"/Users/xavier/x_local/plotutils-2.6",
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS,
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/include",
 					/opt/X11/include,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6/libplot/.libs",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/libplot/.libs",
 					/opt/X11/lib,
 				);
 				LIBRARY_STYLE = DYNAMIC;
@@ -5675,6 +5746,7 @@
 				PRODUCT_NAME = libmeschach_libsciplot;
 				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -5686,6 +5758,7 @@
 		2578218511CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5701,14 +5774,14 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
-					"/Users/xavier/x_local/plotutils-2.6/include",
-					"/Users/xavier/x_local/plotutils-2.6/graph",
-					"/Users/xavier/x_local/plotutils-2.6",
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS,
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/include",
 					/opt/X11/include,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6/libplot/.libs",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/plotutils-2.6/libplot/.libs",
 					/opt/X11/lib,
 				);
 				LIBRARY_STYLE = DYNAMIC;
@@ -5728,6 +5801,7 @@
 				PRODUCT_NAME = libmeschach_libsciplot;
 				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -5739,6 +5813,7 @@
 		2578220811CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5751,17 +5826,17 @@
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"/Users/xavier/x_local/silo-4.8/src/silo",
-					"/Users/xavier/x_local/jansson-2.6/src",
+					"//Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.8/src/silo",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.6/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/xavier/x_local/silo-4.8/src/.libs",
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/spooles/spooles,
-					"/Users/xavier/x_local/jansson-2.6/src/.libs",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.8/src/.libs",
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBSjansson-2.6/src/.libs",
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5794,6 +5869,7 @@
 		2578220911CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5806,17 +5882,17 @@
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"/Users/xavier/x_local/silo-4.8/src/silo",
-					"/Users/xavier/x_local/jansson-2.6/src",
+					"//Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.8/src/silo",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.6/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/xavier/x_local/silo-4.8/src/.libs",
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/spooles/spooles,
-					"/Users/xavier/x_local/jansson-2.6/src/.libs",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.8/src/.libs",
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBSjansson-2.6/src/.libs",
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5848,6 +5924,7 @@
 		2578221A11CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -5866,8 +5943,8 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
@@ -5902,6 +5979,7 @@
 		2578221B11CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -5919,8 +5997,8 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
@@ -5953,6 +6031,7 @@
 		2578222F11CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -5972,9 +6051,9 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/spooles/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
@@ -6012,6 +6091,7 @@
 		2578223011CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -6030,9 +6110,9 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/spooles/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
@@ -6068,6 +6148,7 @@
 		2578224211CE717600293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6082,8 +6163,8 @@
 				HEADER_SEARCH_PATHS = /Users/xavier/DEVELOPMENT/MESCHACH_WORK;
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/spooles/spooles,
-					/Users/xavier/x_local/amd/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
@@ -6117,6 +6198,7 @@
 		2578224311CE717600293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -6131,8 +6213,8 @@
 				HEADER_SEARCH_PATHS = /Users/xavier/DEVELOPMENT/MESCHACH_WORK;
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/spooles/spooles,
-					/Users/xavier/x_local/amd/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
@@ -6165,6 +6247,7 @@
 		2578225511CE717700293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6179,9 +6262,9 @@
 				HEADER_SEARCH_PATHS = /Users/xavier/DEVELOPMENT/MESCHACH_WORK;
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/spooles/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -6218,6 +6301,7 @@
 		2578225611CE717700293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -6232,9 +6316,10 @@
 				HEADER_SEARCH_PATHS = /Users/xavier/DEVELOPMENT/MESCHACH_WORK;
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/spooles/spooles,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
+					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = (
@@ -6269,6 +6354,7 @@
 		2578226811CE717700293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6283,9 +6369,9 @@
 				HEADER_SEARCH_PATHS = /Users/xavier/DEVELOPMENT/MESCHACH_WORK;
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles,
+					/Users/xavier/x_local/lib/amd,
+					/Users/xavier/x_local/lib/spooles/LinSol/srcST,
+					/Users/xavier/x_local/lib/spooles,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -6319,6 +6405,7 @@
 		2578226911CE717700293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -6333,9 +6420,9 @@
 				HEADER_SEARCH_PATHS = /Users/xavier/DEVELOPMENT/MESCHACH_WORK;
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/x_local/spooles/spooles/LinSol/srcST,
-					/Users/xavier/x_local/amd/amd,
-					/Users/xavier/x_local/spooles/spooles,
+					/Users/xavier/x_local/lib/amd,
+					/Users/xavier/x_local/lib/spooles/LinSol/srcST,
+					/Users/xavier/x_local/lib/spooles,
 					/Users/xavier/x_local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -6368,6 +6455,7 @@
 		2578227511CE717700293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6393,7 +6481,6 @@
 					"-lvogle-2.0",
 				);
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = test_vogle.exe;
 				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
@@ -6405,6 +6492,7 @@
 		2578227611CE717700293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -6441,6 +6529,7 @@
 		2578228011CE717700293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6478,6 +6567,7 @@
 		2578228111CE717700293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -6514,6 +6604,7 @@
 		2578228C11CE717700293CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = "";
@@ -6532,7 +6623,7 @@
 					Carbon,
 				);
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.test_vogle_carbon;
 				PRODUCT_NAME = test_vogle_carbon;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -6546,6 +6637,7 @@
 		2578228D11CE717700293CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = "";
@@ -6564,7 +6656,7 @@
 					Carbon,
 				);
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.test_vogle_carbon;
 				PRODUCT_NAME = test_vogle_carbon;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -6578,6 +6670,7 @@
 		259C50F3132A5D3F0070406E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6619,6 +6712,7 @@
 		259C50F4132A5D3F0070406E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;

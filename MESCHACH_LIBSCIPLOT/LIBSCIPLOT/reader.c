@@ -93,8 +93,9 @@
    `read_file', but it uses the plot_point() method of a Multigrapher (see
    plotter.c) to plot each point as it is read. */
 
-#include "sys-defines.h"
-#include "libcommon.h"
+#include "plotutils-2.6/config.h"
+#include "plotutils-2.6/include/sys-defines.h"
+#include "plotutils-2.6/include/libcommon.h"
 #include "extern.h"
 
 /* New (larger) length of a Point array, as function of the old; used when
