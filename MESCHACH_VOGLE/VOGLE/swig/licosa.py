@@ -3,13 +3,14 @@ from sys   import *
 from math  import *
 import os
 
-from vogle import *
+import vogle
 
 USE_MOUSE = True
 
 ESC =	27
 
 TRANS		        = 0.06
+POLYFILL         = 1
 
 xyz = [
    [ 0.000000,  0.000000,  1.000000],
@@ -56,15 +57,15 @@ def drawshape():
     '''
     for i in range(20):
         
-        color(i+1)
+        vogle.color(i+1)
       
-        polyfill(1)
+        vogle.polyfill(POLYFILL)
         
-        makepoly()
-        move(xyz[ncon[i][0]-1][0], xyz[ncon[i][0]-1][1], xyz[ncon[i][0]-1][2])
-        draw(xyz[ncon[i][1]-1][0], xyz[ncon[i][1]-1][1], xyz[ncon[i][1]-1][2])
-        draw(xyz[ncon[i][2]-1][0], xyz[ncon[i][2]-1][1], xyz[ncon[i][2]-1][2])
-        closepoly()
+        vogle.makepoly()
+        vogle.move(xyz[ncon[i][0]-1][0], xyz[ncon[i][0]-1][1], xyz[ncon[i][0]-1][2])
+        vogle.draw(xyz[ncon[i][1]-1][0], xyz[ncon[i][1]-1][1], xyz[ncon[i][1]-1][2])
+        vogle.draw(xyz[ncon[i][2]-1][0], xyz[ncon[i][2]-1][1], xyz[ncon[i][2]-1][2])
+        vogle.closepoly()
 
 #
 #
@@ -72,6 +73,8 @@ def drawshape():
 def main():
     '''
     '''
+    global POLYFILL
+    
     DRAG = 0
     EVENT_X = 0
     EVENT_Y = 0
@@ -87,28 +90,28 @@ def main():
 
     SIZE = 300
    
-    prefposition(50, 50)
-    prefsize(SIZE, SIZE)
+    vogle.prefposition(50, 50)
+    vogle.prefsize(SIZE, SIZE)
 
-    w1 = winopen("X11", "Licosa")
-    nplanes = getdepth()
-    backbuffer()
+    w1 = vogle.winopen("X11", "Licosa")
+    nplanes = vogle.getdepth()
+    vogle.backbuffer()
 
-    window(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0)
-    lookat(0.0, 0.0, 2.1, 0.0, 0.0, 0.0, 0.0)
+    vogle.window(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0)
+    vogle.lookat(0.0, 0.0, 2.1, 0.0, 0.0, 0.0, 0.0)
 
-    textsize(0.15, 0.3)
+    vogle.textsize(0.15, 0.3)
 
-    backface(1)
+    vogle.backface(1)
 
     #
     # Green color ramp...
     #
     for i in range(1,21):
-        mapcolor(i, 20, 20 + i * 10 , 20)
+        vogle.mapcolor(i, 20, 20 + i * 10 , 20)
    
-    if backbuffer() < 0:
-        vexit()
+    if vogle.backbuffer() < 0:
+        vogle.vexit()
         print "licosa: device doesn't support double buffering.\n"
         exit(0)
 
@@ -117,154 +120,158 @@ def main():
    
         if USE_MOUSE:
             
-            psx  = new_doublep()
-            psy  = new_doublep()
+            psx  = vogle.new_doublep()
+            psy  = vogle.new_doublep()
             
-            but = slocator(psx, psy)
+            but = vogle.slocator(psx, psy)
 
-            sx = doublep_value(psx)
-            sy = doublep_value(psy)
+            sx = vogle.doublep_value(psx)
+            sy = vogle.doublep_value(psy)
             
             if (but==1):
-                rotate(90.0 * sx, 'x')
+                vogle.rotate(90.0 * sx, 'x')
             if (but==2):
-                rotate(190.0 * sx, 'y')
+                vogle.rotate(190.0 * sx, 'y')
             if (but==4):
-                rotate(190.0 * sx, 'z')
+                vogle.rotate(190.0 * sx, 'z')
             
-            pushmatrix()
-            rotate(90 * sx, 'y')
-            rotate(90 * sy, 'z')
+            vogle.pushmatrix()
+            vogle.rotate(90 * sx, 'y')
+            vogle.rotate(90 * sy, 'z')
    
-            color(BLACK)
-            clear()
+            vogle.color(vogle.BLACK)
+            vogle.clear()
             drawshape()
-            popmatrix()
-            swapbuffers()
+            vogle.popmatrix()
+            vogle.swapbuffers()
 
-            key = checkkey()
+            key = vogle.checkkey()
             
-            if key in [ord('q'), ESC] :	# Stop the program 
-                vexit()
+            if key in [ord('q'), ESC] :	# Stop the program
+                vogle.vexit()
                 exit(0)
             if key == ord('e'):	# Enlarge
-                scale(1.1, 1.1, 1.1)
+                vogle.scale(1.1, 1.1, 1.1)
             if key == ord('r'):	# Reduce
-                scale(0.9, 0.9, 0.9)
+                vogle.scale(0.9, 0.9, 0.9)
             if key == ord('w'):	# WireFrame
-                polyfill(0)
+                print "WireFrame"
+                POLYFILL = 0
+                #vogle.polyfill(0)
             if key == ord('s'):	# Solid
-                polyfill(1)
+                print "Solid"
+                POLYFILL = 1
+                 #vogle.polyfill(1)
             if key == ord('g'):
                 # gif
                 print "make licosa.gif"
-                w_gif = winopen("gif", "licosa.gif")
+                w_gif = vogle.winopen("gif", "licosa.gif")
                 
                 for i in range(1,21):
-                    mapcolor(i, 20, 20 + i * 10 , 20)
-                pushmatrix()
+                    vogle.mapcolor(i, 20, 20 + i * 10 , 20)
+                vogle.pushmatrix()
 
-                rotate(90 * sx, 'y')
-                rotate(90 * sy, 'z')
+                vogle.rotate(90 * sx, 'y')
+                vogle.rotate(90 * sy, 'z')
 
-                scale(SCALE_FACTOR,SCALE_FACTOR,SCALE_FACTOR)
-                translate(XTRANS,-YTRANS,ZTRANS)
+                vogle.scale(SCALE_FACTOR,SCALE_FACTOR,SCALE_FACTOR)
+                vogle.translate(XTRANS,-YTRANS,ZTRANS)
 
-                color(BLACK)
-                clear()
+                vogle.color(vogle.BLACK)
+                vogle.clear()
       
                 drawshape()
       
                 # if (nplanes == 1):
                 #     drawshape(0)
       
-                popmatrix()
+                vogle.popmatrix()
             
-                swapbuffers()
-                winclose(w_gif)
-                winset(w1)
+                vogle.swapbuffers()
+                vogle.winclose(w_gif)
+                vogle.winset(w1)
            
         else:
 
-            pushmatrix()
+            vogle.pushmatrix()
 
-            rotate( -XROT , 'x')
-            rotate(  YROT , 'y')
+            vogle.rotate( -XROT , 'x')
+            vogle.rotate(  YROT , 'y')
 
-            scale(SCALE_FACTOR,SCALE_FACTOR,SCALE_FACTOR)
-            translate(XTRANS,-YTRANS,ZTRANS)
+            vogle.scale(SCALE_FACTOR,SCALE_FACTOR,SCALE_FACTOR)
+            vogle.translate(XTRANS,-YTRANS,ZTRANS)
 
-            color(BLACK)
-            clear()
+            vogle.color(BLACK)
+            vogle.clear()
       
             drawshape()
       
             # if (nplanes == 1):
             #     drawshape(0)
       
-            popmatrix()
+            vogle.popmatrix()
             
-            swapbuffers()
+            vogle.swapbuffers()
 
 
-            vev = new_Vevent()
+            vev = vogle.new_Vevent()
             
-            w = vgetevent(vev, 1)
+            w = vogle.vgetevent(vev, 1)
 
             #if vev.type == VMOTION:
-            if Vevent_type_get(vev) == VMOTION:
+            if vogle.Vevent_type_get(vev) == VMOTION:
       
                 if DRAG == 1 :
                 
-                    if Vevent_data_get(vev) == 1:
+                    if vogle.Vevent_data_get(vev) == 1:
                     
-                        DELTA_X = Vevent_x_get(vev) - EVENT_X
-                        DELTA_Y = Vevent_y_get(vev) - EVENT_Y
+                        DELTA_X = vogle.Vevent_x_get(vev) - EVENT_X
+                        DELTA_Y = vogle.Vevent_y_get(vev) - EVENT_Y
 
-                        print " In VMOTION , (DELTA_X,DELTA_Y) = (%d,%d) )\n" %(DELTA_X,DELTA_Y)
+                        print " In VMOTION , (DELTA_X,DELTA_Y) = (%d,%d) )\n" % (DELTA_X, DELTA_Y)
 
-                        EVENT_X = Vevent_x_get(vev)
-                        EVENT_Y = Vevent_y_get(vev)
+                        EVENT_X = vogle.Vevent_x_get(vev)
+                        EVENT_Y = vogle.Vevent_y_get(vev)
 
-                        print " In VMOTION , (EVENT_X,EVENT_Y) = (%d,%d) )\n"  %(EVENT_X,EVENT_Y)
+                        print " In VMOTION , (EVENT_X,EVENT_Y) = (%d,%d) )\n"  % (EVENT_X, EVENT_Y)
 
                         rx = 2 * DELTA_X / (float)(SIZE)
                         ry = 2 * DELTA_Y / (float)(SIZE)
 
-                        print " In VMOTION , (rx,ry) = (%6.3lf , %6.3lf) \n"  %(rx,ry)
+                        print " In VMOTION , (rx,ry) = (%6.3lf , %6.3lf) \n"  % (rx,ry)
 
-                        XROT  = fmod( XROT + 180*ry , 360 )
-                        YROT  = fmod( YROT + 180*rx , 360 )
+                        XROT  = vogle.fmod( XROT + 180*ry , 360 )
+                        YROT  = vogle.fmod( YROT + 180*rx , 360 )
 
-                        print " In VMOTION , (XROT,YROT) = (%6.3lf , %6.3lf) \n"  %(XROT,YROT)
+                        print " In VMOTION , (XROT,YROT) = (%6.3lf , %6.3lf) \n"  % (XROT, YROT)
 
-                    if Vevent_data_get(vev) == 2:
+                    if vogle.Vevent_data_get(vev) == 2:
                    
-                        DELTA_X = Vevent_x_get(vev) - EVENT_X
-                        DELTA_Y = Vevent_y_get(vev) - EVENT_Y
+                        DELTA_X = vogle.Vevent_x_get(vev) - EVENT_X
+                        DELTA_Y = Vvogle.event_y_get(vev) - EVENT_Y
 
-                        print " In VMOTION , (DELTA_X,DELTA_Y) = (%d,%d) )\n"  %(DELTA_X,DELTA_Y)
+                        print " In VMOTION , (DELTA_X,DELTA_Y) = (%d,%d) )\n"  %( DELTA_X,DELTA_Y)
 
-                        EVENT_X = Vevent_x_get(vev)
-                        EVENT_Y = Vevent_y_get(vev)
+                        EVENT_X = vogle.Vevent_x_get(vev)
+                        EVENT_Y = vogle.Vevent_y_get(vev)
 
-                        print " In VMOTION , (EVENT_X,EVENT_Y) = (%d,%d) )\n"  %(EVENT_X,EVENT_Y)
+                        print " In VMOTION , (EVENT_X,EVENT_Y) = (%d,%d) )\n"  % (EVENT_X,EVENT_Y)
 
                         rx = 2000 * DELTA_X / (float)(SIZE)
                         ry = 2000 * DELTA_Y / (float)(SIZE)
 
-                        print " In VMOTION , (rx,ry) = (%6.3lf , %6.3lf) \n" %(rx,ry)
+                        print " In VMOTION , (rx,ry) = (%6.3lf , %6.3lf) \n" % (rx, ry)
 
                         XTRANS  -= rx
                         YTRANS  -= ry
                         ZTRANS  = 0.0
       
-            if Vevent_type_get(vev) == VRESIZE:
+            if vogle.Vevent_type_get(vev) == vogle.VRESIZE:
       
-                winset(w)
-                calcviewport()
+                vogle.winset(w)
+                vogle.calcviewport()
       
-            if Vevent_type_get(vev) == VBUTTONPRESS:
+            if vogle.Vevent_type_get(vev) == vogle.VBUTTONPRESS:
          
                 DRAG = 1
                 #
@@ -273,21 +280,26 @@ def main():
                 EVENT_X = Vevent_x_get(vev)
                 EVENT_Y = Vevent_y_get(vev)
       
-            if Vevent_type_get(vev) == VBUTTONRELEASE:
+            if vogle.Vevent_type_get(vev) == vogle.VBUTTONRELEASE:
        
                 DRAG = 0
       
       
-            if Vevent_type_get(vev) == VKEYPRESS:
+            if vogle.Vevent_type_get(vev) == vogle.VKEYPRESS:
       
-                if Vevent_data_get(vev) == ord('s'):
-                    polyfill(1)
-                if Vevent_data_get(vev) == ord('w'):
-                    polyfill(0)
-                if Vevent_data_get(vev) in [ ESC, ord('q')]:
-                   vexit()
+                if vogle.Vevent_data_get(vev) == ord('s'):
+                    print "Sild2"
+                    POLYFILL = 1
+                    #vogle.polyfill(1)
+                if vogle.Vevent_data_get(vev) == ord('w'):
+                    print "WireFrame2"
+                    POLYFILL = 0
+                    pass
+                    #vogle.polyfill(0)
+                if vogle.Vevent_data_get(vev) in [ ESC, ord('q')]:
+                   vogle.vexit()
    
-    vexit()
+    vogle.vexit()
 
     return(0)
 

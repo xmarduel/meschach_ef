@@ -1,6 +1,6 @@
 
-from math  import *
-from vogle import *
+import math
+import vogle
 
 
 RADIUS = 10.0
@@ -14,33 +14,33 @@ SPHERE =	1
 def makesphere():
     '''
     '''
-    makeobj(SPHERE)
+    vogle.makeobj(SPHERE)
 
     #
     # create the latitudinal rings
     #
     for i in range(0, 180, 20):
-        pushmatrix()
-        rotate(i, 'y')
-        circle(0.0, 0.0, RADIUS)
-        popmatrix()
+        vogle.pushmatrix()
+        vogle.rotate(i, 'y')
+        vogle.circle(0.0, 0.0, RADIUS)
+        vogle.popmatrix()
 		
     #
     # create the longitudinal rings
     #
-    pushmatrix()
-    rotate(90.0, 'x')
-    for a in range(-90.0, 90.0, 20.0):
-        r = RADIUS * cos(a * PI / 180.0)
-        z = RADIUS * sin(a * PI / 180.0)
-        pushmatrix()
-        translate(0.0, 0.0, -z)
-        circle(0.0, 0.0, r)
-        popmatrix();
+    vogle.pushmatrix()
+    vogle.rotate(90.0, 'x')
+    for a in range(-90, 90, 20):
+        r = RADIUS * math.cos(a * vogle.PI / 180.0)
+        z = RADIUS * math.sin(a * vogle.PI / 180.0)
+        vogle.pushmatrix()
+        vogle.translate(0.0, 0.0, -z)
+        vogle.circle(0.0, 0.0, r)
+        vogle.popmatrix();
 
-    popmatrix()
+    vogle.popmatrix()
 
-    closeobj()
+    vogle.closeobj()
 
 
 #
@@ -49,18 +49,18 @@ def makesphere():
 def main():
     '''
     '''
-    vinit("X11")
+    vogle.vinit("X11")
 
-    vsetflush(1)
+    vogle.vsetflush(1)
 
     #
     # set up our viewing transformation
     #
-    perspective(90.0, 1.0, 0.001, 500.0)
-    lookat(13.0, 13.0, 8.0, 0.0, 0.0, 0.0, 0.0)
+    vogle.perspective(90.0, 1.0, 0.001, 500.0)
+    vogle.lookat(13.0, 13.0, 8.0, 0.0, 0.0, 0.0, 0.0)
 
-    color(BLACK)
-    clear()
+    vogle.color(vogle.BLACK)
+    vogle.clear()
 
     #
     # Call a routine to make the sphere object
@@ -72,76 +72,76 @@ def main():
     # and the popmatrix to preserve the transformation matrix so
     # that only this sphere is drawn scaled.
     #
-    color(CYAN)
+    vogle.color(vogle.CYAN)
 
-    pushmatrix()
-    scale(0.5, 0.5, 0.5)
-    callobj(SPHERE)
-    popmatrix()
+    vogle.pushmatrix()
+    vogle.scale(0.5, 0.5, 0.5)
+    vogle.callobj(SPHERE)
+    vogle.popmatrix()
 
     #
     # now we draw the same sphere translated, with a different
     # scale and color.
     #
-    color(WHITE)
+    vogle.color(vogle.WHITE)
 
-    pushmatrix()
-    translate(0.0, -1.4 * RADIUS, 1.4 * RADIUS)
-    scale(0.3, 0.3, 0.3)
-    callobj(SPHERE)
-    popmatrix()
+    vogle.pushmatrix()
+    vogle.translate(0.0, -1.4 * RADIUS, 1.4 * RADIUS)
+    vogle.scale(0.3, 0.3, 0.3)
+    vogle.callobj(SPHERE)
+    vogle.popmatrix()
 
     #
     # and maybe a few more times....
     #
-    color(RED)
+    vogle.color(vogle.RED)
 
-    pushmatrix()
-    translate(0.0, RADIUS, 0.7 * RADIUS)
-    scale(0.2, 0.2, 0.2)
-    callobj(SPHERE)
-    popmatrix()
-
-
-    color(GREEN)
-
-    pushmatrix()
-    translate(0.0, 1.5 * RADIUS, -RADIUS)
-    scale(0.15, 0.15, 0.15)
-    callobj(SPHERE)
-    popmatrix()
+    vogle.pushmatrix()
+    vogle.translate(0.0, RADIUS, 0.7 * RADIUS)
+    vogle.scale(0.2, 0.2, 0.2)
+    vogle.callobj(SPHERE)
+    vogle.popmatrix()
 
 
-    color(YELLOW)
+    vogle.color(vogle.GREEN)
 
-    pushmatrix()
-    translate(0.0, -RADIUS, -RADIUS)
-    scale(0.12, 0.12, 0.12)
-    callobj(SPHERE)
-    popmatrix()
-
-    color(BLUE)
-
-    pushmatrix()
-    translate(0.0, -2.0*RADIUS, -RADIUS)
-    scale(0.3, 0.3, 0.3)
-    callobj(SPHERE)
-    popmatrix()
+    vogle.pushmatrix()
+    vogle.translate(0.0, 1.5 * RADIUS, -RADIUS)
+    vogle.scale(0.15, 0.15, 0.15)
+    vogle.callobj(SPHERE)
+    vogle.popmatrix()
 
 
-    font("times.rb")
-    ortho2(0.0, 1.0, 0.0, 1.0)
-    centertext(1)
-    textsize(0.08, 0.15)
-    move2(0.8, 0.5)
-    textang(-90.0)
-    drawstr("I'm very ordinary!")
+    vogle.color(vogle.YELLOW)
 
-    getkey()
+    vogle.pushmatrix()
+    vogle.translate(0.0, -RADIUS, -RADIUS)
+    vogle.scale(0.12, 0.12, 0.12)
+    vogle.callobj(SPHERE)
+    vogle.popmatrix()
 
-    vexit()
-#
-#
+    vogle.color(vogle.BLUE)
+
+    vogle.pushmatrix()
+    vogle.translate(0.0, -2.0*RADIUS, -RADIUS)
+    vogle.scale(0.3, 0.3, 0.3)
+    vogle.callobj(SPHERE)
+    vogle.popmatrix()
+
+
+    vogle.font("times.rb")
+    vogle.ortho2(0.0, 1.0, 0.0, 1.0)
+    vogle.centertext(1)
+    vogle.textsize(0.08, 0.15)
+    vogle.move2(0.8, 0.5)
+    vogle.textang(-90.0)
+    vogle.drawstr("I'm very ordinary!")
+
+    vogle.getkey()
+
+    vogle.vexit()
+
+
 if __name__ == '__main__':
     main()
-#
+
