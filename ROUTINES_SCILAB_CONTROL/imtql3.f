@@ -1,1 +1,0 @@
-/sw/lib/scilab-2.7/routines/control/imtql3.f

@@ -1,1 +1,0 @@
-/sw/lib/scilab-2.7/routines/slicot/mb01ud.f

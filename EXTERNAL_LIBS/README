@@ -2,11 +2,12 @@ It seems that the vogle lib version 2.0b has completely disappered from the inte
 
 It was the version I used and modified for my purpose. I have forgotten what I have modified...(about 20 years ago)
 The version 2.0b had support for multiple windows (good).
-- cocoa or xxxx support (what was the name of the mac api before cocoa ? I have forgotten!)
+- cocoa or carbon support
 
 Moreover, I ported the vopl lib (for graphs) to the same level + some nice extensions....
 So there are in vopl plenty of changes.
 So far as I remember (20 years ago), I added
 - winopen stuff as in vogle-2.0b (multiple windows)
+- double instead of float for array of values
 - sub-viewports API as in pgplot
 - contours lines on a ucd mesh
