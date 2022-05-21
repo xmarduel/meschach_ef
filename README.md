@@ -1,10 +1,9 @@
 # meschach_ef
 my **very** old finite element library, based on the meschach library.
 
-- 1D -> lots of ef
-- 2D
-- 3D
-
+- 1D -> lots of fe : P1,P2,P3, Hermite, Splines S2,S3,S4,S5  for periodic geometries or not
+- 2D -> P1,P2,P3
+- 3D -> P1,P2,P3
 
 with triangles/tetrahedras only
 
