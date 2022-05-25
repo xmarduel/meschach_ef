@@ -868,7 +868,6 @@
 		251B99A614ADC7EF004D2D46 /* cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa.m; sourceTree = "<group>"; };
 		251E82E914B8FA8A0055F7BF /* test_vogle_cocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_vogle_cocoa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		251E82EB14B8FA8A0055F7BF /* test_vogle_cocoa-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "test_vogle_cocoa-Info.plist"; sourceTree = "<group>"; };
-		252818C014AD11B20000896C /* MakefileExamples */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MakefileExamples; sourceTree = "<group>"; };
 		25291D7E14B2E76D00930EDD /* balls.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = balls.c; sourceTree = "<group>"; };
 		252B46AE0B4057C30022CBE0 /* t5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = t5.c; sourceTree = "<group>"; };
 		252B46E50B405C450022CBE0 /* graphics1D_libsciplot_stationnary_xt_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = graphics1D_libsciplot_stationnary_xt_window.c; sourceTree = "<group>"; };
@@ -1204,7 +1203,6 @@
 		255BDDB11A8CD5F500EEE43D /* sol_1.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sol_1.dat; sourceTree = "<group>"; };
 		255BDDB21A8CD5F500EEE43D /* sol_2.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sol_2.dat; sourceTree = "<group>"; };
 		255BDDB31A8CD60100EEE43D /* xavmesh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xavmesh.c; sourceTree = "<group>"; };
-		255BDDB41A8CD76E00EEE43D /* licosa.c.old */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = licosa.c.old; sourceTree = "<group>"; };
 		2566ADED0EFA53DF004FA061 /* meschach.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c.preprocessed; path = meschach.i; sourceTree = "<group>"; };
 		2566AE0A0EFA554D004FA061 /* meschach_general.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c.preprocessed; path = meschach_general.i; sourceTree = "<group>"; };
 		2566AE0F0EFA5599004FA061 /* meschach_lapack.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c.preprocessed; path = meschach_lapack.i; sourceTree = "<group>"; };
@@ -1624,8 +1622,6 @@
 		25099BB30DC1F2B20076878F /* examples */ = {
 			isa = PBXGroup;
 			children = (
-				255BDDB41A8CD76E00EEE43D /* licosa.c.old */,
-				252818C014AD11B20000896C /* MakefileExamples */,
 				25099BB40DC1F2B20076878F /* balls.c */,
 				25099BB50DC1F2B20076878F /* beer.c */,
 				25099BB60DC1F2B20076878F /* bug.c */,
@@ -1645,7 +1641,6 @@
 				25099BC70DC1F2B20076878F /* pick.c */,
 				25099BC80DC1F2B20076878F /* picking.c */,
 				25099BC90DC1F2B20076878F /* poly.c */,
-				25099BCA0DC1F2B20076878F /* README */,
 				25099BCB0DC1F2B20076878F /* run */,
 				25099BCC0DC1F2B20076878F /* shapes.c */,
 				25099BCD0DC1F2B20076878F /* simple.c */,
@@ -1867,6 +1862,7 @@
 		25459F140A7B655C004F50D1 = {
 			isa = PBXGroup;
 			children = (
+				25099BCA0DC1F2B20076878F /* README */,
 				254902361FA9F1250019D16D /* EF_MESHES */,
 				254C1D961A6186210060FF18 /* JSON_SCHEMAS */,
 				25D307AB0A852F8B008BB241 /* DRIVERS_C */,
@@ -3857,7 +3853,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo `pwd`; make --directory MESCHACH_ADDS/SWIG_INTERFACES -f makefile_swig_python_extension all";
+			shellScript = "echo `pwd`; make --directory MESCHACH_ADDS/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
 		};
 		2578215311CE717600293CB2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
