@@ -52,3 +52,28 @@ Params:
 - AdvFunc clean
 - Bc clean
 - setup functions by names in C program
+
+
+
+
+compile first external libs
+----------------------------
+
+# plotutils
++++++++++++++
+> make
+
+# spooles
+++++++++++
+> make lib
+> cp spooles.a libspooles.a
+
+> cd LinSol
+> make lib
+
+# vogle/vopl
++++++++++++++
+build in the project
+
+# pgplot
++++++++++

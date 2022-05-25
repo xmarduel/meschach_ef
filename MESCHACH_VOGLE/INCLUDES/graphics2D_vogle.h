@@ -114,7 +114,7 @@ typedef struct VOGLE_SURFACE_DATA_
 /* ------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------ */
 
-VOGLE_SURFACE_DATA *surfacedata_new(void);
+VOGLE_SURFACE_DATA *surfacedata_new();
 void               *surfacedata_free (VOGLE_SURFACE_DATA *in);
 VOGLE_SURFACE_DATA *surfacedata_clone(VOGLE_SURFACE_DATA *in);
 

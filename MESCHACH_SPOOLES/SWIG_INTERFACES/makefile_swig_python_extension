@@ -26,7 +26,7 @@ DYLIBS_LINKED_TO_BUNDLE = $(LIB_MESCHACH_SPOOLES) \
 TOP = ../..
 #
 # find spooles headers
-CFLAGS = -I/Users/xavier/x_local/spooles
+CFLAGS = -I/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS
 #
 #
 include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk
