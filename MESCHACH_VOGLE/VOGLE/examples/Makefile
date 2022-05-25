@@ -2,17 +2,19 @@
 # examples makefile 
 #
 CEXAMPS = trivial simple text shapes poly views slant circtxt moretxt jtext curves \
-	  windows lstyles getstr patches balls objvws world loc teapot lotsofwindows \
+	  windows lstyles getstr balls objvws world loc teapot lotsofwindows \
 	  cube lcube tetra licosa beer picking pick
 
 COBJS = trivial.o simple.o text.o shapes.o poly.o views.o slant circtxt.o jtext.o moretxt.o \
-	windows.o lstyles.o getstr.o curves.o patches.o balls.o objvws.o world.o loc.o \
+	windows.o lstyles.o getstr.o curves.o balls.o objvws.o world.o loc.o \
 	teapot.o cube.o lcube.o tetra.o licosa.o beer.o picking.o pick.o lotsofwindows.o
 
+#	patches.o 
 #
 # Where to find library
-LIB = ../src/libvogle.a
-LIBS = -lX11 -lm
+#LIB = ../src/libvogle.a
+LIB = /Users/xavier/x_local/lib/libvogle-2.0.dylib
+LIBS = -L/opt/X11/lib  -lX11 -lm
 #
 MCFLAGS = -g
 CFLAGS = -I../src $(MCFLAGS)
@@ -111,4 +113,4 @@ clean:
 	rm -f *.o core
 
 clobber:
-	rm -f $(CEXAMPS) *.o core
+	rm -f $(CEXAMPS) bug *.o core

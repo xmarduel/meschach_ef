@@ -338,6 +338,7 @@
 		2578226411CE717700293CB2 /* PDE_3D_SOLVE.c in Sources */ = {isa = PBXBuildFile; fileRef = 25D307FD0A852F8C008BB241 /* PDE_3D_SOLVE.c */; };
 		2578228911CE717700293CB2 /* licosa.c in Sources */ = {isa = PBXBuildFile; fileRef = 25099BBE0DC1F2B20076878F /* licosa.c */; };
 		257C81121A65B3E10057A8CE /* HEAT_1D.c in Sources */ = {isa = PBXBuildFile; fileRef = 257C81111A65B3E10057A8CE /* HEAT_1D.c */; };
+		257F175F283E9AF300C1B7D4 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 257F175E283E9AF300C1B7D4 /* Makefile */; };
 		258036E011E8929500FCB2FE /* fontlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 2583E8AA0A8536CC00B218E6 /* fontlist.c */; };
 		2580372F11E895FD00FCB2FE /* fontlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 258036A411E88E8600FCB2FE /* fontlist.h */; };
 		2580373311E8960500FCB2FE /* linemode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2583E8AD0A8536CD00B218E6 /* linemode.c */; };
@@ -1245,6 +1246,7 @@
 		25782B421FF63E8400B9979C /* DRIVER_2D_schwarz_TRANSIENT.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = DRIVER_2D_schwarz_TRANSIENT.py; sourceTree = "<group>"; };
 		257C81111A65B3E10057A8CE /* HEAT_1D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HEAT_1D.c; sourceTree = "<group>"; };
 		257C81131A65B40C0057A8CE /* PDE_EXAMPLE_TR_1D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PDE_EXAMPLE_TR_1D.json; path = DRIVERS_C/1D_TRANSIENT/PDE_EXAMPLE_TR_1D.json; sourceTree = SOURCE_ROOT; };
+		257F175E283E9AF300C1B7D4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		258036A411E88E8600FCB2FE /* fontlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fontlist.h; sourceTree = "<group>"; };
 		2583E89F0A8536CC00B218E6 /* graphics1D_libsciplot.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = graphics1D_libsciplot.h; sourceTree = "<group>"; };
 		2583E8A00A8536CC00B218E6 /* graphics1D_libsciplot_stationnary.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = graphics1D_libsciplot_stationnary.c; sourceTree = "<group>"; };
@@ -1622,6 +1624,7 @@
 		25099BB30DC1F2B20076878F /* examples */ = {
 			isa = PBXGroup;
 			children = (
+				257F175E283E9AF300C1B7D4 /* Makefile */,
 				25099BB40DC1F2B20076878F /* balls.c */,
 				25099BB50DC1F2B20076878F /* beer.c */,
 				25099BB60DC1F2B20076878F /* bug.c */,
@@ -3950,6 +3953,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257F175F283E9AF300C1B7D4 /* Makefile in Sources */,
 				258036E011E8929500FCB2FE /* fontlist.c in Sources */,
 				2580373311E8960500FCB2FE /* linemode.c in Sources */,
 				259B97391FA9D585005D800D /* anim.c in Sources */,
