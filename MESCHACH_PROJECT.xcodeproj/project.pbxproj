@@ -338,7 +338,6 @@
 		2578226411CE717700293CB2 /* PDE_3D_SOLVE.c in Sources */ = {isa = PBXBuildFile; fileRef = 25D307FD0A852F8C008BB241 /* PDE_3D_SOLVE.c */; };
 		2578228911CE717700293CB2 /* licosa.c in Sources */ = {isa = PBXBuildFile; fileRef = 25099BBE0DC1F2B20076878F /* licosa.c */; };
 		257C81121A65B3E10057A8CE /* HEAT_1D.c in Sources */ = {isa = PBXBuildFile; fileRef = 257C81111A65B3E10057A8CE /* HEAT_1D.c */; };
-		257F175F283E9AF300C1B7D4 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 257F175E283E9AF300C1B7D4 /* Makefile */; };
 		258036E011E8929500FCB2FE /* fontlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 2583E8AA0A8536CC00B218E6 /* fontlist.c */; };
 		2580372F11E895FD00FCB2FE /* fontlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 258036A411E88E8600FCB2FE /* fontlist.h */; };
 		2580373311E8960500FCB2FE /* linemode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2583E8AD0A8536CD00B218E6 /* linemode.c */; };
@@ -349,10 +348,7 @@
 		2580376011E8995800FCB2FE /* libsciplot.h in Headers */ = {isa = PBXBuildFile; fileRef = 2583E8AC0A8536CD00B218E6 /* libsciplot.h */; };
 		2580376111E8995A00FCB2FE /* libsciplot.c in Sources */ = {isa = PBXBuildFile; fileRef = 2583E8AB0A8536CC00B218E6 /* libsciplot.c */; };
 		2580377811E89AD600FCB2FE /* extern.h in Headers */ = {isa = PBXBuildFile; fileRef = 2583E8A90A8536CC00B218E6 /* extern.h */; };
-		258BE92A1FA5070E009CE32C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 258BE9291FA5070E009CE32C /* Makefile */; };
-		258BE92C1FA509AF009CE32C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 258BE92B1FA509AF009CE32C /* Makefile */; };
 		258E29681A8D4AF40041F3C5 /* contour.c in Sources */ = {isa = PBXBuildFile; fileRef = 258E29661A8D4AF40041F3C5 /* contour.c */; };
-		259B97391FA9D585005D800D /* anim.c in Sources */ = {isa = PBXBuildFile; fileRef = 259B97381FA9D585005D800D /* anim.c */; };
 		259FA9001914378C0051223B /* all_params_json_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 259FA8FF1914362D0051223B /* all_params_json_config.h */; };
 		25ABEC621A8A3B8F007CCE6D /* gif.c in Sources */ = {isa = PBXBuildFile; fileRef = 25ABEC611A8A3B8E007CCE6D /* gif.c */; };
 		25CA629B1913C64700F96A6F /* all_params_json_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 25CA62991913C46500F96A6F /* all_params_json_utils.h */; };
@@ -1371,6 +1367,7 @@
 		25D37E690DC26DE800466CD0 /* metrics1.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = metrics1.txt; sourceTree = "<group>"; };
 		25D37E6A0DC26DE800466CD0 /* metrics2.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = metrics2.txt; sourceTree = "<group>"; };
 		25D37E9B0DC26E8900466CD0 /* lines_stats.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = lines_stats.txt; sourceTree = "<group>"; };
+		25E05231283EC30F000EA85B /* meschach_vogle_wrap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = meschach_vogle_wrap.c; sourceTree = "<group>"; };
 		25E125131A616CD600B1D803 /* makefile_swig_python_extension */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = makefile_swig_python_extension; sourceTree = "<group>"; };
 		25E125141A616CD600B1D803 /* vopl.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c.preprocessed; path = vopl.i; sourceTree = "<group>"; };
 		25E125411A61707C00B1D803 /* vopl_wrap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vopl_wrap.c; sourceTree = "<group>"; };
@@ -2466,6 +2463,7 @@
 		2556DFF70A7BCD2200130628 /* SWIG_INTERFACES */ = {
 			isa = PBXGroup;
 			children = (
+				25E05231283EC30F000EA85B /* meschach_vogle_wrap.c */,
 				2566AE210EFA56BE004FA061 /* meschach_vogle.i */,
 				2556DFFB0A7BCD2200130628 /* makefile_swig_python_extension */,
 				2556DFFC0A7BCD2200130628 /* SWIG_INTERFACE_M_VOGLE_WRAPPER.i */,
@@ -3953,15 +3951,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				257F175F283E9AF300C1B7D4 /* Makefile in Sources */,
 				258036E011E8929500FCB2FE /* fontlist.c in Sources */,
 				2580373311E8960500FCB2FE /* linemode.c in Sources */,
-				259B97391FA9D585005D800D /* anim.c in Sources */,
 				2580373611E8960A00FCB2FE /* misc.c in Sources */,
 				2580373A11E8961100FCB2FE /* plotter.c in Sources */,
 				2580375F11E8995800FCB2FE /* reader.c in Sources */,
-				258BE92A1FA5070E009CE32C /* Makefile in Sources */,
-				258BE92C1FA509AF009CE32C /* Makefile in Sources */,
 				2580376111E8995A00FCB2FE /* libsciplot.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
