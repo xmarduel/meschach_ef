@@ -1,0 +1,69 @@
+CC = bcc
+
+#
+TESTS = trivial.exe simple.exe shapes.exe poly.exe views.exe circtxt.exe \
+	moretxt.exe curves.exe patches.exe balls.exe objvws.exe world.exe \
+	getstr.exe loc.exe teapot.exe cube.exe lcube.exe \
+	tetra.exe jtext.exe lstyles.exe
+
+LIB = ..\..\src\voglew.lib
+CFLAGS = -W -w-rvl -w-pia -ml -I..\..\src -DTC
+RINC = e:\borlandc\include
+
+all: $(TESTS)
+
+.c.obj:
+	$(CC)  -c $(CFLAGS) $<
+
+.rc.res:
+    rc -r -I$(RINC) $*.rc vogle.ico voglewin.h
+
+.obj.exe:
+	$(CC) $(CFLAGS) $*.obj $(LIB)
+        copy vogle.res $*.res
+        rc -k $*.res
+        
+vogle.res : vogle.rc voglewin.h
+
+trivial.exe: $(LIB) trivial.obj vogle.res
+
+simple.exe: $(LIB) simple.obj vogle.res
+
+shapes.exe: $(LIB) shapes.obj vogle.res
+
+poly.exe: $(LIB) poly.obj vogle.res
+
+views.exe: $(LIB) views.obj vogle.res
+
+circtxt.exe: $(LIB) circtxt.obj vogle.res
+
+jtext.exe: $(LIB) jtext.obj vogle.res
+
+moretxt.exe: $(LIB) moretxt.obj vogle.res
+
+getstr.exe: $(LIB) getstr.obj vogle.res
+
+curves.exe: $(LIB) curves.obj vogle.res
+
+patches.exe: $(LIB) patches.obj vogle.res
+
+objvws.exe: $(LIB) objvws.obj vogle.res
+
+balls.exe: $(LIB) balls.obj vogle.res
+
+world.exe: $(LIB) world.obj  vogle.res
+
+loc.exe: $(LIB) loc.obj  vogle.res
+
+lstyles.exe: $(LIB) lstyles.obj  vogle.res
+
+teapot.exe: $(LIB) teapot.obj  vogle.res
+	
+distrt.exe: $(LIB) distrt.obj  vogle.res
+	
+cube.exe: $(LIB) cube.obj  vogle.res
+	
+lcube.exe: $(LIB) lcube.obj  vogle.res
+	
+tetra.exe: $(LIB) tetra.obj  vogle.res
+	

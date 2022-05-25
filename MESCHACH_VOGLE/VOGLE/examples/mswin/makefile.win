@@ -1,0 +1,115 @@
+#
+# Makefile for C vogle test programs.
+#
+MODEL =      M
+LIBPATH =    ..\src
+LIBNAME =    $(MODEL)VOGLEW.LIB
+LIB =        $(LIBPATH)\$(LIBNAME)
+F = -FPi87
+CFLAGS = -nologo -c -Oas -Gsw -Zpe -A$(MODEL) -DMSWIN -DMSC -DPC $(F) -I..\src
+#CFLAGS = -nologo -c -Od -Gsw -Zipe -A$(MODEL) -DMSWIN -DMSC -DPC $(F) -I..\src
+
+all: trivial.exe simple.exe shapes.exe poly.exe views.exe circtxt.exe moretxt.exe \
+	curves.exe patches.exe balls.exe objvws.exe world.exe loc.exe teapot.exe \
+	tetra.exe cube.exe lcube.exe jtext.exe lstyles.exe
+
+vogle.res : vogle.rc voglewin.h
+
+trivial.obj: trivial.c
+
+trivial.exe: trivial.obj $(LIB) vogle.res
+
+simple.obj: simple.c
+
+simple.exe: simple.obj $(LIB) vogle.res
+
+shapes.obj: shapes.c
+
+shapes.exe: shapes.obj $(LIB) vogle.res
+
+poly.obj: poly.c
+
+poly.exe: poly.obj $(LIB) vogle.res
+
+views.obj: views.c
+
+views.exe: views.obj $(LIB) vogle.res
+
+circtxt.obj: circtxt.c
+
+circtxt.exe: circtxt.obj $(LIB) vogle.res
+
+jtext.obj: jtext.c
+
+jtext.exe: jtext.obj $(LIB) vogle.res
+
+moretxt.obj: moretxt.c
+
+moretxt.exe: moretxt.obj $(LIB) vogle.res
+
+getstr.obj: getstr.c
+
+getstr.exe: getstr.obj $(LIB) vogle.res
+
+curves.obj: curves.c
+
+curves.exe: curves.obj $(LIB) vogle.res
+
+patches.obj: patches.c
+
+patches.exe: patches.obj $(LIB) vogle.res
+
+balls.obj: balls.c 
+
+balls.exe: balls.obj  $(LIB) vogle.res
+
+objvws.obj: objvws.c
+
+objvws.exe: objvws.obj $(LIB) vogle.res
+
+world.obj: world.c
+
+world.exe: world.obj $(LIB) vogle.res
+
+loc.obj: loc.c
+
+loc.exe: loc.obj $(LIB) vogle.res
+
+lstyles.obj: lstyles.c
+
+lstyles.exe: lstyles.obj $(LIB) vogle.res
+
+teapot.obj: teapot.c
+
+teapot.exe: teapot.obj $(LIB) vogle.res
+
+distrt.obj: distrt.c
+
+distrt.exe: distrt.obj $(LIB) vogle.res
+
+tetra.obj: tetra.c
+
+tetra.exe: tetra.obj $(LIB) vogle.res
+
+cube.obj: cube.c
+
+cube.exe: cube.obj $(LIB) vogle.res
+
+lcube.obj: lcube.c
+
+lcube.exe: lcube.obj $(LIB) vogle.res
+
+# default rules
+.c.obj:
+        cl $(CFLAGS) $*.c
+
+.obj.exe:
+	link /NOD $*,,, d:\windev\lib\libw d:\windev\lib\mlibcew $(LIB), $*.def
+	copy vogle.res $*.res
+	rc -k $*.res
+	
+.rc.res:
+    rc -r $*.rc vogle.ico
+
+.SUFFIXES:	.c .obj .exe .rc .res .lib
+
