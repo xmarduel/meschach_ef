@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -3592,7 +3592,7 @@
 				LastUpgradeCheck = 1010;
 			};
 			buildConfigurationList = 25459F170A7B655C004F50D1 /* Build configuration list for PBXProject "MESCHACH_PROJECT" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -3906,7 +3906,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo `pwd`; make --directory MESCHACH_EF/SWIG_INTERFACES -f makefile_swig_python_extension all";
+			shellScript = "echo `pwd`; make --directory MESCHACH_EF/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
 		};
 		25E125161A616D7000B1D803 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
