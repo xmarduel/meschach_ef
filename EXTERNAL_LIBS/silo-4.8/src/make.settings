@@ -1,4 +1,0 @@
-"Makefile Summary\n"
-"Compile command:         gcc-4.2 -arch x86_64 -DHAVE_CONFIG_H -I. -I..     -O3 -fexceptions -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Wdeclaration-after-statement \n"
-"Libtool command:         /bin/sh ../libtool --tag=CC   --mode=compile gcc-4.2 -arch x86_64 -DHAVE_CONFIG_H -I. -I..     -O3 -fexceptions -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Wdeclaration-after-statement \n"
-"Link command:            /bin/sh ../libtool --tag=CC   --mode=link gcc-4.2 -arch x86_64  -O3 -fexceptions -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Wdeclaration-after-statement  -Wl,-headerpad_max_install_names -o make.settings -lz   \n"

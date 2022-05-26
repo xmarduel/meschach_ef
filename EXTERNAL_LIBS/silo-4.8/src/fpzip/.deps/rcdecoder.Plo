@@ -1,8 +1,0 @@
-rcdecoder.lo rcdecoder.o: rcdecoder.cpp rcdecoder.h rcmodel.h \
-  rcdecoder.inl
-
-rcdecoder.h:
-
-rcmodel.h:
-
-rcdecoder.inl:

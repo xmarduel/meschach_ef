@@ -1,3 +1,0 @@
-silo_version.lo silo_version.o: silo_version.c libsilo.settings
-
-libsilo.settings:

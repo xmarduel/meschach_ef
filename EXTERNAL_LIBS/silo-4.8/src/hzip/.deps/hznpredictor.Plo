@@ -1,6 +1,0 @@
-hznpredictor.lo hznpredictor.o: hznpredictor.cpp hznpredictor.h \
-  hznpredictor.inl
-
-hznpredictor.h:
-
-hznpredictor.inl:
