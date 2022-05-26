@@ -686,6 +686,9 @@
 		25041BE10D2D1CAA003039E9 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		25041C8B0D2D22D5003039E9 /* graphics2D_vogle_transient_xt_window.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = graphics2D_vogle_transient_xt_window.c; sourceTree = "<group>"; };
 		250525BA132A5CE60087B775 /* draw_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = draw_c.c; sourceTree = "<group>"; };
+		2507E7FF283F64AB003DB616 /* letter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = letter.c; sourceTree = "<group>"; };
+		2507E801283F64B5003DB616 /* toto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = toto.c; sourceTree = "<group>"; };
+		2507E803283F64BF003DB616 /* plotutils.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = plotutils.pdf; sourceTree = "<group>"; };
 		25099B9E0DC1F2B20076878F /* DIFFERENCES */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = DIFFERENCES; sourceTree = "<group>"; };
 		25099BA00DC1F2B20076878F /* vogle.3 */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = vogle.3; sourceTree = "<group>"; };
 		25099BA10DC1F2B20076878F /* vogle.doc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = vogle.doc; sourceTree = "<group>"; };
@@ -1560,6 +1563,9 @@
 		250525B9132A5CE60087B775 /* TEST_LIBPLOT */ = {
 			isa = PBXGroup;
 			children = (
+				2507E803283F64BF003DB616 /* plotutils.pdf */,
+				2507E801283F64B5003DB616 /* toto.c */,
+				2507E7FF283F64AB003DB616 /* letter.c */,
 				259B97381FA9D585005D800D /* anim.c */,
 				258BE92B1FA509AF009CE32C /* Makefile */,
 				25442C441AAB280A004BDDA1 /* gui.c */,

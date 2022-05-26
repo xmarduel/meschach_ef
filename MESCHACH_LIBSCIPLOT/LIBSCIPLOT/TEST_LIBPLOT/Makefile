@@ -1,6 +1,7 @@
 DRAW_C = draw_c
 GUI = gui
 ANIM = anim
+LETTER = letter
 
 CFLAGS = -DLIBPLOT  -I.. -I$(MESCHACH_EF_PROJECT)/EXTERNAL_LIBS/plotutils-2.6 -I$(MESCHACH_EF_PROJECT)/EXTERNAL_LIBS/plotutils-2.6/include -I/opt/X11/include
 CFLAGS_MESCHACH = -I../../..
@@ -24,7 +25,12 @@ $(ANIM): $(ANIM).o
 $(ANIM).o: $(ANIM).c
 	$(CC) $(CFLAGS) -c $(ANIM).c
 
-all: $(DRAW_C) $(GUI) $(ANIM)
+$(LETTER): $(LETTER).o
+	$(CC) -o $(LETTER) $(LDFLAGS) $(LETTER).o
+$(LETTER).o: $(LETTER).c
+	$(CC) $(CFLAGS) -c $(LETTER).c
+
+all: $(DRAW_C) $(GUI) $(ANIM) $(LETTER)
 
 clean::
-	rm -f *.o $(DRAW_C) $(GUI) $(ANIM) *.o
+	rm -f *.o $(DRAW_C) $(GUI) $(ANIM) $(LETTER)
