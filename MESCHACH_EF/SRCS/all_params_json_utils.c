@@ -88,11 +88,6 @@ json_t *json_load_xfile(const char *path)
 /* ---------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------- */
 
-int json_boolean_value(const json_t *p)
-{
-   return json_is_boolean(p) && json_is_true(p);
-}
-
 int json_object_get_boolean_value(const json_t *p, const char *objname)
 {
    json_t* o = json_object_get(p, objname);

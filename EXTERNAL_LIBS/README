@@ -1,8 +1,8 @@
-It seems that the vogle lib version 2.0b has completely disappered from the internet! What a pity!
-
-It was the version I used and modified for my purpose. I have forgotten what I have modified...(about 20 years ago)
+I'm using a modified version of vogle-2.0b for my purpose. I have forgotten what I have modified...(about 20 years ago)
 The version 2.0b had support for multiple windows (good).
-- cocoa or carbon support
+- cocoa or carbon support (seems to be broken, I do not known why nowadays)
+- ppm speed up (nice when generating ppm on the fly during animation)
+- what else ?
 
 Moreover, I ported the vopl lib (for graphs) to the same level + some nice extensions....
 So there are in vopl plenty of changes.

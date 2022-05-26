@@ -5820,17 +5820,17 @@
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"//Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.8/src/silo",
-					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.6/src",
+					"//Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.8/src/.libs",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/.libs",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
-					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBSjansson-2.6/src/.libs",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src/.libs",
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5876,17 +5876,17 @@
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"//Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.8/src/silo",
-					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.6/src",
+					"//Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.8/src/.libs",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/.libs",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/amd,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
-					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBSjansson-2.6/src/.libs",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src/.libs",
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;

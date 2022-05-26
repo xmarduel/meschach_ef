@@ -5,6 +5,7 @@ prerequisites: ( (*) means that the lib is modified and build by us)
 - libs:
 
    - libjansson.a
+   - libsilo.a
 
    - libXaPgplot.a - libcpgplot.a - libpgplot.a
    - (*)libvogle.a - (*)libvopl.a
@@ -61,6 +62,7 @@ compile first external libs
 
 # plotutils
 +++++++++++++
+> ./configure
 > make
 
 # spooles
@@ -77,3 +79,13 @@ build in the project
 
 # pgplot
 +++++++++
+
+# silo
++++++++++
+> ./configure
+> make
+
+# jansson
+++++++++++
+> ./configure
+> make

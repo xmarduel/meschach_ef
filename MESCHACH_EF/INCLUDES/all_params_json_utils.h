@@ -21,7 +21,6 @@ const char *json_object_get_string_value(const json_t *p, const char *objname);
 int json_object_get_integer_value(const json_t *p, const char *objname);
 double json_object_get_real_value(const json_t *p, const char *objname);
 
-int json_boolean_value(const json_t *p);
 int json_object_get_boolean_value(const json_t *p, const char *objname);
 	
 int json_array_get_integer_value(const json_t *p, int idx);
