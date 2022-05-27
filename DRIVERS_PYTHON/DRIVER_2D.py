@@ -448,7 +448,7 @@ def run_test():
              "SUB_WINDOWS" : [
                 {
                    "IDXS"         : [1,1] ,
-                   "WINDOW"       : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":0.0 , "Y_MAX":1.0 },
+                   "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":0.0 , "Y_MAX":1.0 },
                              
                     "GRAPHICS_TYPE"    : "CONTOURS",
                               #"GRAPHICS_TYPE"    : "SURFACE",
