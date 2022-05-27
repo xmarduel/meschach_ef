@@ -255,7 +255,7 @@
                 
                 "LEGEND"       : "contours" , 
                 
-                "WINDOW"       : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":0.0 , "Y_MAX":1.0 },
+                "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":0.0 , "Y_MAX":1.0 },
                 
                 "CONTOURS"     : {
                     "NB_LEVELS"    : 11 ,

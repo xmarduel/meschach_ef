@@ -1626,11 +1626,11 @@ static void json_config_PARAMS_graphics_interactiv2D_plots(PARAMS* p, const json
       p->graph_interactiv2Dplots_params.MARKER_END[i][j] = json_object_get_integer_value(SUB_WINDOW, "MARKER_END");
       */
       
-      json_t *WINDOW = json_object_get(SUB_WINDOW, "WINDOW");
-      p->graph_interactiv2Dplots_params.WINDOW[i][j].X_MIN = json_object_get_real_value(WINDOW, "X_MIN");
-      p->graph_interactiv2Dplots_params.WINDOW[i][j].X_MAX = json_object_get_real_value(WINDOW, "X_MAX");
-      p->graph_interactiv2Dplots_params.WINDOW[i][j].Y_MIN = json_object_get_real_value(WINDOW, "Y_MIN");
-      p->graph_interactiv2Dplots_params.WINDOW[i][j].Y_MAX = json_object_get_real_value(WINDOW, "Y_MAX");
+      json_t *VIEWPORT = json_object_get(SUB_WINDOW, "VIEWPORT");
+      p->graph_interactiv2Dplots_params.WINDOW[i][j].X_MIN = json_object_get_real_value(VIEWPORT, "X_MIN");
+      p->graph_interactiv2Dplots_params.WINDOW[i][j].X_MAX = json_object_get_real_value(VIEWPORT, "X_MAX");
+      p->graph_interactiv2Dplots_params.WINDOW[i][j].Y_MIN = json_object_get_real_value(VIEWPORT, "Y_MIN");
+      p->graph_interactiv2Dplots_params.WINDOW[i][j].Y_MAX = json_object_get_real_value(VIEWPORT, "Y_MAX");
       
         const char *GRAPHICS_TYPE = json_object_get_string_value(SUB_WINDOW, "GRAPHICS_TYPE");
         

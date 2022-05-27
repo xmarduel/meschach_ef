@@ -28,7 +28,7 @@
         
         "PDE_RESOLUTION" : { "type":"object", "description":"",
             "properties" : {
-                "EF"             : { "type":"string", "description":"" , "enum":["P1", "P2", "H3", "S3", "S5"] },           
+                "EF"             : { "type":"string", "description":"" , "enum":["P1", "P2", "P3", "H3", "S2", "S3", "S4", "S5"] },           
                 
                 "LAPLACIAN_ALGO" : { "type":"object", "description":"",
                     "properties" : {
@@ -572,12 +572,12 @@
                             "LEGEND_AXE_Y" : { "type":"string", "description":"" },
                             "MARKER"       : { "type":"integer", "description":"" },
                             "MARKER_END"   : { "type":"integer", "description":"" },
-                            "WINDOW"       : { "type":"object", "description":"",
+                            "VIEWPORT"     : { "type":"object", "description":"",
                                 "properties" : {
                                     "X_MIN"    : { "type":"number", "description":"" },
                                     "X_MAX"    : { "type":"number", "description":"" },
                                     "Y_MIN"    : { "type":"number", "description":"" },
-									"Y_MAX"    : { "type":"number", "description":"" }
+                                    "Y_MAX"    : { "type":"number", "description":"" }
 										  }
                             }
                         }
@@ -601,7 +601,7 @@
 									     },
 										  "GRAPHICS_TYPE" : {"type":"string", "description":"", "enum":["SURFACE", "CONTOURS"] },
 										  "LEGEND"        : { "type":"string", "description":"" },
-                                          "WINDOW"       : { "type":"object", "description":"",
+                                          "VIEWPORT"       : { "type":"object", "description":"",
                                               "properties" : {
                                                   "X_MIN"    : { "type":"number", "description":"" },
                                                   "X_MAX"    : { "type":"number", "description":"" },

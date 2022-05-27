@@ -19,7 +19,7 @@
     # resolution -------------------------------------
 
     "PDE_RESOLUTION" : {
-        "EF" : "P1" ,         # "P1", "P2", "H3", "S3", "S5"
+        "EF" : "P1" ,         # "P1", "P2", "H3", "S2", "S3", "S5"
 
         "LAPLACIAN_ALGO" : {
             "METHOD": "ITERATIVE-METHOD",
