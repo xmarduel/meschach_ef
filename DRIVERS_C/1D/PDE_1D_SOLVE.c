@@ -66,7 +66,7 @@
 
 int main()
 {
-    ELT_1D   *MyElt, *elt_P1, *elt_P2, *elt_P3, *elt_H3, *elt_S3, *elt_S5;
+    ELT_1D   *MyElt, *elt_P1, *elt_P2, *elt_P3, *elt_H3, *elt_S2, *elt_S3, *elt_S5;
 
     GEOM_1D  *MyGeom;
 
@@ -118,6 +118,7 @@ int main()
     elt_P2 = elt1D_get("P2");
     elt_P3 = elt1D_get("P3");
     elt_H3 = elt1D_get("H3");
+    elt_S2 = elt1D_get("S2");
     elt_S3 = elt1D_get("S3");
     elt_S5 = elt1D_get("S5");
 
@@ -279,9 +280,10 @@ int main()
         double diff2 = v_norm2(v_sub(SOL, vec_exact, vec_tmp));
         fprintf(stdout, "\ndiff solexacte-solapprochee = %le\n", diff2);
        
-       v_foutput(stdout, SOL);
-       v_foutput(stdout, vec_exact);
-       
+        printf("SOL\n");
+        v_foutput(stdout, SOL);
+        printf("EXACT\n");
+        v_foutput(stdout, vec_exact);
     }
 
     /* --------------------------------------------------------------------- */
@@ -290,6 +292,7 @@ int main()
     ELT_1D_FREE(elt_P2);
     ELT_1D_FREE(elt_P3);
     ELT_1D_FREE(elt_H3);
+    ELT_1D_FREE(elt_S2);
     ELT_1D_FREE(elt_S3);
     ELT_1D_FREE(elt_S5);
 

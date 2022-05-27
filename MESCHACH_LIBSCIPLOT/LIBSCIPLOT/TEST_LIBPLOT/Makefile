@@ -3,17 +3,15 @@ GUI = gui
 ANIM = anim
 LETTER = letter
 
-CFLAGS = -DLIBPLOT  -I.. -I$(MESCHACH_EF_PROJECT)/EXTERNAL_LIBS/plotutils-2.6 -I$(MESCHACH_EF_PROJECT)/EXTERNAL_LIBS/plotutils-2.6/include -I/opt/X11/include
-CFLAGS_MESCHACH = -I../../..
+PLOTUTILS = $(MESCHACH_EF_PROJECT)/EXTERNAL_LIBS/plotutils-2.6
 
-LDFLAGS = -L/Users/xavier/x_local/lib  -L/opt/X11/lib  -lplot  -lXaw -lXt -lX11
-LDFLAGS_MESCHACH = -L/Users/xavier/x_local/lib  -lmeschach_adds -lmeschach
+CFLAGS =  -I.. -I$(PLOTUTILS) -I$(PLOTUTILS)/include -I/opt/X11/include
+LDFLAGS = -L$(PLOTUTILS)/libplot/.libs -lplot -L/opt/X11/lib  -lXaw -lXmu -lXt -lSM -lICE -lXext -lX11
 
 $(DRAW_C): $(DRAW_C).o
 	$(CC) -o $(DRAW_C) $(LDFLAGS) $(DRAW_C).o
 $(DRAW_C).o: $(DRAW_C).c
 	$(CC) $(CFLAGS) -c $(DRAW_C).c
-
 
 $(GUI): $(GUI).o
 	$(CC) -o $(GUI) $(LDFLAGS) $(GUI).o

@@ -1018,7 +1018,7 @@ Real F0_1D_S2( Real x )          /* -- Element S2 --- */
 Real F1_1D_S2( Real x )
 {
    Real val;
-   return val = 3.0 - 2.0*x + 2.0*SQR(1.0 - x);
+   return val = 3.0 - 2.0*x - 2.0*SQR(1.0 - x);
 }
 Real F2_1D_S2( Real x )
 {
@@ -1174,7 +1174,7 @@ Real DFDX0_1D_S2( Real x )          /* -- Element S2 --- */
 Real DFDX1_1D_S2( Real x )
 {
    Real val;
-   return val = - 6.0 + 4.0*x;
+   return val = 2.0 - 4.0*x;
 }
 Real DFDX2_1D_S2( Real x )
 {
@@ -1328,7 +1328,7 @@ Real DDFDXX0_1D_S2( Real x )          /* -- Element S2 --- */
 Real DDFDXX1_1D_S2( Real x )
 {
    Real val;
-   return val = 4.0;
+   return val = -4.0;
 }
 Real DDFDXX2_1D_S2( Real x )
 {

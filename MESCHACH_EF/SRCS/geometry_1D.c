@@ -1504,7 +1504,7 @@ static GEOM_1D *Geom1D_get_fromParent_S2toP1( const ELT_1D *element, const GEOM_
    }
    else
    {
-      error(E_UNKNOWN, "Geom1D_get_fromParent_S3toP1");
+      error(E_UNKNOWN, "Geom1D_get_fromParent_S2toP1");
    }
 
 

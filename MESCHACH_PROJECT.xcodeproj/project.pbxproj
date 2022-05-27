@@ -687,8 +687,6 @@
 		25041C8B0D2D22D5003039E9 /* graphics2D_vogle_transient_xt_window.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = graphics2D_vogle_transient_xt_window.c; sourceTree = "<group>"; };
 		250525BA132A5CE60087B775 /* draw_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = draw_c.c; sourceTree = "<group>"; };
 		2507E7FF283F64AB003DB616 /* letter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = letter.c; sourceTree = "<group>"; };
-		2507E801283F64B5003DB616 /* toto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = toto.c; sourceTree = "<group>"; };
-		2507E803283F64BF003DB616 /* plotutils.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = plotutils.pdf; sourceTree = "<group>"; };
 		25099B9E0DC1F2B20076878F /* DIFFERENCES */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = DIFFERENCES; sourceTree = "<group>"; };
 		25099BA00DC1F2B20076878F /* vogle.3 */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = vogle.3; sourceTree = "<group>"; };
 		25099BA10DC1F2B20076878F /* vogle.doc */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = vogle.doc; sourceTree = "<group>"; };
@@ -1274,6 +1272,7 @@
 		258BE9291FA5070E009CE32C /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		258BE92B1FA509AF009CE32C /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		258E29661A8D4AF40041F3C5 /* contour.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = contour.c; sourceTree = "<group>"; };
+		2595A5DB2840ADDC00D3A467 /* ef1D_S4_mtx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ef1D_S4_mtx.h; sourceTree = "<group>"; };
 		259B97381FA9D585005D800D /* anim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = anim.c; sourceTree = "<group>"; };
 		259C50F5132A5D3F0070406E /* test_libplot */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test_libplot; sourceTree = BUILT_PRODUCTS_DIR; };
 		259CCCEA0AD8EB7300FFECC4 /* python_extension.mk */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = python_extension.mk; sourceTree = "<group>"; };
@@ -1563,8 +1562,6 @@
 		250525B9132A5CE60087B775 /* TEST_LIBPLOT */ = {
 			isa = PBXGroup;
 			children = (
-				2507E803283F64BF003DB616 /* plotutils.pdf */,
-				2507E801283F64B5003DB616 /* toto.c */,
 				2507E7FF283F64AB003DB616 /* letter.c */,
 				259B97381FA9D585005D800D /* anim.c */,
 				258BE92B1FA509AF009CE32C /* Makefile */,
@@ -2287,6 +2284,7 @@
 				2556DE7B0A7BC9DE00130628 /* ef1D_P3_mtx.h */,
 				2556DE7C0A7BC9DE00130628 /* ef1D_S2_mtx.h */,
 				2556DE7D0A7BC9DE00130628 /* ef1D_S3_mtx.h */,
+				2595A5DB2840ADDC00D3A467 /* ef1D_S4_mtx.h */,
 				2556DE7E0A7BC9DE00130628 /* ef1D_S5_mtx.h */,
 				2556DE7F0A7BC9DE00130628 /* ef2D_P1_mtx.h */,
 				2556DE800A7BC9DE00130628 /* ef2D_P1b_mtx.h */,
@@ -5292,7 +5290,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lmeschach",
 					"-lBridge",
@@ -5338,6 +5336,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lmeschach",
@@ -5821,12 +5820,12 @@
 				EXPORTED_SYMBOLS_FILE = MESCHACH_EF/libmeschach_ef_export.txt;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = "";
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "HAVE_SILO=1";
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"//Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
@@ -5841,7 +5840,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-Wno-unused-variable";
 				OTHER_LDFLAGS = (
 					"-lmeschach_adds",
@@ -5876,13 +5875,13 @@
 				DYLIB_CURRENT_VERSION = 1;
 				EXPORTED_SYMBOLS_FILE = MESCHACH_EF/libmeschach_ef_export.txt;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "HAVE_SILO=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"//Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
 				);
@@ -5897,6 +5896,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-Wno-unused-variable";
 				OTHER_LDFLAGS = (
 					"-lmeschach_adds",

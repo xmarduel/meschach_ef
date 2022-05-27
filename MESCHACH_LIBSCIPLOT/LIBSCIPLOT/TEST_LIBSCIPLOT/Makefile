@@ -1,11 +1,11 @@
 TEST1_LIBSCIPLOT = test1_libsciplot
 TEST2_LIBSCIPLOT = test2_libsciplot
 
-CFLAGS = -I.. -I$(MESCHACH_EF_PROJECT)/EXTERNAL_LIBS -I$(MESCHACH_EF_PROJECT)/EXTERNAL_LIBS/plotutils-2.6 -I$(MESCHACH_EF_PROJECT)/EXTERNAL_LIBS/plotutils-2.6/include
-CFLAGS_MESCHACH = -I../../..
+EXTERNAL_LIBS = $(MESCHACH_EF_PROJECT)/EXTERNAL_LIBS
+PLOTUTILS = $(EXTERNAL_LIBS)/plotutils-2.6
 
-LDFLAGS = -L/Users/xavier/x_local/lib  -L/opt/X11/lib  -lsciplot -lplot  -lXaw -lXt -lX11
-LDFLAGS_MESCHACH = -L/Users/xavier/x_local/lib  -lmeschach_adds -lmeschach
+CFLAGS = -I.. -I$(EXTERNAL_LIBS) -I$(PLOTUTILS) -I$(PLOTUTILS)/include
+LDFLAGS = -L/Users/xavier/x_local/lib -L$(PLOTUTILS)/libplot/.libs  -lsciplot -lplot  -L/opt/X11/lib  -lXaw -lXmu -lXt -lSM -lICE -lXext -lX11
 
 $(TEST1_LIBSCIPLOT): $(TEST1_LIBSCIPLOT).o
 	$(CC) -o $(TEST1_LIBSCIPLOT) $(LDFLAGS) $(TEST1_LIBSCIPLOT).o

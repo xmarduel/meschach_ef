@@ -1,8 +1,8 @@
 #
 #
-from libmeschach      import *
-from libmeschach_adds import *
-from libmeschach_ef   import *
+from meschach      import *
+from meschach_adds import *
+from meschach_ef   import *
 #
 #-------------------------------------------------------------------
 #

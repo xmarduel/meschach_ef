@@ -46,8 +46,7 @@ VEC* build_vec_from_function1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom, const
       }
    }
    else
-   if ( (strcmp(MyElt->name_ef,"S2") == 0)||
-        (strcmp(MyElt->name_ef,"S3") == 0)||
+   if ( (strcmp(MyElt->name_ef,"S3") == 0)||
         (strcmp(MyElt->name_ef,"S5") == 0) )
    {
       VEC *vec_world = v_get(MyGeom->NBSOMM);
@@ -63,6 +62,23 @@ VEC* build_vec_from_function1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom, const
 
       /* clean */
       V_FREE(vec_world);
+   }
+   else
+   if ( (strcmp(MyElt->name_ef,"S2") == 0) ||
+        (strcmp(MyElt->name_ef,"S4") == 0) )
+   {
+      VEC *vec_world = v_get(MyGeom->NBSOMM);
+      
+      /* give vec in the world space */
+      for (s=0; s<MyGeom->NBSOMM; s++)
+      {
+         vec_world->ve[s] = fun->eval(fun, MyGeom->XSOMM->ve[s]);
+      }
+      
+      // TODO   inverse of EF_to_WORLD!!! LU error
+      int nb_steps = 0;
+      iter_xspbicgstab(MyGeom->EF_to_WORLD, NULL, vec_world, 1.0e-10, vec, 100, &nb_steps, NULL);
+      printf(" sol exact eval ... bicgstab: # of iter. = %d \n\n", nb_steps);
    }
    else
    {

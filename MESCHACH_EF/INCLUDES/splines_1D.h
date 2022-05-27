@@ -20,7 +20,7 @@ extern "C"
  * The "basic" mesh ( 3 intervals for "S2", 4 intervals for "S3" or 6 intervals for "S5" ) is also called "local mesh" \n
  *
  * The definition of a basic spline on this local mesh is given with a matrix
- * ( 3x3 for "S3", 4x4 for "S3" or 6x6 for "S5" ). For example :\n
+ * ( 3x3 for "S2", 4x4 for "S3" or 6x6 for "S5" ). For example :\n
  * -> the first line stores the 4 coeff. of { 1, X, X**2, X**3 } on the first interval\n
  * -> the second line     " "           " "                      on the second interval\n
  * -> the third line      " "           " "                      on the third interval\n
