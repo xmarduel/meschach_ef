@@ -66,7 +66,7 @@
 
 int main()
 {
-    ELT_1D   *MyElt, *elt_P1, *elt_P2, *elt_P3, *elt_H3, *elt_S2, *elt_S3, *elt_S5;
+    ELT_1D   *MyElt, *elt_P1, *elt_P2, *elt_P3, *elt_H3, *elt_S2, *elt_S3, *elt_S4, *elt_S5;
 
     GEOM_1D  *MyGeom;
 
@@ -120,6 +120,7 @@ int main()
     elt_H3 = elt1D_get("H3");
     elt_S2 = elt1D_get("S2");
     elt_S3 = elt1D_get("S3");
+    elt_S4 = elt1D_get("S4");
     elt_S5 = elt1D_get("S5");
 
     /* Element type */
@@ -191,6 +192,7 @@ int main()
         graphics1D("gnuplot", MyElt, MyGeom, SOL, "SolApproch1D.dat");
         //graphics1D_gnuplot_script("SolApproch1D.dat", NULL, NULL, MyParams->resol_params.nb_steps, MyParams->misc_params.iter_file);
 
+        printf("data plot\n");
         v_output(DATA_PLOT);
         /*
          * graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch");
@@ -280,6 +282,9 @@ int main()
         double diff2 = v_norm2(v_sub(SOL, vec_exact, vec_tmp));
         fprintf(stdout, "\ndiff solexacte-solapprochee = %le\n", diff2);
        
+        printf("SOL WORLD\n");
+        v_foutput(stdout, sp_mv_mlt(MyGeom->EF_to_WORLD, SOL, NULL));
+       
         printf("SOL\n");
         v_foutput(stdout, SOL);
         printf("EXACT\n");
@@ -294,6 +299,7 @@ int main()
     ELT_1D_FREE(elt_H3);
     ELT_1D_FREE(elt_S2);
     ELT_1D_FREE(elt_S3);
+    ELT_1D_FREE(elt_S4);
     ELT_1D_FREE(elt_S5);
 
     ELT_1D_FREE(MyElt);

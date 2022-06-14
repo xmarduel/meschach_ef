@@ -220,6 +220,14 @@ void graphics1D_output_fun(const char *filename, const ELT_1D *element, const GE
       }
    }
    else
+   if ( strcmp(element->name_ef,"S4") == 0 )
+   {
+      for (i=0; i<geom->XSOMM->dim-2; i++)
+      {
+         fprintf(fp, "%f  %f \n", geom->XSOMM->ve[i+1],  f->eval(f, geom->XSOMM->ve[i+1]) );
+      }
+   }
+   else
    if ( strcmp(element->name_ef,"S5") == 0 )
    {
       for (i=0; i<geom->XSOMM->dim-4; i++)
@@ -309,6 +317,14 @@ void graphics1D_output_vec(const char *filename, const ELT_1D *element, const GE
    }
    else
    if ( strcmp(element->name_ef,"S3") == 0 )
+   {
+      for (i=0; i<geom->XSOMM->dim; i++)
+      {
+         fprintf(fp, "%f  %f \n", geom->XSOMM->ve[i], TMP->ve[i] );
+      }
+   }
+   else
+   if ( strcmp(element->name_ef,"S4") == 0 )
    {
       for (i=0; i<geom->XSOMM->dim; i++)
       {

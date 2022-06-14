@@ -4,7 +4,9 @@ from sympy import *
 from ef3D_utils import *
 
 
-x,y,z = symbols('xyz')
+x = symbols('x')
+y = symbols('y')
+z = symbols('z')
 
 
 class ef3D_Pn(object):
@@ -129,47 +131,47 @@ class ef3D_Pn(object):
         dFunBasedy = self.FunBase.applyfunc(lambda v: diff(v, y) )
         dFunBasedz = self.FunBase.applyfunc(lambda v: diff(v, z) )
     
-        print "/*--------------------------------------------------------*/"
-        print "/*--------------------------------------------------------*/"
+        print("/*--------------------------------------------------------*/")
+        print("/*--------------------------------------------------------*/")
         for k, fb in enumerate(self.FunBase):
-            print ""
-            print "Real F%d_3D_%s(Real x, Real y, Real z)" % (k, self.ef_type)
-            print "{"
-            print "    return %s;" % printing.ccode(fb)
-            print "}"
-        print ""
+            print("")
+            print("Real F%d_3D_%s(Real x, Real y, Real z)" % (k, self.ef_type))
+            print("{")
+            print("    return %s;" % printing.ccode(fb))
+            print("}")
+        print("")
     
-        print "/*--------------------------------------------------------*/"
-        print "/*--------------------------------------------------------*/"
+        print("/*--------------------------------------------------------*/")
+        print("/*--------------------------------------------------------*/")
         for k, fb in enumerate(dFunBasedx):
-            print ""
-            print "Real DFDX%d_3D_%s(Real x, Real y, Real z)" % (k, self.ef_type)
-            print "{"
-            print "    return %s;" % printing.ccode(fb)
-            print "}"
-        print ""
+            print("")
+            print("Real DFDX%d_3D_%s(Real x, Real y, Real z)" % (k, self.ef_type))
+            print("{")
+            print("    return %s;" % printing.ccode(fb))
+            print("}")
+        print("")
     
-        print "/*--------------------------------------------------------*/"
-        print "/*--------------------------------------------------------*/"
+        print("/*--------------------------------------------------------*/")
+        print("/*--------------------------------------------------------*/")
         for k, fb in enumerate(dFunBasedy):
-            print ""
-            print "Real DFDY%d_3D_%s(Real x, Real y, Real z)" % (k, self.ef_type)
-            print "{"
-            print "    return %s;" % printing.ccode(fb)
-            print "}"
-        print ""
+            print("")
+            print("Real DFDY%d_3D_%s(Real x, Real y, Real z)" % (k, self.ef_type))
+            print("{")
+            print("    return %s;" % printing.ccode(fb))
+            print("}")
+        print("")
     
-        print "/*--------------------------------------------------------*/"
-        print "/*--------------------------------------------------------*/"
+        print("/*--------------------------------------------------------*/")
+        print("/*--------------------------------------------------------*/")
         for k, fb in enumerate(dFunBasedz):
-            print ""
-            print "Real DFDZ%d_3D_%s(Real x, Real y, Real z)" % (k, self.ef_type)
-            print "{"
-            print "    return %s;" % printing.ccode(fb)
-            print "}"
-        print ""
-        print "/*--------------------------------------------------------*/"
-        print "/*--------------------------------------------------------*/"
+            print("")
+            print("Real DFDZ%d_3D_%s(Real x, Real y, Real z)" % (k, self.ef_type))
+            print("{")
+            print("    return %s;" % printing.ccode(fb))
+            print("}")
+        print("")
+        print("/*--------------------------------------------------------*/")
+        print("/*--------------------------------------------------------*/")
 
 
     def mx_cdef_vect(self):
@@ -177,10 +179,10 @@ class ef3D_Pn(object):
         '''
         IVec = self.FunBase.applyfunc( integrate_on_tetrahedra )
     
-        print "Real VEC_Masse_%s[%d] = " % (self.ef_type, self.DoF)
-        print ""
-        print to_c_vector(IVec)
-        print ""
+        print("Real VEC_Masse_%s[%d] = " % (self.ef_type, self.DoF))
+        print("")
+        print(to_c_vector(IVec))
+        print("")
 
     def mx_cdef_mass(self):
         '''
@@ -189,10 +191,10 @@ class ef3D_Pn(object):
     
         IMass = Mass.applyfunc( integrate_on_tetrahedra )
     
-        print "Real MAT_Masse_%s[%d][%d] = " % (self.ef_type, self.DoF, self.DoF)
-        print "{\n" + to_c_matrix(IMass) + "};"
-        print ""
-        print ""
+        print("Real MAT_Masse_%s[%d][%d] = " % (self.ef_type, self.DoF, self.DoF))
+        print("{\n" + to_c_matrix(IMass) + "};")
+        print("")
+        print("")
 
     def mx_cdef_stiff(self):
         '''
@@ -219,19 +221,19 @@ class ef3D_Pn(object):
         IStiff_yz = Stiff_yz.applyfunc( integrate_on_tetrahedra )
         IStiff_zy = Stiff_zy.applyfunc( integrate_on_tetrahedra )
     
-        print "Real MAT_Rigid_%s[9][%d][%d] = " % (self.ef_type, self.DoF, self.DoF)
-        print "{"
-        print "   { /* Stiff_xx */ \n" + to_c_matrix(IStiff_xx) + "   },"
-        print "   { /* Stiff_xy */ \n" + to_c_matrix(IStiff_xy) + "   },"
-        print "   { /* Stiff_xz */ \n" + to_c_matrix(IStiff_xz) + "   },"
-        print "   { /* Stiff_yx */ \n" + to_c_matrix(IStiff_yx) + "   },"
-        print "   { /* Stiff_yy */ \n" + to_c_matrix(IStiff_yy) + "   },"
-        print "   { /* Stiff_yz */ \n" + to_c_matrix(IStiff_yz) + "   },"
-        print "   { /* Stiff_zx */ \n" + to_c_matrix(IStiff_zx) + "   },"
-        print "   { /* Stiff_zy */ \n" + to_c_matrix(IStiff_zy) + "   },"
-        print "   { /* Stiff_zz */ \n" + to_c_matrix(IStiff_zz) + "   },"
-        print "};"
-        print ""
+        print("Real MAT_Rigid_%s[9][%d][%d] = " % (self.ef_type, self.DoF, self.DoF))
+        print("{")
+        print("   { /* Stiff_xx */ \n" + to_c_matrix(IStiff_xx) + "   },")
+        print("   { /* Stiff_xy */ \n" + to_c_matrix(IStiff_xy) + "   },")
+        print("   { /* Stiff_xz */ \n" + to_c_matrix(IStiff_xz) + "   },")
+        print("   { /* Stiff_yx */ \n" + to_c_matrix(IStiff_yx) + "   },")
+        print("   { /* Stiff_yy */ \n" + to_c_matrix(IStiff_yy) + "   },")
+        print("   { /* Stiff_yz */ \n" + to_c_matrix(IStiff_yz) + "   },")
+        print("   { /* Stiff_zx */ \n" + to_c_matrix(IStiff_zx) + "   },")
+        print("   { /* Stiff_zy */ \n" + to_c_matrix(IStiff_zy) + "   },")
+        print("   { /* Stiff_zz */ \n" + to_c_matrix(IStiff_zz) + "   },")
+        print("};")
+        print("")
 
     def mx_cdef_conv(self):
         '''
@@ -246,21 +248,21 @@ class ef3D_Pn(object):
         IConv_y = Conv_y.applyfunc( integrate_on_tetrahedra )
         IConv_z = Conv_z.applyfunc( integrate_on_tetrahedra )
     
-        print "Real MAT_Conv_x_%s[%d][%d] = " % (self.ef_type, self.DoF, self.DoF)
-        print "{"
-        print  to_c_matrix(IConv_x)
-        print "};"
-        print ""
-        print "Real MAT_Conv_y_%s[%d][%d] = " % (self.ef_type, self.DoF, self.DoF)
-        print "{"
-        print  to_c_matrix(IConv_y)
-        print "};"
-        print ""
-        print "Real MAT_Conv_z_%s[%d][%d] = " % (self.ef_type, self.DoF, self.DoF)
-        print "{"
-        print  to_c_matrix(IConv_z)
-        print "};"
-        print ""
+        print("Real MAT_Conv_x_%s[%d][%d] = " % (self.ef_type, self.DoF, self.DoF))
+        print("{")
+        print( to_c_matrix(IConv_x))
+        print("};")
+        print("")
+        print("Real MAT_Conv_y_%s[%d][%d] = " % (self.ef_type, self.DoF, self.DoF))
+        print("{")
+        print( to_c_matrix(IConv_y))
+        print("};")
+        print("")
+        print("Real MAT_Conv_z_%s[%d][%d] = " % (self.ef_type, self.DoF, self.DoF))
+        print("{")
+        print(to_c_matrix(IConv_z))
+        print("};")
+        print("")
 
     def mx_cdef_convM1(self):
         '''
@@ -275,21 +277,21 @@ class ef3D_Pn(object):
         IConvM1_y = ConvM1_y.applyfunc( integrate_on_tetrahedra )
         IConvM1_z = ConvM1_z.applyfunc( integrate_on_tetrahedra )
     
-        print "Real MAT_Conv_x_%sd%s[%d][%d] = " % (self.efM1.ef_type, self.ef_type, self.efM1.DoF, self.DoF)
-        print "{"
-        print  to_c_matrix(IConvM1_x)
-        print "};"
-        print ""
-        print "Real MAT_Conv_y_%sd%s[%d][%d] = " % (self.efM1.ef_type, self.ef_type, self.efM1.DoF, self.DoF)
-        print "{"
-        print  to_c_matrix(IConvM1_y)
-        print "};"
-        print ""
-        print "Real MAT_Conv_z_%sd%s[%d][%d] = " % (self.efM1.ef_type, self.ef_type, self.efM1.DoF, self.DoF)
-        print "{"
-        print  to_c_matrix(IConvM1_z)
-        print "};"
-        print ""
+        print("Real MAT_Conv_x_%sd%s[%d][%d] = " % (self.efM1.ef_type, self.ef_type, self.efM1.DoF, self.DoF))
+        print("{")
+        print(to_c_matrix(IConvM1_x))
+        print("};")
+        print("")
+        print("Real MAT_Conv_y_%sd%s[%d][%d] = " % (self.efM1.ef_type, self.ef_type, self.efM1.DoF, self.DoF))
+        print("{")
+        print( to_c_matrix(IConvM1_y))
+        print("};")
+        print("")
+        print("Real MAT_Conv_z_%sd%s[%d][%d] = " % (self.efM1.ef_type, self.ef_type, self.efM1.DoF, self.DoF))
+        print("{")
+        print( to_c_matrix(IConvM1_z))
+        print("};")
+        print("")
 
     def mx_cdef_tensor_mass(self):
         '''
@@ -298,12 +300,12 @@ class ef3D_Pn(object):
     
         ITensorMass = [ matr.applyfunc( integrate_on_tetrahedra ) for matr in TensorMass]
     
-        print "Real TENSOR_Mass_%s[%d][%d][%d] = " % (self.ef_type, self.DoF, self.DoF, self.DoF)
-        print "{"
+        print("Real TENSOR_Mass_%s[%d][%d][%d] = " % (self.ef_type, self.DoF, self.DoF, self.DoF))
+        print("{")
         for k in range(self.DoF):
-            print "   { /* N%d x Nj x Nk */ \n" % k + to_c_matrix(ITensorMass[k]) + "   },"
-        print "};"
-        print ""
+            print("   { /* N%d x Nj x Nk */ \n" % k + to_c_matrix(ITensorMass[k]) + "   },")
+        print("};")
+        print("")
 
 
     def mx_cdef_tensor_convT(self):
@@ -319,33 +321,33 @@ class ef3D_Pn(object):
         ITensorConvT_y = [ matr.applyfunc( integrate_on_tetrahedra ) for matr in TensorConvT_y]
         ITensorConvT_z = [ matr.applyfunc( integrate_on_tetrahedra ) for matr in TensorConvT_z]
     
-        print "Real TENSOR_ConvX_%s[%d][%d][%d] = " % (self.ef_type, self.DoF, self.DoF, self.DoF)
-        print "{"
+        print("Real TENSOR_ConvX_%s[%d][%d][%d] = " % (self.ef_type, self.DoF, self.DoF, self.DoF))
+        print("{")
         for k in range(self.DoF):
-            print "   { /* N%d x dNjdx x Nk */ \n" % k + to_c_matrix(ITensorConvT_x[k]) + "   },"
-        print "};"
-        print ""
-        print "Real TENSOR_ConvY_%s[%d][%d][%d] = " % (self.ef_type, self.DoF, self.DoF, self.DoF)
-        print "{"
+            print("   { /* N%d x dNjdx x Nk */ \n" % k + to_c_matrix(ITensorConvT_x[k]) + "   },")
+        print("};")
+        print("")
+        print("Real TENSOR_ConvY_%s[%d][%d][%d] = " % (self.ef_type, self.DoF, self.DoF, self.DoF))
+        print("{")
         for k in range(self.DoF):
-            print "   { /* N%d x dNjdy x Nk */ \n" % k + to_c_matrix(ITensorConvT_y[k]) + "   },"
-        print "};"
-        print ""
-        print "Real TENSOR_ConvZ_%s[%d][%d][%d] = " % (self.ef_type, self.DoF, self.DoF, self.DoF)
-        print "{"
+            print("   { /* N%d x dNjdy x Nk */ \n" % k + to_c_matrix(ITensorConvT_y[k]) + "   },")
+        print("};")
+        print("")
+        print("Real TENSOR_ConvZ_%s[%d][%d][%d] = " % (self.ef_type, self.DoF, self.DoF, self.DoF))
+        print("{")
         for k in range(self.DoF):
-            print "   { /* N%d x dNjdz x Nk */ \n" % k + to_c_matrix(ITensorConvT_z[k]) + "   },"
-        print "};"
-        print ""
+            print("   { /* N%d x dNjdz x Nk */ \n" % k + to_c_matrix(ITensorConvT_z[k]) + "   },")
+        print("};")
+        print("")
 
 
     def mx_cdef(self):
         '''
         '''
     
-        print ""
-        print "   /* -- Element %s ------------------------------------- */" % self.ef_type
-        print ""
+        print("")
+        print("   /* -- Element %s ------------------------------------- */" % self.ef_type)
+        print("")
     
         self.mx_cdef_vect()
     
@@ -362,9 +364,9 @@ class ef3D_Pn(object):
         '''
         '''
         for k, fb in enumerate(self.FunBase):
-            print "----------------------------------------------"
+            print("----------------------------------------------")
             for pt in self.pts:
-                print "pt = %s -> fb_%d(pt) = %s" % (str(pt), k, str(fb.subs({x:pt[0], y:pt[1], z:pt[2]})))
+                print("pt = %s -> fb_%d(pt) = %s" % (str(pt), k, str(fb.subs({x:pt[0], y:pt[1], z:pt[2]}))))
 
 
 

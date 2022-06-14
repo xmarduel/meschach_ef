@@ -25,6 +25,7 @@ static void elt1D_get_P3(ELT_1D *elt);
 static void elt1D_get_H3(ELT_1D *elt);
 static void elt1D_get_S2(ELT_1D *elt);
 static void elt1D_get_S3(ELT_1D *elt);
+static void elt1D_get_S4(ELT_1D *elt);
 static void elt1D_get_S5(ELT_1D *elt);
 
 /* ------------------------------------------------------------------------------------------------------ */
@@ -83,6 +84,11 @@ ELT_1D *elt1D_get(const char *type)
    if ( strcmp(elt->name_ef,"S3") == 0 )
    {
       elt1D_get_S3(elt);
+   }
+   else
+   if ( strcmp(elt->name_ef,"S4") == 0 )
+   {
+      elt1D_get_S4(elt);
    }
    else
    if ( strcmp(elt->name_ef,"S5") == 0 )
@@ -719,6 +725,123 @@ static void elt1D_get_S3(ELT_1D *elt)
 /* ------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------ */
 
+static void elt1D_get_S4(ELT_1D *elt)
+{
+   /* Declaration de toutes les matrices pour l' element S4 ... */
+#include "MESCHACH_EF/INCLUDES/ef1D_S4_mtx.h"
+   /* Declaration de toutes les matrices pour l' element S4 ... */
+   
+   u_int i,j,k;
+   
+   elt->nb_somm_cell = 5 ;
+   
+   /* elt->f_base  pointe vers (elt->nb_somm_cell) fonctions de bases */
+   elt->f_base      = (Real (**)(Real))calloc(5,sizeof(Real (*)(Real)) );
+   elt->dfdx_base   = (Real (**)(Real))calloc(5,sizeof(Real (*)(Real)) );
+   elt->ddfdxx_base = (Real (**)(Real))calloc(5,sizeof(Real (*)(Real)) );
+   
+   elt->f_base[0] = F0_1D_S4 ;
+   elt->f_base[1] = F1_1D_S4 ;
+   elt->f_base[2] = F2_1D_S4 ;
+   elt->f_base[3] = F3_1D_S4 ;
+   elt->f_base[4] = F4_1D_S4 ;
+   
+   elt->dfdx_base[0] = DFDX0_1D_S4 ;
+   elt->dfdx_base[1] = DFDX1_1D_S4 ;
+   elt->dfdx_base[2] = DFDX2_1D_S4 ;
+   elt->dfdx_base[3] = DFDX3_1D_S4 ;
+   elt->dfdx_base[4] = DFDX4_1D_S4 ;
+   
+   elt->ddfdxx_base[0] = DDFDXX0_1D_S4 ;
+   elt->ddfdxx_base[1] = DDFDXX1_1D_S4 ;
+   elt->ddfdxx_base[2] = DDFDXX2_1D_S4 ;
+   elt->ddfdxx_base[3] = DDFDXX3_1D_S4 ;
+   elt->ddfdxx_base[4] = DDFDXX4_1D_S4 ;
+
+   elt->MAT_I_I = m_get(5,5);
+   for (i=0; i<5; i++)
+      for (j=0; j<5; j++)
+      {
+         elt->MAT_I_I->me[i][j] = MAT_Masse_S4[i][j];
+      }
+   
+   elt->MAT_I_x = m_get(5,5);
+   for (i=0; i<5; i++)
+      for (j=0; j<5; j++)
+      {
+         elt->MAT_I_x->me[i][j] = MAT_Convection_S4[i][j];
+      }
+   
+   elt->MAT_x_x   = m_get(5,5);
+   elt->MAT_xx_xx = m_get(5,5);
+   for (i=0; i<5; i++)
+      for (j=0; j<5; j++)
+      {
+         elt->MAT_x_x->me[i][j]   = MAT_Rigid1_S4[i][j];
+         elt->MAT_xx_xx->me[i][j] = MAT_Rigid2_S4[i][j];
+      }
+   
+   elt->MAT_I_xx = m_get(5,5);
+   elt->MAT_x_xx = m_get(5,5);
+   for (i=0; i<5; i++)
+      for (j=0; j<5; j++)
+      {
+         elt->MAT_I_xx->me[i][j] = MAT_Stab_I_xx_S4[i][j];
+         elt->MAT_x_xx->me[i][j] = MAT_Stab_x_xx_S4[i][j];
+      }
+   
+   
+   elt->VEC_I  = v_get(5);
+   elt->VEC_x  = v_get(5);
+   elt->VEC_xx = v_get(5);
+   for (i=0; i<5; i++)
+   {
+      elt->VEC_I->ve[i]  = VEC_I__S4[i];
+      elt->VEC_x->ve[i]  = VEC_x__S4[i];
+      elt->VEC_xx->ve[i] = VEC_xx_S4[i];
+   }
+   
+   elt->TENSOR_I_x_I = ts_get(5,5,5);
+   elt->TENSOR_x_I_I = ts_get(5,5,5);
+   elt->TENSOR_I_I_x = ts_get(5,5,5);
+   for (i=0; i<5; i++)
+      for (j=0; j<5; j++)
+         for (k=0; k<5; k++)
+         {
+            elt->TENSOR_I_x_I->te[i][j][k] = TENSOR_Convection_S4[i][j][k];
+            elt->TENSOR_x_I_I->te[i][j][k] = TENSOR_Convection_S4[j][i][k];
+            elt->TENSOR_I_I_x->te[i][j][k] = TENSOR_Convection_S4[i][k][j];
+         }
+   
+   elt->TENSOR_I_I_I = ts_get(5,5,5);
+   for (i=0; i<5; i++)
+      for (j=0; j<5; j++)
+         for (k=0; k<5; k++)
+         {
+            elt->TENSOR_I_I_I->te[i][j][k] = TENSOR_Masse_S4[i][j][k];
+         }
+   
+   elt->MAT_FuncBasis_CL_L = m_get(4,4);
+   for (i=0; i<4; i++)
+      for (j=0; j<4; j++)
+      {
+         elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S4_a[i][j];
+         elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S4_b[i][j];
+         elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S4_c[i][j];
+      }
+   elt->MAT_FuncBasis_CL_R = m_get(4,4);
+   for (i=0; i<4; i++)
+      for (j=0; j<4; j++)
+      {
+         elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S4_a[3-i][3-j];
+         elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S4_b[3-i][3-j];
+         elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S4_c[3-i][3-j];
+      }
+}
+
+/* ------------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------ */
+
 static void elt1D_get_S5(ELT_1D *elt)
 {
    /* Declaration de toutes les matrices pour l' element S5 ... */
@@ -1052,6 +1175,39 @@ Real F3_1D_S3( Real x )
 }
 
 
+//B1(t) =    (1-t)**4
+//B2(t) = -4*(1-t)**4 +  4*(1-t)**3 + 6*(1-t)**2 + 4*(1-t)**1 + 1
+//B3(t) =  6*t**4 - 12*t**3 - 6*t**2 + 12*t**1 + 11
+//B4(t) = -4*t**4 +  4*t**3 + 6*t**2 +  4*t**1 + 1
+//B5(t) =    t**4
+
+Real F0_1D_S4( Real x )          /* -- Element S4 --- */
+{
+   Real val;
+   return val = QUA(1-x);
+}
+Real F1_1D_S4( Real x )
+{
+   Real val;
+   return val = -4*QUA(1-x) +  4*CUB(1-x) + 6*SQR(1-x) + 4*(1-x) + 1;
+}
+Real F2_1D_S4( Real x )
+{
+   Real val;
+   return val = 6*QUA(x) - 12*CUB(x) - 6*SQR(x) + 12*x + 11;
+}
+Real F3_1D_S4( Real x )
+{
+   Real val;
+   return val = -4*QUA(x)+  4*CUB(x) + 6*SQR(x) +  4*x + 1;
+}
+Real F4_1D_S4( Real x )
+{
+   Real val;
+   return val = QUA(x);
+}
+
+
 Real F0_1D_S5( Real x )          /* -- Element S5 --- */
 {
    Real val;
@@ -1206,6 +1362,44 @@ Real DFDX3_1D_S3( Real x )
 }
 
 
+
+
+// val = QUA(1-x);
+// val = -4*QUA(1-x) +  4*CUB(1-x) + 6*SQR(1-x) + 4*(1-x) + 1;
+// val = 6*QUA(x) - 12*CUB(x) - 6*SQR(x) + 12*x + 11;
+// val = -4*QUA(x)+  4*CUB(x) + 6*SQR(x) +  4*x + 1;
+// val = QUA(x);
+
+
+
+Real DFDX0_1D_S4( Real x )     /* -- Element S4 --- */
+{
+   Real val;
+   return val = -4*CUB(1-x);
+}
+Real DFDX1_1D_S4( Real x )
+{
+   Real val;
+   return val =  16*CUB(1-x) - 12*SQR(1-x) - 12*(1-x) - 4;
+}
+Real DFDX2_1D_S4( Real x )
+{
+   Real val;
+   return val = 24*CUB(x) - 36*SQR(x) - 12*x + 12;
+}
+Real DFDX3_1D_S4( Real x )
+{
+   Real val;
+   return val = -16*CUB(x)+  12*SQR(x) + 12*x +  4;
+}
+Real DFDX4_1D_S4( Real x )
+{
+   Real val;
+   return val = 4*CUB(x);
+}
+
+
+
 Real DFDX0_1D_S5( Real x )     /* -- Element S5 --- */
 {
    Real val;
@@ -1357,6 +1551,40 @@ Real DDFDXX3_1D_S3( Real x )
 {
    Real val;
    return val =  6.0*x ;
+}
+
+
+
+//val = -4*CUB(1-x);
+//val = +16*CUB(1-x) -  12*SQR(1-x) - 12*(1-x) - 4;
+//val = 24*CUB(x) - 36*SQR(x) - 12*x + 12;
+//val = -16*CUB(x)+  12*SQR(x) + 12*x +  4;
+//val = 4*CUB(x);
+
+Real DDFDXX0_1D_S4( Real x )    /* -- Element S4 --- */
+{
+   Real val;
+   return val = 12*SQR(1-x);
+}
+Real DDFDXX1_1D_S4( Real x )
+{
+   Real val;
+   return val = -16*3*SQR(1-x) + 24*(1-x) + 12;
+}
+Real DDFDXX2_1D_S4( Real x )
+{
+   Real val;
+   return val = 24*3*SQR(x) - 72*x - 12;
+}
+Real DDFDXX3_1D_S4( Real x )
+{
+   Real val;
+   return val = -16*3*SQR(x)+  24*x + 12;
+}
+Real DDFDXX4_1D_S4( Real x )
+{
+   Real val;
+   return val = 12*SQR(x);
 }
 
 

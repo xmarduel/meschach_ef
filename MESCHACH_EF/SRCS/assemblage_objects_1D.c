@@ -254,17 +254,22 @@ static SPMAT* _assemblage_matrix1( ASSEMBLAGEt_TYPE type , const ELT_1D *elt , c
 
    if ( geom->periodicity == NON_PERIODIC_MESHe )
 	{
-		if ( strcmp(elt->name_ef,"S2") == 0 )
+		if ( strcmp(elt->name_ef, "S2") == 0 )
 		{
          transform1D_matrix_with_newbasis_bf( elt , geom , A );
       }
       else
-	   if ( strcmp(elt->name_ef,"S3") == 0 )
+	   if ( strcmp(elt->name_ef, "S3") == 0 )
       {
          transform1D_matrix_with_newbasis_bf( elt , geom , A );
       }
       else
-	   if ( strcmp(elt->name_ef,"S5") == 0 )
+      if ( strcmp(elt->name_ef, "S4") == 0 )
+      {
+         transform1D_matrix_with_newbasis_bf( elt , geom , A );
+      }
+      else
+	   if ( strcmp(elt->name_ef, "S5") == 0 )
       {
          transform1D_matrix_with_newbasis_bf( elt , geom , A );
       }
@@ -556,9 +561,9 @@ static SPMAT * _assemblage_matrix2( ASSEMBLAGEt_TYPE type , const ELT_1D *elt , 
       default: error(E_UNKNOWN, "_assemblage_matrix2");
    }
 
-   /* in case of "S2", "S3" or "S5" and non-periodic  bc */
+   /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
    a_in_bbf = vector_cbf_to_bbf(elt, geom, a, a_in_bbf);
-   /* in case of "S2", "S3" or "S5" and non-periodic  bc */
+   /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
 
    /* mem alloc */
    MAT_el    = m_get(elt->nb_somm_cell, elt->nb_somm_cell);
@@ -586,9 +591,9 @@ static SPMAT * _assemblage_matrix2( ASSEMBLAGEt_TYPE type , const ELT_1D *elt , 
       }
    }
 
-   /* in case of "S2", "S3" or "S5" and non-periodic  bc */
+   /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
    A = transform1D_matrix_with_newbasis_bf(elt , geom , A);
-   /* in case of "S2", "S3" or "S5" and non-periodic  bc */
+   /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
 
    /* clean */
    V_FREE(a_in_bbf);
@@ -819,6 +824,11 @@ VEC* assemblage1D_vector_fun( const ELT_1D *elt , const GEOM_1D *geom , const RH
            transform1D_vector_with_newbasis_bf( elt , geom , RHS );
        }
        else
+       if ( (strcmp(elt->name_ef,"S4") == 0) )
+       {
+          transform1D_vector_with_newbasis_bf( elt , geom , RHS );
+       }
+       else
 	    if ( (strcmp(elt->name_ef,"S5") == 0) )
        {
            transform1D_vector_with_newbasis_bf( elt , geom , RHS );
@@ -1019,10 +1029,10 @@ static VEC * _assemblage_vector2( const ASSEMBLAGEt_TYPE type, const ELT_1D *elt
       default: error(E_UNKNOWN, "_assemblage_vector2");
    }
 
-   /* in case of "S2", "S3" or "S5" and non-periodic  bc */
+   /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
    a_in_bbf = vector_cbf_to_bbf(elt, geom, a, a_in_bbf);
    b_in_bbf = vector_cbf_to_bbf(elt, geom, b, b_in_bbf);
-   /* in case of "S2", "S3" or "S5" and non-periodic  bc */
+   /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
    
    /* alloc mem */
    RHS_el = v_get(elt->nb_somm_cell);
@@ -1040,9 +1050,9 @@ static VEC * _assemblage_vector2( const ASSEMBLAGEt_TYPE type, const ELT_1D *elt
       }
    }
 
-   /* in case of "S2", "S3" or "S5" and non-periodic  bc */
+   /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
    RHS = transform1D_vector_with_newbasis_bf(elt , geom , RHS);
-   /* in case of "S2", "S3" or "S5" and non-periodic  bc */
+   /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
    
    /* free mem */
    V_FREE(a_in_bbf);
@@ -1133,7 +1143,7 @@ static SPMAT* transform1D_matrix_with_newbasis_bf( const ELT_1D *elt , const GEO
    if ( A      == NULL ) error(E_NULL, "transform1D_matrix_with_newbasis_bf");
    
    /* ----- only for S3 and S5  ----------------------------------------------------*/
-   if ( !( (strcmp(elt->name_ef,"S2") == 0) || (strcmp(elt->name_ef,"S3") == 0) || (strcmp(elt->name_ef,"S5") == 0) )  )
+   if ( !( (strcmp(elt->name_ef,"S2") == 0) || (strcmp(elt->name_ef,"S3") == 0) || (strcmp(elt->name_ef,"S4") == 0) || (strcmp(elt->name_ef,"S5") == 0) )  )
    {
       return A;
    }
@@ -1170,7 +1180,7 @@ static VEC * transform1D_vector_with_newbasis_bf( const ELT_1D *elt , const GEOM
    if ( RHS    == NULL ) error(E_NULL, "transform1D_vector_with_newbasis_bf");
 
    
-   if ( !( (strcmp(elt->name_ef,"S2")==0) || (strcmp(elt->name_ef,"S3")==0) || (strcmp(elt->name_ef,"S5")==0) ) )
+   if ( !( (strcmp(elt->name_ef,"S2")==0) || (strcmp(elt->name_ef,"S3")==0) || (strcmp(elt->name_ef,"S4") == 0) || (strcmp(elt->name_ef,"S5")==0) ) )
    {
       return RHS;
    }
@@ -1200,7 +1210,9 @@ static VEC * transform1D_vector_with_newbasis_bf( const ELT_1D *elt , const GEOM
 
 static VEC * vector_cbf_to_bbf(  const ELT_1D *elt , const GEOM_1D *geom , const VEC * RHS_cbf , VEC *RHS_bbf )
 {
-   if ( !( (strcmp(elt->name_ef,"S2")==0) || (strcmp(elt->name_ef,"S3")==0) || (strcmp(elt->name_ef,"S5")==0) ) )
+   char *ef = elt->name_ef;
+   
+   if ( !( (strcmp(ef,"S2")==0) || (strcmp(ef,"S3")==0) || (strcmp(ef,"S4")==0) || (strcmp(ef,"S5")==0) ) )
    {
       return RHS_bbf;
    }
@@ -1279,6 +1291,12 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
    {
       *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][1] ] ;
       *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][2] ] ;
+   }
+   else
+   if ( strcmp(elt->name_ef,"S4") == 0 )
+   {
+      *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][2] ] ;
+      *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][3] ] ;
    }
    else
    if ( strcmp(elt->name_ef,"S5") == 0 )

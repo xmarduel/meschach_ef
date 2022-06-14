@@ -9,7 +9,7 @@ from ef3D_Pn import *
 class ef3D_P1(ef3D_Pn):
     '''
     '''
-    print "ef3D_P1 utilizing sympy %s" % sympy_version
+    print("ef3D_P1 utilizing sympy %s" % sympy_version)
 
     DoF = 4
 
@@ -26,14 +26,12 @@ class ef3D_P1(ef3D_Pn):
             [0,0,1] ]
 
 
+    @classmethod
     def fun(cls, X,Y,Z):
         '''
         fun = u1*N1 + u2*N2 + u3*N3 + u4*N4
         '''
         return cls.a0 + cls.a1*X + cls.a2*Y + cls.a3*Z
-
-    fun = classmethod(fun)
-
 
     def __init__(self):
         '''
@@ -63,5 +61,4 @@ class ef3D_P1(ef3D_Pn):
         FunBase = AinvT * c
     
         return FunBase
-
 

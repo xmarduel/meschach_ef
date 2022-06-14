@@ -114,6 +114,12 @@ Real F1_1D_S3(Real x);
 Real F2_1D_S3(Real x);
 Real F3_1D_S3(Real x);
 
+Real F0_1D_S4(Real x);    /* Element Spline  4 deg */
+Real F1_1D_S4(Real x);
+Real F2_1D_S4(Real x);
+Real F3_1D_S4(Real x);
+Real F4_1D_S4(Real x);
+   
 Real F0_1D_S5(Real x);    /* Element Spline  Quintique */
 Real F1_1D_S5(Real x);
 Real F2_1D_S5(Real x);
@@ -152,6 +158,12 @@ Real DFDX1_1D_S3(Real x);
 Real DFDX2_1D_S3(Real x);
 Real DFDX3_1D_S3(Real x);
 
+Real DFDX0_1D_S4(Real x);    /* Element Spline  4 order */
+Real DFDX1_1D_S4(Real x);
+Real DFDX2_1D_S4(Real x);
+Real DFDX3_1D_S4(Real x);
+Real DFDX4_1D_S4(Real x);
+   
 Real DFDX0_1D_S5(Real x);    /* Element Spline  Quintique */
 Real DFDX1_1D_S5(Real x);
 Real DFDX2_1D_S5(Real x);
@@ -191,6 +203,12 @@ Real DDFDXX1_1D_S3(Real x);
 Real DDFDXX2_1D_S3(Real x);
 Real DDFDXX3_1D_S3(Real x);
 
+Real DDFDXX0_1D_S4(Real x);    /* Element Spline  4 order */
+Real DDFDXX1_1D_S4(Real x);
+Real DDFDXX2_1D_S4(Real x);
+Real DDFDXX3_1D_S4(Real x);
+Real DDFDXX4_1D_S4(Real x);
+   
 Real DDFDXX0_1D_S5(Real x);    /* Element Spline  Quintique */
 Real DDFDXX1_1D_S5(Real x);
 Real DDFDXX2_1D_S5(Real x);

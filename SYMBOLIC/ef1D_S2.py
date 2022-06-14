@@ -24,10 +24,9 @@ class ef1D_S2:
     B3 =  t**2
 
     '''
-    EF : B2 = 3.0 - 2.0*x + 2.0*SQR(1.0 - x)         = 3.0 - 2.0*x + 2.0*(1.0 -2*x + x*x) = 5 - 4x + 2*x*x
+    MESCHACH_EF   : B2 = 3.0 - 2.0*x + 2.0*SQR(1.0 - x)    
 
-
-    HERE + GNUPLOT: B2 = 1 + 2*(1-t) - 2*((1-t)**2)  = 3.0 - 2.0*x - 2.0*(1.0 -2*x + x*x) !!!
+    HERE + GNUPLOT: B2 = 3.0 - 2.0*x - 2.0*SQR(1.0 - x)
 
     MESCHACH_EF all wrong !! ????
 
@@ -65,6 +64,23 @@ class ef1D_S2:
         self.TENSOR_MASS_1 = self.Mass * self.B1
         self.TENSOR_MASS_2 = self.Mass * self.B2
         self.TENSOR_MASS_3 = self.Mass * self.B3
+
+
+        # boundary conditions -> new bases functions
+        Q1 = simplify(  -self.B1/4   + self.B2/4  )
+        Q2 = simplify(   self.B1/2   + self.B2    )
+        
+
+        print("----------------- Q1 ")
+        print(Q1)
+        print("Q1(0) = %s" % Q1.subs(self.t, 0))
+        print("DQ1(0) = %s" % diff(Q1).subs(self.t, 0))
+        print("----------------- Q2")
+        print(Q2)
+        print("Q2(0) = %s" % Q2.subs(self.t, 0))
+        print("DQ2(0) = %s" % diff(Q2).subs(self.t, 0))
+        
+
         
         
     def to_c(self, data):
@@ -146,7 +162,7 @@ class ef1D_S2:
 
 if __name__ == '__main__':
     ef = ef1D_S2()
-    ef.integrate()
+    #ef.integrate()
 
 
 

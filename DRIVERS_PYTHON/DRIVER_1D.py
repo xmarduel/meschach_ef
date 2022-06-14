@@ -53,26 +53,26 @@ def run_test():
     #-------------------------------------------------------------------
 
     def sol(x):
-        #return (x-1)*(x-1)
+       #return (x-1)*(x-1)
         #return 1-x
         #return x*(x-1) +2
         #return x*x
         #return 1
-        #return cos(2*pi*x)
+        return cos(2*pi*x)
         return (exp(x)-1)/(exp(1)-1)
 
     def Dsol(x):
-        #return 2*(x-1)
+       #return 2*(x-1)
         #return 1
         #return 2*x -1
         #return 2*x
         return -2*pi*sin(2*pi*x)
 
     def DDsol(x):
-        #return -2
+       #return -2
         #return 0
         #return 2
-        #return -4*pi*pi*cos(2*pi*x)
+        return -4*pi*pi*cos(2*pi*x)
         return (exp(x))/(exp(1)-1)
 
 
@@ -179,7 +179,7 @@ def run_test():
         },
                             
         "PDE_RESOLUTION" : {
-            "EF" : "P1" ,         # "P1", "P2", "H3", "S3", "S5"
+            "EF" : "S4" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
                             
             "LAPLACIAN_ALGO" : {
                 "METHOD" : "ITERATIVE-METHOD",
@@ -227,7 +227,7 @@ def run_test():
                 "XMAX"   : 1.0,
                 "NX"     : 10,
                 "DISTRIBUTION" : "UNIFORM",
-                "PERIODIC" : False
+                "PERIODIC" : True
             },
         }
     } ))
@@ -445,7 +445,16 @@ def run_test():
         SOL_exact = v_get(NBSOMM)
         SOL_exact = build_vec_from_function1D(MyElt, MyGeom, fun1D, None, SOL_exact)
 
-        print "diff solexacte-solapprochee = %le" % v_norm2( v_sub(SOL, SOL_exact, None) )
+        print "diff solexacte-solapprochee in EF = %le" % v_norm2( v_sub(SOL, SOL_exact, None) )
+
+        WORLD = v_get(NBSOMM)
+        print "CALC WORLD"
+        v_foutput(sys.stdout, sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), SOL, WORLD));
+
+        print "CALC"
+        v_foutput(sys.stdout, SOL)
+        print "EXACT"
+        v_foutput(sys.stdout, SOL_exact)
 
         FUN_1D_FREE(fun1D)
 		  

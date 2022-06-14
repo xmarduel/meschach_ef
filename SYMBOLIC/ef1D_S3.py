@@ -51,6 +51,26 @@ class ef1D_S3:
         self.TENSOR_MASS_2 = self.Mass * self.B2
         self.TENSOR_MASS_3 = self.Mass * self.B3
         self.TENSOR_MASS_4 = self.Mass * self.B4
+
+        # boundary conditions -> new bases functions
+        Q1 = simplify(   self.B1     - 7*self.B2/12  + 4*self.B3/3)
+        Q2 = simplify(-3*self.B1/2   +   self.B2     - 3*self.B3/2)
+        Q3 = simplify(   self.B1     -   self.B2/2   +   self.B3)
+
+        print("----------------- Q1 ")
+        print(Q1)
+        print("Q1(0) = %s" % Q1.subs(self.t, 0))
+        print("DQ1(0) = %s" % diff(Q1).subs(self.t, 0))
+        print("----------------- Q2")
+        print(Q2)
+        print("Q2(0) = %s" % Q2.subs(self.t, 0))
+        print("DQ2(0) = %s" % diff(Q2).subs(self.t, 0))
+        print("----------------- Q3")
+        print(Q3)
+        print("Q3(0) = %s" % Q3.subs(self.t, 0))
+        print("DQ3(0) = %s" % diff(Q3).subs(self.t, 0))
+
+        
     
 
     def to_c(self, data):
@@ -134,7 +154,7 @@ class ef1D_S3:
 
 if __name__ == '__main__':
     ef = ef1D_S3()
-    ef.integrate()
+    #ef.integrate()
 
 
 

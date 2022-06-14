@@ -85,7 +85,7 @@ def run_test():
     #--------------------------------------------------------------------------------------
     Params_set_oneparam(MyParams, "main_problem","NULL", "Kuramoto-Sivashinski" )
     #--------------------------------------------------------------------------------------
-    Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S3" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S5"
+    Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S4" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S4", "S5"
 
     Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "DIRECT-METHOD" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
     Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU, DIAG. 
@@ -99,7 +99,7 @@ def run_test():
     #-time parameters------------------------------------------------------------------
 
     Params_set_oneparam(MyParams, "time_params","TPS_INI",     0.0   )
-    Params_set_oneparam(MyParams, "time_params","TPS_FIN",    100.0  )
+    Params_set_oneparam(MyParams, "time_params","TPS_FIN",    200.0  )
     Params_set_oneparam(MyParams, "time_params","DT",          0.001 )
 
     #- geometry-----------------------------------------------------------------------------
@@ -238,7 +238,7 @@ def run_test():
     bCheckBCwithGEOM = Geom1D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 
     #--------------------------------------------------------------------
-
+    
     NBSOMM = GEOM_1D_NBSOMM_get(MyGeom)
 
     MASS   = sp_get(NBSOMM,NBSOMM, 5)
@@ -246,7 +246,6 @@ def run_test():
 
     MASS   = assemblage1D_matrix_Mass  ( MyElt , MyGeom , MASS   )
     STIFF1 = assemblage1D_matrix_Stiff1( MyElt , MyGeom , STIFF1 )
-
 
     epsilon = Params_get_oneparam(MyParams, "physical_params","epsilon")
     kappa   = Params_get_oneparam(MyParams, "physical_params","kappa")
@@ -278,7 +277,6 @@ def run_test():
     f = -kappa + 2*sqrt(epsilon/DT)
     A_12 = sp_smlt(STIFF1,   -f , A_12)  
     A_21 = sp_smlt(MASS  , -1.0 , A_21) 
-
 
     A = sp_move(A_11, 0,0, NBSOMM,NBSOMM, A, 0,0           )
     A = sp_move(A_12, 0,0, NBSOMM,NBSOMM, A, 0,NBSOMM      )
@@ -312,8 +310,7 @@ def run_test():
     U_tps = v_get(NBSOMM)
     U_lin = v_get(NBSOMM)
     U_nli = v_get(NBSOMM)
-
-
+   
     v_copy(U_o, U_nm2)
     v_copy(U_o, U_nm1)
 
@@ -342,15 +339,13 @@ def run_test():
     U_graph1 = v_get(dim_graph)
     U_graph2 = v_get(NBITER+2)
     U_graph3 = v_get(NBITER+2)
-
-
+   
     ABSCISSAS1 = Geom1D_getBaseMesh( MyElt ,  MyGeom );
-
+    
     ABSCISSAS2 = v_get(NBITER+2)
     for i in range(0,NBITER+2):
        v_set_val(ABSCISSAS2, i, i*DT)
-
-
+   
     if  Params_get_oneparam(MyParams, "graphics_output_params", "PGPLOT")  or Params_get_oneparam(MyParams, "graphics_output_params", "VOGLE") or Params_get_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT") :
 
         NX = Params_get_oneparam(MyParams, "graphics_interactiv1D_params", "NX")
@@ -510,7 +505,7 @@ def run_test():
 		  
 
     #---------------------------------------------------------------------
-
+   
     atime_start = time.time()
 
     NBSOMM = GEOM_1D_NBSOMM_get(MyGeom)

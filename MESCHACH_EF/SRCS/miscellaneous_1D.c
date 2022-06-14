@@ -124,6 +124,7 @@ VEC* build_vec_from_function1Dtransient(const ELT_1D *MyElt, const GEOM_1D *MyGe
    else
    if ( (strcmp(MyElt->name_ef,"S2") == 0)||
         (strcmp(MyElt->name_ef,"S3") == 0)||
+        (strcmp(MyElt->name_ef,"S4") == 0)||
         (strcmp(MyElt->name_ef,"S5") == 0) )
    {
       VEC *vec_world = v_get(MyGeom->NBSOMM);
@@ -181,6 +182,7 @@ VEC* get_vector_for_plotting_1D( const ELT_1D *MyElt, const GEOM_1D *MyGeom, con
    else
    if ( (strcmp(MyElt->name_ef,"S2") == 0) ||
         (strcmp(MyElt->name_ef,"S3") == 0) ||
+        (strcmp(MyElt->name_ef,"S4") == 0) ||
         (strcmp(MyElt->name_ef,"S5") == 0)  ) 
    {
       VEC *TMP = sp_mv_mlt(MyGeom->EF_to_WORLD, SOL, NULL );
@@ -189,6 +191,7 @@ VEC* get_vector_for_plotting_1D( const ELT_1D *MyElt, const GEOM_1D *MyGeom, con
 
       if (strcmp(MyElt->name_ef,"S2") == 0) delta_nbsomm = 1;
       if (strcmp(MyElt->name_ef,"S3") == 0) delta_nbsomm = 2;
+      if (strcmp(MyElt->name_ef,"S4") == 0) delta_nbsomm = 3;
       if (strcmp(MyElt->name_ef,"S5") == 0) delta_nbsomm = 4;
       
       if ( MyGeom->periodicity == NON_PERIODIC_MESHe )

@@ -6,7 +6,9 @@ from sympy import *
 
 # ---------------------------------------------------------------------------------
 
-x,y,z = symbols('xyz')
+x = symbols('x')
+y = symbols('y')
+z = symbols('z')
 
 # --------------------------------------------------------------------------------
 
@@ -198,29 +200,29 @@ if __name__ == '__main__':
     test speed or symbolic integration / numeric integration(monom formula)
     '''
     p = 1 + 3*x + 4*y + 5*z + 6*x*y + 7*y*z + 8*x*z + 9*x*x + 10*y*y + 11*z*z + 12*x*x*x + 13*y*y*y + 14*z*z*z + 15*x*y*z + 16*x*x*y + 17*x*y*y + 18*x*x*z + 19*x*z*z + 20*y*y*z + 21*y*z*z + 22*x*x*x*x + 23*y*y*y*y + 24*z*z*z*z
-    print "symbolic integration : time = ", test_integrate3D_method1( 20, p), 10*" ", "numeric integration  : time = ", test_integrate3D_method2(20, p)
+    print("symbolic integration : time = ", test_integrate3D_method1( 20, p), 10*" ", "numeric integration  : time = ", test_integrate3D_method2(20, p))
 
     import sympy
     pp = sympy.polys.Poly(p,x,y,z)
     for k, m in enumerate(zip(pp.iter_monoms(), pp.iter_coeffs())):
-        print k, ' -> ', m
+        print(k, ' -> ', m)
     #for k, m in enumerate(pp.iter_monoms()):
-    #    print k, ' -> ', m, m.coeff()
+    #    print(k, ' -> ', m, m.coeff())
     for k, m in enumerate(p.as_coeff_factors()[1]): #for monom in polynom:
-        print k, ' -> ', m
+        print(k, ' -> ', m)
         mm =  sympy.polys.Poly(m,x,y,z)
-        for c in mm.iter_coeffs(): print c
+        for c in mm.iter_coeffs(): print(c)
 
 
 
     p = 1 + 3*x + 4*y + 5*z + 6*x*y + 7*y*z + 8*x*z + 9*x*x + 10*y*y + 11*z*z + 12*x*x*x + 13*y*y*y + 14*z*z*z + 15*x*y*z
-    print "symbolic integration : time = ", test_integrate3D_method1( 50, p), 10*" ", "numeric integration  : time = ", test_integrate3D_method2(50, p)
+    print("symbolic integration : time = ", test_integrate3D_method1( 50, p), 10*" ", "numeric integration  : time = ", test_integrate3D_method2(50, p))
 
     p = 1 + 3*x + 4*y + 5*z
-    print "symbolic integration : time = ", test_integrate3D_method1(200, p), 10*" ", "numeric integration  : time = ", test_integrate3D_method2(200, p)
+    print("symbolic integration : time = ", test_integrate3D_method1(200, p), 10*" ", "numeric integration  : time = ", test_integrate3D_method2(200, p))
 
     p = 1 + 3*x 
-    print "symbolic integration : time = ", test_integrate3D_method1(200, p), 10*" ", "numeric integration  : time = ", test_integrate3D_method2(200, p)
+    print("symbolic integration : time = ", test_integrate3D_method1(200, p), 10*" ", "numeric integration  : time = ", test_integrate3D_method2(200, p))
 
 
 
