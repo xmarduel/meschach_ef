@@ -192,8 +192,14 @@ int main()
         graphics1D("gnuplot", MyElt, MyGeom, SOL, "SolApproch1D.dat");
         //graphics1D_gnuplot_script("SolApproch1D.dat", NULL, NULL, MyParams->resol_params.nb_steps, MyParams->misc_params.iter_file);
 
-        printf("data plot\n");
-        v_output(DATA_PLOT);
+       printf("ef res\n");
+       v_output(SOL);
+       
+       printf("data plot\n");
+       v_output(DATA_PLOT);
+       
+       //v_output(GeomP1->XSOMM);
+       
         /*
          * graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch");
          */
@@ -272,6 +278,11 @@ int main()
 
     if (MyParams->exactsol_params.exact_sol[0] >= 0)
     {
+       if ( strcmp(MyElt->name_ef, "S2") == 0 || strcmp(MyElt->name_ef, "S4") == 0 )
+       {
+       }
+       else
+       {
         VEC *vec_tmp   = v_get(SOL->dim);
         VEC* vec_exact = v_get(SOL->dim);
         FUN_1D *fun_exact = Fun1D_get();
@@ -289,6 +300,7 @@ int main()
         v_foutput(stdout, SOL);
         printf("EXACT\n");
         v_foutput(stdout, vec_exact);
+       }
     }
 
     /* --------------------------------------------------------------------- */

@@ -54,6 +54,9 @@ typedef struct GEOM_1D {
   SPMAT* EF_to_WORLD; /**< map EF coords to PHYSIC coords */
 
   SPMAT* BASEFUNC_BASICS_to_CL; /**< matrix transformation Base Functions : basic bf to cl'ed bf */
+   
+  IVEC* S2_S4_REF_S_TO_DOF; /**< mapping between DOF and NODES */
+  IVEC* S2_S4_DOF_TO_REF_S; /**< mapping between NODES and DOF */
 
 } GEOM_1D ;
 

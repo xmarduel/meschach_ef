@@ -19,16 +19,16 @@
     # resolution -------------------------------------
 
     "PDE_RESOLUTION" : {
-        "EF" : "P1" ,         # "P1", "P2", "H3", "S2", "S3", "S5"
+        "EF" : "S4" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
 
         "LAPLACIAN_ALGO" : {
             "METHOD": "ITERATIVE-METHOD",
 				
 	         "ITERATIVE-METHOD" : {
                 "METHOD"          : "BiCGStab" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
-                "PRECONDITIONER"  : "null" ,           # null, "ICH", "ILU", "DIAG"
+                "PRECONDITIONER"  : "ICH" ,           # null, "ICH", "ILU", "DIAG"
                 "PARAMETERS" : {
-                    "NMAX_ITER" : 250,
+                    "NMAX_ITER" : 500,
                     "EPSILON"   : 1.0e-12
                 },
                 "OUTPUT" : {
@@ -104,7 +104,7 @@
     },
     
     "PDE_RHS" : {
-        "FUNC_DIM1_NAME" : "Src1D_06",
+        "FUNC_DIM1_NAME" : "Src1D_05",
         "FUNC_DIM2_NAME" : null,
         "FUNC_DIM3_NAME" : null 
     },
@@ -114,8 +114,8 @@
         "NB_BCS" : 2,
          
         "DIM1" : [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Zero1D" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Zero1D" }
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi1D_05" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi1D_05" }
         ]
 
     },
@@ -130,7 +130,7 @@
     },
     
     "PDE_EXACT_SOL" : {
-        "FUNC_DIM1_NAME" : "Sol1D_06",
+        "FUNC_DIM1_NAME" : "Sol1D_05",
         "FUNC_DIM2_NAME" : null,
         "FUNC_DIM3_NAME" : null 
     },
@@ -139,19 +139,19 @@
 
     "MESH_1D" : {
     
-        "MESHFILEDEFINITION" : {
-            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
-            "MESHNAME" : "MESH_20",
-            "MESHTYPE" : "line"
-        }
+    #"MESHFILEDEFINITION" : {
+       #        "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
+       #     "MESHNAME" : "MESH_10",
+       #     "MESHTYPE" : "line"
+       # }
         
-        #"MESHDATADEFINITION" : {
-        #    "XMIN"   : 0.0, 
-        #    "XMAX"   : 1.0, 
-        #    "NX"     : 10, 
-        #    "DISTRIBUTION" : "UNIFORM",
-        #    "PERIODIC" : false  # true, false
-        #}
+         "MESHDATADEFINITION" : {
+            "XMIN"   : 0.0,
+            "XMAX"   : 1.0,
+            "NX"     : 20,
+            "DISTRIBUTION" : "UNIFORM",
+            "PERIODIC" : false  # true, false
+           }
     },
 
     # infos ----------------------------------------

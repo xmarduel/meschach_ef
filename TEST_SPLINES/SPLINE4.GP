@@ -113,4 +113,59 @@ plot [0:1] B1(t), \
            B4(t), \
            B5(t), \
 	   B1(t) + B2(t) + B3(t) + B4(t) + B5(t)
-pause -1                  
+pause -1  
+
+
+SPLINE0(t) = spline2(t+1)
+SPLINE1(t) = spline2(t)
+SPLINE2(t) = spline2(t-1)
+SPLINE3(t) = spline2(t-2)
+
+set size square
+#
+plot [-4.03:4.03][-1.0:15.0] \
+	SPLINE0(t)   title "SPLINE0(t)" with lines ,\
+	SPLINE1(t)   title "SPLINE1(t)" with lines ,\
+	SPLINE2(t)   title "SPLINE1(t)" with lines ,\
+	SPLINE3(t)   title "SPLINE3(t)" with lines 
+
+pause -1
+#       
+#
+# how to calculate them ???
+#
+a00 = 11.0/(44)
+a01 =  1.0/(44)
+a02 =  1.0/(44)
+a03 = 11.0/(44)
+#
+a10 =  -11.0/22
+a11 =   -1.0/22
+a12 =    1.0/22
+a13 =   11.0/22
+#
+a20 = -11.0/24
+a21 =  11.0/24
+a22 = -11.0/24
+a23 =  11.0/24
+#
+a30 =  -11.0/22
+a31 =  1.0/22
+a32 =  1.0/22
+a33 =  -11.0/22
+#
+NEW_SPLINE0(t) = a00*SPLINE0(t) + a01*SPLINE1(t) + a02*SPLINE2(t) + a03*SPLINE3(t)
+NEW_SPLINE1(t) = a10*SPLINE0(t) + a11*SPLINE1(t) + a12*SPLINE2(t) + a13*SPLINE3(t)
+NEW_SPLINE2(t) = a20*SPLINE0(t) + a21*SPLINE1(t) + a22*SPLINE2(t) + a23*SPLINE3(t)
+NEW_SPLINE3(t) = a30*SPLINE0(t) + a31*SPLINE1(t) + a32*SPLINE2(t) + a33*SPLINE3(t)
+#
+set size square
+#
+plot [-1:1][-0:2] \
+	NEW_SPLINE0(t)   title "NEW_SPLINE0(t)" with lines ,\
+	NEW_SPLINE1(t)   title "NEW_SPLINE1(t)" with lines ,\
+	NEW_SPLINE2(t)   title "NEW_SPLINE1(t)" with lines ,\
+	NEW_SPLINE3(t)   title "NEW_SPLINE3(t)" with lines 
+
+pause -1
+#                

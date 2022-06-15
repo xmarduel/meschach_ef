@@ -152,17 +152,19 @@ Real Sol1D_04(Real x)
 Real Phi1D_05(Real x)
 {
    Real resu;
-   return resu = (x-0.5)*(x-0.5)+2.0; 
+   //return resu = (x-0.5)*(x-0.5)+2.0;
+   return resu = x*(x-1) + 2.0;
 }
 Real Src1D_05(Real x)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = -2.0; 
 }
 Real Sol1D_05(Real x)
 {
    Real resu;
-   return resu = (x-0.5)*(x-0.5)+2.0; 
+   //return resu = (x-0.5)*(x-0.5)+2.0;
+   return resu = x*(x-1) +2;
 }
 /********************************************************************/
 Real Phi1D_06(Real x)
@@ -651,12 +653,13 @@ Real Phi1D_05_Transient(Real x, Real t)
 Real Src1D_05_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 0.0; 
+   //return resu = 0.0;
+   return resu = -2.0;
 }
 Real Sol1D_05_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = (x-0.5)*(x-0.5)+2.0; 
+   return resu = (x-0.5)*(x-0.5)+2.0;
 }
 /********************************************************************/
 Real Phi1D_06_Transient(Real x, Real t) /* is (Phi1D_05)'(0) */

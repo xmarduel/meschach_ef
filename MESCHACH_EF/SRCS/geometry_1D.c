@@ -50,23 +50,23 @@ static GEOM_1D *Geom1D_get_fromParent_S4toP1( const ELT_1D *element, const GEOM_
 static GEOM_1D *Geom1D_get_fromParent_S5toP1( const ELT_1D *element, const GEOM_1D* geom );
 
 
-static void     Geom1D_get_P1geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_P2geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_P3geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_H3geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_S2geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_S3geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_S4geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_S5geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_P1geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_P2geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_P3geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_H3geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_S2geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_S3geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_S4geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_S5geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
 
-static void     Geom1D_get_P1geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_P2geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_P3geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_H3geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_S2geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_S3geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_S4geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
-static void     Geom1D_get_S5geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_P1geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_P2geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_P3geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_H3geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_S2geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_S3geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_S4geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
+static void     Geom1D_get_S5geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
 
 static void     Geom1D_get_P1geom_init_matrix_coords_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
 static void     Geom1D_get_P2geom_init_matrix_coords_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1);
@@ -565,9 +565,9 @@ static void Geom1D_get_P1geom_from_segments(GEOM_1D* geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    /* numerotation des sommets des elements et des faces */
    /*----------------------------------------------------*/
-   Geom1D_get_P1geom_init_matrix_nselmt_with_refs(geom, elt, H1);
+   Geom1D_get_P1geom_init_matrix_nselmt_with_refz(geom, elt, H1);
 
-   Geom1D_get_P1geom_init_matrix_nsface_with_refs(geom, elt, H1);
+   Geom1D_get_P1geom_init_matrix_nsface_with_refa(geom, elt, H1);
       
    /*--------------------------*/
    /* coordonnees  des sommets */
@@ -639,9 +639,9 @@ static void Geom1D_get_P2geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    /* numerotation des sommets des elements et des faces */
    /*----------------------------------------------------*/
-   Geom1D_get_P2geom_init_matrix_nselmt_with_refs(geom, elt, H1);
+   Geom1D_get_P2geom_init_matrix_nselmt_with_refz(geom, elt, H1);
 
-   Geom1D_get_P2geom_init_matrix_nsface_with_refs(geom, elt, H1);
+   Geom1D_get_P2geom_init_matrix_nsface_with_refa(geom, elt, H1);
 
    /*--------------------------*/
    /* coordonnees  des sommets */
@@ -713,9 +713,9 @@ static void Geom1D_get_P3geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    /* numerotation des sommets des elements et des faces */
    /*----------------------------------------------------*/
-   Geom1D_get_P3geom_init_matrix_nselmt_with_refs(geom, elt, H1);
+   Geom1D_get_P3geom_init_matrix_nselmt_with_refz(geom, elt, H1);
 
-   Geom1D_get_P3geom_init_matrix_nsface_with_refs(geom, elt, H1);
+   Geom1D_get_P3geom_init_matrix_nsface_with_refa(geom, elt, H1);
    
    /*--------------------------*/
    /* coordonnees  des sommets */
@@ -787,9 +787,9 @@ static void Geom1D_get_H3geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    /* numerotation des sommets des elements et des faces */
    /*----------------------------------------------------*/
-   Geom1D_get_H3geom_init_matrix_nselmt_with_refs(geom, elt, H1);
+   Geom1D_get_H3geom_init_matrix_nselmt_with_refz(geom, elt, H1);
 
-   Geom1D_get_H3geom_init_matrix_nsface_with_refs(geom, elt, H1);
+   Geom1D_get_H3geom_init_matrix_nsface_with_refa(geom, elt, H1);
 
    /*--------------------------*/
    /* coordonnees  des sommets */
@@ -825,9 +825,10 @@ static void Geom1D_get_S2geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
       // There is a "global" confusion between NB_DOF and NBSOMM !! s*** !!
       // In case of S2 or S4, they are not equals so our stuff is buggy for non periodic geometry
       
+      // Try to make it right here....
       NB_DOF = NX+2      ;
       
-      NBSOMM = NX+3      ; /* NX+1 */
+      NBSOMM = NX+1      ; // so no "trick" here, only the real geometry
       NBELMT = NX        ;
       NBFACE = 2         ;
    }
@@ -864,9 +865,9 @@ static void Geom1D_get_S2geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    /* numerotation des sommets des elements et des faces */
    /*----------------------------------------------------*/
-   Geom1D_get_S2geom_init_matrix_nselmt_with_refs(geom, elt, H1);
+   Geom1D_get_S2geom_init_matrix_nselmt_with_refz(geom, elt, H1);
 
-   Geom1D_get_S2geom_init_matrix_nsface_with_refs(geom, elt, H1);
+   Geom1D_get_S2geom_init_matrix_nsface_with_refa(geom, elt, H1);
 
    /*--------------------------*/
    /* coordonnees  des sommets */
@@ -943,9 +944,9 @@ static void Geom1D_get_S3geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    /* numerotation des sommets des elements et des faces */
    /*----------------------------------------------------*/
-   Geom1D_get_S3geom_init_matrix_nselmt_with_refs(geom, elt, H1);
+   Geom1D_get_S3geom_init_matrix_nselmt_with_refz(geom, elt, H1);
 
-   Geom1D_get_S3geom_init_matrix_nsface_with_refs(geom, elt, H1);
+   Geom1D_get_S3geom_init_matrix_nsface_with_refa(geom, elt, H1);
 
    /*--------------------------*/
    /* coordonnees  des sommets */
@@ -988,7 +989,7 @@ static void Geom1D_get_S4geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
       
       NB_DOF = NX+4      ;
       
-      NBSOMM = NX+5      ; /* NX+1 */
+      NBSOMM = NX+1      ; /* Base geometry */
       NBELMT = NX        ;
       NBFACE = 2         ;
    }
@@ -1025,9 +1026,9 @@ static void Geom1D_get_S4geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    /* numerotation des sommets des elements et des faces */
    /*----------------------------------------------------*/
-   Geom1D_get_S4geom_init_matrix_nselmt_with_refs(geom, elt, H1);
+   Geom1D_get_S4geom_init_matrix_nselmt_with_refz(geom, elt, H1);
    
-   Geom1D_get_S4geom_init_matrix_nsface_with_refs(geom, elt, H1);
+   Geom1D_get_S4geom_init_matrix_nsface_with_refa(geom, elt, H1);
    
    /*--------------------------*/
    /* coordonnees  des sommets */
@@ -1104,9 +1105,9 @@ static void Geom1D_get_S5geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    /* numerotation des sommets des elements et des faces */
    /*----------------------------------------------------*/
-   Geom1D_get_S5geom_init_matrix_nselmt_with_refs(geom, elt, H1);
+   Geom1D_get_S5geom_init_matrix_nselmt_with_refz(geom, elt, H1);
 
-   Geom1D_get_S5geom_init_matrix_nsface_with_refs(geom, elt, H1);
+   Geom1D_get_S5geom_init_matrix_nsface_with_refa(geom, elt, H1);
 
    /*--------------------------*/
    /* coordonnees  des sommets */
@@ -1602,7 +1603,7 @@ static GEOM_1D *Geom1D_get_fromParent_S2toP1( const ELT_1D *element, const GEOM_
    else
    if ( Geom->periodicity == NON_PERIODIC_MESHe )
    {
-      delta_nbsomm = 1; /* ? */
+      delta_nbsomm = 0;
    }
    else
    {
@@ -1614,7 +1615,7 @@ static GEOM_1D *Geom1D_get_fromParent_S2toP1( const ELT_1D *element, const GEOM_
    Geom->X_LEFT  = GeomX->X_LEFT;
    Geom->X_RIGHT = GeomX->X_RIGHT;
 
-   Geom->NBSOMM = GeomX->NBSOMM - 2*delta_nbsomm ;
+   Geom->NBSOMM = GeomX->NBSOMM /*- 2*delta_nbsomm */;
    Geom->NBELMT = GeomX->NBELMT;
    Geom->NBFACE = GeomX->NBFACE;
 
@@ -1780,7 +1781,7 @@ static GEOM_1D *Geom1D_get_fromParent_S4toP1( const ELT_1D *element, const GEOM_
    else
    if ( Geom->periodicity == NON_PERIODIC_MESHe )
    {
-      delta_nbsomm = 2;
+      delta_nbsomm = 0;
    }
    else
    {
@@ -1791,7 +1792,7 @@ static GEOM_1D *Geom1D_get_fromParent_S4toP1( const ELT_1D *element, const GEOM_
    Geom->X_LEFT  = GeomX->X_LEFT;
    Geom->X_RIGHT = GeomX->X_RIGHT;
 
-   Geom->NBSOMM = GeomX->NBSOMM - 2*delta_nbsomm ;
+   Geom->NBSOMM = GeomX->NBSOMM /*- 2*delta_nbsomm */;
    Geom->NBELMT = GeomX->NBELMT;
    Geom->NBFACE = GeomX->NBFACE;
 
@@ -1808,12 +1809,12 @@ static GEOM_1D *Geom1D_get_fromParent_S4toP1( const ELT_1D *element, const GEOM_
 
    for (s=0; s<Geom->NBSOMM; s++)
    {
-      Geom->REF_S->ive[s] = GeomX->REF_S->ive[s+delta_nbsomm];
+      Geom->REF_S->ive[s] = GeomX->REF_S->ive[s];
    }
 
    for (s=0; s<Geom->NBSOMM; s++)
    {
-      Geom->XSOMM->ve[s] = GeomX->XSOMM->ve[s+delta_nbsomm];
+      Geom->XSOMM->ve[s] = GeomX->XSOMM->ve[s];
    }
    for (e=0; e<GeomX->NBELMT; e++)
    {
@@ -1823,8 +1824,8 @@ static GEOM_1D *Geom1D_get_fromParent_S4toP1( const ELT_1D *element, const GEOM_
 
    if ( Geom->periodicity == NON_PERIODIC_MESHe )
    {
-      Geom->NSFACE->im[0][0] = GeomX->NSFACE->im[0][0] + delta_nbsomm;
-      Geom->NSFACE->im[1][0] = GeomX->NSFACE->im[1][0] - delta_nbsomm;
+      Geom->NSFACE->im[0][0] = GeomX->NSFACE->im[0][0];
+      Geom->NSFACE->im[1][0] = GeomX->NSFACE->im[1][0];
    }
 
    /* finished */
@@ -2005,6 +2006,12 @@ static void     Geom1D_get_S2geom_init_matrix_ef2world(GEOM_1D* geom, const ELT_
 
    int P = elt->MAT_FuncBasis_CL_L->m;
 
+   /*
+   ex: 6 segments -> S2 ->
+     NBSOMM = 7
+     NB_DOF = 8
+   */
+   
    geom->EF_to_WORLD           = sp_get(NBSOMM,NB_DOF,2);
    geom->BASEFUNC_BASICS_to_CL = sp_get(NB_DOF,NB_DOF,2);
 
@@ -2028,15 +2035,11 @@ static void     Geom1D_get_S2geom_init_matrix_ef2world(GEOM_1D* geom, const ELT_
 
 
       /* Set the matrix EF_to_WORLD for Quad Splines as if there were no CL transformations */
-      sp_set_val(EF_util1, 0, 0, 1.0);
-      
-      for (i=1; i<NBSOMM-1; i++)
+      for (i=0; i<NBSOMM; i++)
       {
-         sp_set_val(EF_util1,i,i-1 , 1.0);
          sp_set_val(EF_util1,i,i   , 1.0);
+         sp_set_val(EF_util1,i,i+1 , 1.0);
       }
-      
-      sp_set_val(EF_util1, NBSOMM-1, NBSOMM-2, 1.0);
 
       printf("EF to world S2 init");
       sp_foutput(stdout, EF_util1);
@@ -2224,15 +2227,15 @@ static void     Geom1D_get_S4geom_init_matrix_ef2world(GEOM_1D* geom, const ELT_
 
    int P = elt->MAT_FuncBasis_CL_L->m;
 
-   geom->EF_to_WORLD           = sp_get(NBSOMM,NBSOMM,4);
-   geom->BASEFUNC_BASICS_to_CL = sp_get(NBSOMM,NBSOMM,4);
+   geom->EF_to_WORLD           = sp_get(NBSOMM,NB_DOF,2);
+   geom->BASEFUNC_BASICS_to_CL = sp_get(NB_DOF,NB_DOF,2);
 
    /* cf Prenter "Splines and Variational Methods" pp.80-81 */
 
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
       /* Matrix for Periodic Cubic Splines as if there were no CL transformations */
-      SPMAT* EF_util1 = sp_get(NBSOMM,NBSOMM,4);
+      SPMAT* EF_util1 = sp_get(NBSOMM,NB_DOF,4);
 
       /* set first the matrix for the CL of the basics base functions */
       sp_ident(geom->BASEFUNC_BASICS_to_CL);
@@ -2241,38 +2244,19 @@ static void     Geom1D_get_S4geom_init_matrix_ef2world(GEOM_1D* geom, const ELT_
       for (j=0; j<P; j++)
       {
          sp_set_val(geom->BASEFUNC_BASICS_to_CL,          i,         j, elt->MAT_FuncBasis_CL_L->me[i][j]);
-         sp_set_val(geom->BASEFUNC_BASICS_to_CL, NBSOMM-P+i,NBSOMM-P+j, elt->MAT_FuncBasis_CL_R->me[i][j]);
+         sp_set_val(geom->BASEFUNC_BASICS_to_CL, NB_DOF-P+i,NB_DOF-P+j, elt->MAT_FuncBasis_CL_R->me[i][j]);
       }
       /* voila */
 
             
       /* Set the matrix EF_to_WORLD for Quintic Splines as if there were no CL transformations */
-      sp_set_val(EF_util1,0,0, 11.0);
-      sp_set_val(EF_util1,0,1, 11.0);
-      sp_set_val(EF_util1,0,2,  1.0);
-
-      sp_set_val(EF_util1,1,1-1,  1.0);
-      sp_set_val(EF_util1,1,1  , 11.0);
-      sp_set_val(EF_util1,1,1+1, 11.0);
-      sp_set_val(EF_util1,1,1+2,  1.0);
-
-      for (i=2; i<NBSOMM; i++)
+      for (i=0; i<NBSOMM; i++)
       {
-         sp_set_val(EF_util1,i,i-2,  1.0);
-         sp_set_val(EF_util1,i,i-1, 11.0);
-         sp_set_val(EF_util1,i,i  , 11.0);
-         sp_set_val(EF_util1,i,i+1,  1.0);
+         sp_set_val(EF_util1,i,i   ,  1.0);
+         sp_set_val(EF_util1,i,i+1 , 11.0);
+         sp_set_val(EF_util1,i,i+2 , 11.0);
+         sp_set_val(EF_util1,i,i+3 ,  1.0);
       }
-
-      sp_set_val(EF_util1,NB_DOF-2,NB_DOF-4,  1.0);
-      sp_set_val(EF_util1,NB_DOF-2,NB_DOF-3, 11.0);
-      sp_set_val(EF_util1,NB_DOF-2,NB_DOF-2, 11.0);
-      sp_set_val(EF_util1,NB_DOF-2,NB_DOF-1,  1.0);
-
-      sp_set_val(EF_util1,NB_DOF-1,NB_DOF-3,   1.0);
-      sp_set_val(EF_util1,NB_DOF-1,NB_DOF-2 , 11.0);
-      sp_set_val(EF_util1,NB_DOF-1,NB_DOF-1 , 11.0);
-
 
       /* Matrix for Quintic Splines when there has been as CL of "basics" base functions */
       geom->EF_to_WORLD = sp_m_mlt(EF_util1, geom->BASEFUNC_BASICS_to_CL, geom->EF_to_WORLD);
@@ -2442,7 +2426,7 @@ static void     Geom1D_get_S5geom_init_matrix_ef2world(GEOM_1D* geom, const ELT_
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_P1geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_P1geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBELMT = geom->NBELMT;
    int e;
@@ -2464,7 +2448,7 @@ static void     Geom1D_get_P1geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_P2geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_P2geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBELMT = geom->NBELMT;
    int e;
@@ -2487,7 +2471,7 @@ static void     Geom1D_get_P2geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_P3geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_P3geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBELMT = geom->NBELMT;
    int e;
@@ -2511,7 +2495,7 @@ static void     Geom1D_get_P3geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_H3geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_H3geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBELMT = geom->NBELMT;
    int e;
@@ -2536,7 +2520,7 @@ static void     Geom1D_get_H3geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_S2geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_S2geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBELMT = geom->NBELMT;
    int NBSOMM = geom->NBSOMM;
@@ -2575,7 +2559,7 @@ static void     Geom1D_get_S2geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_S3geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_S3geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBELMT = geom->NBELMT;
    int NBSOMM = geom->NBSOMM;
@@ -2618,7 +2602,7 @@ static void     Geom1D_get_S3geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_S4geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_S4geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBELMT = geom->NBELMT;
    int NBSOMM = geom->NBSOMM;
@@ -2658,7 +2642,7 @@ static void     Geom1D_get_S4geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_S5geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_S5geom_init_matrix_nselmt_with_refz(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBELMT = geom->NBELMT;
    int NBSOMM = geom->NBSOMM;
@@ -2704,7 +2688,7 @@ static void     Geom1D_get_S5geom_init_matrix_nselmt_with_refs(GEOM_1D* geom, co
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_P1geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_P1geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
 
@@ -2728,7 +2712,7 @@ static void     Geom1D_get_P1geom_init_matrix_nsface_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_P2geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_P2geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
    
@@ -2752,7 +2736,7 @@ static void     Geom1D_get_P2geom_init_matrix_nsface_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_P3geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_P3geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
 
@@ -2776,7 +2760,7 @@ static void     Geom1D_get_P3geom_init_matrix_nsface_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_H3geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_H3geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
 
@@ -2800,7 +2784,7 @@ static void     Geom1D_get_H3geom_init_matrix_nsface_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_S2geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_S2geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
 
@@ -2824,7 +2808,7 @@ static void     Geom1D_get_S2geom_init_matrix_nsface_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_S3geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_S3geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
 
@@ -2848,7 +2832,7 @@ static void     Geom1D_get_S3geom_init_matrix_nsface_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_S4geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_S4geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
    
@@ -2872,7 +2856,7 @@ static void     Geom1D_get_S4geom_init_matrix_nsface_with_refs(GEOM_1D* geom, co
 
 /* ------------------------------------------------------------------------------------------*/
 
-static void     Geom1D_get_S5geom_init_matrix_nsface_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
+static void     Geom1D_get_S5geom_init_matrix_nsface_with_refa(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
 
@@ -3041,19 +3025,35 @@ static void     Geom1D_get_H3geom_init_matrix_coords_with_refs(GEOM_1D* geom, co
 static void     Geom1D_get_S2geom_init_matrix_coords_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
+   int NB_DOF = geom->NB_DOF;
    int s;
    int NX = H1->dim;
 
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
-      geom->XSOMM->ve[0] = geom->X_LEFT -  H1->ve[0] ; /* uniform mesh */
-      geom->XSOMM->ve[1] = geom->X_LEFT              ;
+      geom->XSOMM->ve[0] = geom->X_LEFT;
       for (s=0; s<NX; s++)
       {
-         geom->XSOMM->ve[s+2] = geom->XSOMM->ve[s+1] + H1->ve[s] ;
+         geom->XSOMM->ve[s+1] = geom->XSOMM->ve[s] + H1->ve[s];
       }
-      geom->XSOMM->ve[NBSOMM-2] = geom->X_RIGHT                 ;
-      geom->XSOMM->ve[NBSOMM-1] = geom->X_RIGHT +  H1->ve[NX-1] ;
+      geom->XSOMM->ve[NBSOMM-1] = geom->X_RIGHT;
+      
+      // The S2 extra stuff ----------------------------------------------
+      geom->S2_S4_REF_S_TO_DOF = iv_get(NBSOMM);
+      iv_ones(geom->S2_S4_REF_S_TO_DOF);
+      iv_smlt(-1, geom->S2_S4_REF_S_TO_DOF, geom->S2_S4_REF_S_TO_DOF);
+      
+      geom->S2_S4_REF_S_TO_DOF->ive[0] = 0;
+      geom->S2_S4_REF_S_TO_DOF->ive[NBSOMM-1] = NB_DOF - 1;
+      
+      // The S2 extra stuff ----------------------------------------------
+      geom->S2_S4_DOF_TO_REF_S = iv_get(NB_DOF);
+      iv_ones(geom->S2_S4_DOF_TO_REF_S);
+      iv_smlt(-1, geom->S2_S4_DOF_TO_REF_S, geom->S2_S4_DOF_TO_REF_S);
+      
+      geom->S2_S4_DOF_TO_REF_S->ive[0] = 0;
+      geom->S2_S4_DOF_TO_REF_S->ive[NB_DOF-1] = NBSOMM - 1;
+      // ----------------------------------------------
    }
    else
    if ( geom->periodicity == PERIODIC_MESHe )
@@ -3076,8 +3076,8 @@ static void     Geom1D_get_S2geom_init_matrix_coords_with_refs(GEOM_1D* geom, co
    /* references on somms */
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
-      geom->REF_S->ive[1]        = 1;
-      geom->REF_S->ive[NBSOMM-2] = 2;
+      geom->REF_S->ive[0]        = 1;
+      geom->REF_S->ive[NBSOMM-1] = 2;
    }
 }
 
@@ -3131,20 +3131,35 @@ static void     Geom1D_get_S3geom_init_matrix_coords_with_refs(GEOM_1D* geom, co
 static void     Geom1D_get_S4geom_init_matrix_coords_with_refs(GEOM_1D* geom, const ELT_1D *elt, const VEC* H1)
 {
    int NBSOMM = geom->NBSOMM;
+   int NB_DOF = geom->NB_DOF;
    int s;
    int NX = H1->dim;
-
+   
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
-      geom->XSOMM->ve[0] = geom->X_LEFT -  2*H1->ve[0] ; /* uniform mesh */
-      geom->XSOMM->ve[1] = geom->X_LEFT -  1*H1->ve[0] ;
+      geom->XSOMM->ve[0] = geom->X_LEFT;
       for (s=0; s<NX; s++)
       {
-         geom->XSOMM->ve[s+2] = geom->XSOMM->ve[s+1] + H1->ve[s] ;
+         geom->XSOMM->ve[s+1] = geom->XSOMM->ve[s] + H1->ve[s];
       }
-      geom->XSOMM->ve[NBSOMM-3] = geom->X_RIGHT;
-      geom->XSOMM->ve[NBSOMM-2] = geom->X_RIGHT + 1*H1->ve[NX-1] ;
-      geom->XSOMM->ve[NBSOMM-1] = geom->X_RIGHT + 2*H1->ve[NX-1] ;
+      geom->XSOMM->ve[NBSOMM-1] = geom->X_RIGHT;
+      
+      // The S4 extra stuff ----------------------------------------------
+      geom->S2_S4_REF_S_TO_DOF = iv_get(NBSOMM);
+      iv_ones(geom->S2_S4_REF_S_TO_DOF);
+      iv_smlt(-1, geom->S2_S4_REF_S_TO_DOF, geom->S2_S4_REF_S_TO_DOF);
+      
+      geom->S2_S4_REF_S_TO_DOF->ive[0] = 0;
+      geom->S2_S4_REF_S_TO_DOF->ive[NBSOMM-1] = NB_DOF - 1;
+      
+      // The S4 extra stuff ----------------------------------------------
+      geom->S2_S4_DOF_TO_REF_S = iv_get(NB_DOF);
+      iv_ones(geom->S2_S4_DOF_TO_REF_S);
+      iv_smlt(-1, geom->S2_S4_DOF_TO_REF_S, geom->S2_S4_DOF_TO_REF_S);
+      
+      geom->S2_S4_DOF_TO_REF_S->ive[0] = 0;
+      geom->S2_S4_DOF_TO_REF_S->ive[NB_DOF-1] = NBSOMM - 1;
+      // ----------------------------------------------
    }
    else
    if ( geom->periodicity == PERIODIC_MESHe )
@@ -3167,8 +3182,8 @@ static void     Geom1D_get_S4geom_init_matrix_coords_with_refs(GEOM_1D* geom, co
    /* references on somms */
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
-      geom->REF_S->ive[2]        = 1;
-      geom->REF_S->ive[NBSOMM-3] = 2;
+      geom->REF_S->ive[0]        = 1;
+      geom->REF_S->ive[NBSOMM-1] = 2;
    }
 }
 

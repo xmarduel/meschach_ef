@@ -78,8 +78,28 @@ plot [0:6][-1:4] \
               
 pause -1
 
+#   Real MAT_PermBasis_S2[2][2] =     /* SUMM_j (A_ij) = 0 */
+#
+#   {   1.0/2 ,   1.0/2 ,
+#       1.0/4 ,  -1.0/4 } ;
+#
+
+SPLINE0(t) = spline1(-2,t)
+SPLINE1(t) = spline1(-1,t)
+
+a00 = 1.0/2
+a01 = 1.0/2
+#
+a10 = -1.0/4
+a11 =  1.0/4
+#
+
+NEW_SPLINE0(t) = a00*SPLINE0(t) + a01*SPLINE1(t)
+NEW_SPLINE1(t) = a10*SPLINE0(t) + a11*SPLINE1(t)
+
 plot [-2:2][-1:3] \
-   spline1(-2,t),spline1(-1,t), \
-   0.25*(-spline1(-2,t)+spline1(-1,t) ), \
-   0.50*( spline1(-2,t)+spline1(-1,t) )
+   SPLINE0(t) , \
+   SPLINE1(t) , \
+   NEW_SPLINE0(t), \
+   NEW_SPLINE1(t)
 pause -1

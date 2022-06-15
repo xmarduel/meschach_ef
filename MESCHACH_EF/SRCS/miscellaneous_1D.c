@@ -196,8 +196,17 @@ VEC* get_vector_for_plotting_1D( const ELT_1D *MyElt, const GEOM_1D *MyGeom, con
       
       if ( MyGeom->periodicity == NON_PERIODIC_MESHe )
       {
-         GRAPH = v_get(SOL->dim - delta_nbsomm);
-         v_move(TMP,(delta_nbsomm+1)/2, GRAPH->dim,GRAPH, 0);
+         if (strcmp(MyElt->name_ef,"S2") == 0  || strcmp(MyElt->name_ef,"S4") == 0)
+         {
+            GRAPH = v_copy(TMP, NULL);
+            //GRAPH = v_get(SOL->dim - delta_nbsomm);
+            //v_move(TMP,(delta_nbsomm+1)/2, GRAPH->dim-1, GRAPH, 0);
+         }
+         else
+         {
+            GRAPH = v_get(SOL->dim - delta_nbsomm);
+            v_move(TMP,(delta_nbsomm+1)/2, GRAPH->dim, GRAPH, 0);
+         }
       }
       else
       if ( MyGeom->periodicity == PERIODIC_MESHe )

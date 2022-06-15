@@ -142,18 +142,18 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
    char *Preconditionning = MyParams->resol_params.preconditionning;
 
 
-   M_BC = sp_get(MyGeom->NBSOMM,MyGeom->NBSOMM,10);
+   M_BC = sp_get(MyGeom->NB_DOF,MyGeom->NB_DOF,10);
    
-   A = sp_get(MyGeom->NBSOMM,MyGeom->NBSOMM,10);
-   S = sp_get(MyGeom->NBSOMM,MyGeom->NBSOMM,10);
-   M = sp_get(MyGeom->NBSOMM,MyGeom->NBSOMM,10);
-   C = sp_get(MyGeom->NBSOMM,MyGeom->NBSOMM,10);
+   A = sp_get(MyGeom->NB_DOF,MyGeom->NB_DOF,10);
+   S = sp_get(MyGeom->NB_DOF,MyGeom->NB_DOF,10);
+   M = sp_get(MyGeom->NB_DOF,MyGeom->NB_DOF,10);
+   C = sp_get(MyGeom->NB_DOF,MyGeom->NB_DOF,10);
 
-   RHS_FUN = v_get(MyGeom->NBSOMM);
-   RHS_BC  = v_get(MyGeom->NBSOMM);
-   RHS     = v_get(MyGeom->NBSOMM);
+   RHS_FUN = v_get(MyGeom->NB_DOF);
+   RHS_BC  = v_get(MyGeom->NB_DOF);
+   RHS     = v_get(MyGeom->NB_DOF);
    
-   SOL = v_get(MyGeom->NBSOMM);
+   SOL = v_get(MyGeom->NB_DOF);
 	
    /* ----- assemblage matrix and rhs ------ */
 
@@ -206,17 +206,18 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
    RHS = v_add(RHS_FUN, RHS_BC, RHS);
    
 	/*
-	v_output(RHS);
-    printf(".....\n");
+	printf("RHS before BC.....\n");
+   v_output(RHS);
+   printf("A before BC.....\n");
 	sp_output(A);
-	printf(".....\n");
    */
    
    transform1D_matrix_vector_with_bc(MyElt, MyGeom, MyBC, A, RHS);
    
 	/*
-	v_output(RHS);
-    printf(".....\n");
+	printf("RHS after BC.....\n");
+   v_output(RHS);
+   printf("A after BC.....\n");
 	sp_output(A);
 	printf(".....\n");
 	*/
