@@ -825,17 +825,13 @@ static void elt1D_get_S4(ELT_1D *elt)
    for (i=0; i<4; i++)
       for (j=0; j<4; j++)
       {
-         elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S4_a[i][j];
-         elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S4_b[i][j];
-         elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S4_c[i][j];
+         elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S4[i][j];
       }
    elt->MAT_FuncBasis_CL_R = m_get(4,4);
    for (i=0; i<4; i++)
       for (j=0; j<4; j++)
       {
-         elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S4_a[3-i][3-j];
-         elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S4_b[3-i][3-j];
-         elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S4_c[3-i][3-j];
+         elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S4[3-i][3-j];
       }
 }
 

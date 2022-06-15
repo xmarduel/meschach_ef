@@ -232,7 +232,7 @@ Real DDFDXX5_1D_S5(Real x);
 
 /*! \fn elt1D_get(const char *type)
 *  \brief initialize an ELT_1D structure
-*  \param type : the type of the finite element ("P1", "P2", P3", H3", "S2", "S3", "S5")
+*  \param type : the type of the finite element ("P1", "P2", P3", H3", "S2", "S3", "S4", "S5")
 */
 
 /*! \fn elt1D_free(ELT_1D *elt)

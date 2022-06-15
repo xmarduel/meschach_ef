@@ -163,26 +163,12 @@ Real TENSOR_Masse_S4[5][5][5] = {
 /* TildePhi_2 = aij*Phi_0 + aij*Phi_1 + aij*Phi_2 + aij*Phi_3 */
 /* TildePhi_3 = aij*Phi_0 + aij*Phi_1 + aij*Phi_2 + aij*Phi_3 */
 
-// TildePhi_0 must be 1 on left border , 0 elsewhere
-// TildePhi_1 must be 0 on left border , 1 somewhere and 0 elsewhere
-// TildePhi_2 must be 0 on left border , 1 somewhere and 0 elsewhere
-// TildePhi_3 must be 0 on left border , 1 somewhere and 0 elsewhere
+// TildePhi_0 must be 1 on left border , div = 0
+// TildePhi_1 must be 0 on left border , div = 1
+// TildePhi_2 must be 0 on left border , div = 0
+// TildePhi_3 must be 0 on left border , div = 0 , ddiv = 1
 
-Real MAT_PermBasis_S4_a[4][4] = {  /* A_ii = 1 */
-   {   1.0   ,  0.0 ,  0.0,    0.0},
-   {   0.0   ,  1.0 ,  0.0,    0.0},
-   {   0.0   ,  0.0 ,  1.0,    0.0},
-   {   0.0   ,  0.0 ,  0.0,    1.0}
-} ;
-
-Real MAT_PermBasis_S4_b[4][4] = {    /* SUMM_i (A_ij) = 1 */
-   {   1.0   ,  0.0 ,  0.0,    0.0},
-   {   0.0   ,  1.0 ,  0.0,    0.0},
-   {   0.0   ,  0.0 ,  1.0,    0.0},
-   {   0.0   ,  0.0 ,  0.0,    1.0}
-} ;
-
-Real MAT_PermBasis_S4_c[4][4] = {    /* SUMM_i (A_ij) = 0 */
+Real MAT_PermBasis_S4[4][4] = {
    {   11.0/44,  -11.0/22   ,  -11.0/24 ,  -11.0/22},
    {    1.0/44,   -1.0/22   ,   11.0/24 ,    1.0/22},
    {    1.0/44,    1.0/22   ,  -11.0/24 ,    1.0/22},

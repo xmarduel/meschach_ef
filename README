@@ -16,9 +16,6 @@ prerequisites: ( (*) means that the lib is modified and build by us)
    - libamd.a
    - libclapack.a - libcblas.a
 
-   - libslicot.a
-   - libscilabcontrol.a
-
 - python:
 
     - jsonschema (validation of input files -meshes and config- )
@@ -29,8 +26,7 @@ prerequisites: ( (*) means that the lib is modified and build by us)
 
 - define(s):
 
-  - -DHAVE_X11 -DHAVE_VOGLE -DHAVE_CPGPLOT -DHAVE_LIBSCIPLOT
-  - -DHAVE_SILO -DHAVE_SLICOT -DHAVE_SCILAB_CONTROL 
+  - -DHAVE_X11 -DHAVE_VOGLE -DHAVE_CPGPLOT -DHAVE_LIBSCIPLOT -DHAVE_SILO
 
 - graphics:
 
