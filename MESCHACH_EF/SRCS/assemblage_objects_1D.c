@@ -1283,8 +1283,16 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
    else
    if ( strcmp(elt->name_ef,"S2") == 0 )
    {
-      *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
-      *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][1] ] ;
+      if (geom->periodicity == NON_PERIODIC_MESHe)
+      {
+         *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
+         *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][1] ] ;
+      }
+      else
+      {
+         *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][1] ] ;
+         *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][2] ] ;
+      }
    }
    else
    if ( strcmp(elt->name_ef,"S3") == 0 ) 
@@ -1295,8 +1303,14 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
    else
    if ( strcmp(elt->name_ef,"S4") == 0 )
    {
-      *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
-      *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][1] ] ;
+      if (geom->periodicity == NON_PERIODIC_MESHe)
+      {
+         *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
+         *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][1] ] ;
+      } else {
+         *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][2] ] ;
+         *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][3] ] ;
+      }
    }
    else
    if ( strcmp(elt->name_ef,"S5") == 0 )

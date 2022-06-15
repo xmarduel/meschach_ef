@@ -11,6 +11,8 @@ typedef double          Real;
 //////////////////////////////////////////////////////////////
 // TYPEMAP : allow to write to file opened from python
 %typemap(in) FILE * {
+struct stat buffer;
+//if (!stat($input, &buffer) == 0) {
 if (!PyFile_Check($input)) {
 	PyErr_SetString(PyExc_TypeError, "Need a file!");
 	return NULL;

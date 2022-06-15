@@ -161,7 +161,7 @@ NEW_SPLINE3(t) = a30*SPLINE0(t) + a31*SPLINE1(t) + a32*SPLINE2(t) + a33*SPLINE3(
 #
 set size square
 #
-plot [-1:1][-0:2] \
+plot [-5:5][-10:12] \
 	NEW_SPLINE0(t)   title "NEW_SPLINE0(t)" with lines ,\
 	NEW_SPLINE1(t)   title "NEW_SPLINE1(t)" with lines ,\
 	NEW_SPLINE2(t)   title "NEW_SPLINE1(t)" with lines ,\

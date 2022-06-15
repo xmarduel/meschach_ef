@@ -1,5 +1,6 @@
 
 SWIG_DIR = $(HOME)/x_local/bin/swig-1.3.40
+#SWIG_DIR = $(HOME)/x_local/bin/swig-4.0.2  # strange, .so crash for python3
 
 SWIG_EXE = $(SWIG_DIR)/swig
 
@@ -26,11 +27,12 @@ LIB_MESCHACH_LIBSCIPLOT  = $(DYLIBS_DIR)/libmeschach_libsciplot.dylib
 #CC_ARCH = -arch $(CURRENT_ARCH)
 
 # APPLE PYTHON 2.7 MAC OSX 10.10
-#PYTHON_HEADERS       = /System/Library/Frameworks/Python.framework/Headers
-#PYTHON_FRAMEWORK_DIR = /System/Library/Frameworks/
-
 PYTHON_HEADERS       = /System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7
 PYTHON_FRAMEWORK_DIR = /System/Library/Frameworks/Python.framework/Versions/2.7
+
+# PYTHON 3.7 on my system
+#PYTHON_HEADERS       = /Library/Frameworks/Python.framework/Versions/3.7/include/python3.7m
+#PYTHON_FRAMEWORK_DIR = /Library/Frameworks/Python.framework/Versions/3.7
 
 
 # CFLAGS already set for specific lib
@@ -58,3 +60,6 @@ $(PYTHON_EXTENSION) : $(OBJ_WRAP) $(DYLIBS_LINKED_TO_BUNDLE)
 all: $(PYTHON_EXTENSION)
 
 clean:; rm $(OBJ_WRAP) $(SRC_WRAP)
+
+
+# -L /Library/Frameworks/Python.framework/Versions/3.7/lib -lpython3.7

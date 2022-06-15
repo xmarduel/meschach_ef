@@ -3845,7 +3845,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo `pwd`; make --directory MESCHACH_SPOOLES/SWIG_INTERFACES -f makefile_swig_python_extension all";
+			shellScript = "echo `pwd`; make --directory MESCHACH_SPOOLES/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
 		};
 		2578213211CE717600293CB2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
