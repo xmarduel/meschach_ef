@@ -1,5 +1,5 @@
 # meschach_ef
-my **very** old finite element library, based on the meschach library.
+my **very** old finite element library, based on the meschach library for the linear algebra.
 
 - 1D -> lots of fe : P1,P2,P3, Hermite, Splines S2,S3,S4,S5  for periodic geometries or not
 - 2D -> P1,P2,P3
