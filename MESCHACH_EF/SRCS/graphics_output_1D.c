@@ -441,7 +441,7 @@ static void graphics1D_silo   (const char *filename, const ELT_1D *element, cons
 
    
    GEOM_1D *GeomP1 = Geom1D_getP1geom_from(element, geom);
-   VEC *SOL_P1     = get_vector_for_plotting_1D( element, geom, SOL );
+   VEC *SOL_P1     = build_vec_world_from_vec_ef_1D( element, geom, SOL );
    
    snprintf(silo_file, 64, "%s.silo", filename); silo_file[63] = '\0';
 
@@ -502,7 +502,7 @@ static void graphics1D_vtk    (const char *filename, const ELT_1D *element, cons
    snprintf(vtk_file, 64, "%s.vtk" , filename); vtk_file[63] = '\0';
 
    GeomP1 = Geom1D_getP1geom_from(element, geom);
-   SOL_P1 = get_vector_for_plotting_1D( element, geom, SOL );
+   SOL_P1 = build_vec_world_from_vec_ef_1D( element, geom, SOL );
 
    /*------ ECRITURE DU FICHIER "Solution_Approc.vtk"---(vtk)----*/
 

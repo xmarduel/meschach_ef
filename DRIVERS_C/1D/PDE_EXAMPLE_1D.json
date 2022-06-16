@@ -19,7 +19,7 @@
     # resolution -------------------------------------
 
     "PDE_RESOLUTION" : {
-        "EF" : "S4" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
+        "EF" : "H3" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
 
         "LAPLACIAN_ALGO" : {
             "METHOD": "ITERATIVE-METHOD",
@@ -148,7 +148,7 @@
          "MESHDATADEFINITION" : {
             "XMIN"   : 0.0,
             "XMAX"   : 1.0,
-            "NX"     : 20,
+            "NX"     : 10,
             "DISTRIBUTION" : "UNIFORM",
             "PERIODIC" : false  # true, false
            }

@@ -179,7 +179,7 @@ def run_test():
         },
                             
         "PDE_RESOLUTION" : {
-            "EF" : "S4" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
+            "EF" : "S2" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
                             
             "LAPLACIAN_ALGO" : {
                 "METHOD" : "ITERATIVE-METHOD",
@@ -225,7 +225,7 @@ def run_test():
             "MESHDATADEFINITION" : {
                 "XMIN"   : 0.0,
                 "XMAX"   : 1.0,
-                "NX"     : 10,
+                "NX"     : 30,
                 "DISTRIBUTION" : "UNIFORM",
                 "PERIODIC" : True
             },
@@ -365,7 +365,7 @@ def run_test():
 
     GeomP1  = Geom1D_getP1geom_from(MyElt, MyGeom)
     MESH_P1 = GEOM_1D_XSOMM_get(GeomP1)
-    SOL_P1  = get_vector_for_plotting_1D( MyElt, MyGeom, SOL)
+    SOL_P1  = build_vec_world_from_vec_ef_1D( MyElt, MyGeom, SOL)
 
     #print "SOL_P1"
     #v_foutput(sys.stdout, SOL_P1)
@@ -440,23 +440,19 @@ def run_test():
         fun1D = Fun1D_get()
         Fun1D_setFunctionPython(fun1D, sol)
 
-        NBSOMM = GEOM_1D_NBSOMM_get(MyGeom)
+        WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
+        WORLD_exact = build_vec_world_from_function1D(MyElt, MyGeom, fun1D, None, None)
 
-        SOL_exact = v_get(NBSOMM)
-        SOL_exact = build_vec_from_function1D(MyElt, MyGeom, fun1D, None, SOL_exact)
-
-        print "diff solexacte-solapprochee in EF = %le" % v_norm2( v_sub(SOL, SOL_exact, None) )
-
-        WORLD = v_get(NBSOMM)
-        print "CALC WORLD"
-        v_foutput(sys.stdout, sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), SOL, WORLD));
-
-        print "CALC"
-        v_foutput(sys.stdout, SOL)
-        print "EXACT"
-        v_foutput(sys.stdout, SOL_exact)
+        print "WORLD (EF)"
+        v_foutput(sys.stdout, WORLD)
+        print "WORLD EXACT"
+        v_foutput(sys.stdout, WORLD_exact)
+        
+        print "diff solexacte-solapprochee in EF = %le" % v_norm2( v_sub(WORLD, WORLD_exact, None) )
 
         FUN_1D_FREE(fun1D)
+        V_FREE(WORLD_exact)
+        V_FREE(WORLD)
 		  
 		  
     
@@ -475,8 +471,6 @@ def run_test():
     GEOM_1D_FREE(GeomP1)
 
     PARAMS_FREE(MyParams)
-
-    V_FREE(SOL_exact)
 
     #---------------------------------------------------------------------
 

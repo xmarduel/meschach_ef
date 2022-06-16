@@ -20,12 +20,15 @@ extern "C"
 
 /* ------------------------------------------------------------------------ */
 
-VEC* build_vec_from_function1D          (const ELT_1D *MyElt, const GEOM_1D *MyGeom, const FUN_1D *fun, const FUN_1D *dfun, VEC *vec);
-VEC* build_vec_from_function1Dtransient (const ELT_1D *MyElt, const GEOM_1D *MyGeom, const FUN_1D *fun, const FUN_1D *dfun, VEC *vec, Real tps);
+VEC* build_vec_ef_from_function1D          (const ELT_1D *MyElt, const GEOM_1D *MyGeom, const FUN_1D *fun, const FUN_1D *dfun, VEC *vec);
+VEC* build_vec_ef_from_function1Dtransient (const ELT_1D *MyElt, const GEOM_1D *MyGeom, const FUN_1D *fun, const FUN_1D *dfun, VEC *vec, Real tps);
+
+VEC* build_vec_world_from_function1D          (const ELT_1D *MyElt, const GEOM_1D *MyGeom, const FUN_1D *fun, const FUN_1D *dfun, VEC *vec);
+VEC* build_vec_world_from_function1Dtransient (const ELT_1D *MyElt, const GEOM_1D *MyGeom, const FUN_1D *fun, const FUN_1D *dfun, VEC *vec, Real tps);
 
 /* ------------------------------------------------------------------------ */
 
-VEC* get_vector_for_plotting_1D (const ELT_1D *MyElt, const GEOM_1D *MyGeom, const VEC *vec);
+VEC* build_vec_world_from_vec_ef_1D         (const ELT_1D *MyElt, const GEOM_1D *MyGeom, const VEC *vec);
 
 /* ------------------------------------------------------------------------ */
 

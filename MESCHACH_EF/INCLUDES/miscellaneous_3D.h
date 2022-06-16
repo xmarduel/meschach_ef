@@ -19,8 +19,8 @@ extern "C"
 
 /* ------------------------------------------------------------------------ */
 
-VEC *build_vec_from_function3D         (const ELT_3D *elt, const GEOM_3D *geom, const FUN_3D* fun, VEC *vec);
-VEC *build_vec_from_function3Dtransient(const ELT_3D *elt, const GEOM_3D *geom, const FUN_3D* fun, VEC *vec, Real tps);
+VEC *build_vec_ef_from_function3D         (const ELT_3D *elt, const GEOM_3D *geom, const FUN_3D* fun, VEC *vec);
+VEC *build_vec_ef_from_function3Dtransient(const ELT_3D *elt, const GEOM_3D *geom, const FUN_3D* fun, VEC *vec, Real tps);
 
 /* ------------------------------------------------------------------------ */
 

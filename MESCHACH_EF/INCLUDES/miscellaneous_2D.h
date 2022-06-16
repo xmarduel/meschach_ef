@@ -19,8 +19,8 @@ extern "C"
 
 /* ------------------------------------------------------------------------ */
 
-VEC *build_vec_from_function2D         (ELT_2D *elt, GEOM_2D *geom, FUN_2D* fun, VEC *vec);
-VEC *build_vec_from_function2Dtransient(ELT_2D *elt, GEOM_2D *geom, FUN_2D* fun, VEC *vec, Real tps);
+VEC *build_vec_ef_from_function2D         (ELT_2D *elt, GEOM_2D *geom, FUN_2D* fun, VEC *vec);
+VEC *build_vec_ef_from_function2Dtransient(ELT_2D *elt, GEOM_2D *geom, FUN_2D* fun, VEC *vec, Real tps);
 
 /* ------------------------------------------------------------------------ */
 

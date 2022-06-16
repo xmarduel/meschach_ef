@@ -186,23 +186,21 @@ int main()
     /* ----------------------- graphics output ------------------------------ */
 
     {
-        VEC            *DATA_PLOT = get_vector_for_plotting_1D(MyElt, MyGeom, SOL);
-        GEOM_1D        *GeomP1 = Geom1D_getP1geom_from(MyElt, MyGeom);
+        VEC     *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
+        GEOM_1D *GeomP1 = Geom1D_getP1geom_from(MyElt, MyGeom);
 
         graphics1D("gnuplot", MyElt, MyGeom, SOL, "SolApproch1D.dat");
         //graphics1D_gnuplot_script("SolApproch1D.dat", NULL, NULL, MyParams->resol_params.nb_steps, MyParams->misc_params.iter_file);
 
-       printf("ef res\n");
-       v_output(SOL);
+        printf("ef res\n");
+        v_output(SOL);
        
-       printf("data plot\n");
-       v_output(DATA_PLOT);
+        printf("world res\n");
+        v_output(WORLD);
        
-       //v_output(GeomP1->XSOMM);
-       
-        /*
-         * graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch");
-         */
+       /*
+        * graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch");
+        */
 
 #ifdef HAVE_VOGLE
         if (MyParams->graph_params.VOGLE == 1)
@@ -218,7 +216,7 @@ int main()
                 MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MIN,
                 MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MAX);
             graphics1D_vopl_setbox(1, 1, 1);
-            graphics1D_vopl_curvedata(1, 1, VOGLEe_COLOR_BLUE, GeomP1->XSOMM, DATA_PLOT);
+            graphics1D_vopl_curvedata(1, 1, VOGLEe_COLOR_BLUE, GeomP1->XSOMM, WORLD);
 
             graphics1D_vopl_plotcurve();
         }
@@ -239,7 +237,7 @@ int main()
                 MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MIN,
                 MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MAX);
             graphics1D_cpgplot_setbox(1, 1, 1);
-            graphics1D_cpgplot_curvedata(1, 1, PGPLOTe_COLOR_BLUE1, GeomP1->XSOMM, DATA_PLOT);
+            graphics1D_cpgplot_curvedata(1, 1, PGPLOTe_COLOR_BLUE1, GeomP1->XSOMM, WORLD);
 
             graphics1D_cpgplot_plotcurve();
         }
@@ -262,7 +260,7 @@ int main()
                 MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MIN,
                 MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MAX);
             graphics1D_libsciplot_setbox(1, 1, 1);
-            graphics1D_libsciplot_curvedata(1, 1, LIBSCIPLOTe_COLOR_RED, GeomP1->XSOMM, DATA_PLOT);
+            graphics1D_libsciplot_curvedata(1, 1, LIBSCIPLOTe_COLOR_RED, GeomP1->XSOMM, WORLD);
 
             graphics1D_libsciplot_plotcurve();
 
@@ -270,7 +268,7 @@ int main()
         }
 #endif
 
-        V_FREE(DATA_PLOT);
+        V_FREE(WORLD);
         GEOM_1D_FREE(GeomP1);
     }
 
@@ -278,29 +276,28 @@ int main()
 
     if (MyParams->exactsol_params.exact_sol[0] >= 0)
     {
-       if ( strcmp(MyElt->name_ef, "S2") == 0 || strcmp(MyElt->name_ef, "S4") == 0 )
-       {
-       }
-       else
-       {
-        VEC *vec_tmp   = v_get(SOL->dim);
-        VEC* vec_exact = v_get(SOL->dim);
-        FUN_1D *fun_exact = Fun1D_get();
-        Fun1D_setCFunction(fun_exact,  ExSol1D[MyParams->exactsol_params.exact_sol[0]]);
+       VEC *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
        
-        vec_exact = build_vec_from_function1D(MyElt, MyGeom, fun_exact, NULL, vec_exact);
+       FUN_1D *fun_exact = Fun1D_get();
+       Fun1D_setCFunction(fun_exact, ExSol1D[MyParams->exactsol_params.exact_sol[0]]);
        
-        double diff2 = v_norm2(v_sub(SOL, vec_exact, vec_tmp));
-        fprintf(stdout, "\ndiff solexacte-solapprochee = %le\n", diff2);
+       VEC* WORLD_EXACT = build_vec_world_from_function1D(MyElt, MyGeom, fun_exact, NULL, NULL);
        
-        printf("SOL WORLD\n");
-        v_foutput(stdout, sp_mv_mlt(MyGeom->EF_to_WORLD, SOL, NULL));
+       printf("SOL (EF)\n");
+       v_foutput(stdout, SOL);
        
-        printf("SOL\n");
-        v_foutput(stdout, SOL);
-        printf("EXACT\n");
-        v_foutput(stdout, vec_exact);
-       }
+       printf("WORLD\n");
+       v_foutput(stdout, WORLD);
+       printf("WORLD_EXACT\n");
+       v_foutput(stdout, WORLD_EXACT);
+       
+       double diff = v_norm2(v_sub(WORLD, WORLD_EXACT, NULL));
+       fprintf(stdout, "\ndiff solexacte-solapprochee = %le\n", diff);
+       fprintf(stdout, "\n---------------------------------------\n");
+       
+       V_FREE(WORLD);
+       V_FREE(WORLD_EXACT);
+       
     }
 
     /* --------------------------------------------------------------------- */

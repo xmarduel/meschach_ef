@@ -41,15 +41,17 @@ _mem_stat_free4
 _mem_stat_free6
 _mem_stat_free7
 
-_build_vec_from_function1D
-_build_vec_from_function2D
-_build_vec_from_function3D
+_build_vec_ef_from_function1D
+_build_vec_ef_from_function2D
+_build_vec_ef_from_function3D
 
-_build_vec_from_function1Dtransient
-_build_vec_from_function2Dtransient
-_build_vec_from_function3Dtransient
+_build_vec_ef_from_function1Dtransient
+_build_vec_ef_from_function2Dtransient
+_build_vec_ef_from_function3Dtransient
 
-_get_vector_for_plotting_1D
+_build_vec_world_from_function1D
+_build_vec_world_from_function1Dtransient
+_build_vec_world_from_vec_ef_1D
 
 _Params_get_oneparam
 _Params_get_oneparam1
@@ -296,7 +298,6 @@ _graphics_geom3D_view
 
 _graphics1D_output_fun
 _graphics1D_output_vec
-_get_vector_for_plotting_1D
 _graphics1D
 _graphics1D_fun
 

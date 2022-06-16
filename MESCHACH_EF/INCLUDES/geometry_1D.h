@@ -55,8 +55,8 @@ typedef struct GEOM_1D {
 
   SPMAT* BASEFUNC_BASICS_to_CL; /**< matrix transformation Base Functions : basic bf to cl'ed bf */
    
-  IVEC* S2_S4_REF_S_TO_DOF; /**< mapping between DOF and NODES */
-  IVEC* S2_S4_DOF_TO_REF_S; /**< mapping between NODES and DOF */
+  IVEC* SPLINES_REF_S_TO_DOF; /**< mapping between DOF and NODES */
+  IVEC* SPLINES_DOF_TO_REF_S; /**< mapping between NODES and DOF */
 
 } GEOM_1D ;
 

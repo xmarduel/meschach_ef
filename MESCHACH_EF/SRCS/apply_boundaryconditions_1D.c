@@ -18,10 +18,10 @@
 /* ----------------------------------------------------------------------------------------------------------- */
 
 static void apply_Bc1D_dirichlet_on_matrix(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, SPMAT *A);
-static void apply_Bc1D_dirichlet_on_matrix_S2_S4(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, SPMAT *A);
+static void apply_Bc1D_dirichlet_on_matrix_SPLINES(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, SPMAT *A);
 
 static void apply_Bc1D_dirichlet_on_vector(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, const SPMAT *A, VEC *RHS);
-static void apply_Bc1D_dirichlet_on_vector_S2_S4(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, const SPMAT *A, VEC *RHS);
+static void apply_Bc1D_dirichlet_on_vector_SPLINES(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, const SPMAT *A, VEC *RHS);
 
 /* ----------------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------------------------------------------- */
@@ -112,11 +112,19 @@ static void apply_Bc1D_dirichlet_on_matrix(const ELT_1D *elt, const GEOM_1D *geo
 {
    if (strcmp(elt->name_ef, "S2") == 0 )
    {
-      return apply_Bc1D_dirichlet_on_matrix_S2_S4(elt, geom, BC, A);
+      return apply_Bc1D_dirichlet_on_matrix_SPLINES(elt, geom, BC, A);
+   }
+   if (strcmp(elt->name_ef, "S3") == 0 )
+   {
+      return apply_Bc1D_dirichlet_on_matrix_SPLINES(elt, geom, BC, A);
    }
    if (strcmp(elt->name_ef, "S4") == 0 )
    {
-      return apply_Bc1D_dirichlet_on_matrix_S2_S4(elt, geom, BC, A);
+      return apply_Bc1D_dirichlet_on_matrix_SPLINES(elt, geom, BC, A);
+   }
+   if (strcmp(elt->name_ef, "S5") == 0 )
+   {
+      return apply_Bc1D_dirichlet_on_matrix_SPLINES(elt, geom, BC, A);
    }
    
    int i,idx,idx2;
@@ -146,14 +154,14 @@ static void apply_Bc1D_dirichlet_on_matrix(const ELT_1D *elt, const GEOM_1D *geo
    }
 }
 
-static void apply_Bc1D_dirichlet_on_matrix_S2_S4(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, SPMAT *A)
+static void apply_Bc1D_dirichlet_on_matrix_SPLINES(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, SPMAT *A)
 {
    int i,idx,idx2;
    SPROW *r;
    
    for(i=0; i<A->m; i++)
    {
-      int node_i = geom->S2_S4_DOF_TO_REF_S->ive[i];
+      int node_i = geom->SPLINES_DOF_TO_REF_S->ive[i];
       
       if ( (node_i > -1) && (geom->REF_S->ive[node_i] > 0) && (BC_1De_DIRICHLET == Bc1D_getBcType(BC, AXEe_X, geom->REF_S->ive[node_i])) )
       {
@@ -168,7 +176,7 @@ static void apply_Bc1D_dirichlet_on_matrix_S2_S4(const ELT_1D *elt, const GEOM_1
          {
             idx2 = r->elt[idx].col ;
             
-            int node_idx2 = geom->S2_S4_DOF_TO_REF_S->ive[idx2];
+            int node_idx2 = geom->SPLINES_DOF_TO_REF_S->ive[idx2];
             
             if ( (node_idx2 > -1) && (geom->REF_S->ive[node_idx2] > 0) && (BC_1De_DIRICHLET == Bc1D_getBcType(BC, AXEe_X, geom->REF_S->ive[node_idx2])) )
             {
@@ -186,11 +194,19 @@ static void apply_Bc1D_dirichlet_on_vector(const ELT_1D *elt, const GEOM_1D *geo
 {
    if (strcmp(elt->name_ef, "S2") == 0 )
    {
-      return apply_Bc1D_dirichlet_on_vector_S2_S4(elt, geom, BC, A, RHS);
+      return apply_Bc1D_dirichlet_on_vector_SPLINES(elt, geom, BC, A, RHS);
+   }
+   if (strcmp(elt->name_ef, "S3") == 0 )
+   {
+      return apply_Bc1D_dirichlet_on_vector_SPLINES(elt, geom, BC, A, RHS);
    }
    if (strcmp(elt->name_ef, "S4") == 0 )
    {
-      return apply_Bc1D_dirichlet_on_vector_S2_S4(elt, geom, BC, A, RHS);
+      return apply_Bc1D_dirichlet_on_vector_SPLINES(elt, geom, BC, A, RHS);
+   }
+   if (strcmp(elt->name_ef, "S5") == 0 )
+   {
+      return apply_Bc1D_dirichlet_on_vector_SPLINES(elt, geom, BC, A, RHS);
    }
    
    int i,idx,idx2;
@@ -223,18 +239,20 @@ static void apply_Bc1D_dirichlet_on_vector(const ELT_1D *elt, const GEOM_1D *geo
    }
 }
 
-static void apply_Bc1D_dirichlet_on_vector_S2_S4(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, const SPMAT *A, VEC *RHS)
+static void apply_Bc1D_dirichlet_on_vector_SPLINES(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, const SPMAT *A, VEC *RHS)
 {
    // NX segment -> NBSOMM = NX + 1
    //            -> NB_DOF = NX + 2 (S2)
+   //            -> NB_DOF = NX + 3 (S3)
    //            -> NB_DOF = NX + 4 (S4)
+   //            -> NB_DOF = NX + 5 (S5)
    
    int i,idx,idx2;
    SPROW *r;
    
    for (i=0; i<geom->NB_DOF; i++)
    {
-      int node_i = geom->S2_S4_DOF_TO_REF_S->ive[i];
+      int node_i = geom->SPLINES_DOF_TO_REF_S->ive[i];
       
       if ( (node_i > -1) && (geom->REF_S->ive[node_i] > 0) && (BC_1De_DIRICHLET == Bc1D_getBcType(BC, AXEe_X, geom->REF_S->ive[node_i])) )
       {
@@ -250,7 +268,7 @@ static void apply_Bc1D_dirichlet_on_vector_S2_S4(const ELT_1D *elt, const GEOM_1
          {
             idx2 = r->elt[idx].col ;
             
-            int node_idx2 = geom->S2_S4_DOF_TO_REF_S->ive[idx2];
+            int node_idx2 = geom->SPLINES_DOF_TO_REF_S->ive[idx2];
             
             if ( node_idx2 >= 0 && (geom->REF_S->ive[node_idx2] > 0) && (BC_1De_DIRICHLET == Bc1D_getBcType(BC, AXEe_X, geom->REF_S->ive[node_idx2])) )
             {

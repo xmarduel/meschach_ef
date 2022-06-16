@@ -6,16 +6,16 @@
 /*--------------------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------*/
 
-VEC* build_vec_from_function3D(const ELT_3D *MyElt, const GEOM_3D *MyGeom, const FUN_3D *FUN, VEC* vec)
+VEC* build_vec_ef_from_function3D(const ELT_3D *MyElt, const GEOM_3D *MyGeom, const FUN_3D *FUN, VEC* vec)
 {
    Real diff = 0.0;
    int s;
 
    /* check */
-   if ( MyElt      == ELT_3D_NULL   ) error(E_NULL, "build_vec_from_function");
-   if ( MyGeom     == GEOM_3D_NULL  ) error(E_NULL, "build_vec_from_function");
-   if ( FUN        == FUN_3D_NULL   ) error(E_NULL, "build_vec_from_function");
-   if ( vec        == VNULL         ) error(E_NULL, "build_vec_from_function");
+   if ( MyElt      == ELT_3D_NULL   ) error(E_NULL, "build_vec_ef_from_function3D");
+   if ( MyGeom     == GEOM_3D_NULL  ) error(E_NULL, "build_vec_ef_from_function3D");
+   if ( FUN        == FUN_3D_NULL   ) error(E_NULL, "build_vec_ef_from_function3D");
+   if ( vec        == VNULL         ) error(E_NULL, "build_vec_ef_from_function3D");
 
 
    for (s=0; s<MyGeom->NBSOMM ; s++)
@@ -31,16 +31,16 @@ VEC* build_vec_from_function3D(const ELT_3D *MyElt, const GEOM_3D *MyGeom, const
 /*--------------------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------*/
 
-VEC* build_vec_from_function3Dtransient(const ELT_3D *MyElt, const GEOM_3D *MyGeom, const FUN_3D *FUN, VEC* vec, Real tps)
+VEC* build_vec_ef_from_function3Dtransient(const ELT_3D *MyElt, const GEOM_3D *MyGeom, const FUN_3D *FUN, VEC* vec, Real tps)
 {
    Real diff = 0.0;
    int s;
 
    /* check */
-   if ( MyElt      == ELT_3D_NULL   ) error(E_NULL, "build_vec_from_function");
-   if ( MyGeom     == GEOM_3D_NULL  ) error(E_NULL, "build_vec_from_function");
-   if ( FUN        == FUN_3D_NULL   ) error(E_NULL, "build_vec_from_function");
-   if ( vec        == VNULL         ) error(E_NULL, "build_vec_from_function");
+   if ( MyElt      == ELT_3D_NULL   ) error(E_NULL, "build_vec_ef_from_function3Dtransient");
+   if ( MyGeom     == GEOM_3D_NULL  ) error(E_NULL, "build_vec_ef_from_function3Dtransient");
+   if ( FUN        == FUN_3D_NULL   ) error(E_NULL, "build_vec_ef_from_function3Dtransient");
+   if ( vec        == VNULL         ) error(E_NULL, "build_vec_ef_from_function3Dtransient");
 
 
    for (s=0; s<MyGeom->NBSOMM ; s++)

@@ -708,17 +708,13 @@ static void elt1D_get_S3(ELT_1D *elt)
    for (i=0; i<3; i++)
    for (j=0; j<3; j++)
    {
-      elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S3_a[i][j];
-      elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S3_b[i][j];
-      elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S3_c[i][j];
+      elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S3[i][j];
    }
    elt->MAT_FuncBasis_CL_R = m_get(3,3);
    for (i=0; i<3; i++)
    for (j=0; j<3; j++)
    {
-      elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S3_a[2-i][2-j];
-      elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S3_b[2-i][2-j];
-      elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S3_c[2-i][2-j];
+      elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S3[2-i][2-j];
    }
 }
 
@@ -941,17 +937,13 @@ static void elt1D_get_S5(ELT_1D *elt)
    for (i=0; i<5; i++)
    for (j=0; j<5; j++)
    {
-      elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S5_a[i][j];
-      elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S5_b[i][j];
-      elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S5_c[i][j];
+      elt->MAT_FuncBasis_CL_L->me[i][j] = MAT_PermBasis_S5[i][j];
    }
    elt->MAT_FuncBasis_CL_R = m_get(5,5);
    for (i=0; i<5; i++)
    for (j=0; j<5; j++)
    {
-      elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S5_a[4-i][4-j];
-      elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S5_b[4-i][4-j];
-      elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S5_c[4-i][4-j];
+      elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S5[4-i][4-j];
    }
 }
 

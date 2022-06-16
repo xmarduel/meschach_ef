@@ -11,11 +11,15 @@
 
 /* ------------------------------------------------------------------------ */
 
-VEC* build_vec_from_function1D          (const ELT_1D *MyElt, const GEOM_1D *MyGeom, FUN_1D *fun, FUN_1D *dfun, VEC *vec);
-VEC* build_vec_from_function1Dtransient (const ELT_1D *MyElt, const GEOM_1D *MyGeom, FUN_1D *fun, FUN_1D *dfun, VEC *vec, Real tps);
+VEC* build_vec_ef_from_function1D          (const ELT_1D *MyElt, const GEOM_1D *MyGeom, FUN_1D *fun, FUN_1D *dfun, VEC *vec);
+VEC* build_vec_ef_from_function1Dtransient (const ELT_1D *MyElt, const GEOM_1D *MyGeom, FUN_1D *fun, FUN_1D *dfun, VEC *vec, Real tps);
+
+VEC* build_vec_world_from_function1D          (const ELT_1D *MyElt, const GEOM_1D *MyGeom, FUN_1D *fun, FUN_1D *dfun, VEC *vec);
+VEC* build_vec_world_from_function1Dtransient (const ELT_1D *MyElt, const GEOM_1D *MyGeom, FUN_1D *fun, FUN_1D *dfun, VEC *vec, Real tps);
+
 /* ------------------------------------------------------------------------ */
 
-VEC* get_vector_for_plotting_1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom, VEC *vec);
+VEC* build_vec_world_from_vec_ef_1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom, VEC *vec);
 
 /* ------------------------------------------------------------------------ */
 
@@ -27,8 +31,8 @@ VEC* get_vector_for_plotting_1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom, VEC 
 
 /* ------------------------------------------------------------------------ */
 
-VEC* build_vec_from_function2D          (const ELT_2D *MyElt, const GEOM_2D *MyGeom, FUN_2D* fun, VEC *vec);
-VEC* build_vec_from_function2Dtransient (const ELT_2D *MyElt, const GEOM_2D *MyGeom, FUN_2D* fun, VEC *vec, Real tps);
+VEC* build_vec_ef_from_function2D          (const ELT_2D *MyElt, const GEOM_2D *MyGeom, FUN_2D* fun, VEC *vec);
+VEC* build_vec_ef_from_function2Dtransient (const ELT_2D *MyElt, const GEOM_2D *MyGeom, FUN_2D* fun, VEC *vec, Real tps);
 
 /* ------------------------------------------------------------------------ */
 
@@ -40,8 +44,8 @@ VEC* build_vec_from_function2Dtransient (const ELT_2D *MyElt, const GEOM_2D *MyG
 
 /* ------------------------------------------------------------------------ */
 
-VEC* build_vec_from_function3D         (ELT_3D *elt, GEOM_3D *geom, FUN_3D* fun, VEC *vec);
-VEC* build_vec_from_function3Dtransient(ELT_3D *elt, GEOM_3D *geom, FUN_3D* fun, VEC *vec, Real tps);
+VEC* build_vec_ef_from_function3D         (ELT_3D *elt, GEOM_3D *geom, FUN_3D* fun, VEC *vec);
+VEC* build_vec_ef_from_function3Dtransient(ELT_3D *elt, GEOM_3D *geom, FUN_3D* fun, VEC *vec, Real tps);
 
 /* ------------------------------------------------------------------------ */
 
