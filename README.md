@@ -7,7 +7,7 @@ my **very** old finite element library, based on the meschach library for the li
 
 with triangles/tetrahedras only
 
-Very nice python wrapper (2.7)
+Very nice python wrapper (2.7) : functions can be defined in python and plugged into the c solvers.
 
 
 As Xcode project (10.1) for macOS 10.14 - maybe you have to adapt the project in order to compile it locally
