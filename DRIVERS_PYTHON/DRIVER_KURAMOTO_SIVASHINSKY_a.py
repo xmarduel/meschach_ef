@@ -294,7 +294,7 @@ spCHfactor(LLT)
 #
 # init
 U_o = v_get(NBSOMM)
-U_o = build_vec_from_function1D( MyElt, MyGeom, MyIC, MyDIC, U_o )
+U_o = build_vec_ef_from_function1D( MyElt, MyGeom, MyIC, MyDIC, U_o )
 #
 U_nm2 = v_get(NBSOMM)
 U_nm1 = v_get(NBSOMM)

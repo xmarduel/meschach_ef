@@ -330,7 +330,7 @@ spCHfactor(LLT)
 #
 # initial solution
 U_o = v_get(NBSOMM)
-U_o = build_vec_from_function1Dtransient( MyElt, MyGeom, MyIC, MyDIC, U_o, 0.0)
+U_o = build_vec_ef_from_function1Dtransient( MyElt, MyGeom, MyIC, MyDIC, U_o, 0.0)
 #
 #
 U_nm2 = v_get(NBSOMM)

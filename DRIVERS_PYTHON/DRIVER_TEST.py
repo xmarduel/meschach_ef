@@ -151,7 +151,7 @@ MASS   = assemblage1D_matrix_Mass (MyElt, MyGeom, MASS);
 
 # initial solution
 U_o = v_get(NBSOMM)
-U_o = build_vec_from_function1D( MyElt, MyGeom, MyIC, MyDIC, U_o )
+U_o = build_vec_ef_from_function1D( MyElt, MyGeom, MyIC, MyDIC, U_o )
 
 RHS_FUN     = v_get(NBSOMM)
 RHS_UUx     = v_get(NBSOMM)
