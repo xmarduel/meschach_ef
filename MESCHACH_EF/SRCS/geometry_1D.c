@@ -16,7 +16,6 @@
 #include "MESCHACH_EF/INCLUDES/all_params.h"
 #include "MESCHACH_EF/INCLUDES/finite_elements.h"
 #include "MESCHACH_EF/INCLUDES/geometry.h"
-#include "MESCHACH_EF/INCLUDES/splines_1D.h"
 
 #include "MESCHACH_EF/INCLUDES/all_params_json_utils.h"
 
@@ -879,11 +878,6 @@ static void Geom1D_get_S2geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    Geom1D_get_S2geom_init_matrix_ef2world(geom, elt, H1);
 
-   /* if mesh non-uniform */
-   /*
-    ((ELT_1D*)elt)->splines_def = Splines1D_get (elt, geom, H1);
-    */
-
    /* end */
    return;
 }
@@ -957,11 +951,6 @@ static void Geom1D_get_S3geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /* initialisation de la matrice EF_to_WORLD           */
    /*----------------------------------------------------*/
    Geom1D_get_S3geom_init_matrix_ef2world(geom, elt, H1);
-
-   /* if mesh non-uniform */
-   /*
-    ((ELT_1D*)elt)->splines_def = Splines1D_get (elt, geom, H1);
-   */
    
    /* end */
    return;
@@ -1040,11 +1029,6 @@ static void Geom1D_get_S4geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /*----------------------------------------------------*/
    Geom1D_get_S4geom_init_matrix_ef2world(geom, elt, H1);
    
-   /* if mesh non-uniform */
-   /*
-    ((ELT_1D*)elt)->splines_def = Splines1D_get (elt, geom, H1);
-    */
-   
    /* end */
    return;
 }
@@ -1118,11 +1102,7 @@ static void Geom1D_get_S5geom_from_segments(GEOM_1D *geom, const ELT_1D *elt, co
    /* initialisation de la matrice EF_to_WORLD           */
    /*----------------------------------------------------*/
    Geom1D_get_S5geom_init_matrix_ef2world(geom, elt, H1);
-
-   /* if mesh non-uniform */
-   /*
-    ((ELT_1D*)elt)->splines_def = Splines1D_get (elt, geom, H1);
-   */
+   
    
    /* end */
    return;
@@ -2028,8 +2008,8 @@ static void     Geom1D_get_S2geom_init_matrix_ef2world(GEOM_1D* geom, const ELT_
       for (i=0; i<P; i++)
       for (j=0; j<P; j++)
       {
-         sp_set_val(geom->BASEFUNC_BASICS_to_CL,          i,         j, elt->MAT_FuncBasis_CL_L->me[i][j]);
-         sp_set_val(geom->BASEFUNC_BASICS_to_CL, NB_DOF-P+i,NB_DOF-P+j, elt->MAT_FuncBasis_CL_R->me[i][j]);
+         sp_set_val(geom->BASEFUNC_BASICS_to_CL,          i,          j, elt->MAT_FuncBasis_CL_L->me[i][j]);
+         sp_set_val(geom->BASEFUNC_BASICS_to_CL, NB_DOF-P+i, NB_DOF-P+j, elt->MAT_FuncBasis_CL_R->me[i][j]);
       }
       /* voila */
 
