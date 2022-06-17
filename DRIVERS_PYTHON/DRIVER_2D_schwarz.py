@@ -343,7 +343,7 @@ if   PROBLEM == "HELMHOLZ" :
 
     print "DIM 1=", MAT_m_get(eigen_vectors)
     print "DIM 2=", MAT_n_get(eigen_vectors)
-    v_foutput(stdout, eigen_values)
+    v_foutput(sys.stdout, eigen_values)
     graphics2D_set("gnuplot" , MyElt , MyGeom , MAT_n_get(eigen_vectors), eigen_vectors, "SolEigen" )
     graphics2D_set("silo"    , MyElt , MyGeom , MAT_n_get(eigen_vectors), eigen_vectors, "SolEigen" )
 
@@ -430,15 +430,15 @@ PARAMS_FREE(MyParams)
 
 #---------------------------------------------------------------------
 
-#mem_info_file(stdout,0)
+#mem_info_file(sys.stdout,0)
 # 
-#mem_info_file(stdout,MY_LIST1)
-#mem_info_file(stdout,MY_LIST2) 
-#mem_info_file(stdout,MY_LIST3) 
-#mem_info_file(stdout,MY_LIST4) 
-#mem_info_file(stdout,MY_LIST5) 
-#mem_info_file(stdout,MY_LIST6)
-#mem_info_file(stdout,MY_LIST7) 
+#mem_info_file(sys.stdout,MY_LIST1)
+#mem_info_file(sys.stdout,MY_LIST2) 
+#mem_info_file(sys.stdout,MY_LIST3) 
+#mem_info_file(sys.stdout,MY_LIST4) 
+#mem_info_file(sys.stdout,MY_LIST5) 
+#mem_info_file(sys.stdout,MY_LIST6)
+#mem_info_file(sys.stdout,MY_LIST7) 
 
 fp2.close()
 

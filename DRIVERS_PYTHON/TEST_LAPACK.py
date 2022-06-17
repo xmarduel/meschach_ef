@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 #
 #
-from sys import *
+import sys
 from math import *
 #
 from libmeschach         import *
@@ -60,20 +60,20 @@ for i in range(0,N-1):
 for i in range(0,N-1):
     sp_set_val(A,i+1,i, 3)  # 2 en bas
 #
-sp_foutput(stdout,A)
+sp_foutput(sys.stdout,A)
 #
 B1 = sp2lowerband(A)
-b_foutput(stdout,B1)
+b_foutput(sys.stdout,B1)
 #
 B2 = sp2band(A)
-b_foutput(stdout,B2)
+b_foutput(sys.stdout,B2)
 #
 #
 M1 = spmat2lapacklowerbanded(A)
 M2 = spmat2lapackbanded     (A)
 #
-m_foutput(stdout,M1)
-m_foutput(stdout,M2)
+m_foutput(sys.stdout,M1)
+m_foutput(sys.stdout,M2)
 
 
 
@@ -81,16 +81,16 @@ m_foutput(stdout,M2)
 v1 = v_ones(v1)
 v2 = sp_mv_mlt(A,v1,v2)
 #
-#v_foutput(stdout,v1)
-v_foutput(stdout,v2)
+#v_foutput(sys.stdout,v1)
+v_foutput(sys.stdout,v2)
 #
 v2 = v_ones(v2)
 v2 = Ax_lapackbanded(A,v1,v2);
-v_foutput(stdout,v2)
+v_foutput(sys.stdout,v2)
 #
 v2 = v_zero(v2)
 v2 = Ax_lapacklowerbanded(A,v1,v2);
-v_foutput(stdout,v2)
+v_foutput(sys.stdout,v2)
 #
 #
 # free memory
@@ -101,15 +101,15 @@ V_FREE(v2);
 #
 #---------------------------------------------------------------------
 #
-#mem_info_file(stdout,0);
+#mem_info_file(sys.stdout,0);
 #
-#mem_info_file(stdout,MY_LIST1);
-#mem_info_file(stdout,MY_LIST2); 
-#mem_info_file(stdout,MY_LIST3); 
-#mem_info_file(stdout,MY_LIST4); 
-#mem_info_file(stdout,MY_LIST5); 
-#mem_info_file(stdout,MY_LIST6);
-#mem_info_file(stdout,MY_LIST7); 
+#mem_info_file(sys.stdout,MY_LIST1);
+#mem_info_file(sys.stdout,MY_LIST2); 
+#mem_info_file(sys.stdout,MY_LIST3); 
+#mem_info_file(sys.stdout,MY_LIST4); 
+#mem_info_file(sys.stdout,MY_LIST5); 
+#mem_info_file(sys.stdout,MY_LIST6);
+#mem_info_file(sys.stdout,MY_LIST7); 
 #
 #
 #----------------------------------------------------------------------

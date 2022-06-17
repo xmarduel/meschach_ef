@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 #
 #
-from sys import *
+import sys
 from math import *
 #
 from meschach import *
@@ -409,7 +409,7 @@ if (1):
     diff = diff_vec_function3D( MyElt, MyGeom, SOL, fun3D, SOL )
     string_res = "diff solexacte-solapprochee = %le" % diff
    
-    #v_foutput(stdout, SOL)
+    #v_foutput(sys.stdout, SOL)
     print string_res
     
     FUN_3D_FREE(fun3D)
@@ -436,15 +436,15 @@ PARAMS_FREE(MyParams)
 #   
 #---------------------------------------------------------------------
 #
-#mem_info_file(stdout,0)
+#mem_info_file(sys.stdout,0)
 #   
-#mem_info_file(stdout,MY_LIST1)
-#mem_info_file(stdout,MY_LIST2) 
-#mem_info_file(stdout,MY_LIST3) 
-#mem_info_file(stdout,MY_LIST4) 
-#mem_info_file(stdout,MY_LIST5) 
-#mem_info_file(stdout,MY_LIST6)
-#mem_info_file(stdout,MY_LIST7) 
+#mem_info_file(sys.stdout,MY_LIST1)
+#mem_info_file(sys.stdout,MY_LIST2) 
+#mem_info_file(sys.stdout,MY_LIST3) 
+#mem_info_file(sys.stdout,MY_LIST4) 
+#mem_info_file(sys.stdout,MY_LIST5) 
+#mem_info_file(sys.stdout,MY_LIST6)
+#mem_info_file(sys.stdout,MY_LIST7) 
 #
 fp2.close()
 #

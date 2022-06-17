@@ -526,7 +526,7 @@ def run_test():
 
         print "DIM 1=", MAT_m_get(eigen_vectors)
         print "DIM 2=", MAT_n_get(eigen_vectors)
-        v_foutput(stdout, eigen_values)
+        v_foutput(sys.stdout, eigen_values)
         graphics2D_set("gnuplot" , MyElt , MyGeom , MAT_n_get(eigen_vectors), eigen_vectors, "SolEigen" )
         graphics2D_set("silo"    , MyElt , MyGeom , MAT_n_get(eigen_vectors), eigen_vectors, "SolEigen" )
 

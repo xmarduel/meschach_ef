@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 #
-from sys import *
+import sys
 from math import *
 #
 from meschach import *
@@ -162,7 +162,7 @@ graphics_geom2D_view("X11", MyGeom, "dummy")
 #
 Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)  
 #
-#Geom2D_foutput(stdout, MyGeom)  
+#Geom2D_foutput(sys.stdout, MyGeom)  
 #
 #--------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------
@@ -226,8 +226,8 @@ NBSOMM = GEOM_2D_NBSOMM_get(MyGeom)
 #
 SOL = v_get(NBSOMM)
 #
-v_foutput(stdout, eigen_re)
-v_foutput(stdout, eigen_im)
+v_foutput(sys.stdout, eigen_re)
+v_foutput(sys.stdout, eigen_im)
 #
 for k in range(NBSOMM):
 #
@@ -263,15 +263,15 @@ PARAMS_FREE(MyParams)
 #   
 #---------------------------------------------------------------------
 #
-mem_info_file(stdout,0)
+mem_info_file(sys.stdout,0)
 #   
-#mem_info_file(stdout,MY_LIST1)
-#mem_info_file(stdout,MY_LIST2) 
-#mem_info_file(stdout,MY_LIST3) 
-#mem_info_file(stdout,MY_LIST4) 
-#mem_info_file(stdout,MY_LIST5) 
-#mem_info_file(stdout,MY_LIST6)
-#mem_info_file(stdout,MY_LIST7) 
+#mem_info_file(sys.stdout,MY_LIST1)
+#mem_info_file(sys.stdout,MY_LIST2) 
+#mem_info_file(sys.stdout,MY_LIST3) 
+#mem_info_file(sys.stdout,MY_LIST4) 
+#mem_info_file(sys.stdout,MY_LIST5) 
+#mem_info_file(sys.stdout,MY_LIST6)
+#mem_info_file(sys.stdout,MY_LIST7) 
 #
 fp2.close()
 #

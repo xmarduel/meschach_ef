@@ -551,10 +551,10 @@ def run_test():
         if ( (itstat > 0) and (n % itstat) == 0 ):
 
             diff = diff_vec_function1Dtransient( MyElt, MyGeom, U_nm1, fun1Dex, 0.0, RHS )
-            print "\ntime = 0.0 -> diff solexacte-solapprochee = ", diff*sqrt(DX)
+            print("\ntime = 0.0 -> diff solexacte-solapprochee = ", diff*sqrt(DX))
 
             diff = diff_vec_function1Dtransient( MyElt, MyGeom, U_n, fun1Dex, n*DT, RHS )
-            print "time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*sqrt(DX)
+            print("time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*sqrt(DX))
 
         #----------------------- graphics interativ -------------------------
         
@@ -733,7 +733,7 @@ def run_test():
         if ( (itstat > 0) and (n % itstat) == 0 ):
 
             diff = diff_vec_function1Dtransient( MyElt, MyGeom, U_n, fun1Dex, n*DT, RHS )
-            print "time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*sqrt(DX)
+            print("time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*sqrt(DX))
         #
         #----------------------- graphics interativ -------------------------
         #
@@ -817,7 +817,7 @@ def run_test():
 
     atime_end = time.time()
 
-    print ">>>>>>> TOTAL TIME = %d" % (atime_end - atime_start)
+    print(">>>>>>> TOTAL TIME = %d" % (atime_end - atime_start))
 
 
     ELT_1D_FREE(MyElt)
