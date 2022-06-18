@@ -72,7 +72,7 @@ static char * graphics3D_script_vtk(const char* filename)
    /* Script python */
    fprintf(fp, "#!/usr/bin/env python\n");
    fprintf(fp, "#\n");
-   fprintf(fp, "# File automatically generated - vtk version 6.1\n");
+   fprintf(fp, "# File automatically generated - vtk version 4.2\n");
    fprintf(fp, "# date : %s", get_date() );
    fprintf(fp, "#\n");
    fprintf(fp, "import vtk\n");
@@ -644,7 +644,7 @@ static char * graphics3D_stokes_script_vtk(const char* filename)
    /* Script python */
    fprintf(fp, "#! /usr/bin/env python\n");
    fprintf(fp, "# \n");
-   fprintf(fp, "# File automatically generated - vtk version : 6.1\n");
+   fprintf(fp, "# File automatically generated - vtk version : 4.2\n");
    fprintf(fp, "# date : %s", get_date() );
    fprintf(fp, "#\n");
    fprintf(fp, "import vtk\n");

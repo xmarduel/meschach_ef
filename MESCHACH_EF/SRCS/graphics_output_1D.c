@@ -556,7 +556,7 @@ static char * graphics1D_vtk_script(const char* filename, const VEC  *SOL)
    /* Script python */
    fprintf(fp, "#!/usr/bin/env pythonw\n");
    fprintf(fp, "#\n");
-   fprintf(fp, "# File automatically generated - vtk version : 6.1\n");
+   fprintf(fp, "# File automatically generated - vtk version : 4.2\n");
    fprintf(fp, "# date : %s", get_date() );
    fprintf(fp, "\n");
    fprintf(fp, "import vtk \n");

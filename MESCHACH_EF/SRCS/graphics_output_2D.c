@@ -716,7 +716,7 @@ static char * graphics2D_script_vtk(const char* filename)
    /* Script python */
    fprintf(fp, "#!/usr/bin/env python\n");
    fprintf(fp, "#\n");
-   fprintf(fp, "# File automatically generated - vtk version : 6.1\n");
+   fprintf(fp, "# File automatically generated - vtk version : 4.2\n");
    fprintf(fp, "# date : %s", get_date() );
    fprintf(fp, "#\n");
    fprintf(fp, "import vtk\n");
@@ -1134,7 +1134,7 @@ static char * graphics2D_stokes_script_vtk(const char* filename)
    /* Script python */
    fprintf(fp, "#! /usr/bin/env python\n");
    fprintf(fp, "# \n");
-   fprintf(fp, "# File automatically generated - vtk version : 6.1\n");
+   fprintf(fp, "# File automatically generated - vtk version : 4.2\n");
    fprintf(fp, "# date : %s", get_date() );
    fprintf(fp, "#\n");
    fprintf(fp, "import vtk\n");
@@ -1382,7 +1382,7 @@ static void graphics2D_vtk_1var(const char *filename, const GEOM_2D *geom, const
    
    FILE *fp = fopen(filename, "w");
    /* File VTK for u or v */
-   fprintf(fp, "# vtk DataFile Version 5.0 \n");
+   fprintf(fp, "# vtk DataFile Version 4.2 \n");
    fprintf(fp, "Solution PDE problem \n");
    fprintf(fp, "\n");
    fprintf(fp, "ASCII \n");
@@ -1472,7 +1472,7 @@ static void graphics2D_vtk_2var(const char *filename, const GEOM_2D *geom, const
 
    FILE *fp = fopen(filename, "w");
    /* File VTK for uv */
-   fprintf(fp, "# vtk DataFile Version 5.0 \n");
+   fprintf(fp, "# vtk DataFile Version 4.2 \n");
    fprintf(fp, "Solution PDE problem \n");
    fprintf(fp, "\n");
    fprintf(fp, "ASCII \n");
