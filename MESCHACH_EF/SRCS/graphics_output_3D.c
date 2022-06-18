@@ -158,7 +158,7 @@ static void graphics3D_vtk(const char *filename, const ELT_3D *element, const GE
    if ( element   == NULL ) error(E_NULL, "graphics3D_vtk");
    if ( geom      == NULL ) error(E_NULL, "graphics3D_vtk");
    if ( SOL       == NULL ) error(E_NULL, "graphics3D_vtk");
-   if ( filename == NULL ) error(E_NULL, "graphics3D_vtk");
+   if ( filename  == NULL ) error(E_NULL, "graphics3D_vtk");
 
    snprintf(vtk_file, 64, "%s.vtk", filename); vtk_file[63]   = '\0';
    

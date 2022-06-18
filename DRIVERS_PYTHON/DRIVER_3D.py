@@ -142,14 +142,10 @@ Adv3D_setFunctionPython(MyAdvFun, 0, AXEe_X, AXEe_X, AXEe_Y, source) # ref_e=0, 
 Adv3D_setFunctionPython(MyAdvFun, 0, AXEe_X, AXEe_X, AXEe_Z, source) # ref_e=0, eq1,unknown1,dz
 
 #Rhs3D_setCFunction(MyRhsFun, 0, AXEe_X, Src3D_08) # ref_e=0, axe=1 #Phi3D_08, Src3D_08
-#-------------------------------------------------------------------   
-
-fp2 = open("OUTPUT.txt", "w")
+#-------------------------------------------------------------------
 
 MyParams = Params_get()
 
-#--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "input_output_files","fp2", fp2)
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "main_problem","NULL", "LAPLACIAN" ) # "LAPLACIAN" "STOKES" "NAVIER-STOKES" "CONVECTION-DIFFUSION"
 #--------------------------------------------------------------------------------------
@@ -160,9 +156,9 @@ Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" 
 
 #Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube" )  #  Mesh File ("cube3D_P1_v6.gmsh"  "cube3D_P1.cube" )
 #Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v6.gmsh" )  #  Mesh File ("cube3D_P1_v6.gmsh")
-Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v7.gmsh" )  #  Mesh File ("cube3D_P1_v6.gmsh") 
+Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v7.gmsh" )  #  Mesh File ("cube3D_P1_v6.gmsh")
 #Params_set_oneparam(MyParams, "geometry_params","meshtype", "cube" )
-Params_set_oneparam(MyParams, "geometry_params","meshtype", "gmsh" )  #  
+Params_set_oneparam(MyParams, "geometry_params","meshtype", "gmsh" )  #
 Params_set_oneparam(MyParams, "geometry_params","meshname", "MESH_10" )  #  
 
 Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     0) # GNUPLOT
@@ -490,7 +486,7 @@ if has_exact_sol == True :
                      
     FUN_3D_FREE(fun3D)
 
-    graphics3D( "vtk",  MyElt , MyGeom , SOL , "Diff_Approch3D")
+    graphics3D( "vtk",  MyElt , MyGeom , SOL_exact , "SolExact3D")
 
   
 # free memory
@@ -521,7 +517,5 @@ ELT_3D_FREE(elt_P2)
 #mem_info_file(stdout, MY_LIST5)
 #mem_info_file(stdout, MY_LIST6)
 #mem_info_file(stdout, MY_LIST7)
-
-fp2.close()
 
 #----------------------------------------------------------------------
