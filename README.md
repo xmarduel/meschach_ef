@@ -13,6 +13,8 @@ with triangles/tetrahedras only.
 - lots of graphics possibilities (1D, 2D: interactiv with xt window), 1D, 2D, 3D: vtk, silo etc.
 - Input parameters in JSON format (json schema for the structure od the parameters - see the demos).
 
+Hopefully a framework with which beginners can learn how to solve FE problems.
+
 As Xcode project (10.1) for macOS 10.14 - maybe you have to adapt the project in order to compile it locally.
 
 External libs to compile separately.
