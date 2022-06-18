@@ -272,7 +272,7 @@ DT      = Params_get_oneparam(MyParams, "time_params", "DT") #  0.0100
 TPS_FIN = Params_get_oneparam(MyParams, "time_params", "TPS_FIN") # 50.000000 
 
 NBITER = int( TPS_FIN / DT )
-print "NBITER = ",NBITER
+print("NBITER = ",NBITER)
 
 
 sp_zero(A)
@@ -484,10 +484,10 @@ for n in range(1,2):
         diff = 0.0
        
         diff = diff_vec_function1Dtransient( MyElt, MyGeom, U_nm1, fun1Dex, 0.0, RHS )
-        print "\ntime = 0.0  --> diff solexacte-solapprochee = ", diff*sqrt(DX)
+        print("\ntime = 0.0  --> diff solexacte-solapprochee = ", diff*sqrt(DX))
 
         diff = diff_vec_function1Dtransient( MyElt, MyGeom, U_n, fun1Dex, n*DT, RHS )
-        print "time = " , n*DT , " --> diff solexacte-solapprochee = " , diff*sqrt(DX)
+        print("time = " , n*DT , " --> diff solexacte-solapprochee = " , diff*sqrt(DX))
     #
     #----------------------- graphics interativ -------------------------
     
@@ -623,7 +623,7 @@ for n in range(2,NBITER+1):
 
         diff = 0
         diff = diff_vec_function1Dtransient( MyElt, MyGeom, U_n, fun1Dex, n*DT, RHS )
-        print "time = " , n*DT , " --> diff solexacte-solapprochee = " , diff*sqrt(DX)
+        print("time = " , n*DT , " --> diff solexacte-solapprochee = " , diff*sqrt(DX))
     
 	 
     #----------------------- graphics interativ -------------------------

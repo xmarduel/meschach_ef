@@ -181,8 +181,8 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
     ResolutionMethod = Params_get_oneparam(MyParams,"matrix_solver_params","resolution_method")
     preconditionning = Params_get_oneparam(MyParams,"matrix_solver_params","preconditionning")
-    print "ResolutionMethod =", ResolutionMethod
-    print "Preconditionning =", preconditionning
+    print("ResolutionMethod =", ResolutionMethod)
+    print("Preconditionning =", preconditionning)
 
     eps_steps = Params_get_oneparam(MyParams,"matrix_solver_params","eps_steps")
     max_steps = Params_get_oneparam(MyParams,"matrix_solver_params","max_steps")
@@ -237,7 +237,7 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
         t2 = time.time()
 
-        print "\nt2-t1 = ", t2-t1
+        print("\nt2-t1 = ", t2-t1)
 
         SP_FREE(A)
         V_FREE(RHS)
@@ -253,19 +253,19 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
     elif preconditionning == "ILU" :
 
-        print "for problem = \"Laplacien\", the matrix A should be symmetric"
-        print" -> use preferrably the LLT preconditionning + CG "
+        print("for problem = \"Laplacien\", the matrix A should be symmetric")
+        print(" -> use preferrably the LLT preconditionning + CG ")
 
         ILU = sp_copy(A)
         spILUfactor(ILU,0.0)    
 
     elif preconditionning == "DIAG" :
 
-        print "not implemented -> NULL precond"
+        print("not implemented -> NULL precond")
 
     elif preconditionning == "NULL" :
 
-        print "no precond for iterativ method"
+        print("no precond for iterativ method")
 
     else :
 
@@ -276,12 +276,12 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
     if  ResolutionMethod == "CG" :
 
         iter_xspcg(A,ICH,RHS,eps_steps,VIT,max_steps,nb_steps,None)
-        print "cg: # of iter. = ", intp_value(nb_steps)
+        print("cg: # of iter. = ", intp_value(nb_steps))
 
     elif ResolutionMethod == "BiCGStab" :
 
         iter_xspbicgstab(A,ILU,RHS,eps_steps,VIT,max_steps,nb_steps,None)
-        print "bicgstab: # of iter. = ", intp_value(nb_steps)
+        print("bicgstab: # of iter. = ", intp_value(nb_steps))
 
     else :
 
@@ -307,7 +307,7 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
 # --------------------------------------------------------------------
 
 PROBLEM = Params_get_oneparam(MyParams, "main_problem", "NULL")
-print "PROBLEM is ",PROBLEM
+print("PROBLEM is ", PROBLEM)
 
 
 if   PROBLEM == "HELMHOLZ" :
@@ -332,7 +332,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-    print "Problem \"%s\" not yet implemented" % PROBLEM
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 
 
@@ -341,8 +341,8 @@ else:
 
 if   PROBLEM == "HELMHOLZ" :
 
-    print "DIM 1=", MAT_m_get(eigen_vectors)
-    print "DIM 2=", MAT_n_get(eigen_vectors)
+    print("DIM 1=", MAT_m_get(eigen_vectors))
+    print("DIM 2=", MAT_n_get(eigen_vectors))
     v_foutput(sys.stdout, eigen_values)
     graphics2D_set("gnuplot" , MyElt , MyGeom , MAT_n_get(eigen_vectors), eigen_vectors, "SolEigen" )
     graphics2D_set("silo"    , MyElt , MyGeom , MAT_n_get(eigen_vectors), eigen_vectors, "SolEigen" )
@@ -355,7 +355,7 @@ elif PROBLEM == "LAPLACIAN" :
 
     #graphics2D_vogle_plotsurface(VOGLEe_COLOR_RED, SOL, GEOM_2D_NSELMT_get(MyGeom), GEOM_2D_XYSOMM_get(MyGeom) )
     
-    print "XXX", VOPL_CONTOURS
+    print("XXX", VOPL_CONTOURS)
     graphics1D_vopl_initialize(Params_get_oneparam(MyParams,"graphics_interactiv2D_params","DRIVER"),
                                Params_get_oneparam(MyParams,"graphics_interactiv2D_params","SIZE_WINDOW_X"),
                                Params_get_oneparam(MyParams,"graphics_interactiv2D_params","SIZE_WINDOW_Y"),
@@ -392,7 +392,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-    print "Problem \"%s\" not yet implemented" % PROBLEM
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 
 

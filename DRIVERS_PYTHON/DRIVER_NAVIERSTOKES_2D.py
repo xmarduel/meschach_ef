@@ -114,7 +114,7 @@ elif TEST == 'KOVASZNAY':
     pi = acos(-1.0)
     Re = 40.0
     L  = Re/2.0 - sqrt(Re*Re/4 + 4*pi*pi)
-    print "L = ", L
+    print("L = ", L)
 
     def u(x,y):
         return 1.0 - exp(L*x)*cos(2*pi*y)
@@ -357,9 +357,9 @@ graphics_geom2D_view("gnuplot", MyGeom, "geometry_view")
 #------------------------------------------------------------------------------------------
 
 PROBLEM = Params_get_oneparam(MyParams, "main_problem", "NULL")
-print "PROBLEM is ", PROBLEM
+print("PROBLEM is ", PROBLEM)
 METHOD = Params_get_oneparam(MyParams, "navierstokes_params", "method")
-print "METHOD is ", METHOD
+print("METHOD is ", METHOD)
 
 
 if   PROBLEM == "LAPLACIAN" :
@@ -380,7 +380,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-    print "Problem \"%s\" not yet implemented" % PROBLEM
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
    
    
@@ -411,7 +411,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-    print "Problem \"%s\" not yet implemented" % PROBLEM
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 
 #---------------------------------------------------------------------

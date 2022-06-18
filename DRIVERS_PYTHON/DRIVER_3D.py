@@ -237,7 +237,7 @@ Geom3D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 #---------------------------------------------------------------------------------------------
 
 PROBLEM = Params_get_oneparam(MyParams, "main_problem", "NULL")
-print PROBLEM
+print(PROBLEM)
 
 # --------------------------------------------------------------------
 # --------------------------------------------------------------------
@@ -292,13 +292,13 @@ def Py_solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
     resolution_method = Params_get_oneparam(MyParams,"matrix_solver_params","resolution_method")
     preconditionning = Params_get_oneparam(MyParams,"matrix_solver_params","preconditionning")
-    print "resolutionMethod =", resolution_method
-    print "preconditionning =", preconditionning
+    print("resolutionMethod =", resolution_method)
+    print("preconditionning =", preconditionning)
 
     BandwrMethod = Params_get_oneparam(MyParams,"matrix_solver_params","bandwidth_method")
     BandwrOption = Params_get_oneparam(MyParams,"matrix_solver_params","bandwidth_option")
-    print "BandwrMethod =", BandwrMethod
-    print "BandwrOption =", BandwrOption
+    print("BandwrMethod =", BandwrMethod)
+    print("BandwrOption =", BandwrOption)
 
     eps_steps = Params_get_oneparam(MyParams,"matrix_solver_params","eps_steps")
     max_steps = Params_get_oneparam(MyParams,"matrix_solver_params","max_steps")
@@ -345,13 +345,13 @@ def Py_solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun ) :
          
         t2 = time.time()
     
-        print "\nt2-t1 = ", t2-t1
+        print("\nt2-t1 = ", t2-t1)
     
         RESIDU = v_get(NBSOMM)
         sp_mv_mlt(A,VIT,RESIDU)
         v_sub(RESIDU,RHS,RESIDU)
 
-        print "\nnorm res = ",v_norm2(RESIDU)
+        print("\nnorm res = ",v_norm2(RESIDU))
 
         V_FREE(RESIDU)
 
@@ -366,19 +366,19 @@ def Py_solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
     elif preconditionning == "ILU" :
 
-        print "for problem = \"Laplacien\", the matrix A should be symmetric"
-        print" -> use preferrably the LLT preconditionning + CG "
+        print("for problem = \"Laplacien\", the matrix A should be symmetric")
+        print("-> use preferrably the LLT preconditionning + CG ")
 
         ILU = sp_copy(A)
         spILUfactor(ILU, 0.0)    
 
     elif preconditionning == "DIAG" :
 
-        print "not implemented -> NULL precond"
+        print("not implemented -> NULL precond")
 
     elif preconditionning == "NULL" :
 
-        print "no precond for iterativ method"
+        print("no precond for iterativ method")
 
     else :
 
@@ -389,12 +389,12 @@ def Py_solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun ) :
     if  resolution_method == "CG" :
 
         iter_xspcg(A, ICH, RHS, eps_steps, VIT, max_steps, nb_steps, None)
-        print "cg: # of iter. = %d" % intp_value(nb_steps)
+        print("cg: # of iter. = %d" % intp_value(nb_steps))
 
     elif resolution_method == "BiCGStab" :
 
         iter_xspbicgstab(A, ILU, RHS, eps_steps, VIT, max_steps, nb_steps, None)
-        print "bicgstab: # of iter. = %d" % intp_value(nb_steps)
+        print("bicgstab: # of iter. = %d" % intp_value(nb_steps))
 
     else :
 
@@ -437,7 +437,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-    print "Problem \"%s\" not yet implemented" % PROBLEM
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 
 
@@ -469,7 +469,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-    print "Problem \"%s\" not yet implemented" % PROBLEM
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 
 
@@ -486,7 +486,7 @@ if has_exact_sol == True :
     SOL_exact = v_get(NBSOMM)
     SOL_exact = build_vec_from_function3D(MyElt, MyGeom, fun3D, SOL_exact)
                
-    print "diff solexacte-solapprochee = %le" % v_norm2( v_sub(SOL, SOL_exact, None) )
+    print("diff solexacte-solapprochee = %le" % v_norm2( v_sub(SOL, SOL_exact, None) ))
                      
     FUN_3D_FREE(fun1D)
 

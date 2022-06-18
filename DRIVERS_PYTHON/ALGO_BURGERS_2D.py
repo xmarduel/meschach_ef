@@ -21,8 +21,8 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
 
     ResolutionMethod = Params_get_oneparam(MyParams,"matrix_solver_params","resolution_method")
     preconditionning = Params_get_oneparam(MyParams,"matrix_solver_params","preconditionning")
-    print "ResolutionMethod =", ResolutionMethod
-    print "Preconditionning =", preconditionning
+    print("ResolutionMethod =", ResolutionMethod)
+    print("Preconditionning =", preconditionning)
 
     eps_steps = Params_get_oneparam(MyParams,"matrix_solver_params","eps_steps")
     max_steps = Params_get_oneparam(MyParams,"matrix_solver_params","max_steps")
@@ -73,19 +73,19 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
 
     elif preconditionning == "ILU" :
 
-        print "for problem = \"Laplacien\", the matrix A should be symmetric"
-        print" -> use preferrably the LLT preconditionning + CG "
+        print("for problem = \"Laplacien\", the matrix A should be symmetric")
+        print(" -> use preferrably the LLT preconditionning + CG ")
 
         ILU = sp_copy(Abc)
         spILUfactor(ILU,0.0)    
 
     elif preconditionning == "DIAG" :
 
-        print "not implemented -> NULL precond"
+        print("not implemented -> NULL precond")
 
     elif preconditionning == "NULL" :
 
-        print "no precond for iterativ method"
+        print("no precond for iterativ method")
 
     else :
 
@@ -119,12 +119,12 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
         elif  ResolutionMethod == "CG" :
 
             iter_spcg2(A,ICH,RHS,eps_steps, SOL,max_steps,nb_steps)
-            print "cg: # of iter. = ",intp_value(nb_steps)
+            print("cg: # of iter. = ",intp_value(nb_steps))
 
         elif ResolutionMethod == "BiCGStab" :
 
             iter_spbicgstab(A,ILU,RHS,eps_steps, SOL,max_steps,nb_steps)
-            print "bicgstab: # of iter. = ",intp_value(nb_steps)
+            print("bicgstab: # of iter. = ",intp_value(nb_steps))
 
         else :
 
@@ -133,13 +133,10 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
 
         # test convergence
         diff = v_norm2( v_sub(SOL, Un, RHS) )
-        print "iter=",n,"  -> diff = ", diff 
+        print("iter=",n,"  -> diff = ", diff)
 
         if diff < eps_steps:
             break
-
-
-
 
          
     delete_intp(nb_steps)
@@ -173,8 +170,8 @@ def Py_solve2D_burgers2( MyElt , MyGeom , MyBC , MyRhsFun , MyParams ) :
 
     ResolutionMethod = Params_get_oneparam(MyParams,"matrix_solver_params","resolution_method")
     preconditionning = Params_get_oneparam(MyParams,"matrix_solver_params","preconditionning")
-    print "ResolutionMethod =", ResolutionMethod
-    print "preconditionning =", preconditionning
+    print("ResolutionMethod =", ResolutionMethod)
+    print("preconditionning =", preconditionning)
 
     eps_steps = Params_get_oneparam(MyParams,"matrix_solver_params","eps_steps")
     max_steps = Params_get_oneparam(MyParams,"matrix_solver_params","max_steps")
@@ -233,7 +230,7 @@ def Py_solve2D_burgers2( MyElt , MyGeom , MyBC , MyRhsFun , MyParams ) :
         elif ResolutionMethod == "BiCGStab" :
 
             iter_spbicgstab(Abc,ILU, RHSbc,eps_steps, SOL,max_steps,nb_steps)
-            print "bicgstab: # of iter. = ",int_p_value(nb_steps)
+            print("bicgstab: # of iter. = ",int_p_value(nb_steps))
 
         else :
 
@@ -242,14 +239,14 @@ def Py_solve2D_burgers2( MyElt , MyGeom , MyBC , MyRhsFun , MyParams ) :
 
         # test convergence
         diff = v_norm2( v_sub(SOL, Un, RES) )
-        print "iter=", n,"  -> diff = ", diff
+        print("iter=", n,"  -> diff = ", diff)
 
         if diff < eps_steps:
             break
 
         #test residu
         res = v_norm2( v_sub( sp_mv_mlt(Abc, Un, RES), RHSbc, RES) )
-        print "\niter=",n,"  -> res = ", res
+        print("\niter=",n,"  -> res = ", res)
 
          
     delete_intp(nb_steps)

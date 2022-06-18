@@ -158,8 +158,8 @@ def Py_solve2D_laplacian(MyElt, MyGeom, MyBC, MyRhsFun):
 
     ResolutionMethod = Params_get_oneparam(MyParams, "matrix_solver_params","resolution_method")
     preconditionning = Params_get_oneparam(MyParams, "matrix_solver_params","preconditionning")
-    print "ResolutionMethod =", ResolutionMethod
-    print "Preconditionning =", preconditionning
+    print("ResolutionMethod =", ResolutionMethod)
+    print("Preconditionning =", preconditionning)
 
     eps_steps = Params_get_oneparam(MyParams, "matrix_solver_params","eps_steps")
     max_steps = Params_get_oneparam(MyParams, "matrix_solver_params","max_steps")
@@ -215,7 +215,7 @@ def Py_solve2D_laplacian(MyElt, MyGeom, MyBC, MyRhsFun):
 
         t2 = time.time()
 
-        print "\nt2-t1 = ", t2-t1
+        print("\nt2-t1 = ", t2-t1)
 
         SP_FREE(A)
         V_FREE(RHS)
@@ -231,19 +231,19 @@ def Py_solve2D_laplacian(MyElt, MyGeom, MyBC, MyRhsFun):
 
     elif preconditionning == "ILU" :
 
-        print "for problem = \"Laplacien\", the matrix A should be symmetric"
-        print" -> use preferrably the LLT preconditionning + CG "
+        print("for problem = \"Laplacien\", the matrix A should be symmetric")
+        print(" -> use preferrably the LLT preconditionning + CG ")
 
         ILU = sp_copy(A)
         spILUfactor(ILU, 0.0)
 
     elif preconditionning == "DIAG" :
 
-        print "not implemented -> NULL precond"
+        print("not implemented -> NULL precond")
 
     elif preconditionning == "NULL" :
 
-        print "no precond for iterativ method"
+        print("no precond for iterativ method")
 
     else :
 
@@ -254,12 +254,12 @@ def Py_solve2D_laplacian(MyElt, MyGeom, MyBC, MyRhsFun):
     if  ResolutionMethod == "CG" :
 
         iter_xspcg(A, ICH, RHS, eps_steps, SOL, max_steps, nb_steps, None)
-        print "cg: # of iter. = ", intp_value(nb_steps)
+        print("cg: # of iter. = ", intp_value(nb_steps))
 
     elif ResolutionMethod == "BiCGStab" :
 
         iter_xspbicgstab(A, ILU, RHS, eps_steps, SOL, max_steps, nb_steps, None)
-        print "bicgstab: # of iter. = ", intp_value(nb_steps)
+        print("bicgstab: # of iter. = ", intp_value(nb_steps))
 
     else :
 
@@ -490,7 +490,7 @@ def run_test():
 
 
     PROBLEM = Params_get_oneparam(MyParams, "main_problem", "NULL")
-    print "PROBLEM is ",PROBLEM
+    print("PROBLEM is ",PROBLEM)
 
 
     if   PROBLEM == "HELMHOLZ" :
@@ -515,7 +515,7 @@ def run_test():
 
     else:
 
-        print "Problem \"%s\" not yet implemented" % PROBLEM
+        print("Problem \"%s\" not yet implemented" % PROBLEM)
         exit(EXIT_FAILURE)
 
 
@@ -524,8 +524,8 @@ def run_test():
 
     if   PROBLEM == "HELMHOLZ" :
 
-        print "DIM 1=", MAT_m_get(eigen_vectors)
-        print "DIM 2=", MAT_n_get(eigen_vectors)
+        print("DIM 1=", MAT_m_get(eigen_vectors))
+        print("DIM 2=", MAT_n_get(eigen_vectors))
         v_foutput(sys.stdout, eigen_values)
         graphics2D_set("gnuplot" , MyElt , MyGeom , MAT_n_get(eigen_vectors), eigen_vectors, "SolEigen" )
         graphics2D_set("silo"    , MyElt , MyGeom , MAT_n_get(eigen_vectors), eigen_vectors, "SolEigen" )
@@ -594,7 +594,7 @@ def run_test():
 
     else:
 
-        print "Problem \"%s\" not yet implemented" % PROBLEM
+        print("Problem \"%s\" not yet implemented" % PROBLEM)
         exit(EXIT_FAILURE)
 
 
@@ -625,7 +625,7 @@ def run_test():
         SOL_exact = v_get(NBSOMM)
         SOL_exact = build_vec_from_function2D(MyElt, MyGeom, fun2D, SOL_exact)
       
-        print "diff solexacte-solapprochee = %le" % v_norm2( v_sub(SOL, SOL_exact, None) )
+        print("diff solexacte-solapprochee = %le" % v_norm2( v_sub(SOL, SOL_exact, None) ))
 
         FUN_2D_FREE(fun2D)
 

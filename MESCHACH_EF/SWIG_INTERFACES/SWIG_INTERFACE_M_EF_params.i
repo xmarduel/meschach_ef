@@ -74,9 +74,10 @@ PARAMS*  Params_append_from_string(PARAMS* p, const char* text);
   
    switch( Params_get_valuetype(arg2, arg3) ) /* check that we send a good type value */
    {
-      case TYPEd_STRING: if (PyString_Check($input)) {
-	                    $1 = PyString_AsString($input);
-	                    printf("--> %s %s \t %s \n", arg2 , arg3 , ((char*)$1));
+      case TYPEd_STRING: if (PyUnicode_Check($input)) {
+	                         PyObject* pStrObj  = PyUnicode_AsUTF8String($input);
+                            $1 = PyBytes_AsString(pStrObj);
+	                         printf("--> %s %s \t %s \n", arg2 , arg3 , ((char*)$1));
                          }
                          else { ok = 0;
                          }
@@ -84,16 +85,17 @@ PARAMS*  Params_append_from_string(PARAMS* p, const char* text);
 
       case TYPEd_REAL:   if (PyFloat_Check($input)) {
                             $1 = &(PyFloat_AS_DOUBLE($input));
-	                    printf("--> %s %s \t %le \n", arg2 , arg3 , *((double*)$1));
-	                 }
+	                         printf("--> %s %s \t %le \n", arg2 , arg3 , *((double*)$1));
+	                      }
                          else { ok = 0;
                          }
                          break;
 
-      case TYPEd_INT:    if (PyInt_Check($input)) {
-                            $1 = &(PyInt_AS_LONG($input));
-	                    printf("--> %s %s \t %ld \n", arg2 , arg3 , *(long*)$1);
-	                 }
+      case TYPEd_INT:    if (PyLong_Check($input)) {
+                            long along = PyLong_AS_LONG($input);
+                            $1 = (void*)&along;
+                            printf("--> %s %s \t %ld \n", arg2 , arg3 , *((int*)$1));
+	                      }
                          else { ok = 0;
                          }
                          break;
@@ -122,11 +124,9 @@ PARAMS*  Params_append_from_string(PARAMS* p, const char* text);
 	                 }
                          break;
 
-      case TYPEd_FILE:   if (PyFile_Check($input)) {
-	                    $1 = PyFile_AsFile($input);
-	                 }
-                         else {
-                            ok = 0;
+      case TYPEd_FILE:   {
+                         int fd = PyObject_AsFileDescriptor($input);
+                         $1 = fdopen(fd, "w");
                          }
                          break;
 
@@ -171,7 +171,8 @@ PARAMS*  Params_append_from_string(PARAMS* p, const char* text);
 					   ok = 0;
 					   break;
 				   }
-				   iv->ive[k] = PyInt_AS_LONG(o);
+				   //iv->ive[k] = PyInt_AS_LONG(o);
+               iv->ive[k] = PyLong_AS_LONG(o);
 			   }
 			   printf("--> %s %s \t %p \n", arg2 , arg3 , iv);
 				iv_output(iv);
@@ -218,7 +219,7 @@ void  Params_set_oneparam2(PARAMS* p, const char* category, const char* field, i
    {
       case TYPEd_STRING: $result = PyString_FromString((char*)($1)); break;
       case TYPEd_REAL:   $result = PyFloat_FromDouble(*(Real*)($1)); break;
-      case TYPEd_INT:    $result = PyInt_FromLong((long)(*(int*)($1))); break;
+      case TYPEd_INT:    $result = PyLong_FromLong((long)(*(int*)($1))); break;
       case TYPEd_REAL_VECTOR:   $result = SWIG_NewPointerObj((void *) $1, SWIGTYPE_p_VEC, 0); break;
       //case TYPEd_INT_VECTOR:    $result = SWIG_NewPointerObj((void *) $1, SWIGTYPE_p_IVEC, 0); break; // actually not used
       case TYPEd_FUN_1D: $result = SWIG_NewPointerObj((void *) $1, SWIGTYPE_p_FUN_1D, 0); break;

@@ -172,8 +172,8 @@ def Py_solve2D_eigen( MyElt , MyGeom , MyBC ) :
     #
     ResolutionMethod = Params_get_oneparam(MyParams,"matrix_solver_params","resolution_method")
     Preconditionning = Params_get_oneparam(MyParams,"matrix_solver_params","preconditionning")
-    print "ResolutionMethod =", ResolutionMethod
-    print "Preconditionning =", Preconditionning
+    print("ResolutionMethod =", ResolutionMethod)
+    print("Preconditionning =", Preconditionning)
     #
     A  = sp_get(NBSOMM,NBSOMM,10)
     #
@@ -214,7 +214,7 @@ def Py_solve2D_eigen( MyElt , MyGeom , MyBC ) :
 # ---------------------------------------------------------------------------------------
 #
 PROBLEM = Params_get_oneparam(MyParams, "main_problem", "NULL")
-print "PROBLEM is ",PROBLEM
+print("PROBLEM is ",PROBLEM)
 #
 #
 (X_re, X_im, eigen_re, eigen_im) = Py_solve2D_eigen( MyElt , MyGeom , MyBC )

@@ -104,15 +104,10 @@ MyAdv = Adv3D_setFunctionPython( MyAdv, 0, AXEe_Y, AXEe_Z, AXEe_X, spheric_z)
 #
 #
 a = Adv3D_evalFunction(MyAdv, 0, AXEe_X, AXEe_X, AXEe_Z,1,1,1)
-print "a=",a
 a = Adv3D_evalFunction(MyAdv, 0, AXEe_X, AXEe_X, AXEe_Y,1,1,1)
-print "a=",a
 a = Adv3D_evalFunction(MyAdv, 0, AXEe_X, AXEe_X, AXEe_Z,1,1,1)
-print "a=",a
 a = Adv3D_evalFunction(MyAdv, 0, AXEe_Y, AXEe_Z, AXEe_X,1,1,1)
-print "a=",a
 a = Adv3D_evalFunction(MyAdv, 0, AXEe_Y, AXEe_Y, AXEe_Z,1,1,1)
-print "a=",a
 #
 #
 #-------------------------------------------------------------------   
@@ -188,12 +183,12 @@ def Py_solve3D_burgers( MyElt , MyGeom , MyBC , MyRhsFun ) :
     #
     NBSOMM = GEOM_3D_NBSOMM_get(MyGeom)
     #
-    print "NBSOMM = ", NBSOMM
+    print("NBSOMM = ", NBSOMM)
     #    
     ResolutionMethod = Params_get_oneparam(MyParams,"matrix_solver_params","resolution_method")
     Preconditionning = Params_get_oneparam(MyParams,"matrix_solver_params","preconditionning")
-    print "ResolutionMethod =", ResolutionMethod
-    print "Preconditionning =", Preconditionning
+    print("ResolutionMethod =", ResolutionMethod)
+    print("Preconditionning =", Preconditionning)
     #
     eps_steps = Params_get_oneparam(MyParams,"matrix_solver_params","eps_steps")
     max_steps = Params_get_oneparam(MyParams,"matrix_solver_params","max_steps")
@@ -246,19 +241,19 @@ def Py_solve3D_burgers( MyElt , MyGeom , MyBC , MyRhsFun ) :
         #
     elif Preconditionning == "ILU" :
         #
-        print "for problem = \"Laplacien\", the matrix A should be symmetric"
-        print" -> use preferrably the LLT preconditionning + CG "
+        print("for problem = \"Laplacien\", the matrix A should be symmetric")
+        print("-> use preferrably the LLT preconditionning + CG ")
         #
         ILU = sp_copy(Abc)
         spILUfactor(ILU,0.0)    
         #
     elif Preconditionning == "DIAG" :
         #
-        print "not implemented -> NULL precond"
+        print("not implemented -> NULL precond")
         #
     elif Preconditionning == "NULL" :
         #
-        print "no precond for iterativ method"
+        print("no precond for iterativ method")
         #  
     else :
         #
@@ -294,12 +289,12 @@ def Py_solve3D_burgers( MyElt , MyGeom , MyBC , MyRhsFun ) :
         elif  ResolutionMethod == "CG" :
         #
             iter_spcg2(A,ICH,RHS,eps_steps, SOL,max_steps,nb_steps)
-            print "cg: # of iter. = ",intp_value(nb_steps)
+            print("cg: # of iter. = ",intp_value(nb_steps))
         #
         elif ResolutionMethod == "BiCGStab" :
         #
             iter_spbicgstab(A,ILU,RHS,eps_steps, SOL,max_steps,nb_steps)
-            print "bicgstab: # of iter. = ",intp_value(nb_steps)
+            print("bicgstab: # of iter. = ",intp_value(nb_steps))
         #
         else :
         #
@@ -308,7 +303,7 @@ def Py_solve3D_burgers( MyElt , MyGeom , MyBC , MyRhsFun ) :
         #
         # test convergence
         diff = v_norm2( v_sub(SOL, Un, RHS) )
-        print "iter=",n,"  -> diff = ", diff 
+        print("iter=",n,"  -> diff = ", diff )
         #
         if ( diff < eps_steps ): break
         #
@@ -334,7 +329,7 @@ def Py_solve3D_burgers( MyElt , MyGeom , MyBC , MyRhsFun ) :
 #--------------------------------------------------------------------
 #
 PROBLEM = Params_get_oneparam(MyParams, "main_problem", "NULL")
-print "PROBLEM is ",PROBLEM
+print("PROBLEM is ",PROBLEM)
 #
 #
 if   PROBLEM == "LAPLACIAN" :
@@ -360,7 +355,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 	
 else:
 #
-	 print "Problem \"%s\" not yet implemented" % PROBLEM
+	 print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 #   
 #
@@ -395,7 +390,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 #
 else:
 #
-    print "Problem \"%s\" not yet implemented" % PROBLEM
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 #
 #---------------------------------------------------------------------
@@ -407,10 +402,10 @@ if (1):
     #Fun3D_setCFunction(fun3D, ExSol3D[MyParams->misc_params.Exact_sol] ) 
 
     diff = diff_vec_function3D( MyElt, MyGeom, SOL, fun3D, SOL )
-    string_res = "diff solexacte-solapprochee = %le" % diff
-   
+    print("diff solexacte-solapprochee = %le" % diff)
+      
     #v_foutput(sys.stdout, SOL)
-    print string_res
+    
     
     FUN_3D_FREE(fun3D)
 #

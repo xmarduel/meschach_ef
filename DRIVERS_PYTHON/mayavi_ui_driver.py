@@ -95,7 +95,7 @@ def mayavi_call():
     #
     file_name = file.get()
     system_call = "mayavi -d " + file_name
-    #
+
     if ( hasAxes.get() == 1 ):
         system_call += " -m Axes"
     if ( hasBandedSurfaceMap.get() == 1 ):
@@ -140,17 +140,16 @@ def mayavi_call():
         system_call += " -m Volume"
     if ( hasWarpVectorCutPlan.get() == 1 ):
         system_call += " -m WarpVectorCutPlan"
-    #
-    print system_call
-    #
+ 
+    print(system_call)
+
     os.system(system_call)
-    #
-#
-#
-#
+
+
+
 Tkinter.Button(text="MayaVi", command=mayavi_call).grid(row=24, column=0, sticky="w")
 Tkinter.Button(text="Quit"  , command=root.quit  ).grid(row=24, column=1)
-#
-#
+
+
 Tkinter.mainloop()
-#
+

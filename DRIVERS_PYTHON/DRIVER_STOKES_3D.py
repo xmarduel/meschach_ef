@@ -49,13 +49,13 @@ def bc3(x,y,z):
 #
 #
 def cv1(x,y,z):
-    #print "cv1: x,y,z=",x,y,z 
+    #print("cv1: x,y,z=",x,y,z)
     return  ( 20*y*(1-y)*x*(1-x) )
 def cv2(x,y,z):
-    #print "cv2: x,y,z=",x,y,z
+    #print("cv2: x,y,z=",x,y,z)
     return  ( 20*y*(1-y)*z*(1-z) )
 def cv3(x,y,z):
-    print "cv3: x,y,z=",x,y,z 
+    print("cv3: x,y,z=",x,y,z)
     return  ( 10*x*(1-x)*z*(1-z) )
 #
 #
@@ -240,9 +240,9 @@ Geom3D_check_with_boundaryconditions(MyGeom , MyBC, AXEe_Z )
 #--------------------------------------------------------------------
 
 PROBLEM = Params_get_oneparam(MyParams, "main_problem", "NULL")
-print "PROBLEM is ", PROBLEM
+print("PROBLEM is ", PROBLEM)
 METHOD = Params_get_oneparam(MyParams, "stokes_params", "method")
-print "METHOD is ", METHOD
+print("METHOD is ", METHOD)
 
 
 if   PROBLEM == "LAPLACIAN" :
@@ -263,7 +263,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-	 print "Problem \"%s\" not yet implemented" % PROBLEM
+	 print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 
    
@@ -300,7 +300,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-	 print "Problem \"%s\" not yet implemented" % PROBLEM
+	 print("Problem \"%s\" not yet implemented" % PROBLEM)
 	 exit(EXIT_FAILURE)
 
 #---------------------------------------------------------------------

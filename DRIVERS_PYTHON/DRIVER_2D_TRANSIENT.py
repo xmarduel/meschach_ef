@@ -197,9 +197,9 @@ U_steadystate = v_finput(fp, None)
 fp.close()
 
 if VEC_dim_get(U_steadystate) == NBSOMM :
-    print "exact solution from file seems OK"
+    print("exact solution from file seems OK")
 else:
-    print "wrong exact solution from file ... take ZERO vector: dim = %d  but geom NBSOMM = %d" % (VEC_dim_get(U_steadystate), NBSOMM)
+    print("wrong exact solution from file ... take ZERO vector: dim = %d  but geom NBSOMM = %d" % (VEC_dim_get(U_steadystate), NBSOMM))
     U_steadystate = v_get(NBSOMM)
     v_zero(U_steadystate)
 
@@ -207,7 +207,7 @@ else:
 U_diff = v_get(NBSOMM)
 U_diff = v_sub(U_o, U_steadystate, U_diff)
 diff = v_norm2(U_diff)
-print "time = " , 0.0 , " --> |sol_steadystate - sol_approchee| = " , diff
+print("time = " , 0.0 , " --> |sol_steadystate - sol_approchee| = " , diff)
 
 #--------------------------------------------------------------------
 
@@ -296,7 +296,7 @@ for k in range(1,NBITER+1):
 
     TPS    = k*DT
 	 
-    print "k = %d => TIME = %lf" % (k, TPS)
+    print("k = %d => TIME = %lf" % (k, TPS))
 	 
     # set the curent time in the functions structs
     Bc2D_setTps (MyBC, TPS)
@@ -331,7 +331,7 @@ for k in range(1,NBITER+1):
 		  
         U_diff = v_sub(U_n, U_steadystate, U_diff)
         diff = v_norm2(U_diff)
-        print "time = " , TPS , " --> |sol_steadystate - sol_approchee| = " , diff
+        print("time = " , TPS , " --> |sol_steadystate - sol_approchee| = " , diff)
 
     #-----------------------  plot -------------------------
     if itgraph > 0 and k % itgraph == 0 :
@@ -348,7 +348,7 @@ for k in range(1,NBITER+1):
 
 atime_end = time()
 
-print ">>>>>>> TOTAL TIME = ", atime_end - atime_start
+print(">>>>>>> TOTAL TIME = ", atime_end - atime_start)
 
 
 #

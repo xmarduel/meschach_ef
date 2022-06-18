@@ -1,5 +1,5 @@
 
-SWIG_DIR = $(HOME)/x_local/bin/swig-4.0.2
+SWIG_DIR = $(HOME)/x_local/bin/swig-1.3.40
 
 SWIG_EXE = $(SWIG_DIR)/swig -py3
 
@@ -25,9 +25,9 @@ LIB_MESCHACH_LIBSCIPLOT  = $(DYLIBS_DIR)/libmeschach_libsciplot.dylib
 
 #CC_ARCH = -arch $(CURRENT_ARCH)
 
-# PYTHON 3.7 on my system
-PYTHON_HEADERS       = /Library/Frameworks/Python.framework/Versions/3.7/include/python3.7m
-PYTHON_FRAMEWORK_DIR = /Library/Frameworks/Python.framework/Versions/3.7
+# APPLE PYTHON 2.7 MAC OSX 10.10
+PYTHON_HEADERS       = /System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7
+PYTHON_FRAMEWORK_DIR = /System/Library/Frameworks/Python.framework/Versions/2.7
 
 
 # CFLAGS already set for specific lib
@@ -49,7 +49,7 @@ $(OBJ_WRAP) : $(SRC_WRAP)
 
 $(PYTHON_EXTENSION) : $(OBJ_WRAP) $(DYLIBS_LINKED_TO_BUNDLE)
 	@echo "--->make bundle ..."
-	$(CC) $(CC_ARCH) -bundle $(OBJ_WRAP) -o $(PYTHON_EXTENSION) $(DYLIBS_LINKED_TO_BUNDLE) -L$(PYTHON_FRAMEWORK_DIR)/lib -lpython3.7
+	$(CC) $(CC_ARCH) -bundle $(OBJ_WRAP) -o $(PYTHON_EXTENSION)  $(DYLIBS_LINKED_TO_BUNDLE) -F/Library/Frameworks/Python.framework/Versions/2.7 Python
 	mv $(PYTHON_EXTENSION) $(INSTALL_DIR)
 
 

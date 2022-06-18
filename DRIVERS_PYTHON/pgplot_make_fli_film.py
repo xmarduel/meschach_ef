@@ -27,7 +27,7 @@ class film_maker:
         os.rename("pgplot.%s" % self.format, "pgplot%05d.%s" % (1,self.format))
         # others files
         for i in range(3, int(self.nbfiles)+1):
-            print i
+            print(i)
             file1 = "pgplot%d.%s"   % (i,self.format)
             file2 = "pgplot%05d.%s" % (i,self.format)
             
@@ -57,17 +57,17 @@ def get_film_maker(nb_files, format, im_size):
     if ( format == "PPM" ): return film_maker_ppm_pict(nb_files, im_size)
     if ( format == "GIF" ): return film_maker_gif_pict(nb_files, im_size)
 
-    print "bad picture format (PPM or GIF)"
-    exit(1)
+    print("bad picture format (PPM or GIF)")
+    sys.exit(1)
 
 
 def usage():
     """ """
-    print "usage: make_film.py <nb_files> <pict_format>  <pict_size>"
-    print "                    <nb_files>:	integer"
-    print "                    <pict_format>:	\"PPM\" or \"GIF\""
-    print "                    <pict_size>:	dim1xdim2"
-    exit(1)
+    print("usage: make_film.py <nb_files> <pict_format>  <pict_size>")
+    print("                    <nb_files>:	integer")
+    print("                    <pict_format>:	\"PPM\" or \"GIF\"")
+    print("                    <pict_size>:	dim1xdim2")
+    sys.exit(1)
 
 
 if __name__ == '__main__':

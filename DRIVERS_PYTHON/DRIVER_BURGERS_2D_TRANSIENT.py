@@ -246,20 +246,20 @@ else :
     for i in range(1, Params_get_oneparam(MyParams,"boundary_conditions_params","nb_BCdirichlet")+1) :
     #
         idx = Params_get_oneparam2(MyParams,"boundary_conditions_params","TabPhi_BCdirichlet", AXEe_X, i)
-        print "idx bc dirichlet =", idx
+        print("idx bc dirichlet =", idx)
         Bc1D_setCFunction( MyBC, BC_1De_DIRICHLET, i, AXEe_X , Src1D_00 )
     #
     #
     # Right Hand Side
     MyRhsFun = Rhs1D_get()
     idx = Params_get_oneparam1(MyParams,"right_hand_side_params", "rhs", AXEe_X)
-    print "idx rhs =", idx
+    print("idx rhs =", idx)
     Rhs1D_setCFunctionTransient( MyRhsFun, 0, AXEe_X, Src1D_00_Transient )
     #
     # Initial Condition
     MyIC = Fun1D_get()
     idx = Params_get_oneparam1(MyParams,"initial_condition_params", "ic", AXEe_X)
-    print "idx ic =", idx
+    print("idx ic =", idx)
     Fun1D_setCFunctionTransient( MyIC, Src1D_07_Transient )
 #
 # 
@@ -294,9 +294,9 @@ bCheckBCwithGEOM = Geom1D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 #
 NBSOMM = GEOM_1D_NBSOMM_get(MyGeom)
 #
-print "NBSOMM=",NBSOMM
-MASS   = sp_get(NBSOMM,NBSOMM, 5)
-STIFF1 = sp_get(NBSOMM,NBSOMM, 5)
+print("NBSOMM=", NBSOMM)
+MASS   = sp_get(NBSOMM, NBSOMM, 5)
+STIFF1 = sp_get(NBSOMM, NBSOMM, 5)
 #
 MASS   = assemblage1D_matrix_Mass  ( MyElt , MyGeom , MASS   )
 STIFF1 = assemblage1D_matrix_Stiff1( MyElt , MyGeom , STIFF1 )
@@ -309,7 +309,7 @@ DT      = Params_get_oneparam(MyParams, "time_params", "DT")
 TPS_FIN = Params_get_oneparam(MyParams, "time_params", "TPS_FIN")
 #
 NBITER = int( TPS_FIN / DT )
-print "NBITER = ", NBITER
+print("NBITER = ", NBITER)
 #
 #
 A  = sp_get(NBSOMM,NBSOMM, 5)
@@ -388,7 +388,7 @@ if  Params_get_oneparam(MyParams, "graphics_output_params", "PGPLOT") :
    #
    #
    dim_graph = SPMAT_m_get(GEOM_1D_EF_to_WORLD_get(MyGeom))
-   print "dim_graph =",dim_graph
+   print("dim_graph =", dim_graph)
    #
    #sp_mv_mlt(MyGeom->EF_to_WORLD, U_o, U_graph1)
    sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), U_o, U_graph1 )
@@ -449,14 +449,14 @@ for n in range(1,2):
         sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), U_nm1, RHS )
         diff = diff_vec_function1Dtransient( MyElt, MyGeom, RHS, fun1Dex, 0.0, RHS )
 
-        print "diff = ", diff
-        print "time = 0.0 -> diff solexacte-solapprochee = ", diff*sqrt(DX)
-        print "time = 0.0 -> diff solexacte-solapprochee ** 2 = ", diff*diff*(DX)
+        print("diff = ", diff)
+        print("time = 0.0 -> diff solexacte-solapprochee = ", diff*sqrt(DX))
+        print("time = 0.0 -> diff solexacte-solapprochee ** 2 = ", diff*diff*(DX))
 
         sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), U_n, RHS )
         diff = diff_vec_function1Dtransient( MyElt, MyGeom, RHS, fun1Dex, n*DT, RHS )
-        print "time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*sqrt(DX)
-        print "time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*diff*(DX)
+        print("time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*sqrt(DX))
+        print("time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*diff*(DX))
 
     #----------------------- graphics interativ -------------------------
     
@@ -592,8 +592,8 @@ for n in range(2,NBITER+1):
         sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), U_n, RHS )
 
         diff = diff_vec_function1Dtransient( MyElt, MyGeom, RHS, fun1Dex, n*DT, RHS )
-        print "time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*sqrt(DX)
-        print "time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*diff*(DX)
+        print("time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*sqrt(DX))
+        print("time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*diff*(DX))
 
     #----------------------- graphics interativ -------------------------
     
@@ -655,7 +655,7 @@ for n in range(2,NBITER+1):
 
 atime_end = time()
 
-print ">>>>>>> TOTAL TIME = ", atime_end - atime_start
+print(">>>>>>> TOTAL TIME = ", atime_end - atime_start)
 
 
 #

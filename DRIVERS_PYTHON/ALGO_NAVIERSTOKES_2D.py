@@ -32,8 +32,8 @@ def Py_solve2D_NavierStokes( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun ) :
 
     else:
 
-        print "METHOD = %s" % METHOD
-        raise  TypeError, "???????? Wrong Method ???????"
+        print("METHOD = %s" % METHOD)
+        raise TypeError, "???????? Wrong Method ???????"
 
 
 # --------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
 
     kappa     = Params_get_oneparam(MyParams, "physical_params", "kappa")
     Reynolds  = 1.0 / kappa
-    print "Reynolds =", Reynolds
+    print("Reynolds =", Reynolds)
 
 
     STOKES        = sp_get(2*NBSOMM_U + NBSOMM_P, 2*NBSOMM_U + NBSOMM_P, 10)
@@ -251,7 +251,7 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
 
         else:
 
-            print "outer method for NavierStokes is \"%s\" \n" % METHOD
+            print("outer method for NavierStokes is \"%s\" \n" % METHOD)
             error(E_UNKNOWN, "Py_solve2D_NavierStokes_NE")
 
 
@@ -261,7 +261,7 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
         # test convergence
         diff = v_norm2( v_sub(Unp1, Un, Unp1) ) + v_norm2( v_sub(Vnp1, Vn, Vnp1) ) 
         
-        print "iter = %d -> diff = %lf" % (n, diff) 
+        print("iter = %d -> diff = %lf" % (n, diff))
 
         if diff < 100*eps_steps : 
 		      break
@@ -338,7 +338,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
 
     kappa     = Params_get_oneparam(MyParams, "physical_params", "kappa")
     Reynolds  = 1.0 / kappa
-    print "Reynolds =", Reynolds
+    print("Reynolds =", Reynolds)
 
     Params_set_oneparam(MyParams, "stokes_params", "method", Params_get_oneparam(MyParams, "navierstokes_params", "outer_method" ))
 
@@ -414,10 +414,10 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
     VIT = v_get(2*NBSOMM_U)
     P   = v_get(NBSOMM_P)
 
-    print "Stokes first..."
+    print("Stokes first...")
     # first estimation ...
     (Uo,Vo,Po) = Py_solve2D_stokes( MyElt , MyEltM1 , MyGeom , MyBC , MyRhsFun )
-    print "Stokes ... Done"
+    print("Stokes ... Done")
 
 
     # ----- assemblage matrix and rhs ------ 
@@ -592,7 +592,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
 	
         else:
 
-            print "outer method for NavierStokes is \"%s\" \n" % OUTER_METHOD
+            print("outer method for NavierStokes is \"%s\" \n" % OUTER_METHOD)
             error(E_UNKNOWN, "Py_solve2D_NavierStokes_NA")
 
 
@@ -601,7 +601,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
         Vnp1 = v_move(VIT, NBSOMM_U,NBSOMM_U, Vnp1,0)
         # test convergence
         diff = v_norm2( v_sub(Unp1, Un, Unp1) ) + v_norm2( v_sub(Vnp1, Vn, Vnp1) ) 
-        print "iter = %d -> diff = %ld " % (n, diff) 
+        print("iter = %d -> diff = %ld " % (n, diff))
 
         if diff < eps_steps :
 		      break

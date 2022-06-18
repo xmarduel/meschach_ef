@@ -89,15 +89,10 @@ MyAdv = Adv2D_setFunctionPython( MyAdv, 0, AXEe_Y, AXEe_Y, AXEe_Y, spheric)
 
 
 a = Adv2D_evalFunction(MyAdv, 0, AXEe_X, AXEe_X, AXEe_X, 1, 1)
-print "a=", a
 a = Adv2D_evalFunction(MyAdv, 0, AXEe_X, AXEe_X, AXEe_Y, 1, 1)
-print "a=", a
 a = Adv2D_evalFunction(MyAdv, 0, AXEe_X, AXEe_Y, AXEe_X, 1, 1)
-print "a=", a
 a = Adv2D_evalFunction(MyAdv, 0, AXEe_Y, AXEe_Y, AXEe_Y, 1, 1)
-print "a=", a
 a = Adv2D_evalFunction(MyAdv, 0, AXEe_Y, AXEe_Y, AXEe_Z, 1, 1)
-print "a=", a
 
 #-------------------------------------------------------------------   
 
@@ -175,7 +170,7 @@ Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 # -------------------------------------------------------------------------------------------
 
 PROBLEM = Params_get_oneparam(MyParams, "main_problem", "NULL")
-print "PROBLEM is ",PROBLEM
+print("PROBLEM is ",PROBLEM)
 
 
 if   PROBLEM == "LAPLACIAN" :
@@ -201,7 +196,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-    print "Problem \"%s\" not yet implemented" % PROBLEM
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 
 #----------------------- graphics output -----------------------------
@@ -235,7 +230,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-    print "Problem \"%s\" not yet implemented" % PROBLEM
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
 
 #---------------------------------------------------------------------
@@ -247,7 +242,7 @@ if True:
     #Fun2D_setCFunction(fun2D, ExSol3D[MyParams->misc_params.Exact_sol] ) 
 
     diff = diff_vec_function2D( MyElt, MyGeom, SOL, fun2D, SOL )
-    print "\ndiff solexacte-solapprochee = %le" % diff
+    print("\ndiff solexacte-solapprochee = %le" % diff)
     
     FUN_2D_FREE(fun2D)
 

@@ -181,21 +181,21 @@ spCHfactor(LLT_MASS)
 # TESTS
 # -----
 
-print "Uo"
+print("Uo")
 #v_foutput(sys.stdout, U_o)
 v_foutput(sys.stdout, sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), U_o, tmp1) )
 
-print "RHS_FUN"
+print("RHS_FUN")
 v_foutput(sys.stdout, RHS_FUN)
 tmp2 = spCHsolve(LLT_MASS, RHS_FUN, tmp2)
 v_foutput(sys.stdout, sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), tmp2, tmp1) )
 
-print "RHS_UUx"
+print("RHS_UUx")
 #v_foutput(sys.stdout, RHS_UUx)
 tmp2 = spCHsolve(LLT_MASS, RHS_UUx, tmp2)
 v_foutput(sys.stdout, sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), tmp2, tmp1) )
 
-print "RHS_UU"
+print("RHS_UU")
 #v_foutput(sys.stdout, RHS_UU)
 tmp2 = spCHsolve(LLT_MASS, RHS_UU, tmp2)
 v_foutput(sys.stdout, sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), tmp2, tmp1) )

@@ -60,6 +60,9 @@ def run_test():
         #return 1
         return cos(2*pi*x)
         return (exp(x)-1)/(exp(1)-1)
+    
+    def solP1(x):
+       return sol(x) + 1
 
     def Dsol(x):
        #return 2*(x-1)
@@ -139,7 +142,7 @@ def run_test():
     Bc1D_setBcType(MyBC, BC_1De_DIRICHLET, 2, AXEe_X) # BC_1De_CAUCHY, BC_1De_DIRICHLET, BC_1De_NEUMANN, BC_1De_ROBIN
 
     Bc1D_setFunctionPython(MyBC, BC_1De_DIRICHLET, 1, AXEe_X, sol)
-    Bc1D_setFunctionPython(MyBC, BC_1De_DIRICHLET, 2, AXEe_X, sol)   
+    Bc1D_setFunctionPython(MyBC, BC_1De_DIRICHLET, 2, AXEe_X, lambda x : sol(x) +0)
 
     Bc1D_setFunctionPython(MyBC, BC_1De_NEUMANN, 1, AXEe_X, Nsol_left)
     Bc1D_setFunctionPython(MyBC, BC_1De_NEUMANN, 2, AXEe_X, Nsol_right) 
@@ -227,7 +230,7 @@ def run_test():
                 "XMAX"   : 1.0,
                 "NX"     : 30,
                 "DISTRIBUTION" : "UNIFORM",
-                "PERIODIC" : True
+                "PERIODIC" : False
             },
         }
     } ))
@@ -306,7 +309,7 @@ def run_test():
     #--------------------------------------------------------------------
 
     PROBLEM = Params_get_oneparam(MyParams, "main_problem", "NULL")
-    print PROBLEM
+    print(PROBLEM)
 
 
     if   PROBLEM == "LAPLACIAN" :
@@ -331,7 +334,7 @@ def run_test():
 
     else:
 
-        print "Problem \"%s\" not yet implemented" % PROBLEM
+        print("Problem \"%s\" not yet implemented" % PROBLEM)
         sys.exit()
 
 
@@ -360,14 +363,14 @@ def run_test():
 
 
 
-    #print "SOL"
+    #print("SOL")
     #v_foutput(sys.stdout, SOL)
 
     GeomP1  = Geom1D_getP1geom_from(MyElt, MyGeom)
     MESH_P1 = GEOM_1D_XSOMM_get(GeomP1)
     SOL_P1  = build_vec_world_from_vec_ef_1D( MyElt, MyGeom, SOL)
 
-    #print "SOL_P1"
+    #print("SOL_P1")
     #v_foutput(sys.stdout, SOL_P1)
 
 
@@ -443,12 +446,12 @@ def run_test():
         WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
         WORLD_exact = build_vec_world_from_function1D(MyElt, MyGeom, fun1D, None, None)
 
-        print "WORLD (EF)"
+        print("WORLD (EF)")
         v_foutput(sys.stdout, WORLD)
-        print "WORLD EXACT"
+        print("WORLD EXACT")
         v_foutput(sys.stdout, WORLD_exact)
         
-        print "diff solexacte-solapprochee in EF = %le" % v_norm2( v_sub(WORLD, WORLD_exact, None) )
+        print("diff solexacte-solapprochee in EF = %le" % v_norm2( v_sub(WORLD, WORLD_exact, None) ))
 
         FUN_1D_FREE(fun1D)
         V_FREE(WORLD_exact)

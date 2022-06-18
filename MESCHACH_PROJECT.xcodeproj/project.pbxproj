@@ -275,7 +275,6 @@
 		257821C511CE717600293CB2 /* rhs_1D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2556DEA00A7BC9DF00130628 /* rhs_1D.h */; };
 		257821C611CE717600293CB2 /* rhs_2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2556DEA10A7BC9DF00130628 /* rhs_2D.h */; };
 		257821C711CE717600293CB2 /* rhs_3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2556DEA20A7BC9DF00130628 /* rhs_3D.h */; };
-		257821C811CE717600293CB2 /* splines_1D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2556DEA30A7BC9DF00130628 /* splines_1D.h */; };
 		257821C911CE717600293CB2 /* time_scheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 2556DEA40A7BC9DF00130628 /* time_scheme.h */; };
 		257821CA11CE717600293CB2 /* triangle_integration_gauss_1D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2556DEA50A7BC9DF00130628 /* triangle_integration_gauss_1D.h */; };
 		257821CB11CE717600293CB2 /* triangle_integration_gauss_2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2556DEA60A7BC9DF00130628 /* triangle_integration_gauss_2D.h */; };
@@ -329,7 +328,6 @@
 		257821FE11CE717600293CB2 /* rhs_1D.c in Sources */ = {isa = PBXBuildFile; fileRef = 2556DEF20A7BC9DF00130628 /* rhs_1D.c */; };
 		257821FF11CE717600293CB2 /* rhs_2D.c in Sources */ = {isa = PBXBuildFile; fileRef = 2556DEF30A7BC9DF00130628 /* rhs_2D.c */; };
 		2578220011CE717600293CB2 /* rhs_3D.c in Sources */ = {isa = PBXBuildFile; fileRef = 2556DEF40A7BC9DF00130628 /* rhs_3D.c */; };
-		2578220111CE717600293CB2 /* splines_1D.c in Sources */ = {isa = PBXBuildFile; fileRef = 2556DEF50A7BC9DF00130628 /* splines_1D.c */; };
 		2578220211CE717600293CB2 /* time_scheme.c in Sources */ = {isa = PBXBuildFile; fileRef = 2556DEF60A7BC9DF00130628 /* time_scheme.c */; };
 		2578220311CE717600293CB2 /* graphics_output.c in Sources */ = {isa = PBXBuildFile; fileRef = 25AC3C500F7FEAD100EFCC61 /* graphics_output.c */; };
 		2578221611CE717600293CB2 /* PDE_1D_SOLVE.c in Sources */ = {isa = PBXBuildFile; fileRef = 25D307AF0A852F8B008BB241 /* PDE_1D_SOLVE.c */; };
@@ -1100,7 +1098,6 @@
 		2556DEA00A7BC9DF00130628 /* rhs_1D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = rhs_1D.h; sourceTree = "<group>"; };
 		2556DEA10A7BC9DF00130628 /* rhs_2D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = rhs_2D.h; sourceTree = "<group>"; };
 		2556DEA20A7BC9DF00130628 /* rhs_3D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = rhs_3D.h; sourceTree = "<group>"; };
-		2556DEA30A7BC9DF00130628 /* splines_1D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = splines_1D.h; sourceTree = "<group>"; };
 		2556DEA40A7BC9DF00130628 /* time_scheme.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = time_scheme.h; sourceTree = "<group>"; };
 		2556DEA50A7BC9DF00130628 /* triangle_integration_gauss_1D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = triangle_integration_gauss_1D.h; sourceTree = "<group>"; };
 		2556DEA60A7BC9DF00130628 /* triangle_integration_gauss_2D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = triangle_integration_gauss_2D.h; sourceTree = "<group>"; };
@@ -1155,7 +1152,6 @@
 		2556DEF20A7BC9DF00130628 /* rhs_1D.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = rhs_1D.c; sourceTree = "<group>"; };
 		2556DEF30A7BC9DF00130628 /* rhs_2D.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = rhs_2D.c; sourceTree = "<group>"; };
 		2556DEF40A7BC9DF00130628 /* rhs_3D.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = rhs_3D.c; sourceTree = "<group>"; };
-		2556DEF50A7BC9DF00130628 /* splines_1D.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = splines_1D.c; sourceTree = "<group>"; };
 		2556DEF60A7BC9DF00130628 /* time_scheme.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = time_scheme.c; sourceTree = "<group>"; };
 		2556DEFC0A7BC9DF00130628 /* makefile_swig_python_extension */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.sh; path = makefile_swig_python_extension; sourceTree = "<group>"; };
 		2556DEFD0A7BC9DF00130628 /* SWIG_INTERFACE_M_EF_adv.i */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c.preprocessed; path = SWIG_INTERFACE_M_EF_adv.i; sourceTree = "<group>"; };
@@ -2321,7 +2317,6 @@
 				2556DEA00A7BC9DF00130628 /* rhs_1D.h */,
 				2556DEA10A7BC9DF00130628 /* rhs_2D.h */,
 				2556DEA20A7BC9DF00130628 /* rhs_3D.h */,
-				2556DEA30A7BC9DF00130628 /* splines_1D.h */,
 				2556DEA40A7BC9DF00130628 /* time_scheme.h */,
 				2556DEA50A7BC9DF00130628 /* triangle_integration_gauss_1D.h */,
 				2556DEA60A7BC9DF00130628 /* triangle_integration_gauss_2D.h */,
@@ -2385,7 +2380,6 @@
 				2556DEF20A7BC9DF00130628 /* rhs_1D.c */,
 				2556DEF30A7BC9DF00130628 /* rhs_2D.c */,
 				2556DEF40A7BC9DF00130628 /* rhs_3D.c */,
-				2556DEF50A7BC9DF00130628 /* splines_1D.c */,
 				2556DEF60A7BC9DF00130628 /* time_scheme.c */,
 			);
 			path = SRCS;
@@ -3031,7 +3025,6 @@
 				257821C511CE717600293CB2 /* rhs_1D.h in Headers */,
 				257821C611CE717600293CB2 /* rhs_2D.h in Headers */,
 				257821C711CE717600293CB2 /* rhs_3D.h in Headers */,
-				257821C811CE717600293CB2 /* splines_1D.h in Headers */,
 				257821C911CE717600293CB2 /* time_scheme.h in Headers */,
 				257821CA11CE717600293CB2 /* triangle_integration_gauss_1D.h in Headers */,
 				257821CB11CE717600293CB2 /* triangle_integration_gauss_2D.h in Headers */,
@@ -4231,7 +4224,6 @@
 				257821FE11CE717600293CB2 /* rhs_1D.c in Sources */,
 				257821FF11CE717600293CB2 /* rhs_2D.c in Sources */,
 				2578220011CE717600293CB2 /* rhs_3D.c in Sources */,
-				2578220111CE717600293CB2 /* splines_1D.c in Sources */,
 				2578220211CE717600293CB2 /* time_scheme.c in Sources */,
 				2578220311CE717600293CB2 /* graphics_output.c in Sources */,
 				255143D8193A32640026ADA1 /* all_params_json_utils.c in Sources */,

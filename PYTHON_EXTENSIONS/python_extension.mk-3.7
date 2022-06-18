@@ -49,7 +49,7 @@ $(OBJ_WRAP) : $(SRC_WRAP)
 
 $(PYTHON_EXTENSION) : $(OBJ_WRAP) $(DYLIBS_LINKED_TO_BUNDLE)
 	@echo "--->make bundle ..."
-	$(CC) $(CC_ARCH) -bundle $(OBJ_WRAP) -o $(PYTHON_EXTENSION) $(DYLIBS_LINKED_TO_BUNDLE) -L$(PYTHON_FRAMEWORK_DIR)/lib -lpython3.7
+	$(CC) $(CC_ARCH) -bundle $(OBJ_WRAP) -o $(PYTHON_EXTENSION) $(DYLIBS_LINKED_TO_BUNDLE) -L/Library/Frameworks/Python.framework/Versions/3.7/lib -lpython3.7
 	mv $(PYTHON_EXTENSION) $(INSTALL_DIR)
 
 
