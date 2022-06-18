@@ -285,7 +285,7 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
     else :
 
-        raise AssertionError, ERRORS_DICT["E_METHOD"]
+        raise AssertionError(ERRORS_DICT["E_METHOD"])
 
 
 

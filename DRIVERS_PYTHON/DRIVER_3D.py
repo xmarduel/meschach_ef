@@ -320,7 +320,7 @@ def Py_solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun ) :
     M_BC    = assemblage3D_matrix_fromBC( MyElt , MyGeom , MyBC, M_BC )
 
     RHS_FUN  = assemblage3D_vector_fun( MyElt , MyGeom , MyRhsFun, RHS_FUN )
-    RHS_BC   = assemblage3D_vector_fromBC( MyElt , MyGeom , MyRhsFun, RHS_BC )
+    RHS_BC   = assemblage3D_vector_fromBC( MyElt , MyGeom , MyBC, RHS_BC )
 
     A = sp_add(M_STIFF, M_BC, A)
     RHS = v_add(RHS_FUN, RHS_BC, RHS)
@@ -398,7 +398,7 @@ def Py_solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
     else :
 
-        raise AssertionError, ERRORS_DICT["E_METHOD"]
+        raise AssertionError(ERRORS_DICT["E_METHOD"])
 
 
      
@@ -484,11 +484,11 @@ if has_exact_sol == True :
     NBSOMM = GEOM_3D_NBSOMM_get(MyGeom)
          
     SOL_exact = v_get(NBSOMM)
-    SOL_exact = build_vec_from_function3D(MyElt, MyGeom, fun3D, SOL_exact)
+    SOL_exact = build_vec_ef_from_function3D(MyElt, MyGeom, fun3D, SOL_exact)
                
     print("diff solexacte-solapprochee = %le" % v_norm2( v_sub(SOL, SOL_exact, None) ))
                      
-    FUN_3D_FREE(fun1D)
+    FUN_3D_FREE(fun3D)
 
     graphics3D( "vtk",  MyElt , MyGeom , SOL , "Diff_Approch3D")
 

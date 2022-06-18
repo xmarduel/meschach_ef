@@ -128,7 +128,7 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
 
         else :
 
-            raise AssertionError, ERRORS_DICT["E_METHOD"]
+            raise AssertionError(ERRORS_DICT["E_METHOD"])
 
 
         # test convergence
@@ -234,7 +234,7 @@ def Py_solve2D_burgers2( MyElt , MyGeom , MyBC , MyRhsFun , MyParams ) :
 
         else :
 
-            raise AssertionError, ERRORS_DICT["E_METHOD"]
+            raise AssertionError(ERRORS_DICT["E_METHOD"])
         
 
         # test convergence

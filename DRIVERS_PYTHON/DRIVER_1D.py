@@ -1,8 +1,7 @@
 #! /usr/bin/env python
 
-
 import sys
-from   math  import cos, sin, sqrt, pi, exp
+from   math import cos, sin, sqrt, pi, exp
 import time
 import threading
 import json

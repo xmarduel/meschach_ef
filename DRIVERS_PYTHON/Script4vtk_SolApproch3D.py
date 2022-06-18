@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 #
 # File automatically generated - vtk version 6.1
-# date : Sat Jun 13 15:19:10 2015
+# date : Sat Jun 18 10:11:44 2022
 #
 import vtk
 #
 #
 reader = vtk.vtkUnstructuredGridReader() 
-reader.SetFileName( "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_PYTHON/SolApproch3D.vtk" )
+reader.SetFileName( "./SolApproch3D.vtk" )
 reader.Update()
 #
 lut1 = vtk.vtkLookupTable() 
@@ -61,8 +61,8 @@ renWin.SetSize( 800, 400 )
 renWin.AddRenderer( ren1 )
 renWin.AddRenderer( ren2 )
 #
-interactor = vtk.vtkRenderWindowInteractor()
-#interactor.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
-interactor.SetRenderWindow(renWin)
-interactor.Initialize()
-interactor.Start()
+iren = vtk.vtkRenderWindowInteractor()
+iren.SetRenderWindow(renWin)
+iren.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
+iren.Initialize()
+iren.Start()

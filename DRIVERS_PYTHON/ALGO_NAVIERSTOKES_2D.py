@@ -1,14 +1,13 @@
 
-
-from sys import *
+import sys
 
 from meschach          import *
 from meschach_adds     import *
 from meschach_ef       import *
 from meschach_spooles  import *
 
-
 # --------------------------------------------------------------------------------------------
+
 def Py_solve2D_NavierStokes( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun ) :
     """
     solve Navier-Stokes
@@ -33,10 +32,11 @@ def Py_solve2D_NavierStokes( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun ) :
     else:
 
         print("METHOD = %s" % METHOD)
-        raise TypeError, "???????? Wrong Method ???????"
+        raise TypeError("???????? Wrong Method ???????")
 
 
 # --------------------------------------------------------------------------------------------
+
 def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun , MyParams ) :
     """
     solve Navier-Stokes - NEWTON-EXACT Algorithm
@@ -113,14 +113,12 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
 
     SOL = v_get(2*NBSOMM_U+ NBSOMM_P);   v_zero(SOL); # [ U , V , P])
 
-	
     # ----- assemblage matrix and rhs ------ 
 
     J  = assemblage2D_matrix_Mass  ( MyEltM1 , GEOM_2D_geomBase_get(MyGeom) , J  )
 
     Su   = assemblage2D_matrix_Stiff1( MyElt , MyGeom , Su )
     sp_smlt(Su, kappa, Su)
-
 
     Bx = assemblage2D_matrix_Conv_x_elt2elt1( MyElt , MyGeom , MyEltM1 , GEOM_2D_geomBase_get(MyGeom) , Bx )
     By = assemblage2D_matrix_Conv_y_elt2elt1( MyElt , MyGeom , MyEltM1 , GEOM_2D_geomBase_get(MyGeom) , By )
@@ -130,7 +128,6 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
 
     sp_transp(Bx, BTx)
     sp_transp(By, BTy)
-
 
     # rhs
     Rhs2D_setCurrentSelectedAxe(MyRhsFun, AXEe_X)
@@ -320,8 +317,8 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
 
     return (Un,Vn,P)
 
-
 # --------------------------------------------------------------------------------------------
+
 def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun , MyParams ) :
     """
     solve Navier-Stokes - NEWTON_APPROCH Algorithm

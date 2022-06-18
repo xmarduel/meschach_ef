@@ -189,7 +189,7 @@ DIFF = v_get(NBSOMM)
 
 # initial solution
 U_o = v_get(NBSOMM)
-U_o = build_vec_from_function2D(MyElt, MyGeom, MyIC, U_o)
+U_o = build_vec_ef_from_function2D(MyElt, MyGeom, MyIC, U_o)
 
 # steady state solution
 fp = open("schwarz.dat", "r")

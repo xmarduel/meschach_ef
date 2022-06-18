@@ -19,6 +19,14 @@ from meschach_vogle   import *
 import time
 import profile
 
+ERRORS_DICT = {
+   "E_UNKNOWN" : "unknowm error !!!" ,
+   "E_METHOD"  : "unknown method !!!"
+}
+WARNINGS_DICT = {
+   "W_UNKNOWN"           : "unknowm warning !"   ,
+   "W_PRECONDITIONNING"  : "unknown preconditionning !"
+}
 
 #-------------------------------------------------------------------
 #
@@ -263,11 +271,9 @@ def Py_solve2D_laplacian(MyElt, MyGeom, MyBC, MyRhsFun):
 
     else :
 
-        raise AssertionError, ERRORS_DICT["E_METHOD"]
+        raise AssertionError(ERRORS_DICT["E_METHOD"])
 
 
-
-    #delete_int_p(nb_steps)
 
     V_FREE(RHS)
     V_FREE(RHS_FUN)
@@ -623,7 +629,7 @@ def run_test():
         NBSOMM = GEOM_2D_NBSOMM_get(MyGeom)
 
         SOL_exact = v_get(NBSOMM)
-        SOL_exact = build_vec_from_function2D(MyElt, MyGeom, fun2D, SOL_exact)
+        SOL_exact = build_vec_ef_from_function2D(MyElt, MyGeom, fun2D, SOL_exact)
       
         print("diff solexacte-solapprochee = %le" % v_norm2( v_sub(SOL, SOL_exact, None) ))
 

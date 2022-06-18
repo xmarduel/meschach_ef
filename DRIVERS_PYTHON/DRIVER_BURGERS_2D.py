@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
-from sys import *
-from math import *
+import sys
+import math
 
 from meschach import *
 from meschach_adds import *
@@ -10,6 +10,15 @@ from meschach_cpgplot import *
 
 #from PDE_ALGO_BURGERS_2D import *
 #from PDE_ALGO_NAVIERSTOKES_2D import *   # ToDo
+
+ERRORS_DICT = {
+   "E_UNKNOWN" : "unknowm error !!!" ,
+   "E_METHOD"  : "unknown method !!!"
+}
+WARNINGS_DICT = {
+   "W_UNKNOWN"           : "unknowm warning !"   ,
+   "W_PRECONDITIONNING"  : "unknown preconditionning !"
+}
 
 #-------------------------------------------------------------------
 
@@ -197,7 +206,7 @@ elif PROBLEM == "NAVIER-STOKES" :
 else:
 
     print("Problem \"%s\" not yet implemented" % PROBLEM)
-    exit(EXIT_FAILURE)
+    sys.exit(EXIT_FAILURE)
 
 #----------------------- graphics output -----------------------------
 

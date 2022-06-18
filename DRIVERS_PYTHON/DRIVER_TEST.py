@@ -7,15 +7,15 @@ import sys
 from meschach          import *
 from meschach_adds     import *
 from meschach_ef       import *
-#
-#
+
+
 #
 # TEST : U(x,t) = cos(x-t) -> Ux  = -sin(x-t)
 #                             Uxx = -cos(x-t)
 #                             Ut  =  sin(x-t)
 #
 #  Ut - k.Uxx + UUx = f(x,t)  ( kappa = 1.0  ) 
-#
+
 #-------------------------------------------------------------------
 
 mem_attach_list1();
