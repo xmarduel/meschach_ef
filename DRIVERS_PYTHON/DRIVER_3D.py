@@ -152,7 +152,7 @@ Params_set_oneparam(MyParams, "main_problem","NULL", "LAPLACIAN" ) # "LAPLACIAN"
 Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P2" )    # Type d'EF : "P1","P2"
 #
 Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,BiCGStab
-Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )    # Precond : NULL, ICH, ILU, DIAG. 
+Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )    # Precond : NULL, ICH, ILU
 
 Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube" )  #  Mesh File ("cube3D_P1_v6.gmsh"  "cube3D_P1.cube" )
 #Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v6.gmsh" )  #  Mesh File ("cube3D_P1_v6.gmsh")
@@ -367,10 +367,6 @@ def Py_solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
         ILU = sp_copy(A)
         spILUfactor(ILU, 0.0)    
-
-    elif preconditionning == "DIAG" :
-
-        print("not implemented -> NULL precond")
 
     elif preconditionning == "NULL" :
 

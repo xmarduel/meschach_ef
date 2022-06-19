@@ -89,7 +89,7 @@ if READ_PARAMS_FROM_FILE == 0 :
     Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S3" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S5"
     
     Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "DIRECT-METHOD" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
-    Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU, DIAG. 
+    Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
     
     #-physical parameters------------------------------------------------------------------
     

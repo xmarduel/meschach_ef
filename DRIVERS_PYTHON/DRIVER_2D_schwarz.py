@@ -109,7 +109,7 @@ Params_set_oneparam(MyParams, "main_problem","NULL", "LAPLACIAN" )
 Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P1" )    # Type d'EF : "P1","P2", "P3"
 
 Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
-Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU, DIAG. 
+Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
 
 Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/schwarz.msh" )  #  Mesh File ("name.dat")
 Params_set_oneparam(MyParams, "geometry_params","meshtype", "gmsh" )  #  Mesh File ("name.dat")
@@ -263,10 +263,6 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
         ILU = sp_copy(A)
         spILUfactor(ILU,0.0)    
-
-    elif preconditionning == "DIAG" :
-
-        print("not implemented -> NULL precond")
 
     elif preconditionning == "NULL" :
 

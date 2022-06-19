@@ -245,10 +245,6 @@ def Py_solve2D_laplacian(MyElt, MyGeom, MyBC, MyRhsFun):
         ILU = sp_copy(A)
         spILUfactor(ILU, 0.0)
 
-    elif preconditionning == "DIAG" :
-
-        print("not implemented -> NULL precond")
-
     elif preconditionning == "NULL" :
 
         print("no precond for iterativ method")
@@ -366,7 +362,7 @@ def run_test():
                             
                 "ITERATIVE-METHOD" : {
                     "METHOD"          : "CG" ,       # "CG", "CGS", "BiCGStab"
-                    "PRECONDITIONER"  : "NULL" ,     # "NULL", "ICH", "ILU", "DIAG"
+                    "PRECONDITIONER"  : "NULL" ,     # "NULL", "ICH", "ILU"
                     "PARAMETERS" : {
                         "NMAX_ITER" : 500,
                         "EPSILON"   : 1.0e-12

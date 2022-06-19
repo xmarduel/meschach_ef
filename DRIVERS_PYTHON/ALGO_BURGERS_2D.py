@@ -79,10 +79,6 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
         ILU = sp_copy(Abc)
         spILUfactor(ILU,0.0)    
 
-    elif preconditionning == "DIAG" :
-
-        print("not implemented -> NULL precond")
-
     elif preconditionning == "NULL" :
 
         print("no precond for iterativ method")

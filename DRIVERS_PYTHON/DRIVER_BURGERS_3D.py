@@ -125,7 +125,7 @@ Params_set_oneparam(MyParams, "main_problem","NULL", "Burgers" )  # Laplacian
 Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P2" )    # Type d'EF : "P1","P2"
 
 Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "DIRECT-METHOD" )     # Methode : DIRECT-METHOD,CG,CGS
-Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU, DIAG. 
+Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
 
 Params_set_oneparam(MyParams, "geometry_params","meshfile", "cube3D_P1.cube" )  #  Mesh File ("name.dat") "MESH_P1.quad2"
                                                                                             "cube2D_P1_v3_ok2.gmsh"
@@ -245,10 +245,6 @@ def Py_solve3D_burgers( MyElt , MyGeom , MyBC , MyRhsFun ) :
         
         ILU = sp_copy(Abc)
         spILUfactor(ILU,0.0)    
-
-    elif Preconditionning == "DIAG" :
-       
-        print("not implemented -> NULL precond")
 
     elif Preconditionning == "NULL" :
        

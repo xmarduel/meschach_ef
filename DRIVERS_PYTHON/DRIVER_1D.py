@@ -188,7 +188,7 @@ def run_test():
                             
                 "ITERATIVE-METHOD" : {
                     "METHOD"          : "CG" ,       # "CG", "CGS", "BiCGStab"
-                    "PRECONDITIONER"  : "NULL" ,     # "NULL", "ICH", "ILU", "DIAG"
+                    "PRECONDITIONER"  : "NULL" ,     # "NULL", "ICH", "ILU"
                     "PARAMETERS" : {
                         "NMAX_ITER" : 500,
                         "EPSILON"   : 1.0e-14
