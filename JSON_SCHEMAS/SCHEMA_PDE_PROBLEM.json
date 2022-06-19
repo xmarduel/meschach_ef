@@ -46,7 +46,7 @@
                         "ITERATIVE-METHOD" : { "type":"object", "description":"",
                             "properties" : {
                                 "METHOD"           : { "type":"string", "description":"", "enum":["CG", "CGS", "BiCGStab"] },
-                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU", "DIAG"] },
+                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU"] },
                                 "PARAMETERS" : { "type":"object", "description":"",
                                     "properties" : {
                                         "NMAX_ITER" : { "type":"integer", "description":"" },
@@ -83,7 +83,7 @@
                         "ITERATIVE-METHOD" : { "type":"object", "description":"",
                             "properties" : {
                                 "METHOD"           : { "type":"string", "description":"", "enum":["CG", "CGS", "BiCGStab"] },
-                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU", "DIAG"] },
+                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU"] },
                                 "PARAMETERS" : { "type":"object", "description":"",
                                     "properties" : {
                                         "NMAX_ITER" : { "type":"integer", "description":"" },
@@ -124,7 +124,7 @@
                         "ITERATIVE-METHOD" : { "type":"object", "description":"",
                             "properties" : {
                                 "METHOD"           : { "type":"string", "description":"", "enum":["CG", "CGS", "BiCGStab"] },
-                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU", "DIAG"] },
+                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU"] },
                                 "PARAMETERS" : { "type":"object", "description":"",
                                     "properties" : {
                                         "NMAX_ITER" : { "type":"integer", "description":"" },

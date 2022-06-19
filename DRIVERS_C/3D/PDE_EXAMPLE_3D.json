@@ -20,7 +20,7 @@
 				
 	"ITERATIVE-METHOD" : {
                 "METHOD"          : "CG" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
-                "PRECONDITIONER"  : "null" ,     # "null", "ICH", "ILU", "DIAG"
+                "PRECONDITIONER"  : "null" ,     # "null", "ICH", "ILU"
                 "PARAMETERS" : {
                     "NMAX_ITER" : 250,
                     "EPSILON"   : 1.0e-12

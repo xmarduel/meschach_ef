@@ -455,11 +455,6 @@ VEC* _solve1D_nli(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeo
       spICHfactor(ICH);     
    }
    else
-   if ( strcmp(Preconditionning, "DIAG") == 0 )
-   {
-      printf( "not implemented -> NULL precond \n");
-   }
-   else
    if ( strcmp(Preconditionning, "NULL") == 0 )
    {
       printf( "no precond for iterativ method \n");
