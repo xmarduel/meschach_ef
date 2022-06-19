@@ -1734,14 +1734,22 @@ static void json_config_PARAMS_io_files(PARAMS* p, const json_t* config)
       return;
    }
       
-   const char *output = json_object_get_string_value(config, "OUTPUT_LOG_FILE");
+   const char *logger_file_name = json_object_get_string_value(config, "OUTPUT_LOG_FILE");
    
-   if ( output == NULL )
+   if ( logger_file_name == NULL )
    {
       return;
    }
    
-   p->io_files.fp2 = fopen(output, "w"); 
+   // then "overwrite"
+   if (p->logger != NULL)
+   {
+      fclose(p->logger);
+   }
+   
+   p->logger = fopen(logger_file_name, "w");
+   
+   printf("Using log file %s ...\n", logger_file_name);
 }
 
 /* --------------------------------------------------------------- */

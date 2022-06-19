@@ -2,5 +2,5 @@
 > python DRIVER_1D.py
 
 # view with vtk
-> vtkpython Script4vtk ....
+> python Script4vtk ....
 

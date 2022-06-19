@@ -40,8 +40,8 @@ typedef enum
 static VEC *_solve2D_lin(PRBLMt_2D_TYPE problem, const ELT_2D *MyElt, const GEOM_2D *MyGeom, const BC_2D *MyBC, const RHS_2D *MyRhsFun, const ADV_2D *MyAdvFun);
 static VEC *_solve2D_nli(PRBLMt_2D_TYPE problem, const ELT_2D *MyElt, const GEOM_2D *MyGeom, const BC_2D *MyBC, const RHS_2D *MyRhsFun, const ADV_2D *MyAdvFun);
 
-static void dump_matrix(const SPMAT * A, const char *initial_comment);
-static void dump_vector(const VEC   * b, const char *initial_comment);
+static void dump_matrix(const SPMAT * A, const char *header);
+static void dump_vector(const VEC   * b, const char *header);
 
 static void show_matrix(const SPMAT * A, const char *legend);
 
@@ -254,15 +254,15 @@ static VEC *_solve2D_lin(PRBLMt_2D_TYPE problem, const ELT_2D *MyElt, const GEOM
    RHS = v_add(RHS_FUN, RHS_BC, RHS);
    
    /* dump */
-   dump_matrix(A  , "# MATRIX  : \n");
-   dump_vector(RHS, "# RHS     : \n");
+   dump_matrix(A  , "# MATRIX  :");
+   dump_vector(RHS, "# RHS     :");
    show_matrix(A  , "A after assemblage" );
    
    transform2D_matrix_vector_with_bc( MyElt , MyGeom , MyBC , A , RHS );
 
    /* dump */
-   dump_matrix(A  , "# MATRIX + CL : \n");
-   dump_vector(RHS, "# RHS    + CL : \n");
+   dump_matrix(A  , "# MATRIX + CL :");
+   dump_vector(RHS, "# RHS    + CL :");
    show_matrix(A  , "A with CL" );   
 
    
@@ -440,23 +440,29 @@ static VEC *_solve2D_nli(PRBLMt_2D_TYPE problem, const ELT_2D *MyElt, const GEOM
 /* ------------------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------------------ */
 
-static void dump_matrix(const SPMAT *A, const char *initial_comment)
+static void dump_matrix(const SPMAT *A, const char *header)
 {
    PARAMS* MyParams = Params_get_staticparam(0);
 
-   fprintf   (MyParams->io_files.fp2, "%s\n", initial_comment);
-   sp_foutput(MyParams->io_files.fp2, A);
+   if (MyParams->logger != NULL)
+   {
+      fprintf   (MyParams->logger, "%s\n\n", header);
+      sp_foutput(MyParams->logger, A);
+   }
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------------------ */
 
-static void dump_vector(const VEC *b, const char * initial_comment)
+static void dump_vector(const VEC *b, const char * header)
 {
    PARAMS* MyParams = Params_get_staticparam(0);
 
-   fprintf  (MyParams->io_files.fp2, "%s\n", initial_comment);
-   v_foutput(MyParams->io_files.fp2, b);
+   if (MyParams->logger != NULL)
+   {
+      fprintf  (MyParams->logger, "%s\n\n", header);
+      v_foutput(MyParams->logger, b);
+   }
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------ */

@@ -32,7 +32,6 @@ static void Params_set_oneparam0_cat_graphics_interactiv2Dplots_params(PARAMS* p
 static void Params_set_oneparam0_cat_time_scheme_params(PARAMS* p, const char* field, void*  val);
 static void Params_set_oneparam0_cat_miscellaneous_params(PARAMS* p, const char* field, void*  val);
 static void Params_set_oneparam0_cat_miscellaneous_graphics(PARAMS* p, const char* field, void*  val);
-static void Params_set_oneparam0_cat_input_output_files(PARAMS* p, const char* field, void*  val);
 static void Params_set_oneparam0_cat_main_problem(PARAMS* p, const char* field, void*  val);
 
 static void Params_set_oneparam1_cat_right_hand_side_params(PARAMS* p, const char* field, int idx1, void*  val);
@@ -146,11 +145,6 @@ void Params_set_oneparam(PARAMS* p, const char* category, const char* field, voi
    if ( strcmp(category,"miscellaneous_graphics") == 0 )
    {
       Params_set_oneparam0_cat_miscellaneous_graphics(p, field, val);
-   }
-   else
-   if ( strcmp(category,"input_output_files") == 0 )
-   {
-      Params_set_oneparam0_cat_input_output_files(p, field, val);
    }
    else
    {
@@ -904,31 +898,6 @@ static void Params_set_oneparam0_cat_miscellaneous_params(PARAMS* p, const char*
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_miscellaneous_params");
    }   
-}
-
-/*-----------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------------*/
-
-static void Params_set_oneparam0_cat_input_output_files(PARAMS* p, const char* field, void*  val)
-{
-   if ( strcmp(field,"fp1") == 0 )
-   {
-      p->io_files.fp1 = (FILE*)val;
-   }
-   else
-   if ( strcmp(field,"fp2") == 0 )
-   {
-      p->io_files.fp2 = (FILE*)val;
-   }
-   else
-   if ( strcmp(field,"fp3") == 0 )
-   {
-      p->io_files.fp3 = (FILE*)val;
-   }
-   else
-   {
-      error(E_UNKNOWN, "Params_set_oneparam0_cat_input_output_files");
-   }
 }
 
 /*-----------------------------------------------------------------------------------------*/

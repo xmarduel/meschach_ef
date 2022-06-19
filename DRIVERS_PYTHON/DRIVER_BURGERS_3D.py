@@ -116,16 +116,9 @@ a = Adv3D_evalFunction(MyAdv, 0, AXEe_Y, AXEe_Z, AXEe_X,1,1,1)
 a = Adv3D_evalFunction(MyAdv, 0, AXEe_Y, AXEe_Y, AXEe_Z,1,1,1)
 
 
-#-------------------------------------------------------------------   
-
-# LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
-# ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
-#
-fp2 = open("OUTPUT.txt", "w")
+#-------------------------------------------------------------------
 
 MyParams = Params_get()
-#--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "input_output_files","fp2", fp2)
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "main_problem","NULL", "Burgers" )  # Laplacian
 #--------------------------------------------------------------------------------------
@@ -437,7 +430,5 @@ PARAMS_FREE(MyParams)
 #mem_info_file(sys.stdout,MY_LIST5) 
 #mem_info_file(sys.stdout,MY_LIST6)
 #mem_info_file(sys.stdout,MY_LIST7) 
-
-fp2.close()
 
 #----------------------------------------------------------------------

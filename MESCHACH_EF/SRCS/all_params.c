@@ -39,7 +39,6 @@ static void Params_init_graphics_interactiv1D_plots(PARAMS* p);
 static void Params_init_graphics_interactiv2D_plots(PARAMS* p);
 static void Params_init_time_scheme(PARAMS* p);
 static void Params_init_miscellaneous_params(PARAMS* p);
-static void Params_init_input_output_files(PARAMS* p);
 static void Params_init_miscellaneous_graphics(PARAMS* p);
 
 /*-----------------------------------------------------------------------------------------*/
@@ -388,12 +387,6 @@ static void Params_init_miscellaneous_graphics(PARAMS* p)
    p->misc_graphics.igeomtotalview = 0;
 }
 
-static void Params_init_input_output_files(PARAMS* p)
-{
-   p->io_files.fp2 = NULL;
-   p->io_files.fp3 = NULL;
-}
-
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
 
@@ -405,6 +398,8 @@ PARAMS* Params_get(void)
    
    /* init default datas */
    strncpy(p->problem , "", 2);
+   /* logger */
+   p->logger = NULL;
    
    Params_init_physical_parameters(p);
    Params_init_time_parameters(p);
@@ -425,7 +420,6 @@ PARAMS* Params_get(void)
    Params_init_time_scheme(p);
    Params_init_miscellaneous_params(p);
    Params_init_miscellaneous_graphics(p);
-   Params_init_input_output_files(p);
    
    return p;
 }
@@ -437,8 +431,10 @@ int  Params_free(PARAMS* p)
 {
    if ( !p ) error(E_NULL, "Params_free");
    
-   /*if (p->io_files.fp1) { fclose(p->io_files.fp1); };*/
-   if (p->io_files.fp2) { fclose(p->io_files.fp2); };
+   if (p->logger != NULL)
+   {
+      fclose(p->logger);
+   }
    
    return EXIT_SUCCESS;
 }

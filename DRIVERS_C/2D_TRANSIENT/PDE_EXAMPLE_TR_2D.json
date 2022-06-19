@@ -26,7 +26,7 @@
 				
             "ITERATIVE-METHOD" : {
                 "METHOD"          : "CG" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
-                "PRECONDITIONER"  : "ILU" ,      # null, "ICH", "ILU", "DIAG"
+                "PRECONDITIONER"  : "ILU" ,      # null, "ICH", "ILU"
                 "PARAMETERS" : {
                     "NMAX_ITER" : 250,
                     "EPSILON"   : 1.0e-12
@@ -118,8 +118,8 @@
     
     "PDE_INITIAL_CONDITION" : {
         "FUNC_DIM1_NAME" : "Zero2D",
-        "FUNC_DIM2_NAME" : "yy",
-        "FUNC_DIM3_NAME" : "zz"
+        "FUNC_DIM2_NAME" : null,
+        "FUNC_DIM3_NAME" : null
     },
     
     "PDE_RHS" : {

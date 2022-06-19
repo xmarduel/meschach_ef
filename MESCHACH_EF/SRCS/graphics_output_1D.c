@@ -510,7 +510,7 @@ static void graphics1D_vtk    (const char *filename, const ELT_1D *element, cons
    if (fp==NULL) error(E_NULL, "graphics1D_vtk");
    
    /* File VTK */
-   fprintf(fp, "# vtk DataFile Version 5.0 \n");
+   fprintf(fp, "# vtk DataFile Version 4.2 \n");
    fprintf(fp, "Solution PDE problem \n");
    fprintf(fp, "\n");
    fprintf(fp, "ASCII \n");

@@ -32,7 +32,6 @@ static void * Params_get_oneparam0_cat_graphics_interactiv2Dplots_params(const P
 static void * Params_get_oneparam0_cat_time_scheme_params(const PARAMS* p, const char* field);
 static void * Params_get_oneparam0_cat_miscellaneous_params(const PARAMS* p, const char* field);
 static void * Params_get_oneparam0_cat_miscellaneous_graphics(const PARAMS* p, const char* field);
-static void * Params_get_oneparam0_cat_input_output_files(const PARAMS* p, const char* field);
 static void * Params_get_oneparam0_cat_main_problem(const PARAMS* p, const char* field);
 
 static void * Params_get_oneparam1_cat_right_hand_side_params(const PARAMS* p, const char* field, int idx1);
@@ -138,11 +137,6 @@ void * Params_get_oneparam(const PARAMS* p, const char* category, const char* fi
    if ( strcmp(category,"miscellaneous_graphics") == 0 )
    {
       return Params_get_oneparam0_cat_miscellaneous_graphics(p, field);
-   }
-   else
-   if ( strcmp(category,"input_output_files") == 0 )
-   {
-      return Params_get_oneparam0_cat_input_output_files(p, field);
    }
    else
    if ( strcmp(category,"graphics_interactiv1D_params") == 0 )
@@ -882,33 +876,6 @@ static void * Params_get_oneparam0_cat_miscellaneous_params(const PARAMS* p, con
    else
    {
       error(E_UNKNOWN, "Params_get_oneparam0_cat_miscellaneous_params");
-   }
-
-   return NULL;
-}
-
-/*-----------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------------*/
-
-static void * Params_get_oneparam0_cat_input_output_files(const PARAMS* p, const char* field)
-{
-   if ( strcmp(field,"fp1") == 0 )
-   {
-      return p->io_files.fp1 ;
-   }
-   else
-   if ( strcmp(field,"fp2") == 0 )
-   {
-      return p->io_files.fp2;
-   }
-   else
-   if ( strcmp(field,"fp3") == 0 )
-   {
-      return p->io_files.fp3;
-   }
-   else
-   {
-      error(E_UNKNOWN, "Params_get_oneparam0_cat_input_output_files");
    }
 
    return NULL;

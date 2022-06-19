@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
-# File automatically generated - vtk version 6.1
-# date : Sat Jun 18 13:21:48 2022
+# File automatically generated - vtk version 4.2
+# date : Sun Jun 19 12:21:58 2022
 #
 import vtk
 #

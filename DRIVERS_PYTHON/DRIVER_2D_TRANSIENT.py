@@ -59,15 +59,11 @@ fun_exact = Fun2D_get()
 Fun2D_setFunctionTransientPython(fun_exact, solexacte) 
 
 
-fp2 = open("OUTPUT_PDE.dat", "w")
-
 MyParams = Params_get()
 
 #-------------------------------------------------------------------   
 # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
 # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
-#--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "input_output_files","fp2", fp2)
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "main_problem","NULL", "LAPLACIAN" )
 #--------------------------------------------------------------------------------------
@@ -376,7 +372,5 @@ mem_info_file(stdout,0)
 #mem_info_file(stdout,MY_LIST5)
 #mem_info_file(stdout,MY_LIST6)
 #mem_info_file(stdout,MY_LIST7)
-
-fp2.close()
 
 #----------------------------------------------------------------------

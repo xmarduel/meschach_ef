@@ -225,15 +225,7 @@ Rhs2D_setFunctionPython(MyRhsFun, 0, AXEe_Y, source_v)
 
 #-------------------------------------------------------------------   
 
-# LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
-# ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
-      
-fp2 = open("OUTPUT.txt", "w")
-
 MyParams = Params_get()
-#--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "input_output_files","fp2", fp2)
-#--------------------------------------------------------------------------------------
 
 Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P2" )    # Type d'EF : "P1","P2","P3"
 
@@ -437,7 +429,5 @@ mem_info_file(stdout,MY_LIST4)
 mem_info_file(stdout,MY_LIST5)
 mem_info_file(stdout,MY_LIST6)
 mem_info_file(stdout,MY_LIST7)
-
-fp2.close()
 
 #----------------------------------------------------------------------

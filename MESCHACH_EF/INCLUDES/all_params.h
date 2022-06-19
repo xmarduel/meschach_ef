@@ -366,21 +366,13 @@ typedef struct {
 } PARAMS_miscellaneous_params ;
 
 /*******************************************/
-typedef struct {
-   
-   FILE* fp1;
-   FILE* fp2;
-   FILE* fp3;
-   
-} PARAMS_input_output_files ;
-
-
-/*******************************************/
 /*******************************************/
 
 typedef struct {
    
    char problem[128];  /* main problem */
+   
+   FILE* logger;
    
    PARAMS_finite_elements        ef_params;
    PARAMS_physical_parameters    phys_params;
@@ -401,7 +393,6 @@ typedef struct {
    PARAMS_graphics_interactiv2D_plots  graph_interactiv2Dplots_params;
    PARAMS_miscellaneous_params   misc_params;
    PARAMS_miscellaneous_graphics misc_graphics;
-   PARAMS_input_output_files     io_files;
    
 } PARAMS ;
 
@@ -458,9 +449,6 @@ void* Params_get_oneparam2(const PARAMS* p, const char* category, const char* fi
 *   PARAMS_graphics_contourplots  graph_contourplots_params; \n
 *   PARAMS_miscellaneous_params   misc_params; \n
 *   PARAMS_miscellaneous_graphics misc_graphics; \n
-*
-*   PARAMS_input_output_files   io_files;
-*
 */
 
 /*! \fn Params_get(void)
@@ -499,8 +487,6 @@ void* Params_get_oneparam2(const PARAMS* p, const char* category, const char* fi
 *  "graphics_plots"         \n
 *  "miscellaneous_params"   \n
 *  "miscellaneous_graphics" \n
-*
-*  "input_output_files" \n
 *
 * the field depends on the category and is a string corresponding to the name of the member of the corresponding structure \n
 *
@@ -640,8 +626,3 @@ void* Params_get_oneparam2(const PARAMS* p, const char* category, const char* fi
 /*! \struct PARAMS_miscellaneous_params
 * \brief the structure for storing miscellaneous parameters
 */
-
-/*! \struct PARAMS_input_output_files
-* \brief the structure for storing miscellaneous parameters
-*/
-

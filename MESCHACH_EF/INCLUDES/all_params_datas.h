@@ -55,7 +55,6 @@ typedef struct
 #define TYPEd_STRING       1
 #define TYPEd_INT          2
 #define TYPEd_REAL         3
-#define TYPEd_FILE         4
 #define TYPEd_CHAR         6
 #define TYPEd_FUN_1D       7
 #define TYPEd_FUN_2D       8
@@ -200,14 +199,7 @@ static TYPE_PARAMS0 params_list0[] =
    { "miscellaneous_graphics", "ispmatpattern"   , TYPEd_INT },
    { "miscellaneous_graphics", "igeomview"       , TYPEd_INT },
    { "miscellaneous_graphics", "igeomcontourview", TYPEd_INT },
-   { "miscellaneous_graphics", "igeomtotalview"  , TYPEd_INT },
-
-   { "input_output_files"    , "fp1"             , TYPEd_FILE },
-   { "input_output_files"    , "fp2"             , TYPEd_FILE },
-   { "input_output_files"    , "fp3"             , TYPEd_FILE },
-
-   { NULL                    , NULL              , TYPEd_FILE }
-   
+   { "miscellaneous_graphics", "igeomtotalview"  , TYPEd_INT },   
 };   
 
 

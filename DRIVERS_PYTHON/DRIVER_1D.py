@@ -208,7 +208,7 @@ def run_test():
             }
         },
       
-        "OUTPUT_LOG_FILE"    : "toto.txt"
+        "OUTPUT_LOG_FILE"    : "output.txt"
 
     } ))
                             

@@ -124,11 +124,6 @@ PARAMS*  Params_append_from_string(PARAMS* p, const char* text);
 	                 }
                          break;
 
-      case TYPEd_FILE:   {
-                         int fd = PyObject_AsFileDescriptor($input);
-                         $1 = fdopen(fd, "w");
-                         }
-                         break;
 
       case TYPEd_REAL_VECTOR:
 			if (PyList_Check($input))
@@ -225,7 +220,6 @@ void  Params_set_oneparam2(PARAMS* p, const char* category, const char* field, i
       case TYPEd_FUN_1D: $result = SWIG_NewPointerObj((void *) $1, SWIGTYPE_p_FUN_1D, 0); break;
       case TYPEd_FUN_2D: $result = SWIG_NewPointerObj((void *) $1, SWIGTYPE_p_FUN_2D, 0); break;
       case TYPEd_FUN_3D: $result = SWIG_NewPointerObj((void *) $1, SWIGTYPE_p_FUN_3D, 0); break;
-      case TYPEd_FILE:      /* do not try to get back a file */
       case TYPEd_UNDEFINED: /* return when arg2 and arg3 do not exist */
          {
          snprintf(msg, 128, "In SWIG_INTERFACE_M_EF_params : category = %s and field = %s are unknown \n", arg2, arg3);

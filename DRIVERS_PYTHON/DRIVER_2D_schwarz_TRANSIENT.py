@@ -1,15 +1,51 @@
 #! /usr/bin/env python
 
-from sys  import *
-from math import *
-from time import *
+import sys
+from math import cos, sin, sqrt, pi, exp
+import time
 import threading
+import profile
 
 from meschach          import *
 from meschach_adds     import *
 from meschach_ef       import *
 from meschach_vogle    import *
 
+#-------------------------------------------------------------------
+#
+# see "Finite Elements Methods"  H.R. Schwarz
+#
+# Chapter 6, p. 369
+#
+# The non-stationnary problem is solved and gives perfect results
+#
+#-------------------------------------------------------------------
+#
+#                         ref = 2
+#                    *-------------*
+#                    !             !
+#          ref = 1   !             ! ref = 2
+#                    *             *
+#                    !          /
+#                    !       /
+#                    !     !
+#                    !     ! ref = 3
+#                    !     !
+#       ref = 2      !      \
+#                    !          \
+#                    !             *
+#                    !             ! ref = 2
+#                    !             !
+#                    *-------------*
+#                      ref = 2
+#
+# There is a mix of BC:
+# - Dirichlet (ref = 1)
+# - Neumann (ref = 2)
+# - Cauchy (ref = 3)
+#
+# so this is a good example
+#
 #-------------------------------------------------------------------
 
 mem_attach_list1()
@@ -42,15 +78,11 @@ def bc_neumann(x,y):
 def bc_cauchy(x,y):
     return 2.0
 
-fp2 = open("OUTPUT_PDE.dat", "w")
-
 MyParams = Params_get()
 
 #-------------------------------------------------------------------   
 # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
 # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
-#--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "input_output_files","fp2", fp2)
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "main_problem","NULL", "LAPLACIAN" )
 #--------------------------------------------------------------------------------------
@@ -68,7 +100,7 @@ Params_set_oneparam(MyParams, "physical_params","epsilon",  0.0 ) # epsilon  -k*
 #-time parameters------------------------------------------------------------------
 
 Params_set_oneparam(MyParams, "time_params","TPS_INI",    0.0  )
-Params_set_oneparam(MyParams, "time_params","TPS_FIN",    60.0  )
+Params_set_oneparam(MyParams, "time_params","TPS_FIN",    100.0  )
 Params_set_oneparam(MyParams, "time_params","DT",         0.10  )
 
 #- geometry-----------------------------------------------------------------------------
@@ -275,7 +307,7 @@ t1.start()
 			
 #---------------------------------------------------------------------
 
-atime_start = time()
+atime_start = time.time()
 
 itstat = Params_get_oneparam(MyParams, "miscellaneous_params", "itstat")
 itgraph = Params_get_oneparam(MyParams, "miscellaneous_params", "itgraph")
@@ -286,7 +318,7 @@ for k in range(1,NBITER+1):
 
     TPS    = k*DT
 	 
-    print("k = %d => TIME = %lf" % (k, TPS))
+    #print("k = %d => TIME = %lf" % (k, TPS))
 	 
     # set the curent time in the functions structs
     Bc2D_setTps (MyBC, TPS)
@@ -321,7 +353,7 @@ for k in range(1,NBITER+1):
 		  
         U_diff = v_sub(U_n, U_steadystate, U_diff)
         diff = v_norm2(U_diff)
-        print("time = " , TPS , " --> |sol_steadystate - sol_approchee| = " , diff)
+        print("time = " , TPS , " --> ||sol_steadystate - sol_approchee|| = " , diff)
 
     #-----------------------  plot -------------------------
     if itgraph > 0 and k % itgraph == 0 :
@@ -339,12 +371,11 @@ for k in range(1,NBITER+1):
     v_copy(U_n, U_nm1)
 
 
-atime_end = time()
+atime_end = time.time()
 
 print(">>>>>>> TOTAL TIME = ", atime_end - atime_start)
 
 
-#
 # free memory
 # -----------
 
@@ -359,16 +390,14 @@ PARAMS_FREE(MyParams)
 
 #---------------------------------------------------------------------
 
-mem_info_file(stdout,0)
+mem_info_file(sys.stdout,0)
 
-#mem_info_file(stdout,MY_LIST1)
-#mem_info_file(stdout,MY_LIST2)
-#mem_info_file(stdout,MY_LIST3)
-#mem_info_file(stdout,MY_LIST4)
-#mem_info_file(stdout,MY_LIST5)
-#mem_info_file(stdout,MY_LIST6)
-#mem_info_file(stdout,MY_LIST7)
-
-fp2.close()
+#mem_info_file(sys.stdout,MY_LIST1)
+#mem_info_file(sys.stdout,MY_LIST2)
+#mem_info_file(sys.stdout,MY_LIST3)
+#mem_info_file(sys.stdout,MY_LIST4)
+#mem_info_file(sys.stdout,MY_LIST5)
+#mem_info_file(sys.stdout,MY_LIST6)
+#mem_info_file(sys.stdout,MY_LIST7)
 
 #----------------------------------------------------------------------

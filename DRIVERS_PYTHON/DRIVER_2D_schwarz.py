@@ -1,10 +1,11 @@
 #! /usr/bin/env python
-#
+
 import sys
 from   math  import cos, sin, sqrt, pi, exp
 import time
 import threading
-#
+import profile
+
 from meschach         import *
 from meschach_spooles import *
 from meschach_lapack  import *
@@ -12,11 +13,14 @@ from meschach_adds    import *
 from meschach_ef      import *
 from meschach_cpgplot import *
 from meschach_vogle   import *
+
+#-------------------------------------------------------------------
 #
+# see "Finite Elements Methods"  H.R. Schwarz
 #
-import time
-import profile
+# Chapter 6, p. 317
 #
+# The stationnary problem is solved there and givers perfect results
 #
 #-------------------------------------------------------------------
 #
@@ -27,8 +31,8 @@ import profile
 #                    *             *
 #                    !          / 
 #                    !       /    
+#                    !     !
 #                    !     ! ref = 3
-#                    !     * 
 #                    !     !
 #       ref = 2      !      \
 #                    !          \
@@ -38,10 +42,15 @@ import profile
 #                    *-------------*
 #                      ref = 2
 #
+# There is a mix of BC:
+# - Dirichlet (ref = 1)
+# - Neumann (ref = 2)
+# - Cauchy (ref = 3)
 #
+# so this is a good example
 #
-#
-#
+#-------------------------------------------------------------------
+
 mem_attach_list1()
 mem_attach_list2()
 mem_attach_list3()
@@ -91,12 +100,9 @@ Rhs2D_setFunctionPython(MyRhsFun, 0, AXEe_X, laplacian_src) # ref_e=0, axe=1
 #
 # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
 # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
-#      
-fp2 = open("OUTPUT.txt", "w")
+#
 
 MyParams = Params_get()
-#--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "input_output_files", "fp2", fp2)
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "main_problem","NULL", "LAPLACIAN" )
 #--------------------------------------------------------------------------------------
@@ -170,8 +176,7 @@ MyGeom = Geom2D_get(MyElt,
         Params_get_oneparam(MyParams, "geometry_params", "meshname"),
         Params_get_oneparam(MyParams, "geometry_params", "meshtype"))
 
-Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)  
-Geom2D_foutput(fp2, MyGeom)  
+Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 
 # --------------------------------------------------------------------
 # --------------------------------------------------------------------
@@ -439,8 +444,6 @@ PARAMS_FREE(MyParams)
 #mem_info_file(sys.stdout,MY_LIST5) 
 #mem_info_file(sys.stdout,MY_LIST6)
 #mem_info_file(sys.stdout,MY_LIST7) 
-
-fp2.close()
 
 #----------------------------------------------------------------------
 

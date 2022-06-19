@@ -72,19 +72,9 @@ def run_test():
         return  U(x,t)
 
 
-    fp2 = open("OUTPUT_PDE.dat", "w")
-
     MyParams = Params_get()
 
-
-    #-------------------------------------------------------------------   
-    # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
-    # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
-    #--------------------------------------------------------------------------------------
-    Params_set_oneparam(MyParams, "input_output_files","fp2", fp2)
-    #--------------------------------------------------------------------------------------
     Params_set_oneparam(MyParams, "main_problem","NULL", "Kuramoto-Sivashinski" )
-    #--------------------------------------------------------------------------------------
     Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S4" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S4", "S5"
 
     Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "DIRECT-METHOD" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
@@ -841,8 +831,6 @@ def run_test():
     mem_info_file(sys.stdout,MY_LIST5) 
     mem_info_file(sys.stdout,MY_LIST6) 
     mem_info_file(sys.stdout,MY_LIST7)
-
-    fp2.close()
 
 #----------------------------------------------------------------------
 

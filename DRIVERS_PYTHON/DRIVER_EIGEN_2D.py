@@ -81,14 +81,7 @@ Adv2D_setFunctionPython(MyAdvFun, 0, AXEe_X, AXEe_Y, AXEe_X, bc1) # ref_e=0, axe
 
 #-------------------------------------------------------------------   
 
-# LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
-# ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
-#
-fp2 = open("OUTPUT.txt", "w")
-
 MyParams = Params_get()
-#--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "input_output_files","fp2", fp2)
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "main_problem","NULL", "HELMHOLZ" ) # CONVECTION-DIFFUSION  LAPLACIAN
 #--------------------------------------------------------------------------------------
@@ -267,7 +260,5 @@ mem_info_file(sys.stdout,0)
 #mem_info_file(sys.stdout,MY_LIST5) 
 #mem_info_file(sys.stdout,MY_LIST6)
 #mem_info_file(sys.stdout,MY_LIST7) 
-
-fp2.close()
 
 #----------------------------------------------------------------------

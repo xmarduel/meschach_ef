@@ -81,15 +81,12 @@ def bc_right(x,t):
     return  U(x,t);
 
 
-fp2 = open("OUTPUT_PDE.dat", "w");
 
 MyParams = Params_get();
 
 #-------------------------------------------------------------------   
 # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
 # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
-#--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "input_output_files","fp2", fp2)
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "H3" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S5"
 
