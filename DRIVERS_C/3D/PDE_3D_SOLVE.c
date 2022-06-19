@@ -113,7 +113,7 @@ int  main()
 			MyParams->geom_params.meshname,
 			MyParams->geom_params.meshtype);
 
-   Geom3D_foutput(MyParams->io_files.fp2, MyGeom);
+   //Geom3D_foutput(MyParams->logger, MyGeom);
 
    MyBC = Bc3D_setup_from_params(MyParams);
    
@@ -162,7 +162,7 @@ int  main()
       graphics3D_fun("vtk", MyElt , MyGeom , fun3D, "Sol_Exacte");
       
       VEC *sol_exacte = v_get(MyGeom->NBSOMM);
-      sol_exacte = build_vec_from_function3D(MyElt, MyGeom, fun3D, sol_exacte);
+      sol_exacte = build_vec_ef_from_function3D(MyElt, MyGeom, fun3D, sol_exacte);
       
       VEC *v_diff = v_get(MyGeom->NBSOMM);
       double diff = v_norm2( v_sub(SOL, sol_exacte, v_diff) );

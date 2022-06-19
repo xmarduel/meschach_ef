@@ -264,26 +264,26 @@ Params_set_oneparam(MyParams, "stokes_params", "augmentedlagrangian.innerloop_so
 Params_set_oneparam(MyParams, "stokes_params", "augmentedlagrangian.innerloop_solver.max_steps", 1000 )
 #--------------------------------------------------------------------------------------
 
-Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/mesh2D.quad" )  #  Mesh File ("name.dat") "MESH_P1.quad2"
-#Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/kovasznay1.msh" )  #  Mesh File ("name.dat") "MESH_P1.quad2"
-#Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/kovasznay2.msh" )  #  Mesh File ("name.dat") "MESH_P1.quad2"
-#Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CANAL_6.emc2" )   #  Mesh File ("name.dat") "MESH_P1.quad2"
-#Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CANAL_7.emc2" )   #  Mesh File ("name.dat") "MESH_P1.quad2"
-#Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CN41_16.emc2" )    #  Mesh File ("name.dat") "MESH_P1.quad2"
-#Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CUBE_11.emc2" )  #  Mesh File ("name.dat") "MESH_P1.quad2"CUBE_11.emc2
-Params_set_oneparam(MyParams, "geometry_params","meshtype", "quad2" )     #
-#Params_set_oneparam(MyParams, "geometry_params","meshtype", "emc2" )     #
-#Params_set_oneparam(MyParams, "geometry_params","meshtype", "gmsh" )     #
+Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/mesh2D.quad" )  #  Mesh File ("name.dat") "MESH_P1.quad2"
+#Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/kovasznay1.msh" )  #  Mesh File ("name.dat") "MESH_P1.quad2"
+#Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/kovasznay2.msh" )  #  Mesh File ("name.dat") "MESH_P1.quad2"
+#Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CANAL_6.emc2" )   #  Mesh File ("name.dat") "MESH_P1.quad2"
+#Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CANAL_7.emc2" )   #  Mesh File ("name.dat") "MESH_P1.quad2"
+#Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CN41_16.emc2" )    #  Mesh File ("name.dat") "MESH_P1.quad2"
+#Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CUBE_11.emc2" )  #  Mesh File ("name.dat") "MESH_P1.quad2"CUBE_11.emc2
+Params_set_oneparam(MyParams, "geometry_params", "meshtype", "quad2" )     #
+#Params_set_oneparam(MyParams, "geometry_params", "meshtype", "emc2" )     #
+#Params_set_oneparam(MyParams, "geometry_params", "meshtype", "gmsh" )     #
 Params_set_oneparam(MyParams, "geometry_params","meshname", "MESH_20" )     # only for "quad" files
 
-Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",      0) # GNUPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",        0) # GRAPH
-Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",       0) # MATLAB
-Params_set_oneparam(MyParams, "graphics_output_params","VTK",          1) # VTK
-Params_set_oneparam(MyParams, "graphics_output_params","SILO",         1) # SILO
-Params_set_oneparam(MyParams, "graphics_output_params","PGPLOT",       0) # PGPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","VOGLE",        0) # VOGLE
-Params_set_oneparam(MyParams, "graphics_output_params","LIBSCIPLOT",   0) # LIBSCIPLOT   (0=NO;1=YES)
+Params_set_oneparam(MyParams, "graphics_output_params", "GNUPLOT",      0) # GNUPLOT
+Params_set_oneparam(MyParams, "graphics_output_params", "GRAPH",        0) # GRAPH
+Params_set_oneparam(MyParams, "graphics_output_params", "MATLAB",       0) # MATLAB
+Params_set_oneparam(MyParams, "graphics_output_params", "VTK",          1) # VTK
+Params_set_oneparam(MyParams, "graphics_output_params", "SILO",         1) # SILO
+Params_set_oneparam(MyParams, "graphics_output_params", "PGPLOT",       0) # PGPLOT
+Params_set_oneparam(MyParams, "graphics_output_params", "VOGLE",        0) # VOGLE
+Params_set_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT",   0) # LIBSCIPLOT   (0=NO;1=YES)
 
 #-physical parameters------------------------------------------------------------------
 

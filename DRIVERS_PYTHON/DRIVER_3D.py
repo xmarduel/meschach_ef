@@ -154,11 +154,11 @@ Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P2" )    # Ty
 Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,BiCGStab
 Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )    # Precond : NULL, ICH, ILU, DIAG. 
 
-#Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube" )  #  Mesh File ("cube3D_P1_v6.gmsh"  "cube3D_P1.cube" )
+Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube" )  #  Mesh File ("cube3D_P1_v6.gmsh"  "cube3D_P1.cube" )
 #Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v6.gmsh" )  #  Mesh File ("cube3D_P1_v6.gmsh")
-Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v7.gmsh" )  #  Mesh File ("cube3D_P1_v6.gmsh")
-#Params_set_oneparam(MyParams, "geometry_params","meshtype", "cube" )
-Params_set_oneparam(MyParams, "geometry_params","meshtype", "gmsh" )  #
+#Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v7.gmsh" )  #  Mesh File ("cube3D_P1_v6.gmsh")
+Params_set_oneparam(MyParams, "geometry_params","meshtype", "cube" )
+#Params_set_oneparam(MyParams, "geometry_params","meshtype", "gmsh" )  #
 Params_set_oneparam(MyParams, "geometry_params","meshname", "MESH_10" )  #  
 
 Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     0) # GNUPLOT

@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
-
-from sys import *
+import sys
 from math import *
 
 from meschach import *
@@ -55,7 +54,7 @@ def cv2(x,y,z):
     #print("cv2: x,y,z=",x,y,z)
     return  ( 20*y*(1-y)*z*(1-z) )
 def cv3(x,y,z):
-    print("cv3: x,y,z=",x,y,z)
+    #print("cv3: x,y,z=",x,y,z)
     return  ( 10*x*(1-x)*z*(1-z) )
 
 
@@ -84,10 +83,10 @@ Bc3D_setBcType(MyBC, BC_3De_DIRICHLET, 6, AXEe_Z )
 
 
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 1, AXEe_X, cv1) # z = 1
-Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 2, AXEe_X, bc0) # x = 1
+Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 2, AXEe_X, cv1) # z = 0
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 3, AXEe_X, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 4, AXEe_X, bc0)
-Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 5, AXEe_X, bc0) # z = 0
+Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 5, AXEe_X, bc0) 
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 6, AXEe_X, bc0)
 
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 1, AXEe_Y, bc0) 
@@ -139,65 +138,64 @@ Rhs3D_setCFunction(MyRhsFun, 0, AXEe_Z, Src3D_00) # ref_e=0
 
 MyParams = Params_get()
 
-Params_set_oneparam(MyParams, "main_problem","NULL", "Stokes" )
-Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P2" )    # Type d'EF : "P1","P2", "P1b"
+Params_set_oneparam(MyParams, "main_problem", "NULL", "STOKES" )
+Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "P2" )    # Type d'EF : "P2", "P1b"
 
-Params_set_oneparam(MyParams, "stokes_params","method", "PRESSUREMATRIX" ) # "PRESSUREMATRIX" "UZAWA"
-Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.iterative_solver.bandwidth_option", "BANDWRe_SPOOLES" )  
-Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.iterative_solver.bandwidth_method", "BANDWRe_SPOOLES_NONSYM" ) 
-Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.innerloop_method", "DIRECT-METHOD" )  # "DIRECT-METHOD" "ITERATIV-METHOD"  
+Params_set_oneparam(MyParams, "stokes_params", "method", "PRESSUREMATRIX" ) # "PRESSUREMATRIX" "UZAWA" "AUGMENTEDLAGR"
+Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.innerloop_method", "DIRECT-METHOD" )  # "DIRECT-METHOD" "ITERATIV-METHOD"
+Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.innerloop_solver.bandwidth_option", BANDWRe_SPOOLES )
+Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.innerloop_solver.bandwidth_method", BANDWRe_SPOOLES_NONSYM )
+
 #Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.iterative_solver.eps_steps", 1.0e-12 )  
 #Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.iterative_solver.max_steps", 500 )
 
-Params_set_oneparam(MyParams, "stokes_params", "uzawa_rho"         , 0.50 ) #  for "UZAWA" 
-Params_set_oneparam(MyParams, "stokes_params", "augmentedlagr_rho" , 0.50 ) #  for "AUGMENTEDLAGR"
+Params_set_oneparam(MyParams, "stokes_params", "uzawa.rho"         , 0.50 ) #  for "UZAWA" 
+Params_set_oneparam(MyParams, "stokes_params", "augmentedlagrangian.rho" , 0.50 ) #  for "AUGMENTEDLAGR"
 
 #--------------------------------------------------------------------------------------
 
-Params_set_oneparam(MyParams, "geometry_params","meshfile", "cube3D_P1.cube" )  #  Mesh File ("name.dat") 
-#Params_set_oneparam(MyParams, "geometry_params","meshfile", "cube3D_P1_v6.gmsh" )  #  Mesh File ("name.dat") 
-Params_set_oneparam(MyParams, "geometry_params","meshtype", "cube" )     # 
-Params_set_oneparam(MyParams, "geometry_params","meshname", "MESH_10" )     # only for "cube" files
+Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube" )  #  Mesh File ("cube3D_P1_v6.gmsh"  "mesh3D.cube" )
+#Params_set_oneparam(MyParams, "geometry_params", "meshfile", "cube3D_P1_v6.gmsh" )  #  Mesh File ("name.dat")
+Params_set_oneparam(MyParams, "geometry_params", "meshtype", "cube" )     # "cube", "gmsh"
+Params_set_oneparam(MyParams, "geometry_params", "meshname", "MESH_10" )     # only for "cube" files
 
-Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     0) # GNUPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",       0) # GRAPH
-Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
-Params_set_oneparam(MyParams, "graphics_output_params","VTK",         1) # VTK
-Params_set_oneparam(MyParams, "graphics_output_params","SILO",        1) # SILO
-Params_set_oneparam(MyParams, "graphics_output_params","PGPLOT",      0) # PGPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","VOGLE",       0) # VOGLE
-Params_set_oneparam(MyParams, "graphics_output_params","LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO;1=YES)
+Params_set_oneparam(MyParams, "graphics_output_params", "GNUPLOT",     0) # GNUPLOT
+Params_set_oneparam(MyParams, "graphics_output_params", "GRAPH",       0) # GRAPH
+Params_set_oneparam(MyParams, "graphics_output_params", "MATLAB",      0) # MATLAB
+Params_set_oneparam(MyParams, "graphics_output_params", "VTK",         1) # VTK
+Params_set_oneparam(MyParams, "graphics_output_params", "SILO",        1) # SILO
+Params_set_oneparam(MyParams, "graphics_output_params", "PGPLOT",      0) # PGPLOT
+Params_set_oneparam(MyParams, "graphics_output_params", "VOGLE",       0) # VOGLE
+Params_set_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO;1=YES)
 
 #-physical parameters------------------------------------------------------------------
 
-Params_set_oneparam(MyParams, "physical_params","epsilon",    0.0  ) # epsilon
-Params_set_oneparam(MyParams, "physical_params","sigma",      0.0   ) # sigma
-Params_set_oneparam(MyParams, "physical_params","kappa",      1.0   ) # kappa  -k*LAPLACIEN(u)+ e.BILAPL(u) +sigma.u =F
+Params_set_oneparam(MyParams, "physical_params", "epsilon",    0.0  ) # epsilon
+Params_set_oneparam(MyParams, "physical_params", "sigma",      0.0   ) # sigma
+Params_set_oneparam(MyParams, "physical_params", "kappa",      1.0   ) # kappa  -k*LAPLACIEN(u)+ e.BILAPL(u) +sigma.u =F
 
 #Params_set_oneparam(MyParams, "convective_terms_params","b1",   1   )
 #Params_set_oneparam(MyParams, "convective_terms_params","b2",   1   )
 #Params_set_oneparam(MyParams, "convective_terms_params","b3",   1   ) # choix de b=(b1,b2,b3) in -e*DD(u) + b.D(u) +sigma.u =F
 
-Params_set_oneparam(MyParams, "convective_terms_params","delta",     0.10) # delta
-Params_set_oneparam(MyParams, "convective_terms_params","rho_stab",  0.50) # rho_stab parametres of stab (SUPG,GALS ..)
+Params_set_oneparam(MyParams, "convective_terms_params", "delta",     0.10) # delta
+Params_set_oneparam(MyParams, "convective_terms_params", "rho_stab",  0.50) # rho_stab parameter of stab (SUPG,GALS ..)
 
 #-parameter for the resolution of the linear system------------------------------------
 
-Params_set_oneparam(MyParams, "matrix_solver_params","max_steps",   500  ) # max_iter de la methode iterative
-Params_set_oneparam(MyParams, "matrix_solver_params","eps_steps", 1.e-8) # eps_iter arret des iterations "  "  "   "
-#Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_MESCHACH)       # BANDWRe_MESCHACH BANDWRe_SPOOLES
-#Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_AMD)       # BANDWRe_MESCHACH BANDWRe_SPOOLES
-#Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_SPOOLES)       # BANDWRe_MESCHACH BANDWRe_SPOOLES
-#Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_BAND)       # USE BAND WIDTH REDUCTION
-#Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_PROFILE)       # USE BAND WIDTH REDUCTION
-#Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_SPOOLES_SYM)   # USE BAND WIDTH REDUCTION
-#Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_SPOOLES_NONSYM)   # USE BAND WIDTH REDUCTION
-#Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_MESCHACH_BAND)       # USE BAND WIDTH REDUCTION
-#Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_MESCHACH_PROFILE)       # USE BAND WIDTH REDUCTION
-
-
-Params_set_oneparam(MyParams, "miscellaneous_params","iter_info", ITER_INFOe_ALL   )     # iter_info 
-Params_set_oneparam(MyParams, "miscellaneous_params","iter_file", "the_residuals.dat"  ) # iter_file le nom du fichier
+Params_set_oneparam(MyParams, "matrix_solver_params", "max_steps",   500  ) # max_iter de la methode iterative
+Params_set_oneparam(MyParams, "matrix_solver_params", "eps_steps", 1.e-8) # eps_iter arret des iterations "  "  "   "
+#Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_MESCHACH)       # BANDWRe_MESCHACH BANDWRe_SPOOLES
+#Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_AMD)       # BANDWRe_MESCHACH BANDWRe_SPOOLES
+#Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_SPOOLES)       # BANDWRe_MESCHACH BANDWRe_SPOOLES
+#Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_BAND)       # USE BAND WIDTH REDUCTION
+#Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_PROFILE)       # USE BAND WIDTH REDUCTION
+#Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_SPOOLES_SYM)   # USE BAND WIDTH REDUCTION
+#Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_SPOOLES_NONSYM)   # USE BAND WIDTH REDUCTION
+#Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_MESCHACH_BAND)       # USE BAND WIDTH REDUCTION
+#Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_MESCHACH_PROFILE)       # USE BAND WIDTH REDUCTION
+Params_set_oneparam(MyParams, "matrix_solver_params", "iter_info", ITER_INFOe_ALL   )     # iter_info
+Params_set_oneparam(MyParams, "matrix_solver_params", "iter_file", "the_residuals.dat"  ) # iter_file le nom du fichier
 
 
 Params_set_staticparam(MyParams, 0)
@@ -219,7 +217,10 @@ else :
 
 #--------------------------------------------------------------------
 
-MyGeom = Geom3D_get(MyElt, Params_get_oneparam(MyParams, "geometry_params", "meshfile"))
+MyGeom = Geom3D_get(MyElt,
+                    Params_get_oneparam(MyParams, "geometry_params", "meshfile"),
+                    Params_get_oneparam(MyParams, "geometry_params", "meshname"),
+                    Params_get_oneparam(MyParams, "geometry_params", "meshtype"))
 
 Geom3D_check_with_boundaryconditions(MyGeom , MyBC, AXEe_X )  
 Geom3D_check_with_boundaryconditions(MyGeom , MyBC, AXEe_Y )
@@ -251,8 +252,8 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-	 print("Problem \"%s\" not yet implemented" % PROBLEM)
-    exit(EXIT_FAILURE)
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
+    sys.exit(sys.EXIT_FAILURE)
 
    
 #----------------------- graphics output -----------------------------
@@ -267,10 +268,10 @@ elif PROBLEM == "CONVECTION-DIFFUSION" :
 
 elif PROBLEM == "STOKES" :
 
-    graphics3D( "vtk" , MyElt , MyGeom , U , "Stokes3D_U_")
-    graphics3D( "vtk" , MyElt , MyGeom , V , "Stokes3D_V_")
-    graphics3D( "vtk" , MyElt , MyGeom , W , "Stokes3D_W_")
-    graphics3D( "vtk" , MyEltM1 , GEOM_3D_geomBase_get(MyGeom), P , "Stokes3D_P_")
+    #graphics3D( "vtk" , MyElt , MyGeom , U , "Stokes3D_U_")
+    #graphics3D( "vtk" , MyElt , MyGeom , V , "Stokes3D_V_")
+    #graphics3D( "vtk" , MyElt , MyGeom , W , "Stokes3D_W_")
+    #graphics3D( "vtk" , MyEltM1 , GEOM_3D_geomBase_get(MyGeom), P , "Stokes3D_P_")
     graphics3D_stokes("vtk", MyElt , MyGeom , U,V,W,P, "Stokes3D")
         
     #graphics3D( "silo" , MyElt , MyGeom , U , "Stokes3D_U_")
@@ -280,7 +281,7 @@ elif PROBLEM == "STOKES" :
 
 elif PROBLEM == "NAVIER-STOKES" :
 
-	 graphics3D( "vtk" , MyElt , MyGeom , U , "NavierStokes3D_U_")
+    graphics3D( "vtk" , MyElt , MyGeom , U , "NavierStokes3D_U_")
     graphics3D( "vtk" , MyElt , MyGeom , V , "NavierStokes3D_V_")
     graphics3D( "vtk" , MyElt , MyGeom , W , "NavierStokes3D_W_")
     graphics3D( "vtk" , MyEltM1 , GEOM_3D_geomBase_get(MyGeom), P , "NavierStokes3D_P_")
@@ -288,8 +289,8 @@ elif PROBLEM == "NAVIER-STOKES" :
 
 else:
 
-	 print("Problem \"%s\" not yet implemented" % PROBLEM)
-	 exit(EXIT_FAILURE)
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
+    sys.exit(sys.EXIT_FAILURE)
 
 #---------------------------------------------------------------------
 
@@ -311,14 +312,14 @@ ELT_3D_FREE(elt_P2)
 
 #---------------------------------------------------------------------
 
-mem_info_file(stdout,0)
+mem_info_file(sys.stdout,0)
 
-mem_info_file(stdout,MY_LIST1)
-mem_info_file(stdout,MY_LIST2)
-mem_info_file(stdout,MY_LIST3)
-mem_info_file(stdout,MY_LIST4)
-mem_info_file(stdout,MY_LIST5)
-mem_info_file(stdout,MY_LIST6)
-mem_info_file(stdout,MY_LIST7) 
+mem_info_file(sys.stdout,MY_LIST1)
+mem_info_file(sys.stdout,MY_LIST2)
+mem_info_file(sys.stdout,MY_LIST3)
+mem_info_file(sys.stdout,MY_LIST4)
+mem_info_file(sys.stdout,MY_LIST5)
+mem_info_file(sys.stdout,MY_LIST6)
+mem_info_file(sys.stdout,MY_LIST7) 
 
 #----------------------------------------------------------------------

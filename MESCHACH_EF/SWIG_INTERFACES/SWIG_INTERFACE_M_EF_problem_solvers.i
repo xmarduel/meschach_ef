@@ -157,13 +157,13 @@ PyObject *Py_solve3D_stokes(ELT_3D *eltP2, ELT_3D *eltP1, GEOM_3D *Geom, BC_3D *
 	}
 	else
 	{
-                return exception_catcher(exception_status);
-        }
+      return exception_catcher(exception_status);
+   }
     
 	resultobj = Py_BuildValue("(OOOO)",SWIG_NewPointerObj((void *) U, SWIGTYPE_p_VEC, 0),
 	                                   SWIG_NewPointerObj((void *) V, SWIGTYPE_p_VEC, 0),
 	                                   SWIG_NewPointerObj((void *) W, SWIGTYPE_p_VEC, 0),
-                                           SWIG_NewPointerObj((void *) P, SWIGTYPE_p_VEC, 0));
+                                      SWIG_NewPointerObj((void *) P, SWIGTYPE_p_VEC, 0));
 	return resultobj;
 }
 

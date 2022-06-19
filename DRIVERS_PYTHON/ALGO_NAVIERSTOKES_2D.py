@@ -260,8 +260,8 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
         
         print("iter = %d -> diff = %lf" % (n, diff))
 
-        if diff < 100*eps_steps : 
-		      break
+        if diff < 100*eps_steps :
+            break
 
 
     # get back velocity from the vector VIT
@@ -601,7 +601,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
         print("iter = %d -> diff = %ld " % (n, diff))
 
         if diff < eps_steps :
-		      break
+            break
 
 
     # get back velocity from the vector VIT
