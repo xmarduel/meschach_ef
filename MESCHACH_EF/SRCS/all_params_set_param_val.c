@@ -1024,7 +1024,7 @@ static void Params_set_oneparam1_cat_graphics_interactiv2Dplots_params(PARAMS* p
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
 
-void Params_set_oneparam2(PARAMS* p, const char* category, const char* field, int idx1, int idx2, void*  val)
+void Params_set_oneparam2(PARAMS* p, const char* category, const char* field, int idx1, int idx2, void* val)
 {
    if ( !p        ) error(E_NULL, "Params_set_oneparam2");
    if ( !category ) error(E_NULL, "Params_set_oneparam2");
@@ -1192,7 +1192,7 @@ static void Params_set_oneparam2_cat_graphics_interactiv2Dplots_params(PARAMS* p
 {
    if ( strcmp(field,"LABEL_LEGEND") == 0 )
    {
-      strncpy(p->graph_interactiv2Dplots_params.LABEL[idx1][idx2].LEGEND , (char*)val, 200-1 );
+      strncpy(p->graph_interactiv2Dplots_params.LABEL[idx1][idx2].LEGEND , (char*)val, 256-1 );
    }
    else
    if ( strcmp(field,"WINDOW_X_MAX") == 0 )

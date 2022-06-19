@@ -84,75 +84,75 @@ MyParams = Params_get()
 # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
 # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
 #--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "main_problem","NULL", "LAPLACIAN" )
+Params_set_oneparam(MyParams, "main_problem", "NULL", "LAPLACIAN" )
 #--------------------------------------------------------------------------------------
-Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P1" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S5"
+Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "P1" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S5"
 
-Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
-Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU, DIAG. 
+Params_set_oneparam(MyParams, "matrix_solver_params", "resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k)
+Params_set_oneparam(MyParams, "matrix_solver_params", "preconditionning", "NULL" )   # Precond : NULL, ICH, ILU, DIAG.
 
 #-physical parameters------------------------------------------------------------------
 
-Params_set_oneparam(MyParams, "physical_params","kappa",    1.0 ) # kappa
-Params_set_oneparam(MyParams, "physical_params","sigma",    0.0 ) # sigma
-Params_set_oneparam(MyParams, "physical_params","epsilon",  0.0 ) # epsilon  -k*LAPLACIEN(u) + e.BILAPL(u) + sigma.u =F
+Params_set_oneparam(MyParams, "physical_params", "kappa",    1.0 ) # kappa
+Params_set_oneparam(MyParams, "physical_params", "sigma",    0.0 ) # sigma
+Params_set_oneparam(MyParams, "physical_params", "epsilon",  0.0 ) # epsilon  -k*LAPLACIEN(u) + e.BILAPL(u) + sigma.u =F
 
 #-time parameters------------------------------------------------------------------
 
-Params_set_oneparam(MyParams, "time_params","TPS_INI",    0.0  )
-Params_set_oneparam(MyParams, "time_params","TPS_FIN",    100.0  )
-Params_set_oneparam(MyParams, "time_params","DT",         0.10  )
+Params_set_oneparam(MyParams, "time_params", "TPS_INI",    0.0  )
+Params_set_oneparam(MyParams, "time_params", "TPS_FIN",    100.0  )
+Params_set_oneparam(MyParams, "time_params", "DT",         0.10  )
 
 #- geometry-----------------------------------------------------------------------------
 
-Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/schwarz.msh" )  #  Mesh File ("name.dat")
-Params_set_oneparam(MyParams, "geometry_params","meshtype", "gmsh" )  #  Mesh File ("name.dat")
-Params_set_oneparam(MyParams, "geometry_params","meshname", "" )  #  Mesh File ("name.dat")
+Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/schwarz.msh" )  #  Mesh File ("name.dat")
+Params_set_oneparam(MyParams, "geometry_params", "meshtype", "gmsh" )  #  Mesh File ("name.dat")
+Params_set_oneparam(MyParams, "geometry_params", "meshname", "" )  #  Mesh File ("name.dat")
 
 
-Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     0) # GNUPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",       0) # GRAPH
-Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
-Params_set_oneparam(MyParams, "graphics_output_params","VTK",         0) # VTK
-Params_set_oneparam(MyParams, "graphics_output_params","SILO",        0) # SILO
-Params_set_oneparam(MyParams, "graphics_output_params","PGPLOT",      0) # PGPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","VOGLE",       1) # VOGLE
-Params_set_oneparam(MyParams, "graphics_output_params","LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO1=YES)
+Params_set_oneparam(MyParams, "graphics_output_params", "GNUPLOT",     0) # GNUPLOT
+Params_set_oneparam(MyParams, "graphics_output_params", "GRAPH",       0) # GRAPH
+Params_set_oneparam(MyParams, "graphics_output_params", "MATLAB",      0) # MATLAB
+Params_set_oneparam(MyParams, "graphics_output_params", "VTK",         0) # VTK
+Params_set_oneparam(MyParams, "graphics_output_params", "SILO",        0) # SILO
+Params_set_oneparam(MyParams, "graphics_output_params", "PGPLOT",      0) # PGPLOT
+Params_set_oneparam(MyParams, "graphics_output_params", "VOGLE",       1) # VOGLE
+Params_set_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO1=YES)
 
-Params_set_oneparam(MyParams, "miscellaneous_params","itprint",      4) # ITPRINT
-Params_set_oneparam(MyParams, "miscellaneous_params","itsave",       1) # ITSAVE
-Params_set_oneparam(MyParams, "miscellaneous_params","itstat",       1) # ITSTAT
-Params_set_oneparam(MyParams, "miscellaneous_params","itgraph",      1) # ITGRAPH
+Params_set_oneparam(MyParams, "miscellaneous_params", "itprint",      4) # ITPRINT
+Params_set_oneparam(MyParams, "miscellaneous_params", "itsave",       1) # ITSAVE
+Params_set_oneparam(MyParams, "miscellaneous_params", "itstat",       1) # ITSTAT
+Params_set_oneparam(MyParams, "miscellaneous_params", "itgraph",      1) # ITGRAPH
 
 #-parameter for the resolution of the linear system------------------------------------
 
-Params_set_oneparam(MyParams, "matrix_solver_params","max_steps", 500   ) # max_iter Nombre max d'iter de la methode iterative
-Params_set_oneparam(MyParams, "matrix_solver_params","eps_steps", 1.e-12) # eps_iter arret des iterations "  "  "   "
+Params_set_oneparam(MyParams, "matrix_solver_params", "max_steps", 500   ) # max_iter Nombre max d'iter de la methode iterative
+Params_set_oneparam(MyParams, "matrix_solver_params", "eps_steps", 1.e-12) # eps_iter arret des iterations "  "  "   "
 
-Params_set_oneparam(MyParams, "matrix_solver_params","iter_info", ITER_INFOe_ALL   )  # iter_info (0 , 1=stdout, 2=file iter_file)
-Params_set_oneparam(MyParams, "matrix_solver_params","iter_file", "the_residuals.dat"  ) # iter_file le nom du fichier
+Params_set_oneparam(MyParams, "matrix_solver_params", "iter_info", ITER_INFOe_ALL   )  # iter_info (0 , 1=stdout, 2=file iter_file)
+Params_set_oneparam(MyParams, "matrix_solver_params", "iter_file", "the_residuals.dat"  ) # iter_file le nom du fichier
 
-Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_method", BANDWRe_MESCHACH) # USE BAND WIDTH REDUCTION BANDWRe_BAND
-Params_set_oneparam(MyParams, "matrix_solver_params","bandwidth_option", BANDWRe_BAND)   # USE BAND WIDTH REDUCTION
+Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_method", BANDWRe_MESCHACH) # USE BAND WIDTH REDUCTION BANDWRe_BAND
+Params_set_oneparam(MyParams, "matrix_solver_params", "bandwidth_option", BANDWRe_BAND)   # USE BAND WIDTH REDUCTION
 
 #-parameter for plotting------------------------------------
 
 Params_set_oneparam(MyParams, "graphics_interactiv2D_params", "NX", 1  )
 Params_set_oneparam(MyParams, "graphics_interactiv2D_params", "NY", 1  )
 
-Params_set_oneparam(MyParams, "graphics_interactiv2D_params","DRIVER", "/XWINDOW"  )
-Params_set_oneparam(MyParams, "graphics_interactiv2D_params","SIZE_WINDOW_X", 700 )
-Params_set_oneparam(MyParams, "graphics_interactiv2D_params","SIZE_WINDOW_Y", 700 )
-Params_set_oneparam(MyParams, "graphics_interactiv2D_params","SIZE_LABELS", 1.1  )
+Params_set_oneparam(MyParams, "graphics_interactiv2D_params", "DRIVER", "/XWINDOW"  )
+Params_set_oneparam(MyParams, "graphics_interactiv2D_params", "SIZE_WINDOW_X", 700 )
+Params_set_oneparam(MyParams, "graphics_interactiv2D_params", "SIZE_WINDOW_Y", 700 )
+Params_set_oneparam(MyParams, "graphics_interactiv2D_params", "SIZE_LABELS", 1.1  )
 
-Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","LABEL_LEGEND", 1,1, "Solution"  )
-Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","GRAPHICS_TYPE", 1,1, "CONTOURS"  )
-Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","WINDOW_X_MIN", 1,1,  0.0  )
-Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","WINDOW_X_MAX", 1,1, 10.0  )
-Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","WINDOW_Y_MIN", 1,1,  0.0  )
-Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","WINDOW_Y_MAX", 1,1, 10.0  )
-Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","NB_LEVELS"   , 1,1, 7    )
-Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","LEVELS"      , 1,1, [10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0, 110.0, 120.0, 130.0, 140.0, 150.0]  )
+Params_set_oneparam2(MyParams, "graphics_interactiv2D_params", "LABEL_LEGEND", 1,1, "Solution"  )
+Params_set_oneparam2(MyParams, "graphics_interactiv2D_params", "GRAPHICS_TYPE", 1,1, "CONTOURS"  )
+Params_set_oneparam2(MyParams, "graphics_interactiv2D_params", "WINDOW_X_MIN", 1,1,  0.0  )
+Params_set_oneparam2(MyParams, "graphics_interactiv2D_params", "WINDOW_X_MAX", 1,1, 10.0  )
+Params_set_oneparam2(MyParams, "graphics_interactiv2D_params", "WINDOW_Y_MIN", 1,1,  0.0  )
+Params_set_oneparam2(MyParams, "graphics_interactiv2D_params", "WINDOW_Y_MAX", 1,1, 10.0  )
+Params_set_oneparam2(MyParams, "graphics_interactiv2D_params", "NB_LEVELS"   , 1,1, 7    )
+Params_set_oneparam2(MyParams, "graphics_interactiv2D_params", "LEVELS"      , 1,1, [10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0, 110.0, 120.0, 130.0, 140.0, 150.0]  )
 
 
 Params_set_staticparam(MyParams, 0)
@@ -219,7 +219,7 @@ else:
 U_diff = v_get(NBSOMM)
 U_diff = v_sub(U_o, U_steadystate, U_diff)
 diff = v_norm2(U_diff)
-print("time = " , 0.0 , " --> |sol_steadystate - sol_initial| = " , diff)
+print("time = " , 0.0 , " --> ||sol_steadystate - sol_initial|| = " , diff)
 
 #--------------------------------------------------------------------
 
@@ -345,15 +345,15 @@ for k in range(1,NBITER+1):
     transform2D_vector_with_bc (MyElt, MyGeom, MyBC, B_REF, RHS)
     
 	 
-	 # -- Calcul de U_np1 -----------------
+    # -- Calcul de U_np1 -----------------
     U_n =  spCHsolve(LLT, RHS, U_n)
 		
-	 #-----------------------  statistics -------------------------
+    #-----------------------  statistics -------------------------
     if itstat > 0 and k % itstat == 0 :
 		  
         U_diff = v_sub(U_n, U_steadystate, U_diff)
         diff = v_norm2(U_diff)
-        print("time = " , TPS , " --> ||sol_steadystate - sol_approchee|| = " , diff)
+        print("time = %5.2f    --> ||sol_steadystate - sol_approchee|| = %lf" % (TPS, diff))
 
     #-----------------------  plot -------------------------
     if itgraph > 0 and k % itgraph == 0 :
