@@ -306,6 +306,12 @@
                                     { "type":"string" },
                                     { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
                                 ]
+                            },
+							"FUNC_DEF" : { "oneOf" : 
+                                [
+                                    { "type":"string" },
+                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                ]
                             }
                         },
                         "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
@@ -318,6 +324,12 @@
                             "IDX"       : { "type":"integer", "description":"" },
                             "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
                             "FUNC_NAME" : { "oneOf" : 
+                                [
+                                    { "type":"string" },
+                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                ]
+                            },
+							"FUNC_DEF" : { "oneOf" : 
                                 [
                                     { "type":"string" },
                                     { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
@@ -338,9 +350,15 @@
                                     { "type":"string" },
                                     { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
                                 ]
+                            },
+							"FUNC_DEF" : { "oneOf" : 
+                                [
+                                    { "type":"string" },
+                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                ]
                             }
                         },
-                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
+                        "required" : ["IDX", "BC_TYPE"],
                         "additionalProperties": false
                     }
                 }

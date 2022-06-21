@@ -115,7 +115,7 @@
          
         "DIM1" : [
            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi1D_05" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi1D_05" }
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "x*x + math.sin(x)" }
         ]
 
     },
