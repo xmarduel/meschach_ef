@@ -21,12 +21,12 @@ extern "C"
 
 typedef struct FUN_1D_
 {
-   FUNC_1D phi_x;               /**< placeholder for a "C" function  with 1 var  (x)     */
-   FUNC_2D phi_xt;              /**< placeholder for a "C" function  with 2 vars (x,t)   */
-   FUNC_1D_PLUS_VOID phi_x_v;   /**< placeholder for a "C" function  with 2 vars (x,  python_obj)  */
-   FUNC_2D_PLUS_VOID phi_xt_v;  /**< placeholder for a "C" function  with 3 vars (x,t,python_obj)  */
+   FUNC_1D phi_x;               /**< placeholder for a "C" function  with 1 var  (x)         */
+   FUNC_2D phi_xt;              /**< placeholder for a "C" function  with 2 vars (x,t)       */
+   FUNC_1D_PLUS_VOID phi_x_v;   /**< placeholder for a "C" function  with 2 vars (x,   obj)  */
+   FUNC_2D_PLUS_VOID phi_xt_v;  /**< placeholder for a "C" function  with 3 vars (x,t, obj)  */
    
-   void*      clientdata;       /**< hold a pointer to a python object */
+   void*      clientdata;       /**< hold a pointer to a python object or lua state */
    
    FUN_TYPE type;               /**< gives back the type of function stored in the object */
 
@@ -60,6 +60,12 @@ Real     Fun1D_evalPyFunctionTransient (const FUN_1D* Fun, Real x, Real tps);
 
 FUN_1D * Fun1D_setCFunction            (FUN_1D* Fun, FUNC_1D  phi);
 FUN_1D * Fun1D_setCFunctionTransient   (FUN_1D* Fun, FUNC_2D  phi);
+
+FUN_1D * Fun1D_setLUAFunction            (FUN_1D* Fun, const char* def);
+FUN_1D * Fun1D_setLUAFunctionTransient   (FUN_1D* Fun, const char* def);
+
+Real     Fun1D_evalLUAFunction           (const FUN_1D* Fun, Real x);
+Real     Fun1D_evalLUAFunctionTransient  (const FUN_1D* Fun, Real x, Real tps);
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */

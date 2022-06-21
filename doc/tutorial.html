@@ -1,0 +1,1181 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Meschach-EF</title>
+  <link href="css/prism.css" rel="stylesheet">
+  <link href="css/pycut.css" rel="stylesheet">
+  <link href="css/simpletree.css" rel="stylesheet">
+  <script type="text/javascript" src="js/prism.js">
+ </script>
+</head>
+
+<body>
+<!-- ----------------------------------------------------------------------------------------------------------->
+<!-- ----------------------------------------------------------------------------------------------------------->
+<!-- ----------------------------------------------------------------------------------------------------------->
+<!-- ----------------------------------------------------------------------------------------------------------->
+
+<div class="sidenav">
+<h3 class="title_sidenav">Contents</h3>
+<ul class="tree">
+  <li><a href="#P-01">Introduction</a></li>
+  <li><a href="#P-02">Example: 1D Laplacian</a></li>
+</ul>
+<script type="text/javascript">
+var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
+for (var i = 0; i < tree.length; i++){
+    tree[i].addEventListener('click', function(e) {
+        var parent = e.target.parentElement;
+        var classList = parent.classList;
+        if (classList.contains("open")) {
+            classList.remove('open');
+            var opensubs = parent.querySelectorAll(':scope .open');
+            for (var i = 0; i < opensubs.length; i++) {
+                opensubs[i].classList.remove('open');
+            }
+        } else {
+            classList.add('open');
+        }
+        if (classList.contains("open")) {
+            //e.preventDefault(); // on open -> jump (default)
+          
+        } else {
+            e.preventDefault(); // on close
+        }
+    });
+}</script>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------------->
+<!-- ----------------------------------------------------------------------------------------------------------->
+<!-- ----------------------------------------------------------------------------------------------------------->
+<!-- ----------------------------------------------------------------------------------------------------------->
+
+<div class="main">
+<h1 class="etitle">Meschach-EF Tutorial</h1>
+
+<h2 id="P-01">Introduction</h2>
+
+<p><strong>Meschach-EF</strong> is a C library to solve Finite Element problems. A nicely integrated python wrapper
+comes with the library too for convenience.</p>
+
+<p>It is named after the (excellent) Linear Algebra library "<strong>meschach</strong>" and follows the same coding
+"philosophy".</p>
+
+<p>It has been written in the early <strong>2000</strong>, and I have now put it in github in <strong>2022</strong> in
+order to not completely lose this work forever. From time to time I used to update/improve it so that it still stays
+compilable/usable over the years (nowadays as XCode project, so easely compilable only on MacOS X - sorry, no
+Makefiles)</p>
+
+<p>So what are the features of <strong>Meschach-EF</strong> that you could be interested in ? </p>
+<ul>
+  <li>Well it is a <strong>small, yet powerfull library</strong>, and is good if you want to learn C programming
+    and the Finite Element Methods.</li>
+  <li>The python wrapper is nice and allows the user to quickly change the "right hand side" or the boundary conditions
+    without recompiling, as the <strong>python functions are plugged into the C code</strong>.</li>
+</ul>
+
+<p><strong>Meschach-EF</strong> can solve <strong>1D</strong>, <strong>2D</strong> and <strong>3D</strong> equations,
+time dependent or not.</p>
+<ul>
+  <li>In 1D, there are many finite elements: <strong>P1</strong>, <strong>P2</strong>, <strong>P3</strong>,
+    <strong>H3</strong> (Hermite), <strong>S2</strong>, <strong>S3</strong>, <strong>S4</strong>, <strong>S5</strong>
+    (Splines). Concerning the splines, the mesh has to be uniform. Both periodic and non-periodic geometries are
+    supported (which for the splines finite elements is not completely trivial).</li>
+  <li>In 2D, finite elements <strong>P1</strong>, <strong>P2</strong> and <strong>P3</strong> are implemented.</li>
+  <li>In 3D, finite elements <strong>P1</strong>, <strong>P2</strong> and <strong>P3</strong> are implemented
+    (well<strong> P3</strong> seems to be not completely finished.... I should finish it!).</li>
+</ul>
+
+<p>You can solve <strong>Laplacian</strong>, <strong>Convection-Diffusion</strong>, <strong>Burgers</strong>, <strong>Stokes</strong>,
+<strong>Navier-Stokes</strong>, <strong>Eigen Values</strong> problems, and infact <strong>any problem</strong> as the
+user has full access to all functions constructing the mass, stiff matrices and the like.</p>
+
+<p>Boundary conditions can be of any type (<strong>Dirichlet</strong>, <strong>Neumann</strong>,
+<strong>Cauchy</strong>, <strong>Robin</strong>) based on the "nodes refs" of the nodes of the geometry or/and the
+"faces refs" of the faces (boundary faces) of the geometry.</p>
+
+<p>Meshes are either built <strong>"per hand"</strong> (line, quadra, cube) or through the programs
+<strong>"emc2"</strong> (2D) (not so well known) or <strong>"gmsh"</strong> (2D or 3D). New meshes format should be
+easy to insert.</p>
+
+<p>There are nice visualisation possibilities of the results, especially for 1D/2D transient problems with real time
+display and X windows interactions (start/pause/step).</p>
+<ul>
+  <li>1D: <strong>cpgplot</strong>, <strong>vogle/vopl</strong> (vopl extended by me)<strong></strong>,
+    <strong>libsciplot</strong> (written by me from gnu libplot/graph code!)</li>
+  <li>2D: <strong>vogle,</strong> and output in <strong>vtk</strong> and <strong>silo</strong> formats + drivers
+    programs</li>
+  <li>3D: no interactiv plot, but output in <strong>vtk</strong> and <strong>silo</strong> formats + driver programs
+    for vtk and the <strong>VisIt</strong> visualisation app (silo files) or <strong>Paraview</strong> app (vtk files)</li>
+</ul>
+
+<p>Considering C driver programs, the parameters for the problem to solve are given in a <strong>json file</strong>
+with well defined structure so hopefully solving a problem is feasible for beginners. Changing the parameters do not
+require to recompile the driver program, and the parameters are all set in a <strong>centralized place</strong>. We
+give below an example of such a configuration file. Boundary condition and right hand side functions are given through
+the name of the functions. A bunch of functions are hard coded in the library, but, well, <strong>this is not very
+flexibel: introducing new functions requires recompiling the library</strong> <strong><span style="color:#ff0080">(is
+there a better way? check libmatheval!)</span></strong>.</p>
+
+<p>Considering Python driver programs, the parameters are given in a slightly different manner: they are given inside
+the python program in the form of a <strong>dictionnary</strong> (or many dictionnaries) <strong>which follows the json
+format</strong>. Moreover, boundary conditions "python" functions can be set in these parameters, so the python drivers
+are therefore very flexibel to test different boundary conditions / right hand side.</p>
+
+<p></p>
+
+<p>There are anyway lots of useful demos to start with.</p>
+
+<h2>The Parameters file</h2>
+
+<p>This is where the parameters of the problem to solve are defined, as well as how the problem will be solved. Why is there a "Parameters File" at all? </p>
+
+<p>Consider solving a simple 1D Laplacian problem. You may want to change the FE ("P1" or "P2") and the resolution method ("DIRECT" or "ITERATIVE"). 
+Each of these two methods have also their own parameters etc.</p>
+
+<p>So you could end, when varying your parameters, to change and change again the driver program at different places. 
+With such a parameter file, there is only 1 place where to edit the parameters. 
+Your driver program will have to handle these differents possibilities, thus being somehow more complicated than initially thought.
+However, this extra cost is compensated by the fact that varying your parameters becomes straightforward.</p>
+
+<p>So a "full" (all possible options for all king of problems) parameters file would look like the following, 
+but infact you need to define only a few of them. It just gives you an idea how your parameters file will be.</p>
+
+<pre><code class="language-json">{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "title":"PDE_CONFIG",
+    "description":"",
+    "type" : "object",
+    "properties" : {
+        "PDE" : { "type":"string", "description":"", "enum":["LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"]},
+        
+        "COORDS_DIMS": { "type":"integer", "description":"x,y,z coordinates", "enum" : [1,2,3] },
+        "TARGET_DIMS": { "type":"integer", "description":"u,v,w",             "enum" : [1,2,3] },
+        
+        "PDE_PARAMATERS" : { "type":"object", "description":"",
+            "properties" : {
+                "KAPPA"  : { "type":"number", "description":"coeff for -Uxx" },
+                "SIGMA"  : { "type":"number", "description":"coeff for U" },
+                "EPSILON": { "type":"number", "description":"coeff for Uxxxx" }
+            }
+        },
+        
+        "PDE_TIME_PARAMETERS" : { "type":"object", "description":"",
+            "properties" : {
+                "TIME_INI" : { "type":"number", "description":"" },
+                "TIME_END" : { "type":"number", "description":"" },
+                "DELTA_T"  : { "type":"number", "description":"" }
+            },
+            "required" : ["TIME_INI", "TIME_END", "DELTA_T"]
+        },
+        
+        "PDE_RESOLUTION" : { "type":"object", "description":"",
+            "properties" : {
+                "EF"             : { "type":"string", "description":"" , "enum":["P1", "P2", "P3", "H3", "S2", "S3", "S4", "S5"] },           
+                
+                "LAPLACIAN_ALGO" : { "type":"object", "description":"",
+                    "properties" : {
+                        "METHOD"        : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "properties" : {
+                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] }, 
+                                        "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                    }
+                                }
+                            }
+                        },
+                        "ITERATIVE-METHOD" : { "type":"object", "description":"",
+                            "properties" : {
+                                "METHOD"           : { "type":"string", "description":"", "enum":["CG", "CGS", "BiCGStab"] },
+                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU"] },
+                                "PARAMETERS" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "NMAX_ITER" : { "type":"integer", "description":"" },
+                                        "EPSILON"   : { "type":"number", "description":"" }
+                                    }
+                                },
+                                "OUTPUT" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "STDOUT" :  { "type":"boolean", "description":"" },
+                                        "FILE"   :  { "type":["null", "string"], "description":"" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "CONVECTION_DIFFUSION_ALGO" : { "type":"object", "description":"",
+                    "properties" : {
+                        "METHOD"        : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                        "METHOD_STABILIZATION" : { "type":"string", "description":"", "enum":["null", "GALS", "SUPG", "DWG"] },
+                        "DELTA"                : { "type":"number", "description":"" },
+                        
+                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "properties" : {
+                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                        "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                    }
+                                }
+                            }
+                        },
+                        "ITERATIVE-METHOD" : { "type":"object", "description":"",
+                            "properties" : {
+                                "METHOD"           : { "type":"string", "description":"", "enum":["CG", "CGS", "BiCGStab"] },
+                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU"] },
+                                "PARAMETERS" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "NMAX_ITER" : { "type":"integer", "description":"" },
+                                        "EPSILON"   : { "type":"number", "description":"" }
+                                    }
+                                },
+                                "OUTPUT" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "STDOUT" :  { "type":"boolean", "description":"" },
+                                        "FILE"   :  { "type":["null", "string"], "description":"" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                
+                "BURGERS_ALGO"      : { "type":"object", "description":"", 
+                    "properties" : {
+                        "METHOD"               : { "type":"string", "description":"", "enum":["NEWTON-EXACT", "NEWTON-APPROCH"] },
+                        "METHOD_STABILIZATION" : { "type":"string", "description":"", "enum":["null", "GALS", "SUPG", "DWG"] },
+                        "DELTA"                : { "type":"number", "description":"" },
+                        
+                        "NB_OUTER_ITERATIONS": { "type":"number", "description":"for the non linear iterations" },
+                        
+                        "INNER_METHOD": { "type":"number", "description":"for the non linear iterations", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                        
+                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "properties" : {
+                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                        "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                    }
+                                }
+                            }
+                        },
+                        "ITERATIVE-METHOD" : { "type":"object", "description":"",
+                            "properties" : {
+                                "METHOD"           : { "type":"string", "description":"", "enum":["CG", "CGS", "BiCGStab"] },
+                                "PRECONDITIONER"   : { "type":"string", "description":"null if no precondition", "enum" : ["null", "ICH", "ILU"] },
+                                "PARAMETERS" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "NMAX_ITER" : { "type":"integer", "description":"" },
+                                        "EPSILON"   : { "type":"number", "description":"" }
+                                    }
+                                },
+                                "OUTPUT" : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "STDOUT" :  { "type":"boolean", "description":"" },
+                                        "FILE"   :  { "type":["null", "string"], "description":"" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                
+                "STOKES_ALGO"       : { "type":"object", "description":"",
+                    "properties" : {
+                        "METHOD" : { "type":"string", "description":"", "enum":["PRESSUREMATRIX", "UZAWA", "AUGMENTEDLAGR"] },
+                        "UZAWA_PARAMETERS" : { "type":"object", "description":"",
+                            "properties" : {
+                                "RHO"       : { "type":"number", "description":"" },
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "METHOD" : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "properties" : {
+                                            "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                            "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                         }
+                                    },
+                                    "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                    "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                }
+                            }
+                        },
+                        "PRESSUREMATRIX_PARAMETERS" : { "type":"object", "description":"",
+                            "properties" : {
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"residual of the CG method" },
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "properties": {
+                                        "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                            "properties" : {
+                                                "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                                "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                            }
+                                        },
+                                        "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                        "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                    }
+                                }
+                            }
+                        },
+                        "AUGMENTEDLAGR_PARAMETERS" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "RHO" : { "type":"number", "description":"" },
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "properties": {
+                                        "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                            "properties" : {
+                                                "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                                "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                            }
+                                        },
+                                        "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                        "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "NAVIERSTOKES_ALGO" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "METHOD" : { "type":"string", "description":"", "enum":["NEWTON-EXACT", "NEWTON-APPROCH"] },
+                        
+                        "NMAX_ITER" : { "type":"integer", "description":"" },
+                        "EPSILON" : { "type":"number", "description":"" },
+                        
+                        "OUTER_METHOD" : { "type":"string", "description":"", "enum":["UZAWA", "PRESSUREMATRIX"] },
+
+                        "UZAWA_PARAMETERS" : { "type":"object", "description":"",
+                            "properties" : {
+                                "RHO"       : { "type":"number", "description":"" },
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "METHOD" : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "properties" : {
+                                            "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                            "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                         }
+                                    },
+                                    "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                    "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                }
+                            }
+                        },
+                        "PRESSUREMATRIX_PARAMETERS" : { "type":"object", "description":"",
+                            "properties" : {
+                                "NMAX_ITER" : { "type":"integer", "description":"" },
+                                "EPSILON"   : { "type":"number", "description":"residual of the CG method" }, 
+                                "INNERLOOP_SOLVER" : { "type":"object", "description":"",
+                                    "properties": {
+                                        "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                            "properties" : {
+                                                "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
+                                                "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
+                                            }
+                                        },
+                                        "NMAX_ITER" : { "type":"integer", "description":"only for iterative method" },
+                                        "EPSILON"   : { "type":"number", "description":"only for iterative method" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "HELMHOLZ_ALGO"     : { "type":"object", "description":"", 
+                    "properties" : {
+                        "EIGEN_PROBLEM" : { "type":"string", "description":"", "enum" : ["ORDINARY_SYMMETRIC", "GENERALIZED_SYMMETRIC_1", "GENERALIZED_SYMMETRIC_2"] },
+                        "EIGEN_OPTION"  : { "type":"string", "description":"", "enum" : ["LOWER", "UPPER", "NEAREST_1", "NEAREST_2", "IBOUNDS", "RBOUNDS", "ALL"] },
+                        "NB_EIGENS"     : { "type":"integer", "description":"" },
+                        "LOWER_IBOUND"  : { "type":"integer", "description":"" },
+                        "UPPER_IBOUND"  : { "type":"integer", "description":"" },
+                        "LOWER_RBOUND"  : { "type":"number", "description":"" },
+                        "UPPER_RBOUND"  : { "type":"number", "description":"" }
+                    },
+                    "required" : ["EIGEN_PROBLEM", "EIGEN_OPTION", "NB_EIGENS", "LOWER_IBOUND", "UPPER_IBOUND", "LOWER_RBOUND", "UPPER_RBOUND"]
+                },
+                
+                "KURAMOTO-SIVASHINSKI_ALGO" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "METHOD" : { "type":"string", "description":"", "enum" : ["NORMAL", "SPLITTED"] }
+                    },
+                    "required" : ["METHOD"]
+                }
+            },
+            "required" : ["EF"]
+        },
+        
+        "PDE_INITIAL_CONDITION" : { "type":"object", "description":"", 
+            "properties" : {
+                "FUNC_DIM1_NAME" : { "type":["null", "string"], "description":"" },
+                "FUNC_DIM2_NAME" : { "type":["null", "string"], "description":"" },
+                "FUNC_DIM3_NAME" : { "type":["null", "string"], "description":"" }
+            }
+        },
+        
+        "PDE_RHS" : { "type":"object", "description":"",
+            "properties" : {
+                "FUNC_DIM1_NAME" : { "type":["null", "string"], "description":"" },
+                "FUNC_DIM2_NAME" : { "type":["null", "string"], "description":"" },
+                "FUNC_DIM3_NAME" : { "type":["null", "string"], "description":"" }
+            }
+        },
+        
+        "PDE_BOUNDARY_CONDITIONS" : { "type":"object", "description":"",
+            "properties" : {
+                "NB_BCS" : { "type":"integer", "description":"" },
+                "DIM1" : { "type":"array", "description":"" , "items" : 
+                    { "type":"object", "description":"" , 
+                        "properties" : {
+                            "IDX"       : { "type":"integer", "description":"" },
+                            "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
+                            "FUNC_NAME" : { "oneOf" : 
+                                [
+                                    { "type":"string" },
+                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                ]
+                            }
+                        },
+                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
+                        "additionalProperties": false
+                    }
+                },
+                "DIM2" : { "type":"array", "description":"" , "items" : 
+                    { "type":"object", "description":"" , 
+                        "properties" : {
+                            "IDX"       : { "type":"integer", "description":"" },
+                            "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
+                            "FUNC_NAME" : { "oneOf" : 
+                                [
+                                    { "type":"string" },
+                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                ]
+                            }
+                        },
+                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
+                        "additionalProperties": false
+                    }
+                },
+                "DIM3" : { "type":"array", "description":"" , "items" : 
+                    { "type":"object", "description":"" ,
+                        "properties" : {
+                            "IDX"       : { "type":"integer", "description":"" },
+                            "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
+                            "FUNC_NAME" : { "oneOf" : 
+                                [
+                                    { "type":"string" },
+                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                ]
+                            }
+                        },
+                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
+                        "additionalProperties": false
+                    }
+                }
+            }
+        },
+
+        "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : { "type":"object", "description":"", 
+            "properties" : {
+                
+                "1-DIM" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                        "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                        "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" }
+                    },
+                    "additionalProperties": false
+                },
+                "2-DIM" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "DIM1" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties": false
+                        },
+                        "DIM2": { "type":"object", "description":"", 
+                            "properties" : {
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "required" : ["DIM1", "DIM2"],
+                    "additionalProperties": false
+                },
+                "3-DIM" : { "type":"object", "description":"", 
+                    "properties" : {
+                        "DIM1" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties": false
+                        },
+                        "DIM2" : { "type":"object", "description":"", 
+                            "properties" : { 
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties": false
+                        },
+                        "DIM3" : { "type":"object", "description":"", 
+                            "properties" : {
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"functions names" },
+                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"functions names" }
+                            },
+                            "additionalProperties" : false
+                        }
+                    },
+                    "required" : ["DIM1", "DIM2", "DIM3"],
+                    "additionalProperties": false
+                }
+            }
+        },
+
+        "PDE_EXACT_SOL" : { "type":"object", "description":"for tests, exact solution of the pde",
+            "properties" : {
+                "FUNC_DIM1_NAME" : { "type":["null", "string"], "description":"optional function name" },
+                "FUNC_DIM2_NAME" : { "type":["null", "string"], "description":"optional function name" },
+                "FUNC_DIM3_NAME" : { "type":["null", "string"], "description":"optional function name" }
+            }
+        },
+        
+        "MESH_1D" : { "type":"object", "description":"", 
+            "properties" : {  
+                "MESHFILEDEFINITION" : { "type":"object", "description":"",
+                    "properties": {
+                        "MESHFILE" : { "type": "string", "description":"" },
+                        "MESHNAME" : { "type": ["null", "string"], "description":"can be null" },
+                        "MESHTYPE" : { "type": ["null", "string"], "description":"" , "enum" : ["line"] }
+                    },
+                    "required": ["MESHFILE", "MESHTYPE"],
+                    "additionalProperties" : false
+                },
+                    
+                "MESHDATADEFINITION" : { "type":"object", "description":"",
+                    "properties" : {
+                        "XMIN"         : { "type":"number", "description":"" },
+                        "XMAX"         : { "type":"number", "description":"" }, 
+                        "NX"           : { "type":"integer", "description":"" }, 
+                        "DISTRIBUTION" : { "type":"string", "enum" : ["UNIFORM","NON-UNIFORM-RIGHT-DENSITY","NON-UNIFORM-LEFT-DENSITY"] },
+                        "PERIODIC"     : { "type":"boolean", "description":"" }
+                    },
+                    "required": ["XMIN", "XMAX" , "NX", "DISTRIBUTION", "PERIODIC"],
+                    "additionalProperties" : false
+                }
+            },
+            "additionalProperties" : false
+        },
+        "MESH_2D" : { "type":"object", "description":"", 
+            "properties" : {
+                "MESHFILEDEFINITION" : { "type":"object", "description":"",
+                    "properties": {
+                        "MESHFILE" : { "type":"string", "description":"" },
+                        "MESHNAME" : { "type": ["null", "string"], "description":"only if mesh2D.quad file" },
+                        "MESHTYPE" : { "type":"string", "description":"", "enum" : ["quad1", "quad2", "quad3", "emc2", "gmsh"] }
+                    },
+                    "required": ["MESHFILE", "MESHTYPE" ],
+                    "additionalProperties" : false
+                }
+            },
+            "required" : ["MESHFILEDEFINITION"],
+            "additionalProperties" : false
+        },
+        "MESH_3D" : { "type":"object", "description":"", 
+            "properties" : {
+                "MESHFILEDEFINITION" : { "type":"object", "description":"",
+                    "properties": {
+                        "MESHFILE" : { "type":"string", "description":""  },
+                        "MESHNAME" : { "type": ["null", "string"], "description":"only if mesh3D.cube file" },
+                        "MESHTYPE" : { "type":"string", "description":"", "enum" : ["cube", "gmsh"] }
+                    },
+                    "required": ["MESHFILE", "MESHTYPE" ],
+                    "additionalProperties" : false
+                }
+            },
+            "required" : ["MESHFILEDEFINITION"],
+            "additionalProperties" : false
+        },
+        
+        "MISC_OUTPUT" : { "type":"object", "description":"",
+            "properties" : {
+                "ITPRINT"          : { "type":"integer", "description":"" },
+                "ITSAVE"           : { "type":"integer", "description":"" },
+                "ITSTAT"           : { "type":"integer", "description":"" },
+                "ITGRAPH"          : { "type":"integer", "description":"" }
+            }
+        },
+
+        "MISC_GRAPHICS" : { "type":"object", "description":"", 
+            "properties" : {
+                "IMTXPROF"         : { "type":"boolean", "description":"" },
+                "IGEOMVIEW"        : { "type":"boolean", "description":"" },
+                "IGEOMCONTOURVIEW" : { "type":"boolean", "description":"" },
+                "IGEOMTOTALVIEW"   : { "type":"boolean", "description":"" }
+            }
+        },
+
+        "GRAPHICS_1D_OUTPUT" : { "type":"object", "description":"", 
+            "properties" : {
+                "GNUPLOT"    : { "type":"boolean", "description":"" },
+                "GRAPH"      : { "type":"boolean", "description":"" },
+                "MATLAB"     : { "type":"boolean", "description":"" },
+                "VTK"        : { "type":"boolean", "description":"" },
+                "SILO"       : { "type":"boolean", "description":"" },
+                "PGPLOT"     : { "type":"boolean", "description":"" },
+                "VOGLE"      : { "type":"boolean", "description":"" },
+                "LIBSCIPLOT" : { "type":"boolean", "description":"" },
+                "MATPLOTLIB" : { "type":"boolean", "description":"" }
+            }
+        },
+        
+        "GRAPHICS_2D_OUTPUT" : { "type":"object", "description":"", 
+            "properties" : {
+                "GNUPLOT"    : { "type":"boolean", "description":"" },
+                "MATLAB"     : { "type":"boolean", "description":"" },
+                "VTK"        : { "type":"boolean", "description":"" },
+                "SILO"       : { "type":"boolean", "description":"" },
+                "VOGLE"      : { "type":"boolean", "description":"" },
+                "MATPLOTLIB" : { "type":"boolean", "description":"" }
+            }
+        },
+        
+        "GRAPHICS_3D_OUTPUT" : { "type":"object", "description":"", 
+            "properties" : {
+                "VTK"        : { "type":"boolean", "description":"" },
+                "SILO"       : { "type":"boolean", "description":"" }
+            }
+        },
+        
+        "GRAPHICS_1D" : { "type":"object", "description":"", 
+            "properties" : {
+                "DRIVER" : { "type":"string", "description":"Driver PGPLOT-VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
+                "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
+                    "items" : { "type":"integer", "description":"in pixels" },
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                "LABELS_SIZE" : { "type":"number", "description":"" },
+                "SUB_WINDOWS" : { "type":"array", "description":"array of sub windows at position I,J in the window",
+                    "items" : { "type":"object", "description":"sub-window object", 
+								"properties" : {
+                            "IDXS"  : { "type":"array", "description":"position in array of subwindows", "minItems": 2, "maxItems": 2,
+                                "items" : { "type":"integer", "minimum":1, "maximum":3 , "description":"array position" }
+                            },
+							"LEGEND"       : { "type":"string", "description":"" },
+                            "LEGEND_AXE_X" : { "type":"string", "description":"" },
+                            "LEGEND_AXE_Y" : { "type":"string", "description":"" },
+                            "MARKER"       : { "type":"integer", "description":"" },
+                            "MARKER_END"   : { "type":"integer", "description":"" },
+                            "VIEWPORT"     : { "type":"object", "description":"",
+                                "properties" : {
+                                    "X_MIN"    : { "type":"number", "description":"" },
+                                    "X_MAX"    : { "type":"number", "description":"" },
+                                    "Y_MIN"    : { "type":"number", "description":"" },
+                                    "Y_MAX"    : { "type":"number", "description":"" }
+										  }
+                            }
+                        }
+                    }
+                }
+            },
+            "GRAPHICS_2D" : { "type":"object", "description":"", 
+                "properties" : {
+                    "DRIVER" : { "type":"string", "description":"Driver VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
+                    "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
+                        "items" : { "type":"integer", "description":"in pixels" },
+                        "minItems": 2,
+                        "maxItems": 2
+                    },
+                    "LABELS_SIZE" : { "type":"number", "description":"" },
+                    "SUB_WINDOWS" : { "type":"array", "description":"array of sub-windows", 
+						      "items": { "type":"object", "description":"sub-window object", 
+						          "properties" : {
+								        "IDXS"  : { "type":"array", "description":"position in array of subwindows", "minItems": 2, "maxItems": 2,
+                                    "items" : { "type":"integer", "minimum":1, "maximum":3, "description":"array position" }
+									     },
+										  "GRAPHICS_TYPE" : {"type":"string", "description":"", "enum":["SURFACE", "CONTOURS"] },
+										  "LEGEND"        : { "type":"string", "description":"" },
+                                          "VIEWPORT"       : { "type":"object", "description":"",
+                                              "properties" : {
+                                                  "X_MIN"    : { "type":"number", "description":"" },
+                                                  "X_MAX"    : { "type":"number", "description":"" },
+                                                  "Y_MIN"    : { "type":"number", "description":"" },
+                                                  "Y_MAX"    : { "type":"number", "description":"" }
+                                              }
+										  },
+                                          "CONTOURS": { "type":"object", "description":"",
+                                              "properties" :  {
+                                                  "NB_LEVELS" : { "type":"integer", "description":"" },
+                                                  "LEVELS"    : { "type":"array", "description":"", "items": { "type":"number", "description":"" }}
+                                              }
+                                          },
+                                          "SURFACE": { "type":"object", "description":"",
+                                              "properties" : {
+                                                 "DUMMY" : { "type":"boolean", "description":"" }
+                                          }
+                                    }
+                              }
+                         }
+                    }
+                }
+            }
+        }
+    },
+
+    "OUTPUT_LOG_FILE" : { "type":"string", "description":""},
+        
+    "required": ["PDE", "COORDS_DIMS", "TARGET_DIMS", "PDE_PARAMATERS", "PDE_RESOLUTION", "PDE_RHS", "PDE_BOUNDARY_CONDITIONS", "OUTPUT_LOG_FILE"]
+}
+</code></pre>
+
+<h2>Example: 1D Laplacian Problem</h2>
+
+<h3>C example</h3>
+
+<p>Parameters are given in a json file. the C driver program reads this config file and solve the problem. Changing the
+parameters do not require to recompile the driver program, and the parameters are set in a centralized place. We give
+below an example of such a configuration file.</p>
+
+<pre><code class="language-json">{  
+    "PDE" : "LAPLACIAN",
+    
+    "COORDS_DIMS" : 1,
+    "TARGET_DIMS" : 1,
+    
+    "PDE_PARAMATERS" : {
+        "KAPPA"    : 1.000,
+        "SIGMA"    : 0.0,
+        "EPSILON"  : 0.0
+    },
+
+    # resolution -------------------------------------
+
+    "PDE_RESOLUTION" : {
+        "EF" : "H3" ,         # "P1", "P2", "P3", "H3", "S2", "S3", "S4", "S5"
+
+        "LAPLACIAN_ALGO" : {
+            "METHOD": "ITERATIVE-METHOD",
+				
+			"DIRECT-METHOD" : {
+                "BANDWIDTHREDUCTION" : {
+                    "OPTION" :         "PROFILE", 
+                    "IMPLEMENTATION" : "MESCHACH" # "MESCHACH", "AMD", "SPOOLES"
+                }
+            },
+						
+	        "ITERATIVE-METHOD" : {
+                "METHOD"          : "BiCGStab" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
+                "PRECONDITIONER"  : "ICH" ,            # null, "ICH", "ILU"
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 500,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : "residuals.dat"
+                }
+            }
+        }
+    },
+
+    # pde def -------------------------------------------------------------------------
+    
+    "PDE_RHS" : {
+        "FUNC_DIM1_NAME" : "Src1D_05",
+        "FUNC_DIM2_NAME" : null,
+        "FUNC_DIM3_NAME" : null 
+    },
+
+    "PDE_BOUNDARY_CONDITIONS" : {
+        
+        "NB_BCS" : 2,
+         
+        "DIM1" : [
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi1D_05" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi1D_05" }
+        ]
+    },
+    
+    "PDE_EXACT_SOL" : {
+        "FUNC_DIM1_NAME" : "Sol1D_05",
+        "FUNC_DIM2_NAME" : null,
+        "FUNC_DIM3_NAME" : null 
+    },
+    
+    # mesh --------------------------------
+
+    "MESH_1D" : {
+    
+        #"MESHFILEDEFINITION" : {
+        #     "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
+        #     "MESHNAME" : "MESH_10",
+        #     "MESHTYPE" : "line"
+        # }
+        
+        "MESHDATADEFINITION" : {
+            "XMIN"   : 0.0,
+            "XMAX"   : 1.0,
+            "NX"     : 10,
+            "DISTRIBUTION" : "UNIFORM",
+            "PERIODIC" : false  # true, false
+           }
+    },
+
+    # graphics ---------------------------
+    
+    "GRAPHICS_1D_OUTPUT" : {
+        "GNUPLOT"    : false,
+        "GRAPH"      : false,
+        "MATLAB"     : false,
+        "VTK"        : false,
+        "SILO"       : false,
+        "PGPLOT"     : false,
+        "VOGLE"      : true,
+        "LIBSCIPLOT" : false,
+        "MATPLOTLIB" : false
+    },
+    
+    # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------
+    
+    "GRAPHICS_1D" : {
+        "DRIVER" : "/XWINDOW" , 
+        "WINDOW_SIZE" : [600, 400] ,
+        "LABELS_SIZE" : 1.2 ,
+        
+        "SUB_WINDOWS" : 
+        [
+           { 
+              "IDXS"         : [1,1] , # ARRAY POSITION
+              "LEGEND"       : "U(x,t)" , 
+              "LEGEND_AXE_X" : "(x)" ,
+              "LEGEND_AXE_Y" : "(y)" ,
+              "MARKER"       : 0 ,
+              "MARKER_END"   : 0 ,
+              "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":-0.2 , "Y_MAX":1.3 }
+           }
+        ]
+    },
+    
+    # logging -------------------------------------------------
+    
+    "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/1D/OUTPUT_PDE_1D.dat"
+}
+</code></pre>
+#<p>As you can see, the config file is not quite exacty a JSON file: there are comments!
+These comment are cut away from our reader.</p>
+
+<p>Even if we c´have chosen the "ITERATIVE-METHOD" for the resolution, we have kept the parameters for the "DIRECT-METHOD" in the file.
+Like this, we can easily change of method by just changing the content of the tag "METHOD": "ITERATIVE-METHOD"</p>
+
+
+<pre><code class="language-c">
+
+/*
+ * --- Numerical Resolution of PDE 1D ---
+ *
+ *     Laplacian :
+ *        -e.LAPLACIEN(u) = F 
+ *        B.C. Dirichlet Type
+ *
+ */
+
+#include <time.h>
+#include <pthread.h>
+
+#include "MESCHACH/INCLUDES/matrix.h"
+#include "MESCHACH/INCLUDES/sparse.h"
+#include "MESCHACH/INCLUDES/iter.h"
+
+#include "MESCHACH_ADDS/INCLUDES/matrix_adds.h"
+#include "MESCHACH_ADDS/INCLUDES/iter_adds.h"
+
+#include "MESCHACH_EF/INCLUDES/functions_structs.h"
+#include "MESCHACH_EF/INCLUDES/functions_definitions.h"
+
+#include "MESCHACH_EF/INCLUDES/finite_elements_1D.h"
+#include "MESCHACH_EF/INCLUDES/geometry_1D.h"
+#include "MESCHACH_EF/INCLUDES/boundary_conditions_1D.h"
+#include "MESCHACH_EF/INCLUDES/rhs_1D.h"
+#include "MESCHACH_EF/INCLUDES/adv_1D.h"
+#include "MESCHACH_EF/INCLUDES/assemblage_objects_1D.h"
+#include "MESCHACH_EF/INCLUDES/apply_boundaryconditions_1D.h"
+#include "MESCHACH_EF/INCLUDES/graphics_output_1D.h"
+#include "MESCHACH_EF/INCLUDES/miscellaneous_1D.h"
+
+/* "top-level functions" */
+#include "MESCHACH_EF/INCLUDES/problems_solvers.h"
+
+#ifdef HAVE_VOGLE
+#include "MESCHACH_VOGLE/INCLUDES/graphics1D_vogle.h"
+#include "MESCHACH_VOGLE/INCLUDES/graphics1D_vogle_stationnary.h"
+#endif
+
+#include "MESCHACH_EF/INCLUDES/all_params.h"
+
+/* ------------------------------------------------------------------------ */
+
+int main()
+{
+    ELT_1D   *MyElt, *elt_P1, *elt_P2, *elt_P3, *elt_H3, *elt_S2, *elt_S3, *elt_S4, *elt_S5;
+
+    GEOM_1D  *MyGeom;
+
+    BC_1D    *MyBC;
+    RHS_1D   *MyRhsFun;
+ 
+    VEC      *SOL;
+
+    PARAMS   *MyParams;
+
+    clock_t  t1;
+    clock_t  t2;
+
+    /* memory informations */
+
+    mem_info_on(TRUE);
+
+    mem_attach_list(MY_LIST1, NB_STRUCTS1, my_names1, my_frees1, my_tnums1);
+    mem_attach_list(MY_LIST2, NB_STRUCTS2, my_names2, my_frees2, my_tnums2);
+    mem_attach_list(MY_LIST3, NB_STRUCTS3, my_names3, my_frees3, my_tnums3);
+    mem_attach_list(MY_LIST4, NB_STRUCTS4, my_names4, my_frees4, my_tnums4);
+    mem_attach_list(MY_LIST5, NB_STRUCTS5, my_names5, my_frees5, my_tnums5);
+    mem_attach_list(MY_LIST6, NB_STRUCTS6, my_names6, my_frees6, my_tnums6);
+    mem_attach_list(MY_LIST7, NB_STRUCTS7, my_names7, my_frees7, my_tnums7);
+
+    err_list_attach(MY_LIST2, NB_ERRS2, my_err_mesg2);
+    err_list_attach(MY_LIST3, NB_ERRS3, my_err_mesg3);
+    err_list_attach(MY_LIST4, NB_ERRS4, my_err_mesg4);
+    err_list_attach(MY_LIST5, NB_ERRS5, my_err_mesg5);
+    err_list_attach(MY_LIST6, NB_ERRS6, my_err_mesg6);
+    err_list_attach(MY_LIST7, NB_ERRS7, my_err_mesg7);
+
+    warn_list_attach(MY_LIST2, NB_WARNS2, my_warn_mesg2);
+    warn_list_attach(MY_LIST3, NB_WARNS3, my_warn_mesg3);
+    warn_list_attach(MY_LIST4, NB_WARNS4, my_warn_mesg4);
+    warn_list_attach(MY_LIST5, NB_WARNS5, my_warn_mesg5);
+    warn_list_attach(MY_LIST6, NB_WARNS6, my_warn_mesg6);
+    warn_list_attach(MY_LIST7, NB_WARNS7, my_warn_mesg7);
+
+    /* LECTURE  IN  INPUT FILE "PDE_EXAMPLE_1D.json" */
+
+    MyParams = Params_setup_from_file("/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/1D/PDE_EXAMPLE_1D.json");
+
+    Params_set_staticparam(MyParams, 0);
+
+    elt_P1 = elt1D_get("P1");
+    elt_P2 = elt1D_get("P2");
+    elt_P3 = elt1D_get("P3");
+    elt_H3 = elt1D_get("H3");
+    elt_S2 = elt1D_get("S2");
+    elt_S3 = elt1D_get("S3");
+    elt_S4 = elt1D_get("S4");
+    elt_S5 = elt1D_get("S5");
+
+    /* Element type */
+    MyElt = elt1D_get(MyParams->ef_params.name_ef);
+
+    /* Geometry */
+    MyGeom = Geom1D_setup_from_params(MyElt, MyParams);
+
+    /* Boundary conditions */
+    MyBC = Bc1D_setup_from_params(MyParams);
+
+    Geom1D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X);
+    Geom1D_foutput(stdout, MyGeom);
+
+    /* Right Hand Side */
+    MyRhsFun = Rhs1D_setup_from_params(MyParams);
+
+
+    t1 = clock();
+    /* ---------------------------------------------------------------------- */
+
+    SOL = solve1D_laplacian(MyElt, MyGeom, MyBC, MyRhsFun);
+
+    /* ---------------------------------------------------------------------- */
+    t2 = clock();
+
+    printf("total time = %f \n", 1.0 * (t2 - t1) / CLOCKS_PER_SEC);
+
+    /* ----------------------- graphics output ------------------------------ */
+
+    {
+        VEC     *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
+        GEOM_1D *GeomP1 = Geom1D_getP1geom_from(MyElt, MyGeom);
+
+        graphics1D("gnuplot", MyElt, MyGeom, SOL, "SolApproch1D.dat");
+        //graphics1D_gnuplot_script("SolApproch1D.dat", NULL, NULL, MyParams->resol_params.nb_steps, MyParams->misc_params.iter_file);
+
+        printf("ef res\n");
+        v_output(SOL);
+       
+        printf("world res\n");
+        v_output(WORLD);
+
+#ifdef HAVE_VOGLE
+        if (MyParams->graph_params.VOGLE == 1)
+        {
+            graphics1D_vopl_initialize(MyParams->graph_interactiv1Dplots_params.DRIVER,
+                MyParams->graph_interactiv1Dplots_params.SIZE_WINDOW_X,
+                MyParams->graph_interactiv1Dplots_params.SIZE_WINDOW_Y, 1, 1, VOPL_CURVE);
+            graphics1D_vopl_title("SOLUTION");
+            graphics1D_vopl_legend(1, 1, "SOLUTION");
+            graphics1D_vopl_labelsize(1, 1, MyParams->graph_interactiv1Dplots_params.SIZE_LABELS);
+            graphics1D_vopl_window(1, 1, MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].X_MIN,
+                MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].X_MAX,
+                MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MIN,
+                MyParams->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MAX);
+            graphics1D_vopl_setbox(1, 1, 1);
+            graphics1D_vopl_curvedata(1, 1, VOGLEe_COLOR_BLUE, GeomP1->XSOMM, WORLD);
+
+            graphics1D_vopl_plotcurve();
+        }
+#endif
+
+        V_FREE(WORLD);
+        GEOM_1D_FREE(GeomP1);
+    }
+
+	 /* ----------------------- check-------- ------------------------------ */
+
+    if (MyParams->exactsol_params.exact_sol[0] >= 0)
+    {
+       VEC *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
+       
+       FUN_1D *fun_exact = Fun1D_get();
+       Fun1D_setCFunction(fun_exact, ExSol1D[MyParams->exactsol_params.exact_sol[0]]);
+       
+       VEC* WORLD_EXACT = build_vec_world_from_function1D(MyElt, MyGeom, fun_exact, NULL, NULL);
+       
+       printf("SOL (EF)\n");
+       v_foutput(stdout, SOL);
+       
+       printf("WORLD\n");
+       v_foutput(stdout, WORLD);
+       printf("WORLD_EXACT\n");
+       v_foutput(stdout, WORLD_EXACT);
+       
+       double diff = v_norm2(v_sub(WORLD, WORLD_EXACT, NULL));
+       fprintf(stdout, "\ndiff solexacte-solapprochee = %le\n", diff);
+       fprintf(stdout, "\n---------------------------------------\n");
+       
+       V_FREE(WORLD);
+       V_FREE(WORLD_EXACT);
+       
+    }
+
+    /* --------------------------------------------------------------------- */
+
+    ELT_1D_FREE(elt_P1);
+    ELT_1D_FREE(elt_P2);
+    ELT_1D_FREE(elt_P3);
+    ELT_1D_FREE(elt_H3);
+    ELT_1D_FREE(elt_S2);
+    ELT_1D_FREE(elt_S3);
+    ELT_1D_FREE(elt_S4);
+    ELT_1D_FREE(elt_S5);
+
+    ELT_1D_FREE(MyElt);
+
+    GEOM_1D_FREE(MyGeom);
+    BC_1D_FREE(MyBC);
+    RHS_1D_FREE(MyRhsFun);
+
+    V_FREE(SOL);
+
+    PARAMS_FREE(MyParams);
+
+    /* ----------------------------------------------------------------------- */
+
+    mem_info_file(stdout, 0);    /* = mem_info(); */
+
+    mem_info_file(stdout, MY_LIST1);
+    mem_info_file(stdout, MY_LIST2);
+    mem_info_file(stdout, MY_LIST3);
+    mem_info_file(stdout, MY_LIST4);
+    mem_info_file(stdout, MY_LIST5);
+    mem_info_file(stdout, MY_LIST6);
+    mem_info_file(stdout, MY_LIST7);
+
+    pthread_exit(NULL);
+
+    return EXIT_SUCCESS;
+}
+</code></pre>
+
+<h3>Python example</h3>
+
+<p>In Python the parameters are given inside the python driver program as a dictionnary (or list of dictionnaries). A
+python dictionnary is quite similar to a json data, so the user should recognize the structure of the dictionnary.</p>
+
+<h2>Example: 1D Kuramoto-Sivashinsky Problem</h2>
+
+<p>A driver program in Python is given.</p>
+
+<h2>Example: 1D Eigenvalues Problem</h2>
+
+<h2>Example: 2D Laplacian Problem</h2>
+
+<h2>Example: 3D Laplacian Problem</h2>
+
+<h2>Example: 2D Stokes</h2>
+
+<h2>Example: 3D Stokes</h2>
+
+<h2>Example: 2D NavierStokes</h2>
+
+<h2>Example: 3D NavierStokes</h2>
+<!-- ----------------------------------------------------------------------------------------------------------->
+<!-- ----------------------------------------------------------------------------------------------------------->
+</div>
+</body>
+</html>

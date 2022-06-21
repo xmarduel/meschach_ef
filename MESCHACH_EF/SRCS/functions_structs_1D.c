@@ -10,6 +10,11 @@
 #include "MESCHACH_EF/INCLUDES/all_params.h"   /* for axes enumerations */
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 
+#ifdef HAVE_LUA
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+#endif
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -105,6 +110,14 @@ FUN_1D * Fun1D_setFunction(FUN_1D* MyFun, FUN_TYPE type, void* phi, void* client
                                MyFun->clientdata = clientdata;
                                MyFun->eval       = (FUN_1D_EVAL__FUN_1D_VAARGS)Fun1D_evalPyFunctionTransient;
                                break;
+	  case FUN_LUA_STATIONNARY: MyFun->phi_x_v    = (FUNC_1D_PLUS_VOID)phi;
+                               MyFun->clientdata = clientdata;
+                               MyFun->eval       = (FUN_1D_EVAL__FUN_1D_VAARGS)Fun1D_evalLUAFunction;
+                               break;
+      case FUN_LUA_TRANSIENT:  MyFun->phi_xt_v   = (FUNC_2D_PLUS_VOID)phi;
+                               MyFun->clientdata = clientdata;
+                               MyFun->eval       = (FUN_1D_EVAL__FUN_1D_VAARGS)Fun1D_evalLUAFunctionTransient;
+                               break;
 
       default: error5(E_FUN_WRONGTYPE, "Fun1D_setFunction");
    }
@@ -130,6 +143,43 @@ FUN_1D * Fun1D_setCFunctionTransient(FUN_1D* MyFun, FUNC_2D phi)
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
+
+FUN_1D * Fun1D_setLUAFunction(FUN_1D* Fun, const char* def) 
+{
+#ifdef HAVE_LUA
+	lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+
+    char* fundef[256];
+	snprintf(fundef, 256, "fun = function(x)  return %s  end", def);
+	
+    if (luaL_dostring(L, fundef == LUA_OK) {
+        lua_pop(L, lua_gettop(L));
+    }
+	
+    Fun1D_setFunction(Fun, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction1D, L);	
+#endif
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+FUN_1D * Fun1D_setLUAFunctionTransient(FUN_1D* Fun, const char* def)
+{
+#ifdef HAVE_LUA
+	lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+
+    char* fundef[256];
+	snprintf(fundef, 256, "fun = function(x, t)  return %s  end", def);
+	
+    if (luaL_dostring(L, fundef == LUA_OK) {
+        lua_pop(L, lua_gettop(L));
+    }
+	
+    Fun1D_setFunction(Fun, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction2D, L);	
+#endif
+}
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
@@ -199,3 +249,100 @@ Real Fun1D_evalPyFunctionTransient     (const FUN_1D* MyFun, Real x, Real tps)
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
+
+Real     Fun1D_evalLUAFunction           (const FUN_1D* Fun, Real x)
+{  
+#ifdef HAVE_LUA
+    if ( MyFun              == NULL ) error(E_NULL, "Fun1D_evalLUAFunction");
+    if ( MyFun->phi_x_v     == NULL ) error(E_NULL, "Fun1D_evalLUAFunction");
+    if ( MyFun->clientdata  == NULL ) error(E_NULL, "Fun1D_evalLUAFunction");
+
+	return MyFun->phi_xt_v(x, MyFun->clientdata);
+#else
+	return 0.0
+#endif
+}
+
+Real     Fun1D_evalLUAFunctionTransient  (const FUN_1D* Fun, Real x, Real tps)
+{
+#ifdef HAVE_LUA
+    if ( MyFun              == NULL ) error(E_NULL, "Fun1D_evalLUAFunctionTransient");
+    if ( MyFun->phi_xt_v    == NULL ) error(E_NULL, "Fun1D_evalLUAFunctionTransient");
+    if ( MyFun->clientdata  == NULL ) error(E_NULL, "Fun1D_evalLUAFunctionTransient");
+
+	return MyFun->phi_xt_v(x, t, MyFun->clientdata);
+#else
+	return 0.0
+#endif
+}
+
+// ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+
+// https://lucasklassmann.com/blog/2019-02-02-how-to-embeddeding-lua-in-c/
+
+Real FunctionForEvaluatingLuaFunction1D(Real x, void *L)
+{
+	Real result = 0.0;
+
+#ifdef HAVE_LUA
+    lua_State *L = (lua_State *)LL;
+
+    // Put the function to be called onto the stack
+    lua_getglobal(L, "fun");
+    lua_pushdouble(L, x);  // first argument
+
+    // Execute my_function with 2 arguments and 1 return value
+    if (lua_pcall(L, 1, 1, 0) == LUA_OK) {
+
+        // Check if the return is an integer
+        if (lua_isdouble(L, -1)) {
+
+            // Convert the return value to integer
+            result = lua_todouble(L, -1);
+
+            // Pop the return value
+            lua_pop(L, 1);
+            printf("Result: %d\n", result);
+        }
+        // Remove the function from the stack
+        lua_pop(L, lua_gettop(L));
+    }
+#endif
+
+	return result;
+}
+
+Real FunctionForEvaluatingLuaFunction2D(Real x, Real t, void *LL)
+{
+	Real result = 0.0;
+
+#ifdef HAVE_LUA
+    lua_State *L = (lua_State *)LL;
+	
+    // Put the function to be called onto the stack
+    lua_getglobal(L, "fun");
+    lua_pushdouble(L, x);  // first argument
+    lua_pushdouble(L, t);  // second argument
+
+    // Execute my_function with 2 arguments and 1 return value
+    if (lua_pcall(L, 2, 1, 0) == LUA_OK) {
+
+        // Check if the return is an integer
+        if (lua_isdouble(L, -1)) {
+
+            // Convert the return value to integer
+            result = lua_todouble(L, -1);
+
+            // Pop the return value
+            lua_pop(L, 1);
+            printf("Result: %d\n", result);
+        }
+        // Remove the function from the stack
+        lua_pop(L, lua_gettop(L));
+    }
+#endif
+
+	return result;
+}
+
