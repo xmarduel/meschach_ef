@@ -424,22 +424,22 @@ but infact you need to define only a few of them. It just gives you an idea how 
         "PDE_INITIAL_CONDITION" : { "type":"object", "description":"", 
             "properties" : {
                 "DIM1" : { "type":"object", "description":"" , 
-			       "properties" : {
-                        "FUNC_NAME" : { "type":"string", "description":"predefined function" },
-                        "FUNC_DEF"  : { "type":"string", "description":"lua code" }
-                    }
+			       "oneOf" : [
+                        { "FUNC_NAME" : { "type":"string", "description":"predefined function", "pattern" : "Ini[1-3]D_0[1-9]" } },
+                        { "FUNC_DEF"  : { "type":"string", "description":"lua code" } }
+                    ]
                 },
 				"DIM2" : { "type":"object", "description":"" , 
-			       "properties" : {
-                        "FUNC_NAME" : { "type":"string", "description":"predefined function" },
-                        "FUNC_DEF"  : { "type":"string", "description":"lua code" }
-                    }
+			       "oneOf" : [
+                        { "FUNC_NAME" : { "type":"string", "description":"predefined function" , "pattern" : "Ini[1-3]D_0[1-9]"} },
+                        {"FUNC_DEF"  : { "type":"string", "description":"lua code" } }
+                    [
                 },
 				"DIM3" : { "type":"object", "description":"" , 
-			       "properties" : {
-                        "FUNC_NAME" : { "type":"string", "description":"predefined function" },
-                        "FUNC_DEF"  : { "type":"string", "description":"lua code" }
-                    }
+			       "oneOf" : [
+                        { "FUNC_NAME" : { "type":"string", "description":"predefined function", "pattern" : "Ini[1-3]D_0[1-9]" } },
+                        { "FUNC_DEF"  : { "type":"string", "description":"lua code" } }
+                    [
                 }
 			}
         },
@@ -447,22 +447,22 @@ but infact you need to define only a few of them. It just gives you an idea how 
         "PDE_RHS" : { "type":"object", "description":"",
             "properties" : {
                 "DIM1" : { "type":"object", "description":"" , 
-			       "properties" : {
-                        "FUNC_NAME" : { "type":"string", "description":"predefined function", "pattern" : "Src[1-3]D_0[1-9]" },
-                        "FUNC_DEF"  : { "type":"string", "description":"lua code" }
-                    }
+			       "oneOf" : [
+                        { "FUNC_NAME" : { "type":"string", "description":"predefined function", "pattern" : "Src[1-3]D_0[1-9]" } },
+                        { "FUNC_DEF"  : { "type":"string", "description":"lua code" } }
+                    ]
                 },
 				"DIM2" : { "type":"object", "description":"" , 
-			       "properties" : {
-                        "FUNC_NAME" : { "type":"string", "description":"predefined function" , "pattern" : "Src[1-3]D_0[1-9]"},
-                        "FUNC_DEF"  : { "type":"string", "description":"lua code" }
-                    }
+			       "oneOf" : [
+                        { "FUNC_NAME" : { "type":"string", "description":"predefined function" , "pattern" : "Src[1-3]D_0[1-9]"} },
+                        {"FUNC_DEF"  : { "type":"string", "description":"lua code" } }
+                    [
                 },
 				"DIM3" : { "type":"object", "description":"" , 
-			       "properties" : {
-                        "FUNC_NAME" : { "type":"string", "description":"predefined function", "pattern" : "Src[1-3]D_0[1-9]" },
-                        "FUNC_DEF"  : { "type":"string", "description":"lua code" }
-                    }
+			       "oneOf" : [
+                        { "FUNC_NAME" : { "type":"string", "description":"predefined function", "pattern" : "Src[1-3]D_0[1-9]" } },
+                        { "FUNC_DEF"  : { "type":"string", "description":"lua code" } }
+                    [
                 }
             }
         },
@@ -480,15 +480,9 @@ but infact you need to define only a few of them. It just gives you an idea how 
                                     { "type":"string", "description":"predefined function" , "pattern" : "Phi[1-3]D_0[1-9]" },
                                     { "type":"array" , , "minItems": 2, "maxItems": 2 , "items": { "type":"string" "description":"predefined function" ,  "pattern" : "Phi[1-3]D_0[1-9]"} }
                                 ]
-                            },
-							"FUNC_DEF" : { "oneOf" : 
-                                [
-                                    { "type":"string", "description":"lua code" },
-                                    { "type":"array" , "description":"lua code", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
-                                ]
                             }
                         },
-                        "required" : ["IDX", "BC_TYPE"],
+                        "required" : ["IDX", "BC_TYPE",  "FUNC_NAME"],
                         "additionalProperties": false
                     }
                 },
@@ -502,15 +496,9 @@ but infact you need to define only a few of them. It just gives you an idea how 
                                     { "type":"string", "description":"predefined function" ,  "pattern" : "Phi[1-3]D_0[1-9]" },
                                     { "type":"array", "minItems": 2, "maxItems": 2 , "items": { "type":"string" , "description":"predefined function" ,  "pattern" : "Phi[1-3]D_0[1-9]"} }
                                 ]
-                            },
-							"FUNC_DEF" : { "oneOf" : 
-                                [
-                                    { "type":"string", "description":"lua code" },
-                                    { "type":"array" , "description":"lua code", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
-                                ]
                             }
                         },
-                        "required" : ["IDX", "BC_TYPE"],
+                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
                         "additionalProperties": false
                     }
                 },
@@ -524,15 +512,9 @@ but infact you need to define only a few of them. It just gives you an idea how 
                                     { "type":"string""description":"predefined function" ,  "pattern" : "Phi[1-3]D_0[1-9]" },
                                     { "type":"array", "items": { "type":"string" "description":"predefined function" ,  "pattern" : "Phi[1-3]D_0[1-9]" }, "minItems": 2, "maxItems": 2 }
                                 ]
-                            },
-							"FUNC_DEF" : { "oneOf" : 
-                                [
-                                    { "type":"string", "description":"lua code" },
-                                    { "type":"array" , "description":"lua code", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
-                                ]
                             }
                         },
-                        "required" : ["IDX", "BC_TYPE"],
+                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
                         "additionalProperties": false
                     }
                 }
@@ -632,22 +614,22 @@ but infact you need to define only a few of them. It just gives you an idea how 
         "PDE_EXACT_SOL" : { "type":"object", "description":"for tests, exact solution of the pde",
             "properties" : {
                 "DIM1" : { "type":"object", "description":"" , 
-			       "properties" : {
-                        "FUNC_NAME" : { "type":"string", "description":"predefined function",  "pattern" : "Sol[1-3]D_0[1-9]" },
-                        "FUNC_DEF"  : { "type":"string", "description":"lua code" }
-                    }
+			       "oneOf" : [
+                        { "FUNC_NAME" : { "type":"string", "description":"predefined function",  "pattern" : "Sol[1-3]D_0[1-9]" } },
+                        { "FUNC_DEF"  : { "type":"string", "description":"lua code" } }
+                    ]
                 },
 				"DIM2" : { "type":"object", "description":"" , 
-			       "properties" : {
-                        "FUNC_NAME" : { "type":"string", "description":"predefined function" , "pattern" : "Sol[1-3]D_0[1-9]" },
-                        "FUNC_DEF"  : { "type":"string", "description":"lua code" }
-                    }
+			       "oneOf" : [
+                        { "FUNC_NAME" : { "type":"string", "description":"predefined function" , "pattern" : "Sol[1-3]D_0[1-9]" } },
+                        { "FUNC_DEF"  : { "type":"string", "description":"lua code" } }
+                    ]
                 },
 				"DIM3" : { "type":"object", "description":"" , 
-			       "properties" : {
-                        "FUNC_NAME" : { "type":"string", "description":"predefined function", "pattern" : "Sol[1-3]D_0[1-9]" },
-                        "FUNC_DEF"  : { "type":"string", "description":"lua code" }
-                    }
+			       "oneOf" : [
+                        { "FUNC_NAME" : { "type":"string", "description":"predefined function", "pattern" : "Sol[1-3]D_0[1-9]" } },
+                        { "FUNC_DEF"  : { "type":"string", "description":"lua code" } }
+                    ]
                 }
             }
         },
