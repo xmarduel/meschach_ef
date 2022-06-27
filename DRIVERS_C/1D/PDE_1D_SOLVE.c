@@ -274,12 +274,12 @@ int main()
 
 	 /* ----------------------- check-------- ------------------------------ */
 
-    if (MyParams->exactsol_params.exact_sol[0] >= 0)
+    if ( strcmp(MyParams->sol_params.sol[0].fundef, "") != 0)
     {
        VEC *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
        
        FUN_1D *fun_exact = Fun1D_get();
-       Fun1D_setCFunction(fun_exact, ExSol1D[MyParams->exactsol_params.exact_sol[0]]);
+       Fun1D_setLUAFunction(fun_exact, MyParams->sol_params.sol[0].fundef);
        
        VEC* WORLD_EXACT = build_vec_world_from_function1D(MyElt, MyGeom, fun_exact, NULL, NULL);
        

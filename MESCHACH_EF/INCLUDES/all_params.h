@@ -97,35 +97,51 @@ typedef struct {
 } PARAMS_geometry ;
 
 /*******************************************/
+/*******************************************/
+   
+typedef struct _FF_SPEC
+{
+   char fundef[128];
+      
+} FF_SPEC;
+   
+/*******************************************/
 typedef struct {
    
    int nb_BC;
    
    int TabBCMask[3][NB_BOUNDARYCONDITIONS];
 
-   int TabPhi_BCdirichlet[3][NB_BOUNDARYCONDITIONS];
-   int TabPhi_BCneumann[3][NB_BOUNDARYCONDITIONS];
-   int TabPhi_BCcauchy[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC TabPhi_BCdirichlet[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC TabPhi_BCneumann[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC TabPhi_BCcauchy[3][NB_BOUNDARYCONDITIONS];
 
-   int TabPhi_BCrobin1[3][NB_BOUNDARYCONDITIONS];
-   int TabPhi_BCrobin2[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC TabPhi_BCrobin1[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC TabPhi_BCrobin2[3][NB_BOUNDARYCONDITIONS];
 
 } PARAMS_boundary_conditions ;
 
 /*******************************************/
 typedef struct {
    
-   int  rhs[3]; /**< the "indices" of the functions for the rhs (3 dim) */
+   FF_SPEC  rhs[3];
    
 } PARAMS_right_hand_side ;
 
 /*******************************************/
 typedef struct {
 
-   int  ic[3];  /**< the "indices" of the function for the ic (3 dim) */
+   FF_SPEC  ini[3];  /**< the "indices" of the function for the ic (3 dim) */
 
 } PARAMS_initial_condition ;
 
+/*******************************************/
+typedef struct {
+      
+   FF_SPEC sol[3];  /**< the "indices" of the function for the exact solution (3 dim) */
+      
+} PARAMS_exact_solution ;
+   
 /*******************************************/
 typedef struct {
    
@@ -134,18 +150,11 @@ typedef struct {
    Real delta;      /**< a coefficient parameter */
    Real rho_stab;   /**< "SUPG" -> -1 , "GALS" -> 0 , "DWG" -> +1 */
    
-   int adv1[3][3];  /**< the functions for advection problem (first  equation) */
-   int adv2[3][3];  /**< the functions for advection problem (second equation) */
-   int adv3[3][3];  /**< the functions for advection problem (third  equation) */
+   FF_SPEC adv1[3][3];  /**< the functions for advection problem (first  equation) */
+   FF_SPEC adv2[3][3];  /**< the functions for advection problem (second equation) */
+   FF_SPEC adv3[3][3];  /**< the functions for advection problem (third  equation) */
    
 } PARAMS_convective_terms ;
-
-/*******************************************/
-typedef struct {
-		
-	int  exact_sol[3];  /**< the "indices" of the function for the exact solution (3 dim) */
-		
-} PARAMS_exact_solution ;
 	
 /*******************************************/
 typedef struct {
@@ -382,8 +391,8 @@ typedef struct {
    PARAMS_boundary_conditions    bc_params;
    PARAMS_right_hand_side        rhs_params;
    PARAMS_convective_terms       adv_params;
-   PARAMS_initial_condition      ic_params;
-   PARAMS_exact_solution         exactsol_params;
+   PARAMS_initial_condition      ini_params;
+   PARAMS_exact_solution         sol_params;
    PARAMS_matrix_solver          resol_params;
    PARAMS_eigen_solver           eigen_params;
    PARAMS_stokes_solver          stokes_params;

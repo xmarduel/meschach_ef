@@ -2,10 +2,11 @@
 
 import sys
 import json
-
-from math import *
-from time import *
+import time
+from math import cos, sin, exp, pi
 import threading
+import time
+import profile
 
 from meschach         import *
 from meschach_spooles import *
@@ -15,9 +16,6 @@ from meschach_ef      import *
 from meschach_cpgplot import *
 from meschach_vogle   import *
 
-
-import time
-import profile
 
 ERRORS_DICT = {
    "E_UNKNOWN" : "unknowm error !!!" ,
@@ -118,11 +116,18 @@ def Py_solve2D_eigen(MyElt, MyGeom, MyBC):
 
     eig_params = eig_params_get()
 
-    eig_params_set_problem(eig_params, Params_get_oneparam(MyParams,"eigen_params","problem") )
-    eig_params_set_option (eig_params, Params_get_oneparam(MyParams,"eigen_params","option_eigen") )
-    eig_params_set_ibounds(eig_params, Params_get_oneparam(MyParams,"eigen_params","lower_ibound"), Params_get_oneparam(MyParams,"eigen_params","upper_ibound"))
-    eig_params_set_rbounds(eig_params, Params_get_oneparam(MyParams,"eigen_params","lower_rbound"), Params_get_oneparam(MyParams,"eigen_params","upper_rbound"))
-    eig_params_set_nb_eigv(eig_params, Params_get_oneparam(MyParams,"eigen_params","nb_eig"))
+    eig_params_set_problem(eig_params,
+            Params_get_oneparam(MyParams, "eigen_params", "problem") )
+    eig_params_set_option (eig_params,
+            Params_get_oneparam(MyParams, "eigen_params", "option_eigen") )
+    eig_params_set_ibounds(eig_params,
+            Params_get_oneparam(MyParams, "eigen_params", "lower_ibound"),
+            Params_get_oneparam(MyParams,"eigen_params","upper_ibound") )
+    eig_params_set_rbounds(eig_params,
+            Params_get_oneparam(MyParams, "eigen_params", "lower_rbound"),
+            Params_get_oneparam(MyParams,"eigen_params","upper_rbound"))
+    eig_params_set_nb_eigv(eig_params,
+            Params_get_oneparam(MyParams, "eigen_params", "nb_eig"))
 
     # ----- assemblage matrices ------ 
 

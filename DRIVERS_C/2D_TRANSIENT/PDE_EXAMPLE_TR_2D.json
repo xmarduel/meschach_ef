@@ -117,15 +117,21 @@
     # pde def -------------------------------------------------------------------------
     
     "PDE_INITIAL_CONDITION" : {
-        "FUNC_DIM1_NAME" : "Zero2D",
-        "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null
+       "DIM1" : {"FUNC_DEF" : "0.0"},
+       "DIM2" : {"FUNC_DEF" : null},
+       "DIM3" : {"FUNC_DEF" : null}
     },
     
     "PDE_RHS" : {
-        "FUNC_DIM1_NAME" : "Src2D_08",
-        "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null 
+       "DIM1" : {"FUNC_DEF" : "10.0"},
+       "DIM2" : {"FUNC_DEF" : null},
+       "DIM3" : {"FUNC_DEF" : null}
+    },
+    
+    "PDE_EXACT_SOL" : {
+       "DIM1" : {"FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
+       "DIM2" : {"FUNC_DEF" : null},
+       "DIM3" : {"FUNC_DEF" : null}
     },
 
     "PDE_BOUNDARY_CONDITIONS" : {
@@ -133,24 +139,24 @@
         "NB_BCS" : 4,
          
         "DIM1" : [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" },
-           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" },
-           { "IDX" : 4 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" }
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" },
+           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" },
+           { "IDX" : 4 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" }
         ],
         
         "DIM2" :  [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
-           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" }
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" },
+           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" }
         ],
         
         "DIM3" : [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
-           { "IDX" : 3 , "BC_TYPE" : "CAUCHY"    , "FUNC_NAME" : "sphere" },
-           { "IDX" : 4 , "BC_TYPE" : "NEUMANN"   , "FUNC_NAME" : "sphere" },
-           { "IDX" : 5 , "BC_TYPE" : "ROBIN"     , "FUNC_NAME" : ["x", "y"]}
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" },
+           { "IDX" : 3 , "BC_TYPE" : "CAUCHY"    , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" },
+           { "IDX" : 4 , "BC_TYPE" : "NEUMANN"   , "FUNC_DEF" : "10/4.0*(1.0/2.0 - (x-0.5)*(x-0.5) - y-0.5)*(y-0.5) )" },
+           { "IDX" : 5 , "BC_TYPE" : "ROBIN"     , "FUNC_DEF" : ["x", "y"]}
         ]
     },
 
@@ -180,12 +186,6 @@
                "FUNC_dvdz" : null 
            }
         }
-    },
-    
-    "PDE_EXACT_SOL" : {
-        "FUNC_DIM1_NAME" : "spheric",
-        "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null 
     },
     
     # mesh --------------------------------

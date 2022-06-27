@@ -10,6 +10,11 @@
 #include "MESCHACH_EF/INCLUDES/all_params.h"   /* for axes enumerations */
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 
+#ifdef HAVE_LUA
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+#endif
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
@@ -105,7 +110,14 @@ FUN_2D * Fun2D_setFunction(FUN_2D* MyFun, FUN_TYPE type, void* phi, void* client
                                MyFun->eval       = (FUN_2D_EVAL__FUN_2D_VAARGS)Fun2D_evalPyFunctionTransient;
                                MyFun->clientdata = clientdata;
                                break;
-
+      case FUN_LUA_STATIONNARY: MyFun->phi_xy_v  = (FUNC_2D_PLUS_VOID)phi;
+                               MyFun->clientdata = clientdata;
+                               MyFun->eval       = (FUN_2D_EVAL__FUN_2D_VAARGS)Fun2D_evalLUAFunction;
+                               break;
+      case FUN_LUA_TRANSIENT:  MyFun->phi_xyt_v  = (FUNC_3D_PLUS_VOID)phi;
+                               MyFun->clientdata = clientdata;
+                               MyFun->eval       = (FUN_2D_EVAL__FUN_2D_VAARGS)Fun2D_evalLUAFunctionTransient;
+                               break;
       default: error5(E_FUN_WRONGTYPE, "Fun2D_setFunction");
    }
 
@@ -126,6 +138,34 @@ FUN_2D * Fun2D_setCFunction(FUN_2D* MyFun, FUNC_2D phi)
 FUN_2D * Fun2D_setCFunctionTransient( FUN_2D* MyFun, FUNC_3D phi)
 {
    return Fun2D_setFunction(MyFun, FUN_C_TRANSIENT, phi, NULL);
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+FUN_2D * Fun2D_setLUAFunction(FUN_2D* Fun, const char* def)
+{
+#ifdef HAVE_LUA
+   lua_State *L = make_lua_interpreter(def, "2D");
+       
+   return Fun2D_setFunction(Fun, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction2D, L);
+#else
+   return Fun;
+#endif
+}
+       
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+       
+FUN_2D * Fun2D_setLUAFunctionTransient(FUN_2D* Fun, const char* def)
+{
+#ifdef HAVE_LUA
+   lua_State *L = make_lua_interpreter(def, "2D_TR"); 
+          
+   return Fun2D_setFunction(Fun, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction3D, L);
+#else
+   return Fun;
+#endif
 }
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -167,6 +207,22 @@ Real Fun2D_evalPyFunction     (const FUN_2D* MyFun, Real x, Real y)
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 
+Real Fun2D_evalLUAFunction     (const FUN_2D* MyFun, Real x, Real y)
+{
+#ifdef HAVE_LUA
+   if ( MyFun              == NULL ) error(E_NULL, "Fun2D_evalLUAFunction");
+   if ( MyFun->phi_xy_v    == NULL ) error(E_NULL, "Fun2D_evalLUAFunction");
+   if ( MyFun->clientdata  == NULL ) error(E_NULL, "Fun2D_evalLUAFunction");
+          
+   return MyFun->phi_xy_v(x, y, MyFun->clientdata);
+#else
+   return 0.0;
+#endif
+}
+    
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
 Real Fun2D_evalCFunctionTransient  (const FUN_2D* MyFun, Real x, Real y, Real tps)
 {
    Real res = 0.0;
@@ -197,5 +253,21 @@ Real Fun2D_evalPyFunctionTransient     (const FUN_2D* MyFun, Real x, Real y, Rea
    return res;
 }
 
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+Real Fun2D_evalLUAFunctionTransient  (const FUN_2D* MyFun, Real x, Real y, Real tps)
+{
+#ifdef HAVE_LUA
+   if ( MyFun              == NULL ) error(E_NULL, "Fun2D_evalLUAFunctionTransient");
+   if ( MyFun->phi_xyt_v   == NULL ) error(E_NULL, "Fun2D_evalLUAFunctionTransient");
+   if ( MyFun->clientdata  == NULL ) error(E_NULL, "Fun2D_evalLUAFunctionTransient");
+      
+   return MyFun->phi_xyt_v(x, y, tps, MyFun->clientdata);
+#else
+   return 0.0;
+#endif
+}
+       
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */

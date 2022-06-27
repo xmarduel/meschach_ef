@@ -18,12 +18,12 @@
         "LAPLACIAN_ALGO" : {
             "METHOD" : "ITERATIVE-METHOD",
 				
-	"ITERATIVE-METHOD" : {
+	     "ITERATIVE-METHOD" : {
                 "METHOD"          : "CG" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
                 "PRECONDITIONER"  : "null" ,     # "null", "ICH", "ILU"
                 "PARAMETERS" : {
-                    "NMAX_ITER" : 250,
-                    "EPSILON"   : 1.0e-12
+                    "NMAX_ITER" : 1000,
+                    "EPSILON"   : 1.0e-14
                 },
                 "OUTPUT" : {
                     "STDOUT" : true,
@@ -106,22 +106,22 @@
 
     # pde def -------------------------------------------------------------------------
     
-   "PDE_INITIAL_CONDITION" : {
-        "FUNC_DIM1_NAME" : null,
-        "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null
+    "PDE_INITIAL_CONDITION" : {
+       "DIM1" : {"FUNC_DEF" : null},
+       "DIM2" : {"FUNC_DEF" : null},
+       "DIM3" : {"FUNC_DEF" : null}
     },
 	 
 	"PDE_RHS" : {
-        "FUNC_DIM1_NAME" : "Src3D_03",
-        "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null 
+        "DIM1" : {"FUNC_DEF" : "10.0"},
+        "DIM2" : {"FUNC_DEF" : null},
+        "DIM3" : {"FUNC_DEF" : null}
     },
 
     "PDE_EXACT_SOL" : {
-        "FUNC_DIM1_NAME" : "Sol3D_03",
-        "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null 
+        "DIM1" : {"FUNC_DEF" : "10.0/6.0 * (0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5) - (z-0.5)*(z-0.5) )"},
+        "DIM2" : {"FUNC_DEF" : null},
+        "DIM3" : {"FUNC_DEF" : null}
     },
 	 
     "PDE_BOUNDARY_CONDITIONS" : {
@@ -129,13 +129,12 @@
         "NB_BCS" : 6,
          
         "DIM1" : [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
-           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
-           { "IDX" : 4 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
-           #{ "IDX" : 5 , "BC_TYPE" : "NEUMANN"   , "FUNC_NAME" : "Phi3D_02" }, # df/dx
-           { "IDX" : 5 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" },
-           { "IDX" : 6 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi3D_03" }
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/6.0 * (0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5) - (z-0.5)*(z-0.5) )" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/6.0 * (0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5) - (z-0.5)*(z-0.5) )" },
+           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/6.0 * (0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5) - (z-0.5)*(z-0.5) )" },
+           { "IDX" : 4 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/6.0 * (0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5) - (z-0.5)*(z-0.5) )" },
+           { "IDX" : 5 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/6.0 * (0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5) - (z-0.5)*(z-0.5) )" },
+           { "IDX" : 6 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/6.0 * (0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5) - (z-0.5)*(z-0.5) )" }
         ]
 
     },
@@ -207,17 +206,17 @@
     # mesh --------------------------------
 
     "MESH_3D" : {
-        #"MESHFILEDEFINITION" : {
-        #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube",
-        #    "MESHNAME" : "MESH_10", # "MESH_10", "MESH_20"
-        #    "MESHTYPE" : "cube"
-        #}
-        
         "MESHFILEDEFINITION" : {
-            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v4.gmsh", # cube3D_P1_v[4-5-6-7-8].gmsh   
-            "MESHNAME" : "null",
-            "MESHTYPE" : "gmsh"
+            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube",
+            "MESHNAME" : "MESH_10", # "MESH_10", "MESH_20"
+            "MESHTYPE" : "cube"
         }
+        
+        #"MESHFILEDEFINITION" : {
+           #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v4.gmsh", # cube3D_P1_v[4-5-6-7-8].gmsh
+           # "MESHNAME" : "null",
+           # "MESHTYPE" : "gmsh"
+           #}
     },
     
     # graphics ---------------------------

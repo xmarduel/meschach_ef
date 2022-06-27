@@ -53,12 +53,16 @@ FUN_3D * Fun3D_setFunction            (FUN_3D* Fun, FUN_TYPE type, void* phi, vo
 FUN_3D * Fun3D_setCFunction           (FUN_3D* Fun, FUNC_3D  phi);
 FUN_3D * Fun3D_setCFunctionTransient  (FUN_3D* Fun, FUNC_4D  phi);
 
-Real     Fun3D_evalCFunction          (const FUN_3D* Fun, Real x, Real y, Real z          );
-Real     Fun3D_evalCFunctionTransient (const FUN_3D* Fun, Real x, Real y, Real z, Real tps);
-Real     Fun3D_evalPyFunction         (const FUN_3D* Fun, Real x, Real y, Real z          );
-Real     Fun3D_evalPyFunctionTransient(const FUN_3D* Fun, Real x, Real y, Real z, Real tps);
-
-
+FUN_3D * Fun3D_setLUAFunction            (FUN_3D* Fun, const char* def);
+FUN_3D * Fun3D_setLUAFunctionTransient   (FUN_3D* Fun, const char* def);
+   
+   
+Real     Fun3D_evalCFunction             (const FUN_3D* Fun, Real x, Real y, Real z          );
+Real     Fun3D_evalCFunctionTransient    (const FUN_3D* Fun, Real x, Real y, Real z, Real tps);
+Real     Fun3D_evalPyFunction            (const FUN_3D* Fun, Real x, Real y, Real z          );
+Real     Fun3D_evalPyFunctionTransient   (const FUN_3D* Fun, Real x, Real y, Real z, Real tps);
+Real     Fun3D_evalLUAFunction           (const FUN_3D* Fun, Real x, Real y, Real z           );
+Real     Fun3D_evalLUAFunctionTransient  (const FUN_3D* Fun, Real x, Real y, Real z, Real tps);
 
 #ifdef __cplusplus
 }

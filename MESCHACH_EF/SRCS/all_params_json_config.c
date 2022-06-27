@@ -140,15 +140,25 @@ static void json_config_PARAMS_geometry(PARAMS* p, const json_t* config)
             return; //error8(E_JSON_MISSING_OBJECT, "MESH_1D");
       }
       
+      json_t *MESH_SPEC = json_object_get(MESH_1D, "MESH_SPEC");
+      
+      if (MESH_SPEC == NULL)
+      {
+         return; //error8(E_JSON_MISSING_OBJECT, "MESH_SPEC");
+      }
+      
+      const char* MESH_SPEC_VALUE = json_string_value(MESH_SPEC);
+      
       json_t *MESHFILEDEFINITION = json_object_get(MESH_1D, "MESHFILEDEFINITION");
       json_t *MESHDATADEFINITION = json_object_get(MESH_1D, "MESHDATADEFINITION");
       
-      if ( MESHFILEDEFINITION == NULL && MESHDATADEFINITION == NULL )
+      if ( ((strcmp(MESH_SPEC_VALUE, "MESHFILEDEFINITION") == 0) && MESHFILEDEFINITION == NULL) ||
+           ((strcmp(MESH_SPEC_VALUE, "MESHDATADEFINITION") == 0) && MESHDATADEFINITION == NULL) )
       {
          error8(E_JSON_MISSING_OBJECT, "MESH_1D # MESHFILEDEFINITION or MESH_1D # MESHDATADEFINITION");
       }
       
-      if ( MESHFILEDEFINITION != NULL )
+      if ( strcmp(MESH_SPEC_VALUE, "MESHFILEDEFINITION") == 0 )
       {
          json_t *MESHFILE = json_object_get(MESHFILEDEFINITION, "MESHFILE");
          json_t *MESHNAME = json_object_get(MESHFILEDEFINITION, "MESHNAME"); // may be null
@@ -189,7 +199,7 @@ static void json_config_PARAMS_geometry(PARAMS* p, const json_t* config)
          
       }
       
-      if ( MESHDATADEFINITION != NULL )
+      if ( strcmp(MESH_SPEC_VALUE, "MESHDATADEFINITION") == 0 )
       {
          strncpy(p->geom_params.meshfile, "NULL", 256);
          
@@ -251,10 +261,10 @@ static void json_config_PARAMS_geometry(PARAMS* p, const json_t* config)
 }
 
 typedef struct BcInfoType_ {
-   int idx;
+   int  idx;
    char *bctype;
-   char *bcfuncname1;
-   char *bcfuncname2;
+   char *funcdef1;
+   char *funcdef2;
 } BcInfoType;
 
 static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* config)
@@ -289,17 +299,28 @@ static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* conf
          
          if ( strcmp(bc_info.bctype, "ROBIN") == 0 )
          {
-            json_t *FUNC_NAME = json_object_get(bc_item, "FUNC_NAME");
+            json_t *FUNC_DEF  = json_object_get(bc_item, "FUNC_DEF");
             
-            json_t *FUNC_NAME1 = json_array_get(FUNC_NAME, 0);
-            json_t *FUNC_NAME2 = json_array_get(FUNC_NAME, 1);
-            
-            bc_info.bcfuncname1 = strdup(json_string_value(FUNC_NAME1));
-            bc_info.bcfuncname2 = strdup(json_string_value(FUNC_NAME2));
+            if ( FUNC_DEF != NULL ) {
+               json_t *FUNC_DEF1 = json_array_get(FUNC_DEF, 0);
+               json_t *FUNC_DEF2 = json_array_get(FUNC_DEF, 1);
+               
+               bc_info.funcdef1 = strdup(json_string_value(FUNC_DEF1));
+               bc_info.funcdef2 = strdup(json_string_value(FUNC_DEF2));
+            } else {
+               bc_info.funcdef1 = strdup("0");
+               bc_info.funcdef2 = strdup("0");
+            }
          }
          else
          {
-            bc_info.bcfuncname1 = strdup(json_object_get_string_value(bc_item, "FUNC_NAME"));
+            const char *FUNC_DEF  = json_object_get_string_value(bc_item, "FUNC_DEF");
+            
+            if ( FUNC_DEF != NULL ) {
+               bc_info.funcdef1 = strdup(FUNC_DEF);
+            } else {
+               bc_info.funcdef1 = strdup("0");
+            }
          }
          
          // fill our parameter
@@ -307,38 +328,47 @@ static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* conf
          {
             p->bc_params.TabBCMask[0][bc_info.idx] = BC_1De_DIRICHLET;
             
-            if ( coords_dims == 1 ) p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-            if ( coords_dims == 2 ) p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-            if ( coords_dims == 3 ) p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
+            if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx].fundef, bc_info.funcdef1);
+            if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx].fundef, bc_info.funcdef1);
+            if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx].fundef, bc_info.funcdef1);
          }
          if ( strcmp(bc_info.bctype, "NEUMANN") == 0 )
          {
             p->bc_params.TabBCMask[0][bc_info.idx] = BC_1De_NEUMANN;
             
-            if ( coords_dims == 1 ) p->bc_params.TabPhi_BCneumann[0][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-            if ( coords_dims == 2 ) p->bc_params.TabPhi_BCneumann[0][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-            if ( coords_dims == 3 ) p->bc_params.TabPhi_BCneumann[0][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
+            if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx].fundef, bc_info.funcdef1);
+            if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx].fundef, bc_info.funcdef1);
+            if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx].fundef, bc_info.funcdef1);
          }
          if ( strcmp(bc_info.bctype, "CAUCHY") == 0 )
          {
             p->bc_params.TabBCMask[2][bc_info.idx] = BC_1De_CAUCHY;
             
-            if ( coords_dims == 1 ) p->bc_params.TabPhi_BCcauchy[0][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-            if ( coords_dims == 2 ) p->bc_params.TabPhi_BCcauchy[0][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-            if ( coords_dims == 3 ) p->bc_params.TabPhi_BCcauchy[0][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
+            if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx].fundef, bc_info.funcdef1);
+            if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx].fundef, bc_info.funcdef1);
+            if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCdirichlet[0][bc_info.idx].fundef, bc_info.funcdef1);
          }
          if ( strcmp(bc_info.bctype, "ROBIN") == 0 )
          {
             p->bc_params.TabBCMask[3][bc_info.idx] = BC_1De_ROBIN;
             
-            if ( coords_dims == 1 ) p->bc_params.TabPhi_BCrobin1[0][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-            if ( coords_dims == 1 ) p->bc_params.TabPhi_BCrobin2[0][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname2, FUNCTION_BCe) ; // get the index of the function from its name...
+            if ( coords_dims == 1 )
+            {
+               strcpy(p->bc_params.TabPhi_BCrobin1[0][bc_info.idx].fundef , bc_info.funcdef1) ;
+               strcpy(p->bc_params.TabPhi_BCrobin2[0][bc_info.idx].fundef , bc_info.funcdef2) ;
+            }
             
-            if ( coords_dims == 2 ) p->bc_params.TabPhi_BCrobin1[0][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-            if ( coords_dims == 2 ) p->bc_params.TabPhi_BCrobin2[0][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname2, FUNCTION_BCe) ; // get the index of the function from its name...
+            if ( coords_dims == 2 )
+            {
+               strcpy(p->bc_params.TabPhi_BCrobin1[0][bc_info.idx].fundef , bc_info.funcdef1) ;
+               strcpy(p->bc_params.TabPhi_BCrobin2[0][bc_info.idx].fundef , bc_info.funcdef2) ;
+            }
             
-            if ( coords_dims == 3 ) p->bc_params.TabPhi_BCrobin1[0][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-            if ( coords_dims == 3 ) p->bc_params.TabPhi_BCrobin2[0][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname2, FUNCTION_BCe) ; // get the index of the function from its name...
+            if ( coords_dims == 3 )
+            {
+               strcpy(p->bc_params.TabPhi_BCrobin1[0][bc_info.idx].fundef , bc_info.funcdef1) ;
+               strcpy(p->bc_params.TabPhi_BCrobin2[0][bc_info.idx].fundef , bc_info.funcdef2) ;
+            }
          }
       }
       
@@ -380,17 +410,17 @@ static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* conf
          
             if ( strcmp(bc_info.bctype, "ROBIN") == 0 )
             {
-               json_t *FUNC_NAME = json_object_get(bc_item, "FUNC_NAME");
+               json_t *FUNC_DEF = json_object_get(bc_item, "FUNC_DEF");
             
-               json_t *FUNC_NAME1 = json_array_get(FUNC_NAME, 0);
-               json_t *FUNC_NAME2 = json_array_get(FUNC_NAME, 1);
+               json_t *FUNC_DEF1 = json_array_get(FUNC_DEF, 0);
+               json_t *FUNC_DEF2 = json_array_get(FUNC_DEF, 1);
             
-               bc_info.bcfuncname1 = strdup(json_string_value(FUNC_NAME1));
-               bc_info.bcfuncname2 = strdup(json_string_value(FUNC_NAME2));
+               bc_info.funcdef1 = strdup(json_string_value(FUNC_DEF1));
+               bc_info.funcdef2 = strdup(json_string_value(FUNC_DEF2));
             }
             else
             {
-               bc_info.bcfuncname1 = strdup(json_object_get_string_value(bc_item, "FUNC_NAME"));
+               bc_info.funcdef1 = strdup(json_object_get_string_value(bc_item, "FUNC_DEF1"));
             }
          
             // fill our parameter
@@ -398,38 +428,38 @@ static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* conf
             {
                p->bc_params.TabBCMask[0][bc_info.idx] = BC_1De_DIRICHLET;
             
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
             }
             if ( strcmp(bc_info.bctype, "NEUMANN") == 0 )
             {
                p->bc_params.TabBCMask[0][bc_info.idx] = BC_1De_NEUMANN;
             
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCneumann[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCneumann[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCneumann[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
             }
             if ( strcmp(bc_info.bctype, "CAUCHY") == 0 )
             {
                p->bc_params.TabBCMask[2][bc_info.idx] = BC_1De_CAUCHY;
             
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCcauchy[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCcauchy[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCcauchy[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
             }
             if ( strcmp(bc_info.bctype, "ROBIN") == 0 )
             {
                p->bc_params.TabBCMask[3][bc_info.idx] = BC_1De_ROBIN;
             
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname2, FUNCTION_BCe) ; // get the index of the function from its name...
-            
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname2, FUNCTION_BCe) ; // get the index of the function from its name...
-            
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname2, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx].fundef, bc_info.funcdef2) ;
+               
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx].fundef, bc_info.funcdef2) ;
+               
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx].fundef, bc_info.funcdef2) ;
             }
          }
       }
@@ -477,17 +507,17 @@ static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* conf
             
             if ( strcmp(bc_info.bctype, "ROBIN") == 0 )
             {
-               json_t *FUNC_NAME = json_object_get(bc_item, "FUNC_NAME");
+               json_t *FUNC_DEF = json_object_get(bc_item, "FUNC_DEF");
                
-               json_t *FUNC_NAME1 = json_array_get(FUNC_NAME, 0);
-               json_t *FUNC_NAME2 = json_array_get(FUNC_NAME, 1);
+               json_t *FUNC_DEF1 = json_array_get(FUNC_DEF, 0);
+               json_t *FUNC_DEF2 = json_array_get(FUNC_DEF, 1);
                
-               bc_info.bcfuncname1 = strdup(json_string_value(FUNC_NAME1));
-               bc_info.bcfuncname2 = strdup(json_string_value(FUNC_NAME2));
+               bc_info.funcdef1 = strdup(json_string_value(FUNC_DEF1));
+               bc_info.funcdef2 = strdup(json_string_value(FUNC_DEF2));
             }
             else
             {
-               bc_info.bcfuncname1 = strdup(json_object_get_string_value(bc_item, "FUNC_NAME"));
+               bc_info.funcdef1 = strdup(json_object_get_string_value(bc_item, "FUNC_DEF2"));
             }
             
             // fill our parameter
@@ -495,38 +525,38 @@ static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* conf
             {
                p->bc_params.TabBCMask[0][bc_info.idx] = BC_1De_DIRICHLET;
                
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCdirichlet[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
             }
             if ( strcmp(bc_info.bctype, "NEUMANN") == 0 )
             {
                p->bc_params.TabBCMask[0][bc_info.idx] = BC_1De_NEUMANN;
                
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCneumann[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCneumann[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCneumann[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCneumann[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCneumann[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCneumann[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
             }
             if ( strcmp(bc_info.bctype, "CAUCHY") == 0 )
             {
                p->bc_params.TabBCMask[2][bc_info.idx] = BC_1De_CAUCHY;
                
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCcauchy[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCcauchy[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCcauchy[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCcauchy[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCcauchy[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCcauchy[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
             }
             if ( strcmp(bc_info.bctype, "ROBIN") == 0 )
             {
                p->bc_params.TabBCMask[3][bc_info.idx] = BC_1De_ROBIN;
                
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 1 ) p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx] = function1Dindex_by_name(bc_info.bcfuncname2, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 1 ) strcpy(p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx].fundef, bc_info.funcdef2) ;
                
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 2 ) p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx] = function2Dindex_by_name(bc_info.bcfuncname2, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 2 ) strcpy(p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx].fundef, bc_info.funcdef2) ;
                
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname1, FUNCTION_BCe) ; // get the index of the function from its name...
-               if ( coords_dims == 3 ) p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx] = function3Dindex_by_name(bc_info.bcfuncname2, FUNCTION_BCe) ; // get the index of the function from its name...
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCrobin1[dim-1][bc_info.idx].fundef, bc_info.funcdef1) ;
+               if ( coords_dims == 3 ) strcpy(p->bc_params.TabPhi_BCrobin2[dim-1][bc_info.idx].fundef, bc_info.funcdef2) ;
             }
          }
       }
@@ -541,15 +571,9 @@ static void json_config_PARAMS_right_hand_side(PARAMS* p, const json_t* config)
    int target_dims = json_object_get_integer_value(config, "TARGET_DIMS");
    
    char *names[] = {
-      "FUNC_DIM1_NAME",
-      "FUNC_DIM2_NAME",
-      "FUNC_DIM3_NAME",
-   };
-   
-   functionIndexByName functionIndex[] = {
-      function1Dindex_by_name,
-      function2Dindex_by_name,
-      function3Dindex_by_name,
+      "DIM1",
+      "DIM2",
+      "DIM3",
    };
    
    int dim = 0;
@@ -558,16 +582,24 @@ static void json_config_PARAMS_right_hand_side(PARAMS* p, const json_t* config)
    {
       char *name = names[dim-1];
          
-      json_t *FUNC_DIM_NAME = json_object_get(PDE_RHS, name);
+      json_t *DIM = json_object_get(PDE_RHS, name);
       
-      if ( FUNC_DIM_NAME == NULL )
+      if ( DIM == NULL )
       {
          error8(E_JSON_MISSING_OBJECT, strcat("PDE_RHS - ", name));
       }
    
-      const char *funcname = json_string_value(FUNC_DIM_NAME);
+      json_t *FUNC_DEF = json_object_get(DIM, "FUNC_DEF");
       
-      p->rhs_params.rhs[dim-1] = functionIndex[coords_dims-1](funcname, FUNCTION_RHSe);
+      if (FUNC_DEF != NULL)
+      {
+         const char *fundef = json_string_value(FUNC_DEF);
+         
+         if (fundef != NULL)
+         {
+            strcpy(p->rhs_params.rhs[dim-1].fundef, fundef);
+         }
+      }
    }
 }
 
@@ -579,15 +611,9 @@ static void json_config_PARAMS_initial_condition(PARAMS* p, const json_t* config
    int target_dims = json_object_get_integer_value(config, "TARGET_DIMS");
    
    char *names[] = {
-      "FUNC_DIM1_NAME",
-      "FUNC_DIM2_NAME",
-      "FUNC_DIM3_NAME",
-   };
-   
-   functionIndexByName functionIndex[] = {
-      function1Dindex_by_name,
-      function2Dindex_by_name,
-      function3Dindex_by_name,
+      "DIM1",
+      "DIM2",
+      "DIM3",
    };
    
    int dim = 0;
@@ -596,18 +622,23 @@ static void json_config_PARAMS_initial_condition(PARAMS* p, const json_t* config
    {
       char *name = names[dim-1];
          
-      json_t *FUNC_DIM_NAME = json_object_get(PDE_INITIAL_CONDITION, name);
+      json_t *DIM = json_object_get(PDE_INITIAL_CONDITION, name);
          
-      if ( FUNC_DIM_NAME == NULL )
+      if ( DIM == NULL )
       {
          error8(E_JSON_MISSING_OBJECT, strcat("PDE_INITIAL_CONDITION - ", name));
       }
-         
-      const char *funcname = json_string_value(FUNC_DIM_NAME);
       
-      if ( funcname )
+      json_t *FUNC_DEF = json_object_get(DIM, "FUNC_DEF");
+      
+      if (FUNC_DEF != NULL)
       {
-         p->ic_params.ic[dim-1] = functionIndex[coords_dims-1](funcname, FUNCTION_ICe);
+         const char *fundef = json_string_value(FUNC_DEF);
+         
+         if (fundef != NULL)
+         {
+            strcpy(p->ini_params.ini[dim-1].fundef, fundef);
+         }
       }
    }
 }
@@ -620,15 +651,9 @@ static void json_config_PARAMS_solexacte(PARAMS* p, const json_t* config)
    int target_dims = json_object_get_integer_value(config, "TARGET_DIMS");
    
    char *names[] = {
-      "FUNC_DIM1_NAME",
-      "FUNC_DIM2_NAME",
-      "FUNC_DIM3_NAME",
-   };
-   
-   functionIndexByName functionIndex[] = {
-      function1Dindex_by_name,
-      function2Dindex_by_name,
-      function3Dindex_by_name,
+      "DIM1",
+      "DIM2",
+      "DIM3",
    };
    
    int dim = 0;
@@ -637,18 +662,23 @@ static void json_config_PARAMS_solexacte(PARAMS* p, const json_t* config)
    {
       char *name = names[dim-1];
       
-      json_t *FUNC_DIM_NAME = json_object_get(PDE_EXACT_SOL, name);
+      json_t *DIM = json_object_get(PDE_EXACT_SOL, name);
       
-      if ( FUNC_DIM_NAME == NULL )
+      if ( DIM == NULL )
       {
          error8(E_JSON_MISSING_OBJECT, strcat("PDE_EXACT_SOL - ", name));
       }
       
-      const char *funcname = json_string_value(FUNC_DIM_NAME);
+      json_t *FUNC_DEF = json_object_get(DIM, "FUNC_DEF");
       
-      if ( funcname )
+      if (FUNC_DEF != NULL)
       {
-         p->exactsol_params.exact_sol[dim-1] = functionIndex[coords_dims-1](funcname, FUNCTION_SOLe);
+         const char *fundef = json_string_value(FUNC_DEF);
+         
+         if (fundef != NULL)
+         {
+            strcpy(p->sol_params.sol[dim-1].fundef, fundef);
+         }
       }
    }
 }
@@ -691,16 +721,13 @@ static void json_config_PARAMS_convective_terms(PARAMS* p, const json_t* config)
          error8(E_JSON_MISSING_OBJECT, "PDE_CONVECTION_DIFFUSION_FUNCTIONS - 1-DIM - FUNC_dudz");
       }
       
-      const char *funcname1 = json_string_value(FUNC_dudx);
-      const char *funcname2 = json_string_value(FUNC_dudy);
-      const char *funcname3 = json_string_value(FUNC_dudz);
+      const char *funcdef1 = json_string_value(FUNC_dudx);
+      const char *funcdef2 = json_string_value(FUNC_dudy);
+      const char *funcdef3 = json_string_value(FUNC_dudz);
       
-      if (funcname1)
-         p->adv_params.adv1[0][0] = function1Dindex_by_name(funcname1, FUNCTION_ADVe);
-      if (funcname2)
-         p->adv_params.adv1[1][0] = function1Dindex_by_name(funcname2, FUNCTION_ADVe);
-      if (funcname3)
-         p->adv_params.adv1[2][0] = function1Dindex_by_name(funcname3, FUNCTION_ADVe);
+      if (funcdef1) strcpy(p->adv_params.adv1[0][0].fundef , funcdef1);
+      if (funcdef2) strcpy(p->adv_params.adv1[1][0].fundef , funcdef2);
+      if (funcdef3) strcpy(p->adv_params.adv1[2][0].fundef , funcdef3);
    }
    
    // 2-DIM

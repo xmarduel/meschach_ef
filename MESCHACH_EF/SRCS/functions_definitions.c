@@ -13,59 +13,6 @@
 *
 */
 
-
-Real Zero1D( Real x )
-{
-   return 0.0; 
-}
-Real Zero2D( Real x , Real y )
-{
-   return 0.0;
-}
-Real Zero3D( Real x , Real y , Real z )
-{
-   return 0.0;
-}
-
-Real One1D( Real x )
-{
-   return 1.0; 
-}
-Real One2D( Real x , Real y )
-{
-   return 1.0;
-}
-Real One3D( Real x , Real y , Real z )
-{
-   return 1.0;
-}
-
-Real Zero1Dtransient( Real x , Real tps )
-{
-   return 0.0;
-}
-Real Zero2Dtransient( Real x , Real y , Real tps )
-{
-   return 0.0;
-}
-Real Zero3Dtransient( Real x , Real y , Real z , Real tps )
-{
-   return 0.0;
-}
-
-Real One1Dtransient( Real x , Real tps )
-{
-   return 1.0;
-}
-Real One2Dtransient( Real x , Real y , Real tps )
-{
-   return 1.0;
-}
-Real One3Dtransient( Real x , Real y , Real z , Real tps )
-{
-   return 1.0;
-}
-
 /********************************************************************/
 /********************************************************************/
 

@@ -50,23 +50,23 @@ int Fun1D_free(FUN_1D *Fun);
 
 
 
-FUN_1D * Fun1D_init                    (FUN_1D* Fun);
-FUN_1D * Fun1D_setFunction             (FUN_1D* Fun, FUN_TYPE type, void* phi, void* cliendata);
+FUN_1D * Fun1D_init                     (FUN_1D* Fun);
+FUN_1D * Fun1D_setFunction              (FUN_1D* Fun, FUN_TYPE type, void* phi, void* cliendata);
 
-Real     Fun1D_evalCFunction           (const FUN_1D* Fun, Real x);
-Real     Fun1D_evalPyFunction          (const FUN_1D* Fun, Real x);
-Real     Fun1D_evalCFunctionTransient  (const FUN_1D* Fun, Real x, Real tps);
-Real     Fun1D_evalPyFunctionTransient (const FUN_1D* Fun, Real x, Real tps);
+Real     Fun1D_evalCFunction            (const FUN_1D* Fun, Real x);
+Real     Fun1D_evalPyFunction           (const FUN_1D* Fun, Real x);
+Real     Fun1D_evalLUAFunction          (const FUN_1D* Fun, Real x);
+   
+Real     Fun1D_evalCFunctionTransient   (const FUN_1D* Fun, Real x, Real tps);
+Real     Fun1D_evalPyFunctionTransient  (const FUN_1D* Fun, Real x, Real tps);
+Real     Fun1D_evalLUAFunctionTransient (const FUN_1D* Fun, Real x, Real tps);
 
-FUN_1D * Fun1D_setCFunction            (FUN_1D* Fun, FUNC_1D  phi);
-FUN_1D * Fun1D_setCFunctionTransient   (FUN_1D* Fun, FUNC_2D  phi);
+FUN_1D * Fun1D_setCFunction             (FUN_1D* Fun, FUNC_1D  phi);
+FUN_1D * Fun1D_setCFunctionTransient    (FUN_1D* Fun, FUNC_2D  phi);
 
-FUN_1D * Fun1D_setLUAFunction            (FUN_1D* Fun, const char* def);
-FUN_1D * Fun1D_setLUAFunctionTransient   (FUN_1D* Fun, const char* def);
-
-Real     Fun1D_evalLUAFunction           (const FUN_1D* Fun, Real x);
-Real     Fun1D_evalLUAFunctionTransient  (const FUN_1D* Fun, Real x, Real tps);
-
+FUN_1D * Fun1D_setLUAFunction           (FUN_1D* Fun, const char* def);
+FUN_1D * Fun1D_setLUAFunctionTransient  (FUN_1D* Fun, const char* def);
+   
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 

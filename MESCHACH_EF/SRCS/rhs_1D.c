@@ -45,8 +45,8 @@ RHS_1D*  Rhs1D_get(void)
 RHS_1D* Rhs1D_setup_from_params(const PARAMS* MyParams)
 {
 	RHS_1D* MyRhs = Rhs1D_get();
-	
-   Rhs1D_setCFunction(MyRhs, /*ref_e*/0, AXEe_X, sources1D[MyParams->rhs_params.rhs[AXEe_X]]);
+   
+   Rhs1D_setLUAFunction(MyRhs, /*ref_e*/0, AXEe_X, MyParams->rhs_params.rhs[AXEe_X].fundef );
 	
 	return MyRhs;
 }
@@ -85,7 +85,6 @@ RHS_1D *Rhs1D_setFunction      (RHS_1D* MyRhs, int ref_e, int axe, FUN_TYPE type
    if ( ref_e > NBMAX_RHS_1D_FUNCTIONS ) error6(E_RHS_WRONGIDXNUMBER, "Rhs1D_setFunction");
    if ( axe != AXEe_X )                  error6(E_RHS_WRONGAXENUMBER, "Rhs1D_setFunction");
    
-   
    /* set the function */
    Fun1D_setFunction(&(MyRhs->Fun[axe][ref_e]), type, phi, clientdata);
    
@@ -103,9 +102,29 @@ RHS_1D *Rhs1D_setCFunction      (RHS_1D* MyRhs, int ref_e, int axe, FUNC_1D phi)
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
+RHS_1D* Rhs1D_setLUAFunction         ( RHS_1D* MyRhs, int ref_e, int axe, const char *def)
+{
+   void *L = make_lua_interpreter(def, "1D");
+   
+   return Rhs1D_setFunction(MyRhs, ref_e, axe, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction1D, L);
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
 RHS_1D *Rhs1D_setCFunctionTransient(RHS_1D* MyRhs, int ref_e, int axe, FUNC_2D phi)
 {
-   return Rhs1D_setFunction(MyRhs, ref_e, axe, FUN_C_TRANSIENT, phi, NULL);  
+   return Rhs1D_setFunction(MyRhs, ref_e, axe, FUN_C_TRANSIENT, phi, NULL);
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
+RHS_1D* Rhs1D_setLUAFunctionTransient( RHS_1D* MyRhs, int ref_e, int axe, const char *def)
+{
+   void *L = make_lua_interpreter(def, "1D_TR");
+   
+   return Rhs1D_setFunction(MyRhs, ref_e, axe, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction2D, L);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -140,22 +159,3 @@ RHS_1D *Rhs1D_setTps (RHS_1D* MyRhs, Real tps)
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-int Rhs1D_is_zero(const RHS_1D *RhsFun)
-{
-	if ( RhsFun->Fun[AXEe_X][0].type == FUN_C_STATIONNARY )
-	{
-		if ( RhsFun->Fun[AXEe_X][0].phi_x == Zero1D )
-			return 1;
-	}
-	
-	if ( RhsFun->Fun[AXEe_X][0].type == FUN_C_TRANSIENT )
-	{
-		if ( RhsFun->Fun[AXEe_X][0].phi_x == Zero1Dtransient )
-			return 1;
-	}
-	
-	return 0;
-}
-
-/*-----------------------------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------------------------------*/

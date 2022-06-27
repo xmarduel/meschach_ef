@@ -68,6 +68,9 @@ ADV_1D* Adv1D_setFunction          ( ADV_1D* MyAdv, int ref_e, int axe1, int axe
 ADV_1D* Adv1D_setCFunction         ( ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_1D phi);
 ADV_1D* Adv1D_setCFunctionTransient( ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_2D phi);
 
+ADV_1D* Adv1D_setLUAFunction         ( ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char * def);
+ADV_1D* Adv1D_setLUAFunctionTransient( ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char * def);
+   
 ADV_1D* Adv1D_setTps               ( ADV_1D* MyAdv, Real tps);
 
 Real    Adv1D_evalFunction         ( const ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, Real x);

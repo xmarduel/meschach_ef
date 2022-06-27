@@ -17,8 +17,8 @@ class item_cyclo:
     the __eq__, __gt__ and __lt__  serve to sort an list of items
     """
     def __init__(self, name, val):
-	     """
-		  """
+        """
+        """
         self.name = name
         self.val  = val
 
@@ -46,7 +46,7 @@ class item_cyclo:
         self.name = self.name.replace("static" , "") 
         self.name = self.name.replace("int"    , "")
         self.name = self.name.replace("Real"   , "")
-		  self.name = self.name.replace("real"   , "")
+        self.name = self.name.replace("real"   , "")
         self.name = self.name.replace("double" , "")
         self.name = self.name.replace("void"   , "")
 
@@ -73,10 +73,10 @@ def get_statistics(metrics):
             if ( k1 == -1 ): # exception : a line like "Total complexity:    34"
                 k2 = line.find(':')
                 func_name  = line[0:k2]
-                func_cyclo = atoi(line[k2+1:-1]) # remove the \n at the end of the line
+                func_cyclo = int(line[k2+1:-1]) # remove the \n at the end of the line
             else:
                 func_name  = line[0:k1]
-                func_cyclo = atoi(line[k1+1:-1])
+                func_cyclo = int(line[k1+1:-1])
 
             statistics.append( item_cyclo(func_name,func_cyclo) )
         else:

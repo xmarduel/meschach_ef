@@ -29,12 +29,14 @@ typedef Real (*FUNC_4D)(Real,Real,Real,Real);
 
 typedef enum
 {
-   FUN_UNDEFINED      = -1,  /**< flag indicates that the function is not yet set */
+   FUN_UNDEFINED       = -1,  /**< flag indicates that the function is not yet set */
 
-   FUN_C_STATIONNARY  =  0,  /**< function depends only on space variable */
-   FUN_C_TRANSIENT    =  1,  /**< function depends on t + space variables */
-   FUN_PY_STATIONNARY =  2,  /**< function depends on t + space variables */
-   FUN_PY_TRANSIENT   =  3   /**< function depends on t + space variables */
+   FUN_C_STATIONNARY   =  0,  /**< function depends only on space variable */
+   FUN_C_TRANSIENT     =  1,  /**< function depends on t + space variables */
+   FUN_PY_STATIONNARY  =  2,  /**< function depends on t + space variables */
+   FUN_PY_TRANSIENT    =  3,  /**< function depends on t + space variables */
+   FUN_LUA_STATIONNARY =  4,  /**< function depends on t + space variables */
+   FUN_LUA_TRANSIENT   =  5   /**< function depends on t + space variables */
    
 } FUN_TYPE;
 
@@ -103,13 +105,15 @@ int   Fun2D_free(FUN_2D *Fun);
 int   Fun3D_free(FUN_3D *Fun);
 
 
-FUN_1D * Fun1D_init                   ( FUN_1D* Fun);
-FUN_1D * Fun1D_setCFunction           ( FUN_1D* Fun, FUNC_1D  phi);
-FUN_1D * Fun1D_setCFunctionTransient  ( FUN_1D* Fun, FUNC_2D  phi);
-Real     Fun1D_evalCFunction          ( FUN_1D* Fun, Real x            );
-Real     Fun1D_evalCFunctionTransient ( FUN_1D* Fun, Real x, Real tps  );
-Real     Fun1D_evalPyFunction         ( FUN_1D* Fun, Real x            );
-Real     Fun1D_evalPyFunctionTransient( FUN_1D* Fun, Real x, Real tps  );
+FUN_1D * Fun1D_init                    ( FUN_1D* Fun);
+FUN_1D * Fun1D_setCFunction            ( FUN_1D* Fun, FUNC_1D  phi);
+FUN_1D * Fun1D_setCFunctionTransient   ( FUN_1D* Fun, FUNC_2D  phi);
+Real     Fun1D_evalCFunction           ( FUN_1D* Fun, Real x            );
+Real     Fun1D_evalCFunctionTransient  ( FUN_1D* Fun, Real x, Real tps  );
+Real     Fun1D_evalPyFunction          ( FUN_1D* Fun, Real x            );
+Real     Fun1D_evalPyFunctionTransient ( FUN_1D* Fun, Real x, Real tps  );
+Real     Fun1D_evalLUAFunction         ( FUN_1D* Fun, Real x            );
+Real     Fun1D_evalLUAFunctionTransient( FUN_1D* Fun, Real x, Real tps  );
 
 FUN_2D * Fun2D_init                   ( FUN_2D* Fun);
 FUN_2D * Fun2D_setCFunction           ( FUN_2D* Fun, FUNC_2D  phi);

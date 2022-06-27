@@ -956,6 +956,7 @@ void * Params_get_oneparam1(const PARAMS* p, const char* category, const char* f
 
 static void * Params_get_oneparam1_cat_right_hand_side_params(const PARAMS* p, const char* field, int idx1)
 {
+   /*
    if ( strcmp(field,"rhs") == 0 )
    {
       return (void*)(&(p->rhs_params.rhs[idx1]));
@@ -964,6 +965,7 @@ static void * Params_get_oneparam1_cat_right_hand_side_params(const PARAMS* p, c
    {
       error(E_UNKNOWN, "Params_get_oneparam1_cat_right_hand_side_params");
    }
+   */
 
    return NULL;
 }
@@ -973,14 +975,16 @@ static void * Params_get_oneparam1_cat_right_hand_side_params(const PARAMS* p, c
 
 static void * Params_get_oneparam1_cat_initial_condition_params(const PARAMS* p, const char* field, int idx1)
 {
+   /*
    if ( strcmp(field,"ic") == 0 )
    {
-      return (void*)(&(p->ic_params.ic[idx1]));
+      return (void*)(&(p->ic_params.ini[idx1]));
    }
    else
    {
       error(E_UNKNOWN, "Params_get_oneparam1_cat_initial_condition_params");
    }
+   */
 
    return NULL;
 }
@@ -990,6 +994,7 @@ static void * Params_get_oneparam1_cat_initial_condition_params(const PARAMS* p,
    
 static void * Params_get_oneparam1_cat_exact_solution_params(const PARAMS* p, const char* field, int idx1)
 {
+   /*
    if ( strcmp(field,"exact_sol") == 0 )
    {
       return (void*)(&(p->exactsol_params.exact_sol[idx1]));
@@ -998,6 +1003,7 @@ static void * Params_get_oneparam1_cat_exact_solution_params(const PARAMS* p, co
    {
       error(E_UNKNOWN, "Params_get_oneparam1_cat_exact_solution_params");
    }
+   */
       
    return NULL;
 }

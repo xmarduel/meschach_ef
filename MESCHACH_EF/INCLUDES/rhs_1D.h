@@ -56,11 +56,14 @@ RHS_1D* Rhs1D_setFunction          ( RHS_1D* MyRhs, int ref_e, int axe, FUN_TYPE
 RHS_1D* Rhs1D_setCFunction         ( RHS_1D* MyRhs, int ref_e, int axe, FUNC_1D phi);
 RHS_1D* Rhs1D_setCFunctionTransient( RHS_1D* MyRhs, int ref_e, int axe, FUNC_2D phi);
 
+RHS_1D* Rhs1D_setLUAFunction         ( RHS_1D* MyRhs, int ref_e, int axe, const char *def);
+RHS_1D* Rhs1D_setLUAFunctionTransient( RHS_1D* MyRhs, int ref_e, int axe, const char *def);
+
+   
 RHS_1D* Rhs1D_setTps               ( RHS_1D* MyRhs, Real tps);
 
 Real    Rhs1D_evalFunction         ( const RHS_1D* MyRhs, int ref_e, int axe, Real x);
 
-int     Rhs1D_is_zero              ( const RHS_1D *RhsFun);
 	
 #ifdef __cplusplus
 }

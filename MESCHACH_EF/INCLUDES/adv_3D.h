@@ -139,6 +139,9 @@ ADV_3D* Adv3D_setFunction          ( ADV_3D* MyAdv, int ref_e, int axe1, int axe
 
 ADV_3D* Adv3D_setCFunction         ( ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_3D phi);
 ADV_3D* Adv3D_setCFunctionTransient( ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_4D phi);
+   
+ADV_3D* Adv3D_setLUAFunction         ( ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def);
+ADV_3D* Adv3D_setLUAFunctionTransient( ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def);
 
 ADV_3D* Adv3D_setCurrentSelectedAxe( ADV_3D* MyAdv, int axe1, int axe2, int axe3 );
 ADV_3D* Adv3D_setTps               ( ADV_3D* MyAdv, Real tps);

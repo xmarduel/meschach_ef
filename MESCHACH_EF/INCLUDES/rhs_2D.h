@@ -63,6 +63,9 @@ RHS_2D* Rhs2D_setFunction          (RHS_2D* MyRhs, int ref_e, int axe, FUN_TYPE 
 RHS_2D* Rhs2D_setCFunction         (RHS_2D* MyRhs, int ref_e, int axe, FUNC_2D phi);
 RHS_2D* Rhs2D_setCFunctionTransient(RHS_2D* MyRhs, int ref_e, int axe, FUNC_3D phi);
 
+RHS_2D* Rhs2D_setLUAFunction         (RHS_2D* MyRhs, int ref_e, int axe, const char *def);
+RHS_2D* Rhs2D_setLUAFunctionTransient(RHS_2D* MyRhs, int ref_e, int axe, const char *def);
+
 RHS_2D* Rhs2D_setTps               (RHS_2D* MyRhs, Real tps);
 RHS_2D* Rhs2D_setCurrentSelectedAxe(RHS_2D* MyRhs, int axe );
 

@@ -81,6 +81,12 @@ BC_1D      *Bc1D_setCFunction2          (BC_1D* MyBC, BC_1D_TYPE bctype, int ref
 BC_1D      *Bc1D_setCFunctionTransient  (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
 BC_1D      *Bc1D_setCFunctionTransient2 (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
 
+BC_1D      *Bc1D_setLUAFunction         (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
+BC_1D      *Bc1D_setLUAFunction2        (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
+   
+BC_1D      *Bc1D_setLUAFunctionTransient (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
+BC_1D      *Bc1D_setLUAFunctionTransient2(BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
+   
 BC_1D      *Bc1D_setTps                 (BC_1D* MyBC, Real tps    );
 
 
@@ -100,6 +106,8 @@ int         Bc1D_getNumberOfBC          (const BC_1D* MyBC, int axe);
 int         Bc1D_getNumberOfBcOnSomms   (const BC_1D* MyBC, int axe);
 int         Bc1D_getNumberOfBcOnFaces   (const BC_1D* MyBC, int axe);
 
+   
+  
 #ifdef __cplusplus
 }
 #endif

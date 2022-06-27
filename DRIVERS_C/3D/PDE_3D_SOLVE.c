@@ -153,11 +153,11 @@ int  main()
       if (MyParams->graph_params.VTK ) graphics3D( "vtk" , MyElt, MyGeom, SOL, "SolApproch");
    }
 
-   if ( MyParams->exactsol_params.exact_sol[0] >= 0 )
+   if ( strcmp(MyParams->sol_params.sol[0].fundef, "") != 0 )
    {
       double norm_diff = 0.0;
       FUN_3D  *fun3D = Fun3D_get();
-      Fun3D_setCFunction(fun3D, ExSol3D[MyParams->exactsol_params.exact_sol[0]]);
+      Fun3D_setLUAFunction(fun3D, MyParams->sol_params.sol[0].fundef);
       
       graphics3D_fun("vtk", MyElt , MyGeom , fun3D, "Sol_Exacte");
       

@@ -74,57 +74,57 @@ def run_test():
 
     MyParams = Params_get()
 
-    Params_set_oneparam(MyParams, "main_problem","NULL", "Kuramoto-Sivashinski" )
-    Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S4" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S4", "S5"
+    Params_set_oneparam(MyParams, "main_problem", "NULL", "Kuramoto-Sivashinski" )
+    Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "S4" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S4", "S5"
 
-    Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "DIRECT-METHOD" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
-    Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
+    Params_set_oneparam(MyParams, "matrix_solver_params", "resolution_method", "DIRECT-METHOD" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k)
+    Params_set_oneparam(MyParams, "matrix_solver_params", "preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
 
     #-physical parameters------------------------------------------------------------------
 
-    Params_set_oneparam(MyParams, "physical_params","kappa",   -1.0 ) # kappa
-    Params_set_oneparam(MyParams, "physical_params","sigma",    0.0 ) # sigma
-    Params_set_oneparam(MyParams, "physical_params","epsilon",  0.2 ) # epsilon  -k*LAPLACIEN(u) + e.BILAPL(u) + sigma.u =F
+    Params_set_oneparam(MyParams, "physical_params", "kappa",   -1.0 ) # kappa
+    Params_set_oneparam(MyParams, "physical_params", "sigma",    0.0 ) # sigma
+    Params_set_oneparam(MyParams, "physical_params", "epsilon",  0.2 ) # epsilon  -k*LAPLACIEN(u) + e.BILAPL(u) + sigma.u =F
 
     #-time parameters------------------------------------------------------------------
 
-    Params_set_oneparam(MyParams, "time_params","TPS_INI",     0.0   )
-    Params_set_oneparam(MyParams, "time_params","TPS_FIN",    200.0  )
-    Params_set_oneparam(MyParams, "time_params","DT",          0.001 )
+    Params_set_oneparam(MyParams, "time_params", "TPS_INI",     0.0   )
+    Params_set_oneparam(MyParams, "time_params", "TPS_FIN",    200.0  )
+    Params_set_oneparam(MyParams, "time_params", "DT",          0.001 )
 
     #- geometry-----------------------------------------------------------------------------
 
-    Params_set_oneparam(MyParams, "geometry_params","meshfile", "NULL" )         #  meshfile 
-    Params_set_oneparam(MyParams, "geometry_params","meshtype", "line" )         # 
-    Params_set_oneparam(MyParams, "geometry_params","meshname", "NULL" )         #  meshname 
+    Params_set_oneparam(MyParams, "geometry_params", "meshfile", "NULL" )         #  meshfile
+    Params_set_oneparam(MyParams, "geometry_params", "meshtype", "line" )         #
+    Params_set_oneparam(MyParams, "geometry_params", "meshname", "NULL" )         #  meshname
 
-    Params_set_oneparam(MyParams, "geometry_params","xmin"  , 0.0  ) # xmax
-    Params_set_oneparam(MyParams, "geometry_params","xmax"  , 2*pi ) # xmax
-    Params_set_oneparam(MyParams, "geometry_params","nx"    ,  100  ) # nx
-    Params_set_oneparam(MyParams, "geometry_params","distribution",  "UNIFORM" ) # distribution
-    Params_set_oneparam(MyParams, "geometry_params","periodicity",  1 ) # periodicity
+    Params_set_oneparam(MyParams, "geometry_params", "xmin"  , 0.0  ) # xmax
+    Params_set_oneparam(MyParams, "geometry_params", "xmax"  , 2*pi ) # xmax
+    Params_set_oneparam(MyParams, "geometry_params", "nx"    ,  100  ) # nx
+    Params_set_oneparam(MyParams, "geometry_params", "distribution", "UNIFORM" ) # distribution
+    Params_set_oneparam(MyParams, "geometry_params", "periodicity", 1 ) # periodicity
 
-    Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     0) # GNUPLOT
-    Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",       0) # GRAPH
-    Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
-    Params_set_oneparam(MyParams, "graphics_output_params","VTK",         0) # VTK
-    Params_set_oneparam(MyParams, "graphics_output_params","SILO",        0) # SILO
-    Params_set_oneparam(MyParams, "graphics_output_params","PGPLOT",      1) # PGPLOT
-    Params_set_oneparam(MyParams, "graphics_output_params","VOGLE",       0) # VOGLE
-    Params_set_oneparam(MyParams, "graphics_output_params","LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO1=YES)
+    Params_set_oneparam(MyParams, "graphics_output_params", "GNUPLOT",     0) # GNUPLOT
+    Params_set_oneparam(MyParams, "graphics_output_params", "GRAPH",       0) # GRAPH
+    Params_set_oneparam(MyParams, "graphics_output_params", "MATLAB",      0) # MATLAB
+    Params_set_oneparam(MyParams, "graphics_output_params", "VTK",         0) # VTK
+    Params_set_oneparam(MyParams, "graphics_output_params", "SILO",        0) # SILO
+    Params_set_oneparam(MyParams, "graphics_output_params", "PGPLOT",      1) # PGPLOT
+    Params_set_oneparam(MyParams, "graphics_output_params", "VOGLE",       0) # VOGLE
+    Params_set_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO1=YES)
 
-    Params_set_oneparam(MyParams, "miscellaneous_params","itprint",      4) # ITPRINT
-    Params_set_oneparam(MyParams, "miscellaneous_params","itsave",       1) # ITSAVE
-    Params_set_oneparam(MyParams, "miscellaneous_params","itstat",     -50) # ITSTAT
-    Params_set_oneparam(MyParams, "miscellaneous_params","itgraph",     50) # ITGRAPH
+    Params_set_oneparam(MyParams, "miscellaneous_params", "itprint",      4) # ITPRINT
+    Params_set_oneparam(MyParams, "miscellaneous_params", "itsave",       1) # ITSAVE
+    Params_set_oneparam(MyParams, "miscellaneous_params", "itstat",     -50) # ITSTAT
+    Params_set_oneparam(MyParams, "miscellaneous_params", "itgraph",     50) # ITGRAPH
 
     #-parameter for the resolution of the linear system------------------------------------
 
-    Params_set_oneparam(MyParams, "matrix_solver_params","max_steps", 15  ) # max_iter Nombre max d'iter de la methode iterative
-    Params_set_oneparam(MyParams, "matrix_solver_params","eps_steps", 1.e-12) # eps_iter arret des iterations "  "  "   "
+    Params_set_oneparam(MyParams, "matrix_solver_params", "max_steps", 15  ) # max_iter Nombre max d'iter de la methode iterative
+    Params_set_oneparam(MyParams, "matrix_solver_params", "eps_steps", 1.e-12) # eps_iter arret des iterations "  "  "   "
 
-    Params_set_oneparam(MyParams, "matrix_solver_params","iter_info", ITER_INFOe_ALL   )  # iter_info (0 , 1=stdout, 2=file iter_file)
-    Params_set_oneparam(MyParams, "matrix_solver_params","iter_file", "the_residuals.dat"  ) # iter_file le nom du fichier
+    Params_set_oneparam(MyParams, "matrix_solver_params", "iter_info", ITER_INFOe_ALL   )  # iter_info (0 , 1=stdout, 2=file iter_file)
+    Params_set_oneparam(MyParams, "matrix_solver_params", "iter_file", "the_residuals.dat"  ) # iter_file le nom du fichier
 
 
     #-parameter for plotting------------------------------------
@@ -138,45 +138,45 @@ def run_test():
     Params_set_oneparam(MyParams, "graphics_interactiv1D_params", "NY", 2  )
 
 
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_LEGEND", 1,1, "U(x,t)")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_AXE_X" , 1,1, "(x)")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_AXE_Y" , 1,1, "(y)")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","MARKER"      , 1,1, 0 )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","MARKER_END"  , 1,1, 0 )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_X_MIN", 1,1,  0.0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_X_MAX", 1,1,  2*pi )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_Y_MIN", 1,1, -7.0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_Y_MAX", 1,1,  7.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_LEGEND", 1,1, "U(x,t)")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_AXE_X" , 1,1, "(x)")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_AXE_Y" , 1,1, "(y)")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "MARKER"      , 1,1, 0 )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "MARKER_END"  , 1,1, 0 )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_X_MIN", 1,1,  0.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_X_MAX", 1,1,  2*pi )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_Y_MIN", 1,1, -7.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_Y_MAX", 1,1,  7.0  )
 
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_LEGEND", 2,1, "KS - L2 Norm of Sol")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_AXE_X" , 2,1, "(t)")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_AXE_Y" , 2,1, "|U(x,t)|")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","MARKER"      , 2,1, 0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","MARKER_END"  , 2,1, 0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_X_MIN", 2,1,    0.0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_X_MAX", 2,1,   100.0 )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_Y_MIN", 2,1,    0.0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_Y_MAX", 2,1,   12.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_LEGEND", 2,1, "KS - L2 Norm of Sol")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_AXE_X" , 2,1, "(t)")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_AXE_Y" , 2,1, "|U(x,t)|")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "MARKER"      , 2,1, 0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "MARKER_END"  , 2,1, 0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_X_MIN", 2,1,    0.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_X_MAX", 2,1,   100.0 )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_Y_MIN", 2,1,    0.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_Y_MAX", 2,1,   12.0  )
 
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_LEGEND", 1,2, "KS - L2 Norm of Sol (Zoom)")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_AXE_X" , 1,2, "(t)")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_AXE_Y" , 1,2, "|U(x,t)|")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","MARKER"      , 1,2, 0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","MARKER_END"  , 1,2, 0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_X_MIN", 1,2, 20.0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_X_MAX", 1,2, 30.0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_Y_MIN", 1,2,  5.0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_Y_MAX", 1,2, 11.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_LEGEND", 1,2, "KS - L2 Norm of Sol (Zoom)")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_AXE_X" , 1,2, "(t)")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_AXE_Y" , 1,2, "|U(x,t)|")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "MARKER"      , 1,2, 0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "MARKER_END"  , 1,2, 0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_X_MIN", 1,2, 20.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_X_MAX", 1,2, 30.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_Y_MIN", 1,2,  5.0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_Y_MAX", 1,2, 11.0  )
 
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_LEGEND", 2,2, "KS - Phase Plane representation")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_AXE_X" , 2,2, "|U|")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","LABEL_AXE_Y" , 2,2, "d/dt |U|")
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","MARKER"      , 2,2, 0  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","MARKER_END"  , 2,2, 6  )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_X_MIN", 2,2,  6.0 )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_X_MAX", 2,2, 10.0 )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_Y_MIN", 2,2, -8.0 )
-    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params","WINDOW_Y_MAX", 2,2,  8.0 )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_LEGEND", 2,2, "KS - Phase Plane representation")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_AXE_X" , 2,2, "|U|")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "LABEL_AXE_Y" , 2,2, "d/dt |U|")
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "MARKER"      , 2,2, 0  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "MARKER_END"  , 2,2, 6  )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_X_MIN", 2,2,  6.0 )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_X_MAX", 2,2, 10.0 )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_Y_MIN", 2,2, -8.0 )
+    Params_set_oneparam2(MyParams, "graphics_interactiv1D_params", "WINDOW_Y_MAX", 2,2,  8.0 )
 
     #############################################################################################
     Params_set_staticparam(MyParams, 0)

@@ -138,29 +138,36 @@ static void Params_init_boundary_conditions(PARAMS* p)
    for (k=0; k<AXEe_NUMBER; k++)
       for (i=0; i<NB_BOUNDARYCONDITIONS; i++)
       {
-         p->bc_params.TabPhi_BCdirichlet[k][i] = -1;
+         strcpy(p->bc_params.TabPhi_BCdirichlet[k][i].fundef, "0");
          
-         p->bc_params.TabPhi_BCneumann[k][i]   = -1;
+         strcpy(p->bc_params.TabPhi_BCneumann[k][i].fundef, "0");
          
-         p->bc_params.TabPhi_BCcauchy[k][i]    = -1;
+         strcpy(p->bc_params.TabPhi_BCcauchy[k][i].fundef, "0");
          
-         p->bc_params.TabPhi_BCrobin1[k][i]    = -1;
-         p->bc_params.TabPhi_BCrobin2[k][i]    = -1;
+         strcpy(p->bc_params.TabPhi_BCrobin1[k][i].fundef, "0");
+         strcpy(p->bc_params.TabPhi_BCrobin2[k][i].fundef, "0");
       }
 }
 
 static void Params_init_right_hand_side(PARAMS* p)
 {
-   p->rhs_params.rhs[AXEe_X] = 0;
-   p->rhs_params.rhs[AXEe_Y] = 0;
-   p->rhs_params.rhs[AXEe_Z] = 0;
+   strcpy(p->rhs_params.rhs[AXEe_X].fundef, "0");
+   strcpy(p->rhs_params.rhs[AXEe_Y].fundef, "0");
+   strcpy(p->rhs_params.rhs[AXEe_Z].fundef, "0");
 }
 
 static void Params_init_initial_condition(PARAMS* p)
 {
-   p->ic_params.ic[AXEe_X] = 0;
-   p->ic_params.ic[AXEe_Y] = 0;
-   p->ic_params.ic[AXEe_Z] = 0;
+   strcpy(p->ini_params.ini[AXEe_X].fundef, "0");
+   strcpy(p->ini_params.ini[AXEe_Y].fundef, "0");
+   strcpy(p->ini_params.ini[AXEe_Z].fundef, "0");
+}
+
+static void Params_init_exact_solution_params(PARAMS* p)
+{
+   strcpy(p->sol_params.sol[AXEe_X].fundef, "0");
+   strcpy(p->sol_params.sol[AXEe_Y].fundef, "0");
+   strcpy(p->sol_params.sol[AXEe_Z].fundef, "0");
 }
 
 static void Params_init_convective_terms(PARAMS* p)
@@ -177,9 +184,9 @@ static void Params_init_convective_terms(PARAMS* p)
    {
       for (i=0; i<AXEe_NUMBER; i++)
       {
-         p->adv_params.adv1[k][i] = 0;
-         p->adv_params.adv2[k][i] = 0;
-         p->adv_params.adv3[k][i] = 0;
+         strcpy(p->adv_params.adv1[k][i].fundef, "0");
+         strcpy(p->adv_params.adv2[k][i].fundef, "0");
+         strcpy(p->adv_params.adv3[k][i].fundef, "0");
       }
    }
 }
@@ -370,13 +377,6 @@ static void Params_init_miscellaneous_params(PARAMS* p)
    p->misc_params.itsave  = 0;
    p->misc_params.itstat  = 0;
    p->misc_params.itgraph = 0;
-}
-
-static void Params_init_exact_solution_params(PARAMS* p)
-{   
-   p->exactsol_params.exact_sol[0] = -1;
-   p->exactsol_params.exact_sol[1] = -1;
-   p->exactsol_params.exact_sol[2] = -1;
 }
 
 static void Params_init_miscellaneous_graphics(PARAMS* p)

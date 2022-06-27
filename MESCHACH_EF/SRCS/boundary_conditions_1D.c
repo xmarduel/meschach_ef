@@ -203,20 +203,20 @@ BC_1D *Bc1D_setup_from_params(const PARAMS *MyParams)
 		
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc1D_setCFunction(MyBC, BC_1De_DIRICHLET, /*ref_s*/i, AXEe_X, BCphi1D[MyParams->bc_params.TabPhi_BCdirichlet[AXEe_X][i]]);
+		Bc1D_setLUAFunction(MyBC, BC_1De_DIRICHLET, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCdirichlet[AXEe_X][i].fundef);
 	}
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc1D_setCFunction(MyBC, BC_1De_NEUMANN, /*ref_s*/i, AXEe_X, BCphi1D[MyParams->bc_params.TabPhi_BCneumann[AXEe_X][i]]);
+		Bc1D_setLUAFunction(MyBC, BC_1De_NEUMANN, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCneumann[AXEe_X][i].fundef);
 	}
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc1D_setCFunction(MyBC, BC_1De_CAUCHY, /*ref_s*/i, AXEe_X, BCphi1D[MyParams->bc_params.TabPhi_BCcauchy[AXEe_X][i]]);
+		Bc1D_setLUAFunction(MyBC, BC_1De_CAUCHY, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCcauchy[AXEe_X][i].fundef);
 	}
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc1D_setCFunction (MyBC, BC_1De_ROBIN, /*ref_s*/i, AXEe_X, BCphi1D[MyParams->bc_params.TabPhi_BCrobin1[AXEe_X][i]]);
-		Bc1D_setCFunction2(MyBC, BC_1De_ROBIN, /*ref_s*/i, AXEe_X, BCphi1D[MyParams->bc_params.TabPhi_BCrobin2[AXEe_X][i]]);
+		Bc1D_setLUAFunction (MyBC, BC_1De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCrobin1[AXEe_X][i].fundef);
+		Bc1D_setLUAFunction2(MyBC, BC_1De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCrobin2[AXEe_X][i].fundef);
 	}
       
    return MyBC;
@@ -378,9 +378,29 @@ BC_1D *Bc1D_setCFunction      ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int a
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
+BC_1D *Bc1D_setLUAFunction    ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def )
+{
+   void *L = make_lua_interpreter(def, "1D");
+   
+   return Bc1D_setFunction1( MyBC, bctype, ref_s, axe, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction1D, L );
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
 BC_1D *Bc1D_setCFunction2      ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , FUNC_1D phi )
 {
    return Bc1D_setFunction2( MyBC, bctype, ref_s, axe, FUN_C_STATIONNARY, phi, NULL );
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
+BC_1D *Bc1D_setLUAFunction2    ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def )
+{
+   void *L = make_lua_interpreter(def, "1D");
+   
+   return Bc1D_setFunction2( MyBC, bctype, ref_s, axe, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction1D, L );
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -394,9 +414,29 @@ BC_1D *Bc1D_setCFunctionTransient ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, i
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
+BC_1D *Bc1D_setLUAFunctionTransient ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe  , const char* def )
+{
+   void *L = make_lua_interpreter(def, "1D_TR");
+   
+   return Bc1D_setFunction1( MyBC, bctype, ref_s, axe, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction2D, L );
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
 BC_1D *Bc1D_setCFunctionTransient2 ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , FUNC_2D phi )
 {
    return Bc1D_setFunction2( MyBC, bctype, ref_s, axe, FUN_C_TRANSIENT, phi, NULL );
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
+BC_1D *Bc1D_setLUAFunctionTransient2 ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def )
+{
+   void *L = make_lua_interpreter(def, "1D_TR");
+   
+   return Bc1D_setFunction2( MyBC, bctype, ref_s, axe, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction2D, L );
 }
 
 /* -------------------------------------------------------------------------------------- */
@@ -702,11 +742,31 @@ static int Bc1D_checkBCdirichlet(const BC_1D *MyBC, int axe, int ref)
 
          if ( MyBC->BC_dirichlet->Fun1[axe][ref].phi_x_v  == NULL )
          {   error4(E_BC_DIRICHLETFUNNOTSET, "Bc1D_checkBCdirichlet");  return EXIT_FAILURE;}
+         if ( MyBC->BC_dirichlet->Fun1[axe][ref].clientdata  == NULL )
+         {   error4(E_BC_DIRICHLETFUNNOTSET, "Bc1D_checkBCdirichlet");  return EXIT_FAILURE;}
          break;
 
       case FUN_PY_TRANSIENT:
 
          if ( MyBC->BC_dirichlet->Fun1[axe][ref].phi_xt_v  == NULL )
+         {   error4(E_BC_DIRICHLETFUNNOTSET, "Bc1D_checkBCdirichlet");  return EXIT_FAILURE;}
+         if ( MyBC->BC_dirichlet->Fun1[axe][ref].clientdata  == NULL )
+         {   error4(E_BC_DIRICHLETFUNNOTSET, "Bc1D_checkBCdirichlet");  return EXIT_FAILURE;}
+         break;
+         
+      case FUN_LUA_STATIONNARY:
+         
+         if ( MyBC->BC_dirichlet->Fun1[axe][ref].phi_x_v  == NULL )
+         {   error4(E_BC_DIRICHLETFUNNOTSET, "Bc1D_checkBCdirichlet");  return EXIT_FAILURE;}
+         if ( MyBC->BC_dirichlet->Fun1[axe][ref].clientdata  == NULL )
+         {   error4(E_BC_DIRICHLETFUNNOTSET, "Bc1D_checkBCdirichlet");  return EXIT_FAILURE;}
+         break;
+         
+      case FUN_LUA_TRANSIENT:
+         
+         if ( MyBC->BC_dirichlet->Fun1[axe][ref].phi_xt_v  == NULL )
+         {   error4(E_BC_DIRICHLETFUNNOTSET, "Bc1D_checkBCdirichlet");  return EXIT_FAILURE;}
+         if ( MyBC->BC_dirichlet->Fun1[axe][ref].clientdata  == NULL )
          {   error4(E_BC_DIRICHLETFUNNOTSET, "Bc1D_checkBCdirichlet");  return EXIT_FAILURE;}
          break;
 
@@ -742,11 +802,31 @@ static int Bc1D_checkBCneumann(const BC_1D *MyBC, int axe, int ref)
 
          if ( MyBC->BC_neumann->Fun1[axe][ref].phi_x_v  == NULL )
          {  error4(E_BC_NEUMANNFUNNOTSET, "Bc1D_checkBCneumann");  return EXIT_FAILURE;}
+         if ( MyBC->BC_neumann->Fun1[axe][ref].clientdata  == NULL )
+         {  error4(E_BC_NEUMANNFUNNOTSET, "Bc1D_checkBCneumann");  return EXIT_FAILURE;}
          break;
 
       case FUN_PY_TRANSIENT:
 
          if ( MyBC->BC_neumann->Fun1[axe][ref].phi_xt_v  == NULL )
+         {  error4(E_BC_NEUMANNFUNNOTSET, "Bc1D_checkBCneumann");  return EXIT_FAILURE;}
+         if ( MyBC->BC_neumann->Fun1[axe][ref].clientdata  == NULL )
+         {  error4(E_BC_NEUMANNFUNNOTSET, "Bc1D_checkBCneumann");  return EXIT_FAILURE;}
+         break;
+         
+      case FUN_LUA_STATIONNARY:
+         
+         if ( MyBC->BC_neumann->Fun1[axe][ref].phi_x_v  == NULL )
+         {  error4(E_BC_NEUMANNFUNNOTSET, "Bc1D_checkBCneumann");  return EXIT_FAILURE;}
+         if ( MyBC->BC_neumann->Fun1[axe][ref].clientdata  == NULL )
+         {  error4(E_BC_NEUMANNFUNNOTSET, "Bc1D_checkBCneumann");  return EXIT_FAILURE;}
+         break;
+         
+      case FUN_LUA_TRANSIENT:
+         
+         if ( MyBC->BC_neumann->Fun1[axe][ref].phi_xt_v  == NULL )
+         {  error4(E_BC_NEUMANNFUNNOTSET, "Bc1D_checkBCneumann");  return EXIT_FAILURE;}
+         if ( MyBC->BC_neumann->Fun1[axe][ref].clientdata  == NULL )
          {  error4(E_BC_NEUMANNFUNNOTSET, "Bc1D_checkBCneumann");  return EXIT_FAILURE;}
          break;
 
@@ -782,11 +862,31 @@ static int Bc1D_checkBCcauchy(const BC_1D *MyBC, int axe, int ref)
 
          if ( MyBC->BC_cauchy->Fun1[axe][ref].phi_x_v  == NULL )
          {   error4(E_BC_CAUCHYFUNNOTSET, "Bc1D_checkBCcauchy");  return EXIT_FAILURE;}
+         if ( MyBC->BC_cauchy->Fun1[axe][ref].clientdata  == NULL )
+         {   error4(E_BC_CAUCHYFUNNOTSET, "Bc1D_checkBCcauchy");  return EXIT_FAILURE;}
          break;
 
       case FUN_PY_TRANSIENT:
 
          if ( MyBC->BC_cauchy->Fun1[axe][ref].phi_xt_v  == NULL )
+         {   error4(E_BC_CAUCHYFUNNOTSET, "Bc1D_checkBCcauchy");  return EXIT_FAILURE;}
+         if ( MyBC->BC_cauchy->Fun1[axe][ref].clientdata  == NULL )
+         {   error4(E_BC_CAUCHYFUNNOTSET, "Bc1D_checkBCcauchy");  return EXIT_FAILURE;}
+         break;
+         
+      case FUN_LUA_STATIONNARY:
+         
+         if ( MyBC->BC_cauchy->Fun1[axe][ref].phi_x_v  == NULL )
+         {   error4(E_BC_CAUCHYFUNNOTSET, "Bc1D_checkBCcauchy");  return EXIT_FAILURE;}
+         if ( MyBC->BC_cauchy->Fun1[axe][ref].clientdata  == NULL )
+         {   error4(E_BC_CAUCHYFUNNOTSET, "Bc1D_checkBCcauchy");  return EXIT_FAILURE;}
+         break;
+         
+      case FUN_LUA_TRANSIENT:
+         
+         if ( MyBC->BC_cauchy->Fun1[axe][ref].phi_xt_v  == NULL )
+         {   error4(E_BC_CAUCHYFUNNOTSET, "Bc1D_checkBCcauchy");  return EXIT_FAILURE;}
+         if ( MyBC->BC_cauchy->Fun1[axe][ref].clientdata  == NULL )
          {   error4(E_BC_CAUCHYFUNNOTSET, "Bc1D_checkBCcauchy");  return EXIT_FAILURE;}
          break;
 
@@ -851,6 +951,34 @@ static int Bc1D_checkBCrobin(const BC_1D *MyBC, int axe, int ref)
          if ( MyBC->BC_robin->Fun2[axe][ref].phi_xt_v  == NULL )
          {  error4(E_BC_ROBINFUNNOTSET, "Bc1D_checkBCrobin");  return EXIT_FAILURE;}
 
+         break;
+         
+      case FUN_LUA_STATIONNARY:
+         
+         if ( MyBC->BC_robin->Fun1[axe][ref].phi_x_v  == NULL )
+         {  error4(E_BC_ROBINFUNNOTSET, "Bc1D_checkBCrobin");  return EXIT_FAILURE;}
+         if ( MyBC->BC_robin->Fun1[axe][ref].clientdata  == NULL )
+         {  error4(E_BC_ROBINFUNNOTSET, "Bc1D_checkBCrobin");  return EXIT_FAILURE;}
+         
+         if ( MyBC->BC_robin->Fun2[axe][ref].phi_x_v  == NULL )
+         {  error4(E_BC_ROBINFUNNOTSET, "Bc1D_checkBCrobin");  return EXIT_FAILURE;}
+         if ( MyBC->BC_robin->Fun2[axe][ref].clientdata  == NULL )
+         {  error4(E_BC_ROBINFUNNOTSET, "Bc1D_checkBCrobin");  return EXIT_FAILURE;}
+         
+         break;
+         
+      case FUN_LUA_TRANSIENT:
+         
+         if ( MyBC->BC_robin->Fun1[axe][ref].phi_xt_v  == NULL )
+         {  error4(E_BC_ROBINFUNNOTSET, "Bc1D_checkBCrobin");  return EXIT_FAILURE;}
+         if ( MyBC->BC_robin->Fun1[axe][ref].clientdata  == NULL )
+         {  error4(E_BC_ROBINFUNNOTSET, "Bc1D_checkBCrobin");  return EXIT_FAILURE;}
+         
+         if ( MyBC->BC_robin->Fun2[axe][ref].phi_xt_v  == NULL )
+         {  error4(E_BC_ROBINFUNNOTSET, "Bc1D_checkBCrobin");  return EXIT_FAILURE;}
+         if ( MyBC->BC_robin->Fun2[axe][ref].clientdata  == NULL )
+         {  error4(E_BC_ROBINFUNNOTSET, "Bc1D_checkBCrobin");  return EXIT_FAILURE;}
+         
          break;
 
       default:

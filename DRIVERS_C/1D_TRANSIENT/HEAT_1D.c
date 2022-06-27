@@ -165,7 +165,8 @@ int  main(void)
 
    /* Initial Condition */
    MyCiFun = Fun1D_get();
-   Fun1D_setCFunctionTransient(MyCiFun, sources1D_Transient[MyParams->ic_params.ic[AXEe_X]]);
+   //Fun1D_setCFunctionTransient(MyCiFun, sources1D_Transient[6]);
+   Fun1D_setLUAFunctionTransient(MyCiFun, MyParams->ini_params.ini[0].fundef);
 	/* Initial Condition for Hermite EF */
    MyDCiFun = Fun1D_get();
    Fun1D_setCFunctionTransient(MyDCiFun, sources1D_Transient[9]);
@@ -213,7 +214,7 @@ int  main(void)
       ABSCISSAS2->ve[k] = k*DT;
    }
    
-   U_o = build_vec_from_function1Dtransient(MyElt, MyGeom, MyCiFun, MyDCiFun, U_o, 0.0);
+   U_o = build_vec_ef_from_function1Dtransient(MyElt, MyGeom, MyCiFun, MyDCiFun, U_o, 0.0);
 
 #ifdef HAVE_CPGPLOT
    if ( MyParams->graph_params.PGPLOT )

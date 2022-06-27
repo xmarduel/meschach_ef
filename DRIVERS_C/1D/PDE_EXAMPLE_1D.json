@@ -19,7 +19,7 @@
     # resolution -------------------------------------
 
     "PDE_RESOLUTION" : {
-        "EF" : "H3" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
+        "EF" : "S2" ,         # "P1", "P2", "P3", "H3", "S2", "S3", "S4", "S5"
 
         "LAPLACIAN_ALGO" : {
             "METHOD": "ITERATIVE-METHOD",
@@ -98,28 +98,34 @@
     # pde def -------------------------------------------------------------------------
     
     "PDE_INITIAL_CONDITION" : {
-        "FUNC_DIM1_NAME" : null,
-        "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null
+        "DIM1" : {"FUNC_DEF" : null},
+        "DIM2" : {"FUNC_DEF" : null},
+        "DIM3" : {"FUNC_DEF" : null}
     },
     
     "PDE_RHS" : {
-        "FUNC_DIM1_NAME" : "Src1D_05",
-        "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null 
+       "DIM1": {"FUNC_DEF" : "-2.0" },
+       "DIM2": {"FUNC_DEF" : null},
+       "DIM3": {"FUNC_DEF" : null}
     },
 
+    "PDE_EXACT_SOL" : {
+       "DIM1": {"FUNC_DEF" : "x*(x-1) + 2.0" },
+       "DIM2": {"FUNC_DEF" : null},
+       "DIM3": {"FUNC_DEF" : null}
+    },
+    
     "PDE_BOUNDARY_CONDITIONS" : {
         
         "NB_BCS" : 2,
          
         "DIM1" : [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi1D_05" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "x*x + math.sin(x)" }
+           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "x*(x-1) + 2.0" },
+           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "x*(x-1) + 2.0" }
         ]
 
     },
-
+    
     "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : {
         
         "1-DIM" : {
@@ -129,38 +135,34 @@
         }
     },
     
-    "PDE_EXACT_SOL" : {
-        "FUNC_DIM1_NAME" : "Sol1D_05",
-        "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null 
-    },
-    
     # mesh --------------------------------
 
     "MESH_1D" : {
+       
+        "MESH_SPEC" : "MESHDATADEFINITION",
     
-    #"MESHFILEDEFINITION" : {
-       #        "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
-       #     "MESHNAME" : "MESH_10",
-       #     "MESHTYPE" : "line"
-       # }
+        "MESHFILEDEFINITION" : {
+            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
+            "MESHNAME" : "MESH_10",
+            "MESHTYPE" : "line"
+        },
         
-         "MESHDATADEFINITION" : {
+        "MESHDATADEFINITION" : {
             "XMIN"   : 0.0,
             "XMAX"   : 1.0,
             "NX"     : 10,
             "DISTRIBUTION" : "UNIFORM",
             "PERIODIC" : false  # true, false
-           }
+        }
     },
 
     # infos ----------------------------------------
 
     "MISC_OUTPUT" : { 
-        "ITPRINT"          : 4,
+        "ITPRINT"          : 1,
         "ITSAVE"           : 1,
         "ITSTAT"           : 1,
-        "ITGRAPH"          : 20
+        "ITGRAPH"          : 1
     },
     
     # graphics ---------------------------
@@ -176,12 +178,12 @@
         "GNUPLOT"    : false,
         "GRAPH"      : false,
         "MATLAB"     : false,
+        "MATPLOTLIB" : false,
         "VTK"        : false,
         "SILO"       : false,
         "PGPLOT"     : false,
         "VOGLE"      : true,
-        "LIBSCIPLOT" : false,
-        "MATPLOTLIB" : false
+        "LIBSCIPLOT" : false
     },
     
     # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------

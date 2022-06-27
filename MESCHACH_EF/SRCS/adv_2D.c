@@ -53,19 +53,19 @@ ADV_2D* Adv2D_setup_from_params(const PARAMS *MyParams)
 {
 	ADV_2D* MyADV = Adv2D_get();
 
-	Adv2D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_X, sources2D[MyParams->adv_params.adv1[AXEe_X][AXEe_X]] );
-	Adv2D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_Y, sources2D[MyParams->adv_params.adv1[AXEe_X][AXEe_Y]] );
+	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_X, MyParams->adv_params.adv1[AXEe_X][AXEe_X].fundef );
+	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_Y, MyParams->adv_params.adv1[AXEe_X][AXEe_Y].fundef );
 	
-	Adv2D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_X, sources2D[MyParams->adv_params.adv1[AXEe_Y][AXEe_X]] );
-	Adv2D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_X, sources2D[MyParams->adv_params.adv1[AXEe_Y][AXEe_Y]] );
+	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_X, MyParams->adv_params.adv1[AXEe_Y][AXEe_X].fundef );
+	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_X, MyParams->adv_params.adv1[AXEe_Y][AXEe_Y].fundef );
 
 	
 		
-	Adv2D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_X, sources2D[MyParams->adv_params.adv2[AXEe_Y][AXEe_X]] );
-	Adv2D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_Y, sources2D[MyParams->adv_params.adv2[AXEe_Y][AXEe_Y]] );
+	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_X, MyParams->adv_params.adv2[AXEe_Y][AXEe_X].fundef );
+	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_Y, MyParams->adv_params.adv2[AXEe_Y][AXEe_Y].fundef );
 	
-	Adv2D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_X, sources2D[MyParams->adv_params.adv2[AXEe_Y][AXEe_X]] );
-	Adv2D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_Y, sources2D[MyParams->adv_params.adv2[AXEe_Y][AXEe_Y]] );
+	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_X, MyParams->adv_params.adv2[AXEe_Y][AXEe_X].fundef );
+	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_Y, MyParams->adv_params.adv2[AXEe_Y][AXEe_Y].fundef );
    
 	return MyADV;
 }
@@ -109,8 +109,12 @@ ADV_2D* Adv2D_setFunction      (ADV_2D* MyAdv, int ref_e, int axe1, int axe2, in
    /* set the function */
    switch(axe1)
    {
-      case AXEe_X: Fun2D_setFunction(&(MyAdv->Fun1[axe2][axe3][ref_e]), type, phi, clientdata); break;
-      case AXEe_Y: Fun2D_setFunction(&(MyAdv->Fun2[axe2][axe3][ref_e]), type, phi, clientdata); break;
+      case AXEe_X:
+         Fun2D_setFunction(&(MyAdv->Fun1[axe2][axe3][ref_e]), type, phi, clientdata);
+         break;
+      case AXEe_Y:
+         Fun2D_setFunction(&(MyAdv->Fun2[axe2][axe3][ref_e]), type, phi, clientdata);
+         break;
    }
 
    return MyAdv;
@@ -127,9 +131,29 @@ ADV_2D* Adv2D_setCFunction      (ADV_2D* MyAdv, int ref_e, int axe1, int axe2, i
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
+ADV_2D* Adv2D_setLUAFunction    (ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def)
+{
+   void *L = make_lua_interpreter(def, "2D");
+   
+   return  Adv2D_setFunction(MyAdv, ref_e, axe1, axe2, axe3, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction2D, L);
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
 ADV_2D* Adv2D_setCFunctionTransient (ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_3D phi)
 {
    return  Adv2D_setFunction(MyAdv, ref_e, axe1, axe2, axe3, FUN_C_TRANSIENT, phi, NULL);
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
+ADV_2D* Adv2D_setLUAFunctionTransient (ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def)
+{
+   void *L = make_lua_interpreter(def, "2D_TR");
+   
+   return  Adv2D_setFunction(MyAdv, ref_e, axe1, axe2, axe3, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction3D, L);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/

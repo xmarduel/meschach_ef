@@ -7,7 +7,7 @@ import vtk
 
 
 reader = vtk.vtkUnstructuredGridReader() 
-reader.SetFileName( "./SolApproch3D.vtk" )
+reader.SetFileName( "./SolExact3D.vtk" )
 reader.Update()
 
 lut1 = vtk.vtkLookupTable() 

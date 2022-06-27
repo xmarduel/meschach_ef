@@ -98,6 +98,9 @@ ADV_2D* Adv2D_setFunction          ( ADV_2D* MyAdv, int ref_e, int axe1, int axe
 
 ADV_2D* Adv2D_setCFunction         ( ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_2D phi);
 ADV_2D* Adv2D_setCFunctionTransient( ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_3D phi);
+   
+ADV_2D* Adv2D_setLUAFunction         ( ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char *def);
+ADV_2D* Adv2D_setLUAFunctionTransient( ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char *def);
 
 ADV_2D* Adv2D_setCurrentSelectedAxe( ADV_2D* MyAdv, int axe1, int axe2, int axe3 );
 ADV_2D* Adv2D_setTps               ( ADV_2D* MyAdv, Real tps);

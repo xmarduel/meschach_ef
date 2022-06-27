@@ -47,9 +47,12 @@ RHS_2D*  Rhs2D_get(void)
 RHS_2D* Rhs2D_setup_from_params(const PARAMS* MyParams)
 {
 	RHS_2D* MyRhs = Rhs2D_get();
+   
+   Rhs2D_setLUAFunction(MyRhs, /*ref_e*/0, AXEe_X, MyParams->rhs_params.rhs[AXEe_X].fundef   );
+   Rhs2D_setLUAFunction(MyRhs, /*ref_e*/0, AXEe_Y, MyParams->rhs_params.rhs[AXEe_X].fundef   );
 
-	Rhs2D_setCFunction(MyRhs, /*ref_e*/0, AXEe_X, sources2D[MyParams->rhs_params.rhs[AXEe_X]] );
-	Rhs2D_setCFunction(MyRhs, /*ref_e*/0, AXEe_Y, sources2D[MyParams->rhs_params.rhs[AXEe_Y]] );
+	//Rhs2D_setCFunction(MyRhs, /*ref_e*/0, AXEe_X, sources2D[MyParams->rhs_params.rhs[AXEe_X]] );
+	//Rhs2D_setCFunction(MyRhs, /*ref_e*/0, AXEe_Y, sources2D[MyParams->rhs_params.rhs[AXEe_Y]] );
    
 	return MyRhs;
 }
@@ -104,9 +107,29 @@ RHS_2D* Rhs2D_setCFunction      (RHS_2D* MyRhs, int ref_e, int axe, FUNC_2D phi)
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
+RHS_2D* Rhs2D_setLUAFunction    ( RHS_2D* MyRhs, int ref_e, int axe, const char *def)
+{
+   void *L = make_lua_interpreter(def, "2D");
+   
+   return Rhs2D_setFunction(MyRhs, ref_e, axe, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction2D, L);
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
 RHS_2D* Rhs2D_setCFunctionTransient( RHS_2D* MyRhs, int ref_e, int axe, FUNC_3D phi)
 {
    return  Rhs2D_setFunction(MyRhs, ref_e, axe, FUN_C_TRANSIENT, phi, NULL);
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
+RHS_2D* Rhs2D_setLUAFunctionTransient( RHS_2D* MyRhs, int ref_e, int axe, const char *def)
+{
+   void *L = make_lua_interpreter(def, "2D_TR");
+   
+   return Rhs2D_setFunction(MyRhs, ref_e, axe, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction3D, L);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/

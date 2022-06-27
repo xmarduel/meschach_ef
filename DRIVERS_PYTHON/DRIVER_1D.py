@@ -52,27 +52,26 @@ def run_test():
     #-------------------------------------------------------------------
 
     def sol(x):
-       #return (x-1)*(x-1)
+        #return (x-1)*(x-1)
         #return 1-x
         #return x*(x-1) +2
         #return x*x
         #return 1
         return cos(2*pi*x)
         return (exp(x)-1)/(exp(1)-1)
-    
-    def solP1(x):
-       return sol(x) + 1
 
     def Dsol(x):
-       #return 2*(x-1)
+        #return 2*(x-1)
         #return 1
-        #return 2*x -1
+        #return 2*x - 1
         #return 2*x
         return -2*pi*sin(2*pi*x)
+        return exp(x)/(exp(1)-1)
 
     def DDsol(x):
-       #return -2
+        #return -2
         #return 0
+        #return 2
         #return 2
         return -4*pi*pi*cos(2*pi*x)
         return (exp(x))/(exp(1)-1)
@@ -141,7 +140,7 @@ def run_test():
     Bc1D_setBcType(MyBC, BC_1De_DIRICHLET, 2, AXEe_X) # BC_1De_CAUCHY, BC_1De_DIRICHLET, BC_1De_NEUMANN, BC_1De_ROBIN
 
     Bc1D_setFunctionPython(MyBC, BC_1De_DIRICHLET, 1, AXEe_X, sol)
-    Bc1D_setFunctionPython(MyBC, BC_1De_DIRICHLET, 2, AXEe_X, lambda x : sol(x) +0)
+    Bc1D_setFunctionPython(MyBC, BC_1De_DIRICHLET, 2, AXEe_X, lambda x : sol(x) + 0 )
 
     Bc1D_setFunctionPython(MyBC, BC_1De_NEUMANN, 1, AXEe_X, Nsol_left)
     Bc1D_setFunctionPython(MyBC, BC_1De_NEUMANN, 2, AXEe_X, Nsol_right) 
@@ -218,12 +217,15 @@ def run_test():
     config = str(json.dumps( {
         "COORDS_DIMS"    : 1,
         "MESH_1D"        : {
-            #"MESHFILEDEFINITION" : {
-            #  "MESHFILE": "NULL",
-            #"MESHFILE"     : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
-            # "MESHNAME"     : "MESH_50",
-            # "MESHTYPE"     : "line",
-            #},
+            "MESH_SPEC": "MESHDATADEFINITION",
+            
+            "MESHFILEDEFINITION" : {
+              "MESHFILE": "NULL",
+              "MESHFILE"     : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
+              "MESHNAME"     : "MESH_50",
+              "MESHTYPE"     : "line"
+            },
+                            
             "MESHDATADEFINITION" : {
                 "XMIN"   : 0.0,
                 "XMAX"   : 1.0,

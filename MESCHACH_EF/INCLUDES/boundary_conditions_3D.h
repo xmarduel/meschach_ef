@@ -82,6 +82,14 @@ BC_3D      *Bc3D_setCFunction2         (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_
 BC_3D      *Bc3D_setCFunctionTransient (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_4D phi);
 BC_3D      *Bc3D_setCFunctionTransient2(BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_4D phi);
 
+   
+BC_3D      *Bc3D_setLUAFunction          (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
+BC_3D      *Bc3D_setLUAFunction2         (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
+   
+BC_3D      *Bc3D_setLUAFunctionTransient (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
+BC_3D      *Bc3D_setLUAFunctionTransient2(BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
+
+   
 BC_3D      *Bc3D_setTps                (BC_3D *MyBC, Real tps    );
 BC_3D      *Bc3D_setCurrentSelectedAxe (BC_3D *MyBC, int axe     );
 

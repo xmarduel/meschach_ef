@@ -86,6 +86,10 @@ _Bc1D_setCFunction
 _Bc1D_setCFunction2
 _Bc1D_setCFunctionTransient
 _Bc1D_setCFunctionTransient2
+_Bc1D_setLUAFunction
+_Bc1D_setLUAFunction2
+_Bc1D_setLUAFunctionTransient
+_Bc1D_setLUAFunctionTransient2
 _Bc1D_setTps
 _Bc1D_evalFunction1
 _Bc1D_evalFunction2
@@ -109,6 +113,10 @@ _Bc2D_setCFunction
 _Bc2D_setCFunction2
 _Bc2D_setCFunctionTransient
 _Bc2D_setCFunctionTransient2
+_Bc2D_setLUAFunction
+_Bc2D_setLUAFunction2
+_Bc2D_setLUAFunctionTransient
+_Bc2D_setLUAFunctionTransient2
 _Bc2D_setTps
 _Bc2D_evalFunction1
 _Bc2D_evalFunction2
@@ -133,6 +141,10 @@ _Bc3D_setCFunction
 _Bc3D_setCFunction2
 _Bc3D_setCFunctionTransient
 _Bc3D_setCFunctionTransient2
+_Bc3D_setLUAFunction
+_Bc3D_setLUAFunction2
+_Bc3D_setLUAFunctionTransient
+_Bc3D_setLUAFunctionTransient2
 _Bc3D_setTps
 _Bc3D_evalFunction1
 _Bc3D_evalFunction2
@@ -146,16 +158,26 @@ _Bc3D_getNumberOfBC
 _Bc3D_getNumberOfBcOnSomms
 _Bc3D_getNumberOfBcOnFaces
 
+_function1Dindex_by_name
+_function2Dindex_by_name
+_function3Dindex_by_name
+
+
 _Fun1D_get
 _Fun1D_free
 _Fun1D_init
 _Fun1D_setFunction
 _Fun1D_setCFunction
 _Fun1D_setCFunctionTransient
+_Fun1D_setLUAFunction
+_Fun1D_setLUAFunctionTransient
+
 _Fun1D_evalCFunction
 _Fun1D_evalCFunctionTransient
 _Fun1D_evalPyFunction
 _Fun1D_evalPyFunctionTransient
+_Fun1D_evalLUAFunction
+_Fun1D_evalLUAFunctionTransient
 
 _Fun2D_get
 _Fun2D_free
@@ -163,21 +185,31 @@ _Fun2D_init
 _Fun2D_setFunction
 _Fun2D_setCFunction
 _Fun2D_setCFunctionTransient
+_Fun2D_setLUAFunction
+_Fun2D_setLUAFunctionTransient
+
 _Fun2D_evalCFunction
 _Fun2D_evalCFunctionTransient
 _Fun2D_evalPyFunction
 _Fun2D_evalPyFunctionTransient
+_Fun2D_evalLUAFunction
+_Fun2D_evalLUAFunctionTransient
 
 _Fun3D_get
 _Fun3D_free
 _Fun3D_init
 _Fun3D_setFunction
 _Fun3D_setCFunction
+_Fun3D_setLUAFunction
+_Fun3D_setLUAFunctionTransient
+
 _Fun3D_setCFunctionTransient
 _Fun3D_evalCFunction
 _Fun3D_evalCFunctionTransient
 _Fun3D_evalPyFunction
 _Fun3D_evalPyFunctionTransient
+_Fun3D_evalLUAFunction
+_Fun3D_evalLUAFunctionTransient
 
 _Geom1D_setup_from_params
 _Geom1D_get_fromfile
@@ -223,9 +255,10 @@ _Rhs1D_setup_from_params
 _Rhs1D_setFunction
 _Rhs1D_setCFunction
 _Rhs1D_setCFunctionTransient
+_Rhs1D_setLUAFunction
+_Rhs1D_setLUAFunctionTransient
 _Rhs1D_setTps
 _Rhs1D_evalFunction
-_Rhs1D_is_zero
 
 _Rhs2D_get
 _Rhs2D_setup_from_params
@@ -233,6 +266,8 @@ _Rhs2D_free
 _Rhs2D_setFunction
 _Rhs2D_setCFunction
 _Rhs2D_setCFunctionTransient
+_Rhs2D_setLUAFunction
+_Rhs2D_setLUAFunctionTransient
 _Rhs2D_setTps
 _Rhs2D_setCurrentSelectedAxe
 _Rhs2D_evalFunction
@@ -243,6 +278,8 @@ _Rhs3D_free
 _Rhs3D_setFunction
 _Rhs3D_setCFunction
 _Rhs3D_setCFunctionTransient
+_Rhs3D_setLUAFunction
+_Rhs3D_setLUAFunctionTransient
 _Rhs3D_setTps
 _Rhs3D_evalFunction
 _Rhs3D_setCurrentSelectedAxe
@@ -253,6 +290,8 @@ _Adv1D_setup_from_params
 _Adv1D_setFunction
 _Adv1D_setCFunction
 _Adv1D_setCFunctionTransient
+_Adv1D_setLUAFunction
+_Adv1D_setLUAFunctionTransient
 _Adv1D_setTps
 _Adv1D_evalFunction
 
@@ -262,6 +301,8 @@ _Adv2D_free
 _Adv2D_setFunction
 _Adv2D_setCFunction
 _Adv2D_setCFunctionTransient
+_Adv2D_setLUAFunction
+_Adv2D_setLUAFunctionTransient
 _Adv2D_setTps
 _Adv2D_setCurrentSelectedAxe
 _Adv2D_evalFunction
@@ -272,6 +313,8 @@ _Adv3D_free
 _Adv3D_setFunction
 _Adv3D_setCFunction
 _Adv3D_setCFunctionTransient
+_Adv3D_setLUAFunction
+_Adv3D_setLUAFunctionTransient
 _Adv3D_setTps
 _Adv3D_setCurrentSelectedAxe
 _Adv3D_evalFunction
@@ -509,19 +552,6 @@ _Sol3D_08_Transient
 _Sol3D_09
 _Sol3D_09_Transient
 
-_Zero1D
-_Zero2D
-_Zero3D
-_Zero1Dtransient
-_Zero2Dtransient
-_Zero3Dtransient
-
-_One1D
-_One2D
-_One3D
-_One1Dtransient
-_One2Dtransient
-_One3Dtransient
 
 _assemblage1D_matrix_Mass
 _assemblage1D_matrix_Stiff1

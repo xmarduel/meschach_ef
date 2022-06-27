@@ -133,10 +133,10 @@ static TYPE_PARAMS0 params_list0[] =
 	{ "stokes_params"         , "augmentedlagrangian.innerloop_solver.max_steps"          , TYPEd_INT },
 	
 
-    { "navierstokes_params"   , "method"           , TYPEd_STRING },
+   { "navierstokes_params"   , "method"           , TYPEd_STRING },
 	{ "navierstokes_params"   , "eps_steps"        , TYPEd_REAL },
 	{ "navierstokes_params"   , "max_steps"        , TYPEd_INT },
-    { "navierstokes_params"   , "outer_method"     , TYPEd_STRING },
+   { "navierstokes_params"   , "outer_method"     , TYPEd_STRING },
 	/* PRESSUREMATRIX */
 	{ "navierstokes_params"   , "pressurematrix.eps_steps"                          , TYPEd_REAL },
 	{ "navierstokes_params"   , "pressurematrix.max_steps"                          , TYPEd_INT },
@@ -207,27 +207,27 @@ static TYPE_PARAMS0 params_list0[] =
 
 static TYPE_PARAMS1 params_list1[] =
 {
-   { "right_hand_side_params"     , "rhs"                 , TYPEd_INT      , AXEe_X , AXEe_Z },
-   { "initial_condition_params"   , "ic"                  , TYPEd_INT      , AXEe_X , AXEe_Z },
-   { "exact_solution_params"      , "exact_sol"           , TYPEd_INT      , AXEe_X , AXEe_Z },
+   { "right_hand_side_params"     , "rhs"                 , TYPEd_STRING      , AXEe_X , AXEe_Z },
+   { "initial_condition_params"   , "ic"                  , TYPEd_STRING      , AXEe_X , AXEe_Z },
+   { "exact_solution_params"      , "exact_sol"           , TYPEd_STRING      , AXEe_X , AXEe_Z },
 	
-   { NULL                         , NULL                  , TYPEd_INT      , 0 , 0 }
+   { NULL                         , NULL                  , TYPEd_STRING      , 0 , 0 }
 
 };
 
 
 static TYPE_PARAMS2 params_list2[] =
 {
-   { "convective_terms_params"    , "adv1"                , TYPEd_INT  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
-   { "convective_terms_params"    , "adv2"                , TYPEd_INT  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
-   { "convective_terms_params"    , "adv3"                , TYPEd_INT  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
+   { "convective_terms_params"    , "adv1"                , TYPEd_STRING  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
+   { "convective_terms_params"    , "adv2"                , TYPEd_STRING  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
+   { "convective_terms_params"    , "adv3"                , TYPEd_STRING  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
 
-   { "boundary_conditions_params" , "TabBCMask"           , TYPEd_INT  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCdirichlet"  , TYPEd_INT  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCneumann"    , TYPEd_INT  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCcauchy"     , TYPEd_INT  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCrobin1"     , TYPEd_INT  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCrobin2"     , TYPEd_INT  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "TabBCMask"           , TYPEd_INT     , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "TabPhi_BCdirichlet"  , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "TabPhi_BCneumann"    , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "TabPhi_BCcauchy"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "TabPhi_BCrobin1"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "TabPhi_BCrobin2"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
 
    { "graphics_interactiv1D_params"  , "LABEL_LEGEND"        , TYPEd_STRING , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
    { "graphics_interactiv1D_params"  , "LABEL_AXE_X"         , TYPEd_STRING , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },

@@ -277,19 +277,81 @@
             "required" : ["EF"]
         },
         
-        "PDE_INITIAL_CONDITION" : { "type":"object", "description":"", 
+        "PDE_INITIAL_CONDITION" : { "type":"object", "description": "", 
             "properties" : {
-                "FUNC_DIM1_NAME" : { "type":["null", "string"], "description":"" },
-                "FUNC_DIM2_NAME" : { "type":["null", "string"], "description":"" },
-                "FUNC_DIM3_NAME" : { "type":["null", "string"], "description":"" }
+                "DIM1" : { "type":"object", "description": "" ,
+                    "properties" : {
+                        "FUNC_DEF" : { "type": ["null", "string"], "description": "lua code" }
+                    },
+                    "required" : ["FUNC_DEF"],
+                    "additionalProperties": false
+                },
+                "DIM2" : { "type":"object", "description": "" ,
+                    "properties" : {
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                    },
+                    "required" : ["FUNC_DEF"],
+                    "additionalProperties": false
+                },
+                "DIM3" : { "type":"object", "description": "" ,
+                    "properties" : {
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                    },
+                    "required" : ["FUNC_DEF"],
+                    "additionalProperties": false
+                }
             }
         },
         
         "PDE_RHS" : { "type":"object", "description":"",
             "properties" : {
-                "FUNC_DIM1_NAME" : { "type":["null", "string"], "description":"" },
-                "FUNC_DIM2_NAME" : { "type":["null", "string"], "description":"" },
-                "FUNC_DIM3_NAME" : { "type":["null", "string"], "description":"" }
+                "DIM1" : { "type":"object", "description":"" ,
+                    "properties" : {
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                    },
+                    "required" : ["FUNC_DEF"],
+                    "additionalProperties": false
+                },
+                "DIM2" : { "type":"object", "description":"" ,
+                    "properties" : {
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                    },
+                    "required" : ["FUNC_DEF"],
+                    "additionalProperties": false
+                },
+                "DIM3" : { "type":"object", "description":"" ,
+                    "properties" : {
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                    },
+                    "required" : ["FUNC_DEF"],
+                    "additionalProperties": false
+                }
+            }
+        },
+        
+        "PDE_EXACT_SOL" : { "type":"object", "description":"for tests, exact solution of the pde",
+            "properties" : {
+                "DIM1" : { "type":"object", "description":"" ,
+                    "properties" : {
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                    },
+                    "required" : ["FUNC_DEF"],
+                    "additionalProperties": false
+                },
+                "DIM2" : { "type":"object", "description":"" ,
+                    "properties" : {
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                    },
+                    "required" : ["FUNC_DEF"],
+                    "additionalProperties": false
+                },
+                "DIM3" : { "type":"object", "description":"" ,
+                    "properties" : {
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                    },
+                    "required" : ["FUNC_DEF"],
+                    "additionalProperties": false
+                }
             }
         },
         
@@ -301,20 +363,14 @@
                         "properties" : {
                             "IDX"       : { "type":"integer", "description":"" },
                             "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
-                            "FUNC_NAME" : { "oneOf" : 
+                            "FUNC_DEF" : { "oneOf" :
                                 [
-                                    { "type":"string" },
-                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
-                                ]
-                            },
-							"FUNC_DEF" : { "oneOf" : 
-                                [
-                                    { "type":"string" },
-                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                    { "type":["null","string"] },
+                                    { "type":"array", "items": { "type":["null","string"] , "description": "lua code" }, "minItems": 2, "maxItems": 2 }
                                 ]
                             }
                         },
-                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
+                        "required" : ["IDX", "BC_TYPE", "FUNC_DEF"],
                         "additionalProperties": false
                     }
                 },
@@ -323,20 +379,14 @@
                         "properties" : {
                             "IDX"       : { "type":"integer", "description":"" },
                             "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
-                            "FUNC_NAME" : { "oneOf" : 
+                            "FUNC_DEF" : { "oneOf" :
                                 [
-                                    { "type":"string" },
-                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
-                                ]
-                            },
-							"FUNC_DEF" : { "oneOf" : 
-                                [
-                                    { "type":"string" },
-                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                    { "type":["null","string"] },
+                                    { "type":"array", "items": { "type":["null","string"] , "description": "lua code" }, "minItems": 2, "maxItems": 2 }
                                 ]
                             }
                         },
-                        "required" : ["IDX", "BC_TYPE", "FUNC_NAME"],
+                        "required" : ["IDX", "BC_TYPE", "FUNC_DEF"],
                         "additionalProperties": false
                     }
                 },
@@ -345,20 +395,14 @@
                         "properties" : {
                             "IDX"       : { "type":"integer", "description":"" },
                             "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
-                            "FUNC_NAME" : { "oneOf" : 
+                            "FUNC_DEF" : { "oneOf" :
                                 [
-                                    { "type":"string" },
-                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
-                                ]
-                            },
-							"FUNC_DEF" : { "oneOf" : 
-                                [
-                                    { "type":"string" },
-                                    { "type":"array", "items": { "type":"string" }, "minItems": 2, "maxItems": 2 }
+                                    { "type":["null","string"] },
+                                    { "type":"array", "items": { "type":["null","string"] , "description": "lua code" }, "minItems": 2, "maxItems": 2 }
                                 ]
                             }
                         },
-                        "required" : ["IDX", "BC_TYPE"],
+                        "required" : ["IDX", "BC_TYPE", "FUNC_DEF"],
                         "additionalProperties": false
                     }
                 }
@@ -370,9 +414,9 @@
                 
                 "1-DIM" : { "type":"object", "description":"", 
                     "properties" : {
-                        "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
-                        "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
-                        "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" }
+                        "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
+                        "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
+                        "FUNC_dudz" : { "type": ["null", "string"], "description":"lua code" }
                     },
                     "additionalProperties": false
                 },
@@ -380,23 +424,23 @@
                     "properties" : {
                         "DIM1" : { "type":"object", "description":"", 
                             "properties" : {
-                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" }
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"lua code" }
                             },
                             "additionalProperties": false
                         },
                         "DIM2": { "type":"object", "description":"", 
                             "properties" : {
-                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" }
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"lua code" }
                             },
                             "additionalProperties": false
                         }
@@ -408,43 +452,43 @@
                     "properties" : {
                         "DIM1" : { "type":"object", "description":"", 
                             "properties" : {
-                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"functions names" }
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"lua code" }
                             },
                             "additionalProperties": false
                         },
                         "DIM2" : { "type":"object", "description":"", 
                             "properties" : { 
-                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"functions names" }
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"lua code" }
                             },
                             "additionalProperties": false
                         },
                         "DIM3" : { "type":"object", "description":"", 
                             "properties" : {
-                                "FUNC_dudx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dudz" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"functions names" },
-                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"functions names" }
+                                "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dudz" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dvdz" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dwdx" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dwdy" : { "type": ["null", "string"], "description":"lua code" },
+                                "FUNC_dwdz" : { "type": ["null", "string"], "description":"lua code" }
                             },
                             "additionalProperties" : false
                         }
@@ -454,17 +498,11 @@
                 }
             }
         },
-
-        "PDE_EXACT_SOL" : { "type":"object", "description":"for tests, exact solution of the pde",
-            "properties" : {
-                "FUNC_DIM1_NAME" : { "type":["null", "string"], "description":"optional function name" },
-                "FUNC_DIM2_NAME" : { "type":["null", "string"], "description":"optional function name" },
-                "FUNC_DIM3_NAME" : { "type":["null", "string"], "description":"optional function name" }
-            }
-        },
         
         "MESH_1D" : { "type":"object", "description":"", 
-            "properties" : {  
+            "properties" : {
+                "MESH_SPEC": { "type":"string", "enum" : ["MESHFILEDEFINITION", "MESHDATADEFINITION"] },
+                
                 "MESHFILEDEFINITION" : { "type":"object", "description":"",
                     "properties": {
                         "MESHFILE" : { "type": "string", "description":"" },

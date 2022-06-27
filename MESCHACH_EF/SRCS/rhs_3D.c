@@ -49,9 +49,13 @@ RHS_3D* Rhs3D_setup_from_params(const PARAMS* MyParams)
 {
 	RHS_3D* MyRhs = Rhs3D_get();
 
-	Rhs3D_setCFunction(MyRhs, /*ref_e*/0, AXEe_X, sources3D[MyParams->rhs_params.rhs[AXEe_X]] );
-	Rhs3D_setCFunction(MyRhs, /*ref_e*/0, AXEe_Y, sources3D[MyParams->rhs_params.rhs[AXEe_Y]] );
-	Rhs3D_setCFunction(MyRhs, /*ref_e*/0, AXEe_Z, sources3D[MyParams->rhs_params.rhs[AXEe_Z]] );
+   Rhs3D_setLUAFunction(MyRhs, /*ref_e*/0, AXEe_X, MyParams->rhs_params.rhs[AXEe_X].fundef   );
+   Rhs3D_setLUAFunction(MyRhs, /*ref_e*/0, AXEe_X, MyParams->rhs_params.rhs[AXEe_Y].fundef   );
+   Rhs3D_setLUAFunction(MyRhs, /*ref_e*/0, AXEe_Z, MyParams->rhs_params.rhs[AXEe_Z].fundef   );
+   
+	//Rhs3D_setCFunction(MyRhs, /*ref_e*/0, AXEe_X, sources3D[MyParams->rhs_params.rhs[AXEe_X]] );
+	//Rhs3D_setCFunction(MyRhs, /*ref_e*/0, AXEe_Y, sources3D[MyParams->rhs_params.rhs[AXEe_Y]] );
+	//Rhs3D_setCFunction(MyRhs, /*ref_e*/0, AXEe_Z, sources3D[MyParams->rhs_params.rhs[AXEe_Z]] );
    
 	return MyRhs;
 }
@@ -91,7 +95,7 @@ RHS_3D* Rhs3D_setFunction      (RHS_3D* MyRhs, int ref_e, int axe, FUN_TYPE type
 
    /* set the function */
    Fun3D_setFunction(&(MyRhs->Fun[axe][ref_e]), type, phi, clientdata);
-
+   
    return MyRhs;
 }
 
@@ -106,9 +110,29 @@ RHS_3D *Rhs3D_setCFunction      (RHS_3D* MyRhs, int ref_e, int axe, FUNC_3D phi)
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
+RHS_3D* Rhs3D_setLUAFunction    ( RHS_3D* MyRhs, int ref_e, int axe, const char *def)
+{
+   void *L = make_lua_interpreter(def, "3D");
+   
+   return Rhs3D_setFunction(MyRhs, ref_e, axe, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction3D, L);
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
 RHS_3D *Rhs3D_setCFunctionTransient(RHS_3D* MyRhs, int ref_e, int axe, FUNC_4D phi)
 {
    return Rhs3D_setFunction(MyRhs, ref_e, axe, FUN_C_TRANSIENT, phi, NULL);   
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
+RHS_3D* Rhs3D_setLUAFunctionTransient( RHS_3D* MyRhs, int ref_e, int axe, const char *def)
+{
+   void *L = make_lua_interpreter(def, "3D_TR");
+   
+   return Rhs3D_setFunction(MyRhs, ref_e, axe, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction4D, L);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/

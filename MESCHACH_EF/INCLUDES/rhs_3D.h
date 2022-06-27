@@ -63,6 +63,9 @@ RHS_3D* Rhs3D_setFunction          (RHS_3D* MyRhs, int ref_e, int axe, FUN_TYPE 
 RHS_3D* Rhs3D_setCFunction         (RHS_3D* MyRhs, int ref_e, int axe, FUNC_3D phi);
 RHS_3D* Rhs3D_setCFunctionTransient(RHS_3D* MyRhs, int ref_e, int axe, FUNC_4D phi);
 
+RHS_3D* Rhs3D_setLUAFunction         (RHS_3D* MyRhs, int ref_e, int axe, const char *def);
+RHS_3D* Rhs3D_setLUAFunctionTransient(RHS_3D* MyRhs, int ref_e, int axe, const char *def);
+
 RHS_3D* Rhs3D_setTps               (RHS_3D* MyRhs, Real tps);
 RHS_3D* Rhs3D_setCurrentSelectedAxe(RHS_3D* MyRhs, int axe );
 

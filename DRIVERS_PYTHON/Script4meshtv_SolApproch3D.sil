@@ -1,0 +1,11 @@
+#! /usr/bin/env meshtvx
+# 
+# File automatically generated  - changes will not be kept - 
+# date : Sun Jun 26 19:41:27 2022
+#
+#
+#  host[#] meshtvx -s name_of_the_file 
+open "./SolApproch3D.silo";
+iso colors={10 11 9 10 8 9 7 8 6 7 5 6 4 5 3 4 2 3 1 2 }
+iso lc=off,ls=solid,lt=1,nlevels=10,min=off,max=off,legend=on,var="vitesse",pop=off
+plot iso

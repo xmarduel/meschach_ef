@@ -37,13 +37,14 @@ typedef Real (*FUNC_4D_PLUS_VOID)(Real,Real,Real,Real, void*);
 
 typedef enum
 {
-	FUN_UNDEFINED      = -1,  /**< flag indicates that the function is not yet set */
+   FUN_UNDEFINED       = -1,  /**< flag indicates that the function is not yet set */
 		
-	FUN_C_STATIONNARY  =  0,  /**< function depends only on space variables */
-	FUN_C_TRANSIENT    =  1,  /**< function depends on t  + space variables */
-	FUN_PY_STATIONNARY =  2,  /**< function depends only on space variables */
-	FUN_PY_TRANSIENT   =  3   /**< function depends on t  + space variables */
-		
+   FUN_C_STATIONNARY   =  0,  /**< function depends only on space variables */
+   FUN_C_TRANSIENT     =  1,  /**< function depends on t  + space variables */
+   FUN_PY_STATIONNARY  =  2,  /**< function depends only on space variables */
+   FUN_PY_TRANSIENT    =  3,  /**< function depends on t  + space variables */
+   FUN_LUA_STATIONNARY =  4,  /**< function depends only on space variables */
+   FUN_LUA_TRANSIENT   =  5   /**< function depends on t  + space variables */
 } FUN_TYPE;
 
 	
@@ -97,8 +98,13 @@ int function2Dindex_by_name(const char *funcname, FUN_CLASS function_class);
 int function3Dindex_by_name(const char *funcname, FUN_CLASS function_class);
 int function4Dindex_by_name(const char *funcname, FUN_CLASS function_class);
 
+Real FunctionForEvaluatingLuaFunction1D(Real x, void *L);
+Real FunctionForEvaluatingLuaFunction2D(Real x, Real y, void *L);
+Real FunctionForEvaluatingLuaFunction3D(Real x, Real y, Real z, void *L);
+Real FunctionForEvaluatingLuaFunction4D(Real x, Real y, Real z, Real t, void *L);
 
-	
+void * make_lua_interpreter(const char* def, const char *fun_type);
+   
 #include "functions_structs_1D.h"
 #include "functions_structs_2D.h"
 #include "functions_structs_3D.h"

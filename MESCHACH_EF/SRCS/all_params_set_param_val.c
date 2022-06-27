@@ -958,6 +958,7 @@ void Params_set_oneparam1(PARAMS* p, const char* category, const char* field, in
 
 static void Params_set_oneparam1_cat_right_hand_side_params(PARAMS* p, const char* field, int idx1, void*  val)
 {
+   /*
    if ( strcmp(field,"rhs") == 0 )
    {
       p->rhs_params.rhs[idx1] = *(int*)val;
@@ -965,7 +966,7 @@ static void Params_set_oneparam1_cat_right_hand_side_params(PARAMS* p, const cha
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam1_cat_right_hand_side_params");
-   }
+   }*/
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -973,14 +974,16 @@ static void Params_set_oneparam1_cat_right_hand_side_params(PARAMS* p, const cha
 
 static void Params_set_oneparam1_cat_initial_condition_params(PARAMS* p, const char* field, int idx1, void*  val)
 {
+   /*
    if ( strcmp(field,"ic") == 0 )
    {
-      p->ic_params.ic[idx1] = *(int*)val;
+      p->ic_params.ini[idx1] = *(int*)val;
    }
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam1_cat_initial_condition_params");
    }
+   */
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -988,6 +991,7 @@ static void Params_set_oneparam1_cat_initial_condition_params(PARAMS* p, const c
 
 static void Params_set_oneparam1_cat_exact_solution_params(PARAMS* p, const char* field, int idx1, void*  val)
 {
+   /*
    if ( strcmp(field,"exact_sol") == 0 )
    {
       p->exactsol_params.exact_sol[idx1] = *(int*)val;
@@ -996,6 +1000,7 @@ static void Params_set_oneparam1_cat_exact_solution_params(PARAMS* p, const char
    {
       error(E_UNKNOWN, "Params_set_oneparam1_cat_exact_solution_params");
    }
+   */
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -1070,6 +1075,7 @@ void Params_set_oneparam2(PARAMS* p, const char* category, const char* field, in
 
 static void Params_set_oneparam2_cat_convective_terms_params(PARAMS* p, const char* field, int idx1, int idx2, void*  val)
 {
+   /*
    if ( strcmp(field,"adv1") == 0 )
    {
       p->adv_params.adv1[idx1][idx2] = *(int*)val;
@@ -1088,6 +1094,7 @@ static void Params_set_oneparam2_cat_convective_terms_params(PARAMS* p, const ch
    {
       error(E_UNKNOWN, "Params_set_oneparam2_cat_convective_terms_params");
    }
+   */
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -1099,6 +1106,7 @@ static void Params_set_oneparam2_cat_boundary_conditions_params(PARAMS* p, const
    {
       p->bc_params.TabBCMask[idx1][idx2]  = *(int*)val;
    }
+   /*
    else
    if ( strcmp(field,"TabPhi_BCdirichlet") == 0 )
    {
@@ -1127,7 +1135,8 @@ static void Params_set_oneparam2_cat_boundary_conditions_params(PARAMS* p, const
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam2_cat_boundary_conditions_params");
-   }   
+   }
+    */
 }
 
 /*-----------------------------------------------------------------------------------------*/

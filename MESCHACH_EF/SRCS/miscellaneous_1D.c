@@ -172,7 +172,9 @@ VEC* build_vec_ef_from_function1Dtransient(const ELT_1D *MyElt, const GEOM_1D *M
 	      
       // inverse of EF_to_WORLD: LU error !!
       int nb_steps = 0;
-      iter_xspbicgstab(MyGeom->EF_to_WORLD, NULL, vec_world, 1.0e-12, vec, 100, &nb_steps, NULL);
+      sp_foutput(stdout,  MyGeom->EF_to_WORLD);
+      iter_xspcg(MyGeom->EF_to_WORLD, NULL, vec_world, 1.0e-12, vec, 100, &nb_steps, NULL);
+      //iter_xspbicgstab(MyGeom->EF_to_WORLD, NULL, vec_world, 1.0e-12, vec, 100, &nb_steps, NULL);
       printf(" sol exact eval ... bicgstab: # of iter. = %d \n\n", nb_steps);
 
       /* clean */

@@ -56,43 +56,43 @@ ADV_3D* Adv3D_setup_from_params(const PARAMS *MyParams)
 	
    ADV_3D *MyADV = Adv3D_get();
 	
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_X, sources3D[MyParams->adv_params.adv1[AXEe_X][AXEe_X]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_Y, sources3D[MyParams->adv_params.adv1[AXEe_X][AXEe_Y]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_Z, sources3D[MyParams->adv_params.adv1[AXEe_X][AXEe_Z]] );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_X, MyParams->adv_params.adv1[AXEe_X][AXEe_X].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_Y, MyParams->adv_params.adv1[AXEe_X][AXEe_Y].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_Z, MyParams->adv_params.adv1[AXEe_X][AXEe_Z].fundef );
 	
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_X, sources3D[MyParams->adv_params.adv1[AXEe_Y][AXEe_X]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_Y, sources3D[MyParams->adv_params.adv1[AXEe_Y][AXEe_Y]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_Z, sources3D[MyParams->adv_params.adv1[AXEe_Y][AXEe_Z]] );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_X, MyParams->adv_params.adv1[AXEe_Y][AXEe_X].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_Y, MyParams->adv_params.adv1[AXEe_Y][AXEe_Y].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_Z, MyParams->adv_params.adv1[AXEe_Y][AXEe_Z].fundef );
 	
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Z, AXEe_X, sources3D[MyParams->adv_params.adv1[AXEe_Z][AXEe_X]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Z, AXEe_Y, sources3D[MyParams->adv_params.adv1[AXEe_Z][AXEe_Y]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Z, AXEe_Z, sources3D[MyParams->adv_params.adv1[AXEe_Z][AXEe_Z]] );
-	
-	
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_X, sources3D[MyParams->adv_params.adv2[AXEe_X][AXEe_X]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_Y, sources3D[MyParams->adv_params.adv2[AXEe_X][AXEe_Y]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_Z, sources3D[MyParams->adv_params.adv2[AXEe_X][AXEe_Z]] );
-	
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_X, sources3D[MyParams->adv_params.adv2[AXEe_Y][AXEe_X]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_Y, sources3D[MyParams->adv_params.adv2[AXEe_Y][AXEe_Y]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_Z, sources3D[MyParams->adv_params.adv2[AXEe_Y][AXEe_Z]] );
-	
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Z, AXEe_X, sources3D[MyParams->adv_params.adv2[AXEe_Z][AXEe_X]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Z, AXEe_Y, sources3D[MyParams->adv_params.adv2[AXEe_Z][AXEe_Y]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Z, AXEe_Z, sources3D[MyParams->adv_params.adv2[AXEe_Z][AXEe_Z]] );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Z, AXEe_X, MyParams->adv_params.adv1[AXEe_Z][AXEe_X].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Z, AXEe_Y, MyParams->adv_params.adv1[AXEe_Z][AXEe_Y].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Z, AXEe_Z, MyParams->adv_params.adv1[AXEe_Z][AXEe_Z].fundef );
 	
 	
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_X, AXEe_X, sources3D[MyParams->adv_params.adv3[AXEe_X][AXEe_X]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_X, AXEe_Y, sources3D[MyParams->adv_params.adv3[AXEe_X][AXEe_Y]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_X, AXEe_Z, sources3D[MyParams->adv_params.adv3[AXEe_X][AXEe_Z]] );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_X, MyParams->adv_params.adv2[AXEe_X][AXEe_X].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_Y, MyParams->adv_params.adv2[AXEe_X][AXEe_Y].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_Z, MyParams->adv_params.adv2[AXEe_X][AXEe_Z].fundef );
 	
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Y, AXEe_X, sources3D[MyParams->adv_params.adv3[AXEe_Y][AXEe_X]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Y, AXEe_Y, sources3D[MyParams->adv_params.adv3[AXEe_Y][AXEe_Y]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Y, AXEe_Z, sources3D[MyParams->adv_params.adv3[AXEe_Y][AXEe_Z]] );
+   Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_X, MyParams->adv_params.adv2[AXEe_Y][AXEe_X].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_Y, MyParams->adv_params.adv2[AXEe_Y][AXEe_Y].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_Z, MyParams->adv_params.adv2[AXEe_Y][AXEe_Z].fundef );
 	
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Z, AXEe_X, sources3D[MyParams->adv_params.adv3[AXEe_Z][AXEe_X]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Z, AXEe_Y, sources3D[MyParams->adv_params.adv3[AXEe_Z][AXEe_Y]] );
-	Adv3D_setCFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Z, AXEe_Z, sources3D[MyParams->adv_params.adv3[AXEe_Z][AXEe_Z]] );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Z, AXEe_X, MyParams->adv_params.adv2[AXEe_Z][AXEe_X].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Z, AXEe_Y, MyParams->adv_params.adv2[AXEe_Z][AXEe_Y].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Z, AXEe_Z, MyParams->adv_params.adv2[AXEe_Z][AXEe_Z].fundef );
+	
+	
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_X, AXEe_X, MyParams->adv_params.adv3[AXEe_X][AXEe_X].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_X, AXEe_Y, MyParams->adv_params.adv3[AXEe_X][AXEe_Y].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_X, AXEe_Z, MyParams->adv_params.adv3[AXEe_X][AXEe_Z].fundef );
+	
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Y, AXEe_X, MyParams->adv_params.adv3[AXEe_Y][AXEe_X].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Y, AXEe_Y, MyParams->adv_params.adv3[AXEe_Y][AXEe_Y].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Y, AXEe_Z, MyParams->adv_params.adv3[AXEe_Y][AXEe_Z].fundef );
+	
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Z, AXEe_X, MyParams->adv_params.adv3[AXEe_Z][AXEe_X].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Z, AXEe_Y, MyParams->adv_params.adv3[AXEe_Z][AXEe_Y].fundef );
+	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Z, AXEe_Z, MyParams->adv_params.adv3[AXEe_Z][AXEe_Z].fundef );
 	
 	return MyADV;
 }
@@ -136,9 +136,15 @@ ADV_3D* Adv3D_setFunction      (ADV_3D* MyAdv, int ref_e, int axe1, int axe2, in
    /* set the function */
    switch(axe1)
    {
-      case AXEe_X: Fun3D_setFunction(&(MyAdv->Fun1[axe2][axe3][ref_e]), type, phi, clientdata); break;
-      case AXEe_Y: Fun3D_setFunction(&(MyAdv->Fun2[axe2][axe3][ref_e]), type, phi, clientdata); break;
-      case AXEe_Z: Fun3D_setFunction(&(MyAdv->Fun3[axe2][axe3][ref_e]), type, phi, clientdata); break;
+      case AXEe_X:
+           Fun3D_setFunction(&(MyAdv->Fun1[axe2][axe3][ref_e]), type, phi, clientdata);
+           break;
+      case AXEe_Y:
+         Fun3D_setFunction(&(MyAdv->Fun2[axe2][axe3][ref_e]), type, phi, clientdata);
+         break;
+      case AXEe_Z:
+         Fun3D_setFunction(&(MyAdv->Fun3[axe2][axe3][ref_e]), type, phi, clientdata);
+         break;
    }
 
    return MyAdv;
@@ -155,9 +161,29 @@ ADV_3D *Adv3D_setCFunction      (ADV_3D* MyAdv, int ref_e, int axe1, int axe2, i
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
+ADV_3D *Adv3D_setLUAFunction    (ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def)
+{
+   void *L = make_lua_interpreter(def, "3D");
+   
+   return Adv3D_setFunction( MyAdv, ref_e, axe1, axe2, axe3, FUN_C_STATIONNARY, FunctionForEvaluatingLuaFunction3D, L);
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
 ADV_3D *Adv3D_setCFunctionTransient(ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_4D phi)
 {
    return Adv3D_setFunction( MyAdv, ref_e, axe1, axe2, axe3, FUN_C_TRANSIENT, phi, NULL);  
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+
+ADV_3D *Adv3D_setLUAFunctionTransient(ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def)
+{
+   void *L = make_lua_interpreter(def, "3D_TR");
+   
+   return Adv3D_setFunction( MyAdv, ref_e, axe1, axe2, axe3, FUN_C_TRANSIENT, FunctionForEvaluatingLuaFunction4D, L);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/

@@ -4182,6 +4182,8 @@
 				257821D211CE717600293CB2 /* algo_navierstokes.c in Sources */,
 				257821D311CE717600293CB2 /* algo_stokes.c in Sources */,
 				257821D411CE717600293CB2 /* all_params.c in Sources */,
+				255143D8193A32640026ADA1 /* all_params_json_utils.c in Sources */,
+				250EEED2193BC01900C0EE46 /* all_params_json_config.c in Sources */,
 				257821D511CE717600293CB2 /* all_params_get_param_val.c in Sources */,
 				257821D711CE717600293CB2 /* all_params_set_param_val.c in Sources */,
 				257821D811CE717600293CB2 /* apply_boundaryconditions_1D.c in Sources */,
@@ -4209,6 +4211,7 @@
 				257821EF11CE717600293CB2 /* geometry_3D.c in Sources */,
 				257821F011CE717600293CB2 /* graphics_geom_view.c in Sources */,
 				257821F111CE717600293CB2 /* graphics_matrix_patterns.c in Sources */,
+				2578220311CE717600293CB2 /* graphics_output.c in Sources */,
 				257821F211CE717600293CB2 /* graphics_output_1D.c in Sources */,
 				257821F311CE717600293CB2 /* graphics_output_2D.c in Sources */,
 				257821F411CE717600293CB2 /* graphics_output_3D.c in Sources */,
@@ -4225,9 +4228,6 @@
 				257821FF11CE717600293CB2 /* rhs_2D.c in Sources */,
 				2578220011CE717600293CB2 /* rhs_3D.c in Sources */,
 				2578220211CE717600293CB2 /* time_scheme.c in Sources */,
-				2578220311CE717600293CB2 /* graphics_output.c in Sources */,
-				255143D8193A32640026ADA1 /* all_params_json_utils.c in Sources */,
-				250EEED2193BC01900C0EE46 /* all_params_json_config.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5812,14 +5812,18 @@
 				EXPORTED_SYMBOLS_FILE = MESCHACH_EF/libmeschach_ef_export.txt;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = "";
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = "HAVE_SILO=1";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"HAVE_SILO=1",
+					"HAVE_LUA=1",
+				);
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
+					"/Users/xavier/x_local/lua-5.4.3/src",
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
@@ -5828,6 +5832,7 @@
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src/.libs",
+					"/Users/xavier/x_local/lua-5.4.3/src",
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5843,6 +5848,9 @@
 					"-lsilo",
 					"-lamd",
 					"-ljansson",
+					"-llua",
+					"-lm",
+					"-ldl",
 				);
 				OTHER_LIBTOOL_FLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -5867,8 +5875,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				EXPORTED_SYMBOLS_FILE = MESCHACH_EF/libmeschach_ef_export.txt;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = "HAVE_SILO=1";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"HAVE_SILO=1",
+					"HAVE_LUA=1",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
@@ -5876,6 +5887,7 @@
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
+					"/Users/xavier/x_local/lua-5.4.3/src",
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
@@ -5884,6 +5896,7 @@
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src/.libs",
+					"/Users/xavier/x_local/lua-5.4.3/src",
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5899,6 +5912,9 @@
 					"-lsilo",
 					"-lamd",
 					"-ljansson",
+					"-llua",
+					"-lm",
+					"-ldl",
 				);
 				OTHER_LIBTOOL_FLAGS = "";
 				OTHER_REZFLAGS = "";

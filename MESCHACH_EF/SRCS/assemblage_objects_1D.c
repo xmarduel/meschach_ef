@@ -776,12 +776,6 @@ VEC* assemblage1D_vector_fun( const ELT_1D *elt , const GEOM_1D *geom , const RH
    
    /* initialisation of RHS */
    v_zero(RHS);
-   
-	/* optimize if NULL function */
-	if ( Rhs1D_is_zero(RhsFun) )
-	{
-		return RHS;
-	}
 	
 	RHS_el = v_get(elt->nb_somm_cell);
 	

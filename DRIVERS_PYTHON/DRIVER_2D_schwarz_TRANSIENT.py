@@ -101,7 +101,7 @@ Params_set_oneparam(MyParams, "physical_params", "epsilon",  0.0 ) # epsilon  -k
 
 Params_set_oneparam(MyParams, "time_params", "TPS_INI",    0.0  )
 Params_set_oneparam(MyParams, "time_params", "TPS_FIN",    100.0  )
-Params_set_oneparam(MyParams, "time_params", "DT",         0.10  )
+Params_set_oneparam(MyParams, "time_params", "DT",         0.1 )
 
 #- geometry-----------------------------------------------------------------------------
 
@@ -119,7 +119,7 @@ Params_set_oneparam(MyParams, "graphics_output_params", "PGPLOT",      0) # PGPL
 Params_set_oneparam(MyParams, "graphics_output_params", "VOGLE",       1) # VOGLE
 Params_set_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO1=YES)
 
-Params_set_oneparam(MyParams, "miscellaneous_params", "itprint",      4) # ITPRINT
+Params_set_oneparam(MyParams, "miscellaneous_params", "itprint",      1) # ITPRINT
 Params_set_oneparam(MyParams, "miscellaneous_params", "itsave",       1) # ITSAVE
 Params_set_oneparam(MyParams, "miscellaneous_params", "itstat",       1) # ITSTAT
 Params_set_oneparam(MyParams, "miscellaneous_params", "itgraph",      1) # ITGRAPH

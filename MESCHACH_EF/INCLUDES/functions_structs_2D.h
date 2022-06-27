@@ -52,13 +52,17 @@ FUN_2D * Fun2D_setFunction           (FUN_2D* Fun, FUN_TYPE type, void* phi, voi
 
 FUN_2D * Fun2D_setCFunction          (FUN_2D* Fun, FUNC_2D  phi);
 FUN_2D * Fun2D_setCFunctionTransient (FUN_2D* Fun, FUNC_3D  phi);
-
-Real     Fun2D_evalCFunction          (const FUN_2D* Fun, Real x, Real y          );
-Real     Fun2D_evalCFunctionTransient (const FUN_2D* Fun, Real x, Real y, Real tps);
-Real     Fun2D_evalPyFunction         (const FUN_2D* Fun, Real x, Real y          );
-Real     Fun2D_evalPyFunctionTransient(const FUN_2D* Fun, Real x, Real y, Real tps);
-
-
+   
+FUN_2D * Fun2D_setLUAFunction            (FUN_2D* Fun, const char* def);
+FUN_2D * Fun2D_setLUAFunctionTransient   (FUN_2D* Fun, const char* def);
+   
+   
+Real     Fun2D_evalCFunction           (const FUN_2D* Fun, Real x, Real y          );
+Real     Fun2D_evalCFunctionTransient  (const FUN_2D* Fun, Real x, Real y, Real tps);
+Real     Fun2D_evalPyFunction          (const FUN_2D* Fun, Real x, Real y          );
+Real     Fun2D_evalPyFunctionTransient (const FUN_2D* Fun, Real x, Real y, Real tps);
+Real     Fun2D_evalLUAFunction         (const FUN_2D* Fun, Real x, Real y          );
+Real     Fun2D_evalLUAFunctionTransient(const FUN_2D* Fun, Real x, Real y, Real tps);
 
 #ifdef __cplusplus
 }
