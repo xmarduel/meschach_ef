@@ -5823,7 +5823,7 @@
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
-					"/Users/xavier/x_local/lua-5.4.3/src",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/lua-5.4.3/src",
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
@@ -5832,7 +5832,7 @@
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src/.libs",
-					"/Users/xavier/x_local/lua-5.4.3/src",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/lua-5.4.3/src",
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
@@ -5887,7 +5887,7 @@
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/silo-4.10.2/src/silo",
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src",
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK,
-					"/Users/xavier/x_local/lua-5.4.3/src",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/lua-5.4.3/src",
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
@@ -5896,7 +5896,7 @@
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles/LinSol/srcST,
 					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/spooles,
 					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/jansson-2.13/src/.libs",
-					"/Users/xavier/x_local/lua-5.4.3/src",
+					"/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/lua-5.4.3/src",
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
