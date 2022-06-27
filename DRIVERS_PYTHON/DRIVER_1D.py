@@ -247,9 +247,6 @@ def run_test():
             "MATLAB"     : False,
             "VTK"        : False,
             "SILO"       : False,
-            "PGPLOT"     : False,
-            "VOGLE"      : True,
-            "LIBSCIPLOT" : False,
             "MATPLOTLIB" : False
         }
     } ))
@@ -259,6 +256,7 @@ def run_test():
     # graphics datas
     config = str(json.dumps( {
         "GRAPHICS_1D" : {
+            "ENGINE" : "VOGLE",
             "DRIVER" : "/XWINDOW" ,
             "WINDOW_SIZE" : [700, 500] ,
             "LABELS_SIZE" : 1.1 ,
@@ -374,8 +372,7 @@ def run_test():
     #print("SOL_P1")
     #v_foutput(sys.stdout, SOL_P1)
 
-
-    if Params_get_oneparam(MyParams,"graphics_output_params","PGPLOT") == 1 :
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "PGPLOT" :
 	
         graphics1D_cpgplot_initialize(Params_get_oneparam(MyParams,"graphics_interactiv1D_params","DRIVER"),
                                       Params_get_oneparam(MyParams,"graphics_interactiv1D_params","SIZE_WINDOW_X"),
@@ -394,7 +391,7 @@ def run_test():
         t1.start()
 
 
-    if Params_get_oneparam(MyParams,"graphics_output_params","VOGLE") == 1 :
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "VOGLE" :
 
         graphics1D_vopl_initialize(Params_get_oneparam(MyParams,"graphics_interactiv1D_params","DRIVER"),
                                     Params_get_oneparam(MyParams,"graphics_interactiv1D_params","SIZE_WINDOW_X"),
@@ -413,7 +410,7 @@ def run_test():
         t1.start()
 
 
-    if Params_get_oneparam(MyParams,"graphics_output_params","LIBSCIPLOT") == 1 :
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "LIBSCIPLOT" :
 
         graphics1D_libsciplot_initialize(Params_get_oneparam(MyParams,"graphics_interactiv1D_params","DRIVER"),
                                          Params_get_oneparam(MyParams,"graphics_interactiv1D_params","SIZE_WINDOW_X"),

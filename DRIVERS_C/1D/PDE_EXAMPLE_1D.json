@@ -180,15 +180,13 @@
         "MATLAB"     : false,
         "MATPLOTLIB" : false,
         "VTK"        : false,
-        "SILO"       : false,
-        "PGPLOT"     : false,
-        "VOGLE"      : true,
-        "LIBSCIPLOT" : false
+        "SILO"       : false
     },
     
     # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------
     
     "GRAPHICS_1D" : {
+        "ENGINE" : "VOGLE",
         "DRIVER" : "/XWINDOW" , 
         "WINDOW_SIZE" : [600, 400] ,
         "LABELS_SIZE" : 1.2 ,

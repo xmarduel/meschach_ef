@@ -1495,19 +1495,13 @@ static void json_config_PARAMS_graphics_output(PARAMS* p, const json_t* config)
       json_t *GRAPH      = json_object_get(GRAPHICS_1D_OUTPUT, "GRAPH");
       json_t *LIBSCIPLOT = json_object_get(GRAPHICS_1D_OUTPUT, "LIBSCIPLOT");
       json_t *MATLAB     = json_object_get(GRAPHICS_1D_OUTPUT, "MATLAB");
-      json_t *PGPLOT     = json_object_get(GRAPHICS_1D_OUTPUT, "PGPLOT");
-      json_t *VOGLE      = json_object_get(GRAPHICS_1D_OUTPUT, "VOGLE");
-      json_t *MATPLOTLIB = json_object_get(GRAPHICS_1D_OUTPUT, "MATPLOTLIB");
       json_t *SILO       = json_object_get(GRAPHICS_1D_OUTPUT, "SILO");
       json_t *VTK        = json_object_get(GRAPHICS_1D_OUTPUT, "VTK");
       
       if ( GNUPLOT )    p->graph_params.GNUPLOT    = json_boolean_value(GNUPLOT); 
       if ( GRAPH )      p->graph_params.GRAPH      = json_boolean_value(GRAPH);  
       if ( LIBSCIPLOT ) p->graph_params.LIBSCIPLOT = json_boolean_value(LIBSCIPLOT); 
-      if ( MATLAB )     p->graph_params.MATLAB     = json_boolean_value(MATLAB); 
-      if ( PGPLOT )     p->graph_params.PGPLOT     = json_boolean_value(PGPLOT); 
-      if ( VOGLE )      p->graph_params.VOGLE      = json_boolean_value(VOGLE); 
-      if ( MATPLOTLIB ) p->graph_params.MATPLOTLIB = json_boolean_value(MATPLOTLIB); 
+      if ( MATLAB )     p->graph_params.MATLAB     = json_boolean_value(MATLAB);
       if ( SILO )       p->graph_params.SILO       = json_boolean_value(SILO); 
       if ( VTK )        p->graph_params.VTK        = json_boolean_value(VTK);
    }
@@ -1523,15 +1517,11 @@ static void json_config_PARAMS_graphics_output(PARAMS* p, const json_t* config)
       
       json_t *GNUPLOT    = json_object_get(GRAPHICS_2D_OUTPUT, "GNUPLOT");
       json_t *MATLAB     = json_object_get(GRAPHICS_2D_OUTPUT, "MATLAB");
-      json_t *VOGLE      = json_object_get(GRAPHICS_2D_OUTPUT, "VOGLE");
-      json_t *MATPLOTLIB = json_object_get(GRAPHICS_2D_OUTPUT, "MATPLOTLIB");
       json_t *SILO       = json_object_get(GRAPHICS_2D_OUTPUT, "SILO");
       json_t *VTK        = json_object_get(GRAPHICS_2D_OUTPUT, "VTK");
       
       if ( GNUPLOT )    p->graph_params.GNUPLOT    = json_boolean_value(GNUPLOT); 
-      if ( MATLAB )     p->graph_params.MATLAB     = json_boolean_value(MATLAB); 
-      if ( VOGLE )      p->graph_params.VOGLE      = json_boolean_value(VOGLE); 
-      if ( MATPLOTLIB ) p->graph_params.MATPLOTLIB = json_boolean_value(MATPLOTLIB); 
+      if ( MATLAB )     p->graph_params.MATLAB     = json_boolean_value(MATLAB);
       if ( SILO )       p->graph_params.SILO       = json_boolean_value(SILO); 
       if ( VTK )        p->graph_params.VTK        = json_boolean_value(VTK);
    }
@@ -1562,6 +1552,7 @@ static void json_config_PARAMS_graphics_interactiv1D_plots(PARAMS* p, const json
       return;
    }
       
+   strncpy(p->graph_interactiv1Dplots_params.ENGINE, json_object_get_string_value(GRAPHICS_1D, "ENGINE"), 16);
    strncpy(p->graph_interactiv1Dplots_params.DRIVER, json_object_get_string_value(GRAPHICS_1D, "DRIVER"), 16);
 
    p->graph_interactiv1Dplots_params.SIZE_WINDOW_X  = json_object_get_arrayitem_integer_value(GRAPHICS_1D, "WINDOW_SIZE", 0);
@@ -1613,7 +1604,8 @@ static void json_config_PARAMS_graphics_interactiv2D_plots(PARAMS* p, const json
       return;
    }
    
-   strncpy(p->graph_interactiv2Dplots_params.DRIVER, json_object_get_string_value(GRAPHICS_2D, "DRIVER"), 16);
+   strncpy(p->graph_interactiv2Dplots_params.ENGINE, json_object_get_string_value(GRAPHICS_2D, "ENGINE"), 16-1);
+   strncpy(p->graph_interactiv2Dplots_params.DRIVER, json_object_get_string_value(GRAPHICS_2D, "DRIVER"), 16-1);
    
    p->graph_interactiv2Dplots_params.SIZE_WINDOW_X  = json_object_get_arrayitem_integer_value(GRAPHICS_2D, "WINDOW_SIZE", 0);
    p->graph_interactiv2Dplots_params.SIZE_WINDOW_Y  = json_object_get_arrayitem_integer_value(GRAPHICS_2D, "WINDOW_SIZE", 1);

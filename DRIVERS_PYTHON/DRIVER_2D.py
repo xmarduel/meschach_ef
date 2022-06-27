@@ -438,7 +438,6 @@ def run_test():
             "MATLAB"     : False,
             "VTK"        : False,
             "SILO"       : True,
-            "VOGLE"      : True,
             "MATPLOTLIB" : False
         },
     } ))
@@ -449,6 +448,7 @@ def run_test():
     config = str(json.dumps( {
          "COORDS_DIMS"    : 2,
          "GRAPHICS_2D" : {
+             "ENGINE"      : "VOGLE",
              "DRIVER"      : "/XWINDOW" ,
              "WINDOW_SIZE" : [700, 500] ,
              "LABELS_SIZE" : 1.5,

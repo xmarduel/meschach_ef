@@ -283,9 +283,6 @@ typedef struct {
    int GRAPH;
    int LIBSCIPLOT;
    int MATLAB;
-   int PGPLOT;
-   int VOGLE;
-   int MATPLOTLIB;
    int SILO;
    int VTK;
    
@@ -314,6 +311,7 @@ typedef struct _WINDOW
 typedef struct {
 
    /* for the whole window */
+   char   ENGINE[16];
    char   DRIVER[16];
 
    int    SIZE_WINDOW_X; /* pixels */
@@ -339,6 +337,7 @@ typedef struct {
 typedef struct {
 		
 	/* for the whole window */
+   char   ENGINE[16];
 	char   DRIVER[16];
 		
 	int    SIZE_WINDOW_X; /* pixels */

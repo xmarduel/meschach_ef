@@ -109,9 +109,6 @@ def run_test():
     Params_set_oneparam(MyParams, "graphics_output_params", "MATLAB",      0) # MATLAB
     Params_set_oneparam(MyParams, "graphics_output_params", "VTK",         0) # VTK
     Params_set_oneparam(MyParams, "graphics_output_params", "SILO",        0) # SILO
-    Params_set_oneparam(MyParams, "graphics_output_params", "PGPLOT",      1) # PGPLOT
-    Params_set_oneparam(MyParams, "graphics_output_params", "VOGLE",       0) # VOGLE
-    Params_set_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO1=YES)
 
     Params_set_oneparam(MyParams, "miscellaneous_params", "itprint",      4) # ITPRINT
     Params_set_oneparam(MyParams, "miscellaneous_params", "itsave",       1) # ITSAVE
@@ -128,7 +125,8 @@ def run_test():
 
 
     #-parameter for plotting------------------------------------
-
+   
+    Params_set_oneparam(MyParams, "graphics_interactiv1D_params", "ENGINE" , "PGPLOT" )
     Params_set_oneparam(MyParams, "graphics_interactiv1D_params", "DRIVER" , "/XWINDOW" )  #"/XWINDOW"  "/PPM"  "/GIF"
 
     Params_set_oneparam(MyParams, "graphics_interactiv1D_params", "SIZE_WINDOW_X", 1200)
@@ -197,7 +195,7 @@ def run_test():
 
     MyRhsFun = Rhs1D_get()
     #Rhs1D_setFunctionTransientPython(MyRhsFun, 0, AXEe_X, source ) # ref_e=0
-    Rhs1D_setCFunctionTransient( MyRhsFun, 0, AXEe_X, Zero1Dtransient )
+    Rhs1D_setFunctionTransientPython( MyRhsFun, 0, AXEe_X, lambda x,t: 0.0  )
 
 
     MyAdvFun = Adv1D_get()
@@ -335,8 +333,8 @@ def run_test():
     ABSCISSAS2 = v_get(NBITER+2)
     for i in range(0,NBITER+2):
        v_set_val(ABSCISSAS2, i, i*DT)
-   
-    if  Params_get_oneparam(MyParams, "graphics_output_params", "PGPLOT")  or Params_get_oneparam(MyParams, "graphics_output_params", "VOGLE") or Params_get_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT") :
+
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") in [ "PGPLOT", "VOGLE", "LIBSCIPLOT"] :
 
         NX = Params_get_oneparam(MyParams, "graphics_interactiv1D_params", "NX")
         NY = Params_get_oneparam(MyParams, "graphics_interactiv1D_params", "NY")
@@ -359,7 +357,7 @@ def run_test():
 
 
 
-    if  Params_get_oneparam(MyParams, "graphics_output_params", "PGPLOT") :
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "PGPLOT" :
 
         graphics1D_cpgplot_initialize(DRIVER, WINDOW_SIZE_X, WINDOW_SIZE_Y, NX, NY)
 
@@ -402,7 +400,7 @@ def run_test():
         graphics1D_cpgplot_plotcurves_start()
 
 
-    if  Params_get_oneparam(MyParams, "graphics_output_params", "VOGLE") :
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "VOGLE" :
 
         graphics1D_vopl_initialize(DRIVER, WINDOW_SIZE_X, WINDOW_SIZE_Y, NX, NY, VOPL_CURVE)
 
@@ -440,7 +438,7 @@ def run_test():
         graphics1D_vopl_plotcurves_start()
 
 
-    if  Params_get_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT") :
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "LIBSCIPLOT" :
 
         graphics1D_libsciplot_initialize(DRIVER, WINDOW_SIZE_X, WINDOW_SIZE_Y, NX, NY)
 
@@ -560,7 +558,7 @@ def run_test():
         if (n % itgraph) == 0 :
 		  
             # -- Graphics with PGPLOT library ---- 
-            if Params_get_oneparam(MyParams, "graphics_output_params", "PGPLOT") :
+            if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "PGPLOT" :
 
                 title = "SOL_PGPLOT_%010.5lf" % (n*DT)
                 graphics1D_cpgplot_title(title)
@@ -576,7 +574,7 @@ def run_test():
                 graphics1D_cpgplot_plotcurves_flush()
 
             # -- Graphics with VOGLE library ---- 
-            if Params_get_oneparam(MyParams, "graphics_output_params", "VOGLE") :
+            if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "VOGLE" :
         
                 title = "SOL_VOGLE_%010.5lf" % (n*DT)
                 graphics1D_vopl_title(title)
@@ -592,7 +590,7 @@ def run_test():
                 graphics1D_vopl_plotcurves_flush()
 
             # -- Graphics with LIBSCIPLOT library ---- 
-            if Params_get_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT") :
+            if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "LIBSCIPLOT" :
 
                 title = "SOL_LIBSCIPLOT_%010.5lf" % (n*DT)
                 graphics1D_libsciplot_title(title)
@@ -739,7 +737,7 @@ def run_test():
         if (n % itgraph) == 0 :
 
             # -- Graphics with PGPLOT library ----
-            if Params_get_oneparam(MyParams, "graphics_output_params", "PGPLOT") :
+            if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "PGPLOT" :
 
                 title = "SOL_PGPLOT_%010.5lf" %(n*DT)
                 graphics1D_cpgplot_title(title)
@@ -755,7 +753,7 @@ def run_test():
                 graphics1D_cpgplot_plotcurves_flush()
 
             # -- Graphics with VOGLE library ----
-            if Params_get_oneparam(MyParams, "graphics_output_params", "VOGLE") :
+            if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "VOGLE" :
 
                 title = "SOL_VOGLE_%010.5lf" % (n*DT)
                 graphics1D_vopl_title(title)
@@ -771,7 +769,7 @@ def run_test():
                 graphics1D_vopl_plotcurves_flush()
 
             # -- Graphics with LIBSCIPLOT library ----
-            if Params_get_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT") :
+            if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "LIBSCIPLOT" :
 
                 title = "SOL_LIBSCIPLOT_%010.5lf" % (n*DT)
                 graphics1D_libsciplot_title(title)
@@ -793,13 +791,13 @@ def run_test():
         v_copy( U_n  , U_nm1 )
 
 
-    if Params_get_oneparam(MyParams, "graphics_output_params", "PGPLOT") :
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "PGPLOT" :
         graphics1D_cpgplot_finalize_transient()
 
-    if Params_get_oneparam(MyParams, "graphics_output_params", "VOGLE") :
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "VOGLE" :
         graphics1D_vopl_finalize_transient()
 
-    if Params_get_oneparam(MyParams, "graphics_output_params", "LIBSCIPLOT") :
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "LIBSCIPLOT" :
         graphics1D_libsciplot_finalize_transient()
 
     # free memory

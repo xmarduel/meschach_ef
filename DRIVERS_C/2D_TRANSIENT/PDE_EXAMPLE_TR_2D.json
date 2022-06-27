@@ -233,14 +233,14 @@
         "GNUPLOT"    : false,
         "MATLAB"     : false,
         "VTK"        : false,
-        "SILO"       : false, 
-        "VOGLE"      : true,
+        "SILO"       : false,
         "MATPLOTLIB" : false
     },
 	 
     # 2D interactive - graphics library ploting parameters ------------
     
     "GRAPHICS_2D" : {
+        "ENGINE" : "VOGLE",
         "DRIVER" : "/XWINDOW" , 
         "WINDOW_SIZE" : [600, 600] ,
         "LABELS_SIZE" : 1.2 ,

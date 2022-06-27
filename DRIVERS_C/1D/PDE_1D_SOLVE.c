@@ -203,7 +203,7 @@ int main()
         */
 
 #ifdef HAVE_VOGLE
-        if (MyParams->graph_params.VOGLE == 1)
+        if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "VOGLE") == 0)
         {
             graphics1D_vopl_initialize(MyParams->graph_interactiv1Dplots_params.DRIVER,
                 MyParams->graph_interactiv1Dplots_params.SIZE_WINDOW_X,
@@ -223,7 +223,7 @@ int main()
 #endif
 
 #ifdef HAVE_CPGPLOT
-        if (MyParams->graph_params.PGPLOT == 1)
+        if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "PGPLOT") == 0)
         {
             graphics1D_cpgplot_initialize(MyParams->graph_interactiv1Dplots_params.DRIVER,
                 MyParams->graph_interactiv1Dplots_params.SIZE_WINDOW_X,
@@ -244,7 +244,7 @@ int main()
 #endif
 
 #ifdef HAVE_LIBSCIPLOT
-        if (MyParams->graph_params.LIBSCIPLOT == 1)
+        if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "LIBSCIPLOT") == 0)
         {
             graphics1D_libsciplot_initialize(MyParams->graph_interactiv1Dplots_params.DRIVER,
                 MyParams->graph_interactiv1Dplots_params.SIZE_WINDOW_X,

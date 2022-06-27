@@ -171,12 +171,10 @@ static TYPE_PARAMS0 params_list0[] =
    { "graphics_output_params", "GRAPH"           , TYPEd_INT },
    { "graphics_output_params", "MATLAB"          , TYPEd_INT },
    { "graphics_output_params", "MATPLOTLIB"      , TYPEd_INT },
-   { "graphics_output_params", "PGPLOT"          , TYPEd_INT },
-   { "graphics_output_params", "VOGLE"           , TYPEd_INT },
-   { "graphics_output_params", "LIBSCIPLOT"      , TYPEd_INT },
    { "graphics_output_params", "SILO"            , TYPEd_INT },
    { "graphics_output_params", "VTK"             , TYPEd_INT },
 
+   { "graphics_interactiv1D_params" , "ENGINE"          , TYPEd_STRING },
    { "graphics_interactiv1D_params" , "DRIVER"          , TYPEd_STRING },
    { "graphics_interactiv1D_params" , "SIZE_WINDOW_X"   , TYPEd_INT  },
    { "graphics_interactiv1D_params" , "SIZE_WINDOW_Y"   , TYPEd_INT  },
@@ -184,6 +182,7 @@ static TYPE_PARAMS0 params_list0[] =
    { "graphics_interactiv1D_params" , "NX"              , TYPEd_INT  },
    { "graphics_interactiv1D_params" , "NY"              , TYPEd_INT  },
 	
+   { "graphics_interactiv2D_params" , "ENGINE"          , TYPEd_STRING },
    { "graphics_interactiv2D_params" , "DRIVER"          , TYPEd_STRING },
    { "graphics_interactiv2D_params" , "SIZE_WINDOW_X"   , TYPEd_INT  },
    { "graphics_interactiv2D_params" , "SIZE_WINDOW_Y"   , TYPEd_INT  },
@@ -207,11 +206,11 @@ static TYPE_PARAMS0 params_list0[] =
 
 static TYPE_PARAMS1 params_list1[] =
 {
-   { "right_hand_side_params"     , "rhs"                 , TYPEd_STRING      , AXEe_X , AXEe_Z },
-   { "initial_condition_params"   , "ic"                  , TYPEd_STRING      , AXEe_X , AXEe_Z },
-   { "exact_solution_params"      , "exact_sol"           , TYPEd_STRING      , AXEe_X , AXEe_Z },
+   { "right_hand_side_params"     , "rhs"        , TYPEd_STRING      , AXEe_X , AXEe_Z },
+   { "initial_condition_params"   , "ini"        , TYPEd_STRING      , AXEe_X , AXEe_Z },
+   { "exact_solution_params"      , "sol"        , TYPEd_STRING      , AXEe_X , AXEe_Z },
 	
-   { NULL                         , NULL                  , TYPEd_STRING      , 0 , 0 }
+   { NULL                         , NULL         , TYPEd_STRING      , 0 , 0 }
 
 };
 
@@ -229,15 +228,15 @@ static TYPE_PARAMS2 params_list2[] =
    { "boundary_conditions_params" , "TabPhi_BCrobin1"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
    { "boundary_conditions_params" , "TabPhi_BCrobin2"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
 
-   { "graphics_interactiv1D_params"  , "LABEL_LEGEND"        , TYPEd_STRING , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv1D_params"  , "LABEL_AXE_X"         , TYPEd_STRING , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv1D_params"  , "LABEL_AXE_Y"         , TYPEd_STRING , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv1D_params"  , "WINDOW_X_MAX"        , TYPEd_REAL   , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv1D_params"  , "WINDOW_Y_MAX"        , TYPEd_REAL   , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv1D_params"  , "WINDOW_X_MIN"        , TYPEd_REAL   , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv1D_params"  , "WINDOW_Y_MIN"        , TYPEd_REAL   , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv1D_params"  , "MARKER"              , TYPEd_INT    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv1D_params"  , "MARKER_END"          , TYPEd_INT    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "LABEL_LEGEND"     , TYPEd_STRING  , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "LABEL_AXE_X"      , TYPEd_STRING  , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "LABEL_AXE_Y"      , TYPEd_STRING  , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "WINDOW_X_MAX"     , TYPEd_REAL    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "WINDOW_Y_MAX"     , TYPEd_REAL    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "WINDOW_X_MIN"     , TYPEd_REAL    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "WINDOW_Y_MIN"     , TYPEd_REAL    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "MARKER"           , TYPEd_INT     , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "MARKER_END"        , TYPEd_INT    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
 
    { "graphics_interactiv2D_params"  , "LABEL_LEGEND"      , TYPEd_STRING      , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
    { "graphics_interactiv2D_params"  , "WINDOW_X_MAX"      , TYPEd_REAL        , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },

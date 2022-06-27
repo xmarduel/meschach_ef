@@ -285,9 +285,6 @@ static void Params_init_graphics_output(PARAMS* p)
    p->graph_params.GRAPH      = 0;
    p->graph_params.LIBSCIPLOT = 0;
    p->graph_params.MATLAB     = 0;
-   p->graph_params.PGPLOT     = 0;
-   p->graph_params.VOGLE      = 0;
-   p->graph_params.MATPLOTLIB = 0;
    p->graph_params.SILO       = 0;
    p->graph_params.VTK        = 0;
 }
@@ -296,6 +293,7 @@ static void Params_init_graphics_interactiv1D_plots(PARAMS* p)
 {
    int i,j;
    
+   strncpy(p->graph_interactiv1Dplots_params.ENGINE, "?", 2);
    strncpy(p->graph_interactiv1Dplots_params.DRIVER, "X", 2);
    
    p->graph_interactiv1Dplots_params.SIZE_WINDOW_X = 700;
@@ -332,6 +330,7 @@ static void Params_init_graphics_interactiv2D_plots(PARAMS* p)
 {
    int i,j;
    
+   strncpy(p->graph_interactiv2Dplots_params.ENGINE, "?", 2);
    strncpy(p->graph_interactiv2Dplots_params.DRIVER, "X", 2);
    
    p->graph_interactiv2Dplots_params.SIZE_WINDOW_X = 700;

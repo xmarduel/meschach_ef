@@ -168,8 +168,8 @@ int  main(void)
    //Fun1D_setCFunctionTransient(MyCiFun, sources1D_Transient[6]);
    Fun1D_setLUAFunctionTransient(MyCiFun, MyParams->ini_params.ini[0].fundef);
 	/* Initial Condition for Hermite EF */
-   MyDCiFun = Fun1D_get();
-   Fun1D_setCFunctionTransient(MyDCiFun, sources1D_Transient[9]);
+   //MyDCiFun = Fun1D_get();
+   //Fun1D_setLUAFunctionTransient(MyDCiFun, MyParams->ini_params.ini[0].fundef);
 
 
    /* ---------------------------------------------------------------------- */
@@ -217,7 +217,7 @@ int  main(void)
    U_o = build_vec_ef_from_function1Dtransient(MyElt, MyGeom, MyCiFun, MyDCiFun, U_o, 0.0);
 
 #ifdef HAVE_CPGPLOT
-   if ( MyParams->graph_params.PGPLOT )
+   if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "PGPLOT") == 0)
    {
       PARAMS_graphics_interactiv1D_plots *PlotParams = &(MyParams->graph_interactiv1Dplots_params);
 		
@@ -273,7 +273,7 @@ int  main(void)
 #endif
 
 #ifdef HAVE_VOGLE
-   if ( MyParams->graph_params.VOGLE )
+   if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "VOGLE") == 0)
    {
       PARAMS_graphics_interactiv1D_plots *params = &(MyParams->graph_interactiv1Dplots_params);
 		
@@ -329,7 +329,7 @@ int  main(void)
 #endif
 
 #ifdef HAVE_LIBSCIPLOT
-   if ( MyParams->graph_params.LIBSCIPLOT )
+   if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "LIBSCIPLOT") == 0)
    {
       PARAMS_graphics_interactiv1D_plots *params = &(MyParams->graph_interactiv1Dplots_params);
 		
@@ -484,7 +484,7 @@ int  main(void)
          char legend[64];
 
 #ifdef HAVE_CPGPLOT
-         if ( MyParams->graph_params.PGPLOT ) /* -- Graphics with CPGPLOT library ---- */
+         if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "PGPLOT") == 0) /* -- Graphics with CPGPLOT library ---- */
          {
             snprintf(title, 63, "SOL_PGPLOT_%010.5lf", k*DT ); title[63] = '\0';
             graphics1D_cpgplot_title(title);
@@ -502,7 +502,7 @@ int  main(void)
 #endif
 
 #ifdef HAVE_VOGLE
-         if ( MyParams->graph_params.VOGLE ) /* -- Graphics with VOGLE library ---- */
+         if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "VOGLE") == 0) /* -- Graphics with VOGLE library ---- */
          {
             snprintf(title, 63, "SOL_VOGLE_%010.5lf", k*DT ); title[63] = '\0';
             graphics1D_vopl_title(title);
@@ -520,7 +520,7 @@ int  main(void)
 #endif
 
 #ifdef HAVE_LIBSCIPLOT
-         if ( MyParams->graph_params.LIBSCIPLOT ) /* -- Graphics with LIBSCIPLOT library ---- */
+         if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "LIBSCIPLOT") == 0) /* -- Graphics with LIBSCIPLOT library ---- */
          {
             snprintf(title, 63, "SOL_LIBSCIPLOT_%010.5lf", k*DT ); title[63] = '\0';
             graphics1D_libsciplot_title(title);
@@ -624,7 +624,7 @@ int  main(void)
          char legend[64];
 
 #ifdef HAVE_CPGPLOT
-         if ( MyParams->graph_params.PGPLOT ) /* -- Graphics with CPGPLOT library ---- */
+         if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "PGPLOT") == 0) /* -- Graphics with CPGPLOT library ---- */
          {
             snprintf(title, 63, "SOL_PGPLOT_%010.5lf", k*DT ); title[63] = '\0';
             graphics1D_cpgplot_title(title);
@@ -642,7 +642,7 @@ int  main(void)
 #endif
 
 #ifdef HAVE_VOGLE
-         if ( MyParams->graph_params.VOGLE ) /* -- Graphics with VOGLE library ---- */
+         if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "VOGLE") == 0) /* -- Graphics with VOGLE library ---- */
          {   
             snprintf(title, 63, "SOL_VOGLE_%010.5lf", k*DT ); title[63] = '\0';
             graphics1D_vopl_title(title);
@@ -660,7 +660,7 @@ int  main(void)
 #endif
 
 #ifdef HAVE_LIBSCIPLOT
-         if ( MyParams->graph_params.LIBSCIPLOT ) /* -- Graphics with LIBSCIPLOT library ---- */
+         if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "LIBSCIPLOT") == 0) /* -- Graphics with LIBSCIPLOT library ---- */
          {
             snprintf(title, 63, "SOL_LIBSCIPLOT_%010.5lf", k*DT ); title[63] = '\0';
             graphics1D_libsciplot_title(title);
@@ -746,21 +746,21 @@ int  main(void)
    mem_info_file(stdout, MY_LIST7);
 
 #ifdef HAVE_CPGPLOT
-   if ( MyParams->graph_params.PGPLOT )
+   if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "PGPLOT") == 0)
    {
       graphics1D_cpgplot_finalize_transient();
    }
 #endif
 
 #ifdef HAVE_VOGLE
-   if ( MyParams->graph_params.VOGLE )
+   if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "VOGLE") == 0)
    {
       graphics1D_vopl_finalize_transient();
    }
 #endif
 
 #ifdef HAVE_LIBSCIPLOT
-   if ( MyParams->graph_params.LIBSCIPLOT )
+   if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "LIBSCIPLOT") == 0)
    {
       graphics1D_libsciplot_finalize_transient();
    }

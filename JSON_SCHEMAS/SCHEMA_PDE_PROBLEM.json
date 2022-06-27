@@ -583,9 +583,6 @@
                 "MATLAB"     : { "type":"boolean", "description":"" },
                 "VTK"        : { "type":"boolean", "description":"" },
                 "SILO"       : { "type":"boolean", "description":"" },
-                "PGPLOT"     : { "type":"boolean", "description":"" },
-                "VOGLE"      : { "type":"boolean", "description":"" },
-                "LIBSCIPLOT" : { "type":"boolean", "description":"" },
                 "MATPLOTLIB" : { "type":"boolean", "description":"" }
             }
         },
@@ -596,7 +593,6 @@
                 "MATLAB"     : { "type":"boolean", "description":"" },
                 "VTK"        : { "type":"boolean", "description":"" },
                 "SILO"       : { "type":"boolean", "description":"" },
-                "VOGLE"      : { "type":"boolean", "description":"" },
                 "MATPLOTLIB" : { "type":"boolean", "description":"" }
             }
         },
@@ -610,6 +606,7 @@
         
         "GRAPHICS_1D" : { "type":"object", "description":"", 
             "properties" : {
+                "ENGINE" : { "type":"string", "description":"lib for graphics", "enum":["PGPLOT", "VOGLE", "LIBSCIPLOT"] },
                 "DRIVER" : { "type":"string", "description":"Driver PGPLOT-VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
                 "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
                     "items" : { "type":"integer", "description":"in pixels" },
@@ -642,6 +639,7 @@
             },
             "GRAPHICS_2D" : { "type":"object", "description":"", 
                 "properties" : {
+                    "ENGINE" : { "type":"string", "description":"lib for graphics", "enum":["VOGLE"] },
                     "DRIVER" : { "type":"string", "description":"Driver VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
                     "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
                         "items" : { "type":"integer", "description":"in pixels" },

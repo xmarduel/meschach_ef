@@ -699,21 +699,6 @@ static void Params_set_oneparam0_cat_graphics_output_params(PARAMS* p, const cha
       p->graph_params.MATLAB = *(int*)val;
    }
    else
-   if ( strcmp(field,"PGPLOT") == 0 )
-   {
-      p->graph_params.PGPLOT = *(int*)val ;
-   }
-   else
-   if ( strcmp(field,"VOGLE") == 0 )
-   {
-      p->graph_params.VOGLE = *(int*)val ;
-   }
-   else
-   if ( strcmp(field,"MATPLOTLIB") == 0 )
-   {
-      p->graph_params.MATPLOTLIB = *(int*)val ;
-   }
-   else
    if ( strcmp(field,"SILO") == 0 )
    {
       p->graph_params.SILO = *(int*)val ;
@@ -735,9 +720,14 @@ static void Params_set_oneparam0_cat_graphics_output_params(PARAMS* p, const cha
 
 static void Params_set_oneparam0_cat_graphics_interactiv1Dplots_params(PARAMS* p, const char* field, void*  val)
 {
+   if ( strcmp(field,"ENGINE") == 0 )
+   {
+      strncpy(p->graph_interactiv1Dplots_params.ENGINE , (char*)val, 16-1 );
+   }
+   else
    if ( strcmp(field,"DRIVER") == 0 )
    {
-      strncpy(p->graph_interactiv1Dplots_params.DRIVER , (char*)val, 15-1 );
+      strncpy(p->graph_interactiv1Dplots_params.DRIVER , (char*)val, 16-1 );
    }
    else
    if ( strcmp(field,"SIZE_WINDOW_X") == 0 )
@@ -775,9 +765,14 @@ static void Params_set_oneparam0_cat_graphics_interactiv1Dplots_params(PARAMS* p
 
 static void Params_set_oneparam0_cat_graphics_interactiv2Dplots_params(PARAMS* p, const char* field, void*  val)
 {
+   if ( strcmp(field,"ENGINE") == 0 )
+   {
+      strncpy(p->graph_interactiv2Dplots_params.ENGINE , (char*)val, 16-1 );
+   }
+   else
    if ( strcmp(field,"DRIVER") == 0 )
    {
-      strncpy(p->graph_interactiv2Dplots_params.DRIVER , (char*)val, 15-1 );
+      strncpy(p->graph_interactiv2Dplots_params.DRIVER , (char*)val, 16-1 );
    }
    else
    if ( strcmp(field,"SIZE_WINDOW_X") == 0 )

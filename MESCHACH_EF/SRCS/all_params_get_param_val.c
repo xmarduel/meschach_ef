@@ -56,7 +56,7 @@ void * Params_get_oneparam(const PARAMS* p, const char* category, const char* fi
    if ( !p        ) error(E_NULL, "Params_get_oneparam");
    if ( !category ) error(E_NULL, "Params_get_oneparam");
    if ( !field    ) error(E_NULL, "Params_get_oneparam");
-
+   
    /* check */
    if ( !Params_check_oneparam0_arguments(category, field) )
    {
@@ -683,21 +683,6 @@ static void * Params_get_oneparam0_cat_graphics_output_params(const PARAMS* p, c
       return (void*)(&(p->graph_params.MATLAB));
    }
    else
-   if ( strcmp(field,"PGPLOT") == 0 )
-   {
-      return (void*)(&(p->graph_params.PGPLOT));
-   }
-   else
-   if ( strcmp(field,"VOGLE") == 0 )
-   {
-      return (void*)(&(p->graph_params.VOGLE));
-   }
-   else
-   if ( strcmp(field,"MATPLOTLIB") == 0 )
-   {
-      return (void*)(&(p->graph_params.MATPLOTLIB));
-   }
-   else
    if ( strcmp(field,"SILO") == 0 )
    {
       return (void*)(&(p->graph_params.SILO));
@@ -720,6 +705,11 @@ static void * Params_get_oneparam0_cat_graphics_output_params(const PARAMS* p, c
 
 static void * Params_get_oneparam0_cat_graphics_interactiv1Dplots_params(const PARAMS* p, const char* field)
 {
+   if ( strcmp(field,"ENGINE") == 0 )
+   {
+      return (void*)(p->graph_interactiv1Dplots_params.ENGINE) ;
+   }
+   else
    if ( strcmp(field,"DRIVER") == 0 )
    {
       return (void*)(p->graph_interactiv1Dplots_params.DRIVER) ;

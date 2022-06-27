@@ -189,7 +189,7 @@ int  main()
    /* ---------------------------------------------------------------------- */
 
 #ifdef HAVE_VOGLE
-   if ( MyParams->graph_params.VOGLE )
+   if (strcmp(MyParams->graph_interactiv2Dplots_params.ENGINE , "VOGLE") == 0)
    {
       int NX = MyParams->graph_interactiv2Dplots_params.NX;
       int NY = MyParams->graph_interactiv2Dplots_params.NY;
@@ -298,7 +298,7 @@ int  main()
  
 
 #ifdef HAVE_VOGLE
-      if ( MyParams->graph_params.VOGLE ) /* -- Graphics with VOGLE library ---- */
+      if (strcmp(MyParams->graph_interactiv2Dplots_params.ENGINE , "VOGLE") == 0) /* -- Graphics with VOGLE library ---- */
       {
          if (strcmp(MyParams->graph_interactiv2Dplots_params.GRAPHICS_TYPE[1][1], "SURFACE") == 0)
          {
