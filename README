@@ -4,6 +4,8 @@ prerequisites: ( (*) means that the lib is modified and build by us)
 
 - libs:
 
+   - liblua
+
    - libjansson.a
    - libsilo.a
    - libplot.a / libcommon.a
@@ -26,7 +28,7 @@ prerequisites: ( (*) means that the lib is modified and build by us)
 
 - define(s):
 
-  - -DHAVE_X11 -DHAVE_VOGLE -DHAVE_CPGPLOT -DHAVE_LIBSCIPLOT -DHAVE_SILO
+  - -DHAVE_X11 -DHAVE_VOGLE -DHAVE_CPGPLOT -DHAVE_LIBSCIPLOT -DHAVE_SILO -DHAVE_LUA
 
 - graphics:
 
