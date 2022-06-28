@@ -680,6 +680,18 @@ static void json_config_PARAMS_solexacte(PARAMS* p, const json_t* config)
             strcpy(p->sol_params.sol[dim-1].fundef, fundef);
          }
       }
+
+      json_t *DFUNC_DEF = json_object_get(DIM, "DFUNC_DEF");
+
+      if (DFUNC_DEF != NULL)
+      {
+         const char *fundef = json_string_value(DFUNC_DEF);
+
+         if (fundef != NULL)
+         {
+            strcpy(p->ini_params.dini[dim-1].fundef, fundef);
+         }
+      }
    }
 }
 

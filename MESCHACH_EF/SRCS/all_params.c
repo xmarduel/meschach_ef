@@ -161,9 +161,13 @@ static void Params_init_initial_condition(PARAMS* p)
    strcpy(p->ini_params.ini[AXEe_X].fundef, "0");
    strcpy(p->ini_params.ini[AXEe_Y].fundef, "0");
    strcpy(p->ini_params.ini[AXEe_Z].fundef, "0");
+
+   strcpy(p->ini_params.dini[AXEe_X].fundef, "0");
+   strcpy(p->ini_params.dini[AXEe_Y].fundef, "0");
+   strcpy(p->ini_params.dini[AXEe_Z].fundef, "0");
 }
 
-static void Params_init_exact_solution_params(PARAMS* p)
+static void Params_init_exact_solution(PARAMS* p)
 {
    strcpy(p->sol_params.sol[AXEe_X].fundef, "0");
    strcpy(p->sol_params.sol[AXEe_Y].fundef, "0");
@@ -408,7 +412,7 @@ PARAMS* Params_get(void)
    Params_init_right_hand_side(p);
    Params_init_initial_condition(p);
    Params_init_convective_terms(p);
-   Params_init_exact_solution_params(p);
+   Params_init_exact_solution(p);
    Params_init_matrix_solver(p);
    Params_init_eigen_solver(p);
    Params_init_stokes_solver(p);

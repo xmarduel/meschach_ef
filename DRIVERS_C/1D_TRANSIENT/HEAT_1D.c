@@ -165,11 +165,10 @@ int  main(void)
 
    /* Initial Condition */
    MyCiFun = Fun1D_get();
-   //Fun1D_setCFunctionTransient(MyCiFun, sources1D_Transient[6]);
    Fun1D_setLUAFunctionTransient(MyCiFun, MyParams->ini_params.ini[0].fundef);
 	/* Initial Condition for Hermite EF */
-   //MyDCiFun = Fun1D_get();
-   //Fun1D_setLUAFunctionTransient(MyDCiFun, MyParams->ini_params.ini[0].fundef);
+   MyDCiFun = Fun1D_get();
+   Fun1D_setLUAFunctionTransient(MyDCiFun, MyParams->ini_params.dini[0].fundef);
 
 
    /* ---------------------------------------------------------------------- */

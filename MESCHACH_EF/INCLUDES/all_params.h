@@ -131,14 +131,15 @@ typedef struct {
 /*******************************************/
 typedef struct {
 
-   FF_SPEC  ini[3];  /**< the "indices" of the function for the ic (3 dim) */
+   FF_SPEC  ini[3];  /**< the function lua code (3 dim) */
+   FF_SPEC  dini[3];  /**< the derivate function lua code (3 dim) needed if hermite ef */
 
 } PARAMS_initial_condition ;
 
 /*******************************************/
 typedef struct {
       
-   FF_SPEC sol[3];  /**< the "indices" of the function for the exact solution (3 dim) */
+   FF_SPEC sol[3];  /**< the  function lua code (3 dim) */
       
 } PARAMS_exact_solution ;
    

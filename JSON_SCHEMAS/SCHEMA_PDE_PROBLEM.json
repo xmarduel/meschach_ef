@@ -281,21 +281,24 @@
             "properties" : {
                 "DIM1" : { "type":"object", "description": "" ,
                     "properties" : {
-                        "FUNC_DEF" : { "type": ["null", "string"], "description": "lua code" }
+                        "FUNC_DEF" : { "type": ["null", "string"], "description": "lua code" },
+                        "DFUNC_DEF" : { "type": ["null", "string"], "description": "lua code for derivativ if ef is Hermite" }
                     },
                     "required" : ["FUNC_DEF"],
                     "additionalProperties": false
                 },
                 "DIM2" : { "type":"object", "description": "" ,
                     "properties" : {
-                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" },
+                        "DFUNC_DEF" : { "type": ["null", "string"], "description": "lua code for derivativ if ef is Hermite" }
                     },
                     "required" : ["FUNC_DEF"],
                     "additionalProperties": false
                 },
                 "DIM3" : { "type":"object", "description": "" ,
                     "properties" : {
-                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" }
+                        "FUNC_DEF" : { "type":["null", "string"], "description": "lua code" },
+                        "DFUNC_DEF" : { "type": ["null", "string"], "description": "lua code for derivativ if ef is Hermite" }
                     },
                     "required" : ["FUNC_DEF"],
                     "additionalProperties": false

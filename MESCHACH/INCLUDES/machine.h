@@ -83,16 +83,29 @@
 #ifdef PLATFORM_LINUX
 #include <malloc.h>
 #else
+#ifdef PLATFORM_DARWIN
 #include	<sys/malloc.h>
+#else
+#include <malloc.h>
 #endif
+#endif
+
 #endif
 
 /* any compiler should have this header */
 /* if not, change it */
-#include        <stdio.h>
+#include <stdio.h>
 
 /* and this one ...*/
-#include        <sys/signal.h>
+#ifdef PLATFORM_LINUX
+#include <sys/signal.h>
+#else
+#ifdef PLATFORM_DARWIN
+#include <sys/signal.h>
+#else
+#include <signal.h>
+#endif
+#endif
 
 /* Check for ANSI C memmove and memset */
 #ifdef STDC_HEADERS
