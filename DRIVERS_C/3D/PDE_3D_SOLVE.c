@@ -96,7 +96,7 @@ int  main()
 	//warn_list_attach(MY_LIST8,NB_WARNS8,my_warn_mesg8);
    
    /*  LECTURE INPUT FILE "PDE_EXAMPLE_3D.json" */
-   MyParams = Params_setup_from_file("/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/3D/PDE_EXAMPLE_3D.json");
+   MyParams = Params_setup_from_file("DRIVERS_C/3D/PDE_EXAMPLE_3D.json");
 
    Params_set_staticparam(MyParams, 0);
    

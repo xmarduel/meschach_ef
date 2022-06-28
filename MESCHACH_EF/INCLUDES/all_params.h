@@ -428,6 +428,7 @@ void* Params_get_oneparam (const PARAMS* p, const char* category, const char* fi
 void* Params_get_oneparam1(const PARAMS* p, const char* category, const char* field, int idx1);
 void* Params_get_oneparam2(const PARAMS* p, const char* category, const char* field, int idx1, int idx2);
 
+void  Params_get_absolute_path(const char* input_file, char* absolute_input_file);
 
 #ifdef __cplusplus
 }

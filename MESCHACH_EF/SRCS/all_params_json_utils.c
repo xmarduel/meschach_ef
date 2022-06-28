@@ -223,10 +223,14 @@ int json_check_data(const char* path, const char* schema, char *res)
    fclose(tmp);
    
    char cmd[CMDSIZE];
-   char PYTHON[64]    = "/Library/Frameworks/Python.framework/Versions/2.7/bin/python";
-   char CHECKER[99]   = "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/JSON_SCHEMAS/check_json.py";
-   char JSON_FILE[32] = "without_comments.json";
-   snprintf(cmd, CMDSIZE, "%s %s %s %s", PYTHON, CHECKER, JSON_FILE, schema);
+   char PYTHON_EXE[64] = "/Library/Frameworks/Python.framework/Versions/2.7/bin/python";
+   char CHECKER[99]    = "JSON_SCHEMAS/check_json.py";
+   char JSON_FILE[32]  = "schema_without_comments.json";
+   
+   char checker_abs_path[512];
+   Params_get_absolute_path(CHECKER, checker_abs_path);
+
+   snprintf(cmd, CMDSIZE, "%s %s %s %s", PYTHON_EXE, checker_abs_path, JSON_FILE, schema);
    
    FILE *stream;
    char line[1024];

@@ -66,6 +66,8 @@ order to not completely lose this work forever. From time to time I used to upda
 compilable/usable over the years (nowadays as XCode project, so easely compilable only on MacOS X - sorry, no
 Makefiles)</p>
 
+<p>For sure there are much powerfull EF libraries in the internet.</p>
+
 <p>So what are the features of <strong>Meschach-EF</strong> that you could be interested in ? </p>
 <ul>
   <li>Well it is a <strong>small, yet powerfull library</strong>, and is good if you want to learn C programming
@@ -94,8 +96,8 @@ user has full access to all functions constructing the mass, stiff matrices and 
 <strong>Cauchy</strong>, <strong>Robin</strong>) based on the "nodes refs" of the nodes of the geometry or/and the
 "faces refs" of the faces (boundary faces) of the geometry.</p>
 
-<p>Meshes are either built <strong>"per hand"</strong> (line, quadra, cube) or through the programs
-<strong>"emc2"</strong> (2D) (not so well known) or <strong>"gmsh"</strong> (2D or 3D). New meshes format should be
+<p>Meshes are either built <strong>"per hand"</strong> (line, quadra, cube) or through the meshes programs
+<strong>"emc2"</strong> (2D) or <strong>"gmsh"</strong> (2D or 3D). New meshes format should be
 easy to insert.</p>
 
 <p>There are nice visualisation possibilities of the results, especially for 1D/2D transient problems with real time
@@ -112,10 +114,8 @@ display and X windows interactions (start/pause/step).</p>
 <p>Considering C driver programs, the parameters for the problem to solve are given in a <strong>json file</strong>
 with well defined structure so hopefully solving a problem is feasible for beginners. Changing the parameters do not
 require to recompile the driver program, and the parameters are all set in a <strong>centralized place</strong>. We
-give below an example of such a configuration file. Boundary condition and right hand side functions can be given either through
-the name of predefined functions in the Meschach-EF library (a bunch of such functions are hard coded in the library), 
-but, well, <strong>this is not very flexibel</strong>, 
-or by specifying the body function as <strong>lua code</strong> (Meschach-EF is compiled with the lua library linked in).
+give below an example of such a configuration file. Boundary conditions and right hand side functions are given 
+by specifying the body function as <strong>lua code</strong> (Meschach-EF is compiled with the lua library linked in).
 So theorically every input is possible, but must match in 1 line. The c code will be able to compute the values of these functions,
 as a lua interpreter (infact 1 interpreter per function) will be started in the driver program.</p>
 

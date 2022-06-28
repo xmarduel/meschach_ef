@@ -1083,8 +1083,12 @@ static QUAD_MESH_DATA* Geom2D_quad_read_file(const char *meshfile , const char* 
    
    // NEW : read JSON file ...
    char validation_output[8192];
-   char *meshfile_schema = "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/JSON_SCHEMAS/SCHEMA_MESH_2D.json";
-   int status = json_check_data(meshfile, meshfile_schema, validation_output);
+   char *meshfile_schema = "JSON_SCHEMAS/SCHEMA_MESH_2D.json";
+
+   char schema_abs_path[512];
+   Params_get_absolute_path(meshfile_schema, schema_abs_path);
+
+   int status = json_check_data(meshfile, schema_abs_path, validation_output);
    
    printf("mesh %s : %s\n", meshfile, validation_output);
    

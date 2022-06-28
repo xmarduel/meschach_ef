@@ -144,7 +144,7 @@ int  main(void)
    
    /* LECTURE FROM INPUT FILE  */
 
-   MyParams = Params_setup_from_file("/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/1D_TRANSIENT/PDE_EXAMPLE_TR_1D.json"); 
+   MyParams = Params_setup_from_file("DRIVERS_C/1D_TRANSIENT/PDE_EXAMPLE_TR_1D.json"); 
 
    Params_set_staticparam(MyParams, 0);
 

@@ -131,8 +131,12 @@ GEOM_1D *Geom1D_get_fromfile(const ELT_1D *elt, const char *meshfile, const char
    VEC* H1; /* the vector of segments */
    /* --------------------------------- */
    char validation_output[8192];
-   char *meshfile_schema = "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/JSON_SCHEMAS/SCHEMA_MESH_1D.json";
-   int status = json_check_data(meshfile, meshfile_schema, validation_output);
+   char *meshfile_schema = "JSON_SCHEMAS/SCHEMA_MESH_1D.json";
+
+   char schema_abs_path[512];
+   Params_get_absolute_path(meshfile_schema, schema_abs_path);
+
+   int status = json_check_data(meshfile, schema_abs_path, validation_output);
    
    printf("%s", validation_output);
    

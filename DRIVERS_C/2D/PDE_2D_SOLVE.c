@@ -101,7 +101,7 @@ int  main()
     
    /*  LECTURE  IN  INPUT FILE "PDE_EXAMPLE_2D.json"    */
    
-   MyParams = Params_setup_from_file("/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/2D/PDE_EXAMPLE_2D.json");
+   MyParams = Params_setup_from_file("DRIVERS_C/2D/PDE_EXAMPLE_2D.json");
 
    Params_set_staticparam(MyParams,0);
    

@@ -41,6 +41,39 @@ static void Params_init_time_scheme(PARAMS* p);
 static void Params_init_miscellaneous_params(PARAMS* p);
 static void Params_init_miscellaneous_graphics(PARAMS* p);
 
+#define BUFSIZE 512
+
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+
+void Params_get_absolute_path(const char* input_file, char* absolute_input_file) 
+{
+   char path[BUFSIZE];
+   char *envvar = "MESCHACH_HOME";
+
+   // Make sure envar actually exists
+   if ( !getenv(envvar) )
+   {
+      fprintf(stderr, "The environment variable %s was not found.\n", envvar);
+      exit(1);
+   }
+
+   // Make sure the buffer is large enough to hold the environment variable value. 
+   if (snprintf(path, BUFSIZE, "%s", getenv(envvar) ) >= BUFSIZE)
+   {
+      fprintf(stderr, "BUFSIZE of %d was too small. Aborting\n", BUFSIZE);
+      exit(1);
+   }
+   
+   //printf("PATH: %s\n", path);
+
+   if ( snprintf(absolute_input_file, BUFSIZE, "%s/%s", getenv(envvar), input_file) >= BUFSIZE) 
+   {
+      fprintf(stderr, "BUFSIZE of %d was too small. Aborting\n", BUFSIZE);
+      exit(1);
+   }
+}
+
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
 
@@ -52,11 +85,17 @@ PARAMS* Params_setup_from_file(const char* input_file)
    if ( !input_file ) error(E_NULL, "Params_setup_from_file");
    
    char validation_output[8156];
-   char schema[] = "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/JSON_SCHEMAS/SCHEMA_PDE_PROBLEM.json";
+   char schema[] = "JSON_SCHEMAS/SCHEMA_PDE_PROBLEM.json";
 
-   int rc = json_check_data(input_file, schema, validation_output);
+   char abs_file[BUFSIZE];
+   Params_get_absolute_path(input_file, abs_file);
+
+   char abs_schema[BUFSIZE];
+   Params_get_absolute_path(schema, abs_schema);
+
+   int rc = json_check_data(input_file, abs_schema, validation_output);
    
-   json_t *config = json_load_xfile(input_file);
+   json_t *config = json_load_xfile(abs_file);
 
    PARAMS *p = json_config_to_params(config);
    

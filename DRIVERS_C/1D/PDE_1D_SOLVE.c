@@ -110,7 +110,7 @@ int main()
 
     /* LECTURE  IN  INPUT FILE "PDE_EXAMPLE_1D.json" */
 
-    MyParams = Params_setup_from_file("/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/1D/PDE_EXAMPLE_1D.json");
+    MyParams = Params_setup_from_file("DRIVERS_C/1D/PDE_EXAMPLE_1D.json");
 
     Params_set_staticparam(MyParams, 0);
 
