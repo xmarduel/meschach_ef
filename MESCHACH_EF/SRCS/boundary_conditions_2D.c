@@ -200,49 +200,49 @@ BC_2D *Bc2D_setup_from_params(const PARAMS *MyParams)
 	int  i=0;
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc2D_setBcType(MyBC, MyParams->bc_params.TabBCMask[AXEe_X][i], /*ref_s*/i, AXEe_X );
-		Bc2D_setBcType(MyBC, MyParams->bc_params.TabBCMask[AXEe_Y][i], /*ref_s*/i, AXEe_Y );
+		Bc2D_setBcType(MyBC, MyParams->bc_params.BcType[AXEe_X][i], /*ref_s*/i, AXEe_X );
+		Bc2D_setBcType(MyBC, MyParams->bc_params.BcType[AXEe_Y][i], /*ref_s*/i, AXEe_Y );
 	}
 		
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		//Bc2D_setCFunction(MyBC, BC_2De_DIRICHLET, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.TabPhi_BCdirichlet[AXEe_X][i]] );
-		//Bc2D_setCFunction(MyBC, BC_2De_DIRICHLET, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.TabPhi_BCdirichlet[AXEe_Y][i]] );
+		//Bc2D_setCFunction(MyBC, BC_2De_DIRICHLET, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.BcDirichlet[AXEe_X][i]] );
+		//Bc2D_setCFunction(MyBC, BC_2De_DIRICHLET, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.BcDirichlet[AXEe_Y][i]] );
       
-      Bc2D_setLUAFunction(MyBC, BC_2De_DIRICHLET, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCdirichlet[AXEe_X][i].fundef );
-      Bc2D_setLUAFunction(MyBC, BC_2De_DIRICHLET, /*ref_s*/i, AXEe_Y, MyParams->bc_params.TabPhi_BCdirichlet[AXEe_Y][i].fundef );
+      Bc2D_setLUAFunction(MyBC, BC_2De_DIRICHLET, /*ref_s*/i, AXEe_X, MyParams->bc_params.BcDirichlet[AXEe_X][i].fundef );
+      Bc2D_setLUAFunction(MyBC, BC_2De_DIRICHLET, /*ref_s*/i, AXEe_Y, MyParams->bc_params.BcDirichlet[AXEe_Y][i].fundef );
 	}
    
    for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		//Bc2D_setCFunction(MyBC, BC_2De_NEUMANN, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.TabPhi_BCneumann[AXEe_X][i]] );
-		//Bc2D_setCFunction(MyBC, BC_2De_NEUMANN, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.TabPhi_BCneumann[AXEe_Y][i]] );
+		//Bc2D_setCFunction(MyBC, BC_2De_NEUMANN, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.BCNeumann[AXEe_X][i]] );
+		//Bc2D_setCFunction(MyBC, BC_2De_NEUMANN, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.BCNeumann[AXEe_Y][i]] );
       
-      Bc2D_setLUAFunction(MyBC, BC_2De_NEUMANN, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCneumann[AXEe_X][i].fundef );
-      Bc2D_setLUAFunction(MyBC, BC_2De_NEUMANN, /*ref_s*/i, AXEe_Y, MyParams->bc_params.TabPhi_BCneumann[AXEe_Y][i].fundef );
+      Bc2D_setLUAFunction(MyBC, BC_2De_NEUMANN, /*ref_s*/i, AXEe_X, MyParams->bc_params.BCNeumann[AXEe_X][i].fundef );
+      Bc2D_setLUAFunction(MyBC, BC_2De_NEUMANN, /*ref_s*/i, AXEe_Y, MyParams->bc_params.BCNeumann[AXEe_Y][i].fundef );
 	}
    
    for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		//Bc2D_setCFunction(MyBC, BC_2De_CAUCHY, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.TabPhi_BCcauchy[AXEe_X][i]] );
-		//Bc2D_setCFunction(MyBC, BC_2De_CAUCHY, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.TabPhi_BCcauchy[AXEe_Y][i]] );
+		//Bc2D_setCFunction(MyBC, BC_2De_CAUCHY, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.BcCauchy[AXEe_X][i]] );
+		//Bc2D_setCFunction(MyBC, BC_2De_CAUCHY, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.BcCauchy[AXEe_Y][i]] );
       
-      Bc2D_setLUAFunction(MyBC, BC_2De_CAUCHY, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCcauchy[AXEe_X][i].fundef );
-      Bc2D_setLUAFunction(MyBC, BC_2De_CAUCHY, /*ref_s*/i, AXEe_Y, MyParams->bc_params.TabPhi_BCcauchy[AXEe_Y][i].fundef );
+      Bc2D_setLUAFunction(MyBC, BC_2De_CAUCHY, /*ref_s*/i, AXEe_X, MyParams->bc_params.BcCauchy[AXEe_X][i].fundef );
+      Bc2D_setLUAFunction(MyBC, BC_2De_CAUCHY, /*ref_s*/i, AXEe_Y, MyParams->bc_params.BcCauchy[AXEe_Y][i].fundef );
 	}
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		//Bc2D_setCFunction (MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.TabPhi_BCrobin1[AXEe_X][i]]);
-		//Bc2D_setCFunction2(MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.TabPhi_BCrobin2[AXEe_X][i]]);
+		//Bc2D_setCFunction (MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.BcRobin1[AXEe_X][i]]);
+		//Bc2D_setCFunction2(MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_X, BCphi2D[MyParams->bc_params.BcRobin2[AXEe_X][i]]);
 			
-		//Bc2D_setCFunction (MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.TabPhi_BCrobin1[AXEe_Y][i]]);
-		//Bc2D_setCFunction2(MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.TabPhi_BCrobin2[AXEe_Y][i]]);
+		//Bc2D_setCFunction (MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.BcRobin1[AXEe_Y][i]]);
+		//Bc2D_setCFunction2(MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_Y, BCphi2D[MyParams->bc_params.BcRobin2[AXEe_Y][i]]);
       
-      Bc2D_setLUAFunction (MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCrobin1[AXEe_X][i].fundef);
-      Bc2D_setLUAFunction2(MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCrobin2[AXEe_X][i].fundef);
+      Bc2D_setLUAFunction (MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.BcRobin1[AXEe_X][i].fundef);
+      Bc2D_setLUAFunction2(MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.BcRobin2[AXEe_X][i].fundef);
       
-      Bc2D_setLUAFunction (MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_Y, MyParams->bc_params.TabPhi_BCrobin1[AXEe_Y][i].fundef);
-      Bc2D_setLUAFunction2(MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_Y, MyParams->bc_params.TabPhi_BCrobin2[AXEe_Y][i].fundef);
+      Bc2D_setLUAFunction (MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_Y, MyParams->bc_params.BcRobin1[AXEe_Y][i].fundef);
+      Bc2D_setLUAFunction2(MyBC, BC_2De_ROBIN, /*ref_s*/i, AXEe_Y, MyParams->bc_params.BcRobin2[AXEe_Y][i].fundef);
 	}
 	
 	return MyBC;

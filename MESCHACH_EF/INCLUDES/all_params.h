@@ -110,14 +110,14 @@ typedef struct {
    
    int nb_BC;
    
-   int TabBCMask[3][NB_BOUNDARYCONDITIONS];
+   int BcType[3][NB_BOUNDARYCONDITIONS];
 
-   FF_SPEC TabPhi_BCdirichlet[3][NB_BOUNDARYCONDITIONS];
-   FF_SPEC TabPhi_BCneumann[3][NB_BOUNDARYCONDITIONS];
-   FF_SPEC TabPhi_BCcauchy[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC BcDirichlet[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC BCNeumann[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC BcCauchy[3][NB_BOUNDARYCONDITIONS];
 
-   FF_SPEC TabPhi_BCrobin1[3][NB_BOUNDARYCONDITIONS];
-   FF_SPEC TabPhi_BCrobin2[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC BcRobin1[3][NB_BOUNDARYCONDITIONS];
+   FF_SPEC BcRobin2[3][NB_BOUNDARYCONDITIONS];
 
 } PARAMS_boundary_conditions ;
 
@@ -534,6 +534,7 @@ void  Params_get_absolute_path(const char* input_file, char* absolute_input_file
 * Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "H3" ) \n
 * Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S2" ) \n
 * Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S3" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S4" ) \n
 * Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S5" ) \n
 * Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P1b" ) \n
 *
@@ -621,9 +622,6 @@ void  Params_get_absolute_path(const char* input_file, char* absolute_input_file
 * Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",       0) # GRAPH \n
 * Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB \n
 * Params_set_oneparam(MyParams, "graphics_output_params","MATPLOTLIB",  0) # MATPLOTLIB \n
-* Params_set_oneparam(MyParams, "graphics_output_params","PGPLOT",      0) # PGPLOT \n
-* Params_set_oneparam(MyParams, "graphics_output_params","VOGLE",       0) # VOGLE \n
-* Params_set_oneparam(MyParams, "graphics_output_params","LIBSCIPLOT",  0) # LIBSCIPLOT \n
 * Params_set_oneparam(MyParams, "graphics_output_params","VTK",         1) # VTK \n
 * Params_set_oneparam(MyParams, "graphics_output_params","SILO",        1) # SILO \n
 *

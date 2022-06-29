@@ -87,7 +87,7 @@ if TEST == 'CN41':
 
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 1, AXEe_Y )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 2, AXEe_Y )
-    Bc2D_setBcType(MyBC, BC_2De_NEUMANN, 3, AXEe_Y )
+    Bc2D_setBcType(MyBC, BC_2De_NEUMANN,   3, AXEe_Y )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 4, AXEe_Y )
 
 
@@ -97,7 +97,7 @@ if TEST == 'CN41':
 
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 1, AXEe_Y, bc0) # v always 0 on boundaries
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 2, AXEe_Y, bc0) # v always 0 on boundaries
-    Bc2D_setFunctionPython(MyBC, BC_2De_NEUMANN, 3, AXEe_Y, bc0) # v always 0 on boundaries
+    Bc2D_setFunctionPython(MyBC, BC_2De_NEUMANN,   3, AXEe_Y, bc0) # v always 0 on boundaries
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 4, AXEe_Y, bc0) # v always 0 on boundaries
 
 

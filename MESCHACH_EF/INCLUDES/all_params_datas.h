@@ -217,16 +217,16 @@ static TYPE_PARAMS1 params_list1[] =
 
 static TYPE_PARAMS2 params_list2[] =
 {
-   { "convective_terms_params"    , "adv1"                , TYPEd_STRING  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
-   { "convective_terms_params"    , "adv2"                , TYPEd_STRING  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
-   { "convective_terms_params"    , "adv3"                , TYPEd_STRING  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
+   { "convective_terms_params"    , "adv1"         , TYPEd_STRING  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
+   { "convective_terms_params"    , "adv2"         , TYPEd_STRING  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
+   { "convective_terms_params"    , "adv3"         , TYPEd_STRING  , AXEe_X , AXEe_Z , AXEe_X , AXEe_Z },
 
-   { "boundary_conditions_params" , "TabBCMask"           , TYPEd_INT     , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCdirichlet"  , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCneumann"    , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCcauchy"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCrobin1"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
-   { "boundary_conditions_params" , "TabPhi_BCrobin2"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "BcType"       , TYPEd_INT     , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "BcDirichlet"  , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "BCNeumann"    , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "BcCauchy"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "BcRobin1"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
+   { "boundary_conditions_params" , "BcRobin2"     , TYPEd_STRING  , 0 , NB_BOUNDARYCONDITIONS-1, AXEe_X , AXEe_Z },
 
    { "graphics_interactiv1D_params"  , "LABEL_LEGEND"     , TYPEd_STRING  , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
    { "graphics_interactiv1D_params"  , "LABEL_AXE_X"      , TYPEd_STRING  , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },

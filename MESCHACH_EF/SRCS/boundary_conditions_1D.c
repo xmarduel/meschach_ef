@@ -198,25 +198,25 @@ BC_1D *Bc1D_setup_from_params(const PARAMS *MyParams)
 	int i;
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc1D_setBcType(MyBC, MyParams->bc_params.TabBCMask[AXEe_X][i], /*ref_s*/i, AXEe_X );
+		Bc1D_setBcType(MyBC, MyParams->bc_params.BcType[AXEe_X][i], /*ref_s*/i, AXEe_X );
 	}
 		
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc1D_setLUAFunction(MyBC, BC_1De_DIRICHLET, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCdirichlet[AXEe_X][i].fundef);
+		Bc1D_setLUAFunction(MyBC, BC_1De_DIRICHLET, /*ref_s*/i, AXEe_X, MyParams->bc_params.BcDirichlet[AXEe_X][i].fundef);
 	}
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc1D_setLUAFunction(MyBC, BC_1De_NEUMANN, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCneumann[AXEe_X][i].fundef);
+		Bc1D_setLUAFunction(MyBC, BC_1De_NEUMANN, /*ref_s*/i, AXEe_X, MyParams->bc_params.BCNeumann[AXEe_X][i].fundef);
 	}
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc1D_setLUAFunction(MyBC, BC_1De_CAUCHY, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCcauchy[AXEe_X][i].fundef);
+		Bc1D_setLUAFunction(MyBC, BC_1De_CAUCHY, /*ref_s*/i, AXEe_X, MyParams->bc_params.BcCauchy[AXEe_X][i].fundef);
 	}
 	for (i=1; i<=MyParams->bc_params.nb_BC; i++)
 	{
-		Bc1D_setLUAFunction (MyBC, BC_1De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCrobin1[AXEe_X][i].fundef);
-		Bc1D_setLUAFunction2(MyBC, BC_1De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.TabPhi_BCrobin2[AXEe_X][i].fundef);
+		Bc1D_setLUAFunction (MyBC, BC_1De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.BcRobin1[AXEe_X][i].fundef);
+		Bc1D_setLUAFunction2(MyBC, BC_1De_ROBIN, /*ref_s*/i, AXEe_X, MyParams->bc_params.BcRobin2[AXEe_X][i].fundef);
 	}
       
    return MyBC;

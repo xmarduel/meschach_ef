@@ -239,7 +239,7 @@ else :
     MyBC = Bc1D_get()
     for i in range(1, Params_get_oneparam(MyParams,"boundary_conditions_params","nb_BCdirichlet")+1) :
     
-        idx = Params_get_oneparam2(MyParams,"boundary_conditions_params","TabPhi_BCdirichlet", AXEe_X, i)
+        idx = Params_get_oneparam2(MyParams,"boundary_conditions_params","BcDirichlet", AXEe_X, i)
         print("idx bc dirichlet =", idx)
         Bc1D_setCFunction( MyBC, BC_1De_DIRICHLET, i, AXEe_X , Src1D_00 )
     

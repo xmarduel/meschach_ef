@@ -1096,34 +1096,34 @@ static void * Params_get_oneparam2_cat_convective_terms_params(const PARAMS* p, 
 
 static void * Params_get_oneparam2_cat_boundary_conditions_params(const PARAMS* p, const char* field, int idx1, int idx2)
 {
-   if ( strcmp(field,"TabBCMask") == 0 )
+   if ( strcmp(field,"BcType") == 0 )
    {
-      return (void*)(&(p->bc_params.TabBCMask[idx1][idx2]));
+      return (void*)(&(p->bc_params.BcType[idx1][idx2]));
    }
    else
-   if ( strcmp(field,"TabPhi_BCdirichlet") == 0 )
+   if ( strcmp(field,"BcDirichlet") == 0 )
    {
-      return (void*)(&(p->bc_params.TabPhi_BCdirichlet[idx1][idx2]));
+      return (void*)(&(p->bc_params.BcDirichlet[idx1][idx2]));
    }
    else
-   if ( strcmp(field,"TabPhi_BCneumann") == 0 )
+   if ( strcmp(field,"BCNeumann") == 0 )
    {
-      return (void*)(&(p->bc_params.TabPhi_BCneumann[idx1][idx2]));
+      return (void*)(&(p->bc_params.BCNeumann[idx1][idx2]));
    }
    else
-   if ( strcmp(field,"TabPhi_BCcauchy") == 0 )
+   if ( strcmp(field,"BcCauchy") == 0 )
    {
-      return (void*)(&(p->bc_params.TabPhi_BCcauchy[idx1][idx2]));
+      return (void*)(&(p->bc_params.BcCauchy[idx1][idx2]));
    }
    else
-   if ( strcmp(field,"TabPhi_BCrobin1") == 0 )
+   if ( strcmp(field,"BcRobin1") == 0 )
    {
-      return (void*)(&(p->bc_params.TabPhi_BCrobin1[idx1][idx2]));
+      return (void*)(&(p->bc_params.BcRobin1[idx1][idx2]));
    }
    else
-   if ( strcmp(field,"TabPhi_BCrobin2") == 0 )
+   if ( strcmp(field,"BcRobin2") == 0 )
    {
-      return (void*)(&(p->bc_params.TabPhi_BCrobin2[idx1][idx2]));
+      return (void*)(&(p->bc_params.BcRobin2[idx1][idx2]));
    }
    else
    {

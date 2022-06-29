@@ -171,20 +171,20 @@ static void Params_init_boundary_conditions(PARAMS* p)
    for (k=0; k<AXEe_NUMBER; k++)
       for (i=0; i<NB_BOUNDARYCONDITIONS; i++)
       {
-         p->bc_params.TabBCMask[k][i] = -1;
+         p->bc_params.BcType[k][i] = -1;
       }
    
    for (k=0; k<AXEe_NUMBER; k++)
       for (i=0; i<NB_BOUNDARYCONDITIONS; i++)
       {
-         strcpy(p->bc_params.TabPhi_BCdirichlet[k][i].fundef, "0");
+         strcpy(p->bc_params.BcDirichlet[k][i].fundef, "0");
          
-         strcpy(p->bc_params.TabPhi_BCneumann[k][i].fundef, "0");
+         strcpy(p->bc_params.BCNeumann[k][i].fundef, "0");
          
-         strcpy(p->bc_params.TabPhi_BCcauchy[k][i].fundef, "0");
+         strcpy(p->bc_params.BcCauchy[k][i].fundef, "0");
          
-         strcpy(p->bc_params.TabPhi_BCrobin1[k][i].fundef, "0");
-         strcpy(p->bc_params.TabPhi_BCrobin2[k][i].fundef, "0");
+         strcpy(p->bc_params.BcRobin1[k][i].fundef, "0");
+         strcpy(p->bc_params.BcRobin2[k][i].fundef, "0");
       }
 }
 
