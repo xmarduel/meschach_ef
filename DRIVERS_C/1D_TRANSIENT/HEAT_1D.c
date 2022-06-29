@@ -6,11 +6,11 @@
  *     examples :
  *
  *     Laplacian :
- *        -e.LAPLACIEN(u) = F 
+ *        -e.LAPLACIEN(u) = F
  *        B.C. Dirichlet Type
  *
  *     BiLaplacian :
- *        -e.BI-LAPLACIEN(u) = F 
+ *        -e.BI-LAPLACIEN(u) = F
  *        B.C. Dirichlet Type
  *
  *
@@ -62,15 +62,15 @@
 
 int  main(void)
 {
-   
+
    ELT_1D   *MyElt ;
 
    GEOM_1D  *MyGeom;
 
    BC_1D    *MyBC;
-   
+
    RHS_1D   *MyRhsFun;
-   
+
    FUN_1D   *MyCiFun;
    FUN_1D   *MyDCiFun; /* for Hermite ef */
 
@@ -78,7 +78,7 @@ int  main(void)
 
    VEC      *ABSCISSAS1, *ABSCISSAS2, *ABSCISSAS3, *ABSCISSAS4;
    VEC      *U_graph1  , *U_graph2,   *U_graph3  , *U_graph4;
-   
+
    PARAMS   *MyParams;
 
    double TPS;
@@ -97,7 +97,7 @@ int  main(void)
    SPMAT *A_REF;
 
    SPMAT *LLT;
-   
+
    VEC *RHS;
    VEC *RHS_FUN;
    VEC *RHS_UUx;
@@ -105,11 +105,11 @@ int  main(void)
    VEC *RHS_LIN;
    VEC *RHS_LIN1;
    VEC *RHS_LIN2;
-   
+
    VEC *U_tmp1;
    VEC *U_tmp2;
    VEC *U_tmp3;
-   
+
    /* memory informations */
    mem_attach_list(MY_LIST1, NB_STRUCTS1, my_names1, my_frees1, my_tnums1);
    mem_attach_list(MY_LIST2, NB_STRUCTS2, my_names2, my_frees2, my_tnums2);
@@ -118,14 +118,14 @@ int  main(void)
    mem_attach_list(MY_LIST5, NB_STRUCTS5, my_names5, my_frees5, my_tnums5);
    mem_attach_list(MY_LIST6, NB_STRUCTS6, my_names6, my_frees6, my_tnums6);
    mem_attach_list(MY_LIST7, NB_STRUCTS7, my_names7, my_frees7, my_tnums7);
-   
+
    err_list_attach(MY_LIST2, NB_ERRS2, my_err_mesg2);
    err_list_attach(MY_LIST3, NB_ERRS3, my_err_mesg3);
    err_list_attach(MY_LIST4, NB_ERRS4, my_err_mesg4);
    err_list_attach(MY_LIST5, NB_ERRS5, my_err_mesg5);
    err_list_attach(MY_LIST6, NB_ERRS6, my_err_mesg6);
    err_list_attach(MY_LIST7, NB_ERRS7, my_err_mesg7);
-   
+
    warn_list_attach(MY_LIST2, NB_WARNS2, my_warn_mesg2);
    warn_list_attach(MY_LIST3, NB_WARNS3, my_warn_mesg3);
    warn_list_attach(MY_LIST4, NB_WARNS4, my_warn_mesg4);
@@ -141,16 +141,16 @@ int  main(void)
    mem_info_file(stdout, MY_LIST5);
    mem_info_file(stdout, MY_LIST6);
    mem_info_file(stdout, MY_LIST7);
-   
+
    /* LECTURE FROM INPUT FILE  */
 
-   MyParams = Params_setup_from_file("DRIVERS_C/1D_TRANSIENT/PDE_EXAMPLE_TR_1D.json"); 
+   MyParams = Params_setup_from_file("DRIVERS_C/1D_TRANSIENT/PDE_EXAMPLE_TR_1D.json");
 
    Params_set_staticparam(MyParams, 0);
 
-   
+
    MyElt  = elt1D_get(MyParams->ef_params.name_ef);
-   
+
    /* Geometry */
    MyGeom = Geom1D_setup_from_params(MyElt, MyParams);
 
@@ -159,14 +159,14 @@ int  main(void)
 
    Geom1D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X);
    Geom1D_foutput(stdout, MyGeom);
-	
+
    /* Right Hand Side */
    MyRhsFun = Rhs1D_setup_from_params(MyParams);
 
    /* Initial Condition */
    MyCiFun = Fun1D_get();
    Fun1D_setLUAFunctionTransient(MyCiFun, MyParams->ini_params.ini[0].fundef);
-	/* Initial Condition for Hermite EF */
+   /* Initial Condition for Hermite EF */
    MyDCiFun = Fun1D_get();
    Fun1D_setLUAFunctionTransient(MyDCiFun, MyParams->ini_params.dini[0].fundef);
 
@@ -181,7 +181,7 @@ int  main(void)
    DT = MyParams->time_params.DT;
    NX = MyParams->geom_params.nx;
    DX = (MyGeom->X_RIGHT- MyGeom->X_LEFT) / NX ;
-   
+
    /* --------------------------------------------------------------------- */
 
    ABSCISSAS1 = v_get( MyGeom->NBSOMM );
@@ -196,7 +196,7 @@ int  main(void)
    ABSCISSAS4 = v_get( IT_TPS_MAX+1 );
    U_graph4   = v_get( IT_TPS_MAX+1 );
 
-   
+
    U_o   = v_get( MyGeom->NBSOMM );
    U_nm2 = v_get( MyGeom->NBSOMM );
    U_nm1 = v_get( MyGeom->NBSOMM );
@@ -205,21 +205,21 @@ int  main(void)
    U_tmp1 = v_get( MyGeom->NBSOMM );
    U_tmp2 = v_get( MyGeom->NBSOMM );
    U_tmp3 = v_get( MyGeom->NBSOMM );
-   
+
    ABSCISSAS1 = Geom1D_getBaseMesh( MyElt ,  MyGeom );
 
    for (k=0; k<=IT_TPS_MAX; k++)
    {
       ABSCISSAS2->ve[k] = k*DT;
    }
-   
+
    U_o = build_vec_ef_from_function1Dtransient(MyElt, MyGeom, MyCiFun, MyDCiFun, U_o, 0.0);
 
 #ifdef HAVE_CPGPLOT
    if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "PGPLOT") == 0)
    {
       PARAMS_graphics_interactiv1D_plots *PlotParams = &(MyParams->graph_interactiv1Dplots_params);
-		
+
       int NX = MyParams->graph_interactiv1Dplots_params.NX;
       int NY = MyParams->graph_interactiv1Dplots_params.NY;
 
@@ -227,8 +227,8 @@ int  main(void)
 
       int window_size_x = MyParams->graph_interactiv1Dplots_params.SIZE_WINDOW_X;
       int window_size_y = MyParams->graph_interactiv1Dplots_params.SIZE_WINDOW_Y;
-      
-		
+
+
       graphics1D_cpgplot_initialize(driver, window_size_x, window_size_y, NX,NY);
 
       U_graph1 = sp_mv_mlt(MyGeom->EF_to_WORLD, U_o, U_graph1);
@@ -275,7 +275,7 @@ int  main(void)
    if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "VOGLE") == 0)
    {
       PARAMS_graphics_interactiv1D_plots *params = &(MyParams->graph_interactiv1Dplots_params);
-		
+
       int NX = MyParams->graph_interactiv1Dplots_params.NX;
       int NY = MyParams->graph_interactiv1Dplots_params.NY;
 
@@ -285,18 +285,18 @@ int  main(void)
       int window_size_y = MyParams->graph_interactiv1Dplots_params.SIZE_WINDOW_Y;
 
       graphics1D_vopl_initialize(driver, window_size_x, window_size_y, NX,NY, VOPL_CURVE);
-      
+
       U_graph1 = sp_mv_mlt(MyGeom->EF_to_WORLD, U_o, U_graph1);
       U_graph2->ve[0] = v_norm2(U_graph1)*sqrt(DX);
       U_graph3->ve[0] = 0.0;
 
       graphics1D_vopl_title("Initial Condition");
-      
+
       graphics1D_vopl_labelsize(1,1, MyParams->graph_interactiv1Dplots_params.SIZE_LABELS);
       graphics1D_vopl_labelsize(1,2, MyParams->graph_interactiv1Dplots_params.SIZE_LABELS);
       graphics1D_vopl_labelsize(2,1, MyParams->graph_interactiv1Dplots_params.SIZE_LABELS);
       graphics1D_vopl_labelsize(2,2, MyParams->graph_interactiv1Dplots_params.SIZE_LABELS);
-      
+
       graphics1D_vopl_legend(1,1, "Initial Condition");
       graphics1D_vopl_legend(1,2, params->LABEL[1][2].LEGEND);
       graphics1D_vopl_legend(2,1, params->LABEL[2][1].LEGEND);
@@ -306,7 +306,7 @@ int  main(void)
       graphics1D_vopl_window(1,2,  params->WINDOW[1][2].X_MIN, params->WINDOW[1][2].X_MAX, params->WINDOW[1][2].Y_MIN, params->WINDOW[1][2].Y_MAX);
       graphics1D_vopl_window(2,1,  params->WINDOW[2][1].X_MIN, params->WINDOW[2][1].X_MAX, params->WINDOW[2][1].Y_MIN, params->WINDOW[2][1].Y_MAX);
       graphics1D_vopl_window(2,2,  params->WINDOW[2][2].X_MIN, params->WINDOW[2][2].X_MAX, params->WINDOW[2][2].Y_MIN, params->WINDOW[2][2].Y_MAX);
-		
+
 
       graphics1D_vopl_setbox( 1,1, 1);
       graphics1D_vopl_setbox( 1,2, 1);
@@ -331,7 +331,7 @@ int  main(void)
    if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "LIBSCIPLOT") == 0)
    {
       PARAMS_graphics_interactiv1D_plots *params = &(MyParams->graph_interactiv1Dplots_params);
-		
+
       int NX = MyParams->graph_interactiv1Dplots_params.NX;
       int NY = MyParams->graph_interactiv1Dplots_params.NY;
 
@@ -373,7 +373,7 @@ int  main(void)
       graphics1D_libsciplot_window(1,2,  params->WINDOW[1][2].X_MIN, params->WINDOW[1][2].X_MAX, params->WINDOW[1][2].Y_MIN, params->WINDOW[1][2].Y_MAX);
       graphics1D_libsciplot_window(2,1,  params->WINDOW[2][1].X_MIN, params->WINDOW[2][1].X_MAX, params->WINDOW[2][1].Y_MIN, params->WINDOW[2][1].Y_MAX);
       graphics1D_libsciplot_window(2,2,  params->WINDOW[2][2].X_MIN, params->WINDOW[2][2].X_MAX, params->WINDOW[2][2].Y_MIN, params->WINDOW[2][2].Y_MAX);
-		
+
 
       graphics1D_libsciplot_setbox( 1,1, 1);
       graphics1D_libsciplot_setbox( 1,2, 1);
@@ -419,7 +419,7 @@ int  main(void)
    sp_compact(A, 0.0);
 
    /* On sauvegarde A dans A_OLD pour les CL sur le 2nd membre */
-   A_REF = sp_copy(A); 
+   A_REF = sp_copy(A);
 
    /* on prend on compte les CL pour transformer A */
    transform1D_matrix_with_bc(MyElt, MyGeom, MyBC, A);
@@ -431,7 +431,7 @@ int  main(void)
    U_nm2   = v_get(MyGeom->NBSOMM);
    U_nm1   = v_get(MyGeom->NBSOMM);
    U_n     = v_get(MyGeom->NBSOMM);
-  
+
    U_nm1   = v_copy(U_o, U_nm1);
 
    RHS            = v_get(MyGeom->NBSOMM);
@@ -441,7 +441,7 @@ int  main(void)
    RHS_LIN        = v_get(MyGeom->NBSOMM);
    RHS_LIN1       = v_get(MyGeom->NBSOMM);
    RHS_LIN2       = v_get(MyGeom->NBSOMM);
-    
+
    /* ---- We have to compute the RHS at the first time step -- */
 
    for (k=1; k<=1; k++)
@@ -464,14 +464,14 @@ int  main(void)
       RHS = v_mltadd(RHS, RHS_TIME_DISCR, 1.0, RHS);
       RHS = v_mltadd(RHS, RHS_UUx       , -DT, RHS);
       RHS = v_mltadd(RHS, RHS_FUN       ,  DT, RHS);
-      
+
 
       /* -- prise en compte des CL ---------- */
       transform1D_vector_with_bc (MyElt, MyGeom, MyBC, A_REF, RHS);
 
       /* -- Calcul de U_np1 ----------------- */
       U_n =  spCHsolve(LLT, RHS, U_n);
-		
+
       /* plots */
       U_graph1 = sp_mv_mlt(MyGeom->EF_to_WORLD, U_n, U_graph1);
       U_graph2->ve[k] = v_norm2(U_graph1)*sqrt(DX);
@@ -547,7 +547,7 @@ int  main(void)
    /* dU/dt    -> 1.5*U_n - 2.0*U_nm1 + 0.5*U_nm2   */
    /* OpLIN(U) -> OpLIN(U_n + U_nm1)/2              */
    /* OpNLI(U) -> OpNLI( 2U_nm1 - U_nm2)            */
-    
+
    sp_zero(A);
 
    sp_mltadd(A, MASS  , 1.5                                 , A);
@@ -611,12 +611,12 @@ int  main(void)
       /* -- Calcul de U_np1 ----------------- */
       U_n =  spCHsolve(LLT, RHS, U_n);
 
-      
+
       /* plots */
       U_graph1 = sp_mv_mlt(MyGeom->EF_to_WORLD, U_n, U_graph1);
       U_graph2->ve[k] = v_norm2(U_graph1)*sqrt(DX);
       U_graph3->ve[k] = ( U_graph2->ve[k] - U_graph2->ve[k-1] ) / DT;
-		
+
       if ( (IT_TPS % MyParams->misc_params.itgraph) == 0 )
       {
          char title[64];
@@ -642,7 +642,7 @@ int  main(void)
 
 #ifdef HAVE_VOGLE
          if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "VOGLE") == 0) /* -- Graphics with VOGLE library ---- */
-         {   
+         {
             snprintf(title, 63, "SOL_VOGLE_%010.5lf", k*DT ); title[63] = '\0';
             graphics1D_vopl_title(title);
 
@@ -682,14 +682,14 @@ int  main(void)
       /* We can do a new time iteration now */
    }
 
-  
+
    ELT_1D_FREE(MyElt);
 
    GEOM_1D_FREE(MyGeom);
    BC_1D_FREE(MyBC);
-   
+
    RHS_1D_FREE(MyRhsFun);
-   
+
    FUN_1D_FREE(MyCiFun);
    FUN_1D_FREE(MyDCiFun);
 
@@ -735,7 +735,7 @@ int  main(void)
    /* -----------------------------------------------------------------------*/
 
    mem_info_file(stdout, 0);  /* = mem_info(); */
-   
+
    mem_info_file(stdout, MY_LIST1);
    mem_info_file(stdout, MY_LIST2);
    mem_info_file(stdout, MY_LIST3);

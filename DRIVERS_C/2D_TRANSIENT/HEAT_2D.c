@@ -6,11 +6,11 @@
  *     examples :
  *
  *     Laplacien :
- *        -e.LAPLACIEN(u) = F 
+ *        -e.LAPLACIEN(u) = F
  *        B.C. Dirichlet Type
  *
  *     Convection-Diffusion :
- *        -e.LAPLACIEN(u) + b.GRADIENT(u) = F 
+ *        -e.LAPLACIEN(u) + b.GRADIENT(u) = F
  *        B.C. Dirichlet Type
  *
  */
@@ -54,15 +54,15 @@
 
 int  main()
 {
-   
+
    ELT_2D   *MyElt , *MyEltM1 , *elt_P1 , *elt_P2 , *elt_P3 ;
-   
+
    GEOM_2D  *MyGeom;
 
    BC_2D    *MyBC;
-   
+
    RHS_2D   *MyRhsFun;
-   
+
    FUN_2D   *MyCiFun;
 
    VEC      *U_o , *U_nm1, *U_n ;
@@ -96,33 +96,33 @@ int  main()
    mem_attach_list(MY_LIST5, NB_STRUCTS5, my_names5, my_frees5, my_tnums5);
    mem_attach_list(MY_LIST6, NB_STRUCTS6, my_names6, my_frees6, my_tnums6);
    mem_attach_list(MY_LIST7, NB_STRUCTS7, my_names7, my_frees7, my_tnums7);
-   
-   
+
+
    err_list_attach(MY_LIST2, NB_ERRS2, my_err_mesg2);
    err_list_attach(MY_LIST3, NB_ERRS3, my_err_mesg3);
    err_list_attach(MY_LIST4, NB_ERRS4, my_err_mesg4);
    err_list_attach(MY_LIST5, NB_ERRS5, my_err_mesg5);
    err_list_attach(MY_LIST6, NB_ERRS6, my_err_mesg6);
    err_list_attach(MY_LIST7, NB_ERRS7, my_err_mesg7);
-   
+
    warn_list_attach(MY_LIST2, NB_WARNS2, my_warn_mesg2);
    warn_list_attach(MY_LIST3, NB_WARNS3, my_warn_mesg3);
    warn_list_attach(MY_LIST4, NB_WARNS4, my_warn_mesg4);
    warn_list_attach(MY_LIST5, NB_WARNS5, my_warn_mesg5);
    warn_list_attach(MY_LIST6, NB_WARNS6, my_warn_mesg6);
    warn_list_attach(MY_LIST7, NB_WARNS7, my_warn_mesg7);
-    
+
    /*  LECTURE INPUT FILE "PDE_EXAMPLE_TR_2D.json" */
-   
+
    MyParams = Params_setup_from_file("DRIVERS_C/2D_TRANSIENT/PDE_EXAMPLE_TR_2D.json");
 
    Params_set_staticparam(MyParams,0);
-   
+
    elt_P1 = elt2D_get("P1");
    elt_P2 = elt2D_get("P2");
    elt_P3 = elt2D_get("P3");
-   
-   
+
+
    MyElt    = elt2D_get(MyParams->ef_params.name_ef);  /* "P1" */
                                                        /* "P2" */
    if ( strcmp("P1", MyParams->ef_params.name_ef) == 0 )
@@ -143,11 +143,11 @@ int  main()
    {
       error(E_UNKNOWN,"main");
    }
-   
+
    MyGeom = Geom2D_get(MyElt,
-					MyParams->geom_params.meshfile, 
-					MyParams->geom_params.meshname,
-					MyParams->geom_params.meshtype);  /* ".quad1" ".quad2" ".emc2" ".gmsh"  */
+               MyParams->geom_params.meshfile,
+               MyParams->geom_params.meshname,
+               MyParams->geom_params.meshtype);  /* ".quad1" ".quad2" ".emc2" ".gmsh"  */
    /*
    if (MyParams->misc_graphics.igeomview)
    {
@@ -163,12 +163,12 @@ int  main()
       GEOM_2D_FREE(MyGeomTotal);
    }
    */
-   
+
    MyBC = Bc2D_setup_from_params(MyParams);
-   
+
    Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X);
-   
-   
+
+
    MyRhsFun = Rhs2D_setup_from_params(MyParams);
 
 
@@ -180,9 +180,9 @@ int  main()
 
    DT = MyParams->time_params.DT;
    /* --------------------------------------------------------------------- */
-   
+
    /* ---------------------------------------------------------------------- */
-   
+
    /*U_o = build_vec_from_function2D(MyElt, MyGeom, MyCiFun, U_o);*/
    U_o = v_get(MyGeom->NBSOMM);
    U_o = v_zero(U_o);
@@ -205,7 +205,7 @@ int  main()
 
           graphics2D_vogle_store_surfacedata(MyGeom->NSELMT, MyGeom->XYSOMM);
           graphics2D_vogle_store_plotdata(U_o);
-      
+
           graphics2D_vogle_plotsurface_start();
       }
       else
@@ -216,12 +216,12 @@ int  main()
                                     MyParams->graph_interactiv2Dplots_params.WINDOW[1][1].X_MAX,
                                     MyParams->graph_interactiv2Dplots_params.WINDOW[1][1].Y_MIN,
                                     MyParams->graph_interactiv2Dplots_params.WINDOW[1][1].Y_MAX);
-			
+
          graphics1D_vopl_nblevels(1, 1, MyParams->graph_interactiv2Dplots_params.NB_LEVELS[1][1]);
          graphics1D_vopl_levels(1, 1, MyParams->graph_interactiv2Dplots_params.LEVELS[1][1]);
          graphics1D_vopl_contourmeshdata(1, 1, MyGeom->NSELMT, MyGeom->XYSOMM);
          graphics1D_vopl_contourplotdata(1, 1, U_o);
-			
+
          graphics1D_vopl_plotcontours_start();
       }
    }
@@ -295,7 +295,7 @@ int  main()
 
       /* -- Calcul de U_np1 ----------------- */
       U_n =  spCHsolve(LLT, RHS, U_n);
- 
+
 
 #ifdef HAVE_VOGLE
       if (strcmp(MyParams->graph_interactiv2Dplots_params.ENGINE , "VOGLE") == 0) /* -- Graphics with VOGLE library ---- */
@@ -315,13 +315,13 @@ int  main()
          else
          {
             char title[64];
-					
+
             snprintf(title, 63, "SOL_VOGLE_%010.5lf", k*DT ); title[63] = '\0';
 
             graphics1D_vopl_contourtransientbuildinfo(1,1);
             graphics1D_vopl_contourplotdata(1, 1, U_n);
             graphics1D_vopl_title(title);
-					
+
             graphics1D_vopl_plotcontours_flush();
          }
       }
@@ -334,12 +334,12 @@ int  main()
    ELT_2D_FREE(elt_P1);
    ELT_2D_FREE(elt_P2);
    ELT_2D_FREE(elt_P3);
-      
+
    ELT_2D_FREE(MyElt);
    GEOM_2D_FREE(MyGeom);
    BC_2D_FREE(MyBC);
    RHS_2D_FREE(MyRhsFun);
-   
+
    V_FREE(U_n);
    V_FREE(U_nm1);
    V_FREE(U_o);
@@ -349,17 +349,17 @@ int  main()
    /* -----------------------------------------------------------------------*/
 
    mem_info_file(stdout,0);  /* = mem_info(); */
-   
+
    mem_info_file(stdout,MY_LIST1);
-   mem_info_file(stdout,MY_LIST2); 
-   mem_info_file(stdout,MY_LIST3); 
-   mem_info_file(stdout,MY_LIST4); 
+   mem_info_file(stdout,MY_LIST2);
+   mem_info_file(stdout,MY_LIST3);
+   mem_info_file(stdout,MY_LIST4);
    mem_info_file(stdout,MY_LIST5);
    mem_info_file(stdout,MY_LIST6);
-   mem_info_file(stdout,MY_LIST7);  
+   mem_info_file(stdout,MY_LIST7);
 
    pthread_exit(NULL);
-   
+
    return EXIT_SUCCESS;
-   
+
 }

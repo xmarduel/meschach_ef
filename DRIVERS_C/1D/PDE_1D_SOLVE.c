@@ -6,15 +6,15 @@
  *     examples :
  *
  *     Laplacian :
- *        -e.LAPLACIEN(u) = F 
+ *        -e.LAPLACIEN(u) = F
  *        B.C. Dirichlet Type
  *
  *     BiLaplacian :
- *        -e.BI-LAPLACIEN(u) = F 
+ *        -e.BI-LAPLACIEN(u) = F
  *        B.C. Dirichlet Type
  *
  *     Convection-Diffusion :
- *        -e.LAPLACIEN(u) + b.GRADIENT(u) = F 
+ *        -e.LAPLACIEN(u) + b.GRADIENT(u) = F
  *        B.C. Dirichlet Type
  *
  */
@@ -194,10 +194,10 @@ int main()
 
         printf("ef res\n");
         v_output(SOL);
-       
+
         printf("world res\n");
         v_output(WORLD);
-       
+
        /*
         * graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch");
         */
@@ -272,32 +272,32 @@ int main()
         GEOM_1D_FREE(GeomP1);
     }
 
-	 /* ----------------------- check-------- ------------------------------ */
+    /* ----------------------- check-------- ------------------------------ */
 
     if ( strcmp(MyParams->sol_params.sol[0].fundef, "") != 0)
     {
        VEC *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
-       
+
        FUN_1D *fun_exact = Fun1D_get();
        Fun1D_setLUAFunction(fun_exact, MyParams->sol_params.sol[0].fundef);
-       
+
        VEC* WORLD_EXACT = build_vec_world_from_function1D(MyElt, MyGeom, fun_exact, NULL, NULL);
-       
+
        printf("SOL (EF)\n");
        v_foutput(stdout, SOL);
-       
+
        printf("WORLD\n");
        v_foutput(stdout, WORLD);
        printf("WORLD_EXACT\n");
        v_foutput(stdout, WORLD_EXACT);
-       
+
        double diff = v_norm2(v_sub(WORLD, WORLD_EXACT, NULL));
        fprintf(stdout, "\ndiff solexacte-solapprochee = %le\n", diff);
        fprintf(stdout, "\n---------------------------------------\n");
-       
+
        V_FREE(WORLD);
        V_FREE(WORLD_EXACT);
-       
+
     }
 
     /* --------------------------------------------------------------------- */

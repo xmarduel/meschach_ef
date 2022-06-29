@@ -6,11 +6,11 @@
  *     examples :
  *
  *     Laplacien :
- *        -e.LAPLACIEN(u) = F 
+ *        -e.LAPLACIEN(u) = F
  *        B.C. Dirichlet Type
  *
  *     Convection-Diffusion :
- *        -e.LAPLACIEN(u) + b.GRADIENT(u) = F 
+ *        -e.LAPLACIEN(u) + b.GRADIENT(u) = F
  *        B.C. Dirichlet Type
  *
  *     Stokes :
@@ -54,17 +54,17 @@
 
 int  main()
 {
-   
+
    ELT_3D   *MyElt , *elt_P1 , *elt_P1b , *elt_P2 ;
 
    GEOM_3D  *MyGeom;
 
    BC_3D    *MyBC;
-   
+
    RHS_3D   *MyRHS;
 
    ADV_3D   *MyADV;
-   
+
    VEC      *SOL = NULL;
 
    PARAMS   *MyParams ;
@@ -78,7 +78,7 @@ int  main()
    mem_attach_list(MY_LIST5, NB_STRUCTS5, my_names5, my_frees5, my_tnums5);
    mem_attach_list(MY_LIST6, NB_STRUCTS6, my_names6, my_frees6, my_tnums6);
    mem_attach_list(MY_LIST7, NB_STRUCTS7, my_names7, my_frees7, my_tnums7);
-   
+
    err_list_attach(MY_LIST2, NB_ERRS2, my_err_mesg2);
    err_list_attach(MY_LIST3, NB_ERRS3, my_err_mesg3);
    err_list_attach(MY_LIST4, NB_ERRS4, my_err_mesg4);
@@ -93,38 +93,38 @@ int  main()
    warn_list_attach(MY_LIST5, NB_WARNS5, my_warn_mesg5);
    warn_list_attach(MY_LIST6, NB_WARNS6, my_warn_mesg6);
    warn_list_attach(MY_LIST7, NB_WARNS7, my_warn_mesg7);
-	//warn_list_attach(MY_LIST8,NB_WARNS8,my_warn_mesg8);
-   
+   //warn_list_attach(MY_LIST8,NB_WARNS8,my_warn_mesg8);
+
    /*  LECTURE INPUT FILE "PDE_EXAMPLE_3D.json" */
    MyParams = Params_setup_from_file("DRIVERS_C/3D/PDE_EXAMPLE_3D.json");
 
    Params_set_staticparam(MyParams, 0);
-   
+
    elt_P1  = elt3D_get("P1");
    elt_P1b = elt3D_get("P1b");
    elt_P2  = elt3D_get("P2");
-   
+
    MyElt  = elt3D_get(MyParams->ef_params.name_ef);  /* "P1" */
                                                      /* "P1b" */
                                                      /* "P2" */
-   
-   MyGeom = Geom3D_get(MyElt, 
-			MyParams->geom_params.meshfile,
-			MyParams->geom_params.meshname,
-			MyParams->geom_params.meshtype);
+
+   MyGeom = Geom3D_get(MyElt,
+         MyParams->geom_params.meshfile,
+         MyParams->geom_params.meshname,
+         MyParams->geom_params.meshtype);
 
    //Geom3D_foutput(MyParams->logger, MyGeom);
 
    MyBC = Bc3D_setup_from_params(MyParams);
-   
+
    Geom3D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X);
-   
-   
+
+
    MyRHS = Rhs3D_setup_from_params(MyParams);
 
 
    /* ---------------------------------------------------------------------- */
-   
+
    if ( strcmp(MyParams->problem, "LAPLACIAN") == 0 )
    {
       SOL = solve3D_laplacian(MyElt, MyGeom, MyBC, MyRHS);
@@ -144,9 +144,9 @@ int  main()
       printf("Problem \"%s\" not yet implemented", MyParams->problem);
       exit(EXIT_FAILURE);
    }
-   
+
    /* ----------------------------------------------------------------------------- */
-   
+
    if ( strcmp(MyParams->problem, "LAPLACIAN") == 0 )
    {
       if (MyParams->graph_params.SILO) graphics3D( "silo", MyElt, MyGeom, SOL, "SolApproch");
@@ -158,28 +158,28 @@ int  main()
       double norm_diff = 0.0;
       FUN_3D  *fun3D = Fun3D_get();
       Fun3D_setLUAFunction(fun3D, MyParams->sol_params.sol[0].fundef);
-      
+
       graphics3D_fun("vtk", MyElt , MyGeom , fun3D, "Sol_Exacte");
-      
+
       VEC *sol_exacte = v_get(MyGeom->NBSOMM);
       sol_exacte = build_vec_ef_from_function3D(MyElt, MyGeom, fun3D, sol_exacte);
-      
+
       VEC *v_diff = v_get(MyGeom->NBSOMM);
       double diff = v_norm2( v_sub(SOL, sol_exacte, v_diff) );
-      
+
       printf("diff solexacte-solapprochee = %le \n", norm_diff);
-      
+
       graphics3D("vtk",  MyElt, MyGeom, SOL, "Diff_Approch");
-      
+
       FUN_3D_FREE(fun3D);
    }
    /* ----------------------------------------------------------------------------- */
-   
-   
+
+
    ELT_3D_FREE(elt_P1);
    ELT_3D_FREE(elt_P2);
    ELT_3D_FREE(elt_P1b);
-      
+
    ELT_3D_FREE(MyElt);
    GEOM_3D_FREE(MyGeom);
    BC_3D_FREE(MyBC);
@@ -192,7 +192,7 @@ int  main()
    /*------------------------------------------------------------------------*/
 
    mem_info_file(stdout, 0);
-   
+
    mem_info_file(stdout, MY_LIST1);
    mem_info_file(stdout, MY_LIST2);
    mem_info_file(stdout, MY_LIST3);
@@ -200,7 +200,7 @@ int  main()
    mem_info_file(stdout, MY_LIST5);
    mem_info_file(stdout, MY_LIST6);
    mem_info_file(stdout, MY_LIST7);
-   
+
    /*------------------------------------------------------------------------*/
 
    return EXIT_SUCCESS;
