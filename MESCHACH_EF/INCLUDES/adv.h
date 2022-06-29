@@ -6,9 +6,6 @@ extern "C"
 {
 #endif
 
-#ifdef WIN32
-#pragma warning ( disable : 4715 )
-#endif
 
 /** \file adv.h
  *
@@ -56,7 +53,7 @@ static  char *my_err_mesg7[NB_ERRS7] =
    "adv axe too big"                   /* 4 */
 };
 
-static char *my_warn_mesg7[NB_WARNS7] = 
+static char *my_warn_mesg7[NB_WARNS7] =
 {
    "unknown rhs warning"               /* 0 */
 };
@@ -117,7 +114,7 @@ int err_warn_attach_lists7(void);
 */
 
 /*! \fn mem_stat_reg7(void **var, int type)
-* 
+*
 * \param var  : adress of a pointer to a ADV_nD structure
 * \param type : TYPE_ADV_1D, TYPE_ADV_2D or TYPE_ADV_3D
 *
@@ -135,7 +132,7 @@ int err_warn_attach_lists7(void);
 */
 
 /*! \fn mem_stat_free7(int mark)
-* 
+*
 * \param mark  : the index of the "workspace" whre the static variables are registered
 *
 * Free the static variables created in a workspace
