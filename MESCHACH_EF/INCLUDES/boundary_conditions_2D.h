@@ -69,28 +69,28 @@ BC_2D      *Bc2D_setup_from_params(const PARAMS *params);
 	
 int         Bc2D_free(BC_2D  *MyBC);
 
-BC_2D      *Bc2D_setBcType             (BC_2D* MyBC, BC_2D_TYPE bctype, int ref, int axe);
+BC_2D      *Bc2D_setBcType              (BC_2D* MyBC, BC_2D_TYPE bctype, int ref, int axe);
 
 /* these two functions are also used in the Python extension module */
-BC_2D      *Bc2D_setFunction1          (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
-BC_2D      *Bc2D_setFunction2          (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
+BC_2D      *Bc2D_setFunction1           (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
+BC_2D      *Bc2D_setFunction2           (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
 /* these two functions are also used in the Python extension module */
 
-BC_2D      *Bc2D_setCFunction          (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
-BC_2D      *Bc2D_setCFunction2         (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
+BC_2D      *Bc2D_setCFunction           (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
+BC_2D      *Bc2D_setCFunction2          (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
 
-BC_2D      *Bc2D_setCFunctionTransient (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_3D phi);
-BC_2D      *Bc2D_setCFunctionTransient2(BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_3D phi);
+BC_2D      *Bc2D_setCFunctionTransient  (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_3D phi);
+BC_2D      *Bc2D_setCFunctionTransient2 (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_3D phi);
 
-BC_2D      *Bc2D_setLUAFunction         (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
-BC_2D      *Bc2D_setLUAFunction2        (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
+BC_2D      *Bc2D_setLUAFunction          (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
+BC_2D      *Bc2D_setLUAFunction2         (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
    
 BC_2D      *Bc2D_setLUAFunctionTransient (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
 BC_2D      *Bc2D_setLUAFunctionTransient2(BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
    
    
-BC_2D      *Bc2D_setTps                (BC_2D *MyBC, Real tps    );
-BC_2D      *Bc2D_setCurrentSelectedAxe (BC_2D *MyBC, int axe     );
+BC_2D      *Bc2D_setTps                  (BC_2D *MyBC, Real tps    );
+BC_2D      *Bc2D_setCurrentSelectedAxe   (BC_2D *MyBC, int axe     );
 
 
 Real        Bc2D_evalFunction1         (const BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, Real x, Real y );

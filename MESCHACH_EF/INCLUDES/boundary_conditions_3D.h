@@ -69,18 +69,18 @@ BC_3D      *Bc3D_setup_from_params(const PARAMS *params);
 	
 int         Bc3D_free(BC_3D  *MyBC);
 
-BC_3D      *Bc3D_setBcType             (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe );
+BC_3D      *Bc3D_setBcType               (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe );
 
 /* these two functions are also used in the Python extension module */
-BC_3D      *Bc3D_setFunction1          (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
-BC_3D      *Bc3D_setFunction2          (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
+BC_3D      *Bc3D_setFunction1            (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
+BC_3D      *Bc3D_setFunction2            (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
 /* these two functions are also used in the Python extension module */
 
-BC_3D      *Bc3D_setCFunction          (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_3D phi);
-BC_3D      *Bc3D_setCFunction2         (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_3D phi);
+BC_3D      *Bc3D_setCFunction            (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_3D phi);
+BC_3D      *Bc3D_setCFunction2           (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_3D phi);
 
-BC_3D      *Bc3D_setCFunctionTransient (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_4D phi);
-BC_3D      *Bc3D_setCFunctionTransient2(BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_4D phi);
+BC_3D      *Bc3D_setCFunctionTransient   (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_4D phi);
+BC_3D      *Bc3D_setCFunctionTransient2  (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_4D phi);
 
    
 BC_3D      *Bc3D_setLUAFunction          (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
@@ -90,8 +90,8 @@ BC_3D      *Bc3D_setLUAFunctionTransient (BC_3D* MyBC, BC_3D_TYPE bctype, int re
 BC_3D      *Bc3D_setLUAFunctionTransient2(BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
 
    
-BC_3D      *Bc3D_setTps                (BC_3D *MyBC, Real tps    );
-BC_3D      *Bc3D_setCurrentSelectedAxe (BC_3D *MyBC, int axe     );
+BC_3D      *Bc3D_setTps                  (BC_3D *MyBC, Real tps    );
+BC_3D      *Bc3D_setCurrentSelectedAxe   (BC_3D *MyBC, int axe     );
 
 
 Real        Bc3D_evalFunction1         (const BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, Real x, Real y, Real z);

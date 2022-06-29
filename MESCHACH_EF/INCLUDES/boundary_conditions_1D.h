@@ -68,43 +68,43 @@ BC_1D      *Bc1D_setup_from_params(const PARAMS *params);
 	
 int         Bc1D_free(BC_1D *MyBC);
 
-BC_1D      *Bc1D_setBcType              (BC_1D* MyBC, BC_1D_TYPE bctype, int ref, int axe);
+BC_1D      *Bc1D_setBcType               (BC_1D* MyBC, BC_1D_TYPE bctype, int ref, int axe);
 
 /* these two functions are also used in the Python extension module */
-BC_1D      *Bc1D_setFunction1           (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
-BC_1D      *Bc1D_setFunction2           (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
+BC_1D      *Bc1D_setFunction1            (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
+BC_1D      *Bc1D_setFunction2            (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
 /* these two functions are also used in the Python extension module */
 
-BC_1D      *Bc1D_setCFunction           (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_1D phi);
-BC_1D      *Bc1D_setCFunction2          (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_1D phi);
+BC_1D      *Bc1D_setCFunction            (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_1D phi);
+BC_1D      *Bc1D_setCFunction2           (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_1D phi);
 
-BC_1D      *Bc1D_setCFunctionTransient  (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
-BC_1D      *Bc1D_setCFunctionTransient2 (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
+BC_1D      *Bc1D_setCFunctionTransient   (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
+BC_1D      *Bc1D_setCFunctionTransient2  (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUNC_2D phi);
 
-BC_1D      *Bc1D_setLUAFunction         (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
-BC_1D      *Bc1D_setLUAFunction2        (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
+BC_1D      *Bc1D_setLUAFunction          (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
+BC_1D      *Bc1D_setLUAFunction2         (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
    
 BC_1D      *Bc1D_setLUAFunctionTransient (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
 BC_1D      *Bc1D_setLUAFunctionTransient2(BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
    
-BC_1D      *Bc1D_setTps                 (BC_1D* MyBC, Real tps    );
+BC_1D      *Bc1D_setTps                  (BC_1D* MyBC, Real tps    );
 
 
-Real        Bc1D_evalFunction1          (const BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, Real x);
-Real        Bc1D_evalFunction2          (const BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, Real x);
+Real        Bc1D_evalFunction1           (const BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, Real x);
+Real        Bc1D_evalFunction2           (const BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, Real x);
 
-BC_1D_TYPE  Bc1D_getBcType              (const BC_1D* MyBC, int axe, int ref);
+BC_1D_TYPE  Bc1D_getBcType               (const BC_1D* MyBC, int axe, int ref);
 
-int         Bc1D_checkBC                (const BC_1D* MyBC );
+int         Bc1D_checkBC                 (const BC_1D* MyBC );
 
-int         Bc1D_hasDirichletBC         (const BC_1D* MyBC, int axe);
-int         Bc1D_hasNeumannBC           (const BC_1D* MyBC, int axe);
-int         Bc1D_hasCauchyBC            (const BC_1D* MyBC, int axe);
-int         Bc1D_hasRobinBC             (const BC_1D* MyBC, int axe);
+int         Bc1D_hasDirichletBC          (const BC_1D* MyBC, int axe);
+int         Bc1D_hasNeumannBC            (const BC_1D* MyBC, int axe);
+int         Bc1D_hasCauchyBC             (const BC_1D* MyBC, int axe);
+int         Bc1D_hasRobinBC              (const BC_1D* MyBC, int axe);
  
-int         Bc1D_getNumberOfBC          (const BC_1D* MyBC, int axe);
-int         Bc1D_getNumberOfBcOnSomms   (const BC_1D* MyBC, int axe);
-int         Bc1D_getNumberOfBcOnFaces   (const BC_1D* MyBC, int axe);
+int         Bc1D_getNumberOfBC           (const BC_1D* MyBC, int axe);
+int         Bc1D_getNumberOfBcOnSomms    (const BC_1D* MyBC, int axe);
+int         Bc1D_getNumberOfBcOnFaces    (const BC_1D* MyBC, int axe);
 
    
   

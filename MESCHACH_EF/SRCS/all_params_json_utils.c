@@ -217,7 +217,7 @@ int json_check_data(const char* path, const char* schema, char *res)
       return 1;
    }
    
-   FILE *tmp = fopen("without_comments.json", "w");
+   FILE *tmp = fopen("schema_without_comments.json", "w");
 
    fprintf(tmp, "%s", text);
    fclose(tmp);

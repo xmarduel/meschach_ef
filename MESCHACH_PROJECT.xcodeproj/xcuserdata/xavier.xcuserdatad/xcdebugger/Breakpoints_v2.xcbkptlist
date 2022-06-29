@@ -57,22 +57,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MESCHACH_ADDS/SRCS/iter_adds.c"
-            timestampString = "677957766.179986"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
-            landmarkName = "iter_xspbicgstab"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MESCHACH_EF/SRCS/miscellaneous_1D.c"
             timestampString = "677957766.180059"
             startingColumnNumber = "9223372036854775807"
@@ -127,7 +111,23 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1607"
             endingLineNumber = "1607"
-            landmarkName = "json_config_PARAMS_graphics_interactiv2D_plots"
+            landmarkName = "json_config_PARAMS_graphics_interactiv1D_plots"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MESCHACH_EF/SRCS/all_params.c"
+            timestampString = "678221730.454837"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "Params_setup_from_file"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

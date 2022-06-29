@@ -708,9 +708,6 @@ but infact you need to define only a few of them. It just gives you an idea how 
                 "MATLAB"     : { "type":"boolean", "description":"" },
                 "VTK"        : { "type":"boolean", "description":"" },
                 "SILO"       : { "type":"boolean", "description":"" },
-                "PGPLOT"     : { "type":"boolean", "description":"" },
-                "VOGLE"      : { "type":"boolean", "description":"" },
-                "LIBSCIPLOT" : { "type":"boolean", "description":"" },
                 "MATPLOTLIB" : { "type":"boolean", "description":"" }
             }
         },
@@ -721,7 +718,6 @@ but infact you need to define only a few of them. It just gives you an idea how 
                 "MATLAB"     : { "type":"boolean", "description":"" },
                 "VTK"        : { "type":"boolean", "description":"" },
                 "SILO"       : { "type":"boolean", "description":"" },
-                "VOGLE"      : { "type":"boolean", "description":"" },
                 "MATPLOTLIB" : { "type":"boolean", "description":"" }
             }
         },
@@ -735,7 +731,8 @@ but infact you need to define only a few of them. It just gives you an idea how 
         
         "GRAPHICS_1D" : { "type":"object", "description":"", 
             "properties" : {
-                "DRIVER" : { "type":"string", "description":"Driver PGPLOT-VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
+                "ENGINE" : { "type":"string", "description":"Dengine", "enum":["PGPLOT", "VOGLE", "LIBSCIPLOT"] },
+                "DRIVER" : { "type":"string", "description":"Driver PGPLOT-VOGLE-LIBSCIPLOT output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
                 "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
                     "items" : { "type":"integer", "description":"in pixels" },
                     "minItems": 2,
@@ -767,6 +764,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
             },
             "GRAPHICS_2D" : { "type":"object", "description":"", 
                 "properties" : {
+                    "ENGINE" : { "type":"string", "description":"Dengine", "enum":["VOGLE"] },
                     "DRIVER" : { "type":"string", "description":"Driver VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
                     "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
                         "items" : { "type":"integer", "description":"in pixels" },
@@ -922,16 +920,14 @@ below an example of such a configuration file.</p>
         "MATLAB"     : false,
         "VTK"        : false,
         "SILO"       : false,
-        "PGPLOT"     : false,
-        "VOGLE"      : true,
-        "LIBSCIPLOT" : false,
         "MATPLOTLIB" : false
     },
     
     # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------
     
     "GRAPHICS_1D" : {
-        "DRIVER" : "/XWINDOW" , 
+        "ENGINE"      : "VOGLE",
+        "DRIVER"      : "/XWINDOW" , 
         "WINDOW_SIZE" : [600, 400] ,
         "LABELS_SIZE" : 1.2 ,
         

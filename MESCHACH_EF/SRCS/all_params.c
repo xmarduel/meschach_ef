@@ -93,7 +93,7 @@ PARAMS* Params_setup_from_file(const char* input_file)
    char abs_schema[BUFSIZE];
    Params_get_absolute_path(schema, abs_schema);
 
-   int rc = json_check_data(input_file, abs_schema, validation_output);
+   int rc = json_check_data(abs_file, abs_schema, validation_output);
    
    json_t *config = json_load_xfile(abs_file);
 

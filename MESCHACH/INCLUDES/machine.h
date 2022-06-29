@@ -83,10 +83,10 @@
 #ifdef PLATFORM_LINUX
 #include <malloc.h>
 #else
-#ifdef PLATFORM_DARWIN
-#include	<sys/malloc.h>
+#ifdef PLATFORM_WINDOWS
+#include	<malloc.h>
 #else
-#include <malloc.h>
+#include <sys/malloc.h>
 #endif
 #endif
 
@@ -100,10 +100,10 @@
 #ifdef PLATFORM_LINUX
 #include <sys/signal.h>
 #else
-#ifdef PLATFORM_DARWIN
-#include <sys/signal.h>
-#else
+#ifdef PLATFORM_WINDOWS
 #include <signal.h>
+#else
+#include <sys/signal.h>
 #endif
 #endif
 
