@@ -28,7 +28,7 @@ extern "C"
 
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
-	
+
 #define  NBMAX_RHS_1D_FUNCTIONS   11
 
 /*------------------------------------------------------------------------- */
@@ -48,7 +48,7 @@ typedef struct {
 
 RHS_1D* Rhs1D_get(void);
 RHS_1D* Rhs1D_setup_from_params(const PARAMS* params);
-	
+
 int     Rhs1D_free(RHS_1D *MyRhs);
 
 RHS_1D* Rhs1D_setFunction          ( RHS_1D* MyRhs, int ref_e, int axe, FUN_TYPE type, void* phi, void* clientdata);
@@ -59,12 +59,12 @@ RHS_1D* Rhs1D_setCFunctionTransient( RHS_1D* MyRhs, int ref_e, int axe, FUNC_2D 
 RHS_1D* Rhs1D_setLUAFunction         ( RHS_1D* MyRhs, int ref_e, int axe, const char *def);
 RHS_1D* Rhs1D_setLUAFunctionTransient( RHS_1D* MyRhs, int ref_e, int axe, const char *def);
 
-   
+
 RHS_1D* Rhs1D_setTps               ( RHS_1D* MyRhs, Real tps);
 
 Real    Rhs1D_evalFunction         ( const RHS_1D* MyRhs, int ref_e, int axe, Real x);
 
-	
+
 #ifdef __cplusplus
 }
 #endif
@@ -90,7 +90,7 @@ Real    Rhs1D_evalFunction         ( const RHS_1D* MyRhs, int ref_e, int axe, Re
 */
 
 /*! \fn Rhs1D_setFunction   ( RHS_1D* MyRhs, int ref_e, int axe, FUN_TYPE type, void* phi, void* clientdata);
-* 
+*
 * \param MyRhs   : the RHS structure
 * \param ref_e   : 0
 * \param axe     : AXEe_X
@@ -113,17 +113,17 @@ Real    Rhs1D_evalFunction         ( const RHS_1D* MyRhs, int ref_e, int axe, Re
 */
 
 /*! \fn Rhs1D_setCFunctionTransient   ( RHS_1D* MyRhs, int ref_e, int axe, FUNC_2D phi);
-* 
+*
 * \param MyRhs   : the RHS structure
 * \param ref_e   : 0
-* \param axe     : AXEe_X 
+* \param axe     : AXEe_X
 * \param phi     : the "C" function ( 2 arguments (x,tps) )
 *
 * Set into the structure a function
 */
 
 /*! \fn Rhs1D_setTps          ( RHS_1D* MyRhs, Real tps);
-* 
+*
 * \param MyRhs : the RHS structure
 * \param tps   : the "current" time
 *
@@ -132,7 +132,7 @@ Real    Rhs1D_evalFunction         ( const RHS_1D* MyRhs, int ref_e, int axe, Re
 
 
 /*! \fn Rhs1D_evalFunction     ( const RHS_1D* MyRhs, int ref_e, int axe, Real x);
-* 
+*
 * \param MyRhs : the RHS structure
 * \param ref_e :
 * \param axe   : AXEe_X only

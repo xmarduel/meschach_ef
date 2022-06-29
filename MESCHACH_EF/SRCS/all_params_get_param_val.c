@@ -56,7 +56,7 @@ void * Params_get_oneparam(const PARAMS* p, const char* category, const char* fi
    if ( !p        ) error(E_NULL, "Params_get_oneparam");
    if ( !category ) error(E_NULL, "Params_get_oneparam");
    if ( !field    ) error(E_NULL, "Params_get_oneparam");
-   
+
    /* check */
    if ( !Params_check_oneparam0_arguments(category, field) )
    {
@@ -291,7 +291,7 @@ static void * Params_get_oneparam0_cat_boundary_conditions_params(const PARAMS* 
    {
       error(E_UNKNOWN, "Params_get_oneparam0_cat_boundary_conditions_params");
    }
-   
+
    return NULL;
 }
 
@@ -413,7 +413,7 @@ static void * Params_get_oneparam0_cat_stokes_params(const PARAMS* p, const char
    {
       return (void*)(&(p->stokes_params.pressurematrix.innerloop_solver.max_steps));
    }
-               
+
    else
    if ( strcmp(field, "uzawa.rho") == 0 )
    {
@@ -449,7 +449,7 @@ static void * Params_get_oneparam0_cat_stokes_params(const PARAMS* p, const char
    {
       return (void*)(&(p->stokes_params.uzawa.innerloop_solver.max_steps));
    }
-   
+
    else
    if ( strcmp(field, "augmentedlagrangian.rho") == 0 )
    {
@@ -785,7 +785,7 @@ static void * Params_get_oneparam0_cat_graphics_interactiv2Dplots_params(const P
    {
       error(E_UNKNOWN, "Params_get_oneparam0_cat_graphics_interactiv2Dplots_params");
    }
-   
+
    return NULL;
 }
 
@@ -825,7 +825,7 @@ static void * Params_get_oneparam0_cat_miscellaneous_graphics(const PARAMS* p, c
    {
       error(E_UNKNOWN, "Params_get_oneparam0_cat_miscellaneous_graphics");
    }
-   
+
    return NULL;
 }
 
@@ -835,10 +835,10 @@ static void * Params_get_oneparam0_cat_miscellaneous_graphics(const PARAMS* p, c
 static void * Params_get_oneparam0_cat_exact_solution_params(const PARAMS* p, const char* field)
 {
    error(E_UNKNOWN, "Params_get_oneparam0_cat_exact_solution_params");
-   
+
    return NULL;
 }
-   
+
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
 
@@ -978,10 +978,10 @@ static void * Params_get_oneparam1_cat_initial_condition_params(const PARAMS* p,
 
    return NULL;
 }
-   
+
 /*-----------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------*/
-   
+
 static void * Params_get_oneparam1_cat_exact_solution_params(const PARAMS* p, const char* field, int idx1)
 {
    /*
@@ -994,7 +994,7 @@ static void * Params_get_oneparam1_cat_exact_solution_params(const PARAMS* p, co
       error(E_UNKNOWN, "Params_get_oneparam1_cat_exact_solution_params");
    }
    */
-      
+
    return NULL;
 }
 
@@ -1014,7 +1014,7 @@ static void * Params_get_oneparam1_cat_graphics_interactiv1Dplots_params(const P
 static void * Params_get_oneparam1_cat_graphics_interactiv2Dplots_params(const PARAMS* p, const char* field, int idx1)
 {
    error(E_UNKNOWN, "Params_get_oneparam1_cat_graphics_interactiv2Dplots_params");
-   
+
    return NULL;
 }
 
@@ -1238,7 +1238,7 @@ static void * Params_get_oneparam2_cat_graphics_interactiv2Dplots_params(const P
    {
       error(E_UNKNOWN, "Params_get_oneparam2_cat_graphics_interactiv2Dplots_params");
    }
-   
+
    return NULL;
 }
 

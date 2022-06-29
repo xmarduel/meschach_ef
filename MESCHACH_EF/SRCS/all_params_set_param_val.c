@@ -166,9 +166,9 @@ static void Params_set_oneparam0_cat_main_problem(PARAMS* p, const char* field, 
 
       if ( TYPEd_STRING != Params_get_valuetype("main_problem", "NULL") )
       {
-         error(E_UNKNOWN, "Params_set_oneparam0_cat_main_problem");         
+         error(E_UNKNOWN, "Params_set_oneparam0_cat_main_problem");
       }
-           
+
    }
    else
    {
@@ -246,7 +246,7 @@ static void Params_set_oneparam0_cat_finite_elements_params(PARAMS* p, const cha
 /*-----------------------------------------------------------------------------------------*/
 
 static void Params_set_oneparam0_cat_geometry_params(PARAMS* p, const char* field, void*  val)
-{   
+{
    if ( strcmp(field,"meshfile") == 0 )
    {
       strncpy(p->geom_params.meshfile, (char*)val, 256);
@@ -293,7 +293,7 @@ static void Params_set_oneparam0_cat_geometry_params(PARAMS* p, const char* fiel
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_geometry_params");
-   }   
+   }
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -403,7 +403,7 @@ static void Params_set_oneparam0_cat_stokes_params(PARAMS* p, const char* field,
    if ( strcmp(field,"pressurematrix.max_steps") == 0 )
    {
       p->stokes_params.pressurematrix.max_steps = *(int*)val;
-   }   
+   }
    else
    if ( strcmp(field,"pressurematrix.innerloop_method") == 0 )
    {
@@ -429,8 +429,8 @@ static void Params_set_oneparam0_cat_stokes_params(PARAMS* p, const char* field,
    if ( strcmp(field,"pressurematrix.innerloop_solver.max_steps") == 0 )
    {
       p->stokes_params.pressurematrix.innerloop_solver.max_steps = *(int*)val;
-   }   
-   
+   }
+
    /* UZAWA */
    else
    if ( strcmp(field,"uzawa.rho") == 0 )
@@ -473,7 +473,7 @@ static void Params_set_oneparam0_cat_stokes_params(PARAMS* p, const char* field,
    {
       p->stokes_params.uzawa.innerloop_solver.max_steps = *(int*)val;
    }
-   
+
    /* AUGMENTEDLAGR */
    else
    if ( strcmp(field,"augmentedlagrangian.rho") == 0 )
@@ -548,7 +548,7 @@ static void Params_set_oneparam0_cat_navierstokes_params(PARAMS* p, const char* 
       strncpy(p->navierstokes_params.outer_method, (char*)val, 64 );
       p->navierstokes_params.outer_method[63] = '\0';
    }
-   
+
    /* PRESSUREMATRIX */
    else
    if ( strcmp(field,"pressurematrix.innerloop_method") == 0 )
@@ -575,8 +575,8 @@ static void Params_set_oneparam0_cat_navierstokes_params(PARAMS* p, const char* 
    if ( strcmp(field,"pressurematrix.innerloop_solver.max_steps") == 0 )
    {
       p->navierstokes_params.pressurematrix.innerloop_solver.max_steps = *(int*)val;
-   }   
-   
+   }
+
    /* UZAWA */
    else
    if ( strcmp(field,"uzawa.rho") == 0 )
@@ -609,7 +609,7 @@ static void Params_set_oneparam0_cat_navierstokes_params(PARAMS* p, const char* 
    {
       p->navierstokes_params.uzawa.innerloop_solver.max_steps = *(int*)val;
    }
-   
+
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_navierstokes_params");
@@ -712,7 +712,7 @@ static void Params_set_oneparam0_cat_graphics_output_params(PARAMS* p, const cha
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_graphics_output_params");
    }
-   
+
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -757,7 +757,7 @@ static void Params_set_oneparam0_cat_graphics_interactiv1Dplots_params(PARAMS* p
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_graphics_interactiv1Dplots_params");
-   }   
+   }
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -802,7 +802,7 @@ static void Params_set_oneparam0_cat_graphics_interactiv2Dplots_params(PARAMS* p
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_graphics_interactiv2Dplots_params");
-   }   
+   }
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -832,7 +832,7 @@ static void Params_set_oneparam0_cat_time_scheme_params(PARAMS* p, const char* f
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_time_scheme_params");
-   }   
+   }
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -862,7 +862,7 @@ static void Params_set_oneparam0_cat_miscellaneous_graphics(PARAMS* p, const cha
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_miscellaneous_graphics");
-   }   
+   }
 }
 
 /*-----------------------------------------------------------------------------------------*/
@@ -892,7 +892,7 @@ static void Params_set_oneparam0_cat_miscellaneous_params(PARAMS* p, const char*
    else
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_miscellaneous_params");
-   }   
+   }
 }
 
 /*-----------------------------------------------------------------------------------------*/

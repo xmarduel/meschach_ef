@@ -22,7 +22,7 @@
 FUN_1D *Fun1D_get(void)
 {
    FUN_1D *Fun;
-   
+
    if ( (Fun=NEW(FUN_1D)) == (FUN_1D *)NULL )
    {
       error(E_MEM, "Fun1D_get");
@@ -32,7 +32,7 @@ FUN_1D *Fun1D_get(void)
       mem_bytes_list(TYPE_FUN_1D, 0, sizeof(FUN_1D), MY_LIST5);
       mem_numvar_list(TYPE_FUN_1D, 1, MY_LIST5);
    }
-   
+
    Fun1D_init(Fun);
 
    return  Fun;
@@ -43,7 +43,7 @@ FUN_1D *Fun1D_get(void)
 
 int Fun1D_free(FUN_1D *Fun)
 {
-   
+
    if ( Fun == FUN_1D_NULL )
    {
       return EXIT_FAILURE;
@@ -55,9 +55,9 @@ int Fun1D_free(FUN_1D *Fun)
          mem_bytes_list(TYPE_FUN_1D, sizeof(FUN_1D), 0, MY_LIST5);
          mem_numvar_list(TYPE_FUN_1D, -1, MY_LIST5);
       }
-      
-      free(Fun);  
-      
+
+      free(Fun);
+
       return EXIT_SUCCESS;
    }
 }
@@ -70,16 +70,16 @@ FUN_1D *Fun1D_init ( FUN_1D *MyFun)
    if ( MyFun == NULL ) error(E_NULL, "Fun1D_init");
 
    MyFun->clientdata   = NULL;
-   
+
    MyFun->phi_x        = NULL;
    MyFun->phi_xt       = NULL;
    MyFun->phi_x_v      = NULL;
    MyFun->phi_xt_v     = NULL;
-      
+
    MyFun->type         = FUN_UNDEFINED;
 
    MyFun->eval         = NULL;
-   
+
    return MyFun;
 }
 
@@ -89,7 +89,7 @@ FUN_1D *Fun1D_init ( FUN_1D *MyFun)
 FUN_1D * Fun1D_setFunction(FUN_1D* MyFun, FUN_TYPE type, void* phi, void* clientdata)
 {
    if ( MyFun == NULL ) error(E_NULL, "Fun1D_setFunction");
-         
+
    /* set type */
    MyFun->type = type;
 
@@ -121,7 +121,7 @@ FUN_1D * Fun1D_setFunction(FUN_1D* MyFun, FUN_TYPE type, void* phi, void* client
 
       default: error5(E_FUN_WRONGTYPE, "Fun1D_setFunction");
    }
-   
+
    return  MyFun;
 }
 
@@ -144,11 +144,11 @@ FUN_1D * Fun1D_setCFunctionTransient(FUN_1D* MyFun, FUNC_2D phi)
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 
-FUN_1D * Fun1D_setLUAFunction(FUN_1D* Fun, const char* def) 
+FUN_1D * Fun1D_setLUAFunction(FUN_1D* Fun, const char* def)
 {
 #ifdef HAVE_LUA
-	lua_State *L = make_lua_interpreter(def, "1D"); 
-	
+	lua_State *L = make_lua_interpreter(def, "1D");
+
    return Fun1D_setFunction(Fun, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction1D, L);
 #else
    return Fun;
@@ -162,7 +162,7 @@ FUN_1D * Fun1D_setLUAFunctionTransient(FUN_1D* Fun, const char* def)
 {
 #ifdef HAVE_LUA
 	lua_State *L = make_lua_interpreter(def, "1D_TR");
-	
+
    return Fun1D_setFunction(Fun, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction2D, L);
 #else
    return Fun;
@@ -175,7 +175,7 @@ FUN_1D * Fun1D_setLUAFunctionTransient(FUN_1D* Fun, const char* def)
 Real Fun1D_evalCFunction     (const FUN_1D* MyFun, Real x)
 {
    Real res = 0.0;
-   
+
    if ( MyFun        == NULL ) error(E_NULL, "Fun1D_evalCFunction");
    if ( MyFun->phi_x == NULL ) error(E_NULL, "Fun1D_evalCFunction");
 
@@ -204,33 +204,33 @@ Real Fun1D_evalPyFunction     (const FUN_1D* MyFun, Real x)
 
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
-       
+
 Real Fun1D_evalLUAFunction     (const FUN_1D* MyFun, Real x)
 {
 #ifdef HAVE_LUA
    if ( MyFun              == NULL ) error(E_NULL, "Fun1D_evalLUAFunction");
    if ( MyFun->phi_x_v     == NULL ) error(E_NULL, "Fun1D_evalLUAFunction");
    if ( MyFun->clientdata  == NULL ) error(E_NULL, "Fun1D_evalLUAFunction");
-      
+
    return MyFun->phi_x_v(x, MyFun->clientdata);
 #else
    return 0.0;
 #endif
 }
-       
+
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 
 Real Fun1D_evalCFunctionTransient  (const FUN_1D* MyFun, Real x, Real tps)
 {
    Real res = 0.0;
-   
+
    if ( MyFun         == NULL ) error(E_NULL, "Fun1D_evalFunctionTransient");
    if ( MyFun->phi_xt == NULL ) error(E_NULL, "Fun1D_evalFunctionTransient");
 
-   /* eval function */   
+   /* eval function */
    res = MyFun->phi_xt(x, tps);
-         
+
    return res;
 }
 
@@ -247,7 +247,7 @@ Real Fun1D_evalPyFunctionTransient     (const FUN_1D* MyFun, Real x, Real tps)
 
    /* eval function */
    res = MyFun->phi_xt_v(x, tps, MyFun->clientdata);
-   
+
    return res;
 }
 
@@ -267,6 +267,6 @@ Real Fun1D_evalLUAFunctionTransient    (const FUN_1D* MyFun, Real x, Real tps)
    return 0.0;
 #endif
 }
-       
+
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */

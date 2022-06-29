@@ -30,7 +30,7 @@ extern "C"
 
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
-	
+
 #define  NBMAX_RHS_2D_FUNCTIONS   11
 
 /*---------------------------------------------------------------------- */
@@ -55,7 +55,7 @@ typedef struct {
 
 RHS_2D* Rhs2D_get(void);
 RHS_2D* Rhs2D_setup_from_params(const PARAMS* params);
-	
+
 int     Rhs2D_free(RHS_2D *MyRhs);
 
 RHS_2D* Rhs2D_setFunction          (RHS_2D* MyRhs, int ref_e, int axe, FUN_TYPE type, void* phi, void* clientdata);
@@ -96,10 +96,10 @@ Real    Rhs2D_evalFunction         (const RHS_2D* MyRhs, int ref_e, int axe, Rea
 */
 
 /*! \fn Rhs2D_setFunction   ( RHS_2D* MyRhs, int ref_e, int axe, FUN_TYPE type, void* phi, void* clientdata);
-* 
+*
 * \param MyRhs   : the RHS structure
 * \param ref_e   : 0
-* \param axe     : AXEe_X or AXEe_Y 
+* \param axe     : AXEe_X or AXEe_Y
 * \param type    : the type of the function we actually store ( "C" or "Python" function)
 * \param phi     : a "C" function
 * \param clientdata  : NULL for a "C" function, a pointer to the "Python" function in the other case
@@ -119,7 +119,7 @@ Real    Rhs2D_evalFunction         (const RHS_2D* MyRhs, int ref_e, int axe, Rea
 */
 
 /*! \fn Rhs2D_setCFunctionTransient   ( RHS_2D* MyRhs, int ref_e, int axe, FUNC_3D phi);
-* 
+*
 * \param MyRhs   : the RHS structure
 * \param ref_e   : 0
 * \param axe     : AXEe_X or AXEe_Y
@@ -129,7 +129,7 @@ Real    Rhs2D_evalFunction         (const RHS_2D* MyRhs, int ref_e, int axe, Rea
 */
 
 /*! \fn Rhs2D_setTps          ( RHS_2D* MyRhs, Real tps);
-* 
+*
 * \param MyRhs : the RHS structure
 * \param tps   : the "current" time
 *
@@ -137,7 +137,7 @@ Real    Rhs2D_evalFunction         (const RHS_2D* MyRhs, int ref_e, int axe, Rea
 */
 
 /*! \fn Rhs2D_setCurrentSelectedAxe  ( RHS_2D* MyRhs, int axe  );
-* 
+*
 * \param MyRhs : the RHS structure
 * \param axe   : the "current" axe : AXEe_X or AXEe_Y
 *
@@ -145,10 +145,10 @@ Real    Rhs2D_evalFunction         (const RHS_2D* MyRhs, int ref_e, int axe, Rea
 */
 
 /*! \fn Rhs2D_evalFunction          ( const RHS_2D* MyRhs, int ref_e, int axe, Real x, Real y);
-* 
+*
 * \param MyRhs : the RHS structure
 * \param ref_e :
-* \param axe   : AXEe_X or AXEe_Y 
+* \param axe   : AXEe_X or AXEe_Y
 * \param x     : the coordinate where to evaluate the function
 * \param y     : the coordinate where to evaluate the function
 *

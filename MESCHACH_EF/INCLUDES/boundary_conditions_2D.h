@@ -7,7 +7,7 @@ extern "C"
 #endif
 
 /** \file boundary_conditions_2D.h
- * 
+ *
  * Contains the structure of boundary conditions in 2 dimensions
  *
  * --------------------------------------------------------------------- */
@@ -16,7 +16,7 @@ extern "C"
 
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
-	
+
 #define  NBMAX_BC_2D_FUNCTIONS   12
 
 /*---------------------------------------------------------------------- */
@@ -36,10 +36,10 @@ typedef enum {
 typedef struct {
 
    char   BCname[16];         /**< name of bc : dirichlet, neumann, cauchy or robin         */
-  
+
    FUN_2D Fun1[2][NBMAX_BC_2D_FUNCTIONS];  /**< 2 x NBMAX_BC_2D_FUNCTIONS functions on the border */
    FUN_2D Fun2[2][NBMAX_BC_2D_FUNCTIONS];  /**< 2 x NBMAX_BC_2D_FUNCTIONS functions on the border */
-   
+
    Real tps;                   /**< for time-dependent problems */
 
    int  current_selected_axe;  /**< tag : which axing is currently selected (AXEe_X or AXEe_Y) */
@@ -66,7 +66,7 @@ typedef struct {
 
 BC_2D      *Bc2D_get(void);
 BC_2D      *Bc2D_setup_from_params(const PARAMS *params);
-	
+
 int         Bc2D_free(BC_2D  *MyBC);
 
 BC_2D      *Bc2D_setBcType              (BC_2D* MyBC, BC_2D_TYPE bctype, int ref, int axe);
@@ -84,11 +84,11 @@ BC_2D      *Bc2D_setCFunctionTransient2 (BC_2D* MyBC, BC_2D_TYPE bctype, int ref
 
 BC_2D      *Bc2D_setLUAFunction          (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
 BC_2D      *Bc2D_setLUAFunction2         (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
-   
+
 BC_2D      *Bc2D_setLUAFunctionTransient (BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
 BC_2D      *Bc2D_setLUAFunctionTransient2(BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe , const char* def);
-   
-   
+
+
 BC_2D      *Bc2D_setTps                  (BC_2D *MyBC, Real tps    );
 BC_2D      *Bc2D_setCurrentSelectedAxe   (BC_2D *MyBC, int axe     );
 
@@ -156,7 +156,7 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 */
 
 /*! \fn Bc2D_setBcType             ( BC_2D* MyBC, BC_2D_TYPE type, int ref, int axe )
-* 
+*
 * \param MyBC : the BC structure
 * \param type : the type of boundary condition we set on a given reference (next arg)
 * \param ref  : the reference index that we consider
@@ -173,7 +173,7 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 */
 
 /*! \fn Bc2D_getBcType             ( const BC_2D* MyBC, int axe, int ref)
-* 
+*
 * \param MyBC : the BC structure
 * \param axe  : AXEe_X or AXEe_Y
 * \param ref  : the reference index that we consider
@@ -182,7 +182,7 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 */
 
 /*! \fn Bc2D_setFunction1         ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
-* 
+*
 * \param MyBC       : the BC structure
 * \param bctype     : the type of boundary condition we set a function into
 * \param ref_s      : the reference index of the geometry that we consider
@@ -208,7 +208,7 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 
 
 /*! \fn Bc2D_setCFunction          ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_2D phi)
-* 
+*
 * \param MyBC   : the BC structure
 * \param bctype : the type of boundary condition we set a function into
 * \param ref_s  : the reference index that we consider
@@ -226,7 +226,7 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 */
 
 /*! \fn Bc2D_setCFunction2          ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_2D phi)
-* 
+*
 * \param MyBC   : the BC structure
 * \param bctype : the type of boundary condition we set a function into
 * \param ref_s  : the reference index that we consider
@@ -240,7 +240,7 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 */
 
 /*! \fn Bc2D_setCFunctionTransient   ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_3D phi)
-* 
+*
 * \param MyBC   : the BC structure
 * \param bctype : the type of boundary condition we set a function into
 * \param ref_s  : the reference index that we consider
@@ -259,7 +259,7 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 */
 
 /*! \fn Bc2D_setCFunctionTransient2   ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUNC_3D phi)
-* 
+*
 * \param MyBC   : the BC structure
 * \param bctype : the type of boundary condition we set a function into
 * \param ref_s  : the reference index that we consider
@@ -273,7 +273,7 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 */
 
 /*! \fn Bc2D_checkBC               ( const BC_2D* MyBC , int axe )
-* 
+*
 * \param MyBC   : the BC structure we check
 * \param axe    : AXEe_X or AXEe_Y
 *
@@ -284,7 +284,7 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 */
 
 /*! \fn Bc2D_setTps               ( BC_2D* MyBC, Real tps)
-* 
+*
 * \param MyBC   : the BC structure we check
 * \param tps    : the current time
 *

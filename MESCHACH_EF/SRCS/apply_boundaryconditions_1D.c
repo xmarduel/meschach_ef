@@ -49,7 +49,7 @@ void transform1D_vector_with_bc(const ELT_1D *elt, const GEOM_1D *geom, const BC
    /*
     conditions limites de Dirichlet - le vecteur est change en consequense
     */
-   
+
    /* check pointer */
    if ( elt    == NULL ) error(E_NULL, "transform1D_vector_with_bc");
    if ( geom   == NULL ) error(E_NULL, "transform1D_vector_with_bc");
@@ -61,7 +61,7 @@ void transform1D_vector_with_bc(const ELT_1D *elt, const GEOM_1D *geom, const BC
    if ( A->m != RHS->dim )         error(E_SIZES, "transform1D_vector_with_bc");
    //if ( A->m != geom->REF_S->dim ) error(E_SIZES, "transform1D_vector_with_bc");
    //if ( A->m != geom->XSOMM->dim ) error(E_SIZES, "transform1D_vector_with_bc");
-   
+
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
       if ( Bc1D_hasDirichletBC(BC, AXEe_X) )
@@ -69,7 +69,7 @@ void transform1D_vector_with_bc(const ELT_1D *elt, const GEOM_1D *geom, const BC
          apply_Bc1D_dirichlet_on_vector(elt, geom, BC, A, RHS);
       }
    }
-   
+
    return;
 }
 
@@ -81,7 +81,7 @@ void transform1D_matrix_with_bc(const ELT_1D *elt, const GEOM_1D *geom, const BC
    /*
     conditions limites de Dirichlet - la matrice est changee en consequense
    */
-   
+
    /* check pointer */
    if ( elt    == NULL ) error(E_NULL, "transform1D_matrix_with_bc");
    if ( geom   == NULL ) error(E_NULL, "transform1D_matrix_with_bc");
@@ -126,7 +126,7 @@ static void apply_Bc1D_dirichlet_on_matrix(const ELT_1D *elt, const GEOM_1D *geo
    {
       return apply_Bc1D_dirichlet_on_matrix_SPLINES(elt, geom, BC, A);
    }
-   
+
    int i,idx,idx2;
    SPROW *r;
 
@@ -137,14 +137,14 @@ static void apply_Bc1D_dirichlet_on_matrix(const ELT_1D *elt, const GEOM_1D *geo
          r = A->row + i ;
          for (idx=0; idx<r->len; idx++ ) r->elt[idx].val = 0.0 ; /* 0 on the whole row */
          sprow_set_val(r,i, 1.0);    /* but 1 on the diagonal element */
-      }                            
+      }
       else
       {
          r = A->row + i ;
          for (idx=0; idx<r->len; idx++ )
          {
             idx2 = r->elt[idx].col ;
-            
+
             if ( (geom->REF_S->ive[idx2] > 0) && (BC_1De_DIRICHLET == Bc1D_getBcType(BC, AXEe_X, geom->REF_S->ive[idx2])) )
             {
                r->elt[idx].val = 0.0 ;
@@ -158,11 +158,11 @@ static void apply_Bc1D_dirichlet_on_matrix_SPLINES(const ELT_1D *elt, const GEOM
 {
    int i,idx,idx2;
    SPROW *r;
-   
+
    for(i=0; i<A->m; i++)
    {
       int node_i = geom->SPLINES_DOF_TO_REF_S->ive[i];
-      
+
       if ( (node_i > -1) && (geom->REF_S->ive[node_i] > 0) && (BC_1De_DIRICHLET == Bc1D_getBcType(BC, AXEe_X, geom->REF_S->ive[node_i])) )
       {
          r = A->row + i ;
@@ -175,9 +175,9 @@ static void apply_Bc1D_dirichlet_on_matrix_SPLINES(const ELT_1D *elt, const GEOM
          for (idx=0; idx<r->len; idx++ )
          {
             idx2 = r->elt[idx].col ;
-            
+
             int node_idx2 = geom->SPLINES_DOF_TO_REF_S->ive[idx2];
-            
+
             if ( (node_idx2 > -1) && (geom->REF_S->ive[node_idx2] > 0) && (BC_1De_DIRICHLET == Bc1D_getBcType(BC, AXEe_X, geom->REF_S->ive[node_idx2])) )
             {
                r->elt[idx].val = 0.0 ;
@@ -208,7 +208,7 @@ static void apply_Bc1D_dirichlet_on_vector(const ELT_1D *elt, const GEOM_1D *geo
    {
       return apply_Bc1D_dirichlet_on_vector_SPLINES(elt, geom, BC, A, RHS);
    }
-   
+
    int i,idx,idx2;
    SPROW *r;
 
@@ -223,7 +223,7 @@ static void apply_Bc1D_dirichlet_on_vector(const ELT_1D *elt, const GEOM_1D *geo
       else
       {
          r = A->row + i ;
-         
+
          for ( idx=0 ; idx<r->len ; idx++ )
          {
             idx2 = r->elt[idx].col ;
@@ -246,34 +246,34 @@ static void apply_Bc1D_dirichlet_on_vector_SPLINES(const ELT_1D *elt, const GEOM
    //            -> NB_DOF = NX + 3 (S3)
    //            -> NB_DOF = NX + 4 (S4)
    //            -> NB_DOF = NX + 5 (S5)
-   
+
    int i,idx,idx2;
    SPROW *r;
-   
+
    for (i=0; i<geom->NB_DOF; i++)
    {
       int node_i = geom->SPLINES_DOF_TO_REF_S->ive[i];
-      
+
       if ( (node_i > -1) && (geom->REF_S->ive[node_i] > 0) && (BC_1De_DIRICHLET == Bc1D_getBcType(BC, AXEe_X, geom->REF_S->ive[node_i])) )
       {
             Real BCVal = Bc1D_evalFunction1(BC, BC_1De_DIRICHLET, geom->REF_S->ive[node_i] , AXEe_X , geom->XSOMM->ve[node_i] );
-         
+
             RHS->ve[i] = BCVal;
       }
       else
       {
          r = A->row + i ;
-         
+
          for ( idx=0 ; idx<r->len ; idx++ )
          {
             idx2 = r->elt[idx].col ;
-            
+
             int node_idx2 = geom->SPLINES_DOF_TO_REF_S->ive[idx2];
-            
+
             if ( node_idx2 >= 0 && (geom->REF_S->ive[node_idx2] > 0) && (BC_1De_DIRICHLET == Bc1D_getBcType(BC, AXEe_X, geom->REF_S->ive[node_idx2])) )
             {
                Real BCVal = Bc1D_evalFunction1(BC, BC_1De_DIRICHLET, geom->REF_S->ive[node_idx2], AXEe_X, geom->XSOMM->ve[node_idx2] ) ;
-               
+
                RHS->ve[i] -= (r->elt[idx].val) * BCVal ;
             }
          }

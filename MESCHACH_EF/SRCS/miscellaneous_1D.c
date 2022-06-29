@@ -28,14 +28,14 @@ VEC* build_vec_ef_from_function1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom, co
    if ( (strcmp(MyElt->name_ef,"P1") == 0) ||
         (strcmp(MyElt->name_ef,"P2") == 0) ||
         (strcmp(MyElt->name_ef,"P3") == 0)  )
-   {  
+   {
       for (s=0; s<MyGeom->NBSOMM; s++)
       {
          vec->ve[s] = fun->eval(fun, MyGeom->XSOMM->ve[s]);
       }
    }
    else
-   if (strcmp(MyElt->name_ef,"H3") == 0) 
+   if (strcmp(MyElt->name_ef,"H3") == 0)
    {
       if ( dfun == FUN_1D_NULL ) error(E_NULL, "build_vec_from_function1D");
 
@@ -52,13 +52,13 @@ VEC* build_vec_ef_from_function1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom, co
         (strcmp(MyElt->name_ef,"S5") == 0)  )
    {
       VEC *vec_world = v_get(MyGeom->NBSOMM);
-      
+
       /* give vec in the world space */
       for (s=0; s<MyGeom->NBSOMM; s++)
       {
          vec_world->ve[s] = fun->eval(fun, MyGeom->XSOMM->ve[s]);
       }
-      
+
       // inverse of EF_to_WORLD: LU error !!
       int nb_steps = 0;
       iter_xspbicgstab(MyGeom->EF_to_WORLD, NULL, vec_world, 1.0e-12, vec, 100, &nb_steps, NULL);
@@ -68,20 +68,20 @@ VEC* build_vec_ef_from_function1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom, co
    {
       error(E_UNKNOWN, "build_vec_ef_from_function1D");
    }
-   
+
    return vec;
 }
 
 VEC* build_vec_world_from_function1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom, const FUN_1D *fun, const FUN_1D* dfun, VEC *vec)
 {
    int s;
-   
+
    if ( MyElt   == ELT_1D_NULL   ) error(E_NULL, "build_vec_world_from_function1D");
    if ( MyGeom  == GEOM_1D_NULL  ) error(E_NULL, "build_vec_world_from_function1D");
    if ( fun     == FUN_1D_NULL   ) error(E_NULL, "build_vec_world_from_function1D");
    //if ( dfun   == FUN_1D_NULL   ) error(E_NULL, "build_vec_world_from_function1D");
    //if ( vec     == VNULL         ) error(E_NULL, "build_vec_world_from_function1D");
-   
+
    if (vec == VNULL)
    {
       if (strcmp(MyElt->name_ef,"H3") == 0)
@@ -93,7 +93,7 @@ VEC* build_vec_world_from_function1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom,
          vec = v_get(MyGeom->NBSOMM);
       }
    }
-   
+
    if ( (strcmp(MyElt->name_ef,"P1") == 0) ||
         (strcmp(MyElt->name_ef,"P2") == 0) ||
         (strcmp(MyElt->name_ef,"P3") == 0) ||
@@ -119,7 +119,7 @@ VEC* build_vec_world_from_function1D(const ELT_1D *MyElt, const GEOM_1D *MyGeom,
    {
       error(E_UNKNOWN, "build_vec_world_from_function1D");
    }
-   
+
    return vec;
 }
 
@@ -139,14 +139,14 @@ VEC* build_vec_ef_from_function1Dtransient(const ELT_1D *MyElt, const GEOM_1D *M
    if ( (strcmp(MyElt->name_ef,"P1") == 0) ||
         (strcmp(MyElt->name_ef,"P2") == 0) ||
         (strcmp(MyElt->name_ef,"P3") == 0)  )
-   {  
+   {
       for (s=0; s<MyGeom->NBSOMM; s++)
       {
          vec->ve[s] = fun->eval(fun, MyGeom->XSOMM->ve[s], tps);
       }
    }
    else
-   if (strcmp(MyElt->name_ef,"H3") == 0) 
+   if (strcmp(MyElt->name_ef,"H3") == 0)
    {
       if ( dfun == FUN_1D_NULL ) error(E_NULL, "build_vec_from_function1D");
 
@@ -163,13 +163,13 @@ VEC* build_vec_ef_from_function1Dtransient(const ELT_1D *MyElt, const GEOM_1D *M
         (strcmp(MyElt->name_ef,"S5") == 0) )
    {
       VEC *vec_world = v_get(MyGeom->NBSOMM);
-	   
+
 	   /* give vec in the world space */
 	   for (s=0; s<MyGeom->NBSOMM; s++)
 	   {
          vec_world->ve[s] = fun->eval(fun, MyGeom->XSOMM->ve[s], tps);
 	   }
-	      
+
       // inverse of EF_to_WORLD: LU error !!
       int nb_steps = 0;
       sp_foutput(stdout,  MyGeom->EF_to_WORLD);
@@ -184,7 +184,7 @@ VEC* build_vec_ef_from_function1Dtransient(const ELT_1D *MyElt, const GEOM_1D *M
    {
       error(E_UNKNOWN, "build_vec_ef_from_function1Dtransient");
    }
-   
+
    return vec;
 }
 
@@ -192,13 +192,13 @@ VEC* build_vec_ef_from_function1Dtransient(const ELT_1D *MyElt, const GEOM_1D *M
 VEC* build_vec_world_from_function1Dtransient(const ELT_1D *MyElt, const GEOM_1D *MyGeom, const FUN_1D *fun, const FUN_1D* dfun, VEC *vec, Real tps)
 {
    int s;
-   
+
    if ( MyElt   == ELT_1D_NULL   ) error(E_NULL, "build_vec_world_from_function1Dtransient");
    if ( MyGeom  == GEOM_1D_NULL  ) error(E_NULL, "build_vec_world_from_function1Dtransient");
    if ( fun     == FUN_1D_NULL   ) error(E_NULL, "build_vec_world_from_function1Dtransient");
    //if ( dfun   == FUN_1D_NULL   ) error(E_NULL, "build_vec_world_from_function1Dtransient");
    if ( vec     == VNULL         ) error(E_NULL, "build_vec_world_from_function1Dtransient");
-   
+
    if ( (strcmp(MyElt->name_ef,"P1") == 0) ||
         (strcmp(MyElt->name_ef,"P2") == 0) ||
         (strcmp(MyElt->name_ef,"P3") == 0)  ||
@@ -216,7 +216,7 @@ VEC* build_vec_world_from_function1Dtransient(const ELT_1D *MyElt, const GEOM_1D
    if (strcmp(MyElt->name_ef,"H3") == 0)
    {
       if ( dfun == FUN_1D_NULL ) error(E_NULL, "build_vec_world_from_function1Dtransient");
-         
+
       for (s=0; s<MyGeom->NBSOMM/2; s++)
       {
          vec->ve[2*s  ] = fun->eval(fun  , MyGeom->XSOMM->ve[2*s+0], tps);
@@ -227,7 +227,7 @@ VEC* build_vec_world_from_function1Dtransient(const ELT_1D *MyElt, const GEOM_1D
    {
       error(E_UNKNOWN, "build_vec_world_from_function1Dtransient");
    }
-   
+
    return vec;
 }
 
@@ -265,7 +265,7 @@ VEC* build_vec_world_from_vec_ef_1D( const ELT_1D *MyElt, const GEOM_1D *MyGeom,
    if ( (strcmp(MyElt->name_ef,"S2") == 0) ||
         (strcmp(MyElt->name_ef,"S3") == 0) ||
         (strcmp(MyElt->name_ef,"S4") == 0) ||
-        (strcmp(MyElt->name_ef,"S5") == 0)  ) 
+        (strcmp(MyElt->name_ef,"S5") == 0)  )
    {
       GRAPH = sp_mv_mlt(MyGeom->EF_to_WORLD, SOL, NULL );
    }

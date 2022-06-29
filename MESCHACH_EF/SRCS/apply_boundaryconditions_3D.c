@@ -64,7 +64,7 @@ void transform3D_matrix_vector_with_bc( const ELT_3D *elt , const GEOM_3D *geom 
 void transform3D_vector_with_bc( const ELT_3D *elt , const GEOM_3D *geom , const BC_3D *BC , const SPMAT  *A , VEC  *RHS  )
 {
    int axe;
-   
+
    /* check */
    if ( elt    == NULL ) error(E_NULL, "transform3D_matrix_vector_with_bc");
    if ( geom   == NULL ) error(E_NULL, "transform3D_matrix_vector_with_bc");
@@ -78,7 +78,7 @@ void transform3D_vector_with_bc( const ELT_3D *elt , const GEOM_3D *geom , const
    {
       apply_Bc3D_dirichlet_on_rhs  (axe, elt, geom, BC, A, RHS);
    }
-   
+
    return;
 }
 
@@ -88,7 +88,7 @@ void transform3D_vector_with_bc( const ELT_3D *elt , const GEOM_3D *geom , const
 void transform3D_matrix_with_bc( const ELT_3D *elt , const GEOM_3D *geom , const BC_3D *BC , SPMAT *A )
 {
    int axe;
-   
+
    /* check */
    if ( elt    == NULL ) error(E_NULL, "transform3D_matrix_with_bc");
    if ( geom   == NULL ) error(E_NULL, "transform3D_matrix_with_bc");
@@ -101,9 +101,9 @@ void transform3D_matrix_with_bc( const ELT_3D *elt , const GEOM_3D *geom , const
    {
       apply_Bc3D_dirichlet_on_mat  (axe, elt, geom, BC, A);
    }
-   
+
    sp_compact(A,MACHEPS);
-   
+
    return;
 }
 
@@ -135,7 +135,7 @@ VEC* transform3D_stokes_vector_with_bc( const ELT_3D *elt , const GEOM_3D *geomU
 {
    int K;
    int axes[] = { AXEe_X , AXEe_Y , AXEe_Z };
-   
+
    /* check */
    if ( elt        == NULL ) error(E_NULL, "transform3D_stokes_vector_with_bc");
    if ( geomU      == NULL ) error(E_NULL, "transform3D_stokes_vector_with_bc");
@@ -156,7 +156,7 @@ VEC* transform3D_stokes_vector_with_bc( const ELT_3D *elt , const GEOM_3D *geomU
       {
          apply_Bc3D_robin_on_rhsNS  (axes[K], elt, geomU, BC, STOKES_RHS);
       }
-      
+
       if (  Bc3D_hasDirichletBC(BC, axes[K])  ) /* conditions aux limites de Dirichlet of [U,V,W] */
       {
          apply_Bc3D_dirichlet_on_rhsNS  (axes[K], elt, geomU, geomP, BC, STOKES, STOKES_RHS);
@@ -164,7 +164,7 @@ VEC* transform3D_stokes_vector_with_bc( const ELT_3D *elt , const GEOM_3D *geomU
    }
 
    /* conditions aux limites de Dirichlet pour P */
-   apply_Bc3D_dirichlet_on_rhsNS_P(elt , geomU , geomP , BC , STOKES , STOKES_RHS);   
+   apply_Bc3D_dirichlet_on_rhsNS_P(elt , geomU , geomP , BC , STOKES , STOKES_RHS);
 
    /* finito */
    return STOKES_RHS;
@@ -214,7 +214,7 @@ SPMAT* transform3D_stokes_matrix_with_bc( const ELT_3D *elt , const GEOM_3D *geo
 
    /* conditions aux limites de Dirichlet pour P */
    apply_Bc3D_dirichlet_on_matNS_P(elt , geomU , geomP , BC , STOKES );
-   
+
    /* finito */
    sp_compact(STOKES, MACHEPS);
 
@@ -236,7 +236,7 @@ void   transform3D_navierstokes_matrix_vector_with_bc( const ELT_3D *elt , const
 
    transform3D_navierstokes_vector_with_bc( elt, geomU, geomP, BC, A, RHS );
    transform3D_navierstokes_matrix_with_bc( elt, geomU, geomP, BC, A );
-   
+
    return;
 }
 
@@ -247,7 +247,7 @@ VEC*   transform3D_navierstokes_vector_with_bc       ( const ELT_3D *elt , const
 {
    int K;
    int axes[] = { AXEe_X , AXEe_Y , AXEe_Z };
-   
+
    /* check */
    if ( elt        == NULL ) error(E_NULL, "transform3D_navierstokes_vector_with_bc");
    if ( geomU      == NULL ) error(E_NULL, "transform3D_navierstokes_vector_with_bc");
@@ -306,8 +306,8 @@ SPMAT* transform3D_navierstokes_matrix_with_bc ( const ELT_3D *elt , const GEOM_
              !  A_31  A_32  A_33  Bz� !
              !                        !
              !  Bx    By    Bz    0   !
-   
-   
+
+
    */
 
    /* conditions aux limites de Cauchy or de Robin */
@@ -326,12 +326,12 @@ SPMAT* transform3D_navierstokes_matrix_with_bc ( const ELT_3D *elt , const GEOM_
 
 
    /* ----- Transformation de la matrice -- Check A_kj -----------------------------------*/
-   
+
    for (K=0; K<3; K++)
    {
       if ( Bc3D_hasDirichletBC(BC, axes[K]) ) /* conditions aux limites de Cauchy */
       {
-          apply_Bc3D_dirichlet_on_matNS( axes[K] , elt , geomU , geomP , BC , STOKES );  
+          apply_Bc3D_dirichlet_on_matNS( axes[K] , elt , geomU , geomP , BC , STOKES );
       }
    }
 
@@ -461,11 +461,11 @@ static void apply_Bc3D_dirichlet_on_rhs(int axe, const ELT_3D *elt , const GEOM_
    int i,idx,idx2;
    Real bcval;
    SPROW *r;
-   
+
    IVEC *REF_S  = geom->REF_S;
    MAT  *XYSOMM = geom->XYSOMM;
 
-   
+
    /* ----- Transformation du second membre ----------------------------------*/
    for (i=0; i<geom->NBSOMM; i++)
    {
@@ -479,7 +479,7 @@ static void apply_Bc3D_dirichlet_on_rhs(int axe, const ELT_3D *elt , const GEOM_
       else
       {
          r = A->row + i ;
-         
+
          for ( idx=0 ; idx<r->len ; idx++ )
          {
             idx2 = r->elt[idx].col ;
@@ -497,7 +497,7 @@ static void apply_Bc3D_dirichlet_on_rhs(int axe, const ELT_3D *elt , const GEOM_
       }
    }
 }
-   
+
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
@@ -510,7 +510,7 @@ static void apply_Bc3D_dirichlet_on_mat(int axe, const ELT_3D *elt , const GEOM_
    SPROW * r;
 
    IVEC *REF_S = geom->REF_S;
-   
+
    /* ----- Transformation de la matrice -------------------------------- */
    for (i=0; i<geom->NBSOMM; i++)
    {
@@ -549,7 +549,7 @@ static void apply_Bc3D_dirichlet_on_rhsNS_P(const ELT_3D *elt , const GEOM_3D *g
 
    IVEC *REF_S  = geomU->REF_S;
    MAT  *XYSOMM = geomU->XYSOMM;
-  
+
 
    for (i=0; i<geomP->NBSOMM; i++)
    {
@@ -612,7 +612,7 @@ static void apply_Bc3D_dirichlet_on_matNS_P(const ELT_3D *elt , const GEOM_3D *g
 
    IVEC *REF_S = geomU->REF_S;
 
-   /* ----- Transformation de la matrice -- Check Bx , By and Bz  -----------------------------------*/   
+   /* ----- Transformation de la matrice -- Check Bx , By and Bz  -----------------------------------*/
    for (i=0; i<geomP->NBSOMM; i++)
    {
       i3 = i + 3*geomU->NBSOMM ;
@@ -764,11 +764,11 @@ static void apply_Bc3D_dirichlet_on_rhsNS(int axe , const ELT_3D *elt , const GE
       case AXEe_X: K_x_NBSOMM = 0*geomU->NBSOMM ; break;
       case AXEe_Y: K_x_NBSOMM = 1*geomU->NBSOMM ; break;
       case AXEe_Z: K_x_NBSOMM = 2*geomU->NBSOMM ; break;
-         
+
       default: error(E_UNKNOWN, "apply_Bc3D_dirichlet_on_rhsNS");
    }
 
-     
+
    /* process */
    for (i=0; i<geomU->NBSOMM; i++)
    {
@@ -805,7 +805,7 @@ static void apply_Bc3D_dirichlet_on_rhsNS(int axe , const ELT_3D *elt , const GE
             if ( idx2 < 2*geomU->NBSOMM )
             {
                idx2 -= 1*geomU->NBSOMM;
-               
+
                if (  (REF_S->ive[idx2] > 0) && (BC_3De_DIRICHLET==Bc3D_getBcType(BC,AXEe_Y,REF_S->ive[idx2])) )
                {
                   Real bcVal = Bc3D_evalFunction1(BC, BC_3De_DIRICHLET, REF_S->ive[idx2], AXEe_Y,
@@ -862,7 +862,7 @@ static void apply_Bc3D_dirichlet_on_matNS(int axe , const ELT_3D *elt , const GE
       case AXEe_X: K_x_NBSOMM = 0*geomU->NBSOMM ; break;
       case AXEe_Y: K_x_NBSOMM = 1*geomU->NBSOMM ; break;
       case AXEe_Z: K_x_NBSOMM = 2*geomU->NBSOMM ; break;
-         
+
       default: error(E_UNKNOWN, "apply_Bc3D_dirichlet_on_matNS");
    }
 
@@ -1021,7 +1021,7 @@ static void apply_Bc3D_robin_on_matNS    (int axe, const ELT_3D *elt , const GEO
 /*
  sv_mlt(  BCval * jac , elt->eltDM1->VEC_I, SCM_ar);
 
- 
+
  if ( (strcmp(elt->name_ef,"P1")==0)  || (strcmp(elt->name_ef,"P1b")==0) )
  {
     SCM_ar->ve[0] = BCval*0.5*jac;

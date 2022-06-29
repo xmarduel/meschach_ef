@@ -42,19 +42,19 @@ void  solve2D_navier_stokes(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEOM
    VEC *U = v_get(MyGeom->NBSOMM);
    VEC *V = v_get(MyGeom->NBSOMM);
    VEC *P = v_get(MyGeom->geomBase->NBSOMM);
-   
+
    PARAMS* MyParams = Params_get_staticparam(0);
-   
-   
+
+
    (void) solve2D_navier_stokes_(elt2 , elt1 , MyGeom, MyBC, MyRhsFun, U, V, P);
 
-   /* ------------------------------ graphics output ----------------------------------------------- */ 
-   
+   /* ------------------------------ graphics output ----------------------------------------------- */
+
    if (MyParams->graph_params.SILO) graphics2D_stokes( "silo" , elt2 , MyGeom , U , V , P , "NavierStokes");
    if (MyParams->graph_params.VTK ) graphics2D_stokes( "vtk"  , elt2 , MyGeom , U , V , P , "NavierStokes");
-   
-   /* ------------------------------ graphics output ----------------------------------------------- */ 
-  
+
+   /* ------------------------------ graphics output ----------------------------------------------- */
+
 
    V_FREE(U);
    V_FREE(V);
@@ -105,9 +105,9 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
    SPMAT *Au;
    SPMAT *Bx, *By;
    SPMAT *C = (SPMAT*)NULL; /* stab matrix */
-   
+
    SPMAT *J;
-   
+
    SPMAT *A; /* aggregates Au and Av */
    SPMAT *B; /* aggregates Bx and By */
 
@@ -118,7 +118,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
    VEC   *STOKES_RHS_bc;  /* the whole rhs    -> get the matrix + rhs with bc with it */
 
    VEC   *VIT; /* aggregates U and V */
-   
+
    VEC   *F, *Fu, *Fv;
    VEC   *G;
 
@@ -128,12 +128,12 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
    int NBSOMM_U;
    int NBSOMM_P;
 
-   
+
    PARAMS* MyParams = Params_get_staticparam(0);
-      
+
    Real kappa    = MyParams->phys_params.kappa;
 	Real Reynolds = 1.0 / kappa;
-	
+
    Real eps_steps = MyParams->navierstokes_params.eps_steps;
    int  max_steps = MyParams->navierstokes_params.max_steps;
    int  nb_steps  = 0;
@@ -177,7 +177,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
 
    Au = assemblage2D_matrix_Stiff1( elt2 , MyGeom , Au );
    sp_smlt(Au, kappa, Au);
-   
+
    J  = assemblage2D_matrix_Mass  ( elt1 , Geom_p , J  );
 
    Bx = assemblage2D_matrix_Conv_x_elt2elt1( elt2 , MyGeom , elt1 , Geom_p , Bx );
@@ -207,7 +207,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
    Rhs2D_setCurrentSelectedAxe((RHS_2D*)MyRhsFun, AXEe_Y);
    Fv = v_get(NBSOMM_U);
    Fv = assemblage2D_vector_fun( elt2, MyGeom, MyRhsFun, Fv);
-   
+
    STOKES_RHS = v_move(Fu, 0, NBSOMM_U, STOKES_RHS,        0); /* set Fu into STOKES_RHS */
    STOKES_RHS = v_move(Fv, 0, NBSOMM_U, STOKES_RHS, NBSOMM_U); /* set Fv into STOKES_RHS */
 
@@ -217,7 +217,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
    STOKES_RHS_bc =   v_copy(STOKES_RHS, STOKES_RHS_bc);
 
    (void)transform2D_stokes_matrix_vector_with_bc( elt2, MyGeom, Geom_p, MyBc, STOKES_bc, STOKES_RHS_bc);
-                                                   
+
    /* ---------------------------------------------------------------------------------*/
 
    A  = sp_get(2*NBSOMM_U, 2*NBSOMM_U, 10); sp_zero(A);
@@ -242,13 +242,13 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
       BANDWRt_METHOD  bandwr_method = MyParams->stokes_params.uzawa.rho;
       BANDWRt_OPTION  bandwr_option = MyParams->stokes_params.uzawa.innerloop_solver.bandwidth_method;
       BANDWRt_MATRIXTYPE  bandwr_mtype = BANDWRe_NONSYM;
-            
+
       int  s,s1,s2;
       double norm;
-      
+
       SPMAT *LLT_PAPt ;
       SPMAT *LLT_PJPt ;
-		
+
 		SPMAT *PAPt ;
       SPMAT *PJPt ;
 
@@ -268,7 +268,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
       VEC *VVy = v_get(NBSOMM_U);
 
       VEC *F_NLI = v_get(VIT->dim);
-      
+
       /* allocate mem */
       if ( bandwr_option != BANDWRe_NO_OPTION )
       {
@@ -299,7 +299,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
 
       LLT_PAPt = sp_copy(PAPt);
       LLT_PJPt = sp_copy(PJPt);
-		
+
 		spCHfactor(LLT_PAPt);
       spCHfactor(LLT_PJPt);
 
@@ -348,7 +348,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
          }
 
          STOKES_RHS_bc = v_copy(STOKES_RHS, STOKES_RHS_bc);
-         
+
          STOKES_RHS_bc = transform2D_stokes_vector_with_bc( elt2, MyGeom, Geom_p, MyBc, STOKES, STOKES_RHS_bc);
 
          F = v_move(STOKES_RHS_bc,          0,2*NBSOMM_U, F, 0);
@@ -376,7 +376,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
          /* test convergence */
          norm = v_norm2( v_sub(VIT, VITold, VITold) );
          printf("NS iter %d -> diff = %le\n", nb_steps, norm);
-         
+
          if ( norm < eps_steps )
          {
             break;
@@ -386,7 +386,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
 
       SP_FREE(PAPt);
       SP_FREE(PJPt);
-		
+
 		SP_FREE(LLT_PAPt);
       SP_FREE(LLT_PJPt);
 
@@ -402,7 +402,7 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
 
       V_FREE(F_NLI);
    }
-   
+
    /* get back velocity */
    U = v_move(VIT,        0,NBSOMM_U, U,0);
    V = v_move(VIT, NBSOMM_U,NBSOMM_U, V,0);
@@ -441,16 +441,16 @@ void  solve3D_navier_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEO
    SPMAT *Bx, *By, *Bz;
    SPMAT *C = (SPMAT*)NULL; /* stab. matrix */
    SPMAT *J;
-   
+
    SPMAT *A; /* aggregates Au , Av and Aw */
    SPMAT *B; /* aggregates Bx , By and Bz */
 
    VEC   *VIT; /* agrregates U , V and W  */
-   
+
    VEC   *Fu;
    VEC   *Fv;
    VEC   *Fw;
-   
+
    VEC   *F;
    VEC   *G;
 
@@ -463,12 +463,12 @@ void  solve3D_navier_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEO
    int NBSOMM_U = MyGeom->NBSOMM ;
    int NBSOMM_P;
 
-   
+
    PARAMS* MyParams = Params_get_staticparam(0);
-      
+
    Real kappa     = MyParams->phys_params.kappa;
    Real Reynolds  = 1.0 / kappa;
-	
+
    Real eps_steps = MyParams->navierstokes_params.eps_steps;
    int  max_steps = MyParams->navierstokes_params.max_steps;
    int  nb_steps  = 1;
@@ -505,7 +505,7 @@ void  solve3D_navier_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEO
 
    sp_copy2(Au,Av);
    sp_copy2(Au,Aw);
-   
+
    J  = assemblage3D_matrix_Mass  ( elt1 , Geom_p , J );
 
    Bx = assemblage3D_matrix_Conv_x_elt2elt1( elt2 , MyGeom , elt1 , Geom_p , Bx );
@@ -524,11 +524,11 @@ void  solve3D_navier_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEO
    STOKES = sp_move(Au, 0,0, NBSOMM_U,NBSOMM_U, STOKES,            0,         0);
    STOKES = sp_move(Av, 0,0, NBSOMM_U,NBSOMM_U, STOKES,   1*NBSOMM_U,1*NBSOMM_U);
    STOKES = sp_move(Aw, 0,0, NBSOMM_U,NBSOMM_U, STOKES,   2*NBSOMM_U,2*NBSOMM_U);
-   
+
    STOKES = sp_move(Bx, 0,0, NBSOMM_P,NBSOMM_U, STOKES, 2*NBSOMM_U,         0);
    STOKES = sp_move(By, 0,0, NBSOMM_P,NBSOMM_U, STOKES, 2*NBSOMM_U,1*NBSOMM_U);
    STOKES = sp_move(Bz, 0,0, NBSOMM_P,NBSOMM_U, STOKES, 2*NBSOMM_U,2*NBSOMM_U);
-   
+
    /* ---------------------------------------------------------------------------------*/
 
    Rhs3D_setCurrentSelectedAxe((RHS_3D*)MyRhsFun, AXEe_X);
@@ -547,7 +547,7 @@ void  solve3D_navier_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEO
    STOKES_RHS = v_move(Fu, 0, NBSOMM_U, STOKES_RHS,          0); /* set Fu into STOKES_RHS */
    STOKES_RHS = v_move(Fv, 0, NBSOMM_U, STOKES_RHS, 1*NBSOMM_U); /* set Fv into STOKES_RHS */
    STOKES_RHS = v_move(Fw, 0, NBSOMM_U, STOKES_RHS, 2*NBSOMM_U); /* set Fw into STOKES_RHS */
-   
+
    /* ---------------------------------------------------------------------------------*/
 
    STOKES_bc     = sp_copy2(STOKES, STOKES_bc);
@@ -572,9 +572,9 @@ void  solve3D_navier_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEO
    G = v_move(STOKES_RHS_bc, 3*NBSOMM_U,  NBSOMM_P, G, 0);
 
 
-   
 
-   
+
+
    if ( strcmp(MyParams->navierstokes_params.outer_method, "UZAWA") == 0 )
    {
       stokes_resol_uzawa (A, B, C, J, VIT, P, F, G, eps_steps, max_steps, &nb_steps);
@@ -596,7 +596,7 @@ void  solve3D_navier_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEO
    W = v_move(VIT, 2*NBSOMM_U,NBSOMM_U, W,0);
 
    /* ------- free memory ------------------ */
-   
+
    SP_FREE(J) ;
 
    V_FREE(F);
@@ -616,6 +616,6 @@ void  solve3D_navier_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEO
    V_FREE(STOKES_RHS_bc);
 
    /* ------------------ end ----------------------- */
-   
+
    return;
 }

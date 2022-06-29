@@ -36,16 +36,16 @@ static VEC* spAUGMLAGRMATRIXapply2_bandwr(SPMAT *J, PERM *Pj, PERM *INVPj, SPMAT
 
 int stokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC *U, VEC *P, VEC *F, VEC *G, Real tol, int max_steps, int *steps)
 {
-	
+
    /*
-	 
+
 	 A*U_kp1 = F - Bt*P
-	 
+
 	 P*(P_kp1 - P_k) = rho.B*U_kp1     0 < rho < 2*kappa
-	 
+
 	*/
-	
-   PARAMS* MyParams = Params_get_staticparam(0);      
+
+   PARAMS* MyParams = Params_get_staticparam(0);
 
    BANDWRt_METHOD  bandwr_method     = MyParams->stokes_params.uzawa.innerloop_solver.bandwidth_method;
    BANDWRt_OPTION  bandwr_option     = MyParams->stokes_params.uzawa.innerloop_solver.bandwidth_option;
@@ -53,7 +53,7 @@ int stokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC *U, VE
 
    SPMAT *PAPt ;
    SPMAT *PJPt ;
-	
+
 	SPMAT *LLT_PAPt ;
    SPMAT *LLT_PJPt ;
 
@@ -64,7 +64,7 @@ int stokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC *U, VE
    PERM  *INVPp = NULL;
 
    int rc;
-   
+
    /* check */
    if ( ! A ) error (E_NULL, "stokes_resol_uzawa");
    if ( ! B ) error (E_NULL, "stokes_resol_uzawa");
@@ -77,14 +77,14 @@ int stokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC *U, VE
 
 
    PAPt = sp_copy(A);
-	
+
    PJPt = sp_copy(PRECOND);
-	
+
 
    if ( bandwr_option != BANDWRe_NO_OPTION )
    {
       printf("\n... stokes_resol_uzawa with bandwidth reduction ...\n");
-		
+
 		/* allocate mem */
 		Pu    = px_get(U->dim);
       INVPu = px_get(U->dim);
@@ -96,7 +96,7 @@ int stokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC *U, VE
       /* set the matrix with reduced band width */
       PAPt = sp_dopermutationforbandwr(A      , Pu, INVPu, bandwr_method, bandwr_option , bandwr_mtype, PAPt );
       printf("profile after = %d\n", sp_profile(PAPt) );
-    
+
       /* set the matrix with reduced band width */
       PJPt = sp_dopermutationforbandwr(PRECOND, Pp, INVPp, bandwr_method, bandwr_option , bandwr_mtype, PJPt );
    }
@@ -104,12 +104,12 @@ int stokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC *U, VE
    {
       printf("\n... stokes_resol_uzawa without bandwidth reduction ...\n");
    }
-   
+
 	if ( strcmp(MyParams->stokes_params.uzawa.innerloop_method, "DIRECT-METHOD") == 0 )
    {
       LLT_PAPt = sp_copy(PAPt);
 		spCHfactor(LLT_PAPt);
-		
+
 		LLT_PJPt = sp_copy(PJPt);
 		spCHfactor(LLT_PJPt);
    }
@@ -117,19 +117,19 @@ int stokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC *U, VE
    {
       LLT_PAPt = sp_copy(PAPt);
 		spICHfactor(LLT_PAPt);
-		
+
 		LLT_PJPt = sp_copy(PJPt);
 		spICHfactor(LLT_PJPt);
    }
 
-   rc = stokes_resol_uzawa_factOk(PAPt, LLT_PAPt, B, C, PJPt, LLT_PJPt, U, P, 
+   rc = stokes_resol_uzawa_factOk(PAPt, LLT_PAPt, B, C, PJPt, LLT_PJPt, U, P,
 									  	    F, G,
 										    tol, max_steps, steps,
 										    Pu, INVPu, Pp, INVPp );
 
    SP_FREE(PAPt);
    SP_FREE(PJPt);
-	
+
 	SP_FREE(LLT_PAPt);
    SP_FREE(LLT_PJPt);
 
@@ -149,25 +149,25 @@ int stokes_resol_uzawa_factOk (SPMAT *PAPt, SPMAT *LLT_PAPt, SPMAT *B, SPMAT *C,
                                PERM  *Pu, PERM  *INVPu, PERM  *Pp, PERM  *INVPp )
 {
    /*
-	 
+
 	A*U_kp1 = F - Bt*P
-	 
+
 	P*(P_kp1 - P_k) = rho.B*U_kp1     0 < rho < 2*kappa
-	 
+
 	*/
-   
-	PARAMS* MyParams = Params_get_staticparam(0);      
+
+	PARAMS* MyParams = Params_get_staticparam(0);
    Real rho         = MyParams->stokes_params.uzawa.rho;  /* condition on rho follows */
 
 	BANDWRt_METHOD  bandwr_method     = MyParams->stokes_params.uzawa.innerloop_solver.bandwidth_method;
    BANDWRt_OPTION  bandwr_option     = MyParams->stokes_params.uzawa.innerloop_solver.bandwidth_option;
 
 	int inner_step;
-	
+
    Real ieps_steps = MyParams->stokes_params.uzawa.innerloop_solver.eps_steps;
 	int  imax_steps = MyParams->stokes_params.uzawa.innerloop_solver.max_steps;
-	
-	
+
+
    Real residu = 1. ;
 
    VEC *oldU, *oldP;
@@ -204,14 +204,14 @@ int stokes_resol_uzawa_factOk (SPMAT *PAPt, SPMAT *LLT_PAPt, SPMAT *B, SPMAT *C,
 
       /* U_kp1 : A*U_kp1 = F - Bt*P */
       v_sub(F, sp_vm_mlt(B,P,tmpU), tmpU);
-      
+
       if ( bandwr_option != BANDWRe_NO_OPTION )
       {
          if ( strcmp(MyParams->stokes_params.uzawa.innerloop_method, "DIRECT-METHOD") == 0 )
 			{
 				spCHsolve_bandwr(LLT_PAPt, Pu, INVPu, tmpU, U);
 			}
-			if ( strcmp(MyParams->stokes_params.uzawa.innerloop_method, "ITERATIV-METHOD") == 0 ) 
+			if ( strcmp(MyParams->stokes_params.uzawa.innerloop_method, "ITERATIV-METHOD") == 0 )
 			{
 				iter_xspcg_bandwr(PAPt, LLT_PAPt, Pu, INVPu, tmpU, ieps_steps, U, imax_steps, &inner_step, NULL);
 			}
@@ -228,7 +228,7 @@ int stokes_resol_uzawa_factOk (SPMAT *PAPt, SPMAT *LLT_PAPt, SPMAT *B, SPMAT *C,
 			}
       }
 
-		/* P_kp1 : P*(P_kp1 - P_k) = rho.B*U_kp1 - G */ 
+		/* P_kp1 : P*(P_kp1 - P_k) = rho.B*U_kp1 - G */
       R = sp_mv_mlt(B, U, R);
       R = v_sub(R, G, R);
 
@@ -254,7 +254,7 @@ int stokes_resol_uzawa_factOk (SPMAT *PAPt, SPMAT *LLT_PAPt, SPMAT *B, SPMAT *C,
 			{
 				iter_xspcg(PJPt, LLT_PJPt, R, ieps_steps, R1, imax_steps, &inner_step, NULL);
 			}
-			
+
       }
       /* <<< xm */
 
@@ -264,7 +264,7 @@ int stokes_resol_uzawa_factOk (SPMAT *PAPt, SPMAT *LLT_PAPt, SPMAT *B, SPMAT *C,
 
       printf("iter %05d :", *steps);
 
-      printf("norm(p-oldp)= %le   ", v_norm2(v_sub(P, oldP, oldP)) ); 
+      printf("norm(p-oldp)= %le   ", v_norm2(v_sub(P, oldP, oldP)) );
       printf("norm(u-oldu)= %le \n", v_norm2(v_sub(U, oldU, oldU)) );
 
       residu = v_norm2(R);
@@ -312,11 +312,11 @@ static VEC* spPRESSUREMATRIXapply1(SPMAT *A, PERM *Pa, PERM *INVPa,
 
   MEM_STAT_REG(o1,TYPE_VEC);
   MEM_STAT_REG(o2,TYPE_VEC);
-  
+
   o1  = sp_vm_mlt(B, in, o1);
   o2  = spCHsolve(LLT_A, o1, o2);
   out = sp_mv_mlt(B, o2, out);
-  
+
   return out;
 }
 
@@ -345,7 +345,7 @@ static VEC* spPRESSUREMATRIXapply2(SPMAT *A, PERM *Pa, PERM *INVPa,
    Real eps_steps    = MyParams->stokes_params.pressurematrix.innerloop_solver.eps_steps;
    int  max_steps    = MyParams->stokes_params.pressurematrix.innerloop_solver.max_steps;
    int  steps;
-   
+
    o1 = v_resize(o1, B->n);
    o2 = v_resize(o2, B->n);
 
@@ -384,7 +384,7 @@ static VEC* spPRESSUREMATRIXapply1_bandwr(SPMAT *A, PERM *Pa, PERM *INVPa,
 
    MEM_STAT_REG(o1,TYPE_VEC);
    MEM_STAT_REG(o2,TYPE_VEC);
-  
+
    o1  = sp_vm_mlt(B, in, o1);
    o2  = spCHsolve_bandwr(LLT_A, Pa, INVPa, o1, o2);
    out = sp_mv_mlt(B, o2, out);
@@ -436,7 +436,7 @@ static VEC* spPRESSUREMATRIXapply2_bandwr(SPMAT *A, PERM *Pa, PERM *INVPa,
    o1  = sp_vm_mlt(B, in, o1);
 
    o1perm = px_vec(Pa, o1, o1perm);     /* the permutated matrix must be st.  P * A * P'  */
-   iter_xspcg(A, ICH_A, o1perm /* in */, eps_steps, o2perm /* out */, max_steps, &steps, NULL); 
+   iter_xspcg(A, ICH_A, o1perm /* in */, eps_steps, o2perm /* out */, max_steps, &steps, NULL);
    o2 = px_vec(INVPa, o2perm, o2);      /* the permutated matrix must be st.  P * A * P'  */
 
    out = sp_mv_mlt(B, o2, out);
@@ -450,7 +450,7 @@ static VEC* spPRESSUREMATRIXapply2_bandwr(SPMAT *A, PERM *Pa, PERM *INVPa,
 int stokes_resol_pressurematrix(SPMAT *A, SPMAT *B, VEC *U, VEC *P, VEC *F, VEC *G, Real tol, int max_steps, int *steps)
 {
    PARAMS* MyParams   = Params_get_staticparam(0);
-   
+
    BANDWRt_METHOD  bandwr_method     = MyParams->stokes_params.pressurematrix.innerloop_solver.bandwidth_method;
    BANDWRt_OPTION  bandwr_option     = MyParams->stokes_params.pressurematrix.innerloop_solver.bandwidth_option;
    BANDWRt_MATRIXTYPE  bandwr_mtype  = BANDWRe_NONSYM;
@@ -460,26 +460,26 @@ int stokes_resol_pressurematrix(SPMAT *A, SPMAT *B, VEC *U, VEC *P, VEC *F, VEC 
    /*
    A*U + Bt*P = F
    B*U        = G
-   
+
    U = inv(A)[ F - Bt*P ]
    B*U = - B*inv(A)*Bt*P + B*inv(A)*F = G
-   
+
    B*inv(A)*Bt*P = B*inv(A)*F - G
-   
+
    Solve R*P = H  with CG : R = B*inv(A)*Bt ;
                             H = B*inv(A)*F - G ;
    */
 
    SPMAT *PAPt  ;
    SPMAT *LLT_A ;
-   
+
    PERM *Pu    = px_get(U->dim);
    PERM *INVPu = px_get(U->dim);
 
 
    printf("bandwr_method = %d \n", bandwr_method);
    printf("bandwr_option = %d \n", bandwr_option);
-   
+
    if ( bandwr_method != BANDWRe_NULL )
    {
        printf("profile before = %d\n", sp_profile(A) );
@@ -507,7 +507,7 @@ int stokes_resol_pressurematrix(SPMAT *A, SPMAT *B, VEC *U, VEC *P, VEC *F, VEC 
 
    /* main algo */
    rc = stokes_resol_pressurematrix_factOk(PAPt, LLT_A, B, U, P, F, G, tol, max_steps, steps, Pu, INVPu );
-   
+
    /* free mem */
    SP_FREE(PAPt);
    SP_FREE(LLT_A);
@@ -516,7 +516,7 @@ int stokes_resol_pressurematrix(SPMAT *A, SPMAT *B, VEC *U, VEC *P, VEC *F, VEC 
    PX_FREE(INVPu);
 
    /* finito */
-   return rc;   
+   return rc;
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -526,18 +526,18 @@ int stokes_resol_pressurematrix_factOk(SPMAT *A, SPMAT *LLT_A, SPMAT *B, VEC *U,
                                        Real tol, int max_steps, int *steps,
                                        PERM *Pu , PERM *INVPu )
 {
-   PARAMS* MyParams   = Params_get_staticparam(0);      
-   int  bandwr_method = MyParams->stokes_params.pressurematrix.innerloop_solver.bandwidth_method;  
+   PARAMS* MyParams   = Params_get_staticparam(0);
+   int  bandwr_method = MyParams->stokes_params.pressurematrix.innerloop_solver.bandwidth_method;
 
    /*
    A*U + Bt*P = F
    B*U        = G
-   
+
    U = inv(A)[ F - Bt*P ]
    B*U = - B*inv(A)*Bt*P + B*inv(A)*F = G
-   
+
    B*inv(A)*Bt*P = B*inv(A)*F - G
-   
+
    Solve R*P = H  with CG : R = B*inv(A)*Bt ;
    H = B*inv(A)*F - G ;
    */
@@ -546,15 +546,15 @@ int stokes_resol_pressurematrix_factOk(SPMAT *A, SPMAT *LLT_A, SPMAT *B, VEC *U,
 
    Real ieps_steps = MyParams->stokes_params.pressurematrix.innerloop_solver.eps_steps;
 	int  imax_steps = MyParams->stokes_params.pressurematrix.innerloop_solver.max_steps;
-	
+
 	VEC *Ptmp;
    VEC *Utmp;
 
-	
+
    ITERSTOKES *ip;
 
    /* eval the rhs H = B*inv(A)*F - G */
-	 
+
 	Ptmp = v_get(P->dim);
    Utmp = v_get(U->dim);
 
@@ -619,7 +619,7 @@ int stokes_resol_pressurematrix_factOk(SPMAT *A, SPMAT *LLT_A, SPMAT *B, VEC *U,
    ip->R_par4 = (void *)B;
    ip->R_par5 = (void *)LLT_A;
    ip->R_par6 = NULL;
-  
+
    ip->Px = (Fun_Rx) NULL; /* preconditionning */
 
 
@@ -671,7 +671,7 @@ int stokes_resol_pressurematrix_factOk(SPMAT *A, SPMAT *LLT_A, SPMAT *B, VEC *U,
    V_FREE(Ptmp);
    V_FREE(Utmp);
 
-   return EXIT_SUCCESS;   
+   return EXIT_SUCCESS;
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -714,7 +714,7 @@ static VEC* spAUGMLAGRMATRIXapply1(SPMAT *J, PERM *Pj, PERM *INVPj,
    /*
    printf("spAUGMLAGRMATRIXapply1 \n");
    */
-   
+
    return out;
 }
 
@@ -740,7 +740,7 @@ static VEC* spAUGMLAGRMATRIXapply2(SPMAT *J, PERM *P, PERM *INVP,
    static VEC *o1 = VNULL;
    static VEC *o2 = VNULL;
    static VEC *o3 = VNULL;
-   
+
    PARAMS* MyParams = Params_get_staticparam(0);
 
    Real eps_steps    = MyParams->stokes_params.augmentedlagrangian.innerloop_solver.eps_steps;
@@ -750,11 +750,11 @@ static VEC* spAUGMLAGRMATRIXapply2(SPMAT *J, PERM *P, PERM *INVP,
    o1 = v_resize(o1, B->n);
    o2 = v_resize(o2, B->n);
    o3 = v_resize(o3, B->n);
-   
+
    MEM_STAT_REG(o1,TYPE_VEC);
    MEM_STAT_REG(o2,TYPE_VEC);
    MEM_STAT_REG(o3,TYPE_VEC);
-   
+
    o1  = sp_vm_mlt(B, in, o1);
    iter_xspcg(J, ICH_J, o1 /* in */, eps_steps, o2 /* out */, max_steps, &steps, NULL);
    o3  = sp_vm_mlt(B, o2, o3);
@@ -765,7 +765,7 @@ static VEC* spAUGMLAGRMATRIXapply2(SPMAT *J, PERM *P, PERM *INVP,
    /*
    printf("spAUGMLAGRMATRIXapply2 \n");
    */
-   
+
    return out;
 }
 
@@ -810,7 +810,7 @@ static VEC* spAUGMLAGRMATRIXapply1_bandwr(SPMAT *J, PERM *Pj, PERM *INVPj,
    /*
    printf("spAUGMLAGRMATRIXapply1_bandwr \n");
    */
-   
+
    return out;
 }
 
@@ -845,7 +845,7 @@ static VEC* spAUGMLAGRMATRIXapply2_bandwr(SPMAT *J, PERM *Pj, PERM *INVPj,
    int  max_steps    = MyParams->stokes_params.augmentedlagrangian.innerloop_solver.max_steps;
    int  steps;
 
-   
+
    o1 = v_resize(o1, B->m);
    o2 = v_resize(o2, B->m);
    o3 = v_resize(o3, B->m);
@@ -875,28 +875,28 @@ static VEC* spAUGMLAGRMATRIXapply2_bandwr(SPMAT *J, PERM *Pj, PERM *INVPj,
    /*
    printf("spAUGMLAGRMATRIXapply2_bandwr \n");
    */
-   
+
    return out;
 }
 
 
 int stokes_resol_augmentedlagrangian(SPMAT *A, SPMAT *B, SPMAT *J, VEC *U, VEC *P, VEC *F, VEC *G, Real tol, int max_steps, int *steps)
 {
-   PARAMS* MyParams   = Params_get_staticparam(0);      
+   PARAMS* MyParams   = Params_get_staticparam(0);
    BANDWRt_METHOD  bandwr_method     = MyParams->stokes_params.augmentedlagrangian.innerloop_solver.bandwidth_method;
    BANDWRt_OPTION  bandwr_option     = MyParams->stokes_params.augmentedlagrangian.innerloop_solver.bandwidth_option;
    BANDWRt_MATRIXTYPE  bandwr_mtype  = BANDWRe_NONSYM;
 
    double  rho        = MyParams->stokes_params.augmentedlagrangian.rho;
    double  res1, res2;
-   
+
 	/*
    A*U + Bt*P = F
    B*U        = G
-   
+
    J*( P_kp1 - P_k ) = rho.B*U_kp1
    (A + rho.Bt*INVJ*B)*U_kp1 = f - Bt*P_k
-    
+
    */
 
    VEC *P_k, *P_kp1, *P_tmp, *P_tmp2;
@@ -916,7 +916,7 @@ int stokes_resol_augmentedlagrangian(SPMAT *A, SPMAT *B, SPMAT *J, VEC *U, VEC *
 
 
    ITERSTOKES *ip;
-   
+
    PAPt = sp_copy(A);
    PJPt = sp_copy(J);
 
@@ -928,7 +928,7 @@ int stokes_resol_augmentedlagrangian(SPMAT *A, SPMAT *B, SPMAT *J, VEC *U, VEC *
 
 	LLT_PAPt = sp_copy(PAPt);
    LLT_PJPt = sp_copy(PJPt);
-	
+
    spCHfactor(LLT_PAPt);
    spCHfactor(LLT_PJPt);
 
@@ -963,11 +963,11 @@ int stokes_resol_augmentedlagrangian(SPMAT *A, SPMAT *B, SPMAT *J, VEC *U, VEC *
    ip->R_par4 = (void *)B;
    ip->R_par5 = (void *)LLT_PJPt;
    ip->R_par6 = (void *)A;
-  
+
    ip->rho    = rho;
 
    ip->Px = (Fun_Rx) NULL; /* preconditionning */
-   
+
 
    ip->info      = iter_stokes_std_info ;
    ip->stop_crit = iter_stokes_std_stop_crit ;
@@ -1002,7 +1002,7 @@ int stokes_resol_augmentedlagrangian(SPMAT *A, SPMAT *B, SPMAT *J, VEC *U, VEC *
       res1 = v_norm2( v_sub(P_k, P_kp1, P_tmp) );
       res2 = v_norm2( v_sub(U_k, U_kp1, U_tmp) );
       printf("\t\t\t->res1,res2 = %le,%le (iter = %d )\n", res1,res2, *steps);
-      
+
       if ( res2 < tol )
       {
          U = v_copy(U_kp1, U);
@@ -1021,7 +1021,7 @@ int stokes_resol_augmentedlagrangian(SPMAT *A, SPMAT *B, SPMAT *J, VEC *U, VEC *
    iter_stokes_free(ip);   /* release only ITERSTOKES structure */
 
 
-   return EXIT_FAILURE;  
+   return EXIT_FAILURE;
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -1032,7 +1032,7 @@ VEC  *iter_stokes_cg(ITERSTOKES *ip)
    static VEC *r = VNULL, *p = VNULL, *q = VNULL, *z = VNULL;
    Real	alpha, beta, inner, old_inner, nres;
    VEC *rr;   /* rr == r or rr == z */
-   
+
    if (ip == ISTOKESNULL)
      error(E_NULL, "iter_stokes_cg");
    if (!ip->Rx || !ip->b)
@@ -1041,18 +1041,18 @@ VEC  *iter_stokes_cg(ITERSTOKES *ip)
      error(E_INSITU, "iter_stokes_cg");
    if (!ip->stop_crit)
      error(E_NULL, "iter_stokes_cg");
-   
+
    if ( ip->eps <= 0.0 )
      ip->eps = MACHEPS;
-   
+
    r = v_resize(r,ip->b->dim);
    p = v_resize(p,ip->b->dim);
    q = v_resize(q,ip->b->dim);
-   
+
    MEM_STAT_REG(r,TYPE_VEC);
    MEM_STAT_REG(p,TYPE_VEC);
    MEM_STAT_REG(q,TYPE_VEC);
-   
+
    if (ip->Px != (Fun_Rx)NULL)
    {
       z = v_resize(z,ip->b->dim);
@@ -1070,7 +1070,7 @@ VEC  *iter_stokes_cg(ITERSTOKES *ip)
       {
          error(E_SIZES, "iter_stokes_cg");
       }
-      
+
       (ip->Rx)(ip->R_par1,ip->R_par2,ip->R_par3,ip->R_par4,ip->R_par5,ip->R_par6, ip->rho, ip->x,p);    		/* p = A*x */
       v_sub(ip->b,p,r);		 		/* r = b - A*x */
    }
@@ -1080,7 +1080,7 @@ VEC  *iter_stokes_cg(ITERSTOKES *ip)
       ip->shared_x = FALSE;
       v_copy(ip->b,r);
    }
-   
+
    old_inner = 0.0;
    for ( ip->steps = 0; ip->steps <= ip->limit; ip->steps++ )
    {
@@ -1094,7 +1094,7 @@ VEC  *iter_stokes_cg(ITERSTOKES *ip)
 
       if (ip->info) ip->info(ip,nres,r,rr);
       if ( ip->stop_crit(ip,nres,r,rr) ) break;
-      
+
       if ( ip->steps )	/* if ( ip->steps > 0 ) ... */
       {
 	      beta = inner/old_inner;
@@ -1108,13 +1108,13 @@ VEC  *iter_stokes_cg(ITERSTOKES *ip)
       }
 
       (ip->Rx)(ip->R_par1,ip->R_par2,ip->R_par3,ip->R_par4,ip->R_par5,ip->R_par6, ip->rho, p,q);     /* q = A*p */
-      
+
       alpha = inner/in_prod(p,q);
       v_mltadd(ip->x,p,alpha,ip->x);
       v_mltadd(r,q,-alpha,r);
       old_inner = inner;
    }
-   
+
    return ip->x;
 }
 
@@ -1291,7 +1291,7 @@ ITERSTOKES *iter_stokes_get(int lenb, int lenx)
    ip->stop_crit = NULL; /* to set */
 
    ip->init_res = 1.0;
-   
+
    return ip;
 }
 
@@ -1327,7 +1327,7 @@ void iter_stokes_std_info(ITERSTOKES *ip, double nres, VEC *res, VEC *Bres)
 {
    if (nres >= 0.0)
      printf(" %d. residual = %g\n",ip->steps,nres);
-   else 
+   else
      printf(" %d. residual = %g (WARNING !!! should be >= 0) \n",
 	    ip->steps,nres);
 }
@@ -1343,7 +1343,7 @@ int iter_stokes_std_stop_crit(ITERSTOKES *ip, double nres, VEC *res, VEC *Bres)
      ip->init_res = fabs(nres);
 
    /* standard stopping criterium */
-   if (nres <= ip->init_res*ip->eps) return TRUE; 
+   if (nres <= ip->init_res*ip->eps) return TRUE;
    return FALSE;
 }
 

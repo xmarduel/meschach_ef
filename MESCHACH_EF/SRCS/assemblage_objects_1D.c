@@ -33,7 +33,7 @@ typedef enum
    ASSEMBLAGEe_ABx    = 7,
    ASSEMBLAGEe_A_B    = 8,
 
-   
+
    ASSEMBLAGEe_VECTOR_UUx   =  9,
    ASSEMBLAGEe_VECTOR_UU    = 10,
 
@@ -86,7 +86,7 @@ SPMAT* assemblage1D_matrix_Mass( const ELT_1D *elt , const GEOM_1D *geom , SPMAT
    if ( elt  == NULL ) error(E_NULL, "assemblage1D_matrix_Mass");
    if ( geom == NULL ) error(E_NULL, "assemblage1D_matrix_Mass");
    if ( Mass == NULL ) error(E_NULL, "assemblage1D_matrix_Mass");
-   
+
    /* delegate */
    return _assemblage_matrix1 (ASSEMBLAGEe_MASS , elt , geom , Mass );
 }
@@ -143,30 +143,30 @@ SPMAT * assemblage1D_matrix_fromBC(const ELT_1D *elt, const GEOM_1D *geom, const
    if ( geom   == NULL ) error(E_NULL, "assemblage1D_matrix_fromBC");
    if ( BC     == NULL ) error(E_NULL, "assemblage1D_matrix_fromBC");
    if ( MassDM1_BC == NULL ) error(E_NULL, "assemblage1D_matrix_fromBC");
-   
+
    /*
     conditions limites de Cauchy/Robin - la matrice est changee en consequense
     */
-   
+
    /* verification compatibilite des dimension */
    //if ( MassDM1_BC->m != geom->REF_S->dim ) error(E_SIZES, "assemblage1D_matrix_fromBC");
-   
-   
+
+
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
       if ( Bc1D_hasCauchyBC(BC, AXEe_X) )
       {
          apply_Bc1D_cauchy_on_matrix(elt, geom, BC, MassDM1_BC);
       }
-      
+
       if ( Bc1D_hasRobinBC(BC, AXEe_X) )
       {
          apply_Bc1D_robin_on_matrix(elt, geom, BC, MassDM1_BC);
       }
    }
-   
+
    sp_compact(MassDM1_BC, MACHEPS);
-   
+
    return MassDM1_BC;
 }
 
@@ -177,15 +177,15 @@ static void apply_Bc1D_cauchy_on_matrix(const ELT_1D *elt, const GEOM_1D *geom, 
 {
    int a,idx2;
    Real BCval;
-   
+
    for(a=0; a<geom->NBFACE; a++)
    {
       if ( (geom->REF_A->ive[a] > 0) && (BC_1De_CAUCHY==Bc1D_getBcType(BC, AXEe_X, geom->REF_A->ive[a])) )
       {
          idx2 = geom->NSFACE->im[a][0];
-         
+
          BCval = Bc1D_evalFunction1(BC, BC_1De_CAUCHY, geom->REF_A->ive[a], AXEe_X, geom->XSOMM->ve[idx2]);
-         
+
          sp_add_val(A, idx2, idx2, BCval);
       }
    }
@@ -198,15 +198,15 @@ static void apply_Bc1D_robin_on_matrix(const ELT_1D *elt, const GEOM_1D *geom, c
 {
    int a,idx2;
    Real BCval;
-   
+
    for(a=0; a<geom->NBFACE; a++)
    {
       if ( (geom->REF_A->ive[a] > 0) && (BC_1De_ROBIN==Bc1D_getBcType(BC, AXEe_X, geom->REF_A->ive[a])) )
       {
          idx2 = geom->NSFACE->im[a][0];
-         
+
          BCval = Bc1D_evalFunction1(BC, BC_1De_ROBIN, geom->REF_A->ive[a], AXEe_X, geom->XSOMM->ve[idx2]);
-         
+
          sp_add_val(A, idx2, idx2, BCval);
       }
    }
@@ -218,7 +218,7 @@ static void apply_Bc1D_robin_on_matrix(const ELT_1D *elt, const GEOM_1D *geom, c
 static SPMAT* _assemblage_matrix1( ASSEMBLAGEt_TYPE type , const ELT_1D *elt , const GEOM_1D *geom , SPMAT *A  )
 {
    int e; int i,j;
-   
+
    MAT *A_el;
    MAT* (*_systel_matrix_)( u_int e , const ELT_1D *elt , const GEOM_1D *geom , MAT* M_el );
 
@@ -274,7 +274,7 @@ static SPMAT* _assemblage_matrix1( ASSEMBLAGEt_TYPE type , const ELT_1D *elt , c
          transform1D_matrix_with_newbasis_bf( elt , geom , A );
       }
 	}
-   
+
    return sp_compact(A, MACHEPS);
 }
 
@@ -284,19 +284,19 @@ static SPMAT* _assemblage_matrix1( ASSEMBLAGEt_TYPE type , const ELT_1D *elt , c
 static MAT* _systel_matrix_Mass( u_int  e , const ELT_1D *element , const GEOM_1D *geom , MAT *Mass_el )
 {
    Real jac ;
-   
+
    /* initialisation */
    m_copy(element->MAT_I_I, Mass_el);
-   
+
    /* calcul jacobien on this element */
    jac = eval_jac_on_e ( e , element , geom );
-      
+
    sm_mlt( jac, Mass_el, Mass_el);
-   
+
    if ( strcmp(element->name_ef,"H3") == 0  )
    {
       int i,j;
-         
+
       for (i=0; i<4; i++)
       for (j=0; j<2; j++)
       {
@@ -308,11 +308,11 @@ static MAT* _systel_matrix_Mass( u_int  e , const ELT_1D *element , const GEOM_1
          Mass_el->me[2*i+1][j] *= jac;
       }
    }
-   
+
    /* with numerical integration  with the basis functions */
    /*
    m_zero(Mass_el);
-    
+
    for (i=0; i<element->nb_somm_cell; i++)
    for (j=0; j<element->nb_somm_cell; j++)
    {
@@ -325,10 +325,10 @@ static MAT* _systel_matrix_Mass( u_int  e , const ELT_1D *element , const GEOM_1
    }
    sm_mlt( jac, Mass_el, Mass_el);
    */
-   
+
 
    return Mass_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -336,21 +336,21 @@ static MAT* _systel_matrix_Mass( u_int  e , const ELT_1D *element , const GEOM_1
 static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_1D *element , const GEOM_1D *geom , MAT *Stiff1_el )
 {
    Real jac, un_sur_jac;
-   
+
    /* initialisation */
    m_copy(element->MAT_x_x, Stiff1_el);
 
-   /* calcul jacobien on this element */ 
+   /* calcul jacobien on this element */
    jac = eval_jac_on_e ( e , element , geom );
-   
+
    un_sur_jac = 1.0/jac ;
-   
+
    sm_mlt(un_sur_jac, Stiff1_el, Stiff1_el);
-   
+
    if ( strcmp(element->name_ef,"H3") == 0 )
    {
       int i,j;
-   
+
       for (i=0; i<4; i++)
       for (j=0; j<2; j++)
       {
@@ -380,9 +380,9 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_1D *element , const GEOM
    sm_mlt( un_sur_jac, Stiff1_el, Stiff1_el);
    m_output(Stiff1_el);
    */
-   
+
    return Stiff1_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -390,23 +390,23 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_1D *element , const GEOM
 static MAT* _systel_matrix_Stiff2( u_int  e , const ELT_1D *element , const GEOM_1D *geom , MAT *Stiff2_el )
 {
    Real jac, un_sur_jac, un_sur_jac3;
-   
+
    /* initialisation */
    m_copy(element->MAT_xx_xx, Stiff2_el);
-   
+
    /* calcul jacobien on this element */
    jac = eval_jac_on_e ( e , element , geom );
-   
+
    un_sur_jac  = 1.0 / jac ;
    un_sur_jac3 = CUB(un_sur_jac);
-   
+
    sm_mlt(un_sur_jac3, Stiff2_el, Stiff2_el);
-   
-   
+
+
    if ( strcmp(element->name_ef,"H3") == 0 )
    {
       int i,j;
-   
+
       for (i=0; i<4; i++)
       for (j=0; j<2; j++)
       {
@@ -418,9 +418,9 @@ static MAT* _systel_matrix_Stiff2( u_int  e , const ELT_1D *element , const GEOM
          Stiff2_el->me[2*i+1][j] *= jac;
       }
    }
-   
+
    return Stiff2_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -429,7 +429,7 @@ static MAT* _systel_matrix_Convec( u_int  e , const ELT_1D *element , const GEOM
 {
    /* initialisation */
    m_copy(element->MAT_I_x, Conv_el);
-   
+
    /* with numerical integration  with the basis functions */
    /*
    m_zero(Conv_el);
@@ -445,11 +445,11 @@ static MAT* _systel_matrix_Convec( u_int  e , const ELT_1D *element , const GEOM
       }
    }
    */
-      
+
    if ( strcmp(element->name_ef,"H3") == 0 )
    {
       int i,j;
-   
+
       /* calcul jacobien on this element */
       Real jac = eval_jac_on_e ( e , element , geom );
 
@@ -464,9 +464,9 @@ static MAT* _systel_matrix_Convec( u_int  e , const ELT_1D *element , const GEOM
          Conv_el->me[2*i+1][j] *= jac;
       }
    }
-   
+
    return Conv_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -574,13 +574,13 @@ static SPMAT * _assemblage_matrix2( ASSEMBLAGEt_TYPE type , const ELT_1D *elt , 
 
    /* fill */
    for( e=0 ; e<geom->NBELMT ; e++ )
-   { 
+   {
       TENSOR_el = _systel_matrix_( e , elt , geom , TENSOR_el );
 
       m_zero(MAT_el);  /* init for each element "e" */
 
       for( i=0 ; i<elt->nb_somm_cell ; i++)
-      for( j=0 ; j<elt->nb_somm_cell ; j++) 
+      for( j=0 ; j<elt->nb_somm_cell ; j++)
       {
          for (k=0; k<elt->nb_somm_cell ; k++)
          {
@@ -614,21 +614,21 @@ static TENSOR* _systel_matrix_AUx( u_int  e , const ELT_1D *element , const GEOM
    ts_copy(element->TENSOR_I_x_I, TENSOR_el);
 
    /*
-   
+
    for (i=0; i<element->nb_somm_cell; i++)
    for (j=0; j<element->nb_somm_cell; j++)
    for (k=0; k<element->nb_somm_cell; k++)
    {
       for (m=0; m<NBPTS_GAUSS_1D_TRI; m++)
       {
-         TENSOR_el->me[i][j][k]  += w1D[m]* 
+         TENSOR_el->me[i][j][k]  += w1D[m]*
                                           element->f_base[i]   (ksi1D[m]) *
                                           element->dfdx_base[j](ksi1D[m]) *
                                           element->f_base[k]   (ksi1D[m]) ;
       }
    }
    */
-   
+
    /* only if element is "H3" */
    if ( strcmp(element->name_ef,"H3") == 0 )
    {
@@ -725,7 +725,7 @@ static TENSOR* _systel_matrix_A_U( u_int  e , const ELT_1D *element , const GEOM
       }
    }
     */
-   
+
    /* calcul jacobien on this element */
    jac = eval_jac_on_e ( e , element , geom );
 
@@ -768,20 +768,20 @@ VEC* assemblage1D_vector_fun( const ELT_1D *elt , const GEOM_1D *geom , const RH
    int e; int i; int k; int m;
    VEC *RHS_el;
    MAT *fbase_k_ksi_m;
-   
+
    if ( elt    == NULL ) error(E_NULL, "assemblage1D_vector_fun");
    if ( geom   == NULL ) error(E_NULL, "assemblage1D_vector_fun");
    if ( RhsFun == NULL ) error(E_NULL, "assemblage1D_vector_fun");
    if ( RHS    == NULL ) error(E_NULL, "assemblage1D_vector_fun");
-   
+
    /* initialisation of RHS */
    v_zero(RHS);
-	
+
 	RHS_el = v_get(elt->nb_somm_cell);
-	
+
    /* init fbase_k_ksi_m */
    fbase_k_ksi_m = m_get(elt->nb_somm_cell, NBPTS_GAUSS_1D_TRI);
-   
+
    for (m=0; m<NBPTS_GAUSS_1D_TRI; m++)
    {
       for (k=0; k<elt->nb_somm_cell; k++)
@@ -790,13 +790,13 @@ VEC* assemblage1D_vector_fun( const ELT_1D *elt , const GEOM_1D *geom , const RH
       }
    }
 
-   
+
    /* setup RHS */
    for(e=0; e<geom->NBELMT; e++)
-   { 
+   {
       /*RHS_el = _systel_vector_fun( e , elt , geom , RhsFun , RHS_el );*/
       RHS_el = _systel_vector_fun_o( e , elt , geom , RhsFun , RHS_el , fbase_k_ksi_m);
-      
+
       for (i=0; i<elt->nb_somm_cell; i++)
       {
          RHS->ve[geom->NSELMT->im[e][i]] += RHS_el->ve[i] ;
@@ -828,7 +828,7 @@ VEC* assemblage1D_vector_fun( const ELT_1D *elt , const GEOM_1D *geom , const RH
            transform1D_vector_with_newbasis_bf( elt , geom , RHS );
        }
 	}
-   
+
    return RHS;
 }
 
@@ -842,20 +842,20 @@ VEC * assemblage1D_vector_fromBC(const ELT_1D *elt, const GEOM_1D *geom, const B
    if ( geom   == NULL ) error(E_NULL, "assemblage1D_vector_fromBC");
    if ( BC     == NULL ) error(E_NULL, "assemblage1D_vector_fromBC");
    if ( RHS    == NULL ) error(E_NULL, "assemblage1D_vector_fromBC");
-   
+
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
       if ( Bc1D_hasNeumannBC(BC, AXEe_X) )
       {
          apply_Bc1D_neumann_on_vector(elt, geom, BC, RHS);
       }
-      
+
       if ( Bc1D_hasRobinBC(BC, AXEe_X) )
       {
          apply_Bc1D_robin_on_vector(elt, geom, BC, RHS);
       }
    }
-   
+
    return RHS;
 }
 
@@ -866,28 +866,28 @@ static VEC * _systel_vector_fun( u_int  e , const ELT_1D *elt , const GEOM_1D *g
 {
    int  k,m,i;
    Real xx[NBPTS_GAUSS_1D_TRI];
-   
+
    Real x1,x2 ;
    Real w_m__F_x_m;
-   
+
    Real jac ;
 
    /* initialisation Rhs_el */
    v_zero(Rhs_el);
-   
+
    /* x1 & x2 */
    eval_x1x2_on_e ( e , elt , geom , &x1 , &x2 );
 
    /* calcul jacobien */
    jac = eval_jac_on_e ( e , elt , geom );
    /*printf("jac = %lf %lf %lf\n", jac,x1,x2);*/
-   
+
    for (m=0; m<NBPTS_GAUSS_1D_TRI; m++)
    {
       xx[m] = x1 + (x2-x1)*ksi1D[m] ;
 
       w_m__F_x_m = w1D[m]*Rhs1D_evalFunction( RhsFun, 0, AXEe_X, xx[m] );
-         
+
       for (k=0; k<elt->nb_somm_cell; k++)
       {
          Rhs_el->ve[k] += w_m__F_x_m * elt->f_base[k](ksi1D[m]) ;
@@ -898,7 +898,7 @@ static VEC * _systel_vector_fun( u_int  e , const ELT_1D *elt , const GEOM_1D *g
    /*
    SCM_el = v_smlt(elt->VEC_I, Rhs1D_evalFunction( RhsFun, 0, axe, 0.0), SCM_el);
    */
-    
+
    /* post -process for H3 */
    if ( strcmp(elt->name_ef,"H3") == 0 )
    {
@@ -908,12 +908,12 @@ static VEC * _systel_vector_fun( u_int  e , const ELT_1D *elt , const GEOM_1D *g
       }
    }
    /* post -process for H3 */
-   
+
    sv_mlt(jac , Rhs_el, Rhs_el);
 
    return Rhs_el;
-} 
- 
+}
+
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
@@ -921,28 +921,28 @@ static VEC* _systel_vector_fun_o( u_int  e , const ELT_1D *elt , const GEOM_1D *
 {
    int  k,m,i;
    Real xx[NBPTS_GAUSS_1D_TRI];
-   
+
    Real x1,x2 ;
    Real w_m__F_x_m;
-   
+
    Real jac ;
 
    /* initialisation Rhs_el */
    v_zero(Rhs_el);
-   
+
    /* x1 & x2 */
    eval_x1x2_on_e ( e , elt , geom , &x1 , &x2 );
 
    /* calcul jacobien */
    jac = eval_jac_on_e ( e , elt , geom );
    /*printf("jac = %lf %lf %lf\n", jac,x1,x2);*/
-   
+
    for (m=0; m<NBPTS_GAUSS_1D_TRI; m++)
    {
       xx[m] = x1 + (x2-x1)*ksi1D[m] ;
 
       w_m__F_x_m = w1D[m]*Rhs1D_evalFunction( RhsFun, 0, AXEe_X, xx[m] );
-         
+
       for (k=0; k<elt->nb_somm_cell; k++)
       {
          Rhs_el->ve[k] += w_m__F_x_m * fbase_k_ksi_m->me[k][m] ;
@@ -953,7 +953,7 @@ static VEC* _systel_vector_fun_o( u_int  e , const ELT_1D *elt , const GEOM_1D *
    /*
    SCM_el = v_smlt(elt->VEC_I, Rhs1D_evalFunction( RhsFun, 0, axe, 0.0), SCM_el);
    */
-    
+
    /* post -process for H3 */
    if ( strcmp(elt->name_ef,"H3") == 0 )
    {
@@ -963,17 +963,17 @@ static VEC* _systel_vector_fun_o( u_int  e , const ELT_1D *elt , const GEOM_1D *
       }
    }
    /* post -process for H3 */
-   
+
    sv_mlt(jac , Rhs_el, Rhs_el);
 
    return Rhs_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
 VEC* assemblage1D_vector_abx( const ELT_1D *elt , const GEOM_1D *geom , const VEC *a , const VEC *b , VEC *RHS )
-{   
+{
    /* check */
    if ( elt    == NULL ) error(E_NULL, "assemblage1D_vector_abx");
    if ( geom   == NULL ) error(E_NULL, "assemblage1D_vector_abx");
@@ -1027,19 +1027,19 @@ static VEC * _assemblage_vector2( const ASSEMBLAGEt_TYPE type, const ELT_1D *elt
    a_in_bbf = vector_cbf_to_bbf(elt, geom, a, a_in_bbf);
    b_in_bbf = vector_cbf_to_bbf(elt, geom, b, b_in_bbf);
    /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
-   
+
    /* alloc mem */
    RHS_el = v_get(elt->nb_somm_cell);
 
    /* initialisation of RHS */
    v_zero(RHS);
-   
+
    for(e=0; e<geom->NBELMT; e++)
-   { 
+   {
       RHS_el = _systel_vector_( e , elt , geom , a_in_bbf , b_in_bbf , RHS_el );
-      
+
       for (i=0; i<elt->nb_somm_cell; i++)
-      { 
+      {
          RHS->ve[geom->NSELMT->im[e][i]] += RHS_el->ve[i] ;
       }
    }
@@ -1047,13 +1047,13 @@ static VEC * _assemblage_vector2( const ASSEMBLAGEt_TYPE type, const ELT_1D *elt
    /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
    RHS = transform1D_vector_with_newbasis_bf(elt , geom , RHS);
    /* in case of "S2", "S3", "S4" or "S5" and non-periodic bc */
-   
+
    /* free mem */
    V_FREE(a_in_bbf);
    V_FREE(b_in_bbf);
 
    V_FREE(RHS_el) ;
-   
+
    /**/
    return RHS;
 }
@@ -1064,16 +1064,16 @@ static VEC * _assemblage_vector2( const ASSEMBLAGEt_TYPE type, const ELT_1D *elt
 static VEC* _systel_vector_abx( u_int  e , const ELT_1D *elt , const GEOM_1D *geom , const VEC *a , const VEC *b, VEC *Rhs_el )
 {
    int i,j;
-    
+
    MAT* ab = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    TENSOR *TENSOR_el = ts_get(elt->nb_somm_cell,
                               elt->nb_somm_cell,
                               elt->nb_somm_cell);
-   
+
    /* init */
    _systel_matrix_AUx( e , elt , geom , TENSOR_el );
-   
+
    /* We write the componant of U.Ux in a matrix  */
    for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
@@ -1081,15 +1081,15 @@ static VEC* _systel_vector_abx( u_int  e , const ELT_1D *elt , const GEOM_1D *ge
        ab->me[i][j] = a->ve[geom->NSELMT->im[e][i]]*
                       b->ve[geom->NSELMT->im[e][j]];
    }
-      
+
    /* Final Calculus : SCM_NL_e = TENSOR*ab */
    tsm_mlt(TENSOR_el, ab, Rhs_el);
-   
+
    M_FREE(ab);
    TS_FREE(TENSOR_el);
-   
+
    return Rhs_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -1097,16 +1097,16 @@ static VEC* _systel_vector_abx( u_int  e , const ELT_1D *elt , const GEOM_1D *ge
 static VEC* _systel_vector_ab ( u_int  e , const ELT_1D *elt , const GEOM_1D *geom , const VEC *a , const VEC *b , VEC *Rhs_el )
 {
    int i,j;
-    
+
    MAT* ab = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    TENSOR *TENSOR_el = ts_get(elt->nb_somm_cell,
                               elt->nb_somm_cell,
                               elt->nb_somm_cell);
-   
+
    /* init */
    _systel_matrix_A_U( e , elt , geom , TENSOR_el );
-   
+
    /* We write the componant of U.Ux in a matrix */
    for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
@@ -1114,10 +1114,10 @@ static VEC* _systel_vector_ab ( u_int  e , const ELT_1D *elt , const GEOM_1D *ge
        ab->me[i][j] = a->ve[geom->NSELMT->im[e][i]]*
                       b->ve[geom->NSELMT->im[e][j]];
    }
-      
+
    /* Final Calculus : SCM_NL_e = TENSOR*ab */
    tsm_mlt(TENSOR_el, ab, Rhs_el);
-      
+
    M_FREE(ab);
    TS_FREE(TENSOR_el);
 
@@ -1130,12 +1130,12 @@ static VEC* _systel_vector_ab ( u_int  e , const ELT_1D *elt , const GEOM_1D *ge
 static SPMAT* transform1D_matrix_with_newbasis_bf( const ELT_1D *elt , const GEOM_1D *geom , SPMAT *A )
 {
    int i;
-   
+
    /* check pointer */
    if ( elt    == NULL ) error(E_NULL, "transform1D_matrix_with_newbasis_bf");
    if ( geom   == NULL ) error(E_NULL, "transform1D_matrix_with_newbasis_bf");
    if ( A      == NULL ) error(E_NULL, "transform1D_matrix_with_newbasis_bf");
-   
+
    /* ----- only for S3 and S5  ----------------------------------------------------*/
    if ( !( (strcmp(elt->name_ef,"S2") == 0) || (strcmp(elt->name_ef,"S3") == 0) || (strcmp(elt->name_ef,"S4") == 0) || (strcmp(elt->name_ef,"S5") == 0) )  )
    {
@@ -1150,7 +1150,7 @@ static SPMAT* transform1D_matrix_with_newbasis_bf( const ELT_1D *elt , const GEO
        */
 
       SPMAT *TMP = sp_get(A->m, A->n, 5);
-      
+
       TMP = sp_mtrm_mlt(geom->BASEFUNC_BASICS_to_CL, A, TMP);
       A   = sp_m_mlt   (TMP, geom->BASEFUNC_BASICS_to_CL, A);
 
@@ -1158,7 +1158,7 @@ static SPMAT* transform1D_matrix_with_newbasis_bf( const ELT_1D *elt , const GEO
       SP_FREE(TMP);
    }
 
-   return A; 
+   return A;
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -1173,7 +1173,7 @@ static VEC * transform1D_vector_with_newbasis_bf( const ELT_1D *elt , const GEOM
    if ( geom   == NULL ) error(E_NULL, "transform1D_vector_with_newbasis_bf");
    if ( RHS    == NULL ) error(E_NULL, "transform1D_vector_with_newbasis_bf");
 
-   
+
    if ( !( (strcmp(elt->name_ef,"S2")==0) || (strcmp(elt->name_ef,"S3")==0) || (strcmp(elt->name_ef,"S4") == 0) || (strcmp(elt->name_ef,"S5")==0) ) )
    {
       return RHS;
@@ -1195,7 +1195,7 @@ static VEC * transform1D_vector_with_newbasis_bf( const ELT_1D *elt , const GEOM
       /* clean */
       V_FREE(TMP);
    }
-   
+
    return RHS;
 }
 
@@ -1205,7 +1205,7 @@ static VEC * transform1D_vector_with_newbasis_bf( const ELT_1D *elt , const GEOM
 static VEC * vector_cbf_to_bbf(  const ELT_1D *elt , const GEOM_1D *geom , const VEC * RHS_cbf , VEC *RHS_bbf )
 {
    char *ef = elt->name_ef;
-   
+
    if ( !( (strcmp(ef,"S2")==0) || (strcmp(ef,"S3")==0) || (strcmp(ef,"S4")==0) || (strcmp(ef,"S5")==0) ) )
    {
       return RHS_bbf;
@@ -1214,7 +1214,7 @@ static VEC * vector_cbf_to_bbf(  const ELT_1D *elt , const GEOM_1D *geom , const
    /* non periodic: perform CL */
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
-      /*           
+      /*
        *    RHS_bbf = T . RHS_cbf            ( T is geom->BASEFUNC_BASICS_to_CL )
        */
 
@@ -1231,13 +1231,13 @@ Real eval_jac_on_e ( int e , const ELT_1D *element , const GEOM_1D *geom )
 {
    Real jac;
    Real x1,x2;
-   
+
    /* calculus the limits of the element e */
    eval_x1x2_on_e ( e , element , geom  , &x1 , &x2 );
-   
+
    /* calculus of the jacobian */
    jac = fabs(x2 - x1) ;
-   
+
    return jac;
 }
 
@@ -1250,7 +1250,7 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
    /*
     should i put in the struct ELT_1D the indices idx1 & idx2 ?
     */
-   
+
    if ( strcmp(elt->name_ef,"P1") == 0 )
    {
       *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
@@ -1267,7 +1267,7 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
    {
       *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
       *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][3] ] ;
-   } 
+   }
    else
    if ( strcmp(elt->name_ef,"H3") == 0 )
    {
@@ -1289,7 +1289,7 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
       }
    }
    else
-   if ( strcmp(elt->name_ef,"S3") == 0 ) 
+   if ( strcmp(elt->name_ef,"S3") == 0 )
    {
       if (geom->periodicity == NON_PERIODIC_MESHe)
       {
@@ -1340,10 +1340,10 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
    {
       Real X_RIGHT = geom->X_RIGHT;
       Real X_LEFT  = geom->X_LEFT;
-      
+
       *x2 += (X_RIGHT-X_LEFT) ;
    }
-   
+
    /*printf(" x1 = %lf  -- x2 = %lf \n",*x1,*x2);*/
 
    return;
@@ -1355,13 +1355,13 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
 static void apply_Bc1D_robin_on_vector(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, VEC *RHS)
 {
    int a,idx2;
-   
+
    for(a=0 ; a<geom->NBFACE; a++)
    {
       if ( (geom->REF_A->ive[a] > 0) && (BC_1De_ROBIN==Bc1D_getBcType(BC, AXEe_X, geom->REF_A->ive[a])) )
       {
          idx2 = geom->NSFACE->im[a][0];
-         
+
          RHS->ve[idx2] += Bc1D_evalFunction2(BC, BC_1De_ROBIN, geom->REF_A->ive[a], AXEe_X, geom->XSOMM->ve[idx2]);
       }
    }
@@ -1373,13 +1373,13 @@ static void apply_Bc1D_robin_on_vector(const ELT_1D *elt, const GEOM_1D *geom, c
 static void apply_Bc1D_neumann_on_vector(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, VEC *RHS)
 {
    int a,idx2;
-   
+
    for(a=0; a<geom->NBFACE; a++)
    {
       if ( (geom->REF_A->ive[a] > 0) && (BC_1De_NEUMANN==Bc1D_getBcType(BC, AXEe_X, geom->REF_A->ive[a])) )
       {
          idx2 = geom->NSFACE->im[a][0];
-         
+
          RHS->ve[idx2] += Bc1D_evalFunction1(BC, BC_1De_NEUMANN, geom->REF_A->ive[a], AXEe_X, geom->XSOMM->ve[idx2]);
       }
    }

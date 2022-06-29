@@ -605,7 +605,7 @@ static void elt1D_get_S2(ELT_1D *elt)
    {
       elt->MAT_FuncBasis_CL_R->me[i][j] = MAT_PermBasis_S2[1-i][1-j];
    }
-         
+
 }
 
 /* ------------------------------------------------------------------------------------------------------ */
@@ -726,28 +726,28 @@ static void elt1D_get_S4(ELT_1D *elt)
    /* Declaration de toutes les matrices pour l' element S4 ... */
 #include "MESCHACH_EF/INCLUDES/ef1D_S4_mtx.h"
    /* Declaration de toutes les matrices pour l' element S4 ... */
-   
+
    u_int i,j,k;
-   
+
    elt->nb_somm_cell = 5 ;
-   
+
    /* elt->f_base  pointe vers (elt->nb_somm_cell) fonctions de bases */
    elt->f_base      = (Real (**)(Real))calloc(5,sizeof(Real (*)(Real)) );
    elt->dfdx_base   = (Real (**)(Real))calloc(5,sizeof(Real (*)(Real)) );
    elt->ddfdxx_base = (Real (**)(Real))calloc(5,sizeof(Real (*)(Real)) );
-   
+
    elt->f_base[0] = F0_1D_S4 ;
    elt->f_base[1] = F1_1D_S4 ;
    elt->f_base[2] = F2_1D_S4 ;
    elt->f_base[3] = F3_1D_S4 ;
    elt->f_base[4] = F4_1D_S4 ;
-   
+
    elt->dfdx_base[0] = DFDX0_1D_S4 ;
    elt->dfdx_base[1] = DFDX1_1D_S4 ;
    elt->dfdx_base[2] = DFDX2_1D_S4 ;
    elt->dfdx_base[3] = DFDX3_1D_S4 ;
    elt->dfdx_base[4] = DFDX4_1D_S4 ;
-   
+
    elt->ddfdxx_base[0] = DDFDXX0_1D_S4 ;
    elt->ddfdxx_base[1] = DDFDXX1_1D_S4 ;
    elt->ddfdxx_base[2] = DDFDXX2_1D_S4 ;
@@ -760,14 +760,14 @@ static void elt1D_get_S4(ELT_1D *elt)
       {
          elt->MAT_I_I->me[i][j] = MAT_Masse_S4[i][j];
       }
-   
+
    elt->MAT_I_x = m_get(5,5);
    for (i=0; i<5; i++)
       for (j=0; j<5; j++)
       {
          elt->MAT_I_x->me[i][j] = MAT_Convection_S4[i][j];
       }
-   
+
    elt->MAT_x_x   = m_get(5,5);
    elt->MAT_xx_xx = m_get(5,5);
    for (i=0; i<5; i++)
@@ -776,7 +776,7 @@ static void elt1D_get_S4(ELT_1D *elt)
          elt->MAT_x_x->me[i][j]   = MAT_Rigid1_S4[i][j];
          elt->MAT_xx_xx->me[i][j] = MAT_Rigid2_S4[i][j];
       }
-   
+
    elt->MAT_I_xx = m_get(5,5);
    elt->MAT_x_xx = m_get(5,5);
    for (i=0; i<5; i++)
@@ -785,8 +785,8 @@ static void elt1D_get_S4(ELT_1D *elt)
          elt->MAT_I_xx->me[i][j] = MAT_Stab_I_xx_S4[i][j];
          elt->MAT_x_xx->me[i][j] = MAT_Stab_x_xx_S4[i][j];
       }
-   
-   
+
+
    elt->VEC_I  = v_get(5);
    elt->VEC_x  = v_get(5);
    elt->VEC_xx = v_get(5);
@@ -796,7 +796,7 @@ static void elt1D_get_S4(ELT_1D *elt)
       elt->VEC_x->ve[i]  = VEC_x__S4[i];
       elt->VEC_xx->ve[i] = VEC_xx_S4[i];
    }
-   
+
    elt->TENSOR_I_x_I = ts_get(5,5,5);
    elt->TENSOR_x_I_I = ts_get(5,5,5);
    elt->TENSOR_I_I_x = ts_get(5,5,5);
@@ -808,7 +808,7 @@ static void elt1D_get_S4(ELT_1D *elt)
             elt->TENSOR_x_I_I->te[i][j][k] = TENSOR_Convection_S4[j][i][k];
             elt->TENSOR_I_I_x->te[i][j][k] = TENSOR_Convection_S4[i][k][j];
          }
-   
+
    elt->TENSOR_I_I_I = ts_get(5,5,5);
    for (i=0; i<5; i++)
       for (j=0; j<5; j++)
@@ -816,7 +816,7 @@ static void elt1D_get_S4(ELT_1D *elt)
          {
             elt->TENSOR_I_I_I->te[i][j][k] = TENSOR_Masse_S4[i][j][k];
          }
-   
+
    elt->MAT_FuncBasis_CL_L = m_get(4,4);
    for (i=0; i<4; i++)
       for (j=0; j<4; j++)
@@ -969,21 +969,21 @@ int elt1D_free(ELT_1D *elt)
       V_FREE(elt->VEC_I);
       V_FREE(elt->VEC_x);
       V_FREE(elt->VEC_xx);
-      
+
       M_FREE(elt->MAT_I_I);
-      
+
       M_FREE(elt->MAT_I_x);
       M_FREE(elt->MAT_x_x);
       M_FREE(elt->MAT_xx_xx);
       M_FREE(elt->MAT_x_xx);
       M_FREE(elt->MAT_I_xx);
-      
+
       TS_FREE(elt->TENSOR_I_x_I);
       TS_FREE(elt->TENSOR_x_I_I);
       TS_FREE(elt->TENSOR_I_I_x);
-      
+
       TS_FREE(elt->TENSOR_I_I_I);
-      
+
 
       M_FREE(elt->MAT_FuncBasis_CL_L);
       M_FREE(elt->MAT_FuncBasis_CL_R);
@@ -991,13 +991,13 @@ int elt1D_free(ELT_1D *elt)
       free(elt->f_base);
       free(elt->dfdx_base);
       free(elt->ddfdxx_base);
-      
+
       /* free the memory of the element */
       free(elt);
-            
+
       return EXIT_SUCCESS;
    }
-   
+
 }
 
 
@@ -1012,7 +1012,7 @@ void elt1D_foutput(FILE* fp, ELT_1D* elt)
    fprintf(fp, "ELT: \n");
    fprintf(fp, "\tdim = %d\n", elt->dim);
    fprintf(fp, "\tname = %s\n", elt->name_ef);
-   
+
    return;
 }
 
@@ -1024,15 +1024,15 @@ void elt1D_fdump(FILE* fp, ELT_1D* elt)
    fprintf(fp, "ELT: \n");
    fprintf(fp, "\tdim = %d\n", elt->dim);
    fprintf(fp, "\tname = %s\n", elt->name_ef);
-      
+
    fprintf(fp, "\tMAT_Masse:");
    m_foutput(fp, elt->MAT_I_I);
-   
+
    fprintf(fp, "\tMAT_Rigid1:");
    m_foutput(fp, elt->MAT_x_x);
 
    fprintf(fp, "\tbase functions:");
-   
+
    return;
 }
 
@@ -1048,7 +1048,7 @@ Real F0_1D_P0( Real x )          /* -- Element P0 --- */
 }
 
 
-Real F0_1D_P1( Real x )          /* -- Element P1 --- */ 
+Real F0_1D_P1( Real x )          /* -- Element P1 --- */
 {
    Real val;
    return val = 1.0 - x ;
@@ -1154,7 +1154,7 @@ Real F1_1D_S3( Real x )
 Real F2_1D_S3( Real x )
 {
    Real val;
-   return val = 1.0 +3.0*x + 3*SQR(x) - 3.0*CUB(x); 
+   return val = 1.0 +3.0*x + 3*SQR(x) - 3.0*CUB(x);
 }
 Real F3_1D_S3( Real x )
 {
@@ -1237,7 +1237,7 @@ Real DFDX0_1D_P0( Real x )     /* -- Element P0 --- */
 }
 
 
-Real DFDX0_1D_P1( Real x )     /* -- Element P1 --- */ 
+Real DFDX0_1D_P1( Real x )     /* -- Element P1 --- */
 {
    Real val;
    return val = -1.0 ;
@@ -1428,7 +1428,7 @@ Real DDFDXX0_1D_P0( Real x )      /* -- Element P0 --- */
 }
 
 
-Real DDFDXX0_1D_P1( Real x )      /* -- Element P1 --- */ 
+Real DDFDXX0_1D_P1( Real x )      /* -- Element P1 --- */
 {
    Real val;
    return val = 0.0 ;

@@ -1,4 +1,4 @@
-#ifndef MEF_FUNCTIONS_STRUCTS_2D__H
+ #ifndef MEF_FUNCTIONS_STRUCTS_2D__H
 #define MEF_FUNCTIONS_STRUCTS_2D__H
 
 #ifdef __cplusplus
@@ -24,9 +24,9 @@ typedef struct FUN_2D_
    FUNC_3D phi_xyt;              /**< placeholder for a "C" function  with 3 vars (x,y,t)   */
    FUNC_2D_PLUS_VOID phi_xy_v;   /**< placeholder for a "C" function  with 3 vars (x,y,  python_obj)  */
    FUNC_3D_PLUS_VOID phi_xyt_v;  /**< placeholder for a "C" function  with 4 vars (x,y,t,python_obj)  */
-   
+
    void*      clientdata;        /**< hold a pointer to a python object */
-   
+
    FUN_TYPE type;                /**< gives back the type of function stored in the object */
 
    double (*eval)(const struct FUN_2D_ * fun2D , double x, double y , ... );
@@ -52,11 +52,11 @@ FUN_2D * Fun2D_setFunction           (FUN_2D* Fun, FUN_TYPE type, void* phi, voi
 
 FUN_2D * Fun2D_setCFunction          (FUN_2D* Fun, FUNC_2D  phi);
 FUN_2D * Fun2D_setCFunctionTransient (FUN_2D* Fun, FUNC_3D  phi);
-   
+
 FUN_2D * Fun2D_setLUAFunction            (FUN_2D* Fun, const char* def);
 FUN_2D * Fun2D_setLUAFunctionTransient   (FUN_2D* Fun, const char* def);
-   
-   
+
+
 Real     Fun2D_evalCFunction           (const FUN_2D* Fun, Real x, Real y          );
 Real     Fun2D_evalCFunctionTransient  (const FUN_2D* Fun, Real x, Real y, Real tps);
 Real     Fun2D_evalPyFunction          (const FUN_2D* Fun, Real x, Real y          );
@@ -84,7 +84,7 @@ Real     Fun2D_evalLUAFunctionTransient(const FUN_2D* Fun, Real x, Real y, Real 
 * For example, in a Python program, we will call the function (for a 2D stationnary problem): \n
 * Fun2D_setPythonFunction         ( FUN_2D* Fun, python_function); \n
 * What happens is that we will store in phi_xy_v the following "C" function (in a transparent manner for the user): \n
-* \n                                           
+* \n
 * static Real FunctionForEvaluatingPythonObject2D(Real x, Real y, void* clientdata ) \n
 * {  \n
 *    PyObject *pyfunc, *arglist; \n

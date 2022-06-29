@@ -37,10 +37,10 @@ typedef enum {
 typedef struct {
 
    char   BCname[16];      /**< name of bc : dirichlet, neumann, cauchy or robin         */
-  
+
    FUN_1D Fun1[1][NBMAX_BC_1D_FUNCTIONS];  /**< NBMAX_BC_1D_FUNCTIONS functions on the border (1) */
    FUN_1D Fun2[1][NBMAX_BC_1D_FUNCTIONS];  /**< NBMAX_BC_1D_FUNCTIONS functions on the border (2) */
-   
+
    Real tps;                              /**< for time-dependent problems */
 
 } BC_1D_XTYPE ;
@@ -54,7 +54,7 @@ typedef struct {
    BC_1D_XTYPE* BC_robin;       /**< gives the functions for Robin     BC on the given references values */
 
    BC_1D_TYPE   BC_MASK[1][NBMAX_BC_1D_FUNCTIONS]; /**< for each reference value, indicate which type of BC is selected */
-   
+
 } BC_1D ;
 
 #define BC_1D_NULL  ((BC_1D*)NULL)
@@ -65,7 +65,7 @@ typedef struct {
 
 BC_1D      *Bc1D_get(void);
 BC_1D      *Bc1D_setup_from_params(const PARAMS *params);
-	
+
 int         Bc1D_free(BC_1D *MyBC);
 
 BC_1D      *Bc1D_setBcType               (BC_1D* MyBC, BC_1D_TYPE bctype, int ref, int axe);
@@ -83,10 +83,10 @@ BC_1D      *Bc1D_setCFunctionTransient2  (BC_1D* MyBC, BC_1D_TYPE bctype, int re
 
 BC_1D      *Bc1D_setLUAFunction          (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
 BC_1D      *Bc1D_setLUAFunction2         (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
-   
+
 BC_1D      *Bc1D_setLUAFunctionTransient (BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
 BC_1D      *Bc1D_setLUAFunctionTransient2(BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe , const char* def);
-   
+
 BC_1D      *Bc1D_setTps                  (BC_1D* MyBC, Real tps    );
 
 
@@ -101,13 +101,13 @@ int         Bc1D_hasDirichletBC          (const BC_1D* MyBC, int axe);
 int         Bc1D_hasNeumannBC            (const BC_1D* MyBC, int axe);
 int         Bc1D_hasCauchyBC             (const BC_1D* MyBC, int axe);
 int         Bc1D_hasRobinBC              (const BC_1D* MyBC, int axe);
- 
+
 int         Bc1D_getNumberOfBC           (const BC_1D* MyBC, int axe);
 int         Bc1D_getNumberOfBcOnSomms    (const BC_1D* MyBC, int axe);
 int         Bc1D_getNumberOfBcOnFaces    (const BC_1D* MyBC, int axe);
 
-   
-  
+
+
 #ifdef __cplusplus
 }
 #endif
@@ -200,7 +200,7 @@ int         Bc1D_getNumberOfBcOnFaces    (const BC_1D* MyBC, int axe);
 */
 
 /*! \fn Bc1D_setFunction2          ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
-* \brief Set the "second" function at axe "axe" for node of reference "ref_s" in MyBC 
+* \brief Set the "second" function at axe "axe" for node of reference "ref_s" in MyBC
 * \param MyBC       : the BC structure
 * \param bctype     : the type of boundary condition we set a function into
 * \param ref_s      : the reference index of the geometry that we consider
@@ -287,7 +287,7 @@ int         Bc1D_getNumberOfBcOnFaces    (const BC_1D* MyBC, int axe);
 */
 
 /*! \fn Bc1D_checkBC               ( const BC_1D* MyBC )
-* \brief Check if the functions for BC are correctly set 
+* \brief Check if the functions for BC are correctly set
 * \param MyBC   : the BC structure we check
 *
 * We check the BC: where the values of BC_MASK are set (not BC_UNKNOWN), the correspondings\n

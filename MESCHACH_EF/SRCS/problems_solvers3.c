@@ -130,15 +130,15 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
    SPMAT *CONV_Y;
    SPMAT *CONV_Z;
    SPMAT *M_BC;
-      
+
    VEC  *SOL;
-   
+
    VEC  *RHS;
    VEC  *RHS_FUN;
    VEC  *RHS_BC;
 
    PARAMS* MyParams = Params_get_staticparam(0);
-   
+
    Real eps_steps = MyParams->resol_params.eps_steps;
    int  max_steps = MyParams->resol_params.max_steps;
    int  nb_steps  = MyParams->resol_params.nb_steps;
@@ -185,18 +185,18 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
          return NULL;
    }
 
-   
+
    RHS_FUN = v_get(MyGeom->NBSOMM);
    RHS_BC  = v_get(MyGeom->NBSOMM);
    RHS     = v_get(MyGeom->NBSOMM);
-   
+
    SOL     = v_get(MyGeom->NBSOMM);
 
 
    /* ----- assemblage matrix and rhs ------ */
 
    M_BC = assemblage3D_matrix_fromBC(MyElt, MyGeom, MyBC, M_BC);
-   
+
    switch( problem )
    {
       case PRBLMe_3D_LAPLACIAN:
@@ -220,7 +220,7 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
          A = sp_add(A, CONV_Y, A);
          A = sp_add(A, CONV_Z, A);
          A = sp_add(A, M_BC, A);
-         
+
          SP_FREE(STIFF1);
          SP_FREE(CONV_X);
          SP_FREE(CONV_Y);
@@ -234,11 +234,11 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
 
          A = sp_smlt(A, MyParams->phys_params.kappa, A);
          C = sp_smlt(C, MyParams->phys_params.sigma, C);
-         
+
          A = sp_add (A, C, A);
 
          SP_FREE(C);
-         
+
          break;
 
       default:
@@ -249,14 +249,14 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
 
    RHS_FUN = assemblage3D_vector_fun(MyElt, MyGeom, MyRhsFun, RHS_FUN);
    RHS_BC   = assemblage3D_vector_fromBC(MyElt, MyGeom, MyBC, RHS_BC);
-   
+
    RHS = v_add(RHS_FUN, RHS_BC, RHS);
-   
+
    /* dump */
    dump_matrix(A  , "# MATRIX :");
    dump_vector(RHS, "# RHS    :");
    show_matrix(A  , "A after assemblage" );
-   
+
    transform3D_matrix_vector_with_bc(MyElt, MyGeom, MyBC, A, RHS);
 
    /* dump */
@@ -264,7 +264,7 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
    dump_vector(RHS, "# RHS    + CL :");
    show_matrix(A  , "A with CL" );
 
-   
+
    /* ------ solve the system Ax = b   ----- */
 
    if  ( strcmp(ResolutionMethod, "DIRECT-METHOD") == 0 )
@@ -375,7 +375,7 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
 				printf("for problem = \"Laplacien\", the matrix A should be symmetric \n");
             printf(" -> use preferrably the LLT preconditionning + CG \n");
 			}
-			
+
          ILU = sp_copy(A);
          spILUfactor(ILU, 0.0);
       }
@@ -397,9 +397,9 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
          iter_xspcg(A, ICH, RHS, eps_steps, SOL, max_steps, &nb_steps, info);
          printf(" cg: # of iter. = %d \n\n", nb_steps);
       }
-		else 
+		else
 		if ( strcmp(ResolutionMethod,"CGS") == 0 )
-		{  
+		{
 			iter_xspcgs(A, ILU, RHS, eps_steps, SOL, max_steps, &nb_steps, info);
 			printf(" cgs: # of iter. = %d \n\n", nb_steps);
 		}
@@ -420,10 +420,10 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
 
    /* -----------------------------------------------FIN ETAPE 5 -------
    DEBUT ETAPE 6 ---------------------------------------------------- */
-   
+
    V_FREE(RHS);
 
-   SP_FREE(A); 
+   SP_FREE(A);
 
    if ( strcmp(Preconditionning,"ILU") == 0 ) SP_FREE(ILU);
    if ( strcmp(Preconditionning,"ICH") == 0 ) SP_FREE(ICH);
@@ -448,7 +448,7 @@ static VEC *_solve3D_nli(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
 static void dump_matrix(const SPMAT *A, const char *header)
 {
    PARAMS* MyParams = Params_get_staticparam(0);
-   
+
    if (MyParams->logger != NULL)
    {
       fprintf   (MyParams->logger, "%s\n\n", header);
@@ -462,7 +462,7 @@ static void dump_matrix(const SPMAT *A, const char *header)
 static void dump_vector(const VEC *b, const char *header)
 {
    PARAMS* MyParams = Params_get_staticparam(0);
-	
+
    if (MyParams->logger != NULL)
    {
       fprintf  (MyParams->logger, "%s\n\n", header);

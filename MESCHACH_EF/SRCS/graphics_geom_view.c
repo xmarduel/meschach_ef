@@ -72,7 +72,7 @@ static void graphics_geom2D_write_mesh( const GEOM_2D* Geom, const char *file_na
 
    fclose(fp);
 
-   return; 
+   return;
 }
 
 /*----------------------------------------------------------------------------------------------------*/
@@ -111,7 +111,7 @@ static void graphics_geom2D_write_edge   ( const GEOM_2D* Geom, const char *file
 
    fclose(fp);
 
-   return; 
+   return;
 }
 
 /*----------------------------------------------------------------------------------------------------*/
@@ -130,7 +130,7 @@ static void graphics_geom3D_write_mesh( const GEOM_3D* Geom, const char *file_na
 
    snprintf(data_file, 64, "%s_mesh.dat" , file_name);
    data_file[63] = '\0';
-   
+
    fp = fopen(data_file, "w");
 
    for (e=0; e<Geom->NBELMT; e++)
@@ -170,7 +170,7 @@ static void graphics_geom3D_write_mesh( const GEOM_3D* Geom, const char *file_na
 
    fclose(fp);
 
-   return; 
+   return;
 }
 
 /*----------------------------------------------------------------------------------------------------*/
@@ -229,10 +229,10 @@ static void graphics_geom2D_view_X11( const GEOM_2D* Geom ) /* with "graph" */
 {
    graphics_geom2D_write_mesh( Geom, "geom2D_dummy" );
    graphics_geom2D_write_edge( Geom, "geom2D_dummy" );
-   
+
    /*system("graph -T X -C -m 1  < geom2D_dummy_edge.dat");*/
    system("graph -T X -C -m 1  < geom2D_dummy_mesh.dat");
-   
+
    system("rm -f geom2D_dummy_edge.dat");
    system("rm -f geom2D_dummy_mesh.dat");
 }
@@ -254,7 +254,7 @@ static void graphics_geom2D_view_gnuplot( const GEOM_2D* Geom, const char *file_
 {
    FILE *fp;
    char  file_gnuplot[64];
-   
+
    /*------ ECRITURE D' UN FICHIER "file_name.gnu" --------*/
    snprintf(file_gnuplot, 64, "%s.gnu" , file_name);
    file_gnuplot[63] = '\0';
@@ -278,14 +278,14 @@ static void graphics_geom2D_view_gnuplot( const GEOM_2D* Geom, const char *file_
    fprintf(fp, "set nokey \n");
    fprintf(fp, "#set size square \n");
    fprintf(fp, "set size ratio -1 \n");
-   
+
    fprintf(fp, "#  \n");
    fprintf(fp, "plot '%s_edge.dat' with lines\n", file_name);
    fprintf(fp, "#  \n");
    fprintf(fp, "pause 0 \"...done\" \n");
    fprintf(fp, "pause -1 \n");
 
-   
+
    fprintf(fp, "# \n");
    fprintf(fp, "# \n");
    fprintf(fp, "pause 0 \" \" \n");
@@ -297,7 +297,7 @@ static void graphics_geom2D_view_gnuplot( const GEOM_2D* Geom, const char *file_
    fprintf(fp, "set nokey \n");
    fprintf(fp, "#set size square \n");
    fprintf(fp, "set size ratio -1 \n");
-   
+
    fprintf(fp, "#  \n");
    fprintf(fp, "plot '%s_mesh.dat' with lines\n", file_name);
    fprintf(fp, "#  \n");
@@ -305,12 +305,12 @@ static void graphics_geom2D_view_gnuplot( const GEOM_2D* Geom, const char *file_
    fprintf(fp, "pause -1 \n");
 
    fclose(fp);
-   
-   
+
+
    /* and write the files of the solutions */
-   graphics_geom2D_write_mesh( Geom, file_name );  
-   graphics_geom2D_write_edge( Geom, file_name );   
-      
+   graphics_geom2D_write_mesh( Geom, file_name );
+   graphics_geom2D_write_edge( Geom, file_name );
+
    return;
 }
 
@@ -339,7 +339,7 @@ static void graphics_geom3D_view_gnuplot( const GEOM_3D* Geom, const char *file_
    /*------ ECRITURE D' UN FICHIER "file_name.gnu" --------*/
    snprintf(file_gnuplot, 64, "%s.gnu" , file_name);
    file_gnuplot[63] = '\0';
-   
+
    fp = fopen(file_gnuplot, "w");
 
    fprintf(fp, "# ----------------------------------------------------------- \n");
@@ -359,7 +359,7 @@ static void graphics_geom3D_view_gnuplot( const GEOM_3D* Geom, const char *file_
    fprintf(fp, "set nokey \n");
    fprintf(fp, "#set size square \n");
    fprintf(fp, "set size ratio -1 \n");
-   
+
    fprintf(fp, "#  \n");
    fprintf(fp, "splot '%s_surf.dat' with lines\n", file_name);
    fprintf(fp, "#  \n");
@@ -378,7 +378,7 @@ static void graphics_geom3D_view_gnuplot( const GEOM_3D* Geom, const char *file_
    fprintf(fp, "set nokey \n");
    fprintf(fp, "#set size square \n");
    fprintf(fp, "set size ratio -1 \n");
-   
+
    fprintf(fp, "#  \n");
    fprintf(fp, "splot '%s_mesh.dat' with lines\n", file_name);
    fprintf(fp, "#  \n");
@@ -391,7 +391,7 @@ static void graphics_geom3D_view_gnuplot( const GEOM_3D* Geom, const char *file_
    /* and write the files of the solutions */
    graphics_geom3D_write_mesh( Geom, file_name );
    graphics_geom3D_write_surf( Geom, file_name );
-      
+
    return;
 }
 
@@ -416,7 +416,7 @@ void graphics_geom2D_view( const char *format, const GEOM_2D * Geom, const char 
       warning(WARN_UNKNOWN, "graphics_geom2D_view");
       return ;
    }
-   
+
    if ( strcmp("X11",format) == 0 )
    {
       graphics_geom2D_view_X11(Geom);
@@ -453,7 +453,7 @@ void graphics_geom3D_view( const char *format, const GEOM_3D * Geom, const char 
       return ;
    }
 
-   
+
    if ( strcmp("X11",format) == 0 )
    {
       graphics_geom3D_view_X11(Geom);

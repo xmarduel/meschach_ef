@@ -16,19 +16,19 @@ extern "C"
 
 typedef struct GEOM_3D {
 
-  char type[16];    /**< "gmsh" , "cube" */
+   char type[16];    /**< "gmsh" , "cube" */
 
-  int NBSOMM ;      /**< nb sommets  in the computational domain */
-  int NBELMT ;      /**< nb elements in the computational domain */
-  int NBFACE ;      /**< nb b.faces  in the computational domain */
+   int NBSOMM ;      /**< nb sommets  in the computational domain */
+   int NBELMT ;      /**< nb elements in the computational domain */
+   int NBFACE ;      /**< nb b.faces  in the computational domain */
 
-  IVEC *REF_S ;     /**< references on the nodes               */
-  IVEC *REF_T ;     /**< references on the elements(triangles) */
-  IVEC *REF_A ;     /**< references on the boundary faces      */
+   IVEC *REF_S ;     /**< references on the nodes               */
+   IVEC *REF_T ;     /**< references on the elements(triangles) */
+   IVEC *REF_A ;     /**< references on the boundary faces      */
 
-  MAT  *XYSOMM  ;   /**< nodes's coordinates array */
-  IMAT *NSELMT  ;   /**< elements's nodes arrays   */
-  IMAT *NSFACE  ;   /**< b.aretes's nodes array    */
+   MAT  *XYSOMM  ;   /**< nodes's coordinates array */
+   IMAT *NSELMT  ;   /**< elements's nodes arrays   */
+   IMAT *NSFACE  ;   /**< b.aretes's nodes array    */
 
 
   struct GEOM_3D *geomBase ;  /**< pointer to a mesh with "P1" ef type if the "parent" Geom is "P2" */
@@ -41,7 +41,7 @@ typedef struct GEOM_3D {
 int Geom3D_free(GEOM_3D *Geom);
 #define GEOM_3D_FREE(Geom)  ( Geom3D_free(Geom), (Geom)=(GEOM_3D *)NULL )
 
-void Geom3D_foutput(FILE *fp, GEOM_3D *Geom);  
+void Geom3D_foutput(FILE *fp, GEOM_3D *Geom);
 #define Geom3D_output(Geom) Geom3D_foutput(stdout,Geom);
 
 GEOM_3D *Geom3D_get(const ELT_3D *element, const char *meshfile, const char *meshname, const char *meshtype);

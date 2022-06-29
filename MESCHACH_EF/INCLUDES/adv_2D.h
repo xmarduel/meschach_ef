@@ -14,12 +14,12 @@ extern "C"
  *
  * a) for a 1-unknown problem :
  *
- *      - Uxx - Uyy + Adv11(x,y).Ux + Adv12(x,y).Uy   = f1(x,y)      ( with f a RHS_2D structure ) 
+ *      - Uxx - Uyy + Adv11(x,y).Ux + Adv12(x,y).Uy   = f1(x,y)      ( with f a RHS_2D structure )
  *
  * b) for a 2-unknowns problem : ( actually not implemented )
  *
- *      - Uxx - Uyy + Adv111(x,y).Ux + Adv112(x,y).Uy + Adv121(x,y).Vx + Adv122(x,y).Vy  = f1(x,y) 
- *      - Vxx - Vyy + Adv211(x,y).Ux + Adv212(x,y).Uy + Adv221(x,y).Vx + Adv222(x,y).Vy  = f2(x,y) 
+ *      - Uxx - Uyy + Adv111(x,y).Ux + Adv112(x,y).Uy + Adv121(x,y).Vx + Adv122(x,y).Vy  = f1(x,y)
+ *      - Vxx - Vyy + Adv211(x,y).Ux + Adv212(x,y).Uy + Adv221(x,y).Vx + Adv222(x,y).Vy  = f2(x,y)
  *
  *
  * or for transient problems :
@@ -30,8 +30,8 @@ extern "C"
  *
  * b) for a 2-unknowns problem : ( actually not implemented )
  *
- *       Ut - Uxx - Uyy + Adv111.Ux + Adv112.Uy + Adv121.Vx + Adv122.Vy  = f1 
- *       Vt - Vxx - Vyy + Adv211.Ux + Adv212.Uy + Adv221.Vx + Adv222.Vy  = f2 
+ *       Ut - Uxx - Uyy + Adv111.Ux + Adv112.Uy + Adv121.Vx + Adv122.Vy  = f1
+ *       Vt - Vxx - Vyy + Adv211.Ux + Adv212.Uy + Adv221.Vx + Adv222.Vy  = f2
  *
  *
  * For an homogeneous material, all the cells of the geometry have the same reference number (usually 0)
@@ -63,14 +63,14 @@ extern "C"
 
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
-	
+
 #define  NBMAX_ADV_2D_FUNCTIONS   11
 
 /*---------------------------------------------------------------------- */
 
 
 typedef struct {
-  
+
    FUN_2D Fun1[2][2][NBMAX_ADV_2D_FUNCTIONS];   /**< functions for the "first" equation   */
    FUN_2D Fun2[2][2][NBMAX_ADV_2D_FUNCTIONS];   /**< functions for the "second" equation  */
 
@@ -79,7 +79,7 @@ typedef struct {
    int  current_selected_axe1;                   /**< references the equation (Fun1 or Fun2)  */
    int  current_selected_axe2;                   /**< references the first index of Fun_n[][] */
    int  current_selected_axe3;                   /**< references the sec   index of Fun_n[][] */
-   
+
 } ADV_2D ;
 
 
@@ -91,14 +91,14 @@ typedef struct {
 
 ADV_2D* Adv2D_get(void);
 ADV_2D* Adv2D_setup_from_params(const PARAMS *params);
-	
+
 int     Adv2D_free(ADV_2D *MyAdv);
 
 ADV_2D* Adv2D_setFunction          ( ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUN_TYPE type, void* phi, void* clientdata);
 
 ADV_2D* Adv2D_setCFunction         ( ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_2D phi);
 ADV_2D* Adv2D_setCFunctionTransient( ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_3D phi);
-   
+
 ADV_2D* Adv2D_setLUAFunction         ( ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char *def);
 ADV_2D* Adv2D_setLUAFunctionTransient( ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char *def);
 

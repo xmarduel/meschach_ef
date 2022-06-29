@@ -68,7 +68,7 @@ static char * graphics3D_script_vtk(const char* filename)
    snprintf(script_vtk, 64, "Script4vtk_%s.py", filename); script_vtk[63] = '\0';
 
    fp = fopen(script_vtk, "w");
-      
+
    /* Script python */
    fprintf(fp, "#!/usr/bin/env python\n");
    fprintf(fp, "#\n");
@@ -150,7 +150,7 @@ static char * graphics3D_script_vtk(const char* filename)
 static void graphics3D_vtk(const char *filename, const ELT_3D *element, const GEOM_3D *geom, const VEC *SOL)
 {
    char vtk_file[64];
-   
+
    const GEOM_3D *GeomX;
 
    int vtk_cell_type;
@@ -161,8 +161,8 @@ static void graphics3D_vtk(const char *filename, const ELT_3D *element, const GE
    if ( filename  == NULL ) error(E_NULL, "graphics3D_vtk");
 
    snprintf(vtk_file, 64, "%s.vtk", filename); vtk_file[63]   = '\0';
-   
-      
+
+
    if ( strcmp(element->name_ef, "P1") == 0 )
    {
       GeomX = geom;
@@ -201,7 +201,7 @@ static void graphics3D_vtk(const char *filename, const ELT_3D *element, const GE
 static void graphics3D_vtk_1var(const char *filename, const GEOM_3D *geom, const VEC* SOL, int vtk_cell_type)
 {
    FILE *fp1 = fopen(filename, "w");
-   
+
    int e,s,k,f;
 
    int MAP_CELL_TO_CELL[10] = /* VTK_ORDER[i] = MY_ORDER[ MAP_CELL_TO_CELL[i] ] */
@@ -223,7 +223,7 @@ static void graphics3D_vtk_1var(const char *filename, const GEOM_3D *geom, const
 
    int tetrahedra_type;
    int triangle_type;
-   
+
    switch (vtk_cell_type)
    {
       case XVTK_CELL_TYPE_LIN:
@@ -405,7 +405,7 @@ static void graphics3D_vtk_3var(const char *filename, const GEOM_3D *geom, const
    }
 
    fprintf(fp, "\n");
-   
+
    fprintf(fp, "CELL_TYPES %d \n", (1+show_faces)*(geom->NBELMT));
    for (e=0; e<geom->NBELMT; e++)
    {
@@ -419,7 +419,7 @@ static void graphics3D_vtk_3var(const char *filename, const GEOM_3D *geom, const
    fprintf(fp, "\n");
    fprintf(fp, "POINT_DATA %d \n", geom->NBSOMM);
    fprintf(fp, "VECTORS velocity float\n");
-   
+
    for (s=0; s<geom->NBSOMM; s++)
    {
       fprintf(fp, "%lf %lf %lf \n",
@@ -469,11 +469,11 @@ static char * graphics3D_script_silo(const char* filename)
 
 static void graphics3D_silo(const char* filename, const ELT_3D *element, const GEOM_3D *geom, const VEC  *SOL)
 {
-   
+
 #ifdef HAVE_SILO
    DBfile   *file_silo = NULL;
    int      DB_REAL    = sizeof(Real)==sizeof(float) ? DB_FLOAT : DB_DOUBLE ;
-#endif   
+#endif
 
    char     *coordnames[3];
    Real     *coords[3];
@@ -484,14 +484,14 @@ static void graphics3D_silo(const char* filename, const ELT_3D *element, const G
    int      zoneshapecnt[1] ,faceshapecnt[1];
    int      zoneshapesize[1],faceshapesize[1];
    int      nzoneshapes,nfaceshapes;
-   
+
    int NB_SOMMS_PER_CELL;
    int NB_FACES_PER_CELL;
-   
+
    char silo_file[64];
-   
+
    int i,e,a,s;
-   
+
    const GEOM_3D *GeomP1;
 
    /* check */
@@ -499,16 +499,16 @@ static void graphics3D_silo(const char* filename, const ELT_3D *element, const G
    if ( geom      == NULL ) error(E_NULL, "graphics3D_silo");
    if ( SOL       == NULL ) error(E_NULL, "graphics3D_silo");
    if ( filename  == NULL ) error(E_NULL, "graphics3D_silo");
-   
+
 
    NB_SOMMS_PER_CELL = 4; /* print mesh and solution as a "P1" solution */
    NB_FACES_PER_CELL = 3; /* print mesh and solution as a "P1" solution */
 
 
    /*--- ECRITURE DU FICHIER "<filename>.silo" ---*/
-   
+
    snprintf(silo_file, 64, "%s.silo", filename); silo_file[63] = '\0';
-   
+
    /* Write out the mesh to the file ---------- DBPutZonelist */
 
    /* nb zones = nb cells of the mesh */
@@ -532,8 +532,8 @@ static void graphics3D_silo(const char* filename, const ELT_3D *element, const G
    zoneshapesize[0] = NB_SOMMS_PER_CELL;
    /* array of lenght "nzoneshapes"  containing the number of zones used by each zone shape */
    zoneshapecnt[0]  = nzones;
-   
-   
+
+
    /* Write out the mesh to the file --------- DBPutFacelist */
 
    /* nb faces = nb faces of the mesh */
@@ -551,14 +551,14 @@ static void graphics3D_silo(const char* filename, const ELT_3D *element, const G
 
    /* "C" notation */
    fnodeorigin = 0;
-   /* only one type of face : triangle */   
+   /* only one type of face : triangle */
    nfaceshapes=1;
-   /* array of lenght "nfaceshapes" containing the number of nodes used by each face shape (here only 1 face shape) */   
+   /* array of lenght "nfaceshapes" containing the number of nodes used by each face shape (here only 1 face shape) */
    faceshapesize[0] = NB_FACES_PER_CELL;
    /* array of lenght "nfaceshapes"  containing the number of zones used by each face shape */
-   faceshapecnt[0]  = nfaces; 
-   
-   
+   faceshapecnt[0]  = nfaces;
+
+
    /* Write out the mesh to the file ---------- DBPutUcdmesh */
 
    GeomP1 = geom;
@@ -585,8 +585,8 @@ static void graphics3D_silo(const char* filename, const ELT_3D *element, const G
       coords[1][s] = GeomP1->XYSOMM->me[s][1];
       coords[2][s] = GeomP1->XYSOMM->me[s][2];
    }
-   
-   
+
+
 #ifdef HAVE_SILO
 
    /* Create the SILO file */
@@ -600,21 +600,21 @@ static void graphics3D_silo(const char* filename, const ELT_3D *element, const G
    /* Write out the mesh to the file ---------- DBPutZonelist */
 
    DBPutZonelist(file_silo, "zone", nzones, 3, znodelist , lznodelist, znodeorigin, zoneshapesize, zoneshapecnt, nzoneshapes);
-   
+
    /* Write out the mesh to the file ---------- DBPutUcdmesh */
 
-   DBPutUcdmesh(file_silo, (char*)geom->type, 3,  coordnames, coords, nnodes, nzones, "zone", "face", DB_REAL, NULL); 
-   
+   DBPutUcdmesh(file_silo, (char*)geom->type, 3,  coordnames, coords, nnodes, nzones, "zone", "face", DB_REAL, NULL);
+
    /* Write out the variables to the file */
-   
-   DBPutUcdvar1(file_silo, "vitesse", (char*)geom->type, SOL->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL); 
-   
+
+   DBPutUcdvar1(file_silo, "vitesse", (char*)geom->type, SOL->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL);
+
    /* Close the silo file */
-   
+
    DBClose(file_silo);
 
 #endif
-   
+
    /* free memory */
    free(coords[0]);
    free(coords[1]);
@@ -845,7 +845,7 @@ static void graphics3D_stokes_vtk(const char *filename, const ELT_3D *element, c
    char w_vtk_file[64];
    char p_vtk_file[64];
    char V_vtk_file[64]; /* vector */
-     
+
    const GEOM_3D *GeomV;
    const GEOM_3D *GeomP;
    const GEOM_3D *GeomX;
@@ -860,7 +860,7 @@ static void graphics3D_stokes_vtk(const char *filename, const ELT_3D *element, c
    if ( w         == NULL ) error(E_NULL, "graphics3D_stokes_vtk");
    if ( p         == NULL ) error(E_NULL, "graphics3D_stokes_vtk");
    if ( filename  == NULL ) error(E_NULL, "graphics3D_stokes_vtk");
-   
+
 
    snprintf(u_vtk_file, 64, "%s_u.vtk", filename); u_vtk_file[63] = '\0';
    snprintf(v_vtk_file, 64, "%s_v.vtk", filename); v_vtk_file[63] = '\0';
@@ -868,7 +868,7 @@ static void graphics3D_stokes_vtk(const char *filename, const ELT_3D *element, c
    snprintf(p_vtk_file, 64, "%s_p.vtk", filename); p_vtk_file[63] = '\0';
 
    snprintf(V_vtk_file, 64, "%s_VV.vtk", filename); V_vtk_file[63] = '\0';
-   
+
    if ( strcmp(element->name_ef,"P1") == 0 )
    {
       GeomV = geom;
@@ -892,8 +892,8 @@ static void graphics3D_stokes_vtk(const char *filename, const ELT_3D *element, c
    {
       GeomV = geom->geomBase;
       GeomP = geom->geomBase;
-      GeomX = geom->geomBase; 
- 
+      GeomX = geom->geomBase;
+
       vtk_cell_type_V = XVTK_CELL_TYPE_LIN;
       vtk_cell_type_P = XVTK_CELL_TYPE_LIN;
    }
@@ -912,16 +912,16 @@ static void graphics3D_stokes_vtk(const char *filename, const ELT_3D *element, c
 
    printf("XXXXX %s\n", u_vtk_file);
    printf("XXXXX %s\n", V_vtk_file);
-   
+
    graphics3D_vtk_3var(V_vtk_file,
-                       GeomX, 
+                       GeomX,
                        Geom3D_extract_P1geom_VEC_from(element, geom, u),
                        Geom3D_extract_P1geom_VEC_from(element, geom, v),
                        Geom3D_extract_P1geom_VEC_from(element, geom, w),
                        XVTK_CELL_TYPE_LIN);
 
    printf("XXXXX %s DONE\n", V_vtk_file);
-   
+
    /* graphics3D_vtk_3var(V_vtk_file, GeomV, u, v,  w, XVTK_CELL_TYPE_QUA); */ /* ?? vtk bug ?? */
 
    /*------ ECRITURE DU FICHIER "Solution_Approc.vtk"---(vtk)----*/
@@ -976,7 +976,7 @@ static void graphics3D_stokes_silo(const char* filename, const ELT_3D *element, 
    DBfile   *file_silo = NULL;
    int      DB_REAL    = sizeof(Real)==sizeof(float) ? DB_FLOAT : DB_DOUBLE ;
 #endif
-   
+
    char     *coordnames[3];
    Real     *coords[3];
    int      nzones,nfaces,nnodes;
@@ -998,7 +998,7 @@ static void graphics3D_stokes_silo(const char* filename, const ELT_3D *element, 
    int i,e,a,s;
 
    char silo_file[64];
-   
+
    const GEOM_3D *GeomP1;
 
    if ( element   == NULL ) error(E_NULL, "graphics3D_stokes_silo");
@@ -1042,7 +1042,7 @@ static void graphics3D_stokes_silo(const char* filename, const ELT_3D *element, 
       coords[1][s] = GeomP1->XYSOMM->me[s][1];
       coords[2][s] = GeomP1->XYSOMM->me[s][2];
    }
-   
+
 
    /* Write out the mesh to the file ------------------------------ DBPutZonelist */
 
@@ -1122,12 +1122,12 @@ static void graphics3D_stokes_silo(const char* filename, const ELT_3D *element, 
    varnames[1] = strdup("v_comp");
    vars[2] = (w->ve);
    varnames[2] = strdup("w_comp");
-   
-   DBPutUcdvar(file_silo, "velocity", (char*)geom->type,  3, varnames, vars, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL); 
 
-   DBPutUcdvar1(file_silo, "u_1", (char*)geom->type, u->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL); 
+   DBPutUcdvar(file_silo, "velocity", (char*)geom->type,  3, varnames, vars, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL);
 
-   DBPutUcdvar1(file_silo, "u_2", (char*)geom->type, v->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL); 
+   DBPutUcdvar1(file_silo, "u_1", (char*)geom->type, u->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL);
+
+   DBPutUcdvar1(file_silo, "u_2", (char*)geom->type, v->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL);
 
    DBPutUcdvar1(file_silo, "u_3", (char*)geom->type, w->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL);
 
@@ -1136,7 +1136,7 @@ static void graphics3D_stokes_silo(const char* filename, const ELT_3D *element, 
    DBClose(file_silo);
 
 #endif
-   
+
    /* free mem */
    free(coords[0]);
    free(coords[1]);
@@ -1153,7 +1153,7 @@ static void graphics3D_stokes_silo(const char* filename, const ELT_3D *element, 
    free(varnames[1]);
    free(varnames[2]);
 
-   
+
    /* end */
    return;
 }
@@ -1168,8 +1168,8 @@ void graphics3D       (const char* format, const ELT_3D *element, const GEOM_3D 
    if ( geom      == GEOM_3D_NULL  ) error(E_NULL, "graphics3D");
    if ( SOL       == VNULL         ) error(E_NULL, "graphics3D");
    if ( filename == (char*)NULL    ) error(E_NULL, "graphics3D");
-   
-   
+
+
    if ( strcmp("vtk", format) == 0 )
    {
       graphics3D_vtk(filename, element, geom, SOL);
@@ -1204,7 +1204,7 @@ void graphics3D_fun   (const char* format, const ELT_3D *element, const GEOM_3D 
    if ( geom      == GEOM_3D_NULL  ) error(E_NULL, "graphics3D_fun");
    if ( fun3D     == FUN_3D_NULL   ) error(E_NULL, "graphics3D_fun");
    if ( filename == (char*)NULL   ) error(E_NULL, "graphics3D_fun");
-   
+
    /* init */
    SOL = v_get(geom->NBSOMM);
 
@@ -1212,13 +1212,13 @@ void graphics3D_fun   (const char* format, const ELT_3D *element, const GEOM_3D 
    {
       SOL->ve[s] = fun3D->eval(fun3D, geom->XYSOMM->me[s][0],
                                       geom->XYSOMM->me[s][1],
-                                      geom->XYSOMM->me[s][2]); 
+                                      geom->XYSOMM->me[s][2]);
    }
 
    graphics3D(format, element, geom, SOL, filename);
 
    V_FREE(SOL);
-   
+
    return;
 }
 
@@ -1235,8 +1235,8 @@ void graphics3D_stokes(const char* format, const ELT_3D *element, const GEOM_3D 
    if ( w         == VNULL         ) error(E_NULL, "graphics3D_stokes");
    if ( p         == VNULL         ) error(E_NULL, "graphics3D_stokes");
    if ( filename  == (char*)NULL   ) error(E_NULL, "graphics3D_stokes");
-   
-   
+
+
    if ( strcmp("vtk", format) == 0 )
    {
       graphics3D_stokes_vtk(filename, element, geom, u, v, w, p);
@@ -1283,12 +1283,12 @@ void graphics3D_stokes_fun   (const char* format, const ELT_3D *element, const G
    V = v_get(geom->NBSOMM);
    W = v_get(geom->NBSOMM);
    P = v_get(geom->geomBase->NBSOMM);
-   
+
    for (s=0; s<geom->NBSOMM; s++)
    {
       U->ve[s] = Fu->eval(Fu, geom->XYSOMM->me[s][0],
                               geom->XYSOMM->me[s][1],
-                              geom->XYSOMM->me[s][2]); 
+                              geom->XYSOMM->me[s][2]);
 
       V->ve[s] = Fv->eval(Fv, geom->XYSOMM->me[s][0],
                               geom->XYSOMM->me[s][1],
@@ -1313,7 +1313,7 @@ void graphics3D_stokes_fun   (const char* format, const ELT_3D *element, const G
    V_FREE(V);
    V_FREE(W);
    V_FREE(P);
-   
+
    return;
 }
 

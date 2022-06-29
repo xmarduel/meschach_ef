@@ -34,7 +34,7 @@ ADV_2D* Adv2D_get(void)
    MyAdv->current_selected_axe1 = AXEe_X;
    MyAdv->current_selected_axe2 = AXEe_X;
    MyAdv->current_selected_axe3 = AXEe_X;
-   
+
    for (i=0; i<2; i++)
    for (j=0; j<2; j++)
    for (k=0; k<NBMAX_ADV_2D_FUNCTIONS; k++)
@@ -55,18 +55,18 @@ ADV_2D* Adv2D_setup_from_params(const PARAMS *MyParams)
 
 	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_X, MyParams->adv_params.adv1[AXEe_X][AXEe_X].fundef );
 	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_Y, MyParams->adv_params.adv1[AXEe_X][AXEe_Y].fundef );
-	
+
 	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_X, MyParams->adv_params.adv1[AXEe_Y][AXEe_X].fundef );
 	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_X, MyParams->adv_params.adv1[AXEe_Y][AXEe_Y].fundef );
 
-	
-		
+
+
 	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_X, MyParams->adv_params.adv2[AXEe_Y][AXEe_X].fundef );
 	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_Y, MyParams->adv_params.adv2[AXEe_Y][AXEe_Y].fundef );
-	
+
 	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_X, MyParams->adv_params.adv2[AXEe_Y][AXEe_X].fundef );
 	Adv2D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_Y, MyParams->adv_params.adv2[AXEe_Y][AXEe_Y].fundef );
-   
+
 	return MyADV;
 }
 
@@ -88,7 +88,7 @@ int Adv2D_free (ADV_2D *MyAdv)
       }
 
       free(MyAdv);
-      
+
       return EXIT_SUCCESS;
    }
 }
@@ -99,13 +99,13 @@ int Adv2D_free (ADV_2D *MyAdv)
 ADV_2D* Adv2D_setFunction      (ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUN_TYPE type, void* phi, void* clientdata)
 {
    if ( MyAdv == NULL )                  error (E_NULL, "Adv2D_setFunction");
-   
+
    if ( ref_e > NBMAX_ADV_2D_FUNCTIONS )            error7(E_ADV_WRONGIDXNUMBER, "Adv2D_setFunction");
 
    if ( !( (axe1 == AXEe_X) || (axe1 == AXEe_Y) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv2D_setFunction");
    if ( !( (axe2 == AXEe_X) || (axe2 == AXEe_Y) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv2D_setFunction");
    if ( !( (axe3 == AXEe_X) || (axe3 == AXEe_Y) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv2D_setFunction");
-   
+
    /* set the function */
    switch(axe1)
    {
@@ -134,7 +134,7 @@ ADV_2D* Adv2D_setCFunction      (ADV_2D* MyAdv, int ref_e, int axe1, int axe2, i
 ADV_2D* Adv2D_setLUAFunction    (ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def)
 {
    void *L = make_lua_interpreter(def, "2D");
-   
+
    return  Adv2D_setFunction(MyAdv, ref_e, axe1, axe2, axe3, FUN_LUA_STATIONNARY, FunctionForEvaluatingLuaFunction2D, L);
 }
 
@@ -152,7 +152,7 @@ ADV_2D* Adv2D_setCFunctionTransient (ADV_2D* MyAdv, int ref_e, int axe1, int axe
 ADV_2D* Adv2D_setLUAFunctionTransient (ADV_2D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def)
 {
    void *L = make_lua_interpreter(def, "2D_TR");
-   
+
    return  Adv2D_setFunction(MyAdv, ref_e, axe1, axe2, axe3, FUN_LUA_TRANSIENT, FunctionForEvaluatingLuaFunction3D, L);
 }
 
@@ -172,7 +172,7 @@ Real    Adv2D_evalFunction        (const ADV_2D* MyAdv, int ref_e, int axe1 , in
 
    /* check arguments */
    if ( MyAdv == NULL )    error (E_NULL, "Adv2D_evalFunction");
-   
+
    /* check arguments */
    if ( ref_e > NBMAX_ADV_2D_FUNCTIONS )            error7(E_ADV_WRONGIDXNUMBER, "Adv2D_evalFunction");
 
@@ -189,7 +189,7 @@ Real    Adv2D_evalFunction        (const ADV_2D* MyAdv, int ref_e, int axe1 , in
       case AXEe_X: val = MyAdv->Fun1[axe2][axe3][ref_e].eval(&MyAdv->Fun1[axe2][axe3][ref_e], x, y, MyAdv->tps); break;
       case AXEe_Y: val = MyAdv->Fun2[axe2][axe3][ref_e].eval(&MyAdv->Fun2[axe2][axe3][ref_e], x, y, MyAdv->tps); break;
    }
-   
+
    return val;
 }
 
@@ -199,9 +199,9 @@ Real    Adv2D_evalFunction        (const ADV_2D* MyAdv, int ref_e, int axe1 , in
 ADV_2D*  Adv2D_setTps (ADV_2D* MyAdv, Real tps)
 {
    if ( MyAdv == NULL )  error (E_NULL, "Adv2D_setTps");
-   
+
    MyAdv->tps = tps;
- 
+
    return MyAdv;
 }
 
@@ -212,7 +212,7 @@ ADV_2D*  Adv2D_setCurrentSelectedAxe (ADV_2D* MyAdv, int axe1, int axe2, int axe
 {
    /* check */
    if ( MyAdv == NULL )                      error (E_NULL, "Adv2D_setCurrentSelectedAxe");
-   
+
    if ( !( (axe1 == AXEe_X) || (axe1 == AXEe_Y) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv2D_setCurrentSelectedAxe");
    if ( !( (axe2 == AXEe_X) || (axe2 == AXEe_Y) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv2D_setCurrentSelectedAxe");
    if ( !( (axe3 == AXEe_X) || (axe3 == AXEe_Y) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv2D_setCurrentSelectedAxe");

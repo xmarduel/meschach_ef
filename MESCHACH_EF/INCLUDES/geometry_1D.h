@@ -21,46 +21,46 @@ extern "C"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
 
 typedef enum {
-  
+
    NON_PERIODIC_MESHe = 0,
    PERIODIC_MESHe = 1,
-	
+
 } MESH_PERIODICITY;
 
 
 typedef struct GEOM_1D {
 
-  char type[16];     /* "line" */
-	
-  int periodicity;    /**< 1->"periodic" or 0->"non-periodic" */
-	
-  int NB_DOF ;      /**< nb dof      in the computationnal domain */
+   char type[16];     /* "line" */
 
-  int NBSOMM ;      /**< nb sommets  in the computationnal domain */
-  int NBELMT ;      /**< nb elements in the computationnal domain */
-  int NBFACE ;      /**< nb faces    in the computationnal domain */
-  
-  VEC  *XSOMM   ;   /**< contains the array of coords sommets */
-  IMAT *NSELMT  ;   /**< contains the array of elements somm's number */
-  IMAT *NSFACE  ;   /**< contains the array of aretes somm's number   */
-  
-  IVEC *REF_S ;     /**< references on the nodes               */
-  IVEC *REF_T ;     /**< references on the elements(segments)  */
-  IVEC *REF_A ;     /**< references on the boundary faces      */
+   int periodicity;    /**< 1->"periodic" or 0->"non-periodic" */
 
-  Real X_LEFT;
-  Real X_RIGHT;
-  
-  SPMAT* EF_to_WORLD; /**< map EF coords to PHYSIC coords */
+   int NB_DOF ;      /**< nb dof      in the computationnal domain */
 
-  SPMAT* BASEFUNC_BASICS_to_CL; /**< matrix transformation Base Functions : basic bf to cl'ed bf */
-   
-  IVEC* SPLINES_REF_S_TO_DOF; /**< mapping between DOF and NODES */
-  IVEC* SPLINES_DOF_TO_REF_S; /**< mapping between NODES and DOF */
+   int NBSOMM ;      /**< nb sommets  in the computationnal domain */
+   int NBELMT ;      /**< nb elements in the computationnal domain */
+   int NBFACE ;      /**< nb faces    in the computationnal domain */
+
+   VEC  *XSOMM   ;   /**< contains the array of coords sommets */
+   IMAT *NSELMT  ;   /**< contains the array of elements somm's number */
+   IMAT *NSFACE  ;   /**< contains the array of aretes somm's number   */
+
+   IVEC *REF_S ;     /**< references on the nodes               */
+   IVEC *REF_T ;     /**< references on the elements(segments)  */
+   IVEC *REF_A ;     /**< references on the boundary faces      */
+
+   Real X_LEFT;
+   Real X_RIGHT;
+
+   SPMAT* EF_to_WORLD; /**< map EF coords to PHYSIC coords */
+
+   SPMAT* BASEFUNC_BASICS_to_CL; /**< matrix transformation Base Functions : basic bf to cl'ed bf */
+
+   IVEC* SPLINES_REF_S_TO_DOF; /**< mapping between DOF and NODES */
+   IVEC* SPLINES_DOF_TO_REF_S; /**< mapping between NODES and DOF */
 
 } GEOM_1D ;
 
- 
+
 #define GEOM_1D_NULL  ((GEOM_1D *)NULL)
 
 void Geom1D_foutput(FILE *fp, GEOM_1D *Geom);
@@ -70,7 +70,7 @@ int Geom1D_free(GEOM_1D *Geom);
 #define GEOM_1D_FREE(Geom)  ( Geom1D_free(Geom), (Geom)=(GEOM_1D *)NULL )
 
 GEOM_1D* Geom1D_setup_from_params(const ELT_1D *MyElt, const PARAMS* params);
-	
+
 GEOM_1D* Geom1D_get_fromfile   (const ELT_1D *elt, const char *meshfile, const char *meshname, const char *meshtype);
 GEOM_1D* Geom1D_get_fromscratch(const ELT_1D *elt, Real xmin, Real xman, int nx, MESH_PERIODICITY periodicity, const char* distribution_type);
 

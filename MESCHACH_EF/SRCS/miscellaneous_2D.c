@@ -9,7 +9,7 @@
 VEC  *build_vec_ef_from_function2D(ELT_2D *MyElt, GEOM_2D *MyGeom, FUN_2D* fun, VEC *vec)
 {
    int s;
-   
+
    /* check */
    if ( MyElt      == ELT_2D_NULL   ) error(E_NULL, "build_vec_ef_from_function2D");
    if ( MyGeom     == GEOM_2D_NULL  ) error(E_NULL, "build_vec_ef_from_function2D");
@@ -31,7 +31,7 @@ VEC  *build_vec_ef_from_function2D(ELT_2D *MyElt, GEOM_2D *MyGeom, FUN_2D* fun, 
 VEC  *build_vec_ef_from_function2Dtransient(ELT_2D *MyElt, GEOM_2D *MyGeom, FUN_2D* fun, VEC *vec, Real tps)
 {
    int s;
-   
+
    /* check */
    if ( MyElt      == ELT_2D_NULL   ) error(E_NULL, "build_vec_ef_from_function2Dtransient");
    if ( MyGeom     == GEOM_2D_NULL  ) error(E_NULL, "build_vec_ef_from_function2Dtransient");

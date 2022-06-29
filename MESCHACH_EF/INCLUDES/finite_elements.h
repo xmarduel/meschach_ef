@@ -48,7 +48,7 @@ static  char *my_err_mesg2[NB_ERRS2] =
    "finite element not implemented"   /* 1 */
 };
 
-static char *my_warn_mesg2[NB_WARNS2] = 
+static char *my_warn_mesg2[NB_WARNS2] =
 {
    "unknown warning"    	     /* 0 */
 };
@@ -107,7 +107,7 @@ int err_warn_attach_lists2(void);
 
 
 /*! \fn mem_stat_reg2(void **var, int type)
-* 
+*
 * \param var  : adress of a pointer to a ELT_nD structure
 * \param type : TYPE_ELT_1D, TYPE_ELT_2D or TYPE_ELT_3D
 *
@@ -125,7 +125,7 @@ int err_warn_attach_lists2(void);
 */
 
 /*! \fn mem_stat_free2(int mark)
-* 
+*
 * \param mark  : the index of the "workspace" whre the static variables are registered
 *
 * Free the static variables created in a workspace

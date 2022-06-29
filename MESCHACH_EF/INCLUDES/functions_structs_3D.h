@@ -14,7 +14,7 @@ extern "C"
 
 #include "MESCHACH/INCLUDES/machine.h"
 #include "MESCHACH/INCLUDES/matrix.h"
-   
+
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 
 
@@ -24,9 +24,9 @@ typedef struct FUN_3D_
    FUNC_4D phi_xyzt;              /**< placeholder for a "C" function  with 4 vars (x,y,z,t)   */
    FUNC_3D_PLUS_VOID phi_xyz_v;   /**< placeholder for a "C" function  with 4 vars (x,y,z,  python_obj)  */
    FUNC_4D_PLUS_VOID phi_xyzt_v;  /**< placeholder for a "C" function  with 5 vars (x,y,z,t,python_obj)  */
-   
+
    void*      clientdata;         /**< hold a pointer to a python object */
-   
+
    FUN_TYPE type;                 /**< gives back the type of function stored in the object */
 
    double (*eval)(const struct FUN_3D_ * fun3D , double x, double y, double z,  ... );
@@ -37,7 +37,7 @@ typedef struct FUN_3D_
 typedef double (*FUN_3D_EVAL__FUN_3D_VAARGS)(const FUN_3D * fun3D , double x, double y, double z, ... );
 
 
-#define FUN_3D_NULL  ((FUN_3D *)NULL) 
+#define FUN_3D_NULL  ((FUN_3D *)NULL)
 
 #define FUN_3D_FREE(Fun) ( Fun3D_free(Fun), (Fun)=(FUN_3D *)NULL )
 
@@ -55,8 +55,8 @@ FUN_3D * Fun3D_setCFunctionTransient  (FUN_3D* Fun, FUNC_4D  phi);
 
 FUN_3D * Fun3D_setLUAFunction            (FUN_3D* Fun, const char* def);
 FUN_3D * Fun3D_setLUAFunctionTransient   (FUN_3D* Fun, const char* def);
-   
-   
+
+
 Real     Fun3D_evalCFunction             (const FUN_3D* Fun, Real x, Real y, Real z          );
 Real     Fun3D_evalCFunctionTransient    (const FUN_3D* Fun, Real x, Real y, Real z, Real tps);
 Real     Fun3D_evalPyFunction            (const FUN_3D* Fun, Real x, Real y, Real z          );

@@ -41,19 +41,19 @@ void  solve2D_stokes(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEOM_2D *My
    VEC *U = v_get(MyGeom->NBSOMM);
    VEC *V = v_get(MyGeom->NBSOMM);
    VEC *P = v_get(MyGeom->geomBase->NBSOMM);
-   
+
    PARAMS* MyParams = Params_get_staticparam(0);
-   
-   
+
+
    (void) solve2D_stokes_(elt2 , elt1 , MyGeom, MyBC, MyRhsFun, U, V, P);
 
-   /* ------------------------------ graphics output ----------------------------------------------- */ 
-   
+   /* ------------------------------ graphics output ----------------------------------------------- */
+
    if (MyParams->graph_params.SILO) graphics2D_stokes( "silo" , elt2 , MyGeom , U , V , P , "Stokes");
    if (MyParams->graph_params.VTK ) graphics2D_stokes( "vtk"  , elt2 , MyGeom , U , V , P , "Stokes");
-   
-   /* ------------------------------ graphics output ----------------------------------------------- */ 
-  
+
+   /* ------------------------------ graphics output ----------------------------------------------- */
+
 
    V_FREE(U);
    V_FREE(V);
@@ -108,14 +108,14 @@ void  solve2D_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEOM_2D *M
    SPMAT *Au, *Av;
    SPMAT *Bx, *By;
    SPMAT *C = (SPMAT*)NULL; /* stab matrix */
-   
+
    SPMAT *J;
-   
+
    SPMAT *A; /* aggregates Au and Av */
    SPMAT *B; /* aggregates Bx and By */
 
    VEC   *VIT; /* aggregates U and V */
-   
+
    VEC   *F, *Fu, *Fv;
    VEC   *G;
 
@@ -124,16 +124,16 @@ void  solve2D_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEOM_2D *M
    int NBSOMM_U;
    int NBSOMM_P;
 
-   
+
    PARAMS* MyParams = Params_get_staticparam(0);
-      
+
    Real kappa     = MyParams->phys_params.kappa;
    Real Reynolds  = 1.0 / kappa;
-	
+
 	Real eps_steps = 1.0e-10;
    int  max_steps = 100;
    int  nb_steps  = 1;
-	
+
 	if ( strcmp(MyParams->stokes_params.method, "UZAWA") == 0 )
 	{
        eps_steps = MyParams->stokes_params.uzawa.eps_steps;
@@ -156,9 +156,9 @@ void  solve2D_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEOM_2D *M
 		printf("method for Stokes is -%s-\n",MyParams->stokes_params.method );
 		error(E_UNKNOWN, "solve2D_stokes_");
 	}
-	
+
 	printf("Stokes: eps_steps = %le  *** max_steps = %d \n", eps_steps, max_steps);
-	
+
    /* check arguments */
    if ( elt2     == ELT_2D_NULL ) error(E_NULL, "solve2D_stokes_");
    if ( elt1     == ELT_2D_NULL ) error(E_NULL, "solve2D_stokes_");
@@ -257,13 +257,13 @@ void  solve2D_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEOM_2D *M
    B = sp_move(STOKES_bc, 2*NBSOMM_U,0,   NBSOMM_P,2*NBSOMM_U, B, 0,0);
 
    F = v_move(STOKES_RHS_bc,          0,2*NBSOMM_U, F, 0);
-   G = v_move(STOKES_RHS_bc, 2*NBSOMM_U,  NBSOMM_P, G, 0);   
-   
+   G = v_move(STOKES_RHS_bc, 2*NBSOMM_U,  NBSOMM_P, G, 0);
+
 
    /* ------------------------------------------------------------------------------- */
    /* ----------------------------- call the algorithms ----------------------------- */
    /* ------------------------------------------------------------------------------- */
-   
+
    if ( strcmp(MyParams->stokes_params.method, "UZAWA") == 0 )
    {
       stokes_resol_uzawa(A, B, C, J, VIT, P, F, G, eps_steps, max_steps, &nb_steps);
@@ -283,7 +283,7 @@ void  solve2D_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEOM_2D *M
       error(E_UNKNOWN, "solve2D_stokes_");
    }
 
-     
+
    /* get back velocity */
    U = v_move(VIT,        0,NBSOMM_U, U,0);
    V = v_move(VIT, NBSOMM_U,NBSOMM_U, V,0);
@@ -351,11 +351,11 @@ void  solve3D_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEOM_3D *M
 
    Real kappa    = MyParams->phys_params.kappa;
 	Real Reynolds = 1.0 / kappa;
-	
+
    int  nb_steps  = MyParams->resol_params.nb_steps;
    Real eps_steps = 1.0e-5;
 	int  max_steps = 0;
-	
+
 	if ( strcmp(MyParams->stokes_params.method, "UZAWA") == 0 )
 	{
 		eps_steps = MyParams->stokes_params.uzawa.eps_steps;
@@ -378,7 +378,7 @@ void  solve3D_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEOM_3D *M
 		printf("method for Stokes is -%s-\n",MyParams->stokes_params.method );
 		error(E_UNKNOWN, "solve2D_stokes_");
 	}
-	
+
    const GEOM_3D   *Geom_p = MyGeom->geomBase ;
 
    if ( Geom_p == (const GEOM_3D *)NULL )
@@ -462,7 +462,7 @@ void  solve3D_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEOM_3D *M
 
    STOKES_bc     = sp_copy2(STOKES, STOKES_bc);
    STOKES_RHS_bc =   v_copy(STOKES_RHS, STOKES_RHS_bc);
-   
+
    (void)transform3D_stokes_matrix_vector_with_bc( elt2, MyGeom, Geom_p, MyBc, STOKES_bc, STOKES_RHS_bc);
 
    /* ---------------------------------------------------------------------------------*/
@@ -481,9 +481,9 @@ void  solve3D_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEOM_3D *M
    F = v_move(STOKES_RHS_bc,          0,3*NBSOMM_U, F, 0);
    G = v_move(STOKES_RHS_bc, 3*NBSOMM_U,  NBSOMM_P, G, 0);
 
-   
 
-   
+
+
    if ( strcmp(MyParams->stokes_params.method, "UZAWA") == 0 )
    {
       stokes_resol_uzawa (A, B, C, J, VIT, P, F, G, eps_steps, max_steps, &nb_steps);
@@ -510,7 +510,7 @@ void  solve3D_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEOM_3D *M
    W = v_move(VIT, 2*NBSOMM_U,NBSOMM_U, W,0);
 
    /* ------- free memory ------------------ */
-   
+
    SP_FREE(J) ;
 
    V_FREE(F);
@@ -530,7 +530,7 @@ void  solve3D_stokes_(const ELT_3D *elt2 , const ELT_3D *elt1 , const GEOM_3D *M
    V_FREE(STOKES_RHS_bc);
 
    /* ------------------ end         ----------------------- */
-   
+
    return;
 }
 

@@ -16,7 +16,7 @@ extern "C"
 
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
-	
+
 #define  NBMAX_BC_3D_FUNCTIONS   11
 
 /*---------------------------------------------------------------------- */
@@ -36,10 +36,10 @@ typedef enum {
 typedef struct {
 
    char   BCname[16];         /**< name of bc : dirichlet, neumann, cauchy or robin         */
-  
+
    FUN_3D Fun1[3][NBMAX_BC_3D_FUNCTIONS]; /**< 3xNBMAX_BC_3D_FUNCTIONS functions on the border (1) */
    FUN_3D Fun2[3][NBMAX_BC_3D_FUNCTIONS]; /**< 3xNBMAX_BC_3D_FUNCTIONS functions on the border (2) */
-   
+
    Real tps;                  /**< for time-dependent problems */
 
    int  current_selected_axe; /**< tag : which axing is currently selected (AXEe_X, AXEe_Y or AXEe_Z) */
@@ -66,7 +66,7 @@ typedef struct {
 
 BC_3D      *Bc3D_get(void);
 BC_3D      *Bc3D_setup_from_params(const PARAMS *params);
-	
+
 int         Bc3D_free(BC_3D  *MyBC);
 
 BC_3D      *Bc3D_setBcType               (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe );
@@ -82,14 +82,14 @@ BC_3D      *Bc3D_setCFunction2           (BC_3D* MyBC, BC_3D_TYPE bctype, int re
 BC_3D      *Bc3D_setCFunctionTransient   (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_4D phi);
 BC_3D      *Bc3D_setCFunctionTransient2  (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_4D phi);
 
-   
+
 BC_3D      *Bc3D_setLUAFunction          (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
 BC_3D      *Bc3D_setLUAFunction2         (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
-   
+
 BC_3D      *Bc3D_setLUAFunctionTransient (BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
 BC_3D      *Bc3D_setLUAFunctionTransient2(BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe , const char* def);
 
-   
+
 BC_3D      *Bc3D_setTps                  (BC_3D *MyBC, Real tps    );
 BC_3D      *Bc3D_setCurrentSelectedAxe   (BC_3D *MyBC, int axe     );
 
@@ -157,7 +157,7 @@ int         Bc3D_getNumberOfBcOnFaces  (const BC_3D* MyBC, int axe);
 */
 
 /*! \fn Bc3D_setBcType             ( BC_3D* MyBC, BC_3D_TYPE type, int ref, int axe )
-* 
+*
 * \param MyBC : the BC structure
 * \param type : the type of boundary condition we set on a given reference (next arg)
 * \param ref  : the reference index that we consider
@@ -174,7 +174,7 @@ int         Bc3D_getNumberOfBcOnFaces  (const BC_3D* MyBC, int axe);
 */
 
 /*! \fn Bc3D_getBcType             ( const BC_3D* MyBC, int axe, int ref)
-* 
+*
 * \param MyBC : the BC structure
 * \param axe  : AXEe_X or AXEe_Y or AXEe_Z
 * \param ref  : the reference index that we consider
@@ -209,7 +209,7 @@ int         Bc3D_getNumberOfBcOnFaces  (const BC_3D* MyBC, int axe);
 */
 
 /*! \fn Bc3D_setCFunction          ( BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_3D phi)
-* 
+*
 * \param MyBC   : the BC structure
 * \param bctype : the type of boundary condition we set a function into
 * \param ref_s  : the reference index that we consider
@@ -227,7 +227,7 @@ int         Bc3D_getNumberOfBcOnFaces  (const BC_3D* MyBC, int axe);
 */
 
 /*! \fn Bc3D_setCFunction2          ( BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_3D phi)
-* 
+*
 * \param MyBC   : the BC structure
 * \param bctype : the type of boundary condition we set a function into
 * \param ref_s  : the reference index that we consider
@@ -241,7 +241,7 @@ int         Bc3D_getNumberOfBcOnFaces  (const BC_3D* MyBC, int axe);
 */
 
 /*! \fn Bc3D_setCFunctionTransient   ( BC_3D* MyBC, BC_3D_TYPE bctype, int ref_s, int axe, FUNC_4D phi)
-* 
+*
 * \param MyBC   : the BC structure
 * \param bctype : the type of boundary condition we set a function into
 * \param ref_s  : the reference index that we consider
@@ -274,7 +274,7 @@ int         Bc3D_getNumberOfBcOnFaces  (const BC_3D* MyBC, int axe);
 */
 
 /*! \fn Bc3D_checkBC               ( const BC_3D* MyBC , int axe )
-* 
+*
 * \param MyBC   : the BC structure we check
 * \param axe    : AXEe_X or AXEe_Y or AXEe_Z
 *
@@ -285,7 +285,7 @@ int         Bc3D_getNumberOfBcOnFaces  (const BC_3D* MyBC, int axe);
 */
 
 /*! \fn Bc3D_setTps               ( BC_3D* MyBC, Real tps)
-* 
+*
 * \param MyBC   : the BC structure we check
 * \param tps    : the current time
 *

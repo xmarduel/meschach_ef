@@ -32,7 +32,7 @@ extern "C"
 
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
-	
+
 #define  NBMAX_RHS_3D_FUNCTIONS   11
 
 /*---------------------------------------------------------------------- */
@@ -44,8 +44,8 @@ typedef struct {
    Real tps;                                /**< the "current" time */
 
    int  current_selected_axe;               /**< the "current selected axe" */
-      
-} RHS_3D ;            
+
+} RHS_3D ;
 
 
 #define RHS_3D_NULL  ((RHS_3D *)NULL)
@@ -55,7 +55,7 @@ typedef struct {
 
 RHS_3D* Rhs3D_get(void);
 RHS_3D* Rhs3D_setup_from_params(const PARAMS* params);
-	
+
 int     Rhs3D_free(RHS_3D  *MyRhs);
 
 RHS_3D* Rhs3D_setFunction          (RHS_3D* MyRhs, int ref_e, int axe, FUN_TYPE type, void* phi, void* clientdata);
@@ -98,7 +98,7 @@ Real    Rhs3D_evalFunction         (const RHS_3D* MyRhs, int ref_e, int axe, Rea
 */
 
 /*! \fn Rhs3D_setFunction   ( RHS_3D* MyRhs, int ref_e, int axe, FUN_TYPE type, void* phi, void* clientdata);
-* 
+*
 * \param MyRhs   : the RHS structure
 * \param ref_e   : 0
 * \param axe     : AXEe_X , AXEe_Y or AXEe_Z
@@ -121,7 +121,7 @@ Real    Rhs3D_evalFunction         (const RHS_3D* MyRhs, int ref_e, int axe, Rea
 */
 
 /*! \fn Rhs3D_setCFunctionTransient   ( RHS_3D* MyRhs, int ref_e, int axe, FUNC_4D phi);
-* 
+*
 * \param MyRhs   : the RHS structure
 * \param ref_e   : 0
 * \param axe     : AXEe_X , AXEe_Y or AXEe_Z
@@ -147,7 +147,7 @@ Real    Rhs3D_evalFunction         (const RHS_3D* MyRhs, int ref_e, int axe, Rea
 */
 
 /*! \fn Rhs3D_evalFunction          ( const RHS_3D* MyRhs, int ref_e, int axe, Real x, Real y, Real z);
-* 
+*
 * \param MyRhs : the RHS structure
 * \param ref_e : 0
 * \param axe   : AXEe_X , AXEe_Y or AXEe_Z

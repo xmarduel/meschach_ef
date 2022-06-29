@@ -94,7 +94,7 @@ static char * graphics2D_script_gnuplot (const char* filename)
 {
    FILE *fp;
    char *script_gnuplot = (char*)malloc(64);
-   
+
    /* write the script to dislay the solution */
    snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gnu" , filename); script_gnuplot[63] = '\0';
 
@@ -104,7 +104,7 @@ static char * graphics2D_script_gnuplot (const char* filename)
    fprintf(fp, "# \n");
    fprintf(fp, "# File automatically generated  - changes will not be kept - \n");
    fprintf(fp, "# date : %s", get_date() );
-   fprintf(fp, "# \n");   
+   fprintf(fp, "# \n");
    /*
       if ( (MyParams->misc_params.iter_info==ITER_INFOe_FILE)||
            (MyParams->misc_params.iter_info==ITER_INFOe_ALL ) )
@@ -148,14 +148,14 @@ static void graphics2D_gnuplot(const char *filename, const ELT_2D *elt, const GE
    FILE *fp;
    char  gnuplot_file[64];
    int  e;
-   
+
    GEOM_2D *GeomP1 = Geom2D_getP1geom_from(elt, geom);
 
    if ( elt      == NULL ) error(E_NULL, "graphics2D_gnuplot");
    if ( geom     == NULL ) error(E_NULL, "graphics2D_gnuplot");
    if ( SOL      == NULL ) error(E_NULL, "graphics2D_gnuplot");
    if ( filename == NULL ) error(E_NULL, "graphics2D_gnuplot");
-   
+
    /* write the files of the solution */
    snprintf(gnuplot_file, 64, "%s.dat", filename);  gnuplot_file[63] = '\0';
 
@@ -163,26 +163,26 @@ static void graphics2D_gnuplot(const char *filename, const ELT_2D *elt, const GE
 
    for (e=0; e<GeomP1->NBELMT; e++)
    {
-      fprintf(fp, "## elt %d ( somms %d - %d - %d )\n", e, 
+      fprintf(fp, "## elt %d ( somms %d - %d - %d )\n", e,
               GeomP1->NSELMT->im[e][0],
               GeomP1->NSELMT->im[e][1],
               GeomP1->NSELMT->im[e][2]);
-      fprintf(fp, "%lf %lf %lf \n", 
+      fprintf(fp, "%lf %lf %lf \n",
               GeomP1->XYSOMM->me[GeomP1->NSELMT->im[e][0]][0],
               GeomP1->XYSOMM->me[GeomP1->NSELMT->im[e][0]][1],
               SOL->ve[GeomP1->NSELMT->im[e][0]]);
 
-      fprintf(fp, "%lf %lf %lf \n", 
+      fprintf(fp, "%lf %lf %lf \n",
               GeomP1->XYSOMM->me[GeomP1->NSELMT->im[e][1]][0],
               GeomP1->XYSOMM->me[GeomP1->NSELMT->im[e][1]][1],
               SOL->ve[GeomP1->NSELMT->im[e][1]]);
 
-      fprintf(fp, "%lf %lf %lf \n", 
+      fprintf(fp, "%lf %lf %lf \n",
               GeomP1->XYSOMM->me[GeomP1->NSELMT->im[e][2]][0],
               GeomP1->XYSOMM->me[GeomP1->NSELMT->im[e][2]][1],
               SOL->ve[GeomP1->NSELMT->im[e][2]]);
 
-      fprintf(fp, "%lf %lf %lf \n", 
+      fprintf(fp, "%lf %lf %lf \n",
               GeomP1->XYSOMM->me[GeomP1->NSELMT->im[e][0]][0],
               GeomP1->XYSOMM->me[GeomP1->NSELMT->im[e][0]][1],
               SOL->ve[GeomP1->NSELMT->im[e][0]]);
@@ -205,7 +205,7 @@ static void graphics2D_script_gnuplot_set (const char* filename, int nb_plots)
    FILE *fp;
    char script_gnuplot[64];
    int i;
-   
+
    /* write the script to dislay the solution */
    snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gnu", filename);
    script_gnuplot[63] = '\0';
@@ -236,7 +236,7 @@ static void graphics2D_script_gnuplot_set (const char* filename, int nb_plots)
       fprintf(fp, "pause -1 \n");
       fprintf(fp, "#  \n");
    }
-   
+
    fclose(fp);
 }
 
@@ -257,7 +257,7 @@ static void graphics2D_gnuplot_set (const char *filename, const ELT_2D *element,
    {
       nb_plots_ok = nb_plots;
    }
-   
+
    for (i=0; i<nb_plots_ok; i++)
    {
       snprintf(tmp_filename, 63, "%s_%05d_", filename,i);
@@ -291,13 +291,13 @@ static char * graphics2D_script_matlab   (const char* filename)
    fprintf(fp, "%c File automatically generated  - changes will not be kept - \n", '%');
    fprintf(fp, "%c date : %s", '%', get_date() );
    fprintf(fp, "%c \n",'%');
-   
+
    fprintf(fp, "load matlab_%s_coordinates.dat; matlab_%s_coordinates(:,1)=[]; \n", filename, filename);
-   fprintf(fp, "load matlab_%s_solution.dat; matlab_%s_solution(:,1)=[]; \n", filename, filename); 
+   fprintf(fp, "load matlab_%s_solution.dat; matlab_%s_solution(:,1)=[]; \n", filename, filename);
    fprintf(fp, "load matlab_%s_elements.dat; matlab_%s_elements3(:,1)=[]; \n", filename, filename);
    fprintf(fp, "%c \n",'%');
    fprintf(fp, "figure(1) \n");
-   fprintf(fp, "set(1,'Position',[750 450 500 500]) \n");  
+   fprintf(fp, "set(1,'Position',[750 450 500 500]) \n");
    fprintf(fp, "trisurf(matlab_%s_elements3,matlab_%s_coordinates(:,1),matlab_%s_coordinates(:,2),matlab_%s_solution,... \n",
            filename, filename, filename, filename);
    fprintf(fp, "        'facecolor','interp','LineStyle','none'); \n");
@@ -335,29 +335,29 @@ static void graphics2D_matlab(const char *filename, const ELT_2D *element, const
    snprintf(matlab_elements3, 64, "matlab_%s_elements3.dat" , filename);
    matlab_elements3[63] = '\0';
 
-   
+
    /* and write the files that this script reads */
    fp = fopen(matlab_coordinates,"w");
    fprintf(fp, "%c Input-file of vertices for the mesh \n",'%');
-   fprintf(fp, "%c node-number  /  x-coordinate  / y-coordinate \n",'%'); 
+   fprintf(fp, "%c node-number  /  x-coordinate  / y-coordinate \n",'%');
    for (s=0; s<GeomP1->NBSOMM; s++)
    {
       fprintf(fp, "%d \t %lf %lf \n",s+1,
               GeomP1->XYSOMM->me[s][0],
-              GeomP1->XYSOMM->me[s][1]); 
-   } 
+              GeomP1->XYSOMM->me[s][1]);
+   }
    fclose(fp);
 
    fp = fopen(matlab_elements3,"w");
    fprintf(fp, "%c Input-file of triangles for the mesh \n",'%');
-   fprintf(fp, "%c element-number  /  1-node  /  2-node  /  3-node \n",'%'); 
+   fprintf(fp, "%c element-number  /  1-node  /  2-node  /  3-node \n",'%');
    for (e=0; e<GeomP1->NBELMT; e++)
    {
       fprintf(fp, "%d \t %d %d %d \n",e+1,
               GeomP1->NSELMT->im[e][0]+1,
               GeomP1->NSELMT->im[e][1]+1,
-              GeomP1->NSELMT->im[e][2]+1); 
-   } 
+              GeomP1->NSELMT->im[e][2]+1);
+   }
    fclose(fp);
 
    fp = fopen(matlab_solution,"w");
@@ -387,7 +387,7 @@ static char * graphics2D_script_silo(const char* filename)
    snprintf(script_meshtv, 64, "Script4meshtv_%s.sil", filename); script_meshtv[63] = '\0';
 
    fp = fopen(script_meshtv,"w");
-   
+
    fprintf(fp, "#! /usr/bin/env meshtvx\n");
    fprintf(fp, "#\n");
    fprintf(fp, "# File automatically generated  - changes will not be kept - \n");
@@ -419,7 +419,7 @@ static void graphics2D_silo(const char* filename, const ELT_2D *element, const G
 #endif
 
    char     silo_file[64];
-   
+
    char     *coordnames[2];
    Real     *coords[2];
    int      nzones,nfaces,nnodes;
@@ -429,18 +429,18 @@ static void graphics2D_silo(const char* filename, const ELT_2D *element, const G
    int      zoneshapecnt[1] ,faceshapecnt[1];
    int      zoneshapesize[1],faceshapesize[1];
    int      nzoneshapes,nfaceshapes;
-   
+
    int i,e,a,s;
 
    int NB_SOMM_CELL  = 3;
    int NB_SOMM_FACE  = 2;
 
    GEOM_2D *GeomP1 = Geom2D_getP1geom_from(element, geom);
-   
+
    snprintf(silo_file, 64, "%s.silo", filename); silo_file[63] = '\0';
- 
+
    /*--- ECRITURE DU FICHIER "Solution_Approc2.silo"---(MESH-TV)---- */
-   
+
    /* Write out the mesh to the file ----------------------------------------- DBPutZonelist */
    nzones = GeomP1->NBELMT;      /* nb cells = nb zones */
    lznodelist = NB_SOMM_CELL*(GeomP1->NBELMT); /* nb nodes pro triangle */
@@ -451,7 +451,7 @@ static void graphics2D_silo(const char* filename, const ELT_2D *element, const G
    {
       znodelist[NB_SOMM_CELL*i+e] = GeomP1->NSELMT->im[i][e];
    }
-   
+
    znodeorigin= 0;
 
    nzoneshapes = 1;                        /* only one type of zone : triangle         */
@@ -459,8 +459,8 @@ static void graphics2D_silo(const char* filename, const ELT_2D *element, const G
    /* containing the number of nodes used by  each zone shape (here only 1 zone shape) */
    zoneshapecnt[0]  = GeomP1->NBELMT; /* array of lenght "nzoneshapes"                 */
    /* containing the number of zones used by each zone shape                           */
-   
-   
+
+
    /* Write out the mesh to the file ------------------------------------------ DBPutFacelist */
    nfaces = GeomP1->NBFACE;
    lfnodelist = NB_SOMM_FACE*GeomP1->NBFACE; /* nb nodes pro face */
@@ -480,7 +480,7 @@ static void graphics2D_silo(const char* filename, const ELT_2D *element, const G
    faceshapecnt[0]  = GeomP1->NBFACE; /* array of lenght "nfaceshapes"                 */
    /* containing the number of faces used by each face shape                           */
 
-   
+
    /* Write out the mesh to the file ----------------------------------------- DBPutUcdmesh */
 
    nnodes = GeomP1->NBSOMM;      /* nb of nodes */  /* GeomP1 is is P1 mesh */
@@ -509,23 +509,23 @@ static void graphics2D_silo(const char* filename, const ELT_2D *element, const G
    /* Write out the mesh to the file ---------- DBPutFacelist */
 
    DBPutFacelist(db, "face", nfaces, 2, fnodelist, lfnodelist, fnodeorigin, NULL, faceshapesize, faceshapecnt, nfaceshapes, NULL, NULL, 0);
-   
+
    /* Write out the mesh to the file ---------- DBPutZonelist */
 
    DBPutZonelist(db, "zone", nzones, 2, znodelist, lznodelist, znodeorigin, zoneshapesize, zoneshapecnt, nzoneshapes);
 
    /* Write out the mesh to the file ---------- DBPutUcdmesh */
 
-   DBPutUcdmesh(db, "mesh", 2, coordnames, coords, nnodes, nzones, "zone", "face", DB_REAL, NULL); 
-   
+   DBPutUcdmesh(db, "mesh", 2, coordnames, coords, nnodes, nzones, "zone", "face", DB_REAL, NULL);
+
    /* Write out the variables to the file ---------- DBPutUcdvar1 */
-   
-   DBPutUcdvar1(db, "vitesse", "mesh", SOL->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL); 
-   
+
+   DBPutUcdvar1(db, "vitesse", "mesh", SOL->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL);
+
    /* Close the silo file */
-   
+
    DBClose(db);
-   
+
 #endif
 
    /* free mem */
@@ -565,12 +565,12 @@ static void graphics2D_silo_set(const char* filename, const ELT_2D *element, con
 
    int i,e,a,s;
    int nb_plot_ok;
-   
+
    int NB_SOMM_CELL  = 3;
    int NB_SOMM_FACE  = 2;
 
    GEOM_2D *GeomP1 = Geom2D_getP1geom_from(element, geom);
-   
+
    /* check */
    if ( nb_plot > A->n )
    {
@@ -580,7 +580,7 @@ static void graphics2D_silo_set(const char* filename, const ELT_2D *element, con
    {
       nb_plot_ok = nb_plot;
    }
-   
+
    /* start */
    snprintf(silo_file, 64, "%s.silo" , filename); silo_file[63] = '\0';
 
@@ -669,7 +669,7 @@ static void graphics2D_silo_set(const char* filename, const ELT_2D *element, con
       int i;
       VEC *SOL = v_get(A->m);
       char tmp_filename[64];
-   
+
       for (i=0; i<nb_plot_ok; i++)
       {
          snprintf(tmp_filename, 63, "%s%05d", filename, i);
@@ -681,7 +681,7 @@ static void graphics2D_silo_set(const char* filename, const ELT_2D *element, con
 
       V_FREE(SOL);
    }
-   
+
    /* Close the silo file */
 
    DBClose(db);
@@ -699,7 +699,7 @@ static void graphics2D_silo_set(const char* filename, const ELT_2D *element, con
    GEOM_2D_FREE(GeomP1);
 
    /* finito */
-   return;   
+   return;
 }
 
 /*----------------------------------------------------------------------------------------------------*/
@@ -708,11 +708,11 @@ static void graphics2D_silo_set(const char* filename, const ELT_2D *element, con
 static char * graphics2D_script_vtk(const char* filename)
 {
    FILE *fp;
-   char *script_vtk = (char*)malloc(64); 
+   char *script_vtk = (char*)malloc(64);
 
    snprintf(script_vtk, 64, "Script4vtk_%s.py", filename); script_vtk[63] = '\0';
    fp = fopen(script_vtk, "w");
-   
+
    /* Script python */
    fprintf(fp, "#!/usr/bin/env python\n");
    fprintf(fp, "#\n");
@@ -769,7 +769,7 @@ static char * graphics2D_script_vtk(const char* filename)
 
    fclose(fp);
 
-   return script_vtk; 
+   return script_vtk;
 }
 
 /*----------------------------------------------------------------------------------------------------*/
@@ -778,12 +778,12 @@ static char * graphics2D_script_vtk(const char* filename)
 static void graphics2D_vtk(const char *filename, const ELT_2D *element, const GEOM_2D *geom, const VEC  *SOL)
 {
    char vtk_file[64];
-   
+
    int vtk_cell_type;
    int vtk_plot_type;
 
    const GEOM_2D *GeomX;
-   
+
    snprintf(vtk_file, 64, "%s.vtk" , filename); vtk_file[63] = '\0';
 
 
@@ -793,7 +793,7 @@ static void graphics2D_vtk(const char *filename, const ELT_2D *element, const GE
 
    if ( SOL->dim != geom->NBSOMM ) error(E_SIZES, "graphics2D_vtk");
 
-   
+
    if ( strcmp(element->name_ef, "P1") == 0 )
    {
       GeomX = geom;
@@ -833,7 +833,7 @@ static void graphics2D_vtk(const char *filename, const ELT_2D *element, const GE
 
 
    /*------ ECRITURE DU FICHIER "Solution_Approc.vtk"---(vtk)----*/
-   
+
    graphics2D_vtk_1var(vtk_file, GeomX, SOL, vtk_cell_type, vtk_plot_type);
 
    /* end */
@@ -850,9 +850,9 @@ static char * graphics2D_stokes_script_silo(const char* filename, const VEC *u, 
 
    snprintf(script_meshtv, 64, "Script4meshtv_%s.sil", filename); script_meshtv[63] = '\0';
 
-   fp = fopen(script_meshtv, "w");   
+   fp = fopen(script_meshtv, "w");
    if (fp == NULL) error(E_NULL, "graphics2D_stokes_script_silo");
-   
+
    /* Script MESHTVX */
    fprintf(fp, "#! /usr/bin/env meshtvx\n");
    fprintf(fp, "#\n");
@@ -895,7 +895,7 @@ static void graphics2D_stokes_silo(const char* filename, const ELT_2D *element, 
 #endif
 
    /*--- ECRITURE DU FICHIER "Solution_Stokes.silo"---(MESH-TV)---- */
-   
+
    char     *coordnames[2];
    Real     *coords[2];
    int      nzones,nfaces,nnodes;
@@ -905,12 +905,12 @@ static void graphics2D_stokes_silo(const char* filename, const ELT_2D *element, 
    int      zoneshapecnt[1] ,faceshapecnt[1];
    int      zoneshapesize[1],faceshapesize[1];
    int      nzoneshapes,nfaceshapes;
-   
+
    Real  *vars[2];
    char  *varnames[2];
-   
+
    int i,e,a,s;
-   
+
    int NB = 3; /* "P1" */
    int NA = 2; /* "P1" */
 
@@ -918,30 +918,30 @@ static void graphics2D_stokes_silo(const char* filename, const ELT_2D *element, 
 
    char silo_file[64];
    snprintf(silo_file, 64, "%s.silo", filename); silo_file[63] = '\0';
-   
+
 
    /* Write out the mesh to the file ------------------------------ DBPutZonelist */
-   
+
    nzones = GeomP1->NBELMT;      /* nb cells = nb zones */
    lznodelist = NB*(GeomP1->NBELMT); /* lg of vector zonelist which for each zone */
    /* Give the 3 indices of the nodes for each   zone of the mesh             */
    znodelist = (int*)calloc(lznodelist,sizeof(int));
-   
+
    for (i=0; i<GeomP1->NBELMT; i++)
    for (e=0; e<NB; e++)
    {
       znodelist[NB*i+e] = GeomP1->NSELMT->im[i][e];
    }
-   
+
    znodeorigin = 0;
-   
+
    nzoneshapes = 1;            /* only one type of zone : triangle */
    zoneshapesize[0] = NB;      /* array of lenght "nzoneshapes"            */
    /* containing the number of nodes used by each zone shape (here only 1 zone shape) */
    zoneshapecnt[0]  = GeomP1->NBELMT; /* array of lenght "nzoneshapes"       */
    /* containing the number of zones used  by each zone shape              */
-   
-   
+
+
    /* Write out the mesh to the file --------------------------------- DBPutFacelist */
    nfaces = GeomP1->NBFACE;
    lfnodelist = NA*GeomP1->NBFACE; /* 2 nodes pro face               */
@@ -968,7 +968,7 @@ static void graphics2D_stokes_silo(const char* filename, const ELT_2D *element, 
    /* Name the coordinate axes 'X' and 'Y'  */
    coordnames[0] = strdup("X");
    coordnames[1] = strdup("Y");
-   
+
    /* Assign coordinates to coordinates array */
    coords[0] = (Real*)calloc(GeomP1->NBSOMM, sizeof(Real));
    coords[1] = (Real*)calloc(GeomP1->NBSOMM, sizeof(Real));
@@ -998,18 +998,18 @@ static void graphics2D_stokes_silo(const char* filename, const ELT_2D *element, 
    DBPutUcdmesh(db, "meshV", 2, coordnames, coords, nnodes, nzones, "zoneV", "faceV", DB_REAL, NULL);
 
    /* Write out the variables to the file ---------- DBPutUcdvar */
-   
+
    vars[0] = (u->ve);
    varnames[0] = "u_comp";
    vars[1] = (v->ve);
    varnames[1] = "v_comp";
-   
-   DBPutUcdvar(db, "velocity", "meshV",  2, varnames, vars, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL); 
-   
-   DBPutUcdvar1(db, "u_1", "meshV", u->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL); 
-   
-   DBPutUcdvar1(db, "u_2", "meshV", v->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL); 
-   
+
+   DBPutUcdvar(db, "velocity", "meshV",  2, varnames, vars, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL);
+
+   DBPutUcdvar1(db, "u_1", "meshV", u->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL);
+
+   DBPutUcdvar1(db, "u_2", "meshV", v->ve, nnodes, NULL, 0, DB_REAL, DB_NODECENT, NULL);
+
 #endif
 
    /* free mem */
@@ -1020,7 +1020,7 @@ static void graphics2D_stokes_silo(const char* filename, const ELT_2D *element, 
    free(coordnames[0]);
    free(coordnames[1]);
 
-   
+
 
    /* Write out the mesh to the file ------------------------------ DBPutZonelist */
 
@@ -1105,7 +1105,7 @@ static void graphics2D_stokes_silo(const char* filename, const ELT_2D *element, 
 
 #endif
 
-   
+
    /* free mem */
    free(fnodelist);
    free(znodelist);
@@ -1376,14 +1376,14 @@ static void graphics2D_vtk_1var(const char *filename, const GEOM_2D *geom, const
    int NB_SOMM_FACE;
 
    int XVTK_TRIANGLE_TYPE;
-   
+
    switch(vtk_cell_type)
    {
       case XVTK_CELL_TYPE_LIN: NB_SOMM_CELL = 3; break;
       case XVTK_CELL_TYPE_QUA: NB_SOMM_CELL = 6; break;
       default:                 NB_SOMM_CELL = 3;
    }
-   
+
    switch(vtk_cell_type)
    {
       case XVTK_CELL_TYPE_LIN: XVTK_TRIANGLE_TYPE = VTK_TRIANGLE_LIN; break;
@@ -1396,7 +1396,7 @@ static void graphics2D_vtk_1var(const char *filename, const GEOM_2D *geom, const
    /* for componant u or v or p             */
    /*                                       */
    /*------ ECRITURE DU FICHIER ---(vtk)----*/
-   
+
    FILE *fp = fopen(filename, "w");
    /* File VTK for u or v */
    fprintf(fp, "# vtk DataFile Version 4.2 \n");
@@ -1443,7 +1443,7 @@ static void graphics2D_vtk_1var(const char *filename, const GEOM_2D *geom, const
       fprintf(fp, "%lf \n", var->ve[s] );
    }
 
-   fclose(fp); 
+   fclose(fp);
 }
 
 /*----------------------------------------------------------------------------------------------------*/
@@ -1471,7 +1471,7 @@ static void graphics2D_vtk_2var(const char *filename, const GEOM_2D *geom, const
    switch(vtk_cell_type)
    {
       case XVTK_CELL_TYPE_LIN: XVTK_TRIANGLE_TYPE = VTK_TRIANGLE_LIN; NB_SOMM_CELL = 3;
-                               XVTK_FACE_TYPE     = VTK_LINE_LIN    ; NB_SOMM_FACE = 2; 
+                               XVTK_FACE_TYPE     = VTK_LINE_LIN    ; NB_SOMM_FACE = 2;
                                break;
       case XVTK_CELL_TYPE_QUA: XVTK_TRIANGLE_TYPE = VTK_TRIANGLE_QUA; NB_SOMM_CELL = 6;
                                XVTK_FACE_TYPE     = VTK_LINE_QUA    ; NB_SOMM_FACE = 3;
@@ -1534,7 +1534,7 @@ static void graphics2D_vtk_2var(const char *filename, const GEOM_2D *geom, const
    for (e=0; e<geom->NBELMT; e++)
    {
       fprintf(fp, "%d\n"        , XVTK_TRIANGLE_TYPE);
-      
+
       /* the 3 faces */
       for (f=0; f<faces_output; f++)
       {
@@ -1550,8 +1550,8 @@ static void graphics2D_vtk_2var(const char *filename, const GEOM_2D *geom, const
       fprintf(fp, "%lf %lf %lf \n", var1->ve[s], var2->ve[s], 0.0);
    }
 
-   fclose(fp); 
-} 
+   fclose(fp);
+}
 
 /*----------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
@@ -1559,17 +1559,17 @@ static void graphics2D_vtk_2var(const char *filename, const GEOM_2D *geom, const
 static void graphics2D_stokes_vtk(const char *filename, const ELT_2D *element, const GEOM_2D *geom, const VEC  *u, const VEC *v, const VEC *p)
 {
    char u_vtk_file[64];
-   char v_vtk_file[64]; 
+   char v_vtk_file[64];
    char p_vtk_file[64];
    char V_vtk_file[64]; /* vector */
-   
+
    const GEOM_2D *GeomV; /* geometry for the velocity */
    const GEOM_2D *GeomP; /* geometry for the pressure */
    const GEOM_2D *GeomX;
- 
+
    int vtk_cell_type_V;
    int vtk_cell_type_P;
-   
+
    int vtk_plot_type_V;
    int vtk_plot_type_P;
 
@@ -1579,11 +1579,11 @@ static void graphics2D_stokes_vtk(const char *filename, const ELT_2D *element, c
 
    snprintf(V_vtk_file, 64, "%s_S.vtk", filename); V_vtk_file[63] = '\0';
 
-   
+
    if ( u->dim != geom->NBSOMM ) error(E_SIZES, "graphics2D_stokes_vtk");
    if ( v->dim != geom->NBSOMM ) error(E_SIZES, "graphics2D_stokes_vtk");
    if ( p->dim != geom->geomBase->NBSOMM ) error(E_SIZES, "graphics2D_stokes_vtk");
-   
+
    if ( strcmp(element->name_ef, "P1") == 0 )
    {
       GeomV = geom;
@@ -1599,8 +1599,8 @@ static void graphics2D_stokes_vtk(const char *filename, const ELT_2D *element, c
    {
       GeomV = geom;             /* vtk can draw quadratic triangle */
       GeomP = geom->geomBase;   /* the pressure is P1 if the velocity is P2 */
-      
-      GeomX = Geom2D_getP1geom_from(element, geom); 
+
+      GeomX = Geom2D_getP1geom_from(element, geom);
 
       vtk_cell_type_V = XVTK_CELL_TYPE_QUA;
       vtk_cell_type_P = XVTK_CELL_TYPE_LIN;
@@ -1610,8 +1610,8 @@ static void graphics2D_stokes_vtk(const char *filename, const ELT_2D *element, c
    {
       GeomV = Geom2D_getP1geom_from(element, geom); /* consider as a refined P1 mesh from the P3 somms */
       GeomP = geom->geomBase; /* consider a P2 mesh */
-      
-      GeomX = GeomV; 
+
+      GeomX = GeomV;
 
       vtk_cell_type_V = XVTK_CELL_TYPE_LIN;
       vtk_cell_type_P = XVTK_CELL_TYPE_QUA;
@@ -1621,7 +1621,7 @@ static void graphics2D_stokes_vtk(const char *filename, const ELT_2D *element, c
    {
       GeomV = geom->geomBase; /* consider only values at triangle's corners( like "P1") */
       GeomP = geom->geomBase; /* consider only values at triangle's corners( like "P1") */
-      
+
       GeomX = geom;
 
       vtk_cell_type_V = XVTK_CELL_TYPE_LIN;
@@ -1636,12 +1636,12 @@ static void graphics2D_stokes_vtk(const char *filename, const ELT_2D *element, c
 
    graphics2D_vtk_1var(u_vtk_file, GeomV, u, vtk_cell_type_V, XVTK_PLOT_SURFACE);
    graphics2D_vtk_1var(v_vtk_file, GeomV, v, vtk_cell_type_V, XVTK_PLOT_SURFACE);
-   
+
    graphics2D_vtk_1var(p_vtk_file, GeomP, p, vtk_cell_type_P, XVTK_PLOT_PLANE  );
 
-   
+
    /*------ ECRITURE DU FICHIER "Solution_Approc.vtk"---(vtk)----*/
-   
+
 /*   graphics2D_vtk_2var(V_vtk_file, GeomV, u , v , vtk_cell_type_V, XVTK_PLOT_SURFACE);*/ /* ?? does not work ?? */
 /*   graphics2D_vtk_2var(V_vtk_file, GeomP, u , v , vtk_cell_type_P, XVTK_PLOT_SURFACE);*/
      graphics2D_vtk_2var(V_vtk_file, GeomX, u , v , XVTK_CELL_TYPE_LIN, XVTK_PLOT_SURFACE);
@@ -1660,7 +1660,7 @@ void graphics2D       (const char* format, const ELT_2D *element , const GEOM_2D
    if ( geom      == GEOM_2D_NULL  ) error(E_NULL, "graphics2D");
    if ( SOL       == VNULL         ) error(E_NULL, "graphics2D");
    if ( filename == (char*)NULL    ) error(E_NULL, "graphics2D");
-   
+
    if ( strcmp("matlab", format) == 0 )
    {
       graphics2D_matlab(filename, element, geom, SOL);
@@ -1712,7 +1712,7 @@ void graphics2D_fun   (const char* format, const ELT_2D *element , const GEOM_2D
    if ( geom      == GEOM_2D_NULL  ) error(E_NULL, "graphics2D_fun");
    if ( Fun2D     == NULL          ) error(E_NULL, "graphics2D_fun");
    if ( filename == (char*)NULL    ) error(E_NULL, "graphics2D_fun");
-   
+
    /* init */
    SOL = v_get(geom->NBSOMM);
 
@@ -1789,7 +1789,7 @@ void graphics2D_stokes_fun(const char* format, const ELT_2D *element, const GEOM
 
    for ( s=0; s<geom->NBSOMM; s++)
    {
-      U->ve[s] = Fu->eval(Fu, geom->XYSOMM->me[s][0], geom->XYSOMM->me[s][1]); 
+      U->ve[s] = Fu->eval(Fu, geom->XYSOMM->me[s][0], geom->XYSOMM->me[s][1]);
 
       V->ve[s] = Fv->eval(Fv, geom->XYSOMM->me[s][0], geom->XYSOMM->me[s][1]);
    }
@@ -1797,7 +1797,7 @@ void graphics2D_stokes_fun(const char* format, const ELT_2D *element, const GEOM
    for ( s=0; s<geom->NBSOMM; s++)
    {
       P->ve[s] = Fp->eval(Fp, geom->geomBase->XYSOMM->me[s][0], geom->geomBase->XYSOMM->me[s][1]);
-   }   
+   }
 
    graphics2D_stokes(format, element, geom, U, V, P, filename);
 
@@ -1819,7 +1819,7 @@ void graphics2D_set   (const char *format, const ELT_2D *element, const GEOM_2D 
    if ( SOL       == MNULL         ) error(E_NULL, "graphics2D_set");
    if ( filename == (char*)NULL    ) error(E_NULL, "graphics2D_set");
 
-   
+
    if ( strcmp("gnuplot", format) == 0 )
    {
       graphics2D_gnuplot_set(filename, element, geom, nb_plot, SOL);

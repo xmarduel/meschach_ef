@@ -19,17 +19,17 @@
 Real Phi1D_00(Real x)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Src1D_00(Real x)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Sol1D_00(Real x)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 /********************************************************************/
 Real Phi1D_01(Real x)
@@ -40,28 +40,28 @@ Real Phi1D_01(Real x)
 Real Src1D_01(Real x)
 {
    Real resu;
-   return resu = 1.0; 
+   return resu = 1.0;
 }
 Real Sol1D_01(Real x)
 {
    Real resu;
-   return resu = 1.0; 
+   return resu = 1.0;
 }
 /********************************************************************/
 Real Phi1D_02(Real x)
 {
    Real resu;
-   return resu = 4.0*x*(1.0-x) + 0.0; 
+   return resu = 4.0*x*(1.0-x) + 0.0;
 }
 Real Src1D_02(Real x)
 {
    Real resu;
-   return resu = 8.0; 
+   return resu = 8.0;
 }
 Real Sol1D_02(Real x)
 {
    Real resu;
-   return resu = 4.0*x*(1.0-x) + 0.0; 
+   return resu = 4.0*x*(1.0-x) + 0.0;
 }
 /********************************************************************/
 Real Phi1D_03(Real x)
@@ -72,7 +72,7 @@ Real Phi1D_03(Real x)
 Real Src1D_03(Real x)
 {
    Real resu;
-   return resu = 8.0; 
+   return resu = 8.0;
 }
 Real Sol1D_03(Real x)
 {
@@ -105,7 +105,7 @@ Real Phi1D_05(Real x)
 Real Src1D_05(Real x)
 {
    Real resu;
-   return resu = -2.0; 
+   return resu = -2.0;
 }
 Real Sol1D_05(Real x)
 {
@@ -124,7 +124,7 @@ Real Src1D_06(Real x)
    Real resu;
    return resu = 1.0;
 }
-Real Sol1D_06(Real x) 
+Real Sol1D_06(Real x)
 {
    Real resu =  -0.5*x*(x-1);
    return resu ;
@@ -138,7 +138,7 @@ Real Phi1D_07(Real x) /* is (Phi1D_06)'(0) */
 Real Src1D_07(Real x)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Sol1D_07(Real x) /* is (Phi1D_06)'(0) */
 {
@@ -149,7 +149,7 @@ Real Sol1D_07(Real x) /* is (Phi1D_06)'(0) */
 Real Phi1D_08(Real x)
 {
    Real resu;
-   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5) ); 
+   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5) );
 }
 Real Src1D_08(Real x)
 {
@@ -160,23 +160,23 @@ Real Src1D_08(Real x)
 Real Sol1D_08(Real x)
 {
    Real resu;
-   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5) ); 
+   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5) );
 }
 /********************************************************************/
 Real Phi1D_09(Real x)
 {
    Real resu;
-   return resu = cos(2*PI*x);  
+   return resu = cos(2*PI*x);
 }
 Real Src1D_09(Real x)
 {
    Real resu;
-   return resu = SQR(2*PI)*cos(2*PI*x); 
+   return resu = SQR(2*PI)*cos(2*PI*x);
 }
 Real Sol1D_09(Real x)
 {
    Real resu;
-   return resu = cos(2*PI*x);  
+   return resu = cos(2*PI*x);
 }
 
 /****************************************************************************/
@@ -185,17 +185,17 @@ Real Sol1D_09(Real x)
 Real Phi2D_00(Real x,Real y)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Src2D_00(Real x,Real y)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Sol2D_00(Real x,Real y)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 /********************************************************************/
 Real Phi2D_01(Real x,Real y)
@@ -206,7 +206,7 @@ Real Phi2D_01(Real x,Real y)
 Real Src2D_01(Real x,Real y)
 {
    Real resu;
-   return resu = 1.0; 
+   return resu = 1.0;
 }
 Real Sol2D_01(Real x,Real y)
 {
@@ -217,17 +217,17 @@ Real Sol2D_01(Real x,Real y)
 Real Phi2D_02(Real x,Real y)
 {
    Real resu;
-   return resu = 2.0; 
+   return resu = 2.0;
 }
 Real Src2D_02(Real x,Real y)
 {
    Real resu;
-   return resu = -1.0; 
+   return resu = -1.0;
 }
 Real Sol2D_02(Real x,Real y)
 {
    Real resu;
-   return resu = 2.0; 
+   return resu = 2.0;
 }
 /********************************************************************/
 Real Phi2D_03(Real x,Real y)
@@ -238,7 +238,7 @@ Real Phi2D_03(Real x,Real y)
 Real Src2D_03(Real x,Real y)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Sol2D_03(Real x,Real y)
 {
@@ -255,7 +255,7 @@ Real Src2D_04(Real x,Real y)
 {
    Real resu;
    /*return resu = 0.0; */
-   return resu = x + 2*y; 
+   return resu = x + 2*y;
 }
 Real Sol2D_04(Real x,Real y)
 {
@@ -266,17 +266,17 @@ Real Sol2D_04(Real x,Real y)
 Real Phi2D_05(Real x,Real y)
 {
    Real resu;
-   return resu = (y-2.0)*(y+2.0)/8.0; 
+   return resu = (y-2.0)*(y+2.0)/8.0;
 }
 Real Src2D_05(Real x,Real y)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Sol2D_05(Real x,Real y)
 {
    Real resu;
-   return resu = (y-2.0)*(y+2.0)/8.0; 
+   return resu = (y-2.0)*(y+2.0)/8.0;
 }
 /********************************************************************/
 Real Phi2D_06(Real x,Real y)
@@ -287,7 +287,7 @@ Real Phi2D_06(Real x,Real y)
 Real Src2D_06(Real x,Real y)
 {
    Real resu;
-   return resu = 1.0; 
+   return resu = 1.0;
 }
 Real Sol2D_06(Real x,Real y)
 {
@@ -303,7 +303,7 @@ Real Phi2D_07(Real x,Real y)
 Real Src2D_07(Real x,Real y)
 {
    Real resu;
-   return resu = -1.0; 
+   return resu = -1.0;
 }
 Real Sol2D_07(Real x,Real y)
 {
@@ -314,7 +314,7 @@ Real Sol2D_07(Real x,Real y)
 Real Phi2D_08(Real x,Real y)
 {
    Real resu;
-   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5) ); 
+   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5) );
 }
 Real Src2D_08(Real x,Real y)
 {
@@ -325,25 +325,25 @@ Real Src2D_08(Real x,Real y)
 Real Sol2D_08(Real x,Real y)
 {
    Real resu;
-   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5) ); 
+   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5) );
 }
 /********************************************************************/
 Real Phi2D_09(Real x,Real y)
 {
    Real resu;
-   return resu = cos(PI*x)*sin(PI*y);  
+   return resu = cos(PI*x)*sin(PI*y);
 }
 Real Src2D_09(Real x,Real y)
 {
    Real resu;
-   return resu = 2*SQR(PI)*cos(PI*x)*sin(PI*y); 
+   return resu = 2*SQR(PI)*cos(PI*x)*sin(PI*y);
 }
 Real Sol2D_09(Real x,Real y)
 {
    Real resu;
-   return resu = cos(PI*x)*sin(PI*y);  
+   return resu = cos(PI*x)*sin(PI*y);
 }
-/***************************************************************************/ 
+/***************************************************************************/
 /***************************************************************************/
 
 Real Phi3D_00( Real x , Real y , Real z )
@@ -479,7 +479,7 @@ Real Sol3D_07( Real x , Real y , Real z )
 /********************************************************************/
 Real Phi3D_08( Real x , Real y , Real z )
 {
-   Real resu = 10.0/6.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5)-SQR(z-0.5) ); 
+   Real resu = 10.0/6.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5)-SQR(z-0.5) );
    return resu;
 }
 Real Src3D_08( Real x , Real y , Real z )
@@ -489,7 +489,7 @@ Real Src3D_08( Real x , Real y , Real z )
 }
 Real Sol3D_08( Real x , Real y , Real z )
 {
-   Real resu = 10.0/6.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5)-SQR(z-0.5) ); 
+   Real resu = 10.0/6.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5)-SQR(z-0.5) );
    return resu;
 }
 /********************************************************************/
@@ -515,17 +515,17 @@ Real Sol3D_09( Real x , Real y , Real z )
 Real Phi1D_00_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Src1D_00_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Sol1D_00_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 /********************************************************************/
 Real Phi1D_01_Transient(Real x, Real t)
@@ -536,7 +536,7 @@ Real Phi1D_01_Transient(Real x, Real t)
 Real Src1D_01_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 1.0; 
+   return resu = 1.0;
 }
 Real Sol1D_01_Transient(Real x, Real t)
 {
@@ -547,17 +547,17 @@ Real Sol1D_01_Transient(Real x, Real t)
 Real Phi1D_02_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 4.0*x*(1.0-x) + 0.0; 
+   return resu = 4.0*x*(1.0-x) + 0.0;
 }
 Real Src1D_02_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 8.0; 
+   return resu = 8.0;
 }
 Real Sol1D_02_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 4.0*x*(1.0-x) + 0.0; 
+   return resu = 4.0*x*(1.0-x) + 0.0;
 }
 /********************************************************************/
 Real Phi1D_03_Transient(Real x, Real t)
@@ -568,7 +568,7 @@ Real Phi1D_03_Transient(Real x, Real t)
 Real Src1D_03_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 8.0; 
+   return resu = 8.0;
 }
 Real Sol1D_03_Transient(Real x, Real t)
 {
@@ -595,7 +595,7 @@ Real Sol1D_04_Transient(Real x, Real t)
 Real Phi1D_05_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = (x-0.5)*(x-0.5)+2.0; 
+   return resu = (x-0.5)*(x-0.5)+2.0;
 }
 Real Src1D_05_Transient(Real x, Real t)
 {
@@ -611,17 +611,17 @@ Real Sol1D_05_Transient(Real x, Real t)
 /********************************************************************/
 Real Phi1D_06_Transient(Real x, Real t) /* is (Phi1D_05)'(0) */
 {
-   Real resu =  sin(x-t); 
+   Real resu =  sin(x-t);
    return resu ;
 }
 Real Src1D_06_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = sin(x-t); 
+   return resu = sin(x-t);
 }
 Real Sol1D_06_Transient(Real x, Real t) /* is (Phi1D_05)'(0) */
 {
-   Real resu =  sin(x-t); 
+   Real resu =  sin(x-t);
    return resu ;
 }
 /********************************************************************/
@@ -633,7 +633,7 @@ Real Phi1D_07_Transient(Real x, Real t) /* is (Phi1D_06)'(0) */
 Real Src1D_07_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = cos(x-t); 
+   return resu = cos(x-t);
 }
 Real Sol1D_07_Transient(Real x, Real t) /* is (Phi1D_06)'(0) */
 {
@@ -644,7 +644,7 @@ Real Sol1D_07_Transient(Real x, Real t) /* is (Phi1D_06)'(0) */
 Real Phi1D_08_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5) ); 
+   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5) );
 }
 Real Src1D_08_Transient(Real x, Real t)
 {
@@ -655,23 +655,23 @@ Real Src1D_08_Transient(Real x, Real t)
 Real Sol1D_08_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5) ); 
+   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5) );
 }
 /********************************************************************/
 Real Phi1D_09_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = -sin(x-t);  
+   return resu = -sin(x-t);
 }
 Real Src1D_09_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = -sin(x-t); 
+   return resu = -sin(x-t);
 }
 Real Sol1D_09_Transient(Real x, Real t)
 {
    Real resu;
-   return resu = -sin(x-t);  
+   return resu = -sin(x-t);
 }
 /****************************************************************************/
 /****************************************************************************/
@@ -679,17 +679,17 @@ Real Sol1D_09_Transient(Real x, Real t)
 Real Phi2D_00_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Src2D_00_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Sol2D_00_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 /********************************************************************/
 Real Phi2D_01_Transient(Real x,Real y, Real t)
@@ -700,7 +700,7 @@ Real Phi2D_01_Transient(Real x,Real y, Real t)
 Real Src2D_01_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 1.0; 
+   return resu = 1.0;
 }
 Real Sol2D_01_Transient(Real x,Real y, Real t)
 {
@@ -711,17 +711,17 @@ Real Sol2D_01_Transient(Real x,Real y, Real t)
 Real Phi2D_02_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 2.0; 
+   return resu = 2.0;
 }
 Real Src2D_02_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = -1.0; 
+   return resu = -1.0;
 }
 Real Sol2D_02_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 2.0; 
+   return resu = 2.0;
 }
 /********************************************************************/
 Real Phi2D_03_Transient(Real x,Real y, Real t)
@@ -732,7 +732,7 @@ Real Phi2D_03_Transient(Real x,Real y, Real t)
 Real Src2D_03_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Sol2D_03_Transient(Real x,Real y, Real t)
 {
@@ -748,8 +748,8 @@ Real Phi2D_04_Transient(Real x,Real y, Real t)
 Real Src2D_04_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   /*return resu = 0.0;*/ 
-   return resu = x + 2*y; 
+   /*return resu = 0.0;*/
+   return resu = x + 2*y;
 }
 Real Sol2D_04_Transient(Real x,Real y, Real t)
 {
@@ -760,17 +760,17 @@ Real Sol2D_04_Transient(Real x,Real y, Real t)
 Real Phi2D_05_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = (y-2.0)*(y+2.0)/8.0; 
+   return resu = (y-2.0)*(y+2.0)/8.0;
 }
 Real Src2D_05_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 0.0; 
+   return resu = 0.0;
 }
 Real Sol2D_05_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = (y-2.0)*(y+2.0)/8.0; 
+   return resu = (y-2.0)*(y+2.0)/8.0;
 }
 /********************************************************************/
 Real Phi2D_06_Transient(Real x,Real y, Real t)
@@ -781,7 +781,7 @@ Real Phi2D_06_Transient(Real x,Real y, Real t)
 Real Src2D_06_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 1.0; 
+   return resu = 1.0;
 }
 Real Sol2D_06_Transient(Real x,Real y, Real t)
 {
@@ -797,7 +797,7 @@ Real Phi2D_07_Transient(Real x,Real y, Real t)
 Real Src2D_07_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = -1.0; 
+   return resu = -1.0;
 }
 Real Sol2D_07_Transient(Real x,Real y, Real t)
 {
@@ -808,7 +808,7 @@ Real Sol2D_07_Transient(Real x,Real y, Real t)
 Real Phi2D_08_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5) ); 
+   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5) );
 }
 Real Src2D_08_Transient(Real x,Real y, Real t)
 {
@@ -819,26 +819,26 @@ Real Src2D_08_Transient(Real x,Real y, Real t)
 Real Sol2D_08_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5) ); 
+   return resu = 10/4.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5) );
 }
 /********************************************************************/
 Real Phi2D_09_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = cos(PI*x)*sin(PI*y);  
+   return resu = cos(PI*x)*sin(PI*y);
 }
 Real Src2D_09_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = 2*SQR(PI)*cos(PI*x)*sin(PI*y); 
+   return resu = 2*SQR(PI)*cos(PI*x)*sin(PI*y);
 }
 Real Sol2D_09_Transient(Real x,Real y, Real t)
 {
    Real resu;
-   return resu = cos(PI*x)*sin(PI*y);  
+   return resu = cos(PI*x)*sin(PI*y);
 }
 
-/***************************************************************************/ 
+/***************************************************************************/
 /***************************************************************************/
 
 Real Phi3D_00_Transient( Real x , Real y , Real z , Real t)
@@ -974,7 +974,7 @@ Real Sol3D_07_Transient( Real x , Real y , Real z , Real t)
 /********************************************************************/
 Real Phi3D_08_Transient( Real x , Real y , Real z , Real t)
 {
-   Real resu = 10.0/6.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5)-SQR(z-0.5) ); 
+   Real resu = 10.0/6.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5)-SQR(z-0.5) );
    return resu;
 }
 Real Src3D_08_Transient( Real x , Real y , Real z , Real t)
@@ -984,7 +984,7 @@ Real Src3D_08_Transient( Real x , Real y , Real z , Real t)
 }
 Real Sol3D_08_Transient( Real x , Real y , Real z , Real t)
 {
-   Real resu = 10.0/6.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5)-SQR(z-0.5) ); 
+   Real resu = 10.0/6.0*(1.0/2.0-SQR(x-0.5)-SQR(y-0.5)-SQR(z-0.5) );
    return resu;
 }
 /********************************************************************/

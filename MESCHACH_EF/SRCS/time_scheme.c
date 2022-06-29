@@ -11,7 +11,7 @@ TIME_SCHEME *time_scheme_get(TIME_SCHEMEt_TIME_DISCR method1, TIME_SCHEMEt_LINEA
 
    int nb_steps;
    int i,j;
-   
+
    if ( (tmschm=NEW(TIME_SCHEME)) == (TIME_SCHEME *)NULL )
    {
       error(E_MEM, "time_scheme_get");
@@ -27,7 +27,7 @@ TIME_SCHEME *time_scheme_get(TIME_SCHEMEt_TIME_DISCR method1, TIME_SCHEMEt_LINEA
    tmschm->method2 = method2;
    tmschm->method3 = method3;
 
-   
+
    switch(method1)
    {
       case TIME_SCHEMEe_TIME_DISCR_EULER:     tmschm->nb_steps_time_discr = 1; break;
@@ -44,16 +44,16 @@ TIME_SCHEME *time_scheme_get(TIME_SCHEMEt_TIME_DISCR method1, TIME_SCHEMEt_LINEA
 
       default: error(E_UNKNOWN, "time_scheme_get");
    }
-   
+
    switch(method3)
    {
       case TIME_SCHEMEe_NONLIN_DISCR_EULER_EXPLICIT:  tmschm->nb_steps_linear_discr = 1; break;
       case TIME_SCHEMEe_NONLIN_DISCR_ADAMS_BASHFORD:  tmschm->nb_steps_linear_discr = 2; break;
       case TIME_SCHEMEe_NONLIN_DISCR_GLOWINSKY:       tmschm->nb_steps_linear_discr = 2; break;
-         
+
       default: error(E_UNKNOWN, "time_scheme_get");
    }
-   
+
 
    /* get the max. number of steps o the method */
    if ( tmschm->nb_steps_time_discr > tmschm->nb_steps_linear_discr )
@@ -78,7 +78,7 @@ TIME_SCHEME *time_scheme_get(TIME_SCHEMEt_TIME_DISCR method1, TIME_SCHEMEt_LINEA
          nb_steps = tmschm->nb_steps_nonlin_discr;
       }
    }
-   
+
    /* finally */
    tmschm->nb_steps  = nb_steps;
 
@@ -88,7 +88,7 @@ TIME_SCHEME *time_scheme_get(TIME_SCHEMEt_TIME_DISCR method1, TIME_SCHEMEt_LINEA
    tmschm->linear_terms_discretisation  = m_get(3,NB_STEPS_MAX);
    tmschm->nonlin_terms_discretisation  = m_get(3,NB_STEPS_MAX);
 
-   
+
    for (i=0; i<3; i++)
    for (j=0; j<NB_STEPS_MAX; j++)
    {
@@ -99,7 +99,7 @@ TIME_SCHEME *time_scheme_get(TIME_SCHEMEt_TIME_DISCR method1, TIME_SCHEMEt_LINEA
 
       /* not yet allocated : array od solution at different times */
    tmschm->Vn = MNULL;
-   
+
    return  tmschm;
 }
 
@@ -108,7 +108,7 @@ TIME_SCHEME *time_scheme_get(TIME_SCHEMEt_TIME_DISCR method1, TIME_SCHEMEt_LINEA
 
 int time_scheme_free(TIME_SCHEME *tmschm)
 {
-  if ( tmschm == TMSNULL ) 
+  if ( tmschm == TMSNULL )
   {
      return EXIT_FAILURE;
   }
@@ -126,7 +126,7 @@ int time_scheme_free(TIME_SCHEME *tmschm)
     }
 
     free(tmschm);
-    
+
     return EXIT_SUCCESS;
   }
 }
@@ -155,7 +155,7 @@ TIME_SCHEME *time_scheme_v_put(TIME_SCHEME *tmschm, int p, VEC *in)
    {
       tmschm->Vn = m_get(NB_STEPS_MAX, in->dim );
    }
-   
+
    MEM_COPY(in->ve, &(tmschm->Vn->me[p][0]),  (in->dim)*sizeof(Real)); /* set_row(tmschm->Vn, p, in); */
 
    return tmschm;

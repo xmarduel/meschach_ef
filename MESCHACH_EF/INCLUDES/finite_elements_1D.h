@@ -37,38 +37,38 @@ typedef struct {
    Real     (**f_base)(Real);      /**< fonctions de base de l'element     */
    Real     (**dfdx_base)(Real);   /**< derivees des fonctions de bases    */
    Real     (**ddfdxx_base)(Real); /**< derivees secondes                  */
-   
+
    MAT*     MAT_I_I;          /**< Mass Matrix Ni.Nj                   */
 
    MAT*     MAT_x_x;          /**< Stiffness  matrix dNi.dNj   */
    MAT*     MAT_xx_xx;        /**< Stiffness  matrix d2Ni.d2Nj */
    MAT*     MAT_I_x;          /**< Convection matrix Ni.dNj    */
-   
+
    MAT*     MAT_x_xx ;        /**< for the stabilization terms dNi.ddNj   */
    MAT*     MAT_I_xx ;        /**< for the stabilization terms Ni.ddNj    */
-   
+
    TENSOR*   TENSOR_I_x_I;      /**< 3D array Ni.dNj.Nk  */
    TENSOR*   TENSOR_x_I_I;      /**< 3D array dNi.Nj.Nk  */
-   TENSOR*   TENSOR_I_I_x;      /**< 3D array Ni.Nj.dNk  */ 
+   TENSOR*   TENSOR_I_I_x;      /**< 3D array Ni.Nj.dNk  */
    TENSOR*   TENSOR_I_I_I;      /**< 3D array Ni.Nj.Nk   */
-   
+
    VEC*     VEC_I;            /**< Right Hand Side (Source cste)  Ni     */
    VEC*     VEC_x;            /**< for the stabilization terms    dNi    */
    VEC*     VEC_xx;           /**< for the stabilization terms    ddNi   */
-   
+
    MAT*     MAT_FuncBasis_CL_L;   /**< basis permutation to fit BC  with splines */
    MAT*     MAT_FuncBasis_CL_R;   /**< basis permutation to fit BC  with splines */
 
    /* only for "S2", "S3" or "S5" with non-uniform mesh */
    /*SPLINES_1D*/void *splines_def; /* definition of all functions on the mesh : will depend on the geometry */
 
-   
+
 } ELT_1D;
- 
+
 
 #define ELT_1D_NULL  ((ELT_1D *)NULL)
- 
-int elt1D_free(ELT_1D *) ; 
+
+int elt1D_free(ELT_1D *) ;
 
 #define ELT_1D_FREE(elt)  ( elt1D_free(elt ), (elt )=(ELT_1D  *)NULL )
 
@@ -90,7 +90,7 @@ Real F0_1D_P0(Real x);    /* Element P0 */
 
 Real F0_1D_P1(Real x);    /* Element P1 */
 Real F1_1D_P1(Real x);
- 
+
 Real F0_1D_P2(Real x);    /* Element P2 */
 Real F1_1D_P2(Real x);
 Real F2_1D_P2(Real x);
@@ -119,7 +119,7 @@ Real F1_1D_S4(Real x);
 Real F2_1D_S4(Real x);
 Real F3_1D_S4(Real x);
 Real F4_1D_S4(Real x);
-   
+
 Real F0_1D_S5(Real x);    /* Element Spline  Quintique */
 Real F1_1D_S5(Real x);
 Real F2_1D_S5(Real x);
@@ -134,7 +134,7 @@ Real DFDX0_1D_P0(Real x);    /* Element P0 */
 
 Real DFDX0_1D_P1(Real x);    /* Element P1 */
 Real DFDX1_1D_P1(Real x);
- 
+
 Real DFDX0_1D_P2(Real x);    /* Element P2 */
 Real DFDX1_1D_P2(Real x);
 Real DFDX2_1D_P2(Real x);
@@ -163,7 +163,7 @@ Real DFDX1_1D_S4(Real x);
 Real DFDX2_1D_S4(Real x);
 Real DFDX3_1D_S4(Real x);
 Real DFDX4_1D_S4(Real x);
-   
+
 Real DFDX0_1D_S5(Real x);    /* Element Spline  Quintique */
 Real DFDX1_1D_S5(Real x);
 Real DFDX2_1D_S5(Real x);
@@ -178,7 +178,7 @@ Real DDFDXX0_1D_P0(Real x);    /* Element P0 */
 
 Real DDFDXX0_1D_P1(Real x);    /* Element P1 */
 Real DDFDXX1_1D_P1(Real x);
- 
+
 Real DDFDXX0_1D_P2(Real x);    /* Element P2 */
 Real DDFDXX1_1D_P2(Real x);
 Real DDFDXX2_1D_P2(Real x);
@@ -208,7 +208,7 @@ Real DDFDXX1_1D_S4(Real x);
 Real DDFDXX2_1D_S4(Real x);
 Real DDFDXX3_1D_S4(Real x);
 Real DDFDXX4_1D_S4(Real x);
-   
+
 Real DDFDXX0_1D_S5(Real x);    /* Element Spline  Quintique */
 Real DDFDXX1_1D_S5(Real x);
 Real DDFDXX2_1D_S5(Real x);

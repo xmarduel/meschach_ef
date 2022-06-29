@@ -24,7 +24,7 @@ extern "C"
 
 #include "MESCHACH_EF/INCLUDES/finite_elements_2D.h"
 
- 
+
 typedef struct {
 
    int     dim;                           /**< dimension; here dim = 3               */
@@ -38,11 +38,11 @@ typedef struct {
    int     nb_somm_face ;                 /**< nb de fonctions de base de l'arete    */
    Real    (**f_face)(Real,Real);         /**< fonctions de base sur les aretes      */
 
-   
+
    VEC*    VEC_Scmbr;           /**< rhs (Source cste) Ni              */
 
    MAT*    MAT_I_I;             /**< The mass matrix Ni.Nj             */
-   
+
    MAT*    MAT_x_x;             /**< The Stiffness matrix dNidx.dNjdx  */
    MAT*    MAT_x_y;             /**< The Stiffness matrix dNidx.dNjdy  */
    MAT*    MAT_x_z;             /**< The Stiffness matrix dNidx.dNjdz  */
@@ -52,11 +52,11 @@ typedef struct {
    MAT*    MAT_z_x;             /**< The Stiffness matrix dNidz.dNjdx  */
    MAT*    MAT_z_y;             /**< The Stiffness matrix dNidz.dNjdy  */
    MAT*    MAT_z_z;             /**< The Stiffness matrix dNidz.dNjdz  */
-   
+
    MAT*    MAT_I_x;             /**< The Convection matrix Ni.dNjdx  */
    MAT*    MAT_I_y;             /**< The Convection matrix Ni.dNjdy  */
    MAT*    MAT_I_z;             /**< The Convection matrix Ni.dNjdz  */
-   
+
    /* for Stokes */
    MAT*    MAT_I_x_PM1dP;       /**< The Convection matrix Ni.dNjdx  for Stokes (PM1,P) = ("P1","P2") or ("P2","P3") */
    MAT*    MAT_I_y_PM1dP;       /**< The Convection matrix Ni.dNjdy  for Stokes (PM1,P) = ("P1","P2") or ("P2","P3") */
@@ -70,26 +70,26 @@ typedef struct {
    TENSOR*   TENSOR_y_I_I;        /**< The 3D array dNidy.Nj.Nk  */
    TENSOR*   TENSOR_z_I_I;        /**< The 3D array dNidz.Nj.Nk  */
    TENSOR*   TENSOR_I_I_I;        /**< The 3D array Ni.Nj.Nk     */
-   
+
    /* frequently used matrices */
    MAT*  MAT_x_y__plus__y_x;   /**< is equal to MAT_x_y + MAT_y_x  */
    MAT*  MAT_x_z__plus__z_x;   /**< is equal to MAT_x_y + MAT_y_x  */
    MAT*  MAT_y_z__plus__z_y;   /**< is equal to MAT_x_y + MAT_y_x  */
-      
+
 
    ELT_2D* eltDM1;             /**< Same element on the dimenson -1 */
-   
+
 } ELT_3D;            /**< ---- a INITIALISER dans "elt3D_get" ------ */
 
 
 #define ELT_3D_NULL  ((ELT_3D *)NULL)
- 
-int elt3D_free(ELT_3D *) ; 
+
+int elt3D_free(ELT_3D *) ;
 
 #define ELT_3D_FREE(elt)  ( elt3D_free(elt), (elt)=(ELT_3D *)NULL )
 
 
-ELT_3D  *elt3D_get(const char* type); 
+ELT_3D  *elt3D_get(const char* type);
 
 
 

@@ -54,7 +54,7 @@ static char * graphics1D_gnuplot_script(const char*filename, const VEC *SOL)
 
    snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gpp", filename); script_gnuplot[63] = '\0';
 
-   graphics1D_gnuplot_write_script(script_gnuplot, "SolApproch1D.dat", NULL, NULL, 100, "the_residuals.dat"); 
+   graphics1D_gnuplot_write_script(script_gnuplot, "SolApproch1D.dat", NULL, NULL, 100, "the_residuals.dat");
 
    return script_gnuplot;
 }
@@ -71,7 +71,7 @@ static void graphics1D_gnuplot_write_script(const char* filename, const char* so
    {
       graphics1D_gnuplot_write_script_residus(fp, num_iter, residus_file) ;
    }
-   
+
    graphics1D_gnuplot_write_script_BeginSolPlot(fp, 0.0, 1.0);
 
    if (solApprox != NULL)
@@ -80,7 +80,7 @@ static void graphics1D_gnuplot_write_script(const char* filename, const char* so
    }
    if (solExacte != NULL)
    {
-      graphics1D_gnuplot_write_script_ContPlot(fp);     
+      graphics1D_gnuplot_write_script_ContPlot(fp);
       graphics1D_gnuplot_write_script_SolPlot(fp, solExacte, "SolExacte" , "lines");
    }
    if (solExDiscrete != NULL)
@@ -89,7 +89,7 @@ static void graphics1D_gnuplot_write_script(const char* filename, const char* so
       graphics1D_gnuplot_write_script_SolPlot(fp, solExDiscrete, "SolExacteDiscrete" , "lines");
    }
    graphics1D_gnuplot_write_script_EndSolPlot(fp);
-   
+
    fclose(fp);
 }
 
@@ -136,7 +136,7 @@ static void graphics1D_gnuplot_write_script_ContPlot(FILE *fp)
 
 static void graphics1D_gnuplot_write_script_EndSolPlot(FILE *fp)
 {
-   fprintf(fp, "\npause -1\n\n"); 
+   fprintf(fp, "\npause -1\n\n");
 }
 
 /*----------------------------------------------------------------------------------------------------*/
@@ -257,15 +257,15 @@ void graphics1D_output_vec(const char *filename, const ELT_1D *element, const GE
    int  i;
    FILE *fp;
    VEC  *TMP;
-   
+
    if ( element == NULL ) error(E_NULL, "graphics1D_output_vec");
    if ( geom    == NULL ) error(E_NULL, "graphics1D_output_vec");
    if ( SOL     == NULL ) error(E_NULL, "graphics1D_output_vec");
-   
+
    if ( geom->EF_to_WORLD->n != SOL->dim ) error(E_SIZES, "graphics1D_output_vec");
 
    TMP = sp_mv_mlt(geom->EF_to_WORLD, (VEC*)SOL, NULL);
-   
+
    if ( filename == NULL )
    {
       fp = stdout;
@@ -274,8 +274,8 @@ void graphics1D_output_vec(const char *filename, const ELT_1D *element, const GE
    {
       fp = fopen(filename, "w");
    }
-   
-   
+
+
    if ( strcmp(element->name_ef,"P1") == 0 )
    {
       for (i=0; i<geom->XSOMM->dim; i++)
@@ -351,7 +351,7 @@ void graphics1D_output_vec(const char *filename, const ELT_1D *element, const GE
    {
       fclose(fp);
    }
-   
+
    return;
 }
 
@@ -439,10 +439,10 @@ static void graphics1D_silo   (const char *filename, const ELT_1D *element, cons
 
    char     silo_file[64];
 
-   
+
    GEOM_1D *GeomP1 = Geom1D_getP1geom_from(element, geom);
    VEC *SOL_P1     = build_vec_world_from_vec_ef_1D( element, geom, SOL );
-   
+
    snprintf(silo_file, 64, "%s.silo", filename); silo_file[63] = '\0';
 
    /*--- ECRITURE DU FICHIER "Solution_Approc2.silo"---(MESH-TV)---- */
@@ -452,7 +452,7 @@ static void graphics1D_silo   (const char *filename, const ELT_1D *element, cons
    /* Create the SILO file */
 
    db = DBCreate(silo_file, DB_CLOBBER, DB_LOCAL, "UCD mesh test", DB_PDB);
-   
+
    /* Write out the mesh to the file ---------- DBPutCurve */
 
    DBPutCurve(db, "curve", GeomP1->XSOMM->ve, SOL_P1->ve, DB_REAL, SOL_P1->dim, NULL);
@@ -508,7 +508,7 @@ static void graphics1D_vtk    (const char *filename, const ELT_1D *element, cons
 
    fp = fopen(vtk_file, "w");
    if (fp==NULL) error(E_NULL, "graphics1D_vtk");
-   
+
    /* File VTK */
    fprintf(fp, "# vtk DataFile Version 4.2 \n");
    fprintf(fp, "Solution PDE problem \n");
@@ -521,7 +521,7 @@ static void graphics1D_vtk    (const char *filename, const ELT_1D *element, cons
    {
       fprintf(fp, "%lf %lf %lf \n",  GeomP1->XSOMM->ve[s], 0.0, 0.0);
    }
-   
+
    fprintf(fp, "LINES %d %d \n", GeomP1->NBSOMM-1 , 3*(GeomP1->NBSOMM-1));
    for (s=0; s<GeomP1->NBSOMM-1 ; s++)
    {
@@ -615,7 +615,7 @@ static char * graphics1D_vtk_script(const char* filename, const VEC  *SOL)
 
    fclose(fp);
 
-   return script_vtk; 
+   return script_vtk;
 }
 
 /*----------------------------------------------------------------------------------------------------*/

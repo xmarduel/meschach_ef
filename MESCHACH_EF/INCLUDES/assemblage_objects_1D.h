@@ -40,7 +40,7 @@ VEC *   assemblage1D_vector_ab    (const ELT_1D *elt, const GEOM_1D *geom, const
 SPMAT * assemblage1D_matrix_fromBC(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, SPMAT *MassBC);
 VEC   * assemblage1D_vector_fromBC(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, VEC *RHS);
 
-   
+
 #ifdef __cplusplus
 }
 #endif
@@ -50,7 +50,7 @@ VEC   * assemblage1D_vector_fromBC(const ELT_1D *elt, const GEOM_1D *geom, const
 
 
 /*! \fn SPMAT * assemblage1D_matrix_Mass ( const ELT_1D *elt , const GEOM_1D *geom , SPMAT *Mass   );
-* 
+*
 * \param elt   : the finite element
 * \param geom  : the geometry
 * \param Mass  : the mass matrix (output)
@@ -59,7 +59,7 @@ VEC   * assemblage1D_vector_fromBC(const ELT_1D *elt, const GEOM_1D *geom, const
 */
 
 /*! \fn SPMAT * assemblage1D_matrix_Stiff1 ( const ELT_1D *elt , const GEOM_1D *geom , SPMAT *Stiff1   );
-* 
+*
 * \param elt    : the finite element
 * \param geom   : the geometry
 * \param Stiff1 : the stiffness matrix (output)
@@ -68,7 +68,7 @@ VEC   * assemblage1D_vector_fromBC(const ELT_1D *elt, const GEOM_1D *geom, const
 */
 
 /*! \fn SPMAT * assemblage1D_matrix_Stiff2 ( const ELT_1D *elt , const GEOM_1D *geom , SPMAT *Stiff2   );
-* 
+*
 * \param elt    : the finite element
 * \param geom   : the geometry
 * \param Stiff2 : the stiffness matrix (output)
@@ -77,7 +77,7 @@ VEC   * assemblage1D_vector_fromBC(const ELT_1D *elt, const GEOM_1D *geom, const
 */
 
 /*! \fn SPMAT * assemblage1D_matrix_Convec ( const ELT_1D *elt , const GEOM_1D *geom , SPMAT *Convec   );
-* 
+*
 * \param elt    : the finite element
 * \param geom   : the geometry
 * \param Convec : the mass matrix (output)

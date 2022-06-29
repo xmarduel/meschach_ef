@@ -32,12 +32,12 @@ static VEC* spPRESSUREMATRIXapply2_bandwr(SPMAT *A, SPMAT *LU_A, PERM *P, PERM *
 
 int navierstokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC *VIT, VEC *P, VEC *F, VEC *G)
 {
-   PARAMS* MyParams = Params_get_staticparam(0);      
-      
+   PARAMS* MyParams = Params_get_staticparam(0);
+
    BANDWRt_METHOD  bandwr_method     = MyParams->navierstokes_params.uzawa.innerloop_solver.bandwidth_method;
    BANDWRt_OPTION  bandwr_option     = MyParams->navierstokes_params.uzawa.innerloop_solver.bandwidth_option;
-   BANDWRt_MATRIXTYPE bandwr_mtype   = BANDWRe_NONSYM;   
-	
+   BANDWRt_MATRIXTYPE bandwr_mtype   = BANDWRe_NONSYM;
+
    SPMAT *LU_A ;
    SPMAT *LU_P ;
 
@@ -46,7 +46,7 @@ int navierstokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC 
 
    PERM  *Pp    ;
    PERM  *INVPp ;
-   
+
    PERM *PERM_LU_A;
    PERM *PERM_LU_P;
 
@@ -79,7 +79,7 @@ int navierstokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC 
 
    LU_P = sp_copy(PRECOND);
 
-   
+
    if ( bandwr_method != BANDWRe_NULL )
    {
       printf("\n... navierstokes_resol_uzawa with bandwidth reduction ...\n");
@@ -103,7 +103,7 @@ int navierstokes_resol_uzawa (SPMAT *A, SPMAT *B, SPMAT *C, SPMAT *PRECOND, VEC 
                                          F, G,
                                          Pu, INVPu, Pp, INVPp);
 
-   
+
 
    SP_FREE(LU_A);
    SP_FREE(LU_P);
@@ -124,7 +124,7 @@ int navierstokes_resol_uzawa_factOk (SPMAT *LU_A, PERM *PERM_LU_A, SPMAT *B, SPM
                                      VEC *F, VEC *G,
                                      PERM  *Pu, PERM  *INVPu, PERM  *Pp, PERM  *INVPp )
 {
-   PARAMS* MyParams = Params_get_staticparam(0);      
+   PARAMS* MyParams = Params_get_staticparam(0);
    Real rho         = MyParams->navierstokes_params.uzawa.rho;  /* condition on rho follows */
 
    BANDWRt_METHOD  bandwr_method     = MyParams->navierstokes_params.uzawa.innerloop_solver.bandwidth_method;
@@ -133,7 +133,7 @@ int navierstokes_resol_uzawa_factOk (SPMAT *LU_A, PERM *PERM_LU_A, SPMAT *B, SPM
 	Real tol      = MyParams->navierstokes_params.uzawa.innerloop_solver.eps_steps;
 	int max_steps = MyParams->navierstokes_params.uzawa.innerloop_solver.max_steps;
 	int steps     = 1;
-	
+
    Real residu = 1. ;
 
    VEC *oldU, *oldP;
@@ -167,14 +167,14 @@ int navierstokes_resol_uzawa_factOk (SPMAT *LU_A, PERM *PERM_LU_A, SPMAT *B, SPM
 
 
       v_sub(F, sp_vm_mlt(B,P,tmpU), tmpU);
-      /*int status_ms = m_solver(a, ap, u, f - b.trans_mult(p));*/  /* A*U = F - Bt*P    -> U */  
+      /*int status_ms = m_solver(a, ap, u, f - b.trans_mult(p));*/  /* A*U = F - Bt*P    -> U */
       if ( bandwr_method != BANDWRe_NULL )
       {
-         spLUsolve_bandwr(LU_A, PERM_LU_A, Pu, INVPu, tmpU, U);  
+         spLUsolve_bandwr(LU_A, PERM_LU_A, Pu, INVPu, tmpU, U);
       }
       else
       {
-         spLUsolve(LU_A, PERM_LU_A, tmpU, U); 
+         spLUsolve(LU_A, PERM_LU_A, tmpU, U);
       }
 
       /*Vector r = I.solve(b*u - g + c*p);*/                        /* PRECOND*P = B*U + C*P - G  -> P */
@@ -201,10 +201,10 @@ int navierstokes_resol_uzawa_factOk (SPMAT *LU_A, PERM *PERM_LU_A, SPMAT *B, SPM
       {
          printf("iter %05d :", steps);
 
-         printf("norm(p-oldp)= %le   ", v_norm2(v_sub(P, oldP, oldP)) ); 
+         printf("norm(p-oldp)= %le   ", v_norm2(v_sub(P, oldP, oldP)) );
          printf("norm(u-oldu)= %le \n", v_norm2(v_sub(U, oldU, oldU)) );
       }
-      
+
       residu = v_norm2(R);
 
       if (residu <= tol && steps > 2)
@@ -274,9 +274,9 @@ int navierstokes_resol_pressurematrix       (SPMAT *A, SPMAT *B, VEC *U, VEC *P,
    PX_FREE(INVPu);
 
    PX_FREE(PERM_LU_A);
-   
+
    /* finito */
-   return rc;  
+   return rc;
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -417,14 +417,14 @@ int navierstokes_resol_pressurematrix_factOk(SPMAT *A, SPMAT *LU_A , PERM *PERM_
                                              PERM *Pu, PERM *INVPu)
 {
    PARAMS* MyParams   = Params_get_staticparam(0);
-   
+
    int  bandwr_method     = MyParams->navierstokes_params.pressurematrix.innerloop_solver.bandwidth_method;
    int  bandwr_option     = MyParams->navierstokes_params.pressurematrix.innerloop_solver.bandwidth_option;
 
 	Real tol      = MyParams->navierstokes_params.pressurematrix.innerloop_solver.eps_steps;
 	int max_steps = MyParams->navierstokes_params.pressurematrix.innerloop_solver.max_steps;
 	int steps     = 1;
-	
+
 	int inner_step = 1;
    /*
     A*U + Bt*P = F
@@ -534,9 +534,9 @@ int navierstokes_resol_pressurematrix_factOk(SPMAT *A, SPMAT *LU_A , PERM *PERM_
    /* clean */
    V_FREE(Ptmp);
    V_FREE(Utmp);
-   
+
    /* finito */
-   return EXIT_SUCCESS; 
+   return EXIT_SUCCESS;
 }
 
 

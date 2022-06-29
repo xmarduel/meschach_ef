@@ -25,20 +25,20 @@ typedef struct FUN_1D_
    FUNC_2D phi_xt;              /**< placeholder for a "C" function  with 2 vars (x,t)       */
    FUNC_1D_PLUS_VOID phi_x_v;   /**< placeholder for a "C" function  with 2 vars (x,   obj)  */
    FUNC_2D_PLUS_VOID phi_xt_v;  /**< placeholder for a "C" function  with 3 vars (x,t, obj)  */
-   
+
    void*      clientdata;       /**< hold a pointer to a python object or lua state */
-   
+
    FUN_TYPE type;               /**< gives back the type of function stored in the object */
 
    double (*eval)(const struct FUN_1D_ * fun1D , double x,  ... );
-  
+
 } FUN_1D ;         /* to INITIALIZE in "Fun1D_get"          */
 
 
 typedef double (*FUN_1D_EVAL__FUN_1D_VAARGS)(const FUN_1D * fun1D , double x,  ... );
 
 
-#define FUN_1D_NULL  ((FUN_1D *)NULL) 
+#define FUN_1D_NULL  ((FUN_1D *)NULL)
 
 #define FUN_1D_FREE(Fun) ( Fun1D_free(Fun), (Fun)=(FUN_1D *)NULL )
 
@@ -56,7 +56,7 @@ FUN_1D * Fun1D_setFunction              (FUN_1D* Fun, FUN_TYPE type, void* phi, 
 Real     Fun1D_evalCFunction            (const FUN_1D* Fun, Real x);
 Real     Fun1D_evalPyFunction           (const FUN_1D* Fun, Real x);
 Real     Fun1D_evalLUAFunction          (const FUN_1D* Fun, Real x);
-   
+
 Real     Fun1D_evalCFunctionTransient   (const FUN_1D* Fun, Real x, Real tps);
 Real     Fun1D_evalPyFunctionTransient  (const FUN_1D* Fun, Real x, Real tps);
 Real     Fun1D_evalLUAFunctionTransient (const FUN_1D* Fun, Real x, Real tps);
@@ -66,7 +66,7 @@ FUN_1D * Fun1D_setCFunctionTransient    (FUN_1D* Fun, FUNC_2D  phi);
 
 FUN_1D * Fun1D_setLUAFunction           (FUN_1D* Fun, const char* def);
 FUN_1D * Fun1D_setLUAFunctionTransient  (FUN_1D* Fun, const char* def);
-   
+
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 
@@ -88,7 +88,7 @@ FUN_1D * Fun1D_setLUAFunctionTransient  (FUN_1D* Fun, const char* def);
 * For example, in a Python program, we will call the function (for a 1D stationnary problem): \n
 * Fun1D_setPythonFunction         ( FUN_1D* Fun, python_function); \n
 * What happens is that we will store in phi_x_v the following "C" function (in a transparent manner for the user): \n
-* \n 
+* \n
 * static Real FunctionForEvaluatingPythonObject1D(Real x, void* clientdata ) \n
 * {  \n
 *    PyObject *pyfunc, *arglist; \n
@@ -148,7 +148,7 @@ FUN_1D * Fun1D_setLUAFunctionTransient  (FUN_1D* Fun, const char* def);
 * \n
 * \n
 * and we will store in void* clientdata the PyObject function. \n
-* \n 
+* \n
 * \n
 * We set the members of the structure from a "C" program with the functions \n
 * Fun1D_setCFunction         ( FUN_1D* Fun, FUNC_1D   phi); \n

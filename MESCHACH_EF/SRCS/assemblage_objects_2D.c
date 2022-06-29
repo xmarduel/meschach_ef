@@ -29,7 +29,7 @@ typedef enum
    ASSEMBLAGEe_CONV_X_FUN = 5,
    ASSEMBLAGEe_CONV_Y_FUN = 6,
    ASSEMBLAGEe_CONV_G_FUN = 7,
-   
+
    ASSEMBLAGEe_AUx    =  8,
    ASSEMBLAGEe_AUy    =  9,
    ASSEMBLAGEe_AxU    = 10,
@@ -149,7 +149,7 @@ SPMAT* assemblage2D_matrix_M_Stab( const ELT_2D *elt , const GEOM_2D *geom , SPM
 {
    PARAMS* MyParams = Params_get_staticparam(0);
    char* method_stab;
-   
+
    /* check */
    if ( elt      == NULL ) error(E_NULL, "assemblage2D_matrix_M_Stab");
    if ( geom     == NULL ) error(E_NULL, "assemblage2D_matrix_M_Stab");
@@ -177,7 +177,7 @@ SPMAT* assemblage2D_matrix_M_Stab( const ELT_2D *elt , const GEOM_2D *geom , SPM
    {
       error(E_UNKNOWN, "assemblage2D_matrix_M_Stab");
    }
-   
+
 
    /* delegate */
    return _assemblage_matrix1b (ASSEMBLAGEe_STAB , elt , geom , M_Stab , MyAdvFun );
@@ -210,7 +210,7 @@ SPMAT*  assemblage2D_matrix_Conv_y_fun( const ELT_2D *elt , const GEOM_2D *geom 
    if ( MyAdvFun == NULL ) error(E_NULL, "assemblage2D_matrix_Conv_y_fun");
 
    /* delegate */
-   return _assemblage_matrix1b (ASSEMBLAGEe_CONV_Y_FUN , elt , geom , Conv_y , MyAdvFun );   
+   return _assemblage_matrix1b (ASSEMBLAGEe_CONV_Y_FUN , elt , geom , Conv_y , MyAdvFun );
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -234,27 +234,27 @@ SPMAT*  assemblage2D_matrix_Conv_G_fun( const ELT_2D *elt , const GEOM_2D *geom 
 SPMAT * assemblage2D_matrix_fromBC(const ELT_2D *elt, const GEOM_2D *geom, const BC_2D *BC, SPMAT *MassBC)
 {
    int axe;
-   
+
    /* check */
    if ( elt      == NULL ) error(E_NULL, "assemblage2D_matrix_fromBC");
    if ( geom     == NULL ) error(E_NULL, "assemblage2D_matrix_fromBC");
    if ( BC       == NULL ) error(E_NULL, "assemblage2D_matrix_fromBC");
    if ( MassBC   == NULL ) error(E_NULL, "assemblage2D_matrix_fromBC");
-   
+
    axe = BC->BC_cauchy->current_selected_axe;
    /* conditions aux limites de Cauchy */
    if ( Bc2D_hasCauchyBC(BC, axe) )
    {
       apply_Bc2D_cauchy_on_mat(axe, elt, geom, BC, MassBC);
    }
-   
+
    axe = BC->BC_robin->current_selected_axe;
    /* conditions aux limites de Robin */
    if ( Bc2D_hasRobinBC(BC, axe) )
    {
       apply_Bc2D_robin_on_mat(axe, elt, geom, BC, MassBC);
    }
-   
+
    return MassBC;
 }
 
@@ -326,7 +326,7 @@ static SPMAT* _assemblage_matrix1b( const ASSEMBLAGEt_TYPE type , const ELT_2D *
       case ASSEMBLAGEe_CONV_X_FUN: _systel_matrix_ = _systel_matrix_Conv_x_fun ; break;
       case ASSEMBLAGEe_CONV_Y_FUN: _systel_matrix_ = _systel_matrix_Conv_y_fun ; break;
       case ASSEMBLAGEe_CONV_G_FUN: _systel_matrix_ = _systel_matrix_Conv_G_fun ; break;
-         
+
       default: error(E_UNKNOWN, "_assemblage_matrix1b");
    }
 
@@ -358,20 +358,20 @@ static SPMAT* _assemblage_matrix1b( const ASSEMBLAGEt_TYPE type , const ELT_2D *
 static MAT* _systel_matrix_Mass( u_int  e , const ELT_2D *elt , const GEOM_2D *geom , MAT *Mass_el )
 {
    Real jacobien;
-   
+
    /* initialisation Mass_el */
    m_zero(Mass_el);
-   
+
    /* calcul jacobien on elt "e" */
    jacobien = eval_jac_on_e ( e, elt, geom );
 
    /* calcul Mass_el on triangle number "e" */
    Mass_el = sm_mlt(jacobien, elt->MAT_I_I,Mass_el);
-   
-   
+
+
    /* or with numerical integration  with the basis functions : */
    /*
-   for (i=0; i<elt->nb_somm_cell; i++) 
+   for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
    {
       for (m=0; m<NBPTS_GAUSS_2D_TRI; m++)
@@ -379,12 +379,12 @@ static MAT* _systel_matrix_Mass( u_int  e , const ELT_2D *elt , const GEOM_2D *g
          Mass_el->me[i][j]  -= w2D[m]*jacobien
             elt->f_base[i](ksi2D[m],eta2D[m])*
             elt->f_base[j](ksi2D[m],eta2D[m])  ;
-      }   
+      }
    }
    */
-   
+
    return Mass_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -404,19 +404,19 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_2D *elt , const GEOM_2D 
    */
 
    MAT *work_el;
-   
+
    Real jacobien ;
 
    Real transformation[2][2];
    Real ksi_x, eta_x;
    Real ksi_y, eta_y;
-   
+
    Real c_xx, c_xy, c_yy ;
-   
-   
+
+
    /* alloc memory */
    work_el = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    /* initialisation Stiff_el */
    m_zero(Stiff1_el);
 
@@ -428,7 +428,7 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_2D *elt , const GEOM_2D 
    eta_x =  transformation[0][1];/*-(y2-y1)*un_sur_jacobien*/ ;
    ksi_y =  transformation[1][0];/*-(x3-x1)*un_sur_jacobien*/ ;
    eta_y =  transformation[1][1];/* (x2-x1)*un_sur_jacobien*/ ;
-   
+
    c_xx = jacobien * ( ksi_x*ksi_x + ksi_y*ksi_y ) ;
    c_xy = jacobien * ( ksi_x*eta_x + ksi_y*eta_y ) ;
    c_yy = jacobien * ( eta_x*eta_x + eta_y*eta_y ) ;
@@ -440,7 +440,7 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_2D *elt , const GEOM_2D 
 
    /* or with numerical integration  with the basis functions : */
    /*
-   for (i=0; i<elt->nb_somm_cell; i++) 
+   for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
    {
       for (m=0; m<NBPTS_GAUSS_2D_TRI; m++)
@@ -448,11 +448,11 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_2D *elt , const GEOM_2D 
          Stiff1_el->me[i][j]  -= w2D[m]*(c_xx*
                            elt->dfdx_base[i](ksi2D[m],eta2D[m])*elt->dfdx_base[j](ksi2D[m],eta2D[m])   +
                                         c_xy*
-                          (elt->dfdx_base[i](ksi2D[m],eta2D[m])*elt->dfdy_base[j](ksi2D[m],eta2D[m])+ 
+                          (elt->dfdx_base[i](ksi2D[m],eta2D[m])*elt->dfdy_base[j](ksi2D[m],eta2D[m])+
                            elt->dfdy_base[i](ksi2D[m],eta2D[m])*elt->dfdx_base[j](ksi2D[m],eta2D[m]))  +
                                         c_yy*
                            elt->dfdy_base[i](ksi2D[m],eta2D[m])*elt->dfdy_base[j](ksi2D[m],eta2D[m])   ) ;
-      }  
+      }
    }
    */
 
@@ -460,7 +460,7 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_2D *elt , const GEOM_2D 
    M_FREE(work_el);
 
    return Stiff1_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -468,22 +468,22 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_2D *elt , const GEOM_2D 
 static MAT* _systel_matrix_Conv_x( u_int  e , const ELT_2D *elt , const GEOM_2D *geom , MAT *Conv_x_el )
 {
    MAT *work_el;
-  
+
    Real jacobien ;
 
    Real transformation[2][2];
    Real ksi_x, eta_x;
-   
+
    /* alloc memory */
    work_el = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    /* calcul jacobien */
    jacobien = eval_jac_on_e_ ( e, elt, geom, transformation );
 
    /* get the transformation parameters */
    ksi_x =  transformation[0][0];/* (y3-y1)*un_sur_jacobien*/ ;
    eta_x =  transformation[0][1];/*-(y2-y1)*un_sur_jacobien*/ ;
-   
+
    /* initialisation Conv_x_el */
    m_zero(Conv_x_el);
 
@@ -491,18 +491,18 @@ static MAT* _systel_matrix_Conv_x( u_int  e , const ELT_2D *elt , const GEOM_2D 
    Conv_x_el = m_add(Conv_x_el, sm_mlt( (jacobien*ksi_x),elt->MAT_I_x,work_el), Conv_x_el);
    Conv_x_el = m_add(Conv_x_el, sm_mlt( (jacobien*eta_x),elt->MAT_I_y,work_el), Conv_x_el);
 
-   
+
   /*
                               _  _           _  _
   Conv_x_el = |Jac|.bx.(ksi_x.Ni_Nxj + eta_x.Ni_Nyj) ;
-  Conv_y_el = |Jac|.by.(ksi_y.Ni_Nxj + eta_y.Ni_Nyj) ; 
+  Conv_y_el = |Jac|.by.(ksi_y.Ni_Nxj + eta_y.Ni_Nyj) ;
 
   */
 
 
   /* or with numerical integration  with the basis functions : */
   /*
-  for (i=0; i<elt->nb_somm_cell; i++) 
+  for (i=0; i<elt->nb_somm_cell; i++)
   for (j=0; j<elt->nb_somm_cell; j++)
   {
     for (m=0; m<NBPTS_GAUSS_2D_TRI; m++)
@@ -514,12 +514,12 @@ static MAT* _systel_matrix_Conv_x( u_int  e , const ELT_2D *elt , const GEOM_2D 
     }
   }
   */
-  
+
   /* free memory */
   M_FREE(work_el);
 
   return Conv_x_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -527,16 +527,16 @@ static MAT* _systel_matrix_Conv_x( u_int  e , const ELT_2D *elt , const GEOM_2D 
 static MAT* _systel_matrix_Conv_y( u_int  e , const ELT_2D *elt , const GEOM_2D *geom , MAT *Conv_y_el )
 {
    MAT *work_el;
-   
+
    Real jacobien ;
 
    Real transformation[2][2];
    Real ksi_y,eta_y;
-   
-   
+
+
    /* alloc memory */
    work_el = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    /* calcul jacobien */
    jacobien = eval_jac_on_e_ ( e, elt, geom, transformation );
 
@@ -554,7 +554,7 @@ static MAT* _systel_matrix_Conv_y( u_int  e , const ELT_2D *elt , const GEOM_2D 
 
   /* or with numerical integration  with the basis functions : */
   /*
-  for (i=0; i<element->nb_somm_cell; i++) 
+  for (i=0; i<element->nb_somm_cell; i++)
   for (j=0; j<element->nb_somm_cell; j++)
   {
     for (m=0; m<NBPTS_GAUSS_2D_TRI; m++)
@@ -574,7 +574,7 @@ static MAT* _systel_matrix_Conv_y( u_int  e , const ELT_2D *elt , const GEOM_2D 
   M_FREE(work_el);
 
   return Conv_y_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -613,13 +613,13 @@ static MAT * _systel_matrix_Conv_x_fun( u_int e , const ELT_2D *elt , const GEOM
    /* we have */
    Conv_x_el = m_add(Conv_x_el, sm_mlt( (jacobien*ksi_x),elt->MAT_I_x,work_el), Conv_x_el);
    Conv_x_el = m_add(Conv_x_el, sm_mlt( (jacobien*eta_x),elt->MAT_I_y,work_el), Conv_x_el);
-   
+
    Conv_x_el = sm_mlt( b1, Conv_x_el, Conv_x_el);
 
    /*                          _  _           _  _
    Conv_x_el = |Jac|.bx.(ksi_x.Ni_Nxj + eta_x.Ni_Nyj) ;
    */
-   
+
    /* or with numerical integration  with the basis functions : */
    /*
     for (i=0; i<elt->nb_somm_cell; i++)
@@ -725,7 +725,7 @@ static MAT * _systel_matrix_Conv_G_fun( u_int e , const ELT_2D *elt , const GEOM
    /*AXES_IDX*/int axe1;
    /*AXES_IDX*/int axe2;
    /*AXES_IDX*/int axe3;
-   
+
    /* alloc memory */
    work_el = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
 
@@ -746,10 +746,10 @@ static MAT * _systel_matrix_Conv_G_fun( u_int e , const ELT_2D *elt , const GEOM
    switch(axe2)
    {
       case AXEe_X: row = 0; break;
-      case AXEe_Y: row = 1; break;         
+      case AXEe_Y: row = 1; break;
       default: error(E_UNKNOWN, "_systel_matrix_Conv_G_fun");
    }
-   
+
    d_ksi =  transformation[row][0];  /* axe2 = AXEe_X -> d_ksi = ksi_x , d_eta = eta_x  */
    d_eta =  transformation[row][1];  /* axe2 = AXEe_Y -> d_ksi = ksi_y , d_eta = eta_y  */
 
@@ -795,12 +795,12 @@ static MAT* _systel_matrix_M_Stab( u_int  e , const ELT_2D *elt , const GEOM_2D 
    Real coeff_MAT_DD_DD_[9] ;
    Real coeff_MAT_DD_D__[6] ;
    Real coeff_MAT_D__DD_[6] ;
-   
+
    MAT* MAT_D__D__[3];
    MAT* MAT_DD_DD_[9];
    MAT* MAT_D__DD_[6];
    MAT* MAT_DD_D__[6];
-   
+
    Real b1 = 0.0;
    Real b2 = 0.0;
    Real b_max;
@@ -824,7 +824,7 @@ static MAT* _systel_matrix_M_Stab( u_int  e , const ELT_2D *elt , const GEOM_2D 
    MAT_DD_DD_[6] = elt->MAT_yy_xx;
    MAT_DD_DD_[7] = elt->MAT_yy_xy;
    MAT_DD_DD_[8] = elt->MAT_yy_yy;
-   
+
    MAT_DD_D__[0] = elt->MAT_xx_x;
    MAT_DD_D__[1] = elt->MAT_xx_y;
    MAT_DD_D__[2] = elt->MAT_xy_x;
@@ -848,7 +848,7 @@ static MAT* _systel_matrix_M_Stab( u_int  e , const ELT_2D *elt , const GEOM_2D 
    un_sur_jacobien      = 1.0 / jacobien ;
    kappa_jacobien       = kappa * jacobien ;
    kappa_kappa_jacobien = kappa * kappa * jacobien ;
-   
+
    b1 = Adv2D_evalFunction(MyAdvFun, 0, AXEe_X, AXEe_X, AXEe_X, cell_center[0], cell_center[1] );
    b2 = Adv2D_evalFunction(MyAdvFun, 0, AXEe_X, AXEe_X, AXEe_Y, cell_center[0], cell_center[1] );
 
@@ -933,7 +933,7 @@ static MAT* _systel_matrix_M_Stab( u_int  e , const ELT_2D *elt , const GEOM_2D 
    /*
    {
    int i,j,m;
-      
+
    MAT * work_el0 = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
    MAT * work_el1 = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
    MAT * work_el2 = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
@@ -1048,10 +1048,10 @@ static MAT* _systel_matrix_M_Stab( u_int  e , const ELT_2D *elt , const GEOM_2D 
       printf(" m = %d \n",m);
       m_output(MAT_DD_D__[m]);
    }
-   
+
    }
    */
-   
+
    return M_Stab_el;
 }
 
@@ -1293,10 +1293,10 @@ static TENSOR* _systel_matrix_AUx( u_int  e , const ELT_2D *element , const GEOM
    Real transformation[2][2];
    Real ksi_x, eta_x;
 
-   
+
    TENSOR  *work_el = ts_get(element->nb_somm_cell,element->nb_somm_cell,element->nb_somm_cell);
-   
-   
+
+
    /* calcul jacobien */
    jacobien = eval_jac_on_e_ ( e, element, geom, transformation) ;
 
@@ -1310,7 +1310,7 @@ static TENSOR* _systel_matrix_AUx( u_int  e , const ELT_2D *element , const GEOM
    /* we have */
    TENSOR_el = ts_add(TENSOR_el, sts_mlt( (jacobien*ksi_x),element->TENSOR_I_x_I,work_el), TENSOR_el);
    TENSOR_el = ts_add(TENSOR_el, sts_mlt( (jacobien*eta_x),element->TENSOR_I_y_I,work_el), TENSOR_el);
-   
+
    /*
    or with numerical integration  with the basis functions :
    */
@@ -1335,7 +1335,7 @@ static TENSOR* _systel_matrix_AUx( u_int  e , const ELT_2D *element , const GEOM
    */
 
    TS_FREE(work_el);
-   
+
    /* end */
    return TENSOR_el;
 }
@@ -1351,7 +1351,7 @@ static TENSOR* _systel_matrix_AUy( u_int  e , const ELT_2D *element , const GEOM
    Real ksi_y, eta_y ;
 
    TENSOR  *work_el = ts_get(element->nb_somm_cell,element->nb_somm_cell,element->nb_somm_cell);
-   
+
    /* calcul jacobien */
    jacobien = eval_jac_on_e_ ( e, element, geom, transformation) ;
 
@@ -1365,7 +1365,7 @@ static TENSOR* _systel_matrix_AUy( u_int  e , const ELT_2D *element , const GEOM
    /* we have */
    TENSOR_el = ts_add(TENSOR_el, sts_mlt( (jacobien*ksi_y),element->TENSOR_I_x_I,work_el), TENSOR_el);
    TENSOR_el = ts_add(TENSOR_el, sts_mlt( (jacobien*eta_y),element->TENSOR_I_y_I,work_el), TENSOR_el);
-   
+
    /*
    or with numerical integration  with the basis functions :
    */
@@ -1388,9 +1388,9 @@ static TENSOR* _systel_matrix_AUy( u_int  e , const ELT_2D *element , const GEOM
    }
    TENSOR_el = sts_mlt( jacobien, TENSOR_el, TENSOR_el);
    */
-    
+
    TS_FREE(work_el);
-   
+
    /* end */
    return TENSOR_el;
 }
@@ -1407,21 +1407,21 @@ static TENSOR* _systel_matrix_AxU( u_int  e , const ELT_2D *element , const GEOM
 
    TENSOR  *work_el = ts_get(element->nb_somm_cell,element->nb_somm_cell,element->nb_somm_cell);
 
-   
+
    /* calcul jacobien */
    jacobien = eval_jac_on_e_ ( e, element, geom, transformation ) ;
 
    /* get the transformation parameters */
    ksi_x =  transformation[0][0];/* (y3-y1)*un_sur_jacobien*/ ;
    eta_x =  transformation[0][1];/*-(y2-y1)*un_sur_jacobien*/ ;
-   
+
    /* init */
    ts_zero(TENSOR_el);
 
    /* we have */
    TENSOR_el = ts_add(TENSOR_el, sts_mlt( (jacobien*ksi_x),element->TENSOR_x_I_I,work_el), TENSOR_el);
    TENSOR_el = ts_add(TENSOR_el, sts_mlt( (jacobien*eta_x),element->TENSOR_y_I_I,work_el), TENSOR_el);
-   
+
    /*
    or with numerical integration  with the basis functions :
    */
@@ -1444,9 +1444,9 @@ static TENSOR* _systel_matrix_AxU( u_int  e , const ELT_2D *element , const GEOM
    }
    TENSOR_el = sts_mlt( jacobien, TENSOR_el, TENSOR_el);
    */
-   
+
    TS_FREE(work_el);
-   
+
    /* end */
    return TENSOR_el;
 }
@@ -1462,7 +1462,7 @@ static TENSOR* _systel_matrix_AyU( u_int  e , const ELT_2D *element , const GEOM
    Real ksi_y,eta_y ;
 
    TENSOR  *work_el = ts_get(element->nb_somm_cell,element->nb_somm_cell,element->nb_somm_cell);
-   
+
    /* calcul jacobien */
    jacobien = eval_jac_on_e_ ( e, element, geom, transformation );
 
@@ -1476,7 +1476,7 @@ static TENSOR* _systel_matrix_AyU( u_int  e , const ELT_2D *element , const GEOM
    /* we have  */
    TENSOR_el = ts_add(TENSOR_el, sts_mlt( (jacobien*ksi_y),element->TENSOR_x_I_I,work_el), TENSOR_el);
    TENSOR_el = ts_add(TENSOR_el, sts_mlt( (jacobien*eta_y),element->TENSOR_y_I_I,work_el), TENSOR_el);
-   
+
    /*
    or with numerical integration  with the basis functions :
    */
@@ -1499,9 +1499,9 @@ static TENSOR* _systel_matrix_AyU( u_int  e , const ELT_2D *element , const GEOM
    }
    sts_mlt( jacobien, TENSOR_el, TENSOR_el);
    */
-   
+
    TS_FREE(work_el);
-    
+
    /* end */
    return TENSOR_el;
 }
@@ -1521,7 +1521,7 @@ static TENSOR* _systel_matrix_A_U( u_int  e , const ELT_2D *element , const GEOM
 
    /* we have */
    TENSOR_el = sts_mlt( jacobien, element->TENSOR_I_I_I, TENSOR_el);
-   
+
    /*
    or with numerical integration  with the basis functions :
    */
@@ -1539,7 +1539,7 @@ static TENSOR* _systel_matrix_A_U( u_int  e , const ELT_2D *element , const GEOM
       }
    }
    */
-   
+
 
    /* end */
    return TENSOR_el;
@@ -1553,7 +1553,7 @@ VEC* assemblage2D_vector_fun( const ELT_2D *elt , const GEOM_2D *geom , const RH
    int e,i,m,k;
    VEC *RHS_el;
    MAT *fbase_k_ksieta_m;
-   
+
    /* check */
    if ( elt    == ELT_2D_NULL  ) error(E_NULL, "assemblage2D_vector_Rhs");
    if ( geom   == GEOM_2D_NULL ) error(E_NULL, "assemblage2D_vector_Rhs");
@@ -1565,7 +1565,7 @@ VEC* assemblage2D_vector_fun( const ELT_2D *elt , const GEOM_2D *geom , const RH
 
    /* init fbase_k_ksi_m */
    fbase_k_ksieta_m = m_get(elt->nb_somm_cell, NBPTS_GAUSS_2D_TRI);
-   
+
    for (m=0; m<NBPTS_GAUSS_2D_TRI; m++)
    {
       for (k=0; k<elt->nb_somm_cell; k++)
@@ -1577,21 +1577,21 @@ VEC* assemblage2D_vector_fun( const ELT_2D *elt , const GEOM_2D *geom , const RH
 
    /* initialisation of Mass */
    v_zero(RHS);
-   
+
    for(e=0; e<geom->NBELMT; e++)
-   { 
+   {
       /*RHS_el = _systel_vector_fun( e , elt , geom , RhsFun , RHS_el );*/
       RHS_el = _systel_vector_fun_o( e , elt , geom , RhsFun , RHS_el , fbase_k_ksieta_m);
-      
+
       for (i=0; i<elt->nb_somm_cell; i++)
-      { 
+      {
          RHS->ve[geom->NSELMT->im[e][i]] += RHS_el->ve[i] ;
       }
    }
-   
+
    V_FREE(RHS_el) ;
    M_FREE(fbase_k_ksieta_m);
-   
+
    return RHS;
 }
 
@@ -1601,27 +1601,27 @@ VEC* assemblage2D_vector_fun( const ELT_2D *elt , const GEOM_2D *geom , const RH
 VEC * assemblage2D_vector_fromBC(const ELT_2D *elt, const GEOM_2D *geom, const BC_2D *BC, VEC *RHS)
 {
    int axe;
-   
+
    /* check */
    if ( elt    == NULL ) error(E_NULL, "assemblage2D_vector_fromBC");
    if ( geom   == NULL ) error(E_NULL, "assemblage2D_vector_fromBC");
    if ( BC     == NULL ) error(E_NULL, "assemblage2D_vector_fromBC");
    if ( RHS    == NULL ) error(E_NULL, "assemblage2D_vector_fromBC");
-   
+
    axe = BC->BC_neumann->current_selected_axe;
    /* conditions aux limites de Neumann */
    if ( Bc2D_hasNeumannBC(BC, axe) )
    {
       apply_Bc2D_neumann_on_rhs  (axe, elt, geom, BC, RHS);
    }
-   
+
    axe = BC->BC_robin->current_selected_axe;
    /* conditions aux limites de Robin */
    if ( Bc2D_hasRobinBC(BC, axe) )
    {
       apply_Bc2D_robin_on_rhs  (axe, elt, geom, BC, RHS);
    }
-   
+
    return RHS;
 }
 
@@ -1632,12 +1632,12 @@ static VEC* _systel_vector_fun( u_int  e , const ELT_2D *elt , const GEOM_2D *ge
 {
    int  m,k;
    Real xx[NBPTS_GAUSS_2D_TRI], yy[NBPTS_GAUSS_2D_TRI];
-   
+
    Real x1,x2,x3 ;
    Real y1,y2,y3 ;
-   
+
    Real jacobien ;
-   
+
    MAT*  XYSOMM = geom->XYSOMM; /* alias */
    IMAT* NSELMT = geom->NSELMT; /* alias */
 
@@ -1647,7 +1647,7 @@ static VEC* _systel_vector_fun( u_int  e , const ELT_2D *elt , const GEOM_2D *ge
 
    /* initialisation Rhs_el */
    v_zero(Rhs_el);
-   
+
    /* calcul jacobien */
    x1 = XYSOMM->me[ NSELMT->im[e][0] ][0] ;
    x2 = XYSOMM->me[ NSELMT->im[e][1] ][0] ;
@@ -1656,9 +1656,9 @@ static VEC* _systel_vector_fun( u_int  e , const ELT_2D *elt , const GEOM_2D *ge
    y1 = XYSOMM->me[ NSELMT->im[e][0] ][1] ;
    y2 = XYSOMM->me[ NSELMT->im[e][1] ][1] ;
    y3 = XYSOMM->me[ NSELMT->im[e][2] ][1] ;
-   
+
    jacobien = (y3-y1)*(x2-x1) - (x3-x1)*(y2-y1) ;
-   
+
 
    for (k=0; k<elt->nb_somm_cell; k++)
    {
@@ -1692,12 +1692,12 @@ static VEC* _systel_vector_fun_o( u_int  e , const ELT_2D *elt , const GEOM_2D *
 {
    int  m,k;
    Real xx[NBPTS_GAUSS_2D_TRI], yy[NBPTS_GAUSS_2D_TRI];
-   
+
    Real x1,x2,x3 ;
    Real y1,y2,y3 ;
-   
+
    Real jacobien ;
-   
+
    MAT*  XYSOMM = geom->XYSOMM; /* alias */
    IMAT* NSELMT = geom->NSELMT; /* alias */
 
@@ -1707,7 +1707,7 @@ static VEC* _systel_vector_fun_o( u_int  e , const ELT_2D *elt , const GEOM_2D *
 
    /* initialisation Rhs_el */
    v_zero(Rhs_el);
-   
+
    /* calcul jacobien */
    x1 = XYSOMM->me[ NSELMT->im[e][0] ][0] ;
    x2 = XYSOMM->me[ NSELMT->im[e][1] ][0] ;
@@ -1716,9 +1716,9 @@ static VEC* _systel_vector_fun_o( u_int  e , const ELT_2D *elt , const GEOM_2D *
    y1 = XYSOMM->me[ NSELMT->im[e][0] ][1] ;
    y2 = XYSOMM->me[ NSELMT->im[e][1] ][1] ;
    y3 = XYSOMM->me[ NSELMT->im[e][2] ][1] ;
-   
+
    jacobien = (y3-y1)*(x2-x1) - (x3-x1)*(y2-y1) ;
-   
+
 
    for (k=0; k<elt->nb_somm_cell; k++)
    {
@@ -1743,7 +1743,7 @@ static VEC* _systel_vector_fun_o( u_int  e , const ELT_2D *elt , const GEOM_2D *
    */
 
    return Rhs_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -1777,11 +1777,11 @@ VEC* assemblage2D_vector_abx( const ELT_2D *elt , const GEOM_2D *geom , const VE
    v_zero(RHS);
 
    for(e=0; e<geom->NBELMT; e++)
-   { 
+   {
       RHS_el = _systel_vector_abx( e , elt , geom , a , b , RHS_el );
 
       for (i=0; i<elt->nb_somm_cell; i++)
-      { 
+      {
          RHS->ve[geom->NSELMT->im[e][i]] += RHS_el->ve[i] ;
       }
    }
@@ -1863,7 +1863,7 @@ static VEC* _systel_vector_abx( u_int  e , const ELT_2D *elt , const GEOM_2D *ge
    TS_FREE(TENSOR_el);
 
    return Rhs_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -1925,11 +1925,11 @@ VEC* assemblage2D_vector_ab( const ELT_2D *elt , const GEOM_2D *geom , const VEC
    v_zero(RHS);
 
    for(e=0; e<geom->NBELMT; e++)
-   { 
+   {
       RHS_el = _systel_vector_ab( e , elt , geom , a , b , RHS_el );
 
       for (i=0; i<elt->nb_somm_cell; i++)
-      { 
+      {
          RHS->ve[geom->NSELMT->im[e][i]] += RHS_el->ve[i] ;
       }
    }
@@ -1984,7 +1984,7 @@ SPMAT *assemblage2D_matrix_Conv_x_elt2elt1( const ELT_2D *elt2 , const GEOM_2D *
 {
    int e;
    int i,j;
-   
+
    MAT *Bx_el;
 
    /* check */
@@ -2001,39 +2001,39 @@ SPMAT *assemblage2D_matrix_Conv_x_elt2elt1( const ELT_2D *elt2 , const GEOM_2D *
 
    /* initialisation of Bx   */
    sp_zero(Bx);
-   
+
    for(e=0; e<geom1->NBELMT; e++)
-   { 
+   {
       /* printf("triangle num %d \n",e); */
       Bx_el = _systel_matrix_Conv_x_elt2elt1( e , elt2 , geom2 , elt1 , geom1 , Bx_el );
-      
+
       for (i=0; i<elt1->nb_somm_cell; i++)
       for (j=0; j<elt2->nb_somm_cell; j++)
-      { 
+      {
          /*
          printf("(i,j)_el = (%d,%d) \n",i,j);
          printf("(i,j)    = (%d,%d) \n",geom->geomBase->NSELMT->im[e][i],geom->NSELMT->im[e][j]);
          */
-            
+
          sp_add_val( Bx   , geom1->NSELMT->im[e][i] , geom2->NSELMT->im[e][j] ,
                      Bx_el->me[i][j] );
       }
    }
-   
+
    M_FREE(Bx_el) ;
-   
+
    return sp_compact(Bx,MACHEPS);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-SPMAT *assemblage2D_matrix_Conv_y_elt2elt1( const ELT_2D *elt2 , const GEOM_2D *geom2 , 
+SPMAT *assemblage2D_matrix_Conv_y_elt2elt1( const ELT_2D *elt2 , const GEOM_2D *geom2 ,
                                             const ELT_2D *elt1 , const GEOM_2D *geom1 , SPMAT *By )
 {
    int e;
    int i,j;
-   
+
    MAT *By_el;
 
    /* check */
@@ -2047,41 +2047,41 @@ SPMAT *assemblage2D_matrix_Conv_y_elt2elt1( const ELT_2D *elt2 , const GEOM_2D *
 
    /* alloc mem */
    By_el = m_get(elt1->nb_somm_cell, elt2->nb_somm_cell);
-   
+
    /* initialisation of By   */
    sp_zero(By);
-   
+
    for(e=0; e<geom1->NBELMT; e++)
-   { 
+   {
       By_el = _systel_matrix_Conv_y_elt2elt1( e , elt2 , geom2 , elt1 , geom1 , By_el );
-      
+
       for (i=0; i<elt1->nb_somm_cell; i++)
       for (j=0; j<elt2->nb_somm_cell; j++)
-      { 
+      {
          sp_add_val( By   , geom1->NSELMT->im[e][i] , geom2->NSELMT->im[e][j] ,
                      By_el->me[i][j] );
       }
    }
-   
+
    M_FREE(By_el) ;
-   
+
    return sp_compact(By,MACHEPS);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static MAT * _systel_matrix_Conv_x_elt2elt1( u_int e , const ELT_2D *elt2 , const GEOM_2D *geom2 , 
+static MAT * _systel_matrix_Conv_x_elt2elt1( u_int e , const ELT_2D *elt2 , const GEOM_2D *geom2 ,
                                                        const ELT_2D *elt1 , const GEOM_2D *geom1 , MAT *Bx_el )
 {
    Real jacobien ;
 
    Real transformation[2][2];
    Real ksi_x, eta_x;
-   
+
    MAT* work_el = m_get(elt1->nb_somm_cell,elt2->nb_somm_cell);
-   
-   
+
+
    /* calcul jacobien on elt "e" */
    jacobien = eval_jac_on_e_ ( e, elt1, geom1, transformation) ;
 
@@ -2098,14 +2098,14 @@ static MAT * _systel_matrix_Conv_x_elt2elt1( u_int e , const ELT_2D *elt2 , cons
 
    /* with numerical integration  with the basis functions */
    /*
-   for (i=0; i<elt1->nb_somm_cell; i++) 
+   for (i=0; i<elt1->nb_somm_cell; i++)
    for (j=0; j<elt2->nb_somm_cell; j++)
    {
       for (m=0; m<NBPTS_GAUSS_2D_TRI; m++)
       {
          Bx_el->me[i][j]  -= w2D[m]*jacobien*
                            elt1-> f_base[i](ksi2D[m],eta2D[m])* (
-                              ksi_x*elt2->dfdx_base[j](ksi2D[m],eta2D[m]) + 
+                              ksi_x*elt2->dfdx_base[j](ksi2D[m],eta2D[m]) +
                               eta_x*elt2->dfdy_base[j](ksi2D[m],eta2D[m]) );
       }
    }
@@ -2123,32 +2123,32 @@ static MAT * _systel_matrix_Conv_x_elt2elt1( u_int e , const ELT_2D *elt2 , cons
 
    exit(0);
    */
-   
+
    M_FREE(work_el);
-   
+
    return Bx_el;
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static MAT * _systel_matrix_Conv_y_elt2elt1( u_int e , const ELT_2D *elt2 , const GEOM_2D *geom2 , 
+static MAT * _systel_matrix_Conv_y_elt2elt1( u_int e , const ELT_2D *elt2 , const GEOM_2D *geom2 ,
                                                        const ELT_2D *elt1 , const GEOM_2D *geom1 , MAT *By_el )
 {
    Real jacobien ;
-   
+
    Real transformation[2][2];
    Real ksi_y, eta_y ;
-   
+
    MAT* work_el = m_get(elt1->nb_somm_cell,elt2->nb_somm_cell);
-   
+
    /* calcul jacobien on elt "e" */
    jacobien = eval_jac_on_e_ ( e, elt1, geom1, transformation );
 
    /* get the transformation parameters */
    ksi_y =  transformation[1][0];/*-(x3-x1)*un_sur_jacobien*/ ;
    eta_y =  transformation[1][1];/* (x2-x1)*un_sur_jacobien*/ ;
-   
+
    /* init By_el */
    m_zero(By_el);
 
@@ -2158,7 +2158,7 @@ static MAT * _systel_matrix_Conv_y_elt2elt1( u_int e , const ELT_2D *elt2 , cons
 
    /* with numerical integration  with the basis functions */
    /*
-   for (i=0; i<elt1->nb_somm_cell; i++) 
+   for (i=0; i<elt1->nb_somm_cell; i++)
    for (j=0; j<elt2->nb_somm_cell; j++)
    {
       for (m=0; m<NBPTS_GAUSS_2D_TRI; m++)
@@ -2183,9 +2183,9 @@ static MAT * _systel_matrix_Conv_y_elt2elt1( u_int e , const ELT_2D *elt2 , cons
 
    exit(0);
    */
-   
+
    M_FREE(work_el);
-   
+
    return By_el;
 }
 
@@ -2257,7 +2257,7 @@ static Real eval_jac_on_e  ( int e , const ELT_2D *element , const GEOM_2D *geom
 
    eta_x = -(y2-y1)/jacobien        eta_y =  (x2-x1)/jacobien
    */
-   
+
    Real x1,x2,x3 ;
    Real y1,y2,y3 ;
 
@@ -2280,7 +2280,7 @@ static Real eval_jac_on_e  ( int e , const ELT_2D *element , const GEOM_2D *geom
 #ifdef _DEBUG
    assert( jacobien > 0.0 );
 #endif
-   
+
    return jacobien;
 }
 
@@ -2304,7 +2304,7 @@ static Real eval_jac_on_e_ ( int e , const ELT_2D *element , const GEOM_2D *geom
    Real ksi_x, eta_x;
    Real ksi_y, eta_y;
    */
-   
+
    MAT*  XYSOMM = geom->XYSOMM; /* alias */
    IMAT* NSELMT = geom->NSELMT; /* alias */
 
@@ -2347,13 +2347,13 @@ static void apply_Bc2D_cauchy_on_mat   (int axe, const ELT_2D *elt, const GEOM_2
 {
    int a;
    int k1,k2;
-   
+
    IVEC *REF_A  = geom->REF_A;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    Real face_center[2],jac,BCval;
    MAT *MAT_ar = m_get(elt->nb_somm_face,elt->nb_somm_face); /* integration sur les faces pour cl de Cauchy */
-   
+
    /* ----- Transformation de la matrice -------------------------------- */
    for( a=0 ; a<geom->NBFACE ; a++ )
    {
@@ -2361,9 +2361,9 @@ static void apply_Bc2D_cauchy_on_mat   (int axe, const ELT_2D *elt, const GEOM_2
       {
          jac   = eval_jac_on_face  ( a , elt , geom , face_center); /* Jacobien de la transformation entre l'arete et [0:1] */
          BCval = Bc2D_evalFunction1(BC, BC_2De_CAUCHY, REF_A->ive[a], axe, face_center[0],face_center[1]);
-         
+
          sm_mlt(BCval * jac , elt->eltDM1->MAT_I_I, MAT_ar);
-         
+
          for (k1=0; k1<elt->nb_somm_face; k1++)
          for (k2=0; k2<elt->nb_somm_face; k2++)
          {
@@ -2372,7 +2372,7 @@ static void apply_Bc2D_cauchy_on_mat   (int axe, const ELT_2D *elt, const GEOM_2
          }
       }
    }
-   
+
    M_FREE(MAT_ar);
 }
 
@@ -2384,13 +2384,13 @@ static void apply_Bc2D_robin_on_mat    (int axe, const ELT_2D *elt, const GEOM_2
 {
    int a;
    int k1,k2;
-   
+
    IVEC *REF_A  = geom->REF_A;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    Real face_center[2],jac,BCval;
    MAT *MAT_ar = m_get(elt->nb_somm_face,elt->nb_somm_face); /* integration sur les faces pour cl de Robin */
-   
+
    /* ----- Transformation de la matrice -------------------------------- */
    for( a=0 ; a<geom->NBFACE ; a++ )
    {
@@ -2398,9 +2398,9 @@ static void apply_Bc2D_robin_on_mat    (int axe, const ELT_2D *elt, const GEOM_2
       {
          jac   = eval_jac_on_face  ( a , elt , geom , face_center); /* Jacobien de la transformation entre l'arete et [0:1] */
          BCval = Bc2D_evalFunction1(BC, BC_2De_ROBIN, REF_A->ive[a], axe, face_center[0],face_center[1]);
-         
+
          sm_mlt(BCval * jac , elt->eltDM1->MAT_I_I, MAT_ar);
-         
+
          for (k1=0; k1<elt->nb_somm_face; k1++)
          for (k2=0; k2<elt->nb_somm_face; k2++)
          {
@@ -2409,7 +2409,7 @@ static void apply_Bc2D_robin_on_mat    (int axe, const ELT_2D *elt, const GEOM_2
          }
       }
    }
-   
+
    M_FREE(MAT_ar);
 }
 
@@ -2421,29 +2421,29 @@ static void apply_Bc2D_neumann_on_rhs  (int axe, const ELT_2D *elt , const GEOM_
    int i,a;
    Real face_center[2],jac, BCval;
    VEC *SCM_ar = v_get(elt->nb_somm_face); /* integration sur les aretes pour cl de Neumann */
-   
+
    IVEC *REF_A  = geom->REF_A;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    /* process */
    for( a=0 ; a<geom->NBFACE ; a++ )
    {
       if ( (REF_A->ive[a] > 0) && (BC_2De_NEUMANN==Bc2D_getBcType(BC,axe,REF_A->ive[a])) )
       {
          jac   = eval_jac_on_face  ( a , elt , geom , face_center); /* Jacobien de la transformation entre l'arete et [0:1] */
-         
+
          BCval = Bc2D_evalFunction1(BC, BC_2De_NEUMANN, REF_A->ive[a], axe, face_center[0],face_center[1]);
-         
-         
+
+
          sv_mlt(  BCval * jac , elt->eltDM1->VEC_I, SCM_ar);
-         
+
          for(i=0; i<elt->nb_somm_face; i++)
          {
             RHS->ve[ NSFACE->im[a][i] ] += SCM_ar->ve[i] ;
          }
       }
    }
-   
+
    V_FREE(SCM_ar);
 }
 
@@ -2455,10 +2455,10 @@ static void apply_Bc2D_robin_on_rhs    (int axe, const ELT_2D *elt , const GEOM_
    int i,a;
    Real face_center[2],jac, BCval;
    VEC *SCM_ar = v_get(elt->nb_somm_face); /* integration sur les aretes pour cl de Robin */
-   
+
    IVEC *REF_A  = geom->REF_A;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    /* process */
    for( a=0 ; a<geom->NBFACE ; a++ )
    {
@@ -2466,16 +2466,16 @@ static void apply_Bc2D_robin_on_rhs    (int axe, const ELT_2D *elt , const GEOM_
       {
          jac   = eval_jac_on_face  ( a , elt , geom , face_center); /* Jacobien de la transformation entre l'arete et [0:1] */
          BCval = Bc2D_evalFunction2(BC, BC_2De_ROBIN, REF_A->ive[a], axe, face_center[0],face_center[1]);
-         
+
          sv_mlt(  BCval * jac , elt->eltDM1->VEC_I, SCM_ar);
-         
+
          for(i=0; i<elt->nb_somm_face; i++)
          {
             RHS->ve[ NSFACE->im[a][i] ] += SCM_ar->ve[i] ;
          }
       }
    }
-   
+
    V_FREE(SCM_ar);
 }
 
@@ -2489,25 +2489,25 @@ static Real eval_jac_on_face  ( int f , const ELT_2D *element , const GEOM_2D *g
     Egde (AB in R2 <-> Base edge in R1
     */
    Real jacobien ;
-   
+
    MAT  *XYSOMM = geom->XYSOMM;
    IMAT *NSELMT = geom->NSELMT;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    /* calcul jacobien */
    int D = element->nb_somm_face -1;  /* nombre de sommet de l'arete -1 */
-   
+
    x1 = XYSOMM->me[NSFACE->im[f][0]][0];   /* car NSFACE commemce a ZERO */
    y1 = XYSOMM->me[NSFACE->im[f][0]][1];
-   
+
    x2 = XYSOMM->me[NSFACE->im[f][D]][0];
    y2 = XYSOMM->me[NSFACE->im[f][D]][1];
-   
+
    face_center[0] = (x1+x2)/2.0;
    face_center[1] = (y1+y2)/2.0;
-   
+
    jacobien = sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) ); /* Jacobien de la transformation entre l'arete et [0:1] */
-   
+
    return jacobien;
 }
 

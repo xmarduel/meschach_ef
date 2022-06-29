@@ -24,12 +24,12 @@ static void elt3D_get_P3 (ELT_3D *elt);
 ELT_3D *elt3D_get(const char *type)
 {
    ELT_3D *elt;
-   
+
    int    i,j;
 
    /*---------------------------------------------------------------------------------------------*/
    /*---------------------------------------------------------------------------------------------*/
-   
+
    if ( (elt=NEW(ELT_3D)) == (ELT_3D *)NULL )
    {
       error(E_MEM, "ELT_3D_get");
@@ -39,17 +39,17 @@ ELT_3D *elt3D_get(const char *type)
       mem_bytes_list(TYPE_ELT_3D, 0, sizeof(ELT_3D), MY_LIST2);
       mem_numvar_list(TYPE_ELT_3D, 1, MY_LIST2);
    }
-   
+
    /* initialize also now the eltDM1 */
    elt->eltDM1 = elt2D_get(type);
-   
+
    /* and initialize our fe */
    elt->dim     = 3;
    elt->name_ef = strdup(type) ;
-   
+
    /*---------------------------------------------------------------------------------------------*/
    /*---------------------------------------------------------------------------------------------*/
-   
+
    if (strcmp(elt->name_ef,"P1") == 0)
    {
       elt3D_get_P1(elt);
@@ -76,12 +76,12 @@ ELT_3D *elt3D_get(const char *type)
 
    /*---------------------------------------------------------------------------------------------*/
    /*---------------------------------------------------------------------------------------------*/
-   
+
    /* set frequently used matrices */
    elt->MAT_x_y__plus__y_x = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
    elt->MAT_x_z__plus__z_x = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
    elt->MAT_y_z__plus__z_y = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
    {
@@ -93,15 +93,15 @@ ELT_3D *elt3D_get(const char *type)
 
    /* finally the datas on the faces */
    elt->nb_somm_face = elt->eltDM1->nb_somm_cell ;
-   
+
    /* elt->f_face  pointe vers (elt->nb_somm_face) fonctions de bases */
    elt->f_face       = (Real (**)(Real,Real))calloc(elt->nb_somm_face,sizeof(Real (*)(Real,Real)) );
-   
+
    for (i=0; i<elt->nb_somm_face; i++)
    {
       elt->f_face[i] = elt->eltDM1->f_base[i];
    }
-   
+
    return (elt);
 }
 
@@ -113,7 +113,7 @@ static void elt3D_get_P1 (ELT_3D *elt)
    /* Declaration de toutes les matrices pour l' element P1 ... */
    #include "MESCHACH_EF/INCLUDES/ef3D_P1_mtx.h"
    /* Declaration de toutes les matrices pour l' element P1 ... */
-   
+
    int    i,j,k;
 
    elt-> nb_somm_cell = 4 ;
@@ -235,7 +235,7 @@ static void elt3D_get_P1b(ELT_3D *elt)
    /* Declaration de toutes les matrices pour l' element P1b ... */
    #include "MESCHACH_EF/INCLUDES/ef3D_P1b_mtx.h"
    /* Declaration de toutes les matrices pour l' element P1b ... */
-   
+
    int    i,j,k;
 
    elt-> nb_somm_cell = 5 ;
@@ -345,7 +345,7 @@ static void elt3D_get_P1b(ELT_3D *elt)
       elt->TENSOR_I_x_I->te[i][j][k] = TENSOR_ConvX_P1b[i][j][k];
       elt->TENSOR_I_y_I->te[i][j][k] = TENSOR_ConvY_P1b[i][j][k];
       elt->TENSOR_I_z_I->te[i][j][k] = TENSOR_ConvZ_P1b[i][j][k];
-      
+
       elt->TENSOR_x_I_I->te[i][j][k] = TENSOR_ConvX_P1b[j][i][k];
       elt->TENSOR_y_I_I->te[i][j][k] = TENSOR_ConvY_P1b[j][i][k];
       elt->TENSOR_z_I_I->te[i][j][k] = TENSOR_ConvZ_P1b[j][i][k];
@@ -360,7 +360,7 @@ static void elt3D_get_P2 (ELT_3D *elt)
    /* Declaration de toutes les matrices pour l' element P2 ... */
    #include "MESCHACH_EF/INCLUDES/ef3D_P2_mtx.h"
    /* Declaration de toutes les matrices pour l' element P2 ... */
-   
+
    int    i,j,k;
 
    elt-> nb_somm_cell = 10 ;
@@ -600,7 +600,7 @@ static void elt3D_get_P3 (ELT_3D *elt)
    elt->dfdz_base[17] = DFDZ17_3D_P3 ;
    elt->dfdz_base[18] = DFDZ18_3D_P3 ;
    elt->dfdz_base[19] = DFDZ19_3D_P3 ;
- 
+
 
    elt->VEC_Scmbr = v_get(20);
    for (i=0; i<20; i++)
@@ -702,11 +702,11 @@ int elt3D_free(ELT_3D *elt)
       }
 
       free(elt->name_ef);
-      
+
       V_FREE(elt->VEC_Scmbr);
 
       M_FREE(elt->MAT_I_I);
-      
+
       M_FREE(elt->MAT_x_x);
       M_FREE(elt->MAT_x_y);
       M_FREE(elt->MAT_x_z);
@@ -720,11 +720,11 @@ int elt3D_free(ELT_3D *elt)
       M_FREE(elt->MAT_x_y__plus__y_x);
       M_FREE(elt->MAT_x_z__plus__z_x);
       M_FREE(elt->MAT_y_z__plus__z_y);
-      
+
       M_FREE(elt->MAT_I_x);
       M_FREE(elt->MAT_I_y);
       M_FREE(elt->MAT_I_z);
-      
+
       M_FREE(elt->MAT_I_x_PM1dP);
       M_FREE(elt->MAT_I_y_PM1dP);
       M_FREE(elt->MAT_I_z_PM1dP);
@@ -736,23 +736,23 @@ int elt3D_free(ELT_3D *elt)
       TS_FREE(elt->TENSOR_x_I_I);
       TS_FREE(elt->TENSOR_y_I_I);
       TS_FREE(elt->TENSOR_z_I_I);
-            
+
       ELT_2D_FREE(elt->eltDM1);
 
       free(elt->f_base);
       free(elt->dfdx_base);
       free(elt->dfdy_base);
       free(elt->dfdz_base);
-      
+
       free(elt->f_face);
-      
+
       /* free the space of the element */
       free(elt);
-      
-      /* finito */      
+
+      /* finito */
       return EXIT_SUCCESS;
    }
-   
+
 }
 
 /* ------------------------------------------------------------------------------------------------------ */
@@ -761,14 +761,14 @@ int elt3D_free(ELT_3D *elt)
 /*  Fonctions de base ** 3D ** ---------------------- */
 
 
-Real F0_3D_P0(Real x , Real y , Real z)   /* -- Element P0 --- */ 
+Real F0_3D_P0(Real x , Real y , Real z)   /* -- Element P0 --- */
 {
    Real val;
    return val = 1.0;
 }
 
 
-Real F0_3D_P1(Real x , Real y , Real z)   /* -- Element P1 --- */ 
+Real F0_3D_P1(Real x , Real y , Real z)   /* -- Element P1 --- */
 {
    Real val = 1.0 - x - y - z;
    return val;
@@ -790,7 +790,7 @@ Real F3_3D_P1(Real x , Real y , Real z)
 }
 
 
-Real F0_3D_P2(Real x , Real y , Real z)   /* -- Element P2 --- */ 
+Real F0_3D_P2(Real x , Real y , Real z)   /* -- Element P2 --- */
 {
    Real val;
    return val =  1.0 - 3.0*(x + y + z) + 4.0*(x*y + x*z + y*z) + 2.0*(x*x + y*y + z*z);
@@ -842,7 +842,7 @@ Real F9_3D_P2(Real x , Real y , Real z)
 }
 
 
-Real F0_3D_P1b(Real x , Real y , Real z)   /* -- Element P1b -bubble function- -- */ 
+Real F0_3D_P1b(Real x , Real y , Real z)   /* -- Element P1b -bubble function- -- */
 {
    Real val;
    return val = F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z);
@@ -970,7 +970,7 @@ Real DFDX9_3D_P2(Real x , Real y , Real z)
 }
 
 
-Real DFDY0_3D_P2(Real x , Real y , Real z)   /* -- Element P2 --- */ 
+Real DFDY0_3D_P2(Real x , Real y , Real z)   /* -- Element P2 --- */
 {
    Real val;
    return val = 4.0*(x + y + z) - 3.0 ;
@@ -1075,30 +1075,30 @@ Real DFDZ9_3D_P2(Real x , Real y , Real z)
 }
 
 
-Real DFDX0_3D_P1b(Real x , Real y , Real z)   /* -- Element P1b -bubble function- -- */ 
+Real DFDX0_3D_P1b(Real x , Real y , Real z)   /* -- Element P1b -bubble function- -- */
 {
    Real val;
-   return val = DFDX0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) + 
-                DFDX1_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) + 
-                DFDX2_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F3_3D_P1(x,y,z) + 
+   return val = DFDX0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) +
+                DFDX1_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) +
+                DFDX2_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F3_3D_P1(x,y,z) +
                 DFDX3_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z) ;
 }
-Real DFDY0_3D_P1b(Real x , Real y , Real z)   /* -- Element P1b -bubble function- -- */ 
+Real DFDY0_3D_P1b(Real x , Real y , Real z)   /* -- Element P1b -bubble function- -- */
 {
    Real val;
-   return val = DFDY0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) + 
-                DFDY1_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) + 
-                DFDY2_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F3_3D_P1(x,y,z) + 
+   return val = DFDY0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) +
+                DFDY1_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) +
+                DFDY2_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F3_3D_P1(x,y,z) +
                 DFDY3_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z) ;
 }
-Real DFDZ0_3D_P1b(Real x , Real y , Real z)   /* -- Element P1b -bubble function- -- */ 
+Real DFDZ0_3D_P1b(Real x , Real y , Real z)   /* -- Element P1b -bubble function- -- */
 {
    Real val;
-   return val = DFDZ0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) + 
-                DFDZ1_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) + 
-                DFDZ2_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F3_3D_P1(x,y,z) + 
+   return val = DFDZ0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) +
+                DFDZ1_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F2_3D_P1(x,y,z)*F3_3D_P1(x,y,z) +
+                DFDZ2_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F3_3D_P1(x,y,z) +
                 DFDZ3_3D_P1(x,y,z)*F0_3D_P1(x,y,z)*F1_3D_P1(x,y,z)*F2_3D_P1(x,y,z) ;
-}  
+}
 
 /* ------------------------------------------------------- */
 

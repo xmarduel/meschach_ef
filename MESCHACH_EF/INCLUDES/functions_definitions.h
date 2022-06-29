@@ -15,7 +15,7 @@ extern "C"
 #include "MESCHACH/INCLUDES/machine.h"
 
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
-	
+
 /*---------------------------------------------------------------------- */
 /*---------------------------------------------------------------------- */
 
@@ -45,7 +45,7 @@ Real Src1D_06( Real x );
 Real Src1D_07( Real x );
 Real Src1D_08( Real x );
 Real Src1D_09( Real x );
-	
+
 Real Sol1D_00( Real x );
 Real Sol1D_01( Real x );
 Real Sol1D_02( Real x );
@@ -83,7 +83,7 @@ Real Src2D_06( Real x , Real y );
 Real Src2D_07( Real x , Real y );
 Real Src2D_08( Real x , Real y );
 Real Src2D_09( Real x , Real y );
-	
+
 Real Sol2D_00( Real x , Real y );
 Real Sol2D_01( Real x , Real y );
 Real Sol2D_02( Real x , Real y );
@@ -121,7 +121,7 @@ Real Src3D_06( Real x , Real y , Real z );
 Real Src3D_07( Real x , Real y , Real z );
 Real Src3D_08( Real x , Real y , Real z );
 Real Src3D_09( Real x , Real y , Real z );
-	
+
 Real Sol3D_00( Real x , Real y , Real z );
 Real Sol3D_01( Real x , Real y , Real z );
 Real Sol3D_02( Real x , Real y , Real z );
@@ -159,7 +159,7 @@ Real Src1D_06_Transient( Real x , Real t );
 Real Src1D_07_Transient( Real x , Real t );
 Real Src1D_08_Transient( Real x , Real t );
 Real Src1D_09_Transient( Real x , Real t );
-	
+
 Real Sol1D_00_Transient( Real x , Real t );
 Real Sol1D_01_Transient( Real x , Real t );
 Real Sol1D_02_Transient( Real x , Real t );
@@ -197,7 +197,7 @@ Real Src2D_06_Transient( Real x , Real y , Real t );
 Real Src2D_07_Transient( Real x , Real y , Real t );
 Real Src2D_08_Transient( Real x , Real y , Real t );
 Real Src2D_09_Transient( Real x , Real y , Real t );
-	
+
 Real Sol2D_00_Transient( Real x , Real y , Real t );
 Real Sol2D_01_Transient( Real x , Real y , Real t );
 Real Sol2D_02_Transient( Real x , Real y , Real t );
@@ -246,10 +246,10 @@ Real Sol3D_06_Transient( Real x , Real y , Real z , Real t );
 Real Sol3D_07_Transient( Real x , Real y , Real z , Real t );
 Real Sol3D_08_Transient( Real x , Real y , Real z , Real t );
 Real Sol3D_09_Transient( Real x , Real y , Real z , Real t );
-	
 
 
-static FUNC_1D_NAMEMAP BC_FUNC_1D_NAMEMAP[] = 
+
+static FUNC_1D_NAMEMAP BC_FUNC_1D_NAMEMAP[] =
 {
 	{ "Phi1D_00" , Phi1D_00 },
    { "Phi1D_01" , Phi1D_01 },
@@ -263,8 +263,8 @@ static FUNC_1D_NAMEMAP BC_FUNC_1D_NAMEMAP[] =
 	{ "Phi1D_09" , Phi1D_09 },
 	{ "NULL"     , NULL     },
 };
-   
-static FUNC_1D_NAMEMAP ADV_FUNC_1D_NAMEMAP[] = 
+
+static FUNC_1D_NAMEMAP ADV_FUNC_1D_NAMEMAP[] =
 {
 	{ "Phi1D_00" , Phi1D_00 },
 	{ "Phi1D_01" , Phi1D_01 },
@@ -278,8 +278,8 @@ static FUNC_1D_NAMEMAP ADV_FUNC_1D_NAMEMAP[] =
 	{ "Phi1D_09" , Phi1D_09 },
 	{ "NULL"     , NULL     },
 };
-	
-static	FUNC_1D_NAMEMAP RHS_FUNC_1D_NAMEMAP[] = 
+
+static	FUNC_1D_NAMEMAP RHS_FUNC_1D_NAMEMAP[] =
 {
 	{ "Src1D_00" , Src1D_00 },
 	{ "Src1D_01" , Src1D_01 },
@@ -293,8 +293,8 @@ static	FUNC_1D_NAMEMAP RHS_FUNC_1D_NAMEMAP[] =
 	{ "Src1D_09" , Src1D_09 },
 	{ "NULL"     , NULL     },
 };
-	
-static	FUNC_1D_NAMEMAP SOL_FUNC_1D_NAMEMAP[] = 
+
+static	FUNC_1D_NAMEMAP SOL_FUNC_1D_NAMEMAP[] =
 {
 	{ "Sol1D_00" , Sol1D_00 },
 	{ "Sol1D_01" , Sol1D_01 },
@@ -308,8 +308,8 @@ static	FUNC_1D_NAMEMAP SOL_FUNC_1D_NAMEMAP[] =
 	{ "Sol1D_09" , Sol1D_09 },
 	{ "NULL"     , NULL     },
 };
-	
-static	FUNC_2D_NAMEMAP BC_FUNC_2D_NAMEMAP[] = 
+
+static	FUNC_2D_NAMEMAP BC_FUNC_2D_NAMEMAP[] =
 {
 	{ "Phi2D_00" , Phi2D_00 },
 	{ "Phi2D_01" , Phi2D_01 },
@@ -323,8 +323,8 @@ static	FUNC_2D_NAMEMAP BC_FUNC_2D_NAMEMAP[] =
 	{ "Phi2D_09" , Phi2D_09 },
 	{ "NULL"     , NULL     },
 };
-   
-static	FUNC_2D_NAMEMAP ADV_FUNC_2D_NAMEMAP[] = 
+
+static	FUNC_2D_NAMEMAP ADV_FUNC_2D_NAMEMAP[] =
 {
 	{ "Phi2D_00" , Phi2D_00 },
 	{ "Phi2D_01" , Phi2D_01 },
@@ -338,8 +338,8 @@ static	FUNC_2D_NAMEMAP ADV_FUNC_2D_NAMEMAP[] =
 	{ "Phi2D_09" , Phi2D_09 },
 	{ "NULL"     , NULL     },
 };
-	
-static	FUNC_2D_NAMEMAP RHS_FUNC_2D_NAMEMAP[] = 
+
+static	FUNC_2D_NAMEMAP RHS_FUNC_2D_NAMEMAP[] =
 {
 	{ "Src2D_00" , Src2D_00 },
 	{ "Src2D_01" , Src2D_01 },
@@ -353,8 +353,8 @@ static	FUNC_2D_NAMEMAP RHS_FUNC_2D_NAMEMAP[] =
 	{ "Src2D_09" , Src2D_09 },
 	{ "NULL"     , NULL     },
 };
-	
-static	FUNC_2D_NAMEMAP SOL_FUNC_2D_NAMEMAP[] = 
+
+static	FUNC_2D_NAMEMAP SOL_FUNC_2D_NAMEMAP[] =
 {
 	{ "Sol2D_00" , Sol2D_00 },
 	{ "Sol2D_01" , Sol2D_01 },
@@ -368,8 +368,8 @@ static	FUNC_2D_NAMEMAP SOL_FUNC_2D_NAMEMAP[] =
 	{ "Sol2D_09" , Sol2D_09 },
 	{ "NULL"     , NULL     },
 };
-	
-static	FUNC_3D_NAMEMAP BC_FUNC_3D_NAMEMAP[] = 
+
+static	FUNC_3D_NAMEMAP BC_FUNC_3D_NAMEMAP[] =
 {
 	{ "Phi3D_00" , Phi3D_00 },
 	{ "Phi3D_01" , Phi3D_01 },
@@ -383,8 +383,8 @@ static	FUNC_3D_NAMEMAP BC_FUNC_3D_NAMEMAP[] =
 	{ "Phi3D_09" , Phi3D_09 },
 	{ "NULL"     , NULL     },
 };
-   
-static	FUNC_3D_NAMEMAP ADV_FUNC_3D_NAMEMAP[] = 
+
+static	FUNC_3D_NAMEMAP ADV_FUNC_3D_NAMEMAP[] =
 {
 	{ "Phi3D_00" , Phi3D_00 },
 	{ "Phi3D_01" , Phi3D_01 },
@@ -398,8 +398,8 @@ static	FUNC_3D_NAMEMAP ADV_FUNC_3D_NAMEMAP[] =
 	{ "Phi3D_09" , Phi3D_09 },
 	{ "NULL"     , NULL     },
 };
-	
-static	FUNC_3D_NAMEMAP RHS_FUNC_3D_NAMEMAP[] = 
+
+static	FUNC_3D_NAMEMAP RHS_FUNC_3D_NAMEMAP[] =
 {
 	{ "Src3D_00" , Src3D_00 },
 	{ "Src3D_01" , Src3D_01 },
@@ -413,8 +413,8 @@ static	FUNC_3D_NAMEMAP RHS_FUNC_3D_NAMEMAP[] =
 	{ "Src3D_09" , Src3D_09 },
 	{ "NULL"     , NULL     },
 };
-	
-static	FUNC_3D_NAMEMAP SOL_FUNC_3D_NAMEMAP[] = 
+
+static	FUNC_3D_NAMEMAP SOL_FUNC_3D_NAMEMAP[] =
 {
 	{ "Sol3D_00" , Sol3D_00 },
 	{ "Sol3D_01" , Sol3D_01 },

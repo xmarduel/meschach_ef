@@ -18,8 +18,8 @@ extern "C"
  *
  * b) for a 2-unknowns problem : ( actually not implemented )
  *
- *       - Uxx - Uyy - Uzz + Adv111.Ux + Adv112.Uy + Adv113.Uz + Adv121.Vx + Adv122.Vy + Adv123.Vz = f1(x,y,z)  
- *       - Vxx - Vyy - Vzz + Adv211.Ux + Adv212.Uy + Adv213.Uz + Adv221.Vx + Adv222.Vy + Adv223.Vz = f2(x,y,z)      
+ *       - Uxx - Uyy - Uzz + Adv111.Ux + Adv112.Uy + Adv113.Uz + Adv121.Vx + Adv122.Vy + Adv123.Vz = f1(x,y,z)
+ *       - Vxx - Vyy - Vzz + Adv211.Ux + Adv212.Uy + Adv213.Uz + Adv221.Vx + Adv222.Vy + Adv223.Vz = f2(x,y,z)
  *
  * b) for a 3-unknowns problem : ( actually not implemented )
  *
@@ -33,7 +33,7 @@ extern "C"
  *
  * a) for a 1-unknown problem :
  *
- *        Ut - Uxx - Uyy - Uzz + Adv11(x,y,z,t).Ux + Adv12(x,y,z,t).Uy + Adv13(x,y,z,t).Uy   = f1(x,y,z,t) 
+ *        Ut - Uxx - Uyy - Uzz + Adv11(x,y,z,t).Ux + Adv12(x,y,z,t).Uy + Adv13(x,y,z,t).Uy   = f1(x,y,z,t)
  *
  *
  *
@@ -105,7 +105,7 @@ extern "C"
 
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
-	
+
 #define  NBMAX_ADV_3D_FUNCTIONS   11
 
 /*---------------------------------------------------------------------- */
@@ -121,7 +121,7 @@ typedef struct {
    int  current_selected_axe1;                  /**< references the equation (Fun1, Fun2, Fun3) */
    int  current_selected_axe2;                  /**< references the first index of Fun_n[][]    */
    int  current_selected_axe3;                  /**< references the sec   index of Fun_n[][]    */
-      
+
 } ADV_3D ;
 
 
@@ -132,20 +132,20 @@ typedef struct {
 
 ADV_3D* Adv3D_get(void);
 ADV_3D* Adv3D_setup_from_params(const PARAMS *params);
-	
+
 int     Adv3D_free(ADV_3D  *MyAdv);
 
 ADV_3D* Adv3D_setFunction          ( ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUN_TYPE type, void* phi, void* clientdata);
 
 ADV_3D* Adv3D_setCFunction         ( ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_3D phi);
 ADV_3D* Adv3D_setCFunctionTransient( ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_4D phi);
-   
+
 ADV_3D* Adv3D_setLUAFunction         ( ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def);
 ADV_3D* Adv3D_setLUAFunctionTransient( ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def);
 
 ADV_3D* Adv3D_setCurrentSelectedAxe( ADV_3D* MyAdv, int axe1, int axe2, int axe3 );
 ADV_3D* Adv3D_setTps               ( ADV_3D* MyAdv, Real tps);
-    
+
 Real    Adv3D_evalFunction         ( const ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, Real x, Real y, Real z);
 
 #ifdef __cplusplus

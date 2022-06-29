@@ -44,12 +44,12 @@ static void graphics_matrix_pattern_outputfile( const SPMAT* A, const char *file
    file_data[63] = '\0';
 
    fp = fopen(file_data, "w");
-   
+
    for (i=0; i<A->m; i++)
    {
       r = A->row + i;
 
-      for (idx=0; idx<r->len; idx++ ) 
+      for (idx=0; idx<r->len; idx++ )
       {
          fprintf(fp, "%d  -%d\n", r->elt[idx].col, i);
       }
@@ -74,7 +74,7 @@ static void graphics_matrix_pattern_X11( const SPMAT* A, const char* file_name)
 
    /* write the gnuplot script to read and plot the file */
    graphics_matrix_pattern_outputfile( A, "graphxx" );
-   
+
    /* execute the command in the shell */
    system(command);
 
@@ -158,12 +158,12 @@ static void graphics_matrix_pattern_script_gnuplot   ( const SPMAT* A, const cha
 /*-----------------------------------------------------------------------------------------------------------*/
 
 static void graphics_matrix_pattern_gnuplot( const SPMAT* A, const char *file_name )
-{    
+{
    /* write the file of the solution */
-   graphics_matrix_pattern_outputfile( A, file_name );  
-   
+   graphics_matrix_pattern_outputfile( A, file_name );
+
    /* write the gnuplot script to read and plot the file */
-   graphics_matrix_pattern_script_gnuplot( A, file_name );      
+   graphics_matrix_pattern_script_gnuplot( A, file_name );
 
    /* finito */
    return;
@@ -177,8 +177,8 @@ void graphics_matrix_pattern (const char* format, const SPMAT* A, const char *na
    if ( format    == (char*)NULL     ) error(E_NULL, "graphics_matrix_pattern");
    if ( A         == (SPMAT*)NULL    ) error(E_NULL, "graphics_matrix_pattern");
    if ( name_file == (char*)NULL     ) error(E_NULL, "graphics_matrix_pattern");
-   
-   
+
+
    if ( strcmp("X11",format) == 0 )
    {
       graphics_matrix_pattern_X11(A, name_file);

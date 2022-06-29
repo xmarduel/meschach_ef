@@ -17,7 +17,7 @@
 #include "MESCHACH_ADDS/INCLUDES/matrix_adds.h"
 
 #include "MESCHACH_EF/INCLUDES/finite_elements.h"
-#include "MESCHACH_EF/INCLUDES/geometry.h" 
+#include "MESCHACH_EF/INCLUDES/geometry.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
 
 #include "MESCHACH_EF/INCLUDES/all_params_json_utils.h"
@@ -27,21 +27,21 @@ typedef struct {
    VEC *H1;
    VEC *H2;
    VEC *H3;
-   
+
    IMAT *POINTS_FACE_TOP_REFS;
    IMAT *POINTS_FACE_BOTTOM_REFS;
    IMAT *POINTS_FACE_FRONT_REFS;
    IMAT *POINTS_FACE_BACK_REFS;
    IMAT *POINTS_FACE_RIGHT_REFS;
    IMAT *POINTS_FACE_LEFT_REFS;
-   
+
    IMAT *FACES_FACE_TOP_REFS;    /* not yet in file */
    IMAT *FACES_FACE_BOTTOM_REFS; /* not yet in file */
    IMAT *FACES_FACE_FRONT_REFS;  /* not yet in file */
    IMAT *FACES_FACE_BACK_REFS;   /* not yet in file */
    IMAT *FACES_FACE_RIGHT_REFS;  /* not yet in file */
    IMAT *FACES_FACE_LEFT_REFS;   /* not yet in file */
-   
+
 } CUBE_MESH_DATA;       /* for the lecture of a "quad" mesh from the file <meshfile> */
 
 
@@ -71,7 +71,7 @@ typedef struct {
 typedef struct
 {
    Real x,y,z;
-   
+
 } point3D;
 
 #define REACH_EOL(fp) while( getc(fp) != '\n')
@@ -143,24 +143,24 @@ GEOM_3D *Geom3D_get(const ELT_3D *element, const char *meshfile, const char *mes
 
    if ( element   == NULL ) error(E_NULL, "Geom3D_get");
    if ( meshfile  == NULL ) error(E_NULL, "Geom3D_get");
-   
+
    GeomP1 = Geom3D_Base_get(meshfile, meshname, meshtype);
 
    if ( (strcmp(element->name_ef, "P1")==0 ) )
-   {               
-      Geom = GeomP1;    
+   {
+      Geom = GeomP1;
    }
    else
    if ( (strcmp(element->name_ef, "P1b")==0 ) )
-   {               
+   {
       GeomP1b = Geom3D_Parent_get_fromBase("P1b", GeomP1);
-      Geom    = GeomP1b;  
+      Geom    = GeomP1b;
    }
    else
    if ( (strcmp(element->name_ef, "P2")==0 ) )
-   {        
+   {
       GeomP2  = Geom3D_Parent_get_fromBase("P2", GeomP1);
-      Geom    = GeomP2;  
+      Geom    = GeomP2;
    }
    else
    {
@@ -168,14 +168,14 @@ GEOM_3D *Geom3D_get(const ELT_3D *element, const char *meshfile, const char *mes
    }
 
    return Geom;
-   
+
 }
 
 /*----------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
 
 int Geom3D_free(GEOM_3D *Geom)
-{  
+{
    if ( Geom == (GEOM_3D *)NULL )
    {
       return EXIT_FAILURE;
@@ -187,25 +187,25 @@ int Geom3D_free(GEOM_3D *Geom)
          mem_bytes_list(TYPE_GEOM_3D, sizeof(GEOM_3D), 0, MY_LIST3);
          mem_numvar_list(TYPE_GEOM_3D, -1, MY_LIST3);
       }
-      
+
       /* free the structure GEOM_3D */
-      
+
       IV_FREE(Geom->REF_S);
       IV_FREE(Geom->REF_T);
       IV_FREE(Geom->REF_A);
-      
+
       M_FREE(Geom->XYSOMM);
       IM_FREE(Geom->NSELMT);
       IM_FREE(Geom->NSFACE);
-      
+
       /* may be also Geom->Geom_P1 to free */
       if ( Geom->geomBase != (GEOM_3D *)NULL ) GEOM_3D_FREE(Geom->geomBase);
-      
+
       free(Geom);
-      
+
       return EXIT_SUCCESS;
    }
-   
+
 }
 
 /*----------------------------------------------------------------------------------------------------*/
@@ -214,22 +214,22 @@ int Geom3D_free(GEOM_3D *Geom)
 void Geom3D_foutput(FILE *fp, GEOM_3D *Geom)
 {
    if ( Geom == NULL ) error(E_NULL, "Geom3D_foutput");
-   
-   
+
+
    if ( (strcmp(Geom->type, "gmsh") == 0 )||
         (strcmp(Geom->type, "cube") == 0 )||
         (strcmp(Geom->type, "tetra") == 0 ) )
    {
       fprintf(fp, "TYPE OF MESH : %s \n" ,Geom->type);
-      
+
       fprintf(fp, "#NBSOMM = %d \n", Geom->NBSOMM);
       fprintf(fp, "#NBELMT = %d \n", Geom->NBELMT);
       fprintf(fp, "#NBFACE = %d \n", Geom->NBFACE);
-      
+
       fprintf(fp, "#REF_S : "); iv_foutput(fp, Geom->REF_S);
       fprintf(fp, "#REF_T : "); iv_foutput(fp, Geom->REF_T);
       fprintf(fp, "#REF_A : "); iv_foutput(fp, Geom->REF_A);
-      
+
       fprintf(fp, "#XYSOMM : ");  m_foutput(fp, Geom->XYSOMM);
       fprintf(fp, "#NSELMT : "); im_foutput(fp, Geom->NSELMT);
       fprintf(fp, "#NSFACE : "); im_foutput(fp, Geom->NSFACE);
@@ -242,7 +242,7 @@ void Geom3D_foutput(FILE *fp, GEOM_3D *Geom)
    {
       error3(E_GEOM_TYPENOTIMPL, "Geom3D_foutput");
    }
-   
+
    return;
 }
 
@@ -252,10 +252,10 @@ void Geom3D_foutput(FILE *fp, GEOM_3D *Geom)
 static GEOM_3D *Geom3D_Base_get(const char *meshfile, const char*meshname, const char *meshtype)
 {
    GEOM_3D *Geom;
-   
+
    if ( meshtype  == NULL ) error(E_NULL, "Geom3D_Parent_get");
    if ( meshfile  == NULL ) error(E_NULL, "Geom3D_Parent_get");
-   
+
 
    if ( strcmp(meshtype, "cube") == 0 )
    {
@@ -274,9 +274,9 @@ static GEOM_3D *Geom3D_Base_get(const char *meshfile, const char*meshname, const
    {
       error3(E_GEOM_TYPENOTIMPL, "Geom3D_Base_get");
    }
-   
+
    return Geom;
-   
+
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -305,33 +305,33 @@ static CUBE_MESH_DATA* Geom3D_cube_read_file(const char *meshfile, const char *m
    Params_get_absolute_path(meshfile_schema, schema_abs_path);
 
    int status = json_check_data(meshfile, schema_abs_path, validation_output);
-   
+
    printf("%s", validation_output);
-   
+
    if ( status != 0 )
    {
       error3(E_GEOM_MESHFILE_JSON_VALIDATION, "Geom3D_cube_read_file");
       fprintf(stderr, "%s", validation_output);
    }
-   
+
    json_t *meshes = json_load_xfile(meshfile);
    json_t *mesh   = json_object_get(meshes, meshname);
-   
+
    if ( mesh == NULL )
    {
       error3(E_GEOM_MESHFILE_JSON_MESH_NOT_FOUND, "Geom3D_cube_read_file");
    }
-   
+
    json_unpack(mesh, "{s:i, s:i, s:i}", "NX", &NX, "NY", &NY, "NZ", &NZ);
 
    cube_mesh_data->H1 = v_get(NX);
    cube_mesh_data->H2 = v_get(NY);
    cube_mesh_data->H3 = v_get(NZ);
-   
+
    json_t *x_segments = json_object_get(mesh, "X_AXIS_SEGMENTS");
    json_t *y_segments = json_object_get(mesh, "Y_AXIS_SEGMENTS");
    json_t *z_segments = json_object_get(mesh, "Z_AXIS_SEGMENTS");
-   
+
    if ( NX != json_array_size(x_segments) )
    {
       error3(E_GEOM_MESH3D_JSON_X_AXIS_SEGMENTS_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
@@ -344,31 +344,31 @@ static CUBE_MESH_DATA* Geom3D_cube_read_file(const char *meshfile, const char *m
    {
       error3(E_GEOM_MESH3D_JSON_Z_AXIS_SEGMENTS_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
    }
-   
-   for (i=0 ;i<NX ;i++) cube_mesh_data->H1->ve[i] = json_real_value(json_array_get(x_segments, i)); 
-   for (i=0 ;i<NY ;i++) cube_mesh_data->H2->ve[i] = json_real_value(json_array_get(y_segments, i)); 
-   for (i=0 ;i<NZ ;i++) cube_mesh_data->H3->ve[i] = json_real_value(json_array_get(z_segments, i)); 
 
-   
+   for (i=0 ;i<NX ;i++) cube_mesh_data->H1->ve[i] = json_real_value(json_array_get(x_segments, i));
+   for (i=0 ;i<NY ;i++) cube_mesh_data->H2->ve[i] = json_real_value(json_array_get(y_segments, i));
+   for (i=0 ;i<NZ ;i++) cube_mesh_data->H3->ve[i] = json_real_value(json_array_get(z_segments, i));
+
+
    cube_mesh_data->POINTS_FACE_TOP_REFS    = im_get(NX+1, NY+1);
    cube_mesh_data->POINTS_FACE_BOTTOM_REFS = im_get(NX+1, NY+1);
-   
+
    cube_mesh_data->POINTS_FACE_FRONT_REFS  = im_get(NX+1, NZ+1);
    cube_mesh_data->POINTS_FACE_BACK_REFS   = im_get(NX+1, NZ+1);
-   
+
    cube_mesh_data->POINTS_FACE_RIGHT_REFS  = im_get(NY+1, NZ+1);
    cube_mesh_data->POINTS_FACE_LEFT_REFS   = im_get(NY+1, NZ+1);
-   
+
    json_t *vertices_info = json_object_get(mesh, "VERTICES_INFOS");
    json_t *vertices_idx  = json_object_get(vertices_info, "VERTICES_IDX");
-   
+
    json_t *top_face    = json_object_get(vertices_idx, "TOP_FACE");
    json_t *bottom_face = json_object_get(vertices_idx, "BOTTOM_FACE");
    json_t *front_face  = json_object_get(vertices_idx, "FRONT_FACE");
    json_t *back_face   = json_object_get(vertices_idx, "BACK_FACE");
    json_t *right_face  = json_object_get(vertices_idx, "RIGHT_FACE");
    json_t *left_face   = json_object_get(vertices_idx, "LEFT_FACE");
-   
+
    if ( (NY+1) != json_array_size(top_face) )
    {
       error3(E_GEOM_MESH3D_JSON_TOP_FACE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
@@ -377,7 +377,7 @@ static CUBE_MESH_DATA* Geom3D_cube_read_file(const char *meshfile, const char *m
    {
       error3(E_GEOM_MESH3D_JSON_BOTTOM_FACE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
    }
-   
+
    if ( (NZ+1) != json_array_size(front_face) )
    {
       error3(E_GEOM_MESH3D_JSON_FRONT_FACE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
@@ -386,7 +386,7 @@ static CUBE_MESH_DATA* Geom3D_cube_read_file(const char *meshfile, const char *m
    {
       error3(E_GEOM_MESH3D_JSON_BACK_FACE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
    }
-   
+
    if ( (NZ+1) != json_array_size(right_face) )
    {
       error3(E_GEOM_MESH3D_JSON_RIGHT_FACE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
@@ -395,97 +395,97 @@ static CUBE_MESH_DATA* Geom3D_cube_read_file(const char *meshfile, const char *m
    {
       error3(E_GEOM_MESH3D_JSON_LEFT_FACE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
    }
-   
-   for (j=0 ;j<NY+1 ;j++) 
+
+   for (j=0 ;j<NY+1 ;j++)
    {
-      json_t *top_face_line    = json_array_get(top_face, j); 
-      
+      json_t *top_face_line    = json_array_get(top_face, j);
+
       if ( (NX+1) != json_array_size(top_face_line) )
       {
          error3(E_GEOM_MESH3D_JSON_TOP_FACE_LINE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
       }
-      
+
       for (i=0 ;i<NX+1 ;i++)
       {
          cube_mesh_data->POINTS_FACE_TOP_REFS->im[i][j] = json_integer_value(json_array_get(top_face_line, i));
       }
    }
-   
-   for (j=0 ;j<NY+1 ;j++) 
+
+   for (j=0 ;j<NY+1 ;j++)
    {
-      json_t *bottom_face_line    = json_array_get(bottom_face, j); 
-      
+      json_t *bottom_face_line    = json_array_get(bottom_face, j);
+
       if ( (NX+1) != json_array_size(bottom_face_line) )
       {
          error3(E_GEOM_MESH3D_JSON_BOTTOM_FACE_LINE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
       }
-      
+
       for (i=0 ;i<NX+1 ;i++)
       {
          cube_mesh_data->POINTS_FACE_BOTTOM_REFS->im[i][j] = json_integer_value(json_array_get(bottom_face_line, i));
       }
    }
-   
-   for (j=0 ;j<NZ+1 ;j++) 
+
+   for (j=0 ;j<NZ+1 ;j++)
    {
-      json_t *front_face_line    = json_array_get(front_face, j); 
-      
+      json_t *front_face_line    = json_array_get(front_face, j);
+
       if ( (NX+1) != json_array_size(front_face_line) )
       {
          error3(E_GEOM_MESH3D_JSON_FRONT_FACE_LINE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
       }
-      
+
       for (i=0 ;i<NX+1 ;i++)
       {
          cube_mesh_data->POINTS_FACE_FRONT_REFS->im[i][j] = json_integer_value(json_array_get(front_face_line, i));
       }
    }
-   
-   for (j=0 ;j<NZ+1 ;j++) 
+
+   for (j=0 ;j<NZ+1 ;j++)
    {
-      json_t *back_face_line    = json_array_get(back_face, j); 
-      
+      json_t *back_face_line    = json_array_get(back_face, j);
+
       if ( (NX+1) != json_array_size(back_face_line) )
       {
          error3(E_GEOM_MESH3D_JSON_BACK_FACE_LINE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
       }
-      
+
       for (i=0 ;i<NX+1 ;i++)
       {
          cube_mesh_data->POINTS_FACE_BACK_REFS->im[i][j] = json_integer_value(json_array_get(back_face_line, i));
       }
    }
-   
-   for (j=0 ;j<NZ+1 ;j++) 
+
+   for (j=0 ;j<NZ+1 ;j++)
    {
-      json_t *right_face_line    = json_array_get(right_face, j); 
-      
+      json_t *right_face_line    = json_array_get(right_face, j);
+
       if ( (NY+1) != json_array_size(right_face_line) )
       {
          error3(E_GEOM_MESH3D_JSON_RIGHT_FACE_LINE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
       }
-      
+
       for (i=0 ;i<NY+1 ;i++)
       {
          cube_mesh_data->POINTS_FACE_RIGHT_REFS->im[i][j] = json_integer_value(json_array_get(right_face_line, i));
       }
    }
-   
-   for (j=0 ;j<NZ+1 ;j++) 
+
+   for (j=0 ;j<NZ+1 ;j++)
    {
-      json_t *left_face_line    = json_array_get(left_face, j); 
-      
+      json_t *left_face_line    = json_array_get(left_face, j);
+
       if ( (NY+1) != json_array_size(left_face_line) )
       {
          error3(E_GEOM_MESH3D_JSON_LEFT_FACE_LINE_BAD_ARRAY_SIZE, "Geom3D_cube_read_file");
       }
-      
+
       for (i=0 ;i<NY+1 ;i++)
       {
          cube_mesh_data->POINTS_FACE_LEFT_REFS->im[i][j] = json_integer_value(json_array_get(left_face_line, i));
       }
    }
-   
+
    /* finito */
    return cube_mesh_data;
 }
@@ -500,7 +500,7 @@ static void Geom3D_Base_cube_set_xyzsomm(GEOM_3D* Geom, const CUBE_MESH_DATA *cu
    int NX = cube_mesh_data->H1->dim;
    int NY = cube_mesh_data->H2->dim;
    int NZ = cube_mesh_data->H3->dim;
-   
+
    /* set coords in each directions */
    VEC *COORD1 = v_get(NX+1);
    VEC *COORD2 = v_get(NY+1);
@@ -549,7 +549,7 @@ static void Geom3D_Base_cube_set_xyzsomm(GEOM_3D* Geom, const CUBE_MESH_DATA *cu
    {
       error3(E_GEOM_WRONG_CUBE, "Geom3D_Base_cube_set_xyzsomm");
    }
-   
+
    /* clean */
    V_FREE(COORD1);
    V_FREE(COORD2);
@@ -665,25 +665,25 @@ static int  Geom3D_Base_cube_set_nsface__facecenter_is_on_boundary(const point3D
 static int  Geom3D_Base_cube_set_nsface__face_is_boundaryface(const GEOM_3D* Geom, int a1, int a2, int a3)
 {
    point3D center;
-   
+
    point3D pt_a1;
    point3D pt_a2;
    point3D pt_a3;
-   
+
    /* the coordinates of the cell's node */
    pt_a1.x = Geom->XYSOMM->me[a1][0];
    pt_a1.y = Geom->XYSOMM->me[a1][1];
    pt_a1.z = Geom->XYSOMM->me[a1][2];
-   
+
    pt_a2.x = Geom->XYSOMM->me[a2][0];
    pt_a2.y = Geom->XYSOMM->me[a2][1];
    pt_a2.z = Geom->XYSOMM->me[a2][2];
-   
+
    pt_a3.x = Geom->XYSOMM->me[a3][0];
    pt_a3.y = Geom->XYSOMM->me[a3][1];
    pt_a3.z = Geom->XYSOMM->me[a3][2];
 
-   
+
    /* first check if all the somm are on the boundary */
    if ( ( Geom->REF_S->ive[a1] > 0 ) &&  ( Geom->REF_S->ive[a2] > 0 ) && ( Geom->REF_S->ive[a3] > 0 ) )
    {
@@ -721,10 +721,10 @@ static void Geom3D_Base_cube_set_nsface(GEOM_3D* Geom)
    int elt_node2;
    int elt_node3;
    int i,e;
-   
+
    int NBELMT = Geom->NBELMT;
    int NBFACE = Geom->NBFACE;
-   
+
    int idx_loc[4][3] =
    {
       {0,1,2}, /* local idx for the 1rst face of an elt */
@@ -732,7 +732,7 @@ static void Geom3D_Base_cube_set_nsface(GEOM_3D* Geom)
       {0,2,3}, /* local idx for the 3th  face of an elt */
       {1,2,3}  /* local idx for the 4th  face of an elt */
    };
-   
+
    for (e=0; e<NBELMT; e++)
    {
       /* the 4 nodes indices on this zone */
@@ -841,11 +841,11 @@ static GEOM_3D* Geom3D_Base_cube_get(const char *meshfile, const char *meshname)
 {
    int NBSOMM, NBELMT, NBFACE;
    int NX,NY,NZ;
-   
+
    GEOM_3D *Geom;
 
    CUBE_MESH_DATA * cube_mesh_data;
-      
+
    /* check */
    if ( meshfile  == NULL ) error(E_NULL, "Geom3D_Base_cube_get");
    if ( meshname  == NULL ) error(E_NULL, "Geom3D_Base_cube_get");
@@ -864,7 +864,7 @@ static GEOM_3D* Geom3D_Base_cube_get(const char *meshfile, const char *meshname)
 
    /* IT IS A CUBE FORMAT */
    strncpy(Geom->type, "cube", 16);
-   
+
    /* we first read NX, NY, NZ the number of segments in each direction */
    cube_mesh_data = Geom3D_cube_read_file(meshfile, meshname);
 
@@ -873,9 +873,9 @@ static GEOM_3D* Geom3D_Base_cube_get(const char *meshfile, const char *meshname)
    NX = cube_mesh_data->H1->dim;
    NY = cube_mesh_data->H2->dim;
    NZ = cube_mesh_data->H3->dim;
-   
+
    /* we have */
-   NBSOMM = (NX+1)*(NY+1)*(NZ+1);  
+   NBSOMM = (NX+1)*(NY+1)*(NZ+1);
    /* we have */
    NBELMT = 5*NX*NY*NZ;
    /* we have */
@@ -899,17 +899,17 @@ static GEOM_3D* Geom3D_Base_cube_get(const char *meshfile, const char *meshname)
 
    /* fill NSELMT */
    Geom3D_Base_cube_set_nselmt(Geom, cube_mesh_data);
-   
+
    /* fill REF_S */
    Geom3D_Base_cube_set_refs(Geom, cube_mesh_data);
 
    /* fill NSFACE */
-   Geom3D_Base_cube_set_nsface(Geom);   
+   Geom3D_Base_cube_set_nsface(Geom);
 
    /* fill REF_A */
    Geom3D_Base_cube_set_refa(Geom, cube_mesh_data);
 
-   
+
    /* clean */
    V_FREE(cube_mesh_data->H1);
    V_FREE(cube_mesh_data->H2);
@@ -947,33 +947,33 @@ static void Geom3D_Base_gmsh_extract_dimensions(FILE *fp, GEOM_3D *MyGeom)
    while ( strncmp("$MeshFormat", A_LINE, 11) != 0 )
    {
       res = fgets(A_LINE, 128, fp);
-      
+
       if ( res == NULL )
       {
          error3(E_GEOM_3D_GMSH_CANNOT_FIND_MESHFORMAT_LINE, "Geom3D_Base_gmsh_extract_dimensions");
       }
    }
-   
+
    /* find "$Nodes" line */
    while ( strncmp("$Nodes", A_LINE, 6) != 0 )
    {
       res = fgets(A_LINE, 128, fp);
-      
+
       if ( res == NULL )
       {
          error3(E_GEOM_3D_GMSH_CANNOT_FIND_NODE_LINE, "Geom2D_Base_gmsh_extract_dimensions");
       }
    }
    fscanf(fp, "%d \n", &NBSOMM);
-   
+
    rewind(fp);
-   
+
    fgets(A_LINE, 128, fp);
    /* find "$Elements" line */
    while ( strncmp("$Elements", A_LINE, 9) != 0 )
    {
       res = fgets(A_LINE, 128, fp);
-      
+
       if ( res == NULL )
       {
          error3(E_GEOM_3D_GMSH_CANNOT_FIND_NODE_LINE, "Geom2D_Base_gmsh_extract_dimensions");
@@ -1013,7 +1013,7 @@ static void Geom3D_Base_gmsh_get_fill_geom(FILE *fp, GEOM_3D *Geom)
 {
    int NBSOMM;
    int s, e, num, num_max = 0;
-   
+
    int ALL_ELMT, TYPE_ELMT;
    int intern;
    int gmsh_physical_idx;
@@ -1039,7 +1039,7 @@ static void Geom3D_Base_gmsh_get_fill_geom(FILE *fp, GEOM_3D *Geom)
    while ( strncmp("$Nodes", A_LINE, 6) != 0 )
    {
       res = fgets(A_LINE, 128, fp);
-      
+
       if ( res == NULL )
       {
          error3(E_GEOM_3D_GMSH_CANNOT_FIND_NODE_LINE, "Geom2D_Base_gmsh_extract_dimensions");
@@ -1050,7 +1050,7 @@ static void Geom3D_Base_gmsh_get_fill_geom(FILE *fp, GEOM_3D *Geom)
    /* get somm coordinates */
    for (s=0; s<NBSOMM; s++)
    {
-      fscanf(fp, "%d %lf %lf %lf\n", 
+      fscanf(fp, "%d %lf %lf %lf\n",
              &num,
              &(Geom->XYSOMM->me[s][0]),
              &(Geom->XYSOMM->me[s][1]),
@@ -1064,7 +1064,7 @@ static void Geom3D_Base_gmsh_get_fill_geom(FILE *fp, GEOM_3D *Geom)
 
    /* fill XMAP_IDX the inv of MAP_IDX */
    XMAP_IDX = iv_get(num_max+1);
-   
+
    for (s=0; s<NBSOMM; s++)
    {
       num = MAP_IDX->ive[s];
@@ -1073,13 +1073,13 @@ static void Geom3D_Base_gmsh_get_fill_geom(FILE *fp, GEOM_3D *Geom)
    /* fill XMAP_IDX the inv of MAP_IDX */
 
    rewind(fp);
-   
+
    fgets(A_LINE, 128, fp);
    /* find "$Elements" line */
    while ( strncmp("$Elements", A_LINE, 9) != 0 )
    {
       res = fgets(A_LINE, 128, fp);
-      
+
       if ( res == NULL )
       {
          error3(E_GEOM_3D_GMSH_CANNOT_FIND_ELEMENT_LINE, "Geom2D_Base_gmsh_extract_dimensions");
@@ -1173,7 +1173,7 @@ static GEOM_3D* Geom3D_Base_gmsh_get(const char *meshfile)
    int NBFACE=0;
    int NBLINE=0;
    int NBPNKT=0;
-   
+
    GEOM_3D * Geom;
    FILE *    fp;
 
@@ -1186,7 +1186,7 @@ static GEOM_3D* Geom3D_Base_gmsh_get(const char *meshfile)
    {
       error(E_FNF, "Geom3DBase_gmsh_get");
    }
-   
+
    /* --------- create the structure GEOM_3D ----------- */
    if ( (Geom=NEW(GEOM_3D)) == (GEOM_3D *)NULL )
    {
@@ -1198,27 +1198,27 @@ static GEOM_3D* Geom3D_Base_gmsh_get(const char *meshfile)
       mem_numvar_list(TYPE_GEOM_3D, 1, MY_LIST3);
    }
    /* ---------------------------------------------------- */
-   
-   
+
+
    /* IT IS A GMSH FORMAT */
    strncpy(Geom->type,"gmsh", 16);
 
-   
+
    /* we first read NBSOMM, NBELMT and NBFACE */
    Geom3D_Base_gmsh_extract_dimensions(fp, Geom);
-   
+
    /* allocate memory */
-   Geom->XYSOMM = m_get(Geom->NBSOMM,3); 
+   Geom->XYSOMM = m_get(Geom->NBSOMM,3);
    Geom->NSELMT = im_get(Geom->NBELMT,4) ;
    Geom->NSFACE = im_get(Geom->NBFACE,3) ;
-   
+
    Geom->REF_S = iv_get(Geom->NBSOMM);  iv_zero(Geom->REF_S);
    Geom->REF_T = iv_get(Geom->NBELMT);  iv_zero(Geom->REF_T);
    Geom->REF_A = iv_get(Geom->NBFACE);  iv_zero(Geom->REF_A);
-   
+
    /* rewind the file and re-read and fill the arrays */
    rewind(fp);
-   
+
    /**/
    Geom3D_Base_gmsh_get_fill_geom(fp, Geom);
 
@@ -1250,9 +1250,9 @@ static GEOM_3D *Geom3D_Parent_get_fromBase(const char* name_ef, const GEOM_3D *G
       mem_numvar_list(TYPE_GEOM_3D, 1, MY_LIST3);
    }
    /* ---------------------------------------------------- */
-   
+
    Geom->geomBase = (GEOM_3D*)GeomP1;  /* cast because of the "const" */
-      
+
    if ( strcmp("P2",name_ef) == 0 )
    {
       Geom3D_Parent_get_fromBase_P1toP2(Geom, GeomP1);
@@ -1266,7 +1266,7 @@ static GEOM_3D *Geom3D_Parent_get_fromBase(const char* name_ef, const GEOM_3D *G
    {
       error2(E_EF_NOTIMPL, "Geom3DParent_get_fromBase");
    }
-   
+
    /* return */
    return Geom;
 }
@@ -1278,7 +1278,7 @@ static void Geom3D_checkmeshesP1P1b(const GEOM_3D *GeomP1, const GEOM_3D *GeomP1
 {
    if ( GeomP1  == NULL ) error(E_NULL, "Geom3D_checkmeshesP1P1b");
    if ( GeomP1b == NULL ) error(E_NULL, "Geom3D_checkmeshesP1P1b");
-   
+
    return;
 }
 
@@ -1300,7 +1300,7 @@ static int check_pt_equal_pt( const point3D *pt1, const point3D *pt2)
    {
       ok = 0;
    }
-   
+
    return ok;
 }
 
@@ -1324,20 +1324,20 @@ static void Geom3D_checkmeshesP1P2 ( const GEOM_3D *GeomP1, const GEOM_3D *GeomP
    point3D onP1[4];
    point3D onP2[10];
    point3D center;
-   
+
    if ( GeomP1 == NULL ) error(E_NULL, "Geom3D_checkmeshesP1P2");
-   if ( GeomP2 == NULL ) error(E_NULL, "Geom3D_checkmeshesP1P2");   
-   
+   if ( GeomP2 == NULL ) error(E_NULL, "Geom3D_checkmeshesP1P2");
+
 
    for (e=0; e<GeomP2->NBELMT; e++)
-   {      
+   {
       for (i=0; i<4; i++)
       {
          onP1[i].x = GeomP2->XYSOMM->me[GeomP1->NSELMT->im[e][i]][0];
          onP1[i].y = GeomP2->XYSOMM->me[GeomP1->NSELMT->im[e][i]][1];
          onP1[i].z = GeomP2->XYSOMM->me[GeomP1->NSELMT->im[e][i]][2];
       }
-      
+
       for (i=0; i<10; i++)
       {
          onP2[i].x = GeomP2->XYSOMM->me[GeomP2->NSELMT->im[e][i]][0];
@@ -1345,12 +1345,12 @@ static void Geom3D_checkmeshesP1P2 ( const GEOM_3D *GeomP1, const GEOM_3D *GeomP
          onP2[i].z = GeomP2->XYSOMM->me[GeomP2->NSELMT->im[e][i]][2];
       }
 
-      
+
       if ( !check_pt_equal_pt( &onP1[0], &onP2[0] ) ) printf("elt %d : onP1[0] != onP2[0] \n",e);
       if ( !check_pt_equal_pt( &onP1[1], &onP2[1] ) ) printf("elt %d : onP1[1] != onP2[1] \n",e);
       if ( !check_pt_equal_pt( &onP1[2], &onP2[2] ) ) printf("elt %d : onP1[0] != onP2[0] \n",e);
       if ( !check_pt_equal_pt( &onP1[3], &onP2[3] ) ) printf("elt %d : onP1[1] != onP2[1] \n",e);
-      
+
       if ( !check_pt_equal_pt( set_pt1_pt2_center(&onP2[0],&onP2[1],&center), &onP2[4] ) ) printf("elt %d  onP2[4] \n", e);
       if ( !check_pt_equal_pt( set_pt1_pt2_center(&onP2[0],&onP2[2],&center), &onP2[5] ) ) printf("elt %d  onP2[5] \n", e);
       if ( !check_pt_equal_pt( set_pt1_pt2_center(&onP2[0],&onP2[3],&center), &onP2[6] ) ) printf("elt %d  onP2[6] \n", e);
@@ -1359,8 +1359,8 @@ static void Geom3D_checkmeshesP1P2 ( const GEOM_3D *GeomP1, const GEOM_3D *GeomP
       if ( !check_pt_equal_pt( set_pt1_pt2_center(&onP2[1],&onP2[3],&center), &onP2[9] ) ) printf("elt %d  onP2[9] \n", e);
 
       /*
-      printf("\t P2:node1=(%lf;%lf;%lf) \n", onP2[0].x , onP2[0].y ,onP2[0].z ); 
-      printf("\t P1:node1=(%lf;%lf;%lf) \n", onP1[0].x , onP1[0].y ,onP1[0].z ); 
+      printf("\t P2:node1=(%lf;%lf;%lf) \n", onP2[0].x , onP2[0].y ,onP2[0].z );
+      printf("\t P1:node1=(%lf;%lf;%lf) \n", onP1[0].x , onP1[0].y ,onP1[0].z );
 
       printf("\t P2:node1=(%lf;%lf;%lf) \n", onP2[1].x , onP2[1].y ,onP2[1].z );
       printf("\t P1:node1=(%lf;%lf;%lf) \n", onP1[1].x , onP1[1].y ,onP1[1].z );
@@ -1372,7 +1372,7 @@ static void Geom3D_checkmeshesP1P2 ( const GEOM_3D *GeomP1, const GEOM_3D *GeomP
       printf("\t P1:node1=(%lf;%lf;%lf) \n", onP1[3].x , onP1[3].y ,onP1[3].z );
       */
    }
-   
+
    printf(" GeomP1 and P2 checked \n");
 
    return;
@@ -1386,7 +1386,7 @@ static void Geom3D_Parent_get_fromBase_P1toP2( GEOM_3D *GeomP2, const GEOM_3D *G
    int e,a,i,j;
    int curr_idx;
    int NB_TOTAL_SIDE;
-   
+
    IMAT *MID_POINTS;
 
    int n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
@@ -1415,13 +1415,13 @@ static void Geom3D_Parent_get_fromBase_P1toP2( GEOM_3D *GeomP2, const GEOM_3D *G
    GeomP2->REF_T  = iv_get(GeomP2->NBELMT);  iv_copy(GeomP1->REF_T, GeomP2->REF_T);
 
    iv_move(GeomP1->REF_S, 0,  GeomP1->NBSOMM, GeomP2->REF_S, 0 );
-   
+
    /* init */
    curr_idx = GeomP1->NBSOMM;
    MID_POINTS = im_get(GeomP1->NBSOMM, GeomP1->NBSOMM);
    im_ones(MID_POINTS);
    im_smlt(MID_POINTS, -1, MID_POINTS); /* init to -1 */
-   
+
    /* fill  the new NSELMT , XYSOMM, NSFACE, REF_T, */
    for (e=0; e<GeomP1->NBELMT; e++)
    {
@@ -1433,15 +1433,15 @@ static void Geom3D_Parent_get_fromBase_P1toP2( GEOM_3D *GeomP2, const GEOM_3D *G
       GeomP2->XYSOMM->me[n0][0] = GeomP1->XYSOMM->me[n0][0];
       GeomP2->XYSOMM->me[n0][1] = GeomP1->XYSOMM->me[n0][1];
       GeomP2->XYSOMM->me[n0][2] = GeomP1->XYSOMM->me[n0][2];
-      
+
       GeomP2->XYSOMM->me[n1][0] = GeomP1->XYSOMM->me[n1][0];
       GeomP2->XYSOMM->me[n1][1] = GeomP1->XYSOMM->me[n1][1];
       GeomP2->XYSOMM->me[n1][2] = GeomP1->XYSOMM->me[n1][2];
-      
+
       GeomP2->XYSOMM->me[n2][0] = GeomP1->XYSOMM->me[n2][0];
       GeomP2->XYSOMM->me[n2][1] = GeomP1->XYSOMM->me[n2][1];
       GeomP2->XYSOMM->me[n2][2] = GeomP1->XYSOMM->me[n2][2];
-      
+
       GeomP2->XYSOMM->me[n3][0] = GeomP1->XYSOMM->me[n3][0];
       GeomP2->XYSOMM->me[n3][1] = GeomP1->XYSOMM->me[n3][1];
       GeomP2->XYSOMM->me[n3][2] = GeomP1->XYSOMM->me[n3][2];
@@ -1508,7 +1508,7 @@ static void Geom3D_Parent_get_fromBase_P1toP2( GEOM_3D *GeomP2, const GEOM_3D *G
    GeomP2->NBSOMM = curr_idx;
    {
       MAT * XYSOMM = m_get(GeomP2->NBSOMM,3);   /* To Fill */
-      
+
       for (i=0; i<GeomP2->NBSOMM; i++)
       for (j=0; j<3; j++)
       {
@@ -1516,7 +1516,7 @@ static void Geom3D_Parent_get_fromBase_P1toP2( GEOM_3D *GeomP2, const GEOM_3D *G
       }
 
       M_FREE(GeomP2->XYSOMM);
-      GeomP2->XYSOMM = XYSOMM; 
+      GeomP2->XYSOMM = XYSOMM;
    }
 
    GeomP2->REF_S  = iv_resize(GeomP2->REF_S, GeomP2->NBSOMM);  /* xxx */
@@ -1540,10 +1540,10 @@ static void Geom3D_Parent_get_fromBase_P1toP2( GEOM_3D *GeomP2, const GEOM_3D *G
 static void Geom3D_Parent_get_fromBase_P1toP1b( GEOM_3D *GeomP1b, const GEOM_3D *GeomP1)
 {
    int e;
-   
+
    if ( GeomP1  == NULL )  error(E_NULL, "Geom3DParent_get_fromBase_P1toP2");
    if ( GeomP1b == NULL )  error(E_NULL, "Geom3DParent_get_fromBase_P1toP2");
-    
+
 
    strncpy(GeomP1b->type, GeomP1->type, 16);
    GeomP1b->type[15] = '\0';
@@ -1552,14 +1552,14 @@ static void Geom3D_Parent_get_fromBase_P1toP1b( GEOM_3D *GeomP1b, const GEOM_3D 
    GeomP1b->NBELMT  = GeomP1->NBELMT;
    GeomP1b->NBFACE  = GeomP1->NBFACE;
 
-   
+
    GeomP1b->REF_S = iv_get(GeomP1b->NBSOMM);  /* references on the nodes : new dimension */
    iv_zero(GeomP1b->REF_S);                   /* new somms are interiors pts             */
    iv_move(GeomP1->REF_S, 0,GeomP1->REF_S->dim, GeomP1b->REF_S, 0);
 
    GeomP1b->REF_T = iv_get(GeomP1->REF_T->dim); iv_copy(GeomP1->REF_T, GeomP1b->REF_T);
    GeomP1b->REF_A = iv_get(GeomP1->REF_A->dim); iv_copy(GeomP1->REF_A, GeomP1b->REF_A);
-   
+
    GeomP1b->XYSOMM  = m_get(GeomP1b->NBSOMM,3) ;   /* nodes's coordinates array : 4 somm per elt */
    GeomP1b->NSELMT  = im_get(GeomP1b->NBELMT,5);   /* elements's nodes arrays   */
 
@@ -1569,7 +1569,7 @@ static void Geom3D_Parent_get_fromBase_P1toP1b( GEOM_3D *GeomP1b, const GEOM_3D 
    for (e=0; e<GeomP1->NBELMT; e++)
    {
       double val = 1.0/3.0;
-      
+
       double x1 = GeomP1->XYSOMM->me[ GeomP1->NSELMT->im[e][0] ][0] ;
       double x2 = GeomP1->XYSOMM->me[ GeomP1->NSELMT->im[e][1] ][0] ;
       double x3 = GeomP1->XYSOMM->me[ GeomP1->NSELMT->im[e][2] ][0] ;
@@ -1584,7 +1584,7 @@ static void Geom3D_Parent_get_fromBase_P1toP1b( GEOM_3D *GeomP1b, const GEOM_3D 
       double z2 = GeomP1->XYSOMM->me[ GeomP1->NSELMT->im[e][1] ][2] ;
       double z3 = GeomP1->XYSOMM->me[ GeomP1->NSELMT->im[e][2] ][2] ;
       double z4 = GeomP1->XYSOMM->me[ GeomP1->NSELMT->im[e][3] ][2] ;
-      
+
       GeomP1b->NSELMT->im[e][0] = GeomP1->NSELMT->im[e][0];
       GeomP1b->NSELMT->im[e][1] = GeomP1->NSELMT->im[e][1];
       GeomP1b->NSELMT->im[e][2] = GeomP1->NSELMT->im[e][2];
@@ -1598,7 +1598,7 @@ static void Geom3D_Parent_get_fromBase_P1toP1b( GEOM_3D *GeomP1b, const GEOM_3D 
    }
 
    GeomP1b->NSFACE  = im_get(GeomP1->NSFACE->m, GeomP1->NSFACE->n); im_copy(GeomP1->NSFACE, GeomP1b->NSFACE);
-   
+
    /* -------------------------- */
    /* check the 2 meshes         */
    /* -------------------------- */
@@ -1616,7 +1616,7 @@ static void Geom3D_Base_check(const GEOM_3D *Geom)
    int NBSOMM = Geom->NBSOMM;
    int NBELMT = Geom->NBELMT;
    int NBSOMM_ELT = 4;
-   
+
    int i,e,idx;
 
    for (i=0; i<NBELMT; i++)
@@ -1656,7 +1656,7 @@ static int midpoint_built_and_fill_geom(int a, int b, IMAT *MID_POINTS, GEOM_3D 
    double xm,ym,zm;
    int new_midpoint = (*curr_idx);
    int ref_on_face;
-   
+
    if ( new_midpoint >= GeomP2->XYSOMM->m )
    {
       error3(E_GEOM_3D_NBSOMM_P2_TOO_SMALL, "midpoint_built_and_fill_geom");
@@ -1732,7 +1732,7 @@ static int check_two_somm_on_a_face(const GEOM_3D *GeomP1, int a, int b)
    int aa;
    int s0,s1,s2;
    int count;
-   
+
    for (aa=0; aa<GeomP1->NBFACE; aa++)
    {
       s0 = GeomP1->NSFACE->im[aa][0];
@@ -1781,13 +1781,13 @@ GEOM_3D *Geom3D_getP1geom_from( const ELT_3D *element, const GEOM_3D* geom )
    if ( geom     == NULL )  error(E_NULL, "Geom3D_getP1geom_from");
 
    if ( (strcmp(element->name_ef,"P2")==0 ) )
-   {        
-      GeomP1 = Geom3D_getP1geom_from_P2geom( element, geom);    
+   {
+      GeomP1 = Geom3D_getP1geom_from_P2geom( element, geom);
    }
    else
    if ( (strcmp(element->name_ef,"P3")==0 ) )
-   {        
-      GeomP1 = Geom3D_getP1geom_from_P3geom( element, geom); 
+   {
+      GeomP1 = Geom3D_getP1geom_from_P3geom( element, geom);
    }
    else
    {
@@ -1796,7 +1796,7 @@ GEOM_3D *Geom3D_getP1geom_from( const ELT_3D *element, const GEOM_3D* geom )
    }
 
    return GeomP1;
-   
+
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -1836,14 +1836,14 @@ static GEOM_3D *Geom3D_getP1geom_from_P2geom( const ELT_3D *element, const GEOM_
 {
    int  e,a,s;
    int  n0,n1,n2;
-   
+
    double xm,x0,x1,x2,x3;
    double ym,y0,y1,y2,y3;
    double zm,z0,z1,z2,z3;
 
    GEOM_3D* GeomP1;
 
-   if ( element == NULL ) error(E_NULL, "Geom3D_getP1geom_from_P2geom");  
+   if ( element == NULL ) error(E_NULL, "Geom3D_getP1geom_from_P2geom");
    if ( GeomP2  == NULL ) error(E_NULL, "Geom3D_getP1geom_from_P2geom");
 
    /* --------- create the structure GEOM_3D ----------- */
@@ -1868,8 +1868,8 @@ static GEOM_3D *Geom3D_getP1geom_from_P2geom( const ELT_3D *element, const GEOM_
 
 
    GeomP1->REF_S = iv_get(GeomP1->NBSOMM);
-   GeomP1->REF_T = iv_get(GeomP1->NBELMT); 
-   GeomP1->REF_A = iv_get(GeomP1->NBFACE); 
+   GeomP1->REF_T = iv_get(GeomP1->NBELMT);
+   GeomP1->REF_A = iv_get(GeomP1->NBFACE);
 
    GeomP1->XYSOMM = m_get(GeomP1->NBSOMM, 3);
    GeomP1->NSELMT = im_get(GeomP1->NBELMT, 4);
@@ -1963,7 +1963,7 @@ static GEOM_3D *Geom3D_getP1geom_from_P2geom( const ELT_3D *element, const GEOM_
       GeomP1->NSFACE->im[4*a+0][0] = n0 ;
       GeomP1->NSFACE->im[4*a+0][1] = n1 ;
       GeomP1->NSFACE->im[4*a+0][2] = n2 ;
-      
+
       /* 2nd sub-face */
       n0 = GeomP2->NSFACE->im[a][1] ;
       n1 = GeomP2->NSFACE->im[a][4] ;
@@ -1991,7 +1991,7 @@ static GEOM_3D *Geom3D_getP1geom_from_P2geom( const ELT_3D *element, const GEOM_
       GeomP1->NSFACE->im[4*a+3][1] = n1 ;
       GeomP1->NSFACE->im[4*a+3][2] = n2 ;
 
-      
+
       /* the references */
       GeomP1->REF_A->ive[4*a+0]    = GeomP2->REF_A->ive[a];
       GeomP1->REF_A->ive[4*a+1]    = GeomP2->REF_A->ive[a];
@@ -2052,9 +2052,9 @@ static GEOM_3D *Geom3D_getP1geom_from_P3geom( const ELT_3D *element, const GEOM_
 
    error3(E_GEOM_TYPENOTIMPL, "Geom3D_get_fromParent_P3toP1");
 
-   if ( element == NULL ) error(E_NULL, "Geom3D_get_fromParent_P3toP1");  
+   if ( element == NULL ) error(E_NULL, "Geom3D_get_fromParent_P3toP1");
    if ( GeomP3  == NULL ) error(E_NULL, "Geom3D_get_fromParent_P3toP1");
-   
+
    return NULL;
 }
 
@@ -2114,24 +2114,24 @@ static VEC *Geom3D_extract_P1geom_VEC_from_P2geom_VEC(const ELT_3D *element, con
       zm = (z0+z1+z2+z3) / 4.0 ;
 
       /*
-      
+
       x = x1 + (x2-x1)*ksi + (x3-x1)*eta + (x4-x1)*phi
       y = y1 + (y2-y1)*ksi + (y3-y1)*eta + (y4-y1)*phi
       z = z1 + (z2-z1)*ksi + (z3-z1)*eta + (z4-z1)*phi
 
       => As = r
 
-      =>  s = inv(A)*r ; 
-     
+      =>  s = inv(A)*r ;
+
       */
 
       r->ve[0] = xm - x0 ;
       r->ve[1] = ym - y0 ;
       r->ve[2] = zm - z0 ;
 
-      A->me[0][0] = x1-x0; 
-      A->me[0][1] = x2-x0; 
-      A->me[0][2] = x3-x0; 
+      A->me[0][0] = x1-x0;
+      A->me[0][1] = x2-x0;
+      A->me[0][2] = x3-x0;
 
       A->me[1][0] = y1-y0;
       A->me[1][1] = y2-y0;
@@ -2141,7 +2141,7 @@ static VEC *Geom3D_extract_P1geom_VEC_from_P2geom_VEC(const ELT_3D *element, con
       A->me[2][1] = z2-z0;
       A->me[2][2] = z3-z0;
 
-      A = LUfactor(A, px) ; 
+      A = LUfactor(A, px) ;
       s = LUsolve(A, px, r, s);
 
       /* the value on the centroid interpolated from the values on the nodes */
@@ -2282,7 +2282,7 @@ int  Geom3D_check_with_boundaryconditions( const GEOM_3D *MyGeom , const BC_3D *
 {
    char axe_name[8];
    int i;
-   
+
    int nb_refs_on_somm ;
    int nb_refs_on_face ;
 
@@ -2335,7 +2335,7 @@ int  Geom3D_check_with_boundaryconditions( const GEOM_3D *MyGeom , const BC_3D *
    }
 
    return EXIT_SUCCESS;
-}   
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -2366,7 +2366,7 @@ GEOM_3D *Geom3D_get_base_tetrahedra(int NX)
    /* I- the unit tetrahedra */
 
    /* we have */
-   Geom->NBSOMM = 4;  
+   Geom->NBSOMM = 4;
    /* we have */
    Geom->NBELMT = 1;
    /* we have */

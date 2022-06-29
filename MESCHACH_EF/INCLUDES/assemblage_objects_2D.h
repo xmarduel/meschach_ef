@@ -57,7 +57,7 @@ VEC   * assemblage2D_vector_fromBC(const ELT_2D *elt, const GEOM_2D *geom, const
 #endif
 
 /*! \fn SPMAT * assemblage2D_matrix_Mass ( const ELT_2D *elt, const GEOM_2D *geom, SPMAT *Mass   );
-* 
+*
 * \param elt   : the finite element
 * \param geom  : the geometry
 * \param Mass  : the mass matrix (output)
@@ -66,7 +66,7 @@ VEC   * assemblage2D_vector_fromBC(const ELT_2D *elt, const GEOM_2D *geom, const
 */
 
 /*! \fn SPMAT * assemblage2D_matrix_Stiff1 ( const ELT_2D *elt, const GEOM_2D *geom, SPMAT *Stiff1   );
-* 
+*
 * \param elt    : the finite element
 * \param geom   : the geometry
 * \param Stiff1 : the stiffness matrix (output)
@@ -75,7 +75,7 @@ VEC   * assemblage2D_vector_fromBC(const ELT_2D *elt, const GEOM_2D *geom, const
 */
 
 /*! \fn SPMAT * assemblage2D_matrix_Conv_x ( const ELT_2D *elt, const GEOM_2D *geom, SPMAT *Conv_x   );
-* 
+*
 * \param elt    : the finite element
 * \param geom   : the geometry
 * \param Conv_x : the convection matrix (output)

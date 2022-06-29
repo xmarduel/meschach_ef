@@ -54,7 +54,7 @@ void transform2D_matrix_vector_with_bc(const ELT_2D *elt, const GEOM_2D *geom, c
 
    transform2D_vector_with_bc(elt, geom, BC, A, RHS);
    transform2D_matrix_with_bc(elt, geom, BC, A);
-   
+
    return;
 }
 
@@ -78,7 +78,7 @@ void transform2D_vector_with_bc(const ELT_2D *elt, const GEOM_2D *geom, const BC
    {
       apply_Bc2D_dirichlet_on_rhs(axe, elt, geom, BC, A, RHS);
    }
-   
+
    return;
 }
 
@@ -101,9 +101,9 @@ void transform2D_matrix_with_bc(const ELT_2D *elt, const GEOM_2D *geom, const BC
    {
       apply_Bc2D_dirichlet_on_mat(axe, elt, geom, BC, A);
    }
-      
+
    sp_compact(A, MACHEPS);
-   
+
    return;
 }
 
@@ -134,7 +134,7 @@ VEC* transform2D_stokes_vector_with_bc( const ELT_2D *elt , const GEOM_2D *geomU
 {
    int K;
    int axes[] = { AXEe_X , AXEe_Y };
-   
+
    /* check */
    if ( elt        == NULL ) error(E_NULL, "transform2D_stokes_vector_with_bc");
    if ( geomU      == NULL ) error(E_NULL, "transform2D_stokes_vector_with_bc");
@@ -169,7 +169,7 @@ VEC* transform2D_stokes_vector_with_bc( const ELT_2D *elt , const GEOM_2D *geomU
 
    /* conditions aux limites de Dirichlet pour P */
    apply_Bc2D_dirichlet_on_rhsNS_P(elt, geomU, geomP, BC, STOKES, STOKES_RHS);
-   
+
    /* finito */
    return STOKES_RHS;
 }
@@ -242,7 +242,7 @@ void   transform2D_navierstokes_matrix_vector_with_bc( const ELT_2D *elt , const
 
    transform2D_navierstokes_vector_with_bc( elt, geomU, geomP, BC, A, RHS );
    transform2D_navierstokes_matrix_with_bc( elt, geomU, geomP, BC, A );
-   
+
    return;
 }
 
@@ -254,7 +254,7 @@ VEC*   transform2D_navierstokes_vector_with_bc ( const ELT_2D *elt , const GEOM_
    int K;
 
    int axes[] = { AXEe_X , AXEe_Y };
-   
+
    /* check */
    if ( elt        == NULL ) error(E_NULL, "transform2D_navierstokes_vector_with_bc");
    if ( geomU      == NULL ) error(E_NULL, "transform2D_navierstokes_vector_with_bc");
@@ -284,7 +284,7 @@ VEC*   transform2D_navierstokes_vector_with_bc ( const ELT_2D *elt , const GEOM_
    for (K=0; K<2; K++)
    {
       if ( Bc2D_hasDirichletBC(BC, axes[K]) )
-      { 
+      {
          apply_Bc2D_dirichlet_on_rhsNS  (axes[K], elt, geomU, geomP, BC, STOKES, STOKES_RHS);
       }
    }
@@ -319,15 +319,15 @@ SPMAT* transform2D_navierstokes_matrix_with_bc ( const ELT_2D *elt , const GEOM_
    STOKES =  !  A_21  A_22   By� !
              !                   !
              !  Bx    By     0   !
-   
-   
+
+
    */
 
    /* conditions aux limites de Cauchy */
    for (K=0; K<2; K++)
    {
       /* conditions aux limites de Cauchy */
-      if ( Bc2D_hasCauchyBC(BC, axes[K]) ) 
+      if ( Bc2D_hasCauchyBC(BC, axes[K]) )
       {
          apply_Bc2D_cauchy_on_matNS   (axes[K], elt, geomU, BC, STOKES);
       }
@@ -357,7 +357,7 @@ SPMAT* transform2D_navierstokes_matrix_with_bc ( const ELT_2D *elt , const GEOM_
    sp_compact(STOKES, MACHEPS);
 
    return STOKES;
-   
+
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -374,7 +374,7 @@ static Real eval_jac_on_face  ( int f , const ELT_2D *element , const GEOM_2D *g
    MAT  *XYSOMM = geom->XYSOMM;
    IMAT *NSELMT = geom->NSELMT;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    /* calcul jacobien */
    int D = element->nb_somm_face -1;  /* nombre de sommet de l'arete -1 */
 
@@ -403,10 +403,10 @@ static void apply_Bc2D_dirichlet_on_rhs(int axe, const ELT_2D *elt , const GEOM_
    int i,idx,idx2;
    Real bcval;
    SPROW *r;
-   
+
    IVEC *REF_S  = geom->REF_S;
    MAT  *XYSOMM = geom->XYSOMM;
-   
+
 
    /* ----- Transformation du second membre ----------------------------------*/
    for (i=0; i<geom->NBSOMM; i++)
@@ -420,7 +420,7 @@ static void apply_Bc2D_dirichlet_on_rhs(int axe, const ELT_2D *elt , const GEOM_
       else
       {
          r = A->row + i ;
-         
+
          for ( idx=0 ; idx<r->len ; idx++ )
          {
             idx2 = r->elt[idx].col ;
@@ -543,8 +543,8 @@ static void apply_Bc2D_dirichlet_on_matNS_P(const ELT_2D *elt , const GEOM_2D *g
    int axe;
 
    IVEC *REF_S = geomU->REF_S;
-   
-   /* ----- Transformation de la matrice -- Check Bx and By  -----------------------------------*/   
+
+   /* ----- Transformation de la matrice -- Check Bx and By  -----------------------------------*/
    for (i=0; i<geomP->NBSOMM; i++)
    {
       i3 = i + 2*geomU->NBSOMM ;
@@ -675,7 +675,7 @@ static void apply_Bc2D_dirichlet_on_rhsNS(int axe , const ELT_2D *elt , const GE
 
    IVEC *REF_S  = geomU->REF_S;
    MAT  *XYSOMM = geomU->XYSOMM;
-   
+
    int K_x_NBSOMM;
 
    switch(axe)
@@ -700,7 +700,7 @@ static void apply_Bc2D_dirichlet_on_rhsNS(int axe , const ELT_2D *elt , const GE
       else
       {
          r = A->row + i1 ;
-         
+
          for ( idx=0 ; idx<r->len ; idx++ )
          {
             idx2 = r->elt[idx].col ;
@@ -905,7 +905,7 @@ static void apply_Bc2D_dirichlet_on_matNS(int axe , const ELT_2D *elt , const GE
 /*
  sv_mlt(  BCval * jac , elt->eltDM1->VEC_I, SCM_ar);
 
- 
+
  if ( (strcmp(elt->name_ef,"P1")==0)  || (strcmp(elt->name_ef,"P1b")==0) )
  {
     SCM_ar->ve[0] = BCval*0.5*jac;

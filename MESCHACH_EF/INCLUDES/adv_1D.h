@@ -27,9 +27,9 @@ extern "C"
  * so that the structure can be set with
  *
  * MyAdv = Adv1D_get()
- * MyAdv = Adv1D_setCFunction( MyAdv, 0, AXEe_X, AXEe_X, AXEe_X, the_c_function) 
+ * MyAdv = Adv1D_setCFunction( MyAdv, 0, AXEe_X, AXEe_X, AXEe_X, the_c_function)
  *
- * In a Python program : 
+ * In a Python program :
  *
  * MyAdv = Adv1D_get()
  * MyAdv = Adv1D_setPythonFunction( MyAdv, 0, AXEe_X, AXEe_X, AXEe_X, the_python_function)
@@ -40,7 +40,7 @@ extern "C"
 
 #include "MESCHACH_EF/INCLUDES/functions_structs.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
-	
+
 #define  NBMAX_ADV_1D_FUNCTIONS   11
 
 /*------------------------------------------------------------------------- */
@@ -70,7 +70,7 @@ ADV_1D* Adv1D_setCFunctionTransient( ADV_1D* MyAdv, int ref_e, int axe1, int axe
 
 ADV_1D* Adv1D_setLUAFunction         ( ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char * def);
 ADV_1D* Adv1D_setLUAFunctionTransient( ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char * def);
-   
+
 ADV_1D* Adv1D_setTps               ( ADV_1D* MyAdv, Real tps);
 
 Real    Adv1D_evalFunction         ( const ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, Real x);

@@ -23,12 +23,12 @@ static void elt2D_get_P1b(ELT_2D *elt);
 ELT_2D *elt2D_get(const char *type)
 {
    ELT_2D *elt;
-   
+
    int    i,j;
 
    /*---------------------------------------------------------------------------------------------*/
    /*---------------------------------------------------------------------------------------------*/
-   
+
    if ( (elt=NEW(ELT_2D)) == (ELT_2D *)NULL )
    {
       error(E_MEM, "ELT_2D_get");
@@ -38,7 +38,7 @@ ELT_2D *elt2D_get(const char *type)
       mem_bytes_list(TYPE_ELT_2D, 0, sizeof(ELT_2D), MY_LIST2);
       mem_numvar_list(TYPE_ELT_2D, 1, MY_LIST2);
    }
-   
+
    /* initialize also now the eltDM1 */
    if ( strcmp(type,"P1" )==0 ) elt->eltDM1 = elt1D_get("P1");
    if ( strcmp(type,"P2" )==0 ) elt->eltDM1 = elt1D_get("P2");
@@ -48,13 +48,13 @@ ELT_2D *elt2D_get(const char *type)
    /* and initialize our fe */
    elt->dim     = 2;
    elt->name_ef = strdup(type) ;
-   
+
    /*---------------------------------------------------------------------------------------------*/
    /*---------------------------------------------------------------------------------------------*/
-   
+
    if (strcmp(elt->name_ef,"P1") == 0)
    {
-      elt2D_get_P1(elt);    
+      elt2D_get_P1(elt);
    }
    else
    if (strcmp(elt->name_ef,"P1b") == 0)
@@ -78,7 +78,7 @@ ELT_2D *elt2D_get(const char *type)
 
    /*---------------------------------------------------------------------------------------------*/
    /*---------------------------------------------------------------------------------------------*/
-   
+
    /* set frequently used matrices */
    elt->MAT_x_y__plus__y_x = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
 
@@ -90,15 +90,15 @@ ELT_2D *elt2D_get(const char *type)
 
    /* and with it the datas on the faces */
    elt->nb_somm_face = elt->eltDM1->nb_somm_cell ;
-   
+
    /* elt->f_face  pointe vers (elt->nb_somm_face) fonctions de bases */
    elt->f_face       = (Real (**)(Real))calloc(elt->nb_somm_face,sizeof(Real (*)(Real)) );
-   
+
    for (i=0; i<elt-> nb_somm_face; i++)
    {
       elt->f_face[i] = elt->eltDM1->f_base[i];
    }
-   
+
    return (elt);
 }
 
@@ -110,7 +110,7 @@ static void elt2D_get_P1 (ELT_2D *elt)
    /* Declaration de toutes les matrices pour l' element P1 ... */
    #include "MESCHACH_EF/INCLUDES/ef2D_P1_mtx.h"
    /* Declaration de toutes les matrices pour l' element P1 ... */
-   
+
    int    i,j,k;
    int    DoF = 3;
 
@@ -437,7 +437,7 @@ static void elt2D_get_P2 (ELT_2D *elt)
       elt->MAT_yy_xy->me[i][j] = TENSOR_DD_DD_P2[7][i][j];
       elt->MAT_yy_yy->me[i][j] = TENSOR_DD_DD_P2[8][i][j];
    }
-      
+
    elt->MAT_xx_x = m_get(DoF,DoF);
    elt->MAT_xx_y = m_get(DoF,DoF);
    elt->MAT_xy_x = m_get(DoF,DoF);
@@ -704,7 +704,7 @@ static void elt2D_get_P1b(ELT_2D *elt)
    /* Declaration de toutes les matrices pour l' element P1b ... */
    #include "MESCHACH_EF/INCLUDES/ef2D_P1b_mtx.h"
    /* Declaration de toutes les matrices pour l' element P1b ... */
-   
+
    int    i,j,k;
    int    DoF = 4;
 
@@ -882,7 +882,7 @@ static void elt2D_get_P1b(ELT_2D *elt)
       elt->MAT_y_xy->me[i][j] = TENSOR_DD_D__P1b[3][j][i];
       elt->MAT_x_yy->me[i][j] = TENSOR_DD_D__P1b[4][j][i];
       elt->MAT_y_yy->me[i][j] = TENSOR_DD_D__P1b[5][j][i];
-   }         
+   }
 }
 
 /* ------------------------------------------------------------------------------------------------------ */
@@ -903,21 +903,21 @@ int elt2D_free(ELT_2D *elt)
       }
 
       free(elt->name_ef);
-      
+
       V_FREE(elt->VEC_I);
       V_FREE(elt->VEC_x);
       V_FREE(elt->VEC_y);
       V_FREE(elt->VEC_xx);
       V_FREE(elt->VEC_xy);
       V_FREE(elt->VEC_yy);
-      
+
       M_FREE(elt->MAT_I_I);
-      
+
       M_FREE(elt->MAT_x_x);
       M_FREE(elt->MAT_x_y);
       M_FREE(elt->MAT_y_x);
       M_FREE(elt->MAT_y_y);
-      
+
       M_FREE(elt->MAT_I_x);
       M_FREE(elt->MAT_I_y);
 
@@ -945,10 +945,10 @@ int elt2D_free(ELT_2D *elt)
       M_FREE(elt->MAT_yy_xy);
       M_FREE(elt->MAT_yy_yy);
 
-      
+
       M_FREE(elt->MAT_I_x_PM1dP);
       M_FREE(elt->MAT_I_y_PM1dP);
-      
+
       TS_FREE(elt->TENSOR_I_x_I);
       TS_FREE(elt->TENSOR_I_y_I);
       TS_FREE(elt->TENSOR_x_I_I);
@@ -957,7 +957,7 @@ int elt2D_free(ELT_2D *elt)
 
       M_FREE(elt->MAT_x_y__plus__y_x);
 
-      
+
       ELT_1D_FREE(elt->eltDM1);
 
       free(elt->f_base);
@@ -966,15 +966,15 @@ int elt2D_free(ELT_2D *elt)
       free(elt->d2fdxx_base);
       free(elt->d2fdxy_base);
       free(elt->d2fdyy_base);
-      
+
       free(elt->f_face);
-      
+
       /* free the space of the element */
       free(elt);
-            
+
       return EXIT_SUCCESS;
    }
-   
+
 }
 
 /* ------------------------------------------------------------------------------------------------------ */
@@ -982,14 +982,14 @@ int elt2D_free(ELT_2D *elt)
 
 /*  Fonctions de base ** 2D ** ---------------------- */
 
-Real F0_2D_P0(Real x , Real y)   /* -- Element P0 --- */ 
+Real F0_2D_P0(Real x , Real y)   /* -- Element P0 --- */
 {
    Real val;
    return val = 1.0;
 }
 
 
-Real F0_2D_P1(Real x , Real y)   /* -- Element P1 --- */ 
+Real F0_2D_P1(Real x , Real y)   /* -- Element P1 --- */
 {
    Real val;
    return val = 1.0-x-y;
@@ -1006,7 +1006,7 @@ Real F2_2D_P1(Real x , Real y)
 }
 
 
-Real F0_2D_P2(Real x , Real y)   /* -- Element P2 --- */ 
+Real F0_2D_P2(Real x , Real y)   /* -- Element P2 --- */
 {
    Real val;
    return val = (1.0 - x - y )*( 1.0 -2*x - 2*y) ;
@@ -1038,7 +1038,7 @@ Real F5_2D_P2(Real x , Real y)
 }
 
 
-Real F0_2D_P3(Real x , Real y)   /* -- Element P3 --- */ 
+Real F0_2D_P3(Real x , Real y)   /* -- Element P3 --- */
 {
    Real val;
    return val = 1.0 - 5.5*x - 5.5*y +  9.0*x*x + 18.0*x*y +  9.0*y*y -  4.5*x*x*x - 13.5*x*x*y - 13.5*x*y*y -  4.5*y*y*y ;
@@ -1091,7 +1091,7 @@ Real F9_2D_P3(Real x , Real y)
 
 
 
-Real F0_2D_P1b(Real x , Real y)   /* -- Element P1b --- */ 
+Real F0_2D_P1b(Real x , Real y)   /* -- Element P1b --- */
 {
    Real val;
    return val = 27*F0_2D_P1(x,y)*F1_2D_P1(x,y)*F2_2D_P1(x,y);
@@ -1200,7 +1200,7 @@ Real DFDY5_2D_P2(Real x , Real y)
 
 /*  Derivees des Fonctions de Base P3---------------- */
 
-Real DFDX0_2D_P3(Real x , Real y)   /* -- Element P3 --- */ 
+Real DFDX0_2D_P3(Real x , Real y)   /* -- Element P3 --- */
 {
    Real val;
    return val = - 5.5 +  18.0*x + 18.0*y  -  13.5*x*x - 27.0*x*y - 13.5*y*y  ;
@@ -1253,7 +1253,7 @@ Real DFDX9_2D_P3(Real x , Real y)
 
 
 
-Real DFDY0_2D_P3(Real x , Real y)   /* -- Element P3 --- */ 
+Real DFDY0_2D_P3(Real x , Real y)   /* -- Element P3 --- */
 {
    Real val;
    return val = - 5.5   + 18.0*x +  18.0*y  - 13.5*x*x - 27.0*x*y -  13.5*y*y ;
@@ -1309,14 +1309,14 @@ Real DFDY9_2D_P3(Real x , Real y)
 Real DFDX0_2D_P1b(Real x , Real y)
 {
    Real val;
-   return val = 27*DFDX0_2D_P1(x,y)*F1_2D_P1(x,y)*F2_2D_P1(x,y) + 
+   return val = 27*DFDX0_2D_P1(x,y)*F1_2D_P1(x,y)*F2_2D_P1(x,y) +
                 27*DFDX1_2D_P1(x,y)*F0_2D_P1(x,y)*F2_2D_P1(x,y) +
                 27*DFDX2_2D_P1(x,y)*F0_2D_P1(x,y)*F1_2D_P1(x,y) ;
 }
 Real DFDY0_2D_P1b(Real x , Real y)
 {
    Real val;
-   return val = 27*DFDY0_2D_P1(x,y)*F1_2D_P1(x,y)*F2_2D_P1(x,y) + 
+   return val = 27*DFDY0_2D_P1(x,y)*F1_2D_P1(x,y)*F2_2D_P1(x,y) +
                 27*DFDY1_2D_P1(x,y)*F0_2D_P1(x,y)*F2_2D_P1(x,y) +
                 27*DFDY2_2D_P1(x,y)*F0_2D_P1(x,y)*F1_2D_P1(x,y) ;
 
@@ -1473,7 +1473,7 @@ Real D2FDYY5_2D_P2(Real x , Real y)
 
 Real D2FDXX0_2D_P3(Real x , Real y)
 {
-   Real val = 18.0 -27.0*x -27.0*y; 
+   Real val = 18.0 -27.0*x -27.0*y;
    return val;
 }
 Real D2FDXX1_2D_P3(Real x , Real y)
@@ -1488,17 +1488,17 @@ Real D2FDXX2_2D_P3(Real x , Real y)
 }
 Real D2FDXX3_2D_P3(Real x , Real y)
 {
-   Real val = -45.0 +81.0*x +54.0*y; 
+   Real val = -45.0 +81.0*x +54.0*y;
    return val;
 }
 Real D2FDXX4_2D_P3(Real x , Real y)
 {
-   Real val = 36.0 -81.0*x -27.0*y; 
+   Real val = 36.0 -81.0*x -27.0*y;
    return val;
 }
 Real D2FDXX5_2D_P3(Real x , Real y)
 {
-   Real val = 27.0*y; 
+   Real val = 27.0*y;
    return val;
 }
 Real D2FDXX6_2D_P3(Real x , Real y)
@@ -1508,7 +1508,7 @@ Real D2FDXX6_2D_P3(Real x , Real y)
 }
 Real D2FDXX7_2D_P3(Real x , Real y)
 {
-   Real val = 27.0*y; 
+   Real val = 27.0*y;
    return val;
 }
 Real D2FDXX8_2D_P3(Real x , Real y)
@@ -1518,13 +1518,13 @@ Real D2FDXX8_2D_P3(Real x , Real y)
 }
 Real D2FDXX9_2D_P3(Real x , Real y)
 {
-   Real val = -54.0*y; 
+   Real val = -54.0*y;
    return val;
 }
 
 Real D2FDXY0_2D_P3(Real x , Real y)
 {
-   Real val = 18.000000 -27.000000*x -27.000000*y; 
+   Real val = 18.000000 -27.000000*x -27.000000*y;
    return val;
 }
 Real D2FDXY1_2D_P3(Real x , Real y)
@@ -1539,7 +1539,7 @@ Real D2FDXY2_2D_P3(Real x , Real y)
 }
 Real D2FDXY3_2D_P3(Real x , Real y)
 {
-   Real val = -22.5 +54.0*x +27.0*y; 
+   Real val = -22.5 +54.0*x +27.0*y;
    return val;
 }
 Real D2FDXY4_2D_P3(Real x , Real y)
@@ -1554,28 +1554,28 @@ Real D2FDXY5_2D_P3(Real x , Real y)
 }
 Real D2FDXY6_2D_P3(Real x , Real y)
 {
-   Real val = -4.500000 +27.000000*y; 
+   Real val = -4.500000 +27.000000*y;
    return val;
 }
 Real D2FDXY7_2D_P3(Real x , Real y)
 {
-   Real val = -22.5 +27.0*x +54.0*y; 
+   Real val = -22.5 +27.0*x +54.0*y;
    return val;
 }
 Real D2FDXY8_2D_P3(Real x , Real y)
 {
-   Real val = 4.5 -27.0*y; 
+   Real val = 4.5 -27.0*y;
    return val;
 }
 Real D2FDXY9_2D_P3(Real x , Real y)
 {
-   Real val = 27.0 -54.0*x -54.0*y; 
+   Real val = 27.0 -54.0*x -54.0*y;
    return val;
 }
 
 Real D2FDYY0_2D_P3(Real x , Real y)
 {
-   Real val = 18.0 -27.0*x -27.0*y; 
+   Real val = 18.0 -27.0*x -27.0*y;
    return val;
 }
 Real D2FDYY1_2D_P3(Real x , Real y)
@@ -1585,7 +1585,7 @@ Real D2FDYY1_2D_P3(Real x , Real y)
 }
 Real D2FDYY2_2D_P3(Real x , Real y)
 {
-   Real val = -9.0 +27.0*y; 
+   Real val = -9.0 +27.0*y;
    return val;
 }
 Real D2FDYY3_2D_P3(Real x , Real y)
@@ -1610,12 +1610,12 @@ Real D2FDYY6_2D_P3(Real x , Real y)
 }
 Real D2FDYY7_2D_P3(Real x , Real y)
 {
-   Real val = -45.0 +54.0*x +81.0*y; 
+   Real val = -45.0 +54.0*x +81.0*y;
    return val;
 }
 Real D2FDYY8_2D_P3(Real x , Real y)
 {
-   Real val = 36.0 -27.0*x -81.0*y; 
+   Real val = 36.0 -27.0*x -81.0*y;
    return val;
 }
 Real D2FDYY9_2D_P3(Real x , Real y)
@@ -1628,12 +1628,12 @@ Real D2FDYY9_2D_P3(Real x , Real y)
 
 Real D2FDXX0_2D_P1b(Real x, Real y)
 {
-   Real val = -54.0*y; 
+   Real val = -54.0*y;
    return val;
 }
 Real D2FDXY0_2D_P1b(Real x, Real y)
 {
-   Real val = 27.0 -54.0*x -54.0*y; 
+   Real val = 27.0 -54.0*x -54.0*y;
    return val;
 }
 Real D2FDYY0_2D_P1b(Real x, Real y)

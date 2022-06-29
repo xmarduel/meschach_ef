@@ -31,7 +31,7 @@ typedef enum
    PRBLMe_ADVECTION   = 2 ,
    PRBLMe_HELMHOLZ    = 3 ,
    PRBLMe_BURGERS     = 4
-   
+
 } PRBLMt_TYPE;
 
 static VEC *_solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeom, const BC_1D *MyBC, const RHS_1D *MyRhsFun, const ADV_1D *MyAdvFun);
@@ -120,7 +120,7 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
    SPMAT *M    = (SPMAT *)NULL;
    SPMAT *C    = (SPMAT *)NULL;
    SPMAT *M_BC = (SPMAT *)NULL;
-   
+
    SPMAT *ILU  = (SPMAT *)NULL;
    SPMAT *ICH  = (SPMAT *)NULL;
 
@@ -128,7 +128,7 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
 
    VEC  *SOL;
    VEC  *RHS;
-   
+
    VEC  *RHS_FUN;
    VEC  *RHS_BC;
 
@@ -143,7 +143,7 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
 
 
    M_BC = sp_get(MyGeom->NB_DOF,MyGeom->NB_DOF,10);
-   
+
    A = sp_get(MyGeom->NB_DOF,MyGeom->NB_DOF,10);
    S = sp_get(MyGeom->NB_DOF,MyGeom->NB_DOF,10);
    M = sp_get(MyGeom->NB_DOF,MyGeom->NB_DOF,10);
@@ -152,25 +152,25 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
    RHS_FUN = v_get(MyGeom->NB_DOF);
    RHS_BC  = v_get(MyGeom->NB_DOF);
    RHS     = v_get(MyGeom->NB_DOF);
-   
+
    SOL = v_get(MyGeom->NB_DOF);
-	
+
    /* ----- assemblage matrix and rhs ------ */
 
    M_BC = assemblage1D_matrix_fromBC(MyElt, MyGeom, MyBC, M_BC);
-   
+
    switch( problem )
    {
       case PRBLMe_LAPLACIAN:
          S = assemblage1D_matrix_Stiff1(MyElt, MyGeom, S);
          A = sp_add (S, M_BC, A);
          break;
-         
+
       case PRBLMe_BILAPLACIAN:
          S = assemblage1D_matrix_Stiff2(MyElt, MyGeom, S);
          A = sp_add (S, M_BC, A);
          break;
-         
+
       case PRBLMe_ADVECTION:
          S = assemblage1D_matrix_Stiff1(MyElt, MyGeom, S);
          C = assemblage1D_matrix_Convec(MyElt, MyGeom, C);
@@ -190,30 +190,30 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
 
          sp_output(S);
          sp_output(M);
-         
+
          A = sp_add (S, M, A);
-         
+
          break;
 
       default:
          error(E_UNKNOWN, "_solve1D_lin");
          return NULL;
    }
-   
+
    RHS_FUN = assemblage1D_vector_fun(MyElt, MyGeom, MyRhsFun, RHS_FUN);
    RHS_BC  = assemblage1D_vector_fromBC(MyElt, MyGeom, MyBC, RHS_BC);
-   
+
    RHS = v_add(RHS_FUN, RHS_BC, RHS);
-   
+
 	/*
 	printf("RHS before BC.....\n");
    v_output(RHS);
    printf("A before BC.....\n");
 	sp_output(A);
    */
-   
+
    transform1D_matrix_vector_with_bc(MyElt, MyGeom, MyBC, A, RHS);
-   
+
 	/*
 	printf("RHS after BC.....\n");
    v_output(RHS);
@@ -221,22 +221,22 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
 	sp_output(A);
 	printf(".....\n");
 	*/
-	
+
    /* show matrix with X11 */
    show_matrix(A, "A with BC");
 
-   
+
    /* ------ solve the system Ax = b   ----- */
 
    if  ( strcmp(ResolutionMethod, "DIRECT-METHOD") == 0 )
-   {     
+   {
       ICH = sp_copy(A);
 
       switch( problem )
       {
          case PRBLMe_LAPLACIAN:
-            
-            spCHfactor(ICH);  
+
+            spCHfactor(ICH);
             spCHsolve(ICH, RHS, SOL);
             break;
 
@@ -266,9 +266,9 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
    else  /* Iterativ Method */
    {
       if  ( strcmp(Preconditionning, "ICH") == 0 )
-      {     
+      {
          ICH = sp_copy(A);
-         spICHfactor(ICH);    
+         spICHfactor(ICH);
       }
 
       else if ( strcmp(Preconditionning, "ILU") == 0 )
@@ -278,7 +278,7 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
 				printf("for problem = \"Laplacien\", the matrix A should be symmetric \n");
 				printf(" -> use preferrably the ICH preconditionning + CG \n");
 			}
-			
+
          ILU = sp_copy(A);
          spILUfactor(ILU, 0.0);
       }
@@ -286,7 +286,7 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
       else if ( strcmp(Preconditionning, "NULL") == 0 )
       {
          printf("no precond for iterativ method \n");
-      }  
+      }
 
       else
       {
@@ -303,16 +303,16 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
          printf(" cg: # of iter. = %d \n\n",nb_steps);
       }
 
-      else 
+      else
 		if ( strcmp(ResolutionMethod, "CGS") == 0 )
-		{  
+		{
 			iter_xspcgs(A, ILU, RHS, eps_steps, SOL, max_steps, &nb_steps, info);
 			printf(" cgs: # of iter. = %d \n\n",nb_steps);
 		}
-			
-		else 
+
+		else
 		if ( strcmp(ResolutionMethod, "BiCGStab") == 0 )
-      {  
+      {
          iter_xspbicgstab(A, ILU, RHS, eps_steps, SOL, max_steps, &nb_steps, info);
          printf(" bicgstab: # of iter. = %d \n\n",nb_steps);
       }
@@ -324,7 +324,7 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
       }
 
       MyParams->resol_params.nb_steps = nb_steps;
-   }   
+   }
 
    /* info residu */
    {
@@ -336,7 +336,7 @@ static VEC* _solve1D_lin(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D
       printf("|| A.x - f || = %le\n", v_norm2(RESIDU) );
 
       /*printf("|| S.x || = %le\n", v_norm2(sp_mv_mlt(S,SOL,RESIDU)) );*/
-      
+
       V_FREE(RESIDU);
    }
 
@@ -376,7 +376,7 @@ VEC* _solve1D_nli(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeo
    VEC  *Un = VNULL;
 
    VEC* (*assemblage_nli)( const ELT_1D *Elt , const GEOM_1D *Geom , const VEC* a , const VEC*b , VEC *RHS );
-   
+
    PARAMS* MyParams = Params_get_staticparam(0);
 
    Real eps_steps = MyParams->resol_params.eps_steps;
@@ -389,7 +389,7 @@ VEC* _solve1D_nli(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeo
    int nb_steps_iter_nli = max_steps; // TODO: burgers outer iterations (json)
    int n;
    Real diff;
-   
+
    switch( problem )
    {
       case PRBLMe_BURGERS: assemblage_nli = assemblage1D_vector_abx; break;
@@ -401,40 +401,40 @@ VEC* _solve1D_nli(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeo
    Abc  = sp_get(MyGeom->NBSOMM, MyGeom->NBSOMM,10);
    S    = sp_get(MyGeom->NBSOMM, MyGeom->NBSOMM,10);
    M_BC = sp_get(MyGeom->NBSOMM, MyGeom->NBSOMM,10);
-   
+
    RHS = v_get(MyGeom->NBSOMM); v_zero(RHS);
    SOL = v_get(MyGeom->NBSOMM); v_zero(SOL);
 
    RHS_FUN = v_get(MyGeom->NBSOMM);
    RHS_BC  = v_get(MyGeom->NBSOMM);
    RHS_NLI = v_get(MyGeom->NBSOMM);
-   
+
    /* ----- assemblage matrix and rhs ------ */
 
    /* calculate once for all the stiff matrix */
    S = assemblage1D_matrix_Stiff1( MyElt, MyGeom, S);
    M_BC = assemblage1D_matrix_fromBC(MyElt, MyGeom, MyBC, M_BC);
-   
+
    /* calculate once for all the rhs from the source function */
    RHS_FUN = assemblage1D_vector_fun(MyElt, MyGeom, MyRhsFun, RHS_FUN);
    RHS_BC = assemblage1D_vector_fromBC(MyElt, MyGeom, MyBC, RHS_BC);
 
    A = sp_add(S, M_BC, A);
    RHS_FUN = v_add(RHS_FUN, RHS_BC, RHS_FUN);
-   
+
    /* bc */
    Abc = sp_copy2(A, Abc);
 
    /* bc */
    transform1D_matrix_with_bc(MyElt, MyGeom, MyBC, Abc);
 
-   
+
    /* ------ solve the system Ax = b   ----- */
 
    if  ( strcmp(ResolutionMethod, "DIRECT-METHOD") == 0 )
-   {  
+   {
       ICH = sp_copy(Abc);
-   
+
       spCHfactor(ICH);
    }
    else
@@ -442,7 +442,7 @@ VEC* _solve1D_nli(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeo
    {
       ICH = sp_copy(Abc);
 
-      spICHfactor(ICH);    
+      spICHfactor(ICH);
    }
    else
    if ( strcmp(Preconditionning, "ILU") == 0 )
@@ -452,7 +452,7 @@ VEC* _solve1D_nli(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeo
 
       ICH = sp_copy(Abc);
 
-      spICHfactor(ICH);     
+      spICHfactor(ICH);
    }
    else
    if ( strcmp(Preconditionning, "NULL") == 0 )
@@ -472,7 +472,7 @@ VEC* _solve1D_nli(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeo
       /*transform1D_vector_with_oldbasis( MyElt, MyGeom , Un );*/
       RHS_NLI = assemblage_nli(MyElt, MyGeom, Un, Un, RHS_NLI);    /*  UUx or UU */
       /*transform1D_vector_with_newbasis( MyElt, MyGeom , RHS_NLI );*/
-      
+
 
       RHS = v_sub(RHS_FUN, RHS_NLI, RHS);
 
@@ -486,7 +486,7 @@ VEC* _solve1D_nli(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeo
       else
 		{
 			ITER_OUTPUT_INFO *info = iter_output_info(MyParams->resol_params.iter_info, MyParams->resol_params.iter_file);
-			
+
 			if ( strcmp(ResolutionMethod, "CG") == 0 )
          {
             iter_xspcg(A, ICH, RHS, eps_steps, SOL, max_steps, &nb_steps, info);
@@ -519,8 +519,8 @@ VEC* _solve1D_nli(PRBLMt_TYPE problem, const ELT_1D *MyElt, const GEOM_1D *MyGeo
    V_FREE(RHS);
    V_FREE(RHS_BC);
    V_FREE(Un);
-   
-   
+
+
    SP_FREE(A);
    SP_FREE(S);
    SP_FREE(M_BC);

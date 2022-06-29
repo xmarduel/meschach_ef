@@ -30,12 +30,12 @@ ADV_3D* Adv3D_get(void)
       mem_bytes_list(TYPE_ADV_3D, 0, sizeof(ADV_3D), MY_LIST7);
       mem_numvar_list(TYPE_ADV_3D, 1, MY_LIST7);
    }
-   
+
 
    MyAdv->current_selected_axe1 = AXEe_X;
    MyAdv->current_selected_axe2 = AXEe_X;
    MyAdv->current_selected_axe3 = AXEe_X;
-   
+
    for (i=0; i<3; i++)
    for (j=0; j<3; j++)
    for (k=0; k<NBMAX_ADV_3D_FUNCTIONS; k++)
@@ -44,7 +44,7 @@ ADV_3D* Adv3D_get(void)
       Fun3D_init(&(MyAdv->Fun2[i][j][k]));
       Fun3D_init(&(MyAdv->Fun3[i][j][k]));
    }
-     
+
    return MyAdv;
 }
 
@@ -53,47 +53,47 @@ ADV_3D* Adv3D_get(void)
 
 ADV_3D* Adv3D_setup_from_params(const PARAMS *MyParams)
 {
-	
+
    ADV_3D *MyADV = Adv3D_get();
-	
+
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_X, MyParams->adv_params.adv1[AXEe_X][AXEe_X].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_Y, MyParams->adv_params.adv1[AXEe_X][AXEe_Y].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_X, AXEe_Z, MyParams->adv_params.adv1[AXEe_X][AXEe_Z].fundef );
-	
+
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_X, MyParams->adv_params.adv1[AXEe_Y][AXEe_X].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_Y, MyParams->adv_params.adv1[AXEe_Y][AXEe_Y].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Y, AXEe_Z, MyParams->adv_params.adv1[AXEe_Y][AXEe_Z].fundef );
-	
+
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Z, AXEe_X, MyParams->adv_params.adv1[AXEe_Z][AXEe_X].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Z, AXEe_Y, MyParams->adv_params.adv1[AXEe_Z][AXEe_Y].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_X, AXEe_Z, AXEe_Z, MyParams->adv_params.adv1[AXEe_Z][AXEe_Z].fundef );
-	
-	
+
+
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_X, MyParams->adv_params.adv2[AXEe_X][AXEe_X].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_Y, MyParams->adv_params.adv2[AXEe_X][AXEe_Y].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_X, AXEe_Z, MyParams->adv_params.adv2[AXEe_X][AXEe_Z].fundef );
-	
+
    Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_X, MyParams->adv_params.adv2[AXEe_Y][AXEe_X].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_Y, MyParams->adv_params.adv2[AXEe_Y][AXEe_Y].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Y, AXEe_Z, MyParams->adv_params.adv2[AXEe_Y][AXEe_Z].fundef );
-	
+
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Z, AXEe_X, MyParams->adv_params.adv2[AXEe_Z][AXEe_X].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Z, AXEe_Y, MyParams->adv_params.adv2[AXEe_Z][AXEe_Y].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Y, AXEe_Z, AXEe_Z, MyParams->adv_params.adv2[AXEe_Z][AXEe_Z].fundef );
-	
-	
+
+
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_X, AXEe_X, MyParams->adv_params.adv3[AXEe_X][AXEe_X].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_X, AXEe_Y, MyParams->adv_params.adv3[AXEe_X][AXEe_Y].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_X, AXEe_Z, MyParams->adv_params.adv3[AXEe_X][AXEe_Z].fundef );
-	
+
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Y, AXEe_X, MyParams->adv_params.adv3[AXEe_Y][AXEe_X].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Y, AXEe_Y, MyParams->adv_params.adv3[AXEe_Y][AXEe_Y].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Y, AXEe_Z, MyParams->adv_params.adv3[AXEe_Y][AXEe_Z].fundef );
-	
+
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Z, AXEe_X, MyParams->adv_params.adv3[AXEe_Z][AXEe_X].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Z, AXEe_Y, MyParams->adv_params.adv3[AXEe_Z][AXEe_Y].fundef );
 	Adv3D_setLUAFunction(MyADV, /*ref_e*/0, AXEe_Z, AXEe_Z, AXEe_Z, MyParams->adv_params.adv3[AXEe_Z][AXEe_Z].fundef );
-	
+
 	return MyADV;
 }
 
@@ -115,7 +115,7 @@ int Adv3D_free (ADV_3D *MyAdv)
       }
 
       free(MyAdv);
-      
+
       return EXIT_SUCCESS;
    }
 }
@@ -126,13 +126,13 @@ int Adv3D_free (ADV_3D *MyAdv)
 ADV_3D* Adv3D_setFunction      (ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUN_TYPE type, void* phi, void* clientdata)
 {
    if ( MyAdv == NULL )                  error (E_NULL, "Adv3D_setFunction");
-   
+
    if ( ref_e > NBMAX_ADV_3D_FUNCTIONS )                                error7(E_ADV_WRONGIDXNUMBER, "Adv3D_setFunction");
- 
+
    if ( !( (axe1 == AXEe_X) || (axe1 == AXEe_Y) || (axe1 == AXEe_Z) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv3D_setFunction");
    if ( !( (axe2 == AXEe_X) || (axe2 == AXEe_Y) || (axe2 == AXEe_Z) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv3D_setFunction");
    if ( !( (axe3 == AXEe_X) || (axe3 == AXEe_Y) || (axe3 == AXEe_Z) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv3D_setFunction");
-   
+
    /* set the function */
    switch(axe1)
    {
@@ -155,7 +155,7 @@ ADV_3D* Adv3D_setFunction      (ADV_3D* MyAdv, int ref_e, int axe1, int axe2, in
 
 ADV_3D *Adv3D_setCFunction      (ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_3D phi)
 {
-   return Adv3D_setFunction( MyAdv, ref_e, axe1, axe2, axe3, FUN_C_STATIONNARY, phi, NULL);   
+   return Adv3D_setFunction( MyAdv, ref_e, axe1, axe2, axe3, FUN_C_STATIONNARY, phi, NULL);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -164,7 +164,7 @@ ADV_3D *Adv3D_setCFunction      (ADV_3D* MyAdv, int ref_e, int axe1, int axe2, i
 ADV_3D *Adv3D_setLUAFunction    (ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def)
 {
    void *L = make_lua_interpreter(def, "3D");
-   
+
    return Adv3D_setFunction( MyAdv, ref_e, axe1, axe2, axe3, FUN_C_STATIONNARY, FunctionForEvaluatingLuaFunction3D, L);
 }
 
@@ -173,7 +173,7 @@ ADV_3D *Adv3D_setLUAFunction    (ADV_3D* MyAdv, int ref_e, int axe1, int axe2, i
 
 ADV_3D *Adv3D_setCFunctionTransient(ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_4D phi)
 {
-   return Adv3D_setFunction( MyAdv, ref_e, axe1, axe2, axe3, FUN_C_TRANSIENT, phi, NULL);  
+   return Adv3D_setFunction( MyAdv, ref_e, axe1, axe2, axe3, FUN_C_TRANSIENT, phi, NULL);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -182,7 +182,7 @@ ADV_3D *Adv3D_setCFunctionTransient(ADV_3D* MyAdv, int ref_e, int axe1, int axe2
 ADV_3D *Adv3D_setLUAFunctionTransient(ADV_3D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char* def)
 {
    void *L = make_lua_interpreter(def, "3D_TR");
-   
+
    return Adv3D_setFunction( MyAdv, ref_e, axe1, axe2, axe3, FUN_C_TRANSIENT, FunctionForEvaluatingLuaFunction4D, L);
 }
 
@@ -197,12 +197,12 @@ typedef FUN_3D    FUN_3D_ARRAY[3][3][NBMAX_ADV_3D_FUNCTIONS];
 Real    Adv3D_evalFunction        (const ADV_3D* MyAdv, int ref_e, int axe1 , int axe2 , int axe3 , Real x, Real y, Real z)
 {
    Real val = 0.0;
-   
+
    FUN_3D_ARRAY * axe_fun;
 
    /* check arguments */
    if ( MyAdv == NULL )    error (E_NULL, "Adv3D_evalFunction");
-   
+
    /* check arguments */
    if ( ref_e > NBMAX_ADV_3D_FUNCTIONS )                                error7(E_ADV_WRONGIDXNUMBER, "Adv3D_evalFunction");
 
@@ -228,9 +228,9 @@ Real    Adv3D_evalFunction        (const ADV_3D* MyAdv, int ref_e, int axe1 , in
 ADV_3D*  Adv3D_setTps              (ADV_3D* MyAdv, Real tps)
 {
    if ( MyAdv == NULL )  error (E_NULL, "Adv3D_setTps");
-   
+
    MyAdv->tps = tps;
- 
+
    return MyAdv;
 }
 
@@ -245,11 +245,11 @@ ADV_3D*  Adv3D_setCurrentSelectedAxe (ADV_3D* MyAdv, int axe1, int axe2, int axe
    if ( !( (axe1 == AXEe_X) || (axe1 == AXEe_Y) || (axe1 == AXEe_Z) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv3D_setCurrentSelectedAxe");
    if ( !( (axe2 == AXEe_X) || (axe2 == AXEe_Y) || (axe2 == AXEe_Z) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv3D_setCurrentSelectedAxe");
    if ( !( (axe3 == AXEe_X) || (axe3 == AXEe_Y) || (axe3 == AXEe_Z) ) ) error7(E_ADV_WRONGAXENUMBER, "Adv3D_setCurrentSelectedAxe");
-   
+
    MyAdv->current_selected_axe1 = axe1;
    MyAdv->current_selected_axe2 = axe2;
    MyAdv->current_selected_axe3 = axe3;
-   
+
    return MyAdv;
 }
 

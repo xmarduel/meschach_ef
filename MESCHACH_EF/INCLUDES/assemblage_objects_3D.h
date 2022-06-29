@@ -60,7 +60,7 @@ VEC   * assemblage3D_vector_fromBC(const ELT_3D *elt, const GEOM_3D *geom, const
 #endif
 
 /*! \fn SPMAT *  assemblage3D_matrix_Mass (const ELT_3D *elt, const GEOM_3D *geom, SPMAT *Mass   );
-* 
+*
 * \param elt   : the finite element
 * \param geom  : the geometry
 * \param Mass  : the mass matrix (output)
@@ -78,7 +78,7 @@ VEC   * assemblage3D_vector_fromBC(const ELT_3D *elt, const GEOM_3D *geom, const
 */
 
 /*! \fn SPMAT * assemblage3D_matrix_Conv_x (const ELT_3D *elt, const GEOM_3D *geom, SPMAT *Conv_x   );
-* 
+*
 * \param elt    : the finite element
 * \param geom   : the geometry
 * \param Conv_x : the convection matrix (output)
@@ -97,7 +97,7 @@ VEC   * assemblage3D_vector_fromBC(const ELT_3D *elt, const GEOM_3D *geom, const
 
 
 /*! \fn SPMAT * assemblage3D_matrix_Conv_z (const ELT_3D *elt, const GEOM_3D *geom, SPMAT *Conv_z   );
-* 
+*
 * \param elt    : the finite element
 * \param geom   : the geometry
 * \param Conv_z : the convection matrix (output)

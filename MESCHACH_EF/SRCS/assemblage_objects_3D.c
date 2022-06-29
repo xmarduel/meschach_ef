@@ -51,7 +51,7 @@ typedef enum
    ASSEMBLAGEe_STOKES_Bx = 20,
    ASSEMBLAGEe_STOKES_By = 21,
    ASSEMBLAGEe_STOKES_Bz = 22
-   
+
 } ASSEMBLAGEt_TYPE;
 
 
@@ -166,7 +166,7 @@ SPMAT* assemblage3D_matrix_Conv_y( const ELT_3D *elt , const GEOM_3D *geom , SPM
    if ( Conv_y == NULL ) error(E_NULL, "assemblage3D_matrix_Conv_y");
 
    /* delegate */
-   return _assemblage_matrix1a( ASSEMBLAGEe_CONVy , elt , geom, Conv_y);   
+   return _assemblage_matrix1a( ASSEMBLAGEe_CONVy , elt , geom, Conv_y);
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -344,19 +344,19 @@ static SPMAT* _assemblage_matrix1b( const ASSEMBLAGEt_TYPE type , const ELT_3D *
 static MAT* _systel_matrix_Mass( u_int  e , const ELT_3D *elt , const GEOM_3D *geom , MAT *Mass_el )
 {
    Real jacobien ;
- 
+
    /* initialisation Mass_el */
    m_zero(Mass_el);
-   
+
    /* calcul jacobien on elt "e" */
    jacobien =  eval_jac_on_e( e, elt, geom );
 
    /* calcul Mass_el on triangle number "e" */
    Mass_el = sm_mlt(jacobien, elt->MAT_I_I, Mass_el);
-   
+
    /* or with numerical integration  with the basis functions : */
    /*
-   for (i=0; i<elt->nb_somm_cell; i++) 
+   for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
    {
       for (m=0; m<NBPTS_GAUSS_3D_TRI; m++)
@@ -364,12 +364,12 @@ static MAT* _systel_matrix_Mass( u_int  e , const ELT_3D *elt , const GEOM_3D *g
          Mass_el->me[i][j]  -= w3D[m]*jacobien*
             elt->f_base[i](ksi3D[m],eta3D[m],psi3D[m])*
             elt->f_base[j](ksi3D[m],eta3D[m],psi3D[m])  ;
-      }   
+      }
    }
-   */   
-   
+   */
+
    return Mass_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -379,10 +379,10 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_3D *elt , const GEOM_3D 
    MAT *work_el;
 
    Real jacobien ;
-   
+
    Real transformation[3][3];
 
-   Real ksi_x, eta_x, psi_x, 
+   Real ksi_x, eta_x, psi_x,
         ksi_y, eta_y, psi_y,
         ksi_z, eta_z, psi_z;
 
@@ -393,7 +393,7 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_3D *elt , const GEOM_3D 
               2        2         2
    a = [ ksi_x  + ksi_y   + ksi_z  ] * jacobien    (Nksi*Nksi)
 
-              2         2        2 
+              2         2        2
    b = [ eta_x  +  eta_y  + eta_z  ] * jacobien    (Neta*Neta)
 
               2         2        2
@@ -409,14 +409,14 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_3D *elt , const GEOM_3D 
    f = [ eta_x.psi_x  + eta_y.psi_y + eta_z.psi_z ] * jacobien   (Neta*Npsi + Npsi*Neta)
 
 */
-   
-   
+
+
    /* alloc memory */
    work_el = m_get(elt->nb_somm_cell, elt->nb_somm_cell);
-   
+
    /* jacobien */
    jacobien = eval_jac_on_e_( e, elt, geom, transformation );
-   
+
    /*
                                    [ ksi_x , eta_x , psi_x ]
     transformation is a 3x3 matrix [ ksi_y , eta_y , psi_y ]
@@ -436,7 +436,7 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_3D *elt , const GEOM_3D 
    psi_y = transformation[1][2]; /*printf("tetra %d : psi_y = %lf \n", e, psi_y);*/
    psi_z = transformation[2][2]; /*printf("tetra %d : psi_z = %lf \n", e, psi_z);*/
 
-   
+
    c_xx = ( ksi_x*ksi_x  +  ksi_y*ksi_y  +  ksi_z*ksi_z  ) * jacobien; /*printf("c_xy = %lf \n", c_xx);*/
    c_yy = ( eta_x*eta_x  +  eta_y*eta_y  +  eta_z*eta_z  ) * jacobien; /*printf("c_yy = %lf \n", c_yy);*/
    c_zz = ( psi_x*psi_x  +  psi_y*psi_y  +  psi_z*psi_z  ) * jacobien; /*printf("c_zz = %lf \n", c_zz);*/
@@ -447,40 +447,40 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_3D *elt , const GEOM_3D 
 
    /* initialisation Stiff_el */
    m_zero(Stiff1_el);
-   
+
    Stiff1_el = m_add(Stiff1_el,sm_mlt(c_xx, elt->MAT_x_x, work_el), Stiff1_el);
    Stiff1_el = m_add(Stiff1_el,sm_mlt(c_yy, elt->MAT_y_y, work_el), Stiff1_el);
    Stiff1_el = m_add(Stiff1_el,sm_mlt(c_zz, elt->MAT_z_z, work_el), Stiff1_el);
-  
+
    Stiff1_el = m_add(Stiff1_el,sm_mlt(c_xy, elt->MAT_x_y__plus__y_x, work_el), Stiff1_el);
    Stiff1_el = m_add(Stiff1_el,sm_mlt(c_xz, elt->MAT_x_z__plus__z_x, work_el), Stiff1_el);
    Stiff1_el = m_add(Stiff1_el,sm_mlt(c_yz, elt->MAT_y_z__plus__z_y, work_el), Stiff1_el);
-   
+
    /*m_foutput(stdout, Stiff1_el);*/
 
    /* or with numerical integration  with the basis functions : */
    /*
    m_zero(work_el);
 
-   for (i=0; i<elt->nb_somm_cell; i++) 
+   for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
    {
       for (m=0; m<NBPTS_GAUSS_3D_TRI; m++)
       {
          work_el->me[i][j]  += w3D[m]*(
-          c_xx*  elt->dfdx_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdx_base[j](ksi3D[m],eta3D[m],psi3D[m])  +  
-          c_yy*  elt->dfdy_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdy_base[j](ksi3D[m],eta3D[m],psi3D[m])  +   
-          c_zz*  elt->dfdz_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdz_base[j](ksi3D[m],eta3D[m],psi3D[m])  + 
-          c_xy*( elt->dfdx_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdy_base[j](ksi3D[m],eta3D[m],psi3D[m])  +  
-                 elt->dfdy_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdx_base[j](ksi3D[m],eta3D[m],psi3D[m]) )+  
+          c_xx*  elt->dfdx_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdx_base[j](ksi3D[m],eta3D[m],psi3D[m])  +
+          c_yy*  elt->dfdy_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdy_base[j](ksi3D[m],eta3D[m],psi3D[m])  +
+          c_zz*  elt->dfdz_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdz_base[j](ksi3D[m],eta3D[m],psi3D[m])  +
+          c_xy*( elt->dfdx_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdy_base[j](ksi3D[m],eta3D[m],psi3D[m])  +
+                 elt->dfdy_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdx_base[j](ksi3D[m],eta3D[m],psi3D[m]) )+
           c_xz*( elt->dfdx_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdz_base[j](ksi3D[m],eta3D[m],psi3D[m])  +
-                 elt->dfdz_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdx_base[j](ksi3D[m],eta3D[m],psi3D[m]) )+ 
+                 elt->dfdz_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdx_base[j](ksi3D[m],eta3D[m],psi3D[m]) )+
           c_yz*( elt->dfdy_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdz_base[j](ksi3D[m],eta3D[m],psi3D[m])  +
                  elt->dfdz_base[i](ksi3D[m],eta3D[m],psi3D[m])*elt->dfdy_base[j](ksi3D[m],eta3D[m],psi3D[m]) )
                                        ) ;
-      }  
+      }
    }
-    
+
    m_sub(work_el,Stiff1_el,work_el);
    for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
@@ -493,13 +493,13 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_3D *elt , const GEOM_3D 
 
    m_foutput(stdout, work_el);
    */
-   
+
    /* free memory */
    M_FREE(work_el);
 
-      
+
    return Stiff1_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -507,7 +507,7 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_3D *elt , const GEOM_3D 
 static MAT* _systel_matrix_Conv_x( u_int  e , const ELT_3D *elt , const GEOM_3D *geom , MAT *Conv_x_el )
 {
    MAT *work_el;
-   
+
    Real jacobien ;
 
    Real transformation[3][3];
@@ -515,10 +515,10 @@ static MAT* _systel_matrix_Conv_x( u_int  e , const ELT_3D *elt , const GEOM_3D 
 
    /* alloc memory */
    work_el = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    /* initialisation Conv_x_el */
    m_zero(Conv_x_el);
-   
+
    /* calcul jacobien on elt "e" */
    jacobien = eval_jac_on_e_( e, elt, geom, transformation );
 
@@ -527,23 +527,23 @@ static MAT* _systel_matrix_Conv_x( u_int  e , const ELT_3D *elt , const GEOM_3D 
    eta_x = transformation[0][1];
    psi_x = transformation[0][2];
 
- 
+
    Conv_x_el = m_add(Conv_x_el, sm_mlt( (jacobien*ksi_x),elt->MAT_I_x,work_el), Conv_x_el);
    Conv_x_el = m_add(Conv_x_el, sm_mlt( (jacobien*eta_x),elt->MAT_I_y,work_el), Conv_x_el);
    Conv_x_el = m_add(Conv_x_el, sm_mlt( (jacobien*psi_x),elt->MAT_I_z,work_el), Conv_x_el);
-   
-   /*   
+
+   /*
    Conv_x_el = |Jac|.bx.(ksi_x.N_Nx + eta_x.N_Ny + psi_x.N_Nz) ;
    Conv_y_el = |Jac|.by.(ksi_y.N_Nx + eta_y.N_Ny + psi_y.N_Nz) ;
-   Conv_z_el = |Jac|.bz.(ksi_z.N_Nx + eta_z.N_Ny + psi_z.N_Nz) ;     
+   Conv_z_el = |Jac|.bz.(ksi_z.N_Nx + eta_z.N_Ny + psi_z.N_Nz) ;
    */
-   
-   
+
+
    /* or with numerical integration  with the basis functions : */
    /*
    m_zero(work_el);
-   
-   for (i=0; i<elt->nb_somm_cell; i++) 
+
+   for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
    {
       for (m=0; m<NBPTS_GAUSS_3D_TRI; m++)
@@ -570,12 +570,12 @@ static MAT* _systel_matrix_Conv_x( u_int  e , const ELT_3D *elt , const GEOM_3D 
 
    m_foutput(stdout, work_el);
    */
-   
+
    /* free memory */
    M_FREE(work_el);
-   
+
    return Conv_x_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -583,18 +583,18 @@ static MAT* _systel_matrix_Conv_x( u_int  e , const ELT_3D *elt , const GEOM_3D 
 static MAT* _systel_matrix_Conv_y( u_int  e , const ELT_3D *elt , const GEOM_3D *geom , MAT *Conv_y_el )
 {
    MAT *work_el;
-   
+
    Real jacobien ;
-   
+
    Real transformation[3][3];
    Real ksi_y, eta_y, psi_y ;
-   
+
    /* alloc memory */
    work_el = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    /* initialisation Conv_x_el */
    m_zero(Conv_y_el);
-   
+
    /* calcul jacobien on elt "e" */
    jacobien = eval_jac_on_e_( e, elt, geom, transformation );
 
@@ -603,23 +603,23 @@ static MAT* _systel_matrix_Conv_y( u_int  e , const ELT_3D *elt , const GEOM_3D 
    eta_y = transformation[1][1];
    psi_y = transformation[1][2];
 
-   
+
    Conv_y_el = m_add(Conv_y_el, sm_mlt( (jacobien*ksi_y),elt->MAT_I_x,work_el), Conv_y_el);
    Conv_y_el = m_add(Conv_y_el, sm_mlt( (jacobien*eta_y),elt->MAT_I_y,work_el), Conv_y_el);
    Conv_y_el = m_add(Conv_y_el, sm_mlt( (jacobien*psi_y),elt->MAT_I_z,work_el), Conv_y_el);
-   
+
    /* or with numerical integration  with the basis functions :
    m_zero(work_el);
-   
-   for (i=0; i<element->nb_somm_cell; i++) 
+
+   for (i=0; i<element->nb_somm_cell; i++)
    for (j=0; j<element->nb_somm_cell; j++)
    {
      for (m=0; m<NBPTS_GAUSS_3D_TRI; m++)
      {
         xx[m] = x1 + (x2-x1)*ksi3D[m] + (x3-x1)*eta3D[m] + (x4-x1)*psi3D[m];
         yy[m] = y1 + (y2-y1)*ksi3D[m] + (y3-y1)*eta3D[m] + (y4-y1)*psi3D[m] ;
-        zz[m] = z1 + (z2-z1)*ksi3D[m] + (z3-z1)*eta3D[m] + (z4-z1)*psi3D[m] ; 
-        
+        zz[m] = z1 + (z2-z1)*ksi3D[m] + (z3-z1)*eta3D[m] + (z4-z1)*psi3D[m] ;
+
         work_el->me[i][j]  += w[m]*jacobien*
            by(xx[m],yy[m],zz[m])*
            element->f_base[i](ksi3D[m],eta3D[m],psi3D[m])*   (
@@ -642,12 +642,12 @@ static MAT* _systel_matrix_Conv_y( u_int  e , const ELT_3D *elt , const GEOM_3D 
 
    m_foutput(stdout, work_el);
    */
-   
+
    /* free memory */
    M_FREE(work_el);
-   
+
    return Conv_y_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -655,18 +655,18 @@ static MAT* _systel_matrix_Conv_y( u_int  e , const ELT_3D *elt , const GEOM_3D 
 static MAT* _systel_matrix_Conv_z( u_int  e , const ELT_3D *elt , const GEOM_3D *geom , MAT *Conv_z_el )
 {
    MAT *work_el;
-   
+
    Real jacobien ;
 
    Real transformation[3][3];
    Real ksi_z, eta_z, psi_z ;
-      
+
    /* alloc memory */
    work_el = m_get(elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    /* initialisation Conv_x_el */
    m_zero(Conv_z_el);
-   
+
    /* calcul jacobien on elt "e" */
    jacobien = eval_jac_on_e_( e, elt, geom, transformation );
 
@@ -674,16 +674,16 @@ static MAT* _systel_matrix_Conv_z( u_int  e , const ELT_3D *elt , const GEOM_3D 
    ksi_z = transformation[2][0];
    eta_z = transformation[2][1];
    psi_z = transformation[2][2];
-   
-   
+
+
    Conv_z_el = m_add(Conv_z_el, sm_mlt( (jacobien*ksi_z),elt->MAT_I_x,work_el), Conv_z_el);
    Conv_z_el = m_add(Conv_z_el, sm_mlt( (jacobien*eta_z),elt->MAT_I_y,work_el), Conv_z_el);
    Conv_z_el = m_add(Conv_z_el, sm_mlt( (jacobien*psi_z),elt->MAT_I_z,work_el), Conv_z_el);
-   
+
    /* or with numerical integration  with the basis functions :
    m_zero(work_el);
-   
-   for (i=0; i<element->nb_somm_cell; i++) 
+
+   for (i=0; i<element->nb_somm_cell; i++)
    for (j=0; j<element->nb_somm_cell; j++)
    {
       for (m=0; m<NBPTS_GAUSS_3D_TRI; m++)
@@ -710,10 +710,10 @@ static MAT* _systel_matrix_Conv_z( u_int  e , const ELT_3D *elt , const GEOM_3D 
 
    m_foutput(stdout, work_el);
    */
-   
+
    /* free memory */
    M_FREE(work_el);
-   
+
    return Conv_z_el;
 }
 
@@ -748,7 +748,7 @@ static MAT * _systel_matrix_Conv_x_fun( u_int e , const ELT_3D *elt , const GEOM
    ksi_x =  transformation[0][0];
    eta_x =  transformation[0][1];
    psi_x =  transformation[0][2];
-   
+
    /* initialisation Conv_x_el */
    m_zero(Conv_x_el);
 
@@ -897,7 +897,7 @@ static MAT * _systel_matrix_Conv_G_fun( u_int e , const ELT_3D *elt , const GEOM
    Real transformation[3][3];
    Real d_ksi, d_eta, d_psi;
    int row;
-   
+
    Real cell_size;
    Real cell_center[3];
    Real bG;
@@ -1134,7 +1134,7 @@ static SPMAT * _assemblage_matrix2( ASSEMBLAGEt_TYPE type , const ELT_3D *elt , 
 static TENSOR*  _systel_matrix_AUx  ( u_int e , const ELT_3D *elt , const GEOM_3D *geom , TENSOR* M_el )
 {
    Real jacobien ;
-   
+
    Real transformation[3][3];
    Real ksi_x, eta_x, psi_x ;
 
@@ -1142,7 +1142,7 @@ static TENSOR*  _systel_matrix_AUx  ( u_int e , const ELT_3D *elt , const GEOM_3
 
    /* mem alloc */
    work_el = ts_get(elt->nb_somm_cell,elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    /* calcul jacobien on elt "e" */
    jacobien = eval_jac_on_e_ ( e, elt, geom, transformation );
 
@@ -1153,11 +1153,11 @@ static TENSOR*  _systel_matrix_AUx  ( u_int e , const ELT_3D *elt , const GEOM_3
 
    /* init */
    M_el = ts_zero(M_el);
-   
+
    ts_add( M_el, sts_mlt( ksi_x*jacobien, elt->TENSOR_I_x_I, work_el), M_el);
    ts_add( M_el, sts_mlt( eta_x*jacobien, elt->TENSOR_I_y_I, work_el), M_el);
    ts_add( M_el, sts_mlt( psi_x*jacobien, elt->TENSOR_I_z_I, work_el), M_el);
-   
+
    /* or with numerical integration  with the basis functions : */
    /*
    jacobien = 1.0;
@@ -1190,7 +1190,7 @@ static TENSOR*  _systel_matrix_AUx  ( u_int e , const ELT_3D *elt , const GEOM_3
    m3_foutput(stdout, M_el);
    exit(0);
    */
-                                          
+
    /* free mem */
    TS_FREE(work_el);
 
@@ -1212,7 +1212,7 @@ static TENSOR*  _systel_matrix_AUy  ( u_int e , const ELT_3D *elt , const GEOM_3
 
    /* mem alloc */
    work_el = ts_get(elt->nb_somm_cell,elt->nb_somm_cell,elt->nb_somm_cell);
-   
+
    /* calcul jacobien on elt "e" */
    jacobien = eval_jac_on_e_ ( e, elt, geom, transformation );
 
@@ -1223,11 +1223,11 @@ static TENSOR*  _systel_matrix_AUy  ( u_int e , const ELT_3D *elt , const GEOM_3
 
    /* init */
    ts_zero(M_el);
-   
+
    ts_add( M_el, sts_mlt( ksi_y*jacobien, elt->TENSOR_I_x_I, work_el), M_el);
    ts_add( M_el, sts_mlt( eta_y*jacobien, elt->TENSOR_I_y_I, work_el), M_el);
    ts_add( M_el, sts_mlt( psi_y*jacobien, elt->TENSOR_I_z_I, work_el), M_el);
-   
+
    /* or with numerical integration  with the basis functions : */
    /*
    for (i=0; i<elt->nb_somm_cell; i++)
@@ -1545,8 +1545,8 @@ static TENSOR*  _systel_matrix_A_U  ( u_int e , const ELT_3D *elt , const GEOM_3
    */
    /* don't forget the jacobian */
    /*sts_mlt( jacobien, M_el, M_el );*/
-    
-   
+
+
    /*
    for (i=0; i<elt->nb_somm_cell; i++)
    for (j=0; j<elt->nb_somm_cell; j++)
@@ -1557,7 +1557,7 @@ static TENSOR*  _systel_matrix_A_U  ( u_int e , const ELT_3D *elt , const GEOM_3
    m3_foutput(stdout, M_el);
    exit(0);
    */
-   
+
    return M_el;
 }
 
@@ -1567,7 +1567,7 @@ static TENSOR*  _systel_matrix_A_U  ( u_int e , const ELT_3D *elt , const GEOM_3
 VEC* assemblage3D_vector_fun( const ELT_3D *elt , const GEOM_3D *geom , const RHS_3D *RhsFun , VEC *RHS )
 {
    int e; int i;
-   
+
    VEC *RHS_el;
 
    /* check */
@@ -1578,22 +1578,22 @@ VEC* assemblage3D_vector_fun( const ELT_3D *elt , const GEOM_3D *geom , const RH
 
    /* mem alloc */
    RHS_el = v_get(elt->nb_somm_cell);
-   
+
    /* initialisation of Mass */
    v_zero(RHS);
-   
+
    for(e=0; e<geom->NBELMT; e++)
-   { 
+   {
       RHS_el = _systel_vector_fun( e , elt , geom , RhsFun , RHS_el );
-      
+
       for (i=0; i<elt->nb_somm_cell; i++)
-      { 
+      {
          RHS->ve[geom->NSELMT->im[e][i]] += RHS_el->ve[i] ;
       }
    }
-   
+
    V_FREE(RHS_el) ;
-   
+
    return RHS;
 }
 
@@ -1603,7 +1603,7 @@ VEC* assemblage3D_vector_fun( const ELT_3D *elt , const GEOM_3D *geom , const RH
 static VEC* _systel_vector_fun( u_int  e , const ELT_3D *elt , const GEOM_3D *geom , const RHS_3D *RhsFun , VEC *Rhs_el )
 {
    int  m,k;
-   
+
    Real xx[NBPTS_GAUSS_3D_TRI],
         yy[NBPTS_GAUSS_3D_TRI],
         zz[NBPTS_GAUSS_3D_TRI];
@@ -1616,12 +1616,12 @@ static VEC* _systel_vector_fun( u_int  e , const ELT_3D *elt , const GEOM_3D *ge
    IMAT* NSELMT = geom->NSELMT; /* alias */
 
    Real jacobien ;
-   
+
 
    int axe = RhsFun->current_selected_axe;
    /* check */
    if ( (axe != AXEe_X) && (axe != AXEe_Y) && (axe != AXEe_Z) ) error6(E_RHS_WRONGAXENUMBER, "_systel_vector_Rhs");
-      
+
    /* calcul jacobien on elt "e" */
    jacobien = eval_jac_on_e ( e, elt, geom );
 
@@ -1659,7 +1659,7 @@ static VEC* _systel_vector_fun( u_int  e , const ELT_3D *elt , const GEOM_3D *ge
    }
 
    Rhs_el = sv_mlt(jacobien, Rhs_el, Rhs_el);
-   
+
    /* If the Source is a constant function : */
    /*
    for (k=0; k<elt->nb_somm_cell; k++)
@@ -1667,9 +1667,9 @@ static VEC* _systel_vector_fun( u_int  e , const ELT_3D *elt , const GEOM_3D *ge
       SCM_el->ve[k] = Rhs3D_evalFunction( RhsFun, 0, axe, 0.0,0.0,0.0) * jacobien * elt->VEC_Scmbr->ve[k] ;
    }
    */
-   
+
    return Rhs_el;
-} 
+}
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -1816,7 +1816,7 @@ static VEC* _systel_vector_abx( u_int  e , const ELT_3D *elt , const GEOM_3D *ge
 
    M_FREE(ab);
    TS_FREE(TENSOR_el);
-  
+
    return Rhs_el;
 }
 
@@ -1942,7 +1942,7 @@ SPMAT *_assemblage_matrix3( ASSEMBLAGEt_TYPE type , const ELT_3D *elt2 , const G
    MAT *B_el;
    MAT* (*_systel_matrix_)( u_int e , const ELT_3D *elt2 , const GEOM_3D *geom2 ,
                                       const ELT_3D *elt1 , const GEOM_3D *geom1 , MAT *B_el );
-   
+
    /* check */
    if ( elt2    == NULL ) error(E_NULL, "_assemblage_matrix3");
    if ( geom2   == NULL ) error(E_NULL, "_assemblage_matrix3");
@@ -1957,7 +1957,7 @@ SPMAT *_assemblage_matrix3( ASSEMBLAGEt_TYPE type , const ELT_3D *elt2 , const G
       case ASSEMBLAGEe_STOKES_Bx : _systel_matrix_ = _systel_matrix_Conv_x_elt2elt1 ; break;
       case ASSEMBLAGEe_STOKES_By : _systel_matrix_ = _systel_matrix_Conv_y_elt2elt1 ; break;
       case ASSEMBLAGEe_STOKES_Bz : _systel_matrix_ = _systel_matrix_Conv_z_elt2elt1 ; break;
-      
+
       default: error(E_UNKNOWN, "_assemblage_matrix3");
    }
 
@@ -2005,7 +2005,7 @@ SPMAT *assemblage3D_matrix_Conv_x_elt2elt1( const ELT_3D *elt2 , const GEOM_3D *
    if ( Bx      == NULL ) error(E_NULL, "assemblage3D_matrix_Conv_x_elt2elt1");
    /* test compatibility geom1 and geom 2 */
    if ( geom1->NBELMT != geom2->NBELMT ) error(E_SIZES, "assemblage3D_matrix_Conv_x_elt2elt1");
-   
+
    /* delegate */
    return _assemblage_matrix3( ASSEMBLAGEe_STOKES_Bx , elt2 , geom2 , elt1 , geom1 , Bx );
 }
@@ -2013,7 +2013,7 @@ SPMAT *assemblage3D_matrix_Conv_x_elt2elt1( const ELT_3D *elt2 , const GEOM_3D *
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-SPMAT *assemblage3D_matrix_Conv_y_elt2elt1( const ELT_3D *elt2 , const GEOM_3D *geom2 , 
+SPMAT *assemblage3D_matrix_Conv_y_elt2elt1( const ELT_3D *elt2 , const GEOM_3D *geom2 ,
                                             const ELT_3D *elt1 , const GEOM_3D *geom1 , SPMAT *By )
 {
    /* check */
@@ -2032,7 +2032,7 @@ SPMAT *assemblage3D_matrix_Conv_y_elt2elt1( const ELT_3D *elt2 , const GEOM_3D *
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-SPMAT *assemblage3D_matrix_Conv_z_elt2elt1( const ELT_3D *elt2 , const GEOM_3D *geom2 , 
+SPMAT *assemblage3D_matrix_Conv_z_elt2elt1( const ELT_3D *elt2 , const GEOM_3D *geom2 ,
                                             const ELT_3D *elt1 , const GEOM_3D *geom1 , SPMAT *Bz )
 {
    /* check */
@@ -2051,20 +2051,20 @@ SPMAT *assemblage3D_matrix_Conv_z_elt2elt1( const ELT_3D *elt2 , const GEOM_3D *
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-MAT* _systel_matrix_Conv_x_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3D *geom2 , 
+MAT* _systel_matrix_Conv_x_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3D *geom2 ,
                                                const ELT_3D *elt1 , const GEOM_3D *geom1 , MAT *Bx_el )
 {
    Real jacobien ;
 
    Real transformation[3][3];
    Real ksi_x, eta_x, psi_x ;
-   
+
    MAT* work_el = m_get(elt1->nb_somm_cell,elt2->nb_somm_cell);
-   
-   
+
+
    /* init Bx_el */
    m_zero(Bx_el);
-   
+
    /* calcul jacobien on elt "e" */
    jacobien =  eval_jac_on_e_ ( e, elt1, geom1, transformation );
 
@@ -2094,7 +2094,7 @@ MAT* _systel_matrix_Conv_x_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3
              elt1-> f_base[i](ksi3D[m],eta3D[m],psi3D[m])* (
                   ksi_x*elt2->dfdx_base[j](ksi3D[m],eta3D[m],psi3D[m]) +
                   eta_x*elt2->dfdy_base[j](ksi3D[m],eta3D[m],psi3D[m]) +
-                  psi_x*elt2->dfdz_base[j](ksi3D[m],eta3D[m],psi3D[m]) ); 
+                  psi_x*elt2->dfdz_base[j](ksi3D[m],eta3D[m],psi3D[m]) );
        }
    }
 
@@ -2109,27 +2109,27 @@ MAT* _systel_matrix_Conv_x_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3
       }
    }
    m_foutput(stdout, work_el);
-   */ 
+   */
 
    M_FREE(work_el);
-   
+
    return Bx_el;
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-MAT* _systel_matrix_Conv_y_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3D *geom2 , 
+MAT* _systel_matrix_Conv_y_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3D *geom2 ,
                                                const ELT_3D *elt1 , const GEOM_3D *geom1 , MAT *By_el )
 {
    Real jacobien ;
 
    Real transformation[3][3];
    Real ksi_y, eta_y, psi_y ;
-   
+
    MAT* work_el = m_get(elt1->nb_somm_cell,elt2->nb_somm_cell);
-   
-   
+
+
    /* calcul jacobien on elt "e" */
    jacobien =  eval_jac_on_e_ ( e, elt1, geom1, transformation );
 
@@ -2140,7 +2140,7 @@ MAT* _systel_matrix_Conv_y_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3
 
    /* init By_el */
    m_zero(By_el);
-   
+
    /* with exact integration */
    By_el = m_add(By_el, sm_mlt( (jacobien*ksi_y), elt2->MAT_I_x_PM1dP,work_el), By_el);
    By_el = m_add(By_el, sm_mlt( (jacobien*eta_y), elt2->MAT_I_y_PM1dP,work_el), By_el);
@@ -2177,14 +2177,14 @@ MAT* _systel_matrix_Conv_y_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3
     */
 
    M_FREE(work_el);
-   
+
    return By_el;
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-MAT* _systel_matrix_Conv_z_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3D *geom2 , 
+MAT* _systel_matrix_Conv_z_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3D *geom2 ,
                                                const ELT_3D *elt1 , const GEOM_3D *geom1 , MAT *Bz_el )
 {
    Real jacobien ;
@@ -2203,10 +2203,10 @@ MAT* _systel_matrix_Conv_z_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3
    eta_z = transformation[2][1]; /*printf("tri %d : eta_z = %lf \n", e, eta_z);*/
    psi_z = transformation[2][2]; /*printf("tri %d : psi_z = %lf \n", e, psi_z);*/
 
-   
+
    /* init Bz_el */
    m_zero(Bz_el);
-   
+
    /* with exact integration */
    Bz_el = m_add(Bz_el, sm_mlt( (jacobien*ksi_z), elt2->MAT_I_x_PM1dP,work_el), Bz_el);
    Bz_el = m_add(Bz_el, sm_mlt( (jacobien*eta_z), elt2->MAT_I_y_PM1dP,work_el), Bz_el);
@@ -2243,7 +2243,7 @@ MAT* _systel_matrix_Conv_z_elt2elt1( u_int e , const ELT_3D *elt2 , const GEOM_3
     */
 
    M_FREE(work_el);
-   
+
    return Bz_el;
 }
 
@@ -2339,7 +2339,7 @@ static Real eval_jac_on_e_ ( int e , const ELT_3D *element , const GEOM_3D *geom
                                    [ ksi_x , eta_x , psi_x ]
     transformation is a 3x3 matrix [ ksi_y , eta_y , psi_y ]
                                    [ ksi_z , eta_z , psi_z ]
-         
+
    */
 
    Real x1,x2,x3,x4 ;
@@ -2455,7 +2455,7 @@ static Real element_size( int e, const ELT_3D *elt, const GEOM_3D *geom , Real c
    x2 = XYZSOMM->me[ NSELMT->im[e][1] ][0] ;
    x3 = XYZSOMM->me[ NSELMT->im[e][2] ][0] ;
    x4 = XYZSOMM->me[ NSELMT->im[e][3] ][0] ;
-   
+
    y1 = XYZSOMM->me[ NSELMT->im[e][0] ][1] ;
    y2 = XYZSOMM->me[ NSELMT->im[e][1] ][1] ;
    y3 = XYZSOMM->me[ NSELMT->im[e][2] ][1] ;
@@ -2471,7 +2471,7 @@ static Real element_size( int e, const ELT_3D *elt, const GEOM_3D *geom , Real c
    surfABD = fabs( (y4-y1)*(x2-x1) - (x4-x1)*(y2-y1) );
    surfACD = fabs( (y4-y1)*(x3-x1) - (x4-x1)*(y3-y1) );
    surfBCD = fabs( (y4-y2)*(x3-x2) - (x4-x2)*(y3-y2) );
-   
+
    elt_size1 = ( surfABC > surfABD ? surfABC : surfABD );
    elt_size2 = ( surfACD > surfBCD ? surfACD : surfBCD );
    elt_size  = ( elt_size1 > elt_size2 ? elt_size1 : elt_size2 );
@@ -2480,7 +2480,7 @@ static Real element_size( int e, const ELT_3D *elt, const GEOM_3D *geom , Real c
    center[0] = ( x1+x2+x3+x4 )/4.0;
    center[1] = ( y1+y2+y3+y4 )/4.0;
    center[2] = ( z1+z2+z3+z4 )/4.0;
-   
+
    /* return */
    return sqrt(elt_size);
 }
@@ -2491,20 +2491,20 @@ static Real element_size( int e, const ELT_3D *elt, const GEOM_3D *geom , Real c
 SPMAT * assemblage3D_matrix_fromBC(const ELT_3D *elt, const GEOM_3D *geom, const BC_3D *BC, SPMAT *MassBC)
 {
    int axe;
-   
+
    /* check */
    if ( elt    == NULL ) error(E_NULL, "assemblage3D_matrix_fromBC");
    if ( geom   == NULL ) error(E_NULL, "assemblage3D_matrix_fromBC");
    if ( BC     == NULL ) error(E_NULL, "assemblage3D_matrix_fromBC");
    if ( MassBC == NULL ) error(E_NULL, "assemblage3D_matrix_fromBC");
-   
+
    axe = BC->BC_cauchy->current_selected_axe;
    /* conditions aux limites de Cauchy */
    if ( Bc3D_hasCauchyBC(BC, axe) )
    {
       apply_Bc3D_cauchy_on_mat  (axe, elt, geom, BC, MassBC);
    }
-   
+
    axe = BC->BC_robin->current_selected_axe;
    /* conditions aux limites de Robin */
    if ( Bc3D_hasRobinBC(BC, axe) )
@@ -2521,7 +2521,7 @@ SPMAT * assemblage3D_matrix_fromBC(const ELT_3D *elt, const GEOM_3D *geom, const
 VEC   * assemblage3D_vector_fromBC(const ELT_3D *elt, const GEOM_3D *geom, const BC_3D *BC, VEC *RHS)
 {
    int axe;
-   
+
    /* check */
    if ( elt    == NULL ) error(E_NULL, "assemblage3D_vector_fromBC");
    if ( geom   == NULL ) error(E_NULL, "assemblage3D_vector_fromBC");
@@ -2534,7 +2534,7 @@ VEC   * assemblage3D_vector_fromBC(const ELT_3D *elt, const GEOM_3D *geom, const
    {
       apply_Bc3D_neumann_on_rhs  (axe, elt, geom, BC, RHS);
    }
-   
+
    axe = BC->BC_robin->current_selected_axe;
    /* conditions aux limites de Robin */
    if ( Bc3D_hasRobinBC(BC, axe) )
@@ -2542,7 +2542,7 @@ VEC   * assemblage3D_vector_fromBC(const ELT_3D *elt, const GEOM_3D *geom, const
       apply_Bc3D_robin_on_rhs  (axe, elt, geom, BC, RHS);
    }
 
-   return RHS;  
+   return RHS;
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
@@ -2554,96 +2554,96 @@ static Real eval_jac_on_face  ( int f , const ELT_3D *element , const GEOM_3D *g
    /*
     Triangle (AB;AC) in R3 <-> Base triangle in R2
     */
-   
+
    Real A[3], B[3], C[3];
    Real AB[3], AC[3], ABcrossAC[3], norm_ABcrossAC ;
-   
+
    Real transformation[3][3];
    Real A_11, A_21, A_31;
-   
+
    Real jacobien ;
-   
+
    MAT*  XYSOMM = geom->XYSOMM; /* alias */
    IMAT* NSFACE = geom->NSFACE; /* alias */
-   
+
    /* calcul jacobien */
    A[0] = XYSOMM->me[NSFACE->im[f][0]][0] ;
    A[1] = XYSOMM->me[NSFACE->im[f][0]][1] ;
    A[2] = XYSOMM->me[NSFACE->im[f][0]][2] ;
-   
+
    B[0] = XYSOMM->me[NSFACE->im[f][1]][0] ;
    B[1] = XYSOMM->me[NSFACE->im[f][1]][1] ;
    B[2] = XYSOMM->me[NSFACE->im[f][1]][2] ;
-   
+
    C[0] = XYSOMM->me[NSFACE->im[f][2]][0] ;
    C[1] = XYSOMM->me[NSFACE->im[f][2]][1] ;
    C[2] = XYSOMM->me[NSFACE->im[f][2]][2] ;
-   
+
    face_center[0] = (A[0]+B[0]+C[0])/3.0 ;
    face_center[1] = (A[1]+B[1]+C[1])/3.0 ;
    face_center[2] = (A[2]+B[2]+C[2])/3.0 ;
-   
+
    AB[0] = B[0] - A[0] ;
    AB[1] = B[1] - A[1] ;
    AB[2] = B[2] - A[2] ;
-   
+
    AC[0] = C[0] - A[0] ;
    AC[1] = C[1] - A[1] ;
    AC[2] = C[2] - A[2] ;
-   
+
    ABcrossAC[0] = AB[1]*AC[2] - AB[2]*AC[1];
    ABcrossAC[1] = AB[2]*AC[0] - AB[0]*AC[2];
    ABcrossAC[2] = AB[0]*AC[1] - AB[1]*AC[0];
-   
+
    norm_ABcrossAC = sqrt( ABcrossAC[0]*ABcrossAC[0] + ABcrossAC[1]*ABcrossAC[1] + ABcrossAC[2]*ABcrossAC[2] );
-   
+
    /*
     printf("A = [ %lf - %lf - %lf ] \n", A[0],A[1],A[2]);
     printf("B = [ %lf - %lf - %lf ] \n", B[0],B[1],B[2]);
     printf("C = [ %lf - %lf - %lf ] \n", C[0],C[1],C[2]);
     */
-   
+
    /*
     printf("norm_ABcrossAC = %lf \n", norm_ABcrossAC);
     */
-   
+
 #ifdef _DEBUG
    assert( norm_ABcrossAC > 0.0 );
 #endif
-   
+
    ABcrossAC[0] /= norm_ABcrossAC;
    ABcrossAC[1] /= norm_ABcrossAC;
    ABcrossAC[2] /= norm_ABcrossAC;
-   
+
    transformation[0][0] = AB[0];
    transformation[1][0] = AB[1];
    transformation[2][0] = AB[2];
-   
+
    transformation[0][1] = AC[0];
    transformation[1][1] = AC[1];
    transformation[2][1] = AC[2];
-   
+
    transformation[0][2] = ABcrossAC[0];
    transformation[1][2] = ABcrossAC[1];
    transformation[2][2] = ABcrossAC[2];
-   
+
    A_11 = transformation[1][1]*transformation[2][2] - transformation[2][1]*transformation[1][2] ;
    A_21 = transformation[0][1]*transformation[2][2] - transformation[2][1]*transformation[0][2] ;
    A_31 = transformation[0][1]*transformation[1][2] - transformation[1][1]*transformation[0][2] ;
-   
-   
+
+
    jacobien = transformation[0][0] * A_11  -
    transformation[1][0] * A_21  +
    transformation[2][0] * A_31  ;
-   
+
 #ifdef _DEBUG
    assert( jacobien > 0.0 );
 #endif
-   
+
    /*
     printf("jacobien for face No %d  = %lf (count = %d)\n", f,jacobien, ++count);
     */
-   
+
    return jacobien;
 }
 
@@ -2658,10 +2658,10 @@ static void apply_Bc3D_neumann_on_rhs  (int axe, const ELT_3D *elt , const GEOM_
    int i,a;
    Real centrum[3],jac, BCval;
    VEC *SCM_ar = v_get(elt->nb_somm_face); /* integration sur les aretes pour cl de Neumann */
-   
+
    IVEC *REF_A  = geom->REF_A;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    /* process */
    for( a=0 ; a<geom->NBFACE ; a++ )
    {
@@ -2669,16 +2669,16 @@ static void apply_Bc3D_neumann_on_rhs  (int axe, const ELT_3D *elt , const GEOM_
       {
          jac   = eval_jac_on_face  ( a , elt , geom , centrum);
          BCval = Bc3D_evalFunction1(BC, BC_3De_NEUMANN, REF_A->ive[a], axe, centrum[0],centrum[1],centrum[2]);
-         
+
          sv_mlt(  BCval * jac , elt->eltDM1->VEC_I, SCM_ar);
-         
+
          for(i=0; i<elt->nb_somm_face; i++)
          {
             RHS->ve[ NSFACE->im[a][i] ] += SCM_ar->ve[i] ;
          }
       }
    }
-   
+
    V_FREE(SCM_ar);
 }
 
@@ -2690,10 +2690,10 @@ static void apply_Bc3D_robin_on_rhs    (int axe, const ELT_3D *elt , const GEOM_
    int i,a;
    Real centrum[3],jac, BCval;
    VEC *SCM_ar = v_get(elt->nb_somm_face); /* integration sur les aretes pour cl de Robin */
-   
+
    IVEC *REF_A  = geom->REF_A;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    /* process */
    for( a=0 ; a<geom->NBFACE ; a++ )
    {
@@ -2701,16 +2701,16 @@ static void apply_Bc3D_robin_on_rhs    (int axe, const ELT_3D *elt , const GEOM_
       {
          jac   = eval_jac_on_face  ( a , elt , geom , centrum); /* Jacobien de la transformation entre la face et [0:1] */
          BCval = Bc3D_evalFunction2(BC, BC_3De_ROBIN, REF_A->ive[a], axe, centrum[0],centrum[1],centrum[2]);
-         
+
          sv_mlt(  BCval * jac , elt->eltDM1->VEC_I, SCM_ar);
-         
+
          for(i=0; i<elt->nb_somm_face; i++)
          {
             RHS->ve[ NSFACE->im[a][i] ] += SCM_ar->ve[i] ;
          }
       }
    }
-   
+
    V_FREE(SCM_ar);
 }
 
@@ -2722,14 +2722,14 @@ static void apply_Bc3D_cauchy_on_mat   (int axe, const ELT_3D *elt , const GEOM_
 {
    int a;
    int k1,k2;
-   
+
    IVEC *REF_A  = geom->REF_A;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    Real centrum[3],jac,BCval;
    MAT *MAT_ar = m_get(elt->nb_somm_face,elt->nb_somm_face); /* integration sur les faces pour cl de Cauchy */
-   
-   
+
+
    /* ----- Transformation de la matrice -------------------------------- */
    for( a=0 ; a<geom->NBFACE ; a++ )
    {
@@ -2737,9 +2737,9 @@ static void apply_Bc3D_cauchy_on_mat   (int axe, const ELT_3D *elt , const GEOM_
       {
          jac   = eval_jac_on_face  ( a , elt , geom , centrum); /* Jacobien de la transformation entre la face et [0:1] */
          BCval = Bc3D_evalFunction1(BC, BC_3De_CAUCHY, REF_A->ive[a], axe, centrum[0],centrum[1],centrum[2]);
-         
+
          sm_mlt(BCval * jac , elt->eltDM1->MAT_I_I, MAT_ar);
-         
+
          for (k1=0; k1<elt->nb_somm_face; k1++)
          for (k2=0; k2<elt->nb_somm_face; k2++)
          {
@@ -2748,7 +2748,7 @@ static void apply_Bc3D_cauchy_on_mat   (int axe, const ELT_3D *elt , const GEOM_
          }
       }
    }
-   
+
    M_FREE(MAT_ar);
 }
 
@@ -2759,13 +2759,13 @@ static void apply_Bc3D_robin_on_mat    (int axe, const ELT_3D *elt , const GEOM_
 {
    int a;
    int k1,k2;
-   
+
    IVEC *REF_A  = geom->REF_A;
    IMAT *NSFACE = geom->NSFACE;
-   
+
    Real centrum[3],jac,BCval;
    MAT *MAT_ar = m_get(elt->nb_somm_face,elt->nb_somm_face); /* integration sur les faces pour cl de Robin */
-   
+
    /* ----- Transformation de la matrice -------------------------------- */
    for( a=0 ; a<geom->NBFACE ; a++ )
    {
@@ -2773,9 +2773,9 @@ static void apply_Bc3D_robin_on_mat    (int axe, const ELT_3D *elt , const GEOM_
       {
          jac   = eval_jac_on_face  ( a , elt , geom , centrum); /* Jacobien de la transformation entre l'arete et [0:1] */
          BCval = Bc3D_evalFunction1(BC, BC_3De_ROBIN, REF_A->ive[a], axe, centrum[0],centrum[1], centrum[2]);
-         
+
          sm_mlt(BCval * jac , elt->eltDM1->MAT_I_I, MAT_ar);
-         
+
          for (k1=0; k1<elt->nb_somm_face; k1++)
          for (k2=0; k2<elt->nb_somm_face; k2++)
          {
@@ -2784,7 +2784,7 @@ static void apply_Bc3D_robin_on_mat    (int axe, const ELT_3D *elt , const GEOM_
          }
       }
    }
-   
+
    M_FREE(MAT_ar);
 }
 

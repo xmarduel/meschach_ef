@@ -29,7 +29,7 @@ typedef struct {
 
    int     dim;                        /**< dimension; here dim = 2               */
    char*   name_ef;                    /**< nom de l'element : P1 , P2 , P3 , P1b */
-   
+
    int     nb_somm_cell ;              /**< nb de fonctions de base de l'element  */
    Real    (**f_base)(Real,Real);      /**< fonctions de base de l'element        */
    Real    (**dfdx_base)(Real,Real);   /**< derivees des fonctions de base        */
@@ -39,24 +39,24 @@ typedef struct {
    Real    (**d2fdyy_base)(Real,Real); /**< derivees des fonctions de base        */
    int     nb_somm_face ;              /**< nb de fonctions de base de l'arete    */
    Real    (**f_face)(Real);           /**< fonctions de base sur les aretes      */
-   
+
    VEC*    VEC_I;                /**< rhs (Source cste)   Ni            */
    VEC*    VEC_x;                /**< rhs (Source cste)   dNidx  for the "stabilized" rhs    */
    VEC*    VEC_y;                /**< rhs (Source cste)   dNidy  for the "stabilized" rhs    */
    VEC*    VEC_xx;               /**< rhs (Source cste)   d2Ni   for the "stabilized" rhs    */
    VEC*    VEC_xy;               /**< rhs (Source cste)   d2Ni   for the "stabilized" rhs    */
    VEC*    VEC_yy;               /**< rhs (Source cste)   d2Ni   for the "stabilized" rhs    */
-   
+
    MAT*    MAT_I_I;              /**< The mass matrix Ni.Nj             */
 
    MAT*    MAT_x_x;              /**< The Stiffness matrix dNidx.dNjdx  */
    MAT*    MAT_x_y;              /**< The Stiffness matrix dNidx.dNjdy  */
    MAT*    MAT_y_x;              /**< The Stiffness matrix dNidy.dNjdx  */
    MAT*    MAT_y_y;              /**< The Stiffness matrix dNidy.dNjdy  */
-   
+
    MAT*    MAT_I_x;              /**< The Convection matrix Ni.dNjdx    */
    MAT*    MAT_I_y;              /**< The Convection matrix Ni.dNjdx    */
-   
+
    MAT*    MAT_xx_xx;            /**< The Stiffness matrix dNidx.dNjdx  */
    MAT*    MAT_xx_xy;            /**< The Stiffness matrix dNidx.dNjdx  */
    MAT*    MAT_xx_yy;            /**< The Stiffness matrix dNidx.dNjdx  */
@@ -84,14 +84,14 @@ typedef struct {
    /*MAT*    MAT_I_xx;*/         /* for the "stabilization" matrices  */
    /*MAT*    MAT_I_xy;*/         /* for the "stabilization" matrices  */
    /*MAT*    MAT_I_yy;*/         /* for the "stabilization" matrices  */
-   
+
    /* for Stokes */
    MAT*    MAT_I_x_PM1dP;        /**< The Convection matrix Ni.dNjdx  for Stokes (PM1,P) = ("P1","P2") or ("P2","P3") */
    MAT*    MAT_I_y_PM1dP;        /**< The Convection matrix Ni.dNjdy  for Stokes (PM1,P) = ("P1","P2") or ("P2","P3") */
-   
+
    /* 3D arrays */
    TENSOR*   TENSOR_I_x_I;         /**< 3D array Ni.dNj.Nk  */
-   TENSOR*   TENSOR_I_y_I;         /**< 3D array Ni.Nj.dNk  */ 
+   TENSOR*   TENSOR_I_y_I;         /**< 3D array Ni.Nj.dNk  */
    TENSOR*   TENSOR_x_I_I;         /**< 3D array Ni.Nj.Nk   */
    TENSOR*   TENSOR_y_I_I;         /**< 3D array dNi.Nj.Nk  */
    TENSOR*   TENSOR_I_I_I;         /**< 3D array Ni.Nj.Nk   */
@@ -99,15 +99,15 @@ typedef struct {
    /* frequently used matrices */
    MAT*  MAT_x_y__plus__y_x;     /**< is equal to MAT_x_y + MAT_y_x  */
 
-   
-   ELT_1D* eltDM1;               /**< Same element on the dimenson -1 */          
-   
+
+   ELT_1D* eltDM1;               /**< Same element on the dimenson -1 */
+
 } ELT_2D;
- 
+
 
 #define ELT_2D_NULL  ((ELT_2D *)NULL)
- 
-int elt2D_free(ELT_2D *) ; 
+
+int elt2D_free(ELT_2D *) ;
 
 #define ELT_2D_FREE(elt)  ( elt2D_free(elt ), (elt )=(ELT_2D *)NULL )
 

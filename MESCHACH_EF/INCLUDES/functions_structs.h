@@ -38,7 +38,7 @@ typedef Real (*FUNC_4D_PLUS_VOID)(Real,Real,Real,Real, void*);
 typedef enum
 {
    FUN_UNDEFINED       = -1,  /**< flag indicates that the function is not yet set */
-		
+
    FUN_C_STATIONNARY   =  0,  /**< function depends only on space variables */
    FUN_C_TRANSIENT     =  1,  /**< function depends on t  + space variables */
    FUN_PY_STATIONNARY  =  2,  /**< function depends only on space variables */
@@ -47,7 +47,7 @@ typedef enum
    FUN_LUA_TRANSIENT   =  5   /**< function depends on t  + space variables */
 } FUN_TYPE;
 
-	
+
 typedef enum
 {
    FUNCTION_RHSe      = 0,
@@ -57,37 +57,37 @@ typedef enum
    FUNCTION_ADVe      = 4,
 
 } FUN_CLASS;
-	
+
 
 typedef struct FUNC_1D_NAMEMAP_ {
-		
+
 	char name[64];
 	FUNC_1D func;
-	
+
 } FUNC_1D_NAMEMAP;
-	
+
 typedef struct FUNC_2D_NAMEMAP_ {
-		
+
 	char name[64];
 	FUNC_2D func;
-		
+
 } FUNC_2D_NAMEMAP;
-	
+
 typedef struct FUNC_3D_NAMEMAP_ {
-		
+
 	char name[64];
 	FUNC_3D func;
-		
+
 } FUNC_3D_NAMEMAP;
-	
+
 typedef struct FUNC_4D_NAMEMAP_ {
-		
+
 	char name[64];
 	FUNC_4D func;
-		
+
 } FUNC_4D_NAMEMAP;
 
-	
+
 FUNC_1D function1D_by_name(const char *funcname, FUN_CLASS function_class);
 FUNC_2D function2D_by_name(const char *funcname, FUN_CLASS function_class);
 FUNC_3D function3D_by_name(const char *funcname, FUN_CLASS function_class);
@@ -104,7 +104,7 @@ Real FunctionForEvaluatingLuaFunction3D(Real x, Real y, Real z, void *L);
 Real FunctionForEvaluatingLuaFunction4D(Real x, Real y, Real z, Real t, void *L);
 
 void * make_lua_interpreter(const char* def, const char *fun_type);
-   
+
 #include "functions_structs_1D.h"
 #include "functions_structs_2D.h"
 #include "functions_structs_3D.h"
@@ -135,7 +135,7 @@ static  char *my_err_mesg5[NB_ERRS5] =
    "fun_struct has a undefined type"                   /* 3 */
 };
 
-static char *my_warn_mesg5[NB_WARNS5] = 
+static char *my_warn_mesg5[NB_WARNS5] =
 {
    "unknown fun_struc warning"            /* 0 */
 };
