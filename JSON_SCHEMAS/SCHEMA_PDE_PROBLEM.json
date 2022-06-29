@@ -5,10 +5,10 @@
     "type" : "object",
     "properties" : {
         "PDE" : { "type":"string", "description":"", "enum":["LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"]},
-        
+
         "COORDS_DIMS": { "type":"integer", "description":"x,y,z coordinates", "enum" : [1,2,3] },
         "TARGET_DIMS": { "type":"integer", "description":"u,v,w",             "enum" : [1,2,3] },
-        
+
         "PDE_PARAMATERS" : { "type":"object", "description":"",
             "properties" : {
                 "KAPPA"  : { "type":"number", "description":"coeff for -Uxx" },
@@ -16,7 +16,7 @@
                 "EPSILON": { "type":"number", "description":"coeff for Uxxxx" }
             }
         },
-        
+
         "PDE_TIME_PARAMETERS" : { "type":"object", "description":"",
             "properties" : {
                 "TIME_INI" : { "type":"number", "description":"" },
@@ -25,19 +25,19 @@
             },
             "required" : ["TIME_INI", "TIME_END", "DELTA_T"]
         },
-        
+
         "PDE_RESOLUTION" : { "type":"object", "description":"",
             "properties" : {
-                "EF"             : { "type":"string", "description":"" , "enum":["P1", "P2", "P3", "H3", "S2", "S3", "S4", "S5"] },           
-                
+                "EF"             : { "type":"string", "description":"" , "enum":["P1", "P2", "P3", "H3", "S2", "S3", "S4", "S5"] },
+
                 "LAPLACIAN_ALGO" : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD"        : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+                        "DIRECT-METHOD" : { "type":"object", "description":"",
                             "properties" : {
-                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                     "properties" : {
-                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] }, 
+                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                         "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
                                     }
                                 }
@@ -69,10 +69,10 @@
                         "METHOD"        : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
                         "METHOD_STABILIZATION" : { "type":"string", "description":"", "enum":["null", "GALS", "SUPG", "DWG"] },
                         "DELTA"                : { "type":"number", "description":"" },
-                        
-                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+
+                        "DIRECT-METHOD" : { "type":"object", "description":"",
                             "properties" : {
-                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                     "properties" : {
                                         "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                         "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -100,20 +100,20 @@
                         }
                     }
                 },
-                
-                "BURGERS_ALGO"      : { "type":"object", "description":"", 
+
+                "BURGERS_ALGO"      : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD"               : { "type":"string", "description":"", "enum":["NEWTON-EXACT", "NEWTON-APPROCH"] },
                         "METHOD_STABILIZATION" : { "type":"string", "description":"", "enum":["null", "GALS", "SUPG", "DWG"] },
                         "DELTA"                : { "type":"number", "description":"" },
-                        
+
                         "NB_OUTER_ITERATIONS": { "type":"number", "description":"for the non linear iterations" },
-                        
+
                         "INNER_METHOD": { "type":"number", "description":"for the non linear iterations", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                        
-                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+
+                        "DIRECT-METHOD" : { "type":"object", "description":"",
                             "properties" : {
-                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                     "properties" : {
                                         "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                         "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -141,7 +141,7 @@
                         }
                     }
                 },
-                
+
                 "STOKES_ALGO"       : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD" : { "type":"string", "description":"", "enum":["PRESSUREMATRIX", "UZAWA", "AUGMENTEDLAGR"] },
@@ -152,7 +152,7 @@
                                 "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "METHOD" : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                         "properties" : {
                                             "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                             "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -170,7 +170,7 @@
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "properties": {
                                         "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                             "properties" : {
                                                 "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                                 "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -182,7 +182,7 @@
                                 }
                             }
                         },
-                        "AUGMENTEDLAGR_PARAMETERS" : { "type":"object", "description":"", 
+                        "AUGMENTEDLAGR_PARAMETERS" : { "type":"object", "description":"",
                             "properties" : {
                                 "RHO" : { "type":"number", "description":"" },
                                 "NMAX_ITER" : { "type":"integer", "description":"" },
@@ -190,7 +190,7 @@
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "properties": {
                                         "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                             "properties" : {
                                                 "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                                 "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -205,13 +205,13 @@
                     }
                 },
 
-                "NAVIERSTOKES_ALGO" : { "type":"object", "description":"", 
+                "NAVIERSTOKES_ALGO" : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD" : { "type":"string", "description":"", "enum":["NEWTON-EXACT", "NEWTON-APPROCH"] },
-                        
+
                         "NMAX_ITER" : { "type":"integer", "description":"" },
                         "EPSILON" : { "type":"number", "description":"" },
-                        
+
                         "OUTER_METHOD" : { "type":"string", "description":"", "enum":["UZAWA", "PRESSUREMATRIX"] },
 
                         "UZAWA_PARAMETERS" : { "type":"object", "description":"",
@@ -221,7 +221,7 @@
                                 "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "METHOD" : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                         "properties" : {
                                             "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                             "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -235,11 +235,11 @@
                         "PRESSUREMATRIX_PARAMETERS" : { "type":"object", "description":"",
                             "properties" : {
                                 "NMAX_ITER" : { "type":"integer", "description":"" },
-                                "EPSILON"   : { "type":"number", "description":"residual of the CG method" }, 
+                                "EPSILON"   : { "type":"number", "description":"residual of the CG method" },
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "properties": {
                                         "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                             "properties" : {
                                                 "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                                 "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -254,7 +254,7 @@
                     }
                 },
 
-                "HELMHOLZ_ALGO"     : { "type":"object", "description":"", 
+                "HELMHOLZ_ALGO"     : { "type":"object", "description":"",
                     "properties" : {
                         "EIGEN_PROBLEM" : { "type":"string", "description":"", "enum" : ["ORDINARY_SYMMETRIC", "GENERALIZED_SYMMETRIC_1", "GENERALIZED_SYMMETRIC_2"] },
                         "EIGEN_OPTION"  : { "type":"string", "description":"", "enum" : ["LOWER", "UPPER", "NEAREST_1", "NEAREST_2", "IBOUNDS", "RBOUNDS", "ALL"] },
@@ -266,8 +266,8 @@
                     },
                     "required" : ["EIGEN_PROBLEM", "EIGEN_OPTION", "NB_EIGENS", "LOWER_IBOUND", "UPPER_IBOUND", "LOWER_RBOUND", "UPPER_RBOUND"]
                 },
-                
-                "KURAMOTO-SIVASHINSKI_ALGO" : { "type":"object", "description":"", 
+
+                "KURAMOTO-SIVASHINSKI_ALGO" : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD" : { "type":"string", "description":"", "enum" : ["NORMAL", "SPLITTED"] }
                     },
@@ -276,8 +276,8 @@
             },
             "required" : ["EF"]
         },
-        
-        "PDE_INITIAL_CONDITION" : { "type":"object", "description": "", 
+
+        "PDE_INITIAL_CONDITION" : { "type":"object", "description": "",
             "properties" : {
                 "DIM1" : { "type":"object", "description": "" ,
                     "properties" : {
@@ -305,7 +305,7 @@
                 }
             }
         },
-        
+
         "PDE_RHS" : { "type":"object", "description":"",
             "properties" : {
                 "DIM1" : { "type":"object", "description":"" ,
@@ -331,7 +331,7 @@
                 }
             }
         },
-        
+
         "PDE_EXACT_SOL" : { "type":"object", "description":"for tests, exact solution of the pde",
             "properties" : {
                 "DIM1" : { "type":"object", "description":"" ,
@@ -357,12 +357,12 @@
                 }
             }
         },
-        
+
         "PDE_BOUNDARY_CONDITIONS" : { "type":"object", "description":"",
             "properties" : {
                 "NB_BCS" : { "type":"integer", "description":"" },
-                "DIM1" : { "type":"array", "description":"" , "items" : 
-                    { "type":"object", "description":"" , 
+                "DIM1" : { "type":"array", "description":"" , "items" :
+                    { "type":"object", "description":"" ,
                         "properties" : {
                             "IDX"       : { "type":"integer", "description":"" },
                             "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
@@ -377,8 +377,8 @@
                         "additionalProperties": false
                     }
                 },
-                "DIM2" : { "type":"array", "description":"" , "items" : 
-                    { "type":"object", "description":"" , 
+                "DIM2" : { "type":"array", "description":"" , "items" :
+                    { "type":"object", "description":"" ,
                         "properties" : {
                             "IDX"       : { "type":"integer", "description":"" },
                             "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
@@ -393,7 +393,7 @@
                         "additionalProperties": false
                     }
                 },
-                "DIM3" : { "type":"array", "description":"" , "items" : 
+                "DIM3" : { "type":"array", "description":"" , "items" :
                     { "type":"object", "description":"" ,
                         "properties" : {
                             "IDX"       : { "type":"integer", "description":"" },
@@ -412,10 +412,10 @@
             }
         },
 
-        "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : { "type":"object", "description":"", 
+        "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : { "type":"object", "description":"",
             "properties" : {
-                
-                "1-DIM" : { "type":"object", "description":"", 
+
+                "1-DIM" : { "type":"object", "description":"",
                     "properties" : {
                         "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
                         "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
@@ -423,9 +423,9 @@
                     },
                     "additionalProperties": false
                 },
-                "2-DIM" : { "type":"object", "description":"", 
+                "2-DIM" : { "type":"object", "description":"",
                     "properties" : {
-                        "DIM1" : { "type":"object", "description":"", 
+                        "DIM1" : { "type":"object", "description":"",
                             "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
@@ -436,7 +436,7 @@
                             },
                             "additionalProperties": false
                         },
-                        "DIM2": { "type":"object", "description":"", 
+                        "DIM2": { "type":"object", "description":"",
                             "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
@@ -451,9 +451,9 @@
                     "required" : ["DIM1", "DIM2"],
                     "additionalProperties": false
                 },
-                "3-DIM" : { "type":"object", "description":"", 
+                "3-DIM" : { "type":"object", "description":"",
                     "properties" : {
-                        "DIM1" : { "type":"object", "description":"", 
+                        "DIM1" : { "type":"object", "description":"",
                             "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
@@ -467,8 +467,8 @@
                             },
                             "additionalProperties": false
                         },
-                        "DIM2" : { "type":"object", "description":"", 
-                            "properties" : { 
+                        "DIM2" : { "type":"object", "description":"",
+                            "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
                                 "FUNC_dudz" : { "type": ["null", "string"], "description":"lua code" },
@@ -481,7 +481,7 @@
                             },
                             "additionalProperties": false
                         },
-                        "DIM3" : { "type":"object", "description":"", 
+                        "DIM3" : { "type":"object", "description":"",
                             "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description":"lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description":"lua code" },
@@ -501,11 +501,11 @@
                 }
             }
         },
-        
-        "MESH_1D" : { "type":"object", "description":"", 
+
+        "MESH_1D" : { "type":"object", "description":"",
             "properties" : {
                 "MESH_SPEC": { "type":"string", "enum" : ["MESHFILEDEFINITION", "MESHDATADEFINITION"] },
-                
+
                 "MESHFILEDEFINITION" : { "type":"object", "description":"",
                     "properties": {
                         "MESHFILE" : { "type": "string", "description":"" },
@@ -515,12 +515,12 @@
                     "required": ["MESHFILE", "MESHTYPE"],
                     "additionalProperties" : false
                 },
-                    
+
                 "MESHDATADEFINITION" : { "type":"object", "description":"",
                     "properties" : {
                         "XMIN"         : { "type":"number", "description":"" },
-                        "XMAX"         : { "type":"number", "description":"" }, 
-                        "NX"           : { "type":"integer", "description":"" }, 
+                        "XMAX"         : { "type":"number", "description":"" },
+                        "NX"           : { "type":"integer", "description":"" },
                         "DISTRIBUTION" : { "type":"string", "enum" : ["UNIFORM","NON-UNIFORM-RIGHT-DENSITY","NON-UNIFORM-LEFT-DENSITY"] },
                         "PERIODIC"     : { "type":"boolean", "description":"" }
                     },
@@ -530,7 +530,7 @@
             },
             "additionalProperties" : false
         },
-        "MESH_2D" : { "type":"object", "description":"", 
+        "MESH_2D" : { "type":"object", "description":"",
             "properties" : {
                 "MESHFILEDEFINITION" : { "type":"object", "description":"",
                     "properties": {
@@ -545,7 +545,7 @@
             "required" : ["MESHFILEDEFINITION"],
             "additionalProperties" : false
         },
-        "MESH_3D" : { "type":"object", "description":"", 
+        "MESH_3D" : { "type":"object", "description":"",
             "properties" : {
                 "MESHFILEDEFINITION" : { "type":"object", "description":"",
                     "properties": {
@@ -560,7 +560,7 @@
             "required" : ["MESHFILEDEFINITION"],
             "additionalProperties" : false
         },
-        
+
         "MISC_OUTPUT" : { "type":"object", "description":"",
             "properties" : {
                 "ITPRINT"          : { "type":"integer", "description":"" },
@@ -570,7 +570,7 @@
             }
         },
 
-        "MISC_GRAPHICS" : { "type":"object", "description":"", 
+        "MISC_GRAPHICS" : { "type":"object", "description":"",
             "properties" : {
                 "IMTXPROF"         : { "type":"boolean", "description":"" },
                 "IGEOMVIEW"        : { "type":"boolean", "description":"" },
@@ -579,7 +579,7 @@
             }
         },
 
-        "GRAPHICS_1D_OUTPUT" : { "type":"object", "description":"", 
+        "GRAPHICS_1D_OUTPUT" : { "type":"object", "description":"",
             "properties" : {
                 "GNUPLOT"    : { "type":"boolean", "description":"" },
                 "GRAPH"      : { "type":"boolean", "description":"" },
@@ -589,8 +589,8 @@
                 "MATPLOTLIB" : { "type":"boolean", "description":"" }
             }
         },
-        
-        "GRAPHICS_2D_OUTPUT" : { "type":"object", "description":"", 
+
+        "GRAPHICS_2D_OUTPUT" : { "type":"object", "description":"",
             "properties" : {
                 "GNUPLOT"    : { "type":"boolean", "description":"" },
                 "MATLAB"     : { "type":"boolean", "description":"" },
@@ -599,31 +599,31 @@
                 "MATPLOTLIB" : { "type":"boolean", "description":"" }
             }
         },
-        
-        "GRAPHICS_3D_OUTPUT" : { "type":"object", "description":"", 
+
+        "GRAPHICS_3D_OUTPUT" : { "type":"object", "description":"",
             "properties" : {
                 "VTK"        : { "type":"boolean", "description":"" },
                 "SILO"       : { "type":"boolean", "description":"" }
             }
         },
-        
-        "GRAPHICS_1D" : { "type":"object", "description":"", 
+
+        "GRAPHICS_1D" : { "type":"object", "description":"",
             "properties" : {
                 "ENGINE" : { "type":"string", "description":"lib for graphics", "enum":["PGPLOT", "VOGLE", "LIBSCIPLOT"] },
                 "DRIVER" : { "type":"string", "description":"Driver PGPLOT-VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
-                "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
+                "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY",
                     "items" : { "type":"integer", "description":"in pixels" },
                     "minItems": 2,
                     "maxItems": 2
                 },
                 "LABELS_SIZE" : { "type":"number", "description":"" },
                 "SUB_WINDOWS" : { "type":"array", "description":"array of sub windows at position I,J in the window",
-                    "items" : { "type":"object", "description":"sub-window object", 
-								"properties" : {
+                    "items" : { "type":"object", "description":"sub-window object",
+                        "properties" : {
                             "IDXS"  : { "type":"array", "description":"position in array of subwindows", "minItems": 2, "maxItems": 2,
                                 "items" : { "type":"integer", "minimum":1, "maximum":3 , "description":"array position" }
                             },
-							"LEGEND"       : { "type":"string", "description":"" },
+                            "LEGEND"       : { "type":"string", "description":"" },
                             "LEGEND_AXE_X" : { "type":"string", "description":"" },
                             "LEGEND_AXE_Y" : { "type":"string", "description":"" },
                             "MARKER"       : { "type":"integer", "description":"" },
@@ -634,51 +634,51 @@
                                     "X_MAX"    : { "type":"number", "description":"" },
                                     "Y_MIN"    : { "type":"number", "description":"" },
                                     "Y_MAX"    : { "type":"number", "description":"" }
-										  }
+                                }
                             }
                         }
                     }
                 }
             },
-            "GRAPHICS_2D" : { "type":"object", "description":"", 
+            "GRAPHICS_2D" : { "type":"object", "description":"",
                 "properties" : {
                     "ENGINE" : { "type":"string", "description":"lib for graphics", "enum":["VOGLE"] },
                     "DRIVER" : { "type":"string", "description":"Driver VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
-                    "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
+                    "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY",
                         "items" : { "type":"integer", "description":"in pixels" },
                         "minItems": 2,
                         "maxItems": 2
                     },
                     "LABELS_SIZE" : { "type":"number", "description":"" },
-                    "SUB_WINDOWS" : { "type":"array", "description":"array of sub-windows", 
-						      "items": { "type":"object", "description":"sub-window object", 
-						          "properties" : {
-								        "IDXS"  : { "type":"array", "description":"position in array of subwindows", "minItems": 2, "maxItems": 2,
+                    "SUB_WINDOWS" : { "type":"array", "description":"array of sub-windows",
+                        "items": { "type":"object", "description":"sub-window object",
+                            "properties" : {
+                                "IDXS"  : { "type":"array", "description":"position in array of subwindows", "minItems": 2, "maxItems": 2,
                                     "items" : { "type":"integer", "minimum":1, "maximum":3, "description":"array position" }
-									     },
-										  "GRAPHICS_TYPE" : {"type":"string", "description":"", "enum":["SURFACE", "CONTOURS"] },
-										  "LEGEND"        : { "type":"string", "description":"" },
-                                          "VIEWPORT"       : { "type":"object", "description":"",
-                                              "properties" : {
-                                                  "X_MIN"    : { "type":"number", "description":"" },
-                                                  "X_MAX"    : { "type":"number", "description":"" },
-                                                  "Y_MIN"    : { "type":"number", "description":"" },
-                                                  "Y_MAX"    : { "type":"number", "description":"" }
-                                              }
-										  },
-                                          "CONTOURS": { "type":"object", "description":"",
-                                              "properties" :  {
-                                                  "NB_LEVELS" : { "type":"integer", "description":"" },
-                                                  "LEVELS"    : { "type":"array", "description":"", "items": { "type":"number", "description":"" }}
-                                              }
-                                          },
-                                          "SURFACE": { "type":"object", "description":"",
-                                              "properties" : {
-                                                 "DUMMY" : { "type":"boolean", "description":"" }
-                                          }
+                                },
+                                "GRAPHICS_TYPE" : {"type":"string", "description":"", "enum":["SURFACE", "CONTOURS"] },
+                                "LEGEND"        : { "type":"string", "description":"" },
+                                "VIEWPORT"       : { "type":"object", "description":"",
+                                    "properties" : {
+                                        "X_MIN"    : { "type":"number", "description":"" },
+                                        "X_MAX"    : { "type":"number", "description":"" },
+                                        "Y_MIN"    : { "type":"number", "description":"" },
+                                        "Y_MAX"    : { "type":"number", "description":"" }
                                     }
-                              }
-                         }
+                                },
+                                "CONTOURS": { "type":"object", "description":"",
+                                    "properties" :  {
+                                        "NB_LEVELS" : { "type":"integer", "description":"" },
+                                        "LEVELS"    : { "type":"array", "description":"", "items": { "type":"number", "description":"" }}
+                                    }
+                                },
+                                "SURFACE": { "type":"object", "description":"",
+                                    "properties" : {
+                                        "DUMMY" : { "type":"boolean", "description":"" }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -686,6 +686,6 @@
     },
 
     "OUTPUT_LOG_FILE" : { "type":"string", "description":""},
-        
+
     "required": ["PDE", "COORDS_DIMS", "TARGET_DIMS", "PDE_PARAMATERS", "PDE_RESOLUTION", "PDE_RHS", "PDE_BOUNDARY_CONDITIONS", "OUTPUT_LOG_FILE"]
 }

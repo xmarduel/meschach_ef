@@ -1,9 +1,9 @@
-{  
+{
     "PDE" : "LAPLACIAN",   # "LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"
-    
+
     "COORDS_DIMS" : 3,
     "TARGET_DIMS" : 1,
-    
+
     "PDE_PARAMATERS" : {
         "KAPPA"    : 1.000,
         "SIGMA"    : 0.0,
@@ -17,8 +17,8 @@
 
         "LAPLACIAN_ALGO" : {
             "METHOD" : "ITERATIVE-METHOD",
-				
-	     "ITERATIVE-METHOD" : {
+
+            "ITERATIVE-METHOD" : {
                 "METHOD"          : "CG" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
                 "PRECONDITIONER"  : "null" ,     # "null", "ICH", "ILU"
                 "PARAMETERS" : {
@@ -36,7 +36,7 @@
             "METHOD" : "ITERATIVE-METHOD",
             "METHOD_STABILIZATION" : "GALS" ,   # "null", "GALS", "SUPG", "DWG"
             "DELTA" : 10.0,
-            
+
             "ITERATIVE-METHOD" : {
                 "METHOD"           : "CG" ,
                 "PRECONDITIONER"   : "ILU",
@@ -54,9 +54,9 @@
         "BURGERS_ALGO" : {
             "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
             "DELTA" : 10.0,
-            
+
             "NB_OUTER_ITERATIONS" : 100,
-            
+
             "INNER-METHOD": "ITERATIVE-METHOD",
 
             "ITERATIVE-METHOD" : {
@@ -72,22 +72,22 @@
                 }
             }
         },
-		  
-        "STOKES_ALGO" : {             
+
+        "STOKES_ALGO" : {
             "STOKES_METHOD"    : "PRESSUREMATRIX"
         },
-        
-        "STOKES_ALGO" : {             
+
+        "STOKES_ALGO" : {
             "STOKES_METHOD"    : "UZAWA",
-            "USAWA_PARAMETERS" : { 
+            "USAWA_PARAMETERS" : {
                 "RHO" : 1.0
             }
         },
 
-        "NAVIERSTOKES_ALGO" : {             
+        "NAVIERSTOKES_ALGO" : {
             "METHOD"    : "NEWTON-EXACT"
         },
-        
+
         "EIGEN_ALGO" : {
             "EIGEN_PROBLEM" : "ORDINARY_SYMMETRIC",
             "EIGEN_OPTION"  : "LOWER",
@@ -96,23 +96,23 @@
 
             "LOWER_IBOUND"  : 5,
             "UPPER_IBOUND"  : 9,
-            
+
             "LOWER_RBOUND"  : 1.0,
             "UPPER_RBOUND"  : 1.0
-        } 
-        
-        
+        }
+
+
     },
 
     # pde def -------------------------------------------------------------------------
-    
+
     "PDE_INITIAL_CONDITION" : {
        "DIM1" : {"FUNC_DEF" : null},
        "DIM2" : {"FUNC_DEF" : null},
        "DIM3" : {"FUNC_DEF" : null}
     },
-	 
-	"PDE_RHS" : {
+
+    "PDE_RHS" : {
         "DIM1" : {"FUNC_DEF" : "10.0"},
         "DIM2" : {"FUNC_DEF" : null},
         "DIM3" : {"FUNC_DEF" : null}
@@ -123,11 +123,11 @@
         "DIM2" : {"FUNC_DEF" : null},
         "DIM3" : {"FUNC_DEF" : null}
     },
-	 
+
     "PDE_BOUNDARY_CONDITIONS" : {
-        
+
         "NB_BCS" : 6,
-         
+
         "DIM1" : [
            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/6.0 * (0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5) - (z-0.5)*(z-0.5) )" },
            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/6.0 * (0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5) - (z-0.5)*(z-0.5) )" },
@@ -140,13 +140,13 @@
     },
 
     "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : {
-        
+
         "1-DIM" : {
            "FUNC_dudx" : "x",
            "FUNC_dudy" : "y",
            "FUNC_dudz" : "z"
         },
-        
+
         "2-DIM" : {
            "DIM1" : {
                "FUNC_dudx" : "x",
@@ -154,7 +154,7 @@
                "FUNC_dudz" : "y",
                "FUNC_dvdx" : null,
                "FUNC_dvdy" : null,
-               "FUNC_dvdz" : null 
+               "FUNC_dvdz" : null
            },
            "DIM2" : {
                "FUNC_dudx" : "x",
@@ -162,7 +162,7 @@
                "FUNC_dudz" : "y",
                "FUNC_dvdx" : null,
                "FUNC_dvdy" : null,
-               "FUNC_dvdz" : null 
+               "FUNC_dvdz" : null
            }
         },
 
@@ -202,7 +202,7 @@
            }
         }
     },
-    
+
     # mesh --------------------------------
 
     "MESH_3D" : {
@@ -211,23 +211,23 @@
             "MESHNAME" : "MESH_10", # "MESH_10", "MESH_20"
             "MESHTYPE" : "cube"
         }
-        
+
         #"MESHFILEDEFINITION" : {
            #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v4.gmsh", # cube3D_P1_v[4-5-6-7-8].gmsh
            # "MESHNAME" : "null",
            # "MESHTYPE" : "gmsh"
            #}
     },
-    
+
     # graphics ---------------------------
-    
+
     "GRAPHICS_3D_OUTPUT" : {
         "VTK"        : false,
-        "SILO"       : true 
+        "SILO"       : true
     },
-    
+
     # logging -------------------------------------------------
-    
+
     "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/3D/OUTPUT_PDE_3D.dat"
 
 }

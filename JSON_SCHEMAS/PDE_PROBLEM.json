@@ -1,9 +1,9 @@
-{  
+{
     "PDE" : "LAPLACIAN",   # "LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"
-    
+
     "COORDS_DIMS" : 2,
     "TARGET_DIMS" : 1,
-    
+
     "PDE_PARAMATERS" : {
         "KAPPA"    : 1.000,
         "SIGMA"    : 0.0,
@@ -11,7 +11,7 @@
     },
 
     "PDE_TIME_PARAMETERS" : {
-        "TIME_INI" : 0.0, 
+        "TIME_INI" : 0.0,
         "TIME_END" : 10.0,
         "DELTA_T"  : 0.005
     },
@@ -23,7 +23,7 @@
 
         "LAPLACIAN_ALGO" : {
             "METHOD" : "ITERATIVE-METHOD",
-            
+
             "ITERATIVE-METHOD" : {
                 "METHOD"          : "CG" ,       # "CG", "CGS", "BiCGStab"
                 "PRECONDITIONER"  : "ILU" ,      # null, "ICH", "ILU"
@@ -36,9 +36,9 @@
                     "FILE"   : "residuals.dat"
                 }
             }
-            
+
             "DIRECT-METHOD" : {
-                "BANDWIDTHREDUCTION" : {  
+                "BANDWIDTHREDUCTION" : {
                     "OPTION" :         "PROFILE",
                     "IMPLEMENTATION" : "MESCHACH"
                 }
@@ -49,7 +49,7 @@
             "METHOD" : "ITERATIVE-METHOD",
             "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
             "DELTA" : 10.0,
-            
+
             "ITERATIVE-METHOD" : {
                 "METHOD"           : "BiCGStab" ,
                 "PRECONDITIONER"   : "ILU",
@@ -62,9 +62,9 @@
                     "FILE"   : null
                 }
             }
-            
+
             "DIRECT-METHOD" : {
-                "BANDWIDTHREDUCTION" : {  
+                "BANDWIDTHREDUCTION" : {
                     "OPTION" :         "PROFILE",
                     "IMPLEMENTATION" : "MESCHACH"
                 }
@@ -75,9 +75,9 @@
             "METHOD"    : "NEWTON-EXACT", # "NEWTON-EXACT" or "NEWTON-APPROCH"
             "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
             "DELTA" : 10.0,
-            
+
             "NB_OUTER_ITERATIONS" : 100,
-            
+
             "INNER-METHOD": "ITERATIVE-METHOD",
 
             "ITERATIVE-METHOD" : {
@@ -93,17 +93,17 @@
                 }
             }
         },
-        
-        "STOKES_ALGO" : {             
+
+        "STOKES_ALGO" : {
             "METHOD"    : "PRESSUREMATRIX",
-            
+
             "PRESSUREMATRIX_PARAMETERS" : {  # "METHOD"    : "PRESSUREMATRIX"
                 "NMAX_ITER" : 100,
-                "EPSILON"   : 1.0e-8, 
-                                
+                "EPSILON"   : 1.0e-8,
+
                 "INNERLOOP_SOLVER": {
                     "METHOD" : "DIRECT-METHOD",
-                    "BANDWIDTHREDUCTION" : {  
+                    "BANDWIDTHREDUCTION" : {
                         "OPTION" :         "PROFILE",
                         "IMPLEMENTATION" : "MESCHACH"
                     },
@@ -111,31 +111,31 @@
                     "EPSILON"   : 1.0e-12
                 }
             },
-            
+
             "USAWA_PARAMETERS" : { # "METHOD"    : "UZAWA"
                 "RHO" : 1.0,
                 "NMAX_ITER" : 100,
-                "EPSILON"   : 1.0e-8, 
-                                
+                "EPSILON"   : 1.0e-8,
+
                 "INNERLOOP_SOLVER": {
                     "METHOD" : "DIRECT-METHOD",
-                    "BANDWIDTHREDUCTION" : {  
+                    "BANDWIDTHREDUCTION" : {
                         "OPTION" :         "PROFILE",
                         "IMPLEMENTATION" : "MESCHACH"
                     },
                     "NMAX_ITER" : 250,
                     "EPSILON"   : 1.0e-12
                 }
-            },        
-            
+            },
+
             "AUGMENTEDLAGR_PARAMETERS" : {  # "METHOD"    : "AUGMENTEDLAGR"
                 "RHO" : 1.0,
                 "NMAX_ITER" : 250,
                 "EPSILON"   : 1.0e-12
-                    
+
                 "INNERLOOP_SOLVER": {
                     "METHOD" : "DIRECT-METHOD",
-                    "BANDWIDTHREDUCTION" : {  
+                    "BANDWIDTHREDUCTION" : {
                         "OPTION" :         "PROFILE",
                         "IMPLEMENTATION" : "MESCHACH"
                     },
@@ -145,19 +145,19 @@
             }
         },
 
-        "NAVIERSTOKES_ALGO" : {             
+        "NAVIERSTOKES_ALGO" : {
             "METHOD"    : "NEWTON-EXACT", # "NEWTON-EXACT" or "NEWTON-APPROCH"
             "NMAX_ITER" : 250,
             "EPSILON"   : 1.0e-12,
             "OUTER-METHOD" : "PRESSUREMATRIX" , # "UZAWA", "PRESSUREMATRIX"
-            
+
             "PRESSUREMATRIX_PARAMETERS" : {  # "OUTER-METHOD"    : "PRESSUREMATRIX"
                 "NMAX_ITER" : 100,
-                "EPSILON"   : 1.0e-8, 
-                                
+                "EPSILON"   : 1.0e-8,
+
                 "INNERLOOP_SOLVER": {
                     "METHOD" : "DIRECT-METHOD",
-                    "BANDWIDTHREDUCTION" : {  
+                    "BANDWIDTHREDUCTION" : {
                         "OPTION" :         "PROFILE",
                         "IMPLEMENTATION" : "MESCHACH"
                     },
@@ -165,15 +165,15 @@
                     "EPSILON"   : 1.0e-12
                 }
             },
-            
+
             "USAWA_PARAMETERS" : {            # "OUTER-METHOD"    : "UZAWA"
                 "RHO" : 1.0,
                 "NMAX_ITER" : 100,
-                "EPSILON"   : 1.0e-8, 
-                                
+                "EPSILON"   : 1.0e-8,
+
                 "INNERLOOP_SOLVER": {
                     "METHOD" : "DIRECT-METHOD",
-                    "BANDWIDTHREDUCTION" : {  
+                    "BANDWIDTHREDUCTION" : {
                         "OPTION" :         "PROFILE",
                         "IMPLEMENTATION" : "MESCHACH"
                     },
@@ -182,7 +182,7 @@
                 }
             }
         },
-        
+
         "HELMHOLZ_ALGO" : {
             "EIGEN_PROBLEM" : "ORDINARY_SYMMETRIC",
             "EIGEN_OPTION"  : "LOWER",
@@ -191,25 +191,25 @@
 
             "LOWER_IBOUND"  : 5,
             "UPPER_IBOUND"  : 9,
-            
+
             "LOWER_RBOUND"  : 1.0,
             "UPPER_RBOUND"  : 1.0
         },
-        
+
         "KURAMOTO-SIVASHINSKI_ALGO" : {
             "METHOD" : "SPLITTED"    # "SPLITTED" or "NORMAL"
         }
-      
+
     },
 
     # pde def -------------------------------------------------------------------------
-    
+
     "PDE_INITIAL_CONDITION" : {
         "FUNC_DIM1_NAME" : "xx",
         "FUNC_DIM2_NAME" : "yy",
         "FUNC_DIM3_NAME" : "zz"
     },
-    
+
     "PDE_RHS" : {
         "FUNC_DIM1_NAME" : "Src2D_08",
         "FUNC_DIM2_NAME" : "null", # need a string, not null
@@ -217,22 +217,22 @@
     },
 
     "PDE_BOUNDARY_CONDITIONS" : {
-        
+
         "NB_BCS" : 4,
-         
+
         "DIM1" : [
            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" },
            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" },
            { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" },
            { "IDX" : 4 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "Phi2D_08" }
         ],
-        
+
         "DIM2" :  [
            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
            { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" }
         ],
-        
+
         "DIM3" : [
            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_NAME" : "sphere" },
@@ -243,13 +243,13 @@
     },
 
     "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : {
-        
+
         "1-DIM" : {
            "FUNC_dudx" : "x",
            "FUNC_dudy" : "y",
            "FUNC_dudz" : "z"
         },
-        
+
         "2-DIM" : {
            "DIM1" : {
                "FUNC_dudx" : "x",
@@ -257,7 +257,7 @@
                "FUNC_dudz" : "y",
                "FUNC_dvdx" : null,
                "FUNC_dvdy" : null,
-               "FUNC_dvdz" : null 
+               "FUNC_dvdz" : null
            },
            "DIM2" : {
                "FUNC_dudx" : "x",
@@ -265,7 +265,7 @@
                "FUNC_dudz" : "y",
                "FUNC_dvdx" : null,
                "FUNC_dvdy" : null,
-               "FUNC_dvdz" : null 
+               "FUNC_dvdz" : null
            }
         },
 
@@ -305,60 +305,60 @@
            }
         }
     },
-    
+
     "PDE_EXACT_SOL" : {
         "FUNC_DIM1_NAME" : "spheric",
         "FUNC_DIM2_NAME" : null,
-        "FUNC_DIM3_NAME" : null 
+        "FUNC_DIM3_NAME" : null
     },
-    
+
     # mesh --------------------------------
 
     "MESH_1D" : {
-    
+
         #"MESHFILEDEFINITION" : {
         #    "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
         #    "MESHNAME" : "MESH_50",
         #    "MESHTYPE" : "line",
         #},
-        
+
         "MESHDATADEFINITION" : {
-            "XMIN"   : 0.0, 
-            "XMAX"   : 1.0, 
-            "NX"     : 10, 
+            "XMIN"   : 0.0,
+            "XMAX"   : 1.0,
+            "NX"     : 10,
             "DISTRIBUTION" : "UNIFORM",
             "PERIODIC" : false  # true, false
         }
     },
-        
+
     "MESH_2D" : {
-    
+
         "MESHFILEDEFINITION" : {
             "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/mesh2D.quad",
             "MESHNAME" : "MESH_10",     # "MESH_03", "MESH_04", "MESH_05", "MESH_06", "MESH_10", "MESH_20", "MESH_40", "MESH_50"
             "MESHTYPE" : "quad1"        # "quad1", "quad2", "quad3"
         }
-        
+
         #"MESHFILEDEFINITION" : {
         #    "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/2D/CUBE_11.emc2",
         #    "MESHNAME" : null,
         #    "MESHTYPE" : "emc2"
         #}
-        
+
         #"MESHFILEDEFINITION" : {
         #    "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/2D/cube2D_P1_v2.gmsh",
         #    "MESHNAME" : null,
         #    "MESHTYPE" : "gmsh"
         #}
     },
-            
+
     "MESH_3D" : {
         "MESHFILEDEFINITION" : {
             "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube",
             "MESHNAME" : "MESH_20", # "MESH_10", "MESH_20"
             "MESHTYPE" : "cube"
         }
-        
+
         #"MESHFILEDEFINITION" : {
         #    "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v4.gmsh" # cube3D_P1_v[4-5-6-7-8].gmsh
         #    "MESHNAME" : null,
@@ -368,119 +368,120 @@
 
     # infos ----------------------------------------
 
-    "MISC_OUTPUT" : { 
+    "MISC_OUTPUT" : {
         "ITPRINT"          : 4,
         "ITSAVE"           : 1,
         "ITSTAT"           : 1,
         "ITGRAPH"          : 20
     },
-    
+
     # graphics ---------------------------
-    
-    "MISC_GRAPHICS" : { 
+
+    "MISC_GRAPHICS" : {
         "IMTXPROF"         : false,
         "IGEOMVIEW"        : false,
         "IGEOMCONTOURVIEW" : false,
         "IGEOMTOTALVIEW"   : false
     },
-    
+
     "GRAPHICS_1D_OUTPUT" : {
         "GNUPLOT"    : false,
         "GRAPH"      : false,
         "MATLAB"     : false,
         "VTK"        : false,
-        "SILO"       : true, 
-        "PGPLOT"     : false, 
+        "SILO"       : true,
+        "PGPLOT"     : false,
         "VOGLE "     : true,
         "LIBSCIPLOT" : false,
         "MATPLOTLIB" : false
     },
-    
+
     "GRAPHICS_2D_OUTPUT" : {
         "GNUPLOT"    : false,
         "MATLAB"     : false,
         "VTK"        : false,
-        "SILO"       : true, 
+        "SILO"       : true,
         "VOGLE"      : true,
         "MATPLOTLIB" : false
     },
-    
+
     "GRAPHICS_3D_OUTPUT" : {
         "VTK"        : false,
-        "SILO"       : true 
+        "SILO"       : true
     },
-    
+
     # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------
-    
+
     "GRAPHICS_1D" : {
-        "DRIVER" : "/XWINDOW" , 
+        "ENGINE" : "PGPLOT",
+        "DRIVER" : "/XWINDOW" ,
         "WINDOW_SIZE" : [900, 900] ,
         "LABELS_SIZE" : 1.5 ,
-        
-        "SUB_WINDOWS" : { 
+
+        "SUB_WINDOWS" : {
             "NX":2 ,
             "NY":2 ,
             "SUB_WINDOW" :
             [
-              { 
-                "IDXS"         : [1,1] ,
-                "LEGEND"       : "U(x,t)" , 
-                "LEGEND_AXE_X" : "(x)" ,
-                "LEGEND_AXE_Y" : "(y)" ,
-                "MARKER"       : 0 ,
-                "MARKER_END"   : 0 ,
-                "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":6.28318, "Y_MIN":-8.0 , "Y_MAX":8.0 }
-              },
-              { 
-                "IDXS"         : [1,2] ,
-                "LEGEND"       : "KS - L2 Norm of Sol" , 
-                "LEGEND_AXE_X" : "(t)" ,
-                "LEGEND_AXE_Y" : "|U(x,t)|"  ,
-                "MARKER"       : 0 ,
-                "MARKER_END"   : 0 ,
-                "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":100.0, "Y_MIN":0.0 , "Y_MAX":12.0 }
-              },
-              {
-                "IDXS"         : [2,1] ,
-                "LEGEND"       : "KS - L2 Norm of Sol (Zoom)" , 
-                "LEGEND_AXE_X" : "(t)" ,
-                "LEGEND_AXE_Y" : "|U(x,t)|"  ,
-                "MARKER"       : 0 ,
-                "MARKER_END"   : 0 ,
-                "VIEWPORT"     : { "X_MIN":20.0, "X_MAX":30.0, "Y_MIN":5.0, "Y_MAX":12.0 }
-              },
-              { 
-                "IDXS"         : [2,2] ,
-                "LEGEND"       : "KS - Phase Plane representation" , 
-                "LEGEND_AXE_X" : "|U|"   ,
-                "LEGEND_AXE_Y" : "d/dt |U|"  ,
-                "MARKER"       : 0 ,
-                "MARKER_END"   : 6 ,
-                "VIEWPORT"     : { "X_MIN":6.0, "X_MAX":10.0, "Y_MIN":-7.0, "Y_MAX":7.0 }
-              }
+                {
+                    "IDXS"         : [1,1] ,
+                    "LEGEND"       : "U(x,t)" ,
+                    "LEGEND_AXE_X" : "(x)" ,
+                    "LEGEND_AXE_Y" : "(y)" ,
+                    "MARKER"       : 0 ,
+                    "MARKER_END"   : 0 ,
+                    "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":6.28318, "Y_MIN":-8.0 , "Y_MAX":8.0 }
+                },
+                {
+                    "IDXS"         : [1,2] ,
+                    "LEGEND"       : "KS - L2 Norm of Sol" ,
+                    "LEGEND_AXE_X" : "(t)" ,
+                    "LEGEND_AXE_Y" : "|U(x,t)|"  ,
+                    "MARKER"       : 0 ,
+                    "MARKER_END"   : 0 ,
+                    "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":100.0, "Y_MIN":0.0 , "Y_MAX":12.0 }
+                },
+                {
+                    "IDXS"         : [2,1] ,
+                    "LEGEND"       : "KS - L2 Norm of Sol (Zoom)" ,
+                    "LEGEND_AXE_X" : "(t)" ,
+                    "LEGEND_AXE_Y" : "|U(x,t)|"  ,
+                    "MARKER"       : 0 ,
+                    "MARKER_END"   : 0 ,
+                    "VIEWPORT"     : { "X_MIN":20.0, "X_MAX":30.0, "Y_MIN":5.0, "Y_MAX":12.0 }
+                },
+                {
+                    "IDXS"         : [2,2] ,
+                    "LEGEND"       : "KS - Phase Plane representation" ,
+                    "LEGEND_AXE_X" : "|U|"   ,
+                    "LEGEND_AXE_Y" : "d/dt |U|"  ,
+                    "MARKER"       : 0 ,
+                    "MARKER_END"   : 6 ,
+                    "VIEWPORT"     : { "X_MIN":6.0, "X_MAX":10.0, "Y_MIN":-7.0, "Y_MAX":7.0 }
+                }
             ]
         }
     },
-    
+
     # 2D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------
-    
+
     "GRAPHICS_2D" : {
-        "DRIVER" : "/XWINDOW" , 
+        "DRIVER" : "/XWINDOW" ,
         "WINDOW_SIZE" : [900, 900] ,
         "LABELS_SIZE" : 1.5 ,
-        
-        "SUB_WINDOWS" : { 
+
+        "SUB_WINDOWS" : {
             "NX":1 ,
             "NY":1 ,
             "SUB_WINDOW" :
             [
-              { 
-                "IDXS"         : [1,1] ,
-                "LEGEND"       : "contours" , 
-                "NB_LEVELS"    : 11 ,
-					 "LEVELS"       : [0.1, 0.2, 0.3, 0.7, 0.9, 1.1 ] ,
-                "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":0.0 , "Y_MAX":1.0 }
-              }
+                {
+                    "IDXS"         : [1,1] ,
+                    "LEGEND"       : "contours" ,
+                    "NB_LEVELS"    : 11 ,
+                    "LEVELS"       : [0.1, 0.2, 0.3, 0.7, 0.9, 1.1 ] ,
+                    "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":0.0 , "Y_MAX":1.0 }
+                }
             ]
         }
     }

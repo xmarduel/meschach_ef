@@ -1,9 +1,9 @@
-{  
+{
     "PDE" : "LAPLACIAN",   # "LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"
-    
+
     "COORDS_DIMS" : 1,
     "TARGET_DIMS" : 1,
-    
+
     "PDE_PARAMATERS" : {
         "KAPPA"    : -1.000,
         "SIGMA"    : 0.0,
@@ -11,7 +11,7 @@
     },
 
     "PDE_TIME_PARAMETERS" : {
-        "TIME_INI" : 0.0, 
+        "TIME_INI" : 0.0,
         "TIME_END" : 80.0,
         "DELTA_T"  : 0.01
     },
@@ -23,8 +23,8 @@
 
         "LAPLACIAN_ALGO" : {
             "METHOD" : "ITERATIVE-METHOD",
-      
-	         "ITERATIVE-METHOD" : {
+
+               "ITERATIVE-METHOD" : {
                 "METHOD"          : "CG" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
                 "PRECONDITIONER"  : "null" ,      # null, "ICH", "ILU"
                 "PARAMETERS" : {
@@ -40,10 +40,10 @@
 
         "CONVECTION_DIFFUSION_ALGO" : {
            "METHOD" : "ITERATIVE-METHOD",
-		  
+
             "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
             "DELTA" : 10.0,
-            
+
             "ITERATIVE-METHOD" : {
                 "METHOD"           : "CG" ,
                 "PRECONDITIONER"   : "ILU",
@@ -62,9 +62,9 @@
             "METHOD" : "NEWTON-EXACT",
             "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
             "DELTA" : 10.0,
-            
+
             "NB_OUTER_ITERATIONS" : 100,
-            
+
             "INNER-METHOD": "ITERATIVE-METHOD",
 
             "ITERATIVE-METHOD" : {
@@ -89,61 +89,61 @@
 
             "LOWER_IBOUND"  : 5,
             "UPPER_IBOUND"  : 9,
-            
+
             "LOWER_RBOUND"  : 1.0,
             "UPPER_RBOUND"  : 1.0
-        } 
+        }
 
     },
 
     # pde def -------------------------------------------------------------------------
-    
+
     "PDE_INITIAL_CONDITION" : {
-       "DIM1" : {"FUNC_DEF" : "math.cos(x-t) / 2.0"},
-       "DIM2" : {"FUNC_DEF" : null },
-       "DIM3" : {"FUNC_DEF" : null }
+        "DIM1" : {"FUNC_DEF" : "math.cos(x-t) / 2.0"},
+        "DIM2" : {"FUNC_DEF" : null },
+        "DIM3" : {"FUNC_DEF" : null }
     },
-    
+
     "PDE_RHS" : {
-       "DIM1": {"FUNC_DEF" : "0.0" },
-       "DIM2": {"FUNC_DEF" : null  },
-       "DIM3": {"FUNC_DEF" : null  }
+        "DIM1": {"FUNC_DEF" : "0.0" },
+        "DIM2": {"FUNC_DEF" : null  },
+        "DIM3": {"FUNC_DEF" : null  }
     },
-    
+
     "PDE_EXACT_SOL" : {
-       "DIM1": {"FUNC_DEF" : null },
-       "DIM2": {"FUNC_DEF" : null },
-       "DIM3": {"FUNC_DEF" : null }
+        "DIM1": {"FUNC_DEF" : null },
+        "DIM2": {"FUNC_DEF" : null },
+        "DIM3": {"FUNC_DEF" : null }
     },
-    
+
     "PDE_BOUNDARY_CONDITIONS" : {
-        
+
         "NB_BCS" : 2,
-         
+
         "DIM1" : [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0 * (1.0/2.0 - (x-0.5)*(x-0.5)-(y-0.5)*(y-0.5))" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0 * (1.0/2.0 - (x-0.5)*(x-0.5)-(y-0.5)*(y-0.5))" }
+            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0 * (1.0/2.0 - (x-0.5)*(x-0.5)-(y-0.5)*(y-0.5))" },
+            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10/4.0 * (1.0/2.0 - (x-0.5)*(x-0.5)-(y-0.5)*(y-0.5))" }
         ]
     },
 
     "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : {
-        
+
         "1-DIM" : {
-           "FUNC_dudx" : null,
-           "FUNC_dudy" : null,
-           "FUNC_dudz" : null
+            "FUNC_dudx" : null,
+            "FUNC_dudy" : null,
+            "FUNC_dudz" : null
         }
     },
-    
+
     # mesh --------------------------------
 
     "MESH_1D" : {
-       
+
         "MESH_SPEC": "MESHDATADEFINITION",
-        
+
         "MESHDATADEFINITION" : {
-            "XMIN"   : 0.0, 
-            "XMAX"   : 6.2831853071795862, 
+            "XMIN"   : 0.0,
+            "XMAX"   : 6.2831853071795862,
             "NX"     : 40,
             "DISTRIBUTION" : "UNIFORM",
             "PERIODIC" : true  # true, false
@@ -152,22 +152,22 @@
 
     # infos ----------------------------------------
 
-    "MISC_OUTPUT" : { 
+    "MISC_OUTPUT" : {
         "ITPRINT"          : 1,
         "ITSAVE"           : 1,
         "ITSTAT"           : 1,
         "ITGRAPH"          : 1
     },
-    
+
     # graphics ---------------------------
-    
-    "MISC_GRAPHICS" : { 
+
+    "MISC_GRAPHICS" : {
         "IMTXPROF"         : false,
         "IGEOMVIEW"        : false,
         "IGEOMCONTOURVIEW" : false,
         "IGEOMTOTALVIEW"   : false
     },
-    
+
     "GRAPHICS_1D_OUTPUT" : {
         "GNUPLOT"    : false,
         "GRAPH"      : false,
@@ -176,29 +176,29 @@
         "SILO"       : false,
         "MATPLOTLIB" : false
     },
-    
+
     # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------
-    
+
     "GRAPHICS_1D" : {
         "ENGINE" : "PGPLOT",
-        "DRIVER" : "/XWINDOW" , 
+        "DRIVER" : "/XWINDOW" ,
         "WINDOW_SIZE" : [1200, 900] ,
         "LABELS_SIZE" : 1.5 ,
-        
+
         "SUB_WINDOWS" :
         [
-            { 
+            {
                 "IDXS"         : [1,1] ,
-                "LEGEND"       : "U(x,t)" , 
+                "LEGEND"       : "U(x,t)" ,
                 "LEGEND_AXE_X" : "(x)" ,
                 "LEGEND_AXE_Y" : "(y)" ,
                 "MARKER"       : 0 ,
                 "MARKER_END"   : 0 ,
                 "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":6.28318, "Y_MIN":-8.0 , "Y_MAX":8.0 }
-				},
-            { 
+            },
+            {
                 "IDXS"         : [1,2] ,
-                "LEGEND"       : "KS - L2 Norm of Sol" , 
+                "LEGEND"       : "KS - L2 Norm of Sol" ,
                 "LEGEND_AXE_X" : "(t)" ,
                 "LEGEND_AXE_Y" : "|U(x,t)|"  ,
                 "MARKER"       : 0 ,
@@ -207,16 +207,16 @@
             },
             {
                 "IDXS"         : [2,1] ,
-                "LEGEND"       : "KS - L2 Norm of Sol (Zoom)" , 
+                "LEGEND"       : "KS - L2 Norm of Sol (Zoom)" ,
                 "LEGEND_AXE_X" : "(t)" ,
                 "LEGEND_AXE_Y" : "|U(x,t)|"  ,
                 "MARKER"       : 0 ,
                 "MARKER_END"   : 0 ,
                 "VIEWPORT"     : { "X_MIN":20.0, "X_MAX":30.0, "Y_MIN":5.0, "Y_MAX":12.0 }
             },
-            { 
+            {
                 "IDXS"         : [2,2] ,
-                "LEGEND"       : "KS - Phase Plane representation" , 
+                "LEGEND"       : "KS - Phase Plane representation" ,
                 "LEGEND_AXE_X" : "|U|"   ,
                 "LEGEND_AXE_Y" : "d/dt |U|"  ,
                 "MARKER"       : 0 ,
@@ -225,8 +225,8 @@
             }
         ]
     },
-    
+
     # logging -------------------------------------------------
-    
+
     "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/1D_TRANSIENT/OUTPUT_PDE_1D_TRANSIENT.dat"
 }

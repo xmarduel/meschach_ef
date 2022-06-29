@@ -287,10 +287,10 @@ BC_2D        *Bc2D_setBcType            ( BC_2D* MyBC, BC_2D_TYPE type, int ref,
    if ( ref > NBMAX_BC_2D_FUNCTIONS )       error4(E_BC_WRONGIDXNUMBER, "Bc2D_setBcType");
    if ( (axe != AXEe_X)&&(axe !=AXEe_Y ) )  error4(E_BC_WRONGAXENUMBER, "Bc2D_setBcType");
 
-	if ( type == BC_2De_UNKNOWN )
-	{
-		return MyBC;
-	}
+   if ( type == BC_2De_UNKNOWN )
+   {
+      return MyBC;
+   }
 
    if ( (type != BC_2De_DIRICHLET) && (type != BC_2De_NEUMANN) && (type != BC_2De_CAUCHY) && (type != BC_2De_ROBIN)) error4(E_BC_WRONGBCTYPE, "Bc2D_setBcType");
 
@@ -588,25 +588,21 @@ int           Bc2D_checkBC               ( const BC_2D* MyBC , int axe)
          case BC_2De_DIRICHLET:
 
             Bc2D_checkBCdirichlet(MyBC, axe, ref);
-
             break;
 
          case BC_2De_NEUMANN:
 
             Bc2D_checkBCneumann(MyBC, axe, ref);
-
             break;
 
          case BC_2De_CAUCHY:
 
             Bc2D_checkBCcauchy(MyBC, axe, ref);
-
             break;
 
          case BC_2De_ROBIN:
 
             Bc2D_checkBCrobin(MyBC, axe, ref);
-
             break;
       }
    }

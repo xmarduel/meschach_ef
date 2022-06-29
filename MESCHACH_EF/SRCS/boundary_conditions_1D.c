@@ -539,22 +539,22 @@ int           Bc1D_checkBC               ( const BC_1D* MyBC )
          case BC_1De_DIRICHLET:
 
             Bc1D_checkBCdirichlet(MyBC, AXEe_X, ref);
-				break;
+            break;
 
          case BC_1De_NEUMANN:
 
             Bc1D_checkBCneumann(MyBC, AXEe_X, ref);
-				break;
+            break;
 
          case BC_1De_CAUCHY:
 
             Bc1D_checkBCcauchy(MyBC, AXEe_X, ref);
-				break;
+            break;
 
          case BC_1De_ROBIN:
 
             Bc1D_checkBCrobin(MyBC, AXEe_X, ref);
-				break;
+            break;
       }
    }
 

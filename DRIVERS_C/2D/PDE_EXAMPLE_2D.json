@@ -1,9 +1,9 @@
-{  
+{
     "PDE" : "LAPLACIAN",   # "LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"
-    
+
     "COORDS_DIMS" : 2,
     "TARGET_DIMS" : 1,
-    
+
     "PDE_PARAMATERS" : {
         "KAPPA"    : 1.000,
         "SIGMA"    : 0.0,
@@ -11,7 +11,7 @@
     },
 
     "PDE_TIME_PARAMETERS" : {
-        "TIME_INI" : 0.0, 
+        "TIME_INI" : 0.0,
         "TIME_END" : 10.0,
         "DELTA_T"  : 0.005
     },
@@ -23,7 +23,7 @@
 
         "LAPLACIAN_ALGO" : {
             "METHOD" : "ITERATIVE-METHOD",
-				
+
             "ITERATIVE-METHOD" : {
                 "METHOD"          : "CG" ,       # "CG", "CGS", "BiCGStab"
                 "PRECONDITIONER"  : "ILU" ,      # null, "ICH", "ILU"
@@ -42,7 +42,7 @@
             "METHOD" : "ITERATIVE-METHOD",
             "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
             "DELTA" : 10.0,
-            
+
             "ITERATIVE-METHOD" : {
                 "METHOD"           : "CG" ,
                 "PRECONDITIONER"   : "ILU",
@@ -61,9 +61,9 @@
             "METHOD" : "NEWTON-EXACT",
             "METHOD_STABILIZATION" : "GALS" ,   # null, "GALS", "SUPG", "DWG"
             "DELTA" : 10.0,
-            
+
             "NB_OUTER_ITERATIONS" : 100,
-            
+
             "ITERATIVE-METHOD" : {
                 "METHOD"           : "BiCGStab" ,
                 "PRECONDITIONER"   : "ILU",
@@ -77,50 +77,50 @@
                 }
             }
         },
-        "STOKES_ALGO" : {             
-            "STOKES_METHOD"    : "PRESSUREMATRIX"
 
-        },
-        
-        "STOKES_ALGO" : {             
+        #"STOKES_ALGO" : {
+        #    "STOKES_METHOD"    : "PRESSUREMATRIX"
+        #},
+
+        "STOKES_ALGO" : {
             "METHOD"    : "UZAWA",
-            "USAWA_PARAMETERS" : { 
+            "USAWA_PARAMETERS" : {
                 "RHO"       : 1.0,
-		 "NMAX_ITER" : 500,
-		 "EPSILON"   : 1.0e-10,
-		 "INNERLOOP_SOLVER" : { 
-                     "METHOD" : "DIRECT-METHOD",
-                     "BANDWIDTHREDUCTION" : { 
-	      		 "OPTION"         : "PROFILE",
-      			 "IMPLEMENTATION" : "SPOOLES"
-                     },
-                     "NMAX_ITER" : 1.0e-10,
-                     "EPSILON"   : 500
+                "NMAX_ITER" : 500,
+                "EPSILON"   : 1.0e-10,
+                "INNERLOOP_SOLVER" : {
+                    "METHOD" : "DIRECT-METHOD",
+                    "BANDWIDTHREDUCTION" : {
+                        "OPTION"         : "PROFILE",
+                        "IMPLEMENTATION" : "SPOOLES"
+                    },
+                    "NMAX_ITER" : 1.0e-10,
+                    "EPSILON"   : 500
                 }
             }
         },
 
-        "NAVIERSTOKES_ALGO" : {             
+        "NAVIERSTOKES_ALGO" : {
             "METHOD"    : "NEWTON-EXACT",
             "NMAX_ITER" : 25,
             "EPSILON"   : 1.0e-8,
             "OUTER_METHOD" : "PRESSUREMATRIX",
-				
-            "PRESSUREMATRIX_PARAMETERS" : { 
-	        "NMAX_ITER" : 100,
-		 "EPSILON"   : 1.0e-12,  # residual of the CG method
-		 "INNERLOOP_SOLVER" : { 
-                     "METHOD": "DIRECT-METHOD",
-                     "BANDWIDTHREDUCTION" : {
-                         "OPTION"         : "PROFILE",
-                         "IMPLEMENTATION" : "SPOOLES"
-		     },
-		     "NMAX_ITER" : 500,
-		     "EPSILON"   : 1.0e-12
-	  	 }
-	    }
+
+            "PRESSUREMATRIX_PARAMETERS" : {
+                "NMAX_ITER" : 100,
+                "EPSILON"   : 1.0e-12,  # residual of the CG method
+                "INNERLOOP_SOLVER" : {
+                    "METHOD": "DIRECT-METHOD",
+                    "BANDWIDTHREDUCTION" : {
+                        "OPTION"         : "PROFILE",
+                        "IMPLEMENTATION" : "SPOOLES"
+                    },
+                    "NMAX_ITER" : 500,
+                    "EPSILON"   : 1.0e-12
+                }
+            }
         },
-        
+
         "EIGEN_ALGO" : {
             "EIGEN_PROBLEM" : "ORDINARY_SYMMETRIC",
             "EIGEN_OPTION"  : "LOWER",
@@ -129,103 +129,103 @@
 
             "LOWER_IBOUND"  : 5,
             "UPPER_IBOUND"  : 9,
-            
+
             "LOWER_RBOUND"  : 1.0,
             "UPPER_RBOUND"  : 1.0
-        } 
- 
+        }
+
     },
 
     # pde def -------------------------------------------------------------------------
-    
+
     "PDE_INITIAL_CONDITION" : {
-       "DIM1" : {"FUNC_DEF" : null},
-       "DIM2" : {"FUNC_DEF" : null},
-       "DIM3" : {"FUNC_DEF" : null}
+        "DIM1" : {"FUNC_DEF" : null},
+        "DIM2" : {"FUNC_DEF" : null},
+        "DIM3" : {"FUNC_DEF" : null}
     },
-    
+
     "PDE_RHS" : {
-       "DIM1" : {"FUNC_DEF" : "10.0"},
-       "DIM2" : {"FUNC_DEF" : null},
-       "DIM3" : {"FUNC_DEF" : null}
+        "DIM1" : {"FUNC_DEF" : "10.0"},
+        "DIM2" : {"FUNC_DEF" : null},
+        "DIM3" : {"FUNC_DEF" : null}
     },
-    
+
     "PDE_EXACT_SOL" : {
-       "DIM1" : {"FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
-       "DIM2" : {"FUNC_DEF" : null},
-       "DIM3" : {"FUNC_DEF" : null}
+        "DIM1" : {"FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
+        "DIM2" : {"FUNC_DEF" : null},
+        "DIM3" : {"FUNC_DEF" : null}
     },
 
     "PDE_BOUNDARY_CONDITIONS" : {
-        
+
         "NB_BCS" : 4,
-         
+
         "DIM1" : [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
-           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
-           { "IDX" : 4 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" }
+            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
+            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
+            { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
+            { "IDX" : 4 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" }
         ],
-        
+
         "DIM2" :  [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
-           { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" }
+            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
+            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" },
+            { "IDX" : 3 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "10.0/4.0*(0.5 - (x-0.5)*(x-0.5) - (y-0.5)*(y-0.5))" }
         ],
-        
+
         "DIM3" : [
-           { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : null },
-           { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : null },
-           { "IDX" : 3 , "BC_TYPE" : "CAUCHY"    , "FUNC_DEF" : null },
-           { "IDX" : 4 , "BC_TYPE" : "NEUMANN"   , "FUNC_DEF" : null },
-           { "IDX" : 5 , "BC_TYPE" : "ROBIN"     , "FUNC_DEF" : [null, null]}
-        ]
+            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : null },
+            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : null },
+            { "IDX" : 3 , "BC_TYPE" : "CAUCHY"    , "FUNC_DEF" : null },
+            { "IDX" : 4 , "BC_TYPE" : "NEUMANN"   , "FUNC_DEF" : null },
+            { "IDX" : 5 , "BC_TYPE" : "ROBIN"     , "FUNC_DEF" : [null, null]}
+       ]
     },
 
     "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : {
-        
+
         "1-DIM" : {
-           "FUNC_dudx" : "x",
-           "FUNC_dudy" : "y",
-           "FUNC_dudz" : "z"
+            "FUNC_dudx" : "x",
+            "FUNC_dudy" : "y",
+            "FUNC_dudz" : "z"
         },
-        
+
         "2-DIM" : {
-           "DIM1" : {
-               "FUNC_dudx" : "x",
-               "FUNC_dudy" : "y",
-               "FUNC_dudz" : "y",
-               "FUNC_dvdx" : null,
-               "FUNC_dvdy" : null,
-               "FUNC_dvdz" : null 
-           },
-           "DIM2" : {
-               "FUNC_dudx" : "x",
-               "FUNC_dudy" : "y",
-               "FUNC_dudz" : "y",
-               "FUNC_dvdx" : null,
-               "FUNC_dvdy" : null,
-               "FUNC_dvdz" : null 
-           }
+            "DIM1" : {
+                "FUNC_dudx" : "x",
+                "FUNC_dudy" : "y",
+                "FUNC_dudz" : "y",
+                "FUNC_dvdx" : null,
+                "FUNC_dvdy" : null,
+                "FUNC_dvdz" : null
+            },
+            "DIM2" : {
+                "FUNC_dudx" : "x",
+                "FUNC_dudy" : "y",
+                "FUNC_dudz" : "y",
+                "FUNC_dvdx" : null,
+                "FUNC_dvdy" : null,
+                "FUNC_dvdz" : null
+            }
         }
     },
-    
+
     # mesh --------------------------------
-        
+
     "MESH_2D" : {
-    
+
         #"MESHFILEDEFINITION" : {
         #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/mesh2D.quad",
         #    "MESHNAME" : "MESH_20",     # "MESH_03", "MESH_04", "MESH_05", "MESH_06", "MESH_10", "MESH_20", "MESH_40", "MESH_50"
         #    "MESHTYPE" : "quad3"        # "quad1", "quad2", "quad3"
         #}
-        
+
         #"MESHFILEDEFINITION" : {
         #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CUBE_11.emc2",
         #    "MESHNAME" : "null",
         #    "MESHTYPE" : "emc2"
         #}
-        
+
         "MESHFILEDEFINITION" : {
             "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/cube2D_P1_v3.gmsh",
             "MESHNAME" : "null",
@@ -235,22 +235,22 @@
 
     # infos ----------------------------------------
 
-    "MISC_OUTPUT" : { 
+    "MISC_OUTPUT" : {
         "ITPRINT"          : 4,
         "ITSAVE"           : 1,
         "ITSTAT"           : 1,
         "ITGRAPH"          : 20
     },
-    
+
     # graphics ---------------------------
-    
-    "MISC_GRAPHICS" : { 
+
+    "MISC_GRAPHICS" : {
         "IMTXPROF"         : false,
         "IGEOMVIEW"        : false,
         "IGEOMCONTOURVIEW" : false,
         "IGEOMTOTALVIEW"   : false
     },
-    
+
     "GRAPHICS_1D_OUTPUT" : {
         "GNUPLOT"    : false,
         "GRAPH"      : false,
@@ -259,7 +259,7 @@
         "SILO"       : true,
         "MATPLOTLIB" : false
     },
-    
+
     "GRAPHICS_2D_OUTPUT" : {
         "GNUPLOT"    : false,
         "MATLAB"     : false,
@@ -267,30 +267,30 @@
         "SILO"       : true,
         "MATPLOTLIB" : false
     },
-    
+
     "GRAPHICS_3D_OUTPUT" : {
         "VTK"        : false,
-        "SILO"       : true 
+        "SILO"       : true
     },
-	 
+
     # 2D interactive - graphics library ploting parameters ------------
-    
+
     "GRAPHICS_2D" : {
         "ENGINE" : "VOGLE",
-        "DRIVER" : "/XWINDOW" , 
+        "DRIVER" : "/XWINDOW" ,
         "WINDOW_SIZE" : [600, 600] ,
         "LABELS_SIZE" : 1.2 ,
-        
+
         "SUB_WINDOWS" :
         [
-            { 
+            {
                 "IDXS"         : [1,1] ,
-                
+
                 "GRAPHICS_TYPE"    : "CONTOURS",
                 #"GRAPHICS_TYPE"    : "SURFACE",
-                
+
                 "LEGEND"       : "contours" ,
-                
+
                 "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":0.0 , "Y_MAX":1.0 },
 
                 "CONTOURS"     : {
@@ -304,9 +304,9 @@
             }
         ]
     },
-    
+
     # logging -------------------------------------------------
-    
+
     "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/2D/OUTPUT_PDE_2D.dat"
-    
+
 }
