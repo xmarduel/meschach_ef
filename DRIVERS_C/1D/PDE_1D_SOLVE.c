@@ -199,12 +199,12 @@ int main()
        
         if (MyParams->graph_params.SILO == 1)
         {
-            graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch");
+            graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch1D");
         }
        
         if (MyParams->graph_params.VTK == 1)
         {
-            graphics1D("vtk", MyElt, MyGeom, SOL, "SolApproch");
+            graphics1D("vtk", MyElt, MyGeom, SOL, "SolApproch1D");
         }
        
         VEC     *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);

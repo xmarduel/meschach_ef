@@ -38,7 +38,7 @@ for (var i = 0; i < tree.length; i++){
         }
         if (classList.contains("open")) {
             //e.preventDefault(); // on open -> jump (default)
-          
+
         } else {
             e.preventDefault(); // on close
         }
@@ -114,7 +114,7 @@ display and X windows interactions (start/pause/step).</p>
 <p>Considering C driver programs, the parameters for the problem to solve are given in a <strong>json file</strong>
 with well defined structure so hopefully solving a problem is feasible for beginners. Changing the parameters do not
 require to recompile the driver program, and the parameters are all set in a <strong>centralized place</strong>. We
-give below an example of such a configuration file. Boundary conditions and right hand side functions are given 
+give below an example of such a configuration file. Boundary conditions and right hand side functions are given
 by specifying the body function as <strong>lua code</strong> (Meschach-EF is compiled with the lua library linked in).
 So theorically every input is possible, but must match in 1 line. The c code will be able to compute the values of these functions,
 as a lua interpreter (infact 1 interpreter per function) will be started in the driver program.</p>
@@ -132,15 +132,15 @@ so the python drivers are therefore very flexibel to test different boundary con
 
 <p>This is where the parameters of the problem to solve are defined, as well as how the problem will be solved. Why is there a "Parameters File" at all? </p>
 
-<p>Consider solving a simple 1D Laplacian problem. You may want to change the FE ("P1" or "P2") and the resolution method 
+<p>Consider solving a simple 1D Laplacian problem. You may want to change the FE ("P1" or "P2") and the resolution method
 ("DIRECT-METHOD" or "ITERATIVE-METHOD"). Each of these two methods have also their own parameters etc.</p>
 
-<p>So you could end, when varying your parameters, to change and change again the driver program at different places. 
-With such a parameters file, there is only 1 place where to edit the parameters. 
+<p>So you could end, when varying your parameters, to change and change again the driver program at different places.
+With such a parameters file, there is only 1 place where to edit the parameters.
 Your driver program will have to handle these differents possibilities, thus being somehow more complicated than initially thought.
 However, this extra cost is compensated by the fact that varying your parameters becomes straightforward.</p>
 
-<p>So a "full" (all possible options for all king of problems) parameters file would look like the following, 
+<p>So a "full" (all possible options for all king of problems) parameters file would look like the following,
 but infact you need to define only a few of them. It just gives you an idea how your parameters file will be.</p>
 
 <pre><code class="language-json">{
@@ -150,10 +150,10 @@ but infact you need to define only a few of them. It just gives you an idea how 
     "type" : "object",
     "properties" : {
         "PDE" : { "type":"string", "description":"", "enum":["LAPLACIAN", "CONVECTION-DIFFUSION", "BURGERS", "HELMHOLZ", "STOKES", "NAVIER-STOKES", "KURAMOTO-SIVASHINSKI"]},
-        
+
         "COORDS_DIMS": { "type":"integer", "description":"x,y,z coordinates", "enum" : [1,2,3] },
         "TARGET_DIMS": { "type":"integer", "description":"u,v,w",             "enum" : [1,2,3] },
-        
+
         "PDE_PARAMATERS" : { "type":"object", "description":"",
             "properties" : {
                 "KAPPA"  : { "type":"number", "description":"coeff for -Uxx" },
@@ -161,7 +161,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                 "EPSILON": { "type":"number", "description":"coeff for Uxxxx" }
             }
         },
-        
+
         "PDE_TIME_PARAMETERS" : { "type":"object", "description":"",
             "properties" : {
                 "TIME_INI" : { "type":"number", "description":"" },
@@ -170,19 +170,19 @@ but infact you need to define only a few of them. It just gives you an idea how 
             },
             "required" : ["TIME_INI", "TIME_END", "DELTA_T"]
         },
-        
+
         "PDE_RESOLUTION" : { "type":"object", "description":"",
             "properties" : {
-                "EF"             : { "type":"string", "description":"" , "enum":["P1", "P2", "P3", "H3", "S2", "S3", "S4", "S5"] },           
-                
+                "EF"             : { "type":"string", "description":"" , "enum":["P1", "P2", "P3", "H3", "S2", "S3", "S4", "S5"] },
+
                 "LAPLACIAN_ALGO" : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD"        : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+                        "DIRECT-METHOD" : { "type":"object", "description":"",
                             "properties" : {
-                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                     "properties" : {
-                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] }, 
+                                        "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                         "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
                                     }
                                 }
@@ -214,10 +214,10 @@ but infact you need to define only a few of them. It just gives you an idea how 
                         "METHOD"        : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
                         "METHOD_STABILIZATION" : { "type":"string", "description":"", "enum":["null", "GALS", "SUPG", "DWG"] },
                         "DELTA"                : { "type":"number", "description":"" },
-                        
-                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+
+                        "DIRECT-METHOD" : { "type":"object", "description":"",
                             "properties" : {
-                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                     "properties" : {
                                         "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                         "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -245,20 +245,20 @@ but infact you need to define only a few of them. It just gives you an idea how 
                         }
                     }
                 },
-                
-                "BURGERS_ALGO"      : { "type":"object", "description":"", 
+
+                "BURGERS_ALGO"      : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD"               : { "type":"string", "description":"", "enum":["NEWTON-EXACT", "NEWTON-APPROCH"] },
                         "METHOD_STABILIZATION" : { "type":"string", "description":"", "enum":["null", "GALS", "SUPG", "DWG"] },
                         "DELTA"                : { "type":"number", "description":"" },
-                        
+
                         "NB_OUTER_ITERATIONS": { "type":"number", "description":"for the non linear iterations" },
-                        
+
                         "INNER_METHOD": { "type":"number", "description":"for the non linear iterations", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                        
-                        "DIRECT-METHOD" : { "type":"object", "description":"", 
+
+                        "DIRECT-METHOD" : { "type":"object", "description":"",
                             "properties" : {
-                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                     "properties" : {
                                         "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                         "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -286,7 +286,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                         }
                     }
                 },
-                
+
                 "STOKES_ALGO"       : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD" : { "type":"string", "description":"", "enum":["PRESSUREMATRIX", "UZAWA", "AUGMENTEDLAGR"] },
@@ -297,7 +297,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                                 "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "METHOD" : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                         "properties" : {
                                             "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                             "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -315,7 +315,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "properties": {
                                         "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                             "properties" : {
                                                 "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                                 "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -327,7 +327,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                                 }
                             }
                         },
-                        "AUGMENTEDLAGR_PARAMETERS" : { "type":"object", "description":"", 
+                        "AUGMENTEDLAGR_PARAMETERS" : { "type":"object", "description":"",
                             "properties" : {
                                 "RHO" : { "type":"number", "description":"" },
                                 "NMAX_ITER" : { "type":"integer", "description":"" },
@@ -335,7 +335,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "properties": {
                                         "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                             "properties" : {
                                                 "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                                 "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -350,13 +350,13 @@ but infact you need to define only a few of them. It just gives you an idea how 
                     }
                 },
 
-                "NAVIERSTOKES_ALGO" : { "type":"object", "description":"", 
+                "NAVIERSTOKES_ALGO" : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD" : { "type":"string", "description":"", "enum":["NEWTON-EXACT", "NEWTON-APPROCH"] },
-                        
+
                         "NMAX_ITER" : { "type":"integer", "description":"" },
                         "EPSILON" : { "type":"number", "description":"" },
-                        
+
                         "OUTER_METHOD" : { "type":"string", "description":"", "enum":["UZAWA", "PRESSUREMATRIX"] },
 
                         "UZAWA_PARAMETERS" : { "type":"object", "description":"",
@@ -366,7 +366,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                                 "EPSILON"   : { "type":"number", "description":"diff between U_k+1 and u_k" },
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "METHOD" : { "type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                    "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                         "properties" : {
                                             "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                             "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -380,11 +380,11 @@ but infact you need to define only a few of them. It just gives you an idea how 
                         "PRESSUREMATRIX_PARAMETERS" : { "type":"object", "description":"",
                             "properties" : {
                                 "NMAX_ITER" : { "type":"integer", "description":"" },
-                                "EPSILON"   : { "type":"number", "description":"residual of the CG method" }, 
+                                "EPSILON"   : { "type":"number", "description":"residual of the CG method" },
                                 "INNERLOOP_SOLVER" : { "type":"object", "description":"",
                                     "properties": {
                                         "METHOD": {"type":"string", "description":"", "enum":["DIRECT-METHOD", "ITERATIVE-METHOD"] },
-                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"", 
+                                        "BANDWIDTHREDUCTION" : { "type":"object", "description":"",
                                             "properties" : {
                                                 "OPTION" :         { "type":"string", "description":"may be null", "enum":["null", "BAND", "PROFILE"] },
                                                 "IMPLEMENTATION" : { "type":"string", "description":"",            "enum":["MESCHACH", "AMD", "SPOOLES"] }
@@ -399,7 +399,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                     }
                 },
 
-                "HELMHOLZ_ALGO"     : { "type":"object", "description":"", 
+                "HELMHOLZ_ALGO"     : { "type":"object", "description":"",
                     "properties" : {
                         "EIGEN_PROBLEM" : { "type":"string", "description":"", "enum" : ["ORDINARY_SYMMETRIC", "GENERALIZED_SYMMETRIC_1", "GENERALIZED_SYMMETRIC_2"] },
                         "EIGEN_OPTION"  : { "type":"string", "description":"", "enum" : ["LOWER", "UPPER", "NEAREST_1", "NEAREST_2", "IBOUNDS", "RBOUNDS", "ALL"] },
@@ -411,8 +411,8 @@ but infact you need to define only a few of them. It just gives you an idea how 
                     },
                     "required" : ["EIGEN_PROBLEM", "EIGEN_OPTION", "NB_EIGENS", "LOWER_IBOUND", "UPPER_IBOUND", "LOWER_RBOUND", "UPPER_RBOUND"]
                 },
-                
-                "KURAMOTO-SIVASHINSKI_ALGO" : { "type":"object", "description":"", 
+
+                "KURAMOTO-SIVASHINSKI_ALGO" : { "type":"object", "description":"",
                     "properties" : {
                         "METHOD" : { "type":"string", "description":"", "enum" : ["NORMAL", "SPLITTED"] }
                     },
@@ -421,40 +421,40 @@ but infact you need to define only a few of them. It just gives you an idea how 
             },
             "required" : ["EF"]
         },
-        
-        "PDE_INITIAL_CONDITION" : { "type":"object", "description":"", 
+
+        "PDE_INITIAL_CONDITION" : { "type":"object", "description":"",
             "properties" : {
-                "DIM1" : { "type":"object", "description":"" , 
+                "DIM1" : { "type":"object", "description":"" ,
                     "properties" : {
                         { "FUNC_DEF"  : { "type":["null", "string"], "description":"lua code" }
                     }
                 },
-                "DIM2" : { "type":"object", "description":"" , 
+                "DIM2" : { "type":"object", "description":"" ,
                     "properties" : {
                         { "FUNC_DEF"  : { "type":["null", "string"], "description":"lua code" }
                     }
                 },
-                "DIM3" : { "type":"object", "description":"" , 
+                "DIM3" : { "type":"object", "description":"" ,
                     "properties" : {
                         { "FUNC_DEF"  : { "type":["null", "string"], "description":"lua code" }
                     }
                 }
             }
         },
-        
+
         "PDE_RHS" : { "type":"object", "description":"",
             "properties" : {
-                "DIM1" : { "type":"object", "description":"" , 
+                "DIM1" : { "type":"object", "description":"" ,
                     "properties" : {
                         { "FUNC_DEF"  : { "type":["null", "string"], "description":"lua code" }
                     }
                 },
-                "DIM2" : { "type":"object", "description":"" , 
+                "DIM2" : { "type":"object", "description":"" ,
                     "properties" : {
                         { "FUNC_DEF"  : { "type":["null", "string"], "description":"lua code" }
                     }
                 },
-                "DIM3" : { "type":"object", "description":"" , 
+                "DIM3" : { "type":"object", "description":"" ,
                     "properties" : {
                         { "FUNC_DEF"  : { "type":["null", "string"], "description":"lua code" }
                     }
@@ -464,33 +464,33 @@ but infact you need to define only a few of them. It just gives you an idea how 
 
         "PDE_EXACT_SOL" : { "type":"object", "description":"for tests, exact solution of the pde",
             "properties" : {
-                "DIM1" : { "type":"object", "description":"" , 
+                "DIM1" : { "type":"object", "description":"" ,
                     "properties" : {
                         { "FUNC_DEF"  : { "type":["null", "string"], "description":"lua code" }
                     }
                 },
-                "DIM2" : { "type":"object", "description":"" , 
+                "DIM2" : { "type":"object", "description":"" ,
                     "properties" : {
                         { "FUNC_DEF"  : { "type":["null", "string"], "description":"lua code" }
                     }
                 },
-                "DIM3" : { "type":"object", "description":"" , 
+                "DIM3" : { "type":"object", "description":"" ,
                     "properties" : {
                         { "FUNC_DEF"  : { "type":["null", "string"], "description":"lua code" }
                     }
                 }
             }
         },
-        
+
         "PDE_BOUNDARY_CONDITIONS" : { "type":"object", "description":"",
             "properties" : {
                 "NB_BCS" : { "type":"integer", "description":"" },
-                "DIM1" : { "type":"array", "description":"" , "items" : 
-                    { "type":"object", "description":"" , 
+                "DIM1" : { "type":"array", "description":"" , "items" :
+                    { "type":"object", "description":"" ,
                         "properties" : {
                             "IDX"       : { "type":"integer", "description":"" },
                             "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
-                            "FUNC_DEF"  : { "oneOf" : 
+                            "FUNC_DEF"  : { "oneOf" :
                                 [
                                     { "type":"string", "description": "lua code" },
                                     { "type":"array" , "minItems": 2, "maxItems": 2 , "items": { "type":"string" "description":"lua code" } }
@@ -501,12 +501,12 @@ but infact you need to define only a few of them. It just gives you an idea how 
                         "additionalProperties": false
                     }
                 },
-                "DIM2" : { "type":"array", "description":"" , "items" : 
-                    { "type":"object", "description":"" , 
+                "DIM2" : { "type":"array", "description":"" , "items" :
+                    { "type":"object", "description":"" ,
                         "properties" : {
                             "IDX"       : { "type":"integer", "description":"" },
                             "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
-                            "FUNC_DEF" : { "oneOf" : 
+                            "FUNC_DEF" : { "oneOf" :
                                 [
                                     { "type":"string", "description": "lua code" },
                                     { "type":"array", "minItems": 2, "maxItems": 2 , "items": { "type":"string" , "description":"lua code"} }
@@ -517,12 +517,12 @@ but infact you need to define only a few of them. It just gives you an idea how 
                         "additionalProperties": false
                     }
                 },
-                "DIM3" : { "type":"array", "description":"" , "items" : 
+                "DIM3" : { "type":"array", "description":"" , "items" :
                     { "type":"object", "description":"" ,
                         "properties" : {
                             "IDX"       : { "type":"integer", "description":"" },
                             "BC_TYPE"   : { "type":"string",  "description":"", "enum" : ["DIRICHLET", "NEUMANN", "CAUCHY", "ROBIN"] },
-                            "FUNC_DEF"  : { "oneOf" : 
+                            "FUNC_DEF"  : { "oneOf" :
                                 [
                                     { "type":"string", "description": "lua code"},
                                     { "type":"array", "items": { "type":"string" ,"description":"lua code"  }, "minItems": 2, "maxItems": 2 }
@@ -536,10 +536,10 @@ but infact you need to define only a few of them. It just gives you an idea how 
             }
         },
 
-        "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : { "type":"object", "description":"", 
+        "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : { "type":"object", "description":"",
             "properties" : {
-                
-                "1-DIM" : { "type":"object", "description":"", 
+
+                "1-DIM" : { "type":"object", "description":"",
                     "properties" : {
                         "FUNC_dudx" : { "type": ["null", "string"], "description": "lua code" },
                         "FUNC_dudy" : { "type": ["null", "string"], "description": "lua code" },
@@ -547,9 +547,9 @@ but infact you need to define only a few of them. It just gives you an idea how 
                     },
                     "additionalProperties": false
                 },
-                "2-DIM" : { "type":"object", "description":"", 
+                "2-DIM" : { "type":"object", "description":"",
                     "properties" : {
-                        "DIM1" : { "type":"object", "description":"", 
+                        "DIM1" : { "type":"object", "description":"",
                             "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description": "lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description": "lua code" },
@@ -560,7 +560,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                             },
                             "additionalProperties": false
                         },
-                        "DIM2": { "type":"object", "description":"", 
+                        "DIM2": { "type":"object", "description":"",
                             "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description": "lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description": "lua code" },
@@ -575,9 +575,9 @@ but infact you need to define only a few of them. It just gives you an idea how 
                     "required" : ["DIM1", "DIM2"],
                     "additionalProperties": false
                 },
-                "3-DIM" : { "type":"object", "description":"", 
+                "3-DIM" : { "type":"object", "description":"",
                     "properties" : {
-                        "DIM1" : { "type":"object", "description":"", 
+                        "DIM1" : { "type":"object", "description":"",
                             "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description": "lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description": "lua code" },
@@ -591,8 +591,8 @@ but infact you need to define only a few of them. It just gives you an idea how 
                             },
                             "additionalProperties": false
                         },
-                        "DIM2" : { "type":"object", "description":"", 
-                            "properties" : { 
+                        "DIM2" : { "type":"object", "description":"",
+                            "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description": "lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description": "lua code" },
                                 "FUNC_dudz" : { "type": ["null", "string"], "description": "lua code" },
@@ -605,7 +605,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
                             },
                             "additionalProperties": false
                         },
-                        "DIM3" : { "type":"object", "description":"", 
+                        "DIM3" : { "type":"object", "description":"",
                             "properties" : {
                                 "FUNC_dudx" : { "type": ["null", "string"], "description": "lua code" },
                                 "FUNC_dudy" : { "type": ["null", "string"], "description": "lua code" },
@@ -626,8 +626,8 @@ but infact you need to define only a few of them. It just gives you an idea how 
             }
         },
 
-        "MESH_1D" : { "type":"object", "description":"", 
-            "properties" : {  
+        "MESH_1D" : { "type":"object", "description":"",
+            "properties" : {
                 "MESHFILEDEFINITION" : { "type":"object", "description":"",
                     "properties": {
                         "MESHFILE" : { "type": "string", "description":"" },
@@ -637,12 +637,12 @@ but infact you need to define only a few of them. It just gives you an idea how 
                     "required": ["MESHFILE", "MESHTYPE"],
                     "additionalProperties" : false
                 },
-                    
+
                 "MESHDATADEFINITION" : { "type":"object", "description":"",
                     "properties" : {
                         "XMIN"         : { "type":"number", "description":"" },
-                        "XMAX"         : { "type":"number", "description":"" }, 
-                        "NX"           : { "type":"integer", "description":"" }, 
+                        "XMAX"         : { "type":"number", "description":"" },
+                        "NX"           : { "type":"integer", "description":"" },
                         "DISTRIBUTION" : { "type":"string", "enum" : ["UNIFORM","NON-UNIFORM-RIGHT-DENSITY","NON-UNIFORM-LEFT-DENSITY"] },
                         "PERIODIC"     : { "type":"boolean", "description":"" }
                     },
@@ -652,7 +652,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
             },
             "additionalProperties" : false
         },
-        "MESH_2D" : { "type":"object", "description":"", 
+        "MESH_2D" : { "type":"object", "description":"",
             "properties" : {
                 "MESHFILEDEFINITION" : { "type":"object", "description":"",
                     "properties": {
@@ -667,7 +667,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
             "required" : ["MESHFILEDEFINITION"],
             "additionalProperties" : false
         },
-        "MESH_3D" : { "type":"object", "description":"", 
+        "MESH_3D" : { "type":"object", "description":"",
             "properties" : {
                 "MESHFILEDEFINITION" : { "type":"object", "description":"",
                     "properties": {
@@ -682,7 +682,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
             "required" : ["MESHFILEDEFINITION"],
             "additionalProperties" : false
         },
-        
+
         "MISC_OUTPUT" : { "type":"object", "description":"",
             "properties" : {
                 "ITPRINT"          : { "type":"integer", "description":"" },
@@ -692,7 +692,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
             }
         },
 
-        "MISC_GRAPHICS" : { "type":"object", "description":"", 
+        "MISC_GRAPHICS" : { "type":"object", "description":"",
             "properties" : {
                 "IMTXPROF"         : { "type":"boolean", "description":"" },
                 "IGEOMVIEW"        : { "type":"boolean", "description":"" },
@@ -701,46 +701,43 @@ but infact you need to define only a few of them. It just gives you an idea how 
             }
         },
 
-        "GRAPHICS_1D_OUTPUT" : { "type":"object", "description":"", 
-            "properties" : {
-                "GNUPLOT"    : { "type":"boolean", "description":"" },
-                "GRAPH"      : { "type":"boolean", "description":"" },
-                "MATLAB"     : { "type":"boolean", "description":"" },
-                "VTK"        : { "type":"boolean", "description":"" },
-                "SILO"       : { "type":"boolean", "description":"" },
-                "MATPLOTLIB" : { "type":"boolean", "description":"" }
-            }
-        },
-        
-        "GRAPHICS_2D_OUTPUT" : { "type":"object", "description":"", 
+        "GRAPHICS_1D_OUTPUT" : { "type":"object", "description":"",
             "properties" : {
                 "GNUPLOT"    : { "type":"boolean", "description":"" },
                 "MATLAB"     : { "type":"boolean", "description":"" },
                 "VTK"        : { "type":"boolean", "description":"" },
-                "SILO"       : { "type":"boolean", "description":"" },
-                "MATPLOTLIB" : { "type":"boolean", "description":"" }
+                "SILO"       : { "type":"boolean", "description":"" }
             }
         },
-        
-        "GRAPHICS_3D_OUTPUT" : { "type":"object", "description":"", 
+
+        "GRAPHICS_2D_OUTPUT" : { "type":"object", "description":"",
+            "properties" : {
+                "GNUPLOT"    : { "type":"boolean", "description":"" },
+                "MATLAB"     : { "type":"boolean", "description":"" },
+                "VTK"        : { "type":"boolean", "description":"" },
+                "SILO"       : { "type":"boolean", "description":"" }
+            }
+        },
+
+        "GRAPHICS_3D_OUTPUT" : { "type":"object", "description":"",
             "properties" : {
                 "VTK"        : { "type":"boolean", "description":"" },
                 "SILO"       : { "type":"boolean", "description":"" }
             }
         },
-        
-        "GRAPHICS_1D" : { "type":"object", "description":"", 
+
+        "GRAPHICS_1D" : { "type":"object", "description":"",
             "properties" : {
-                "ENGINE" : { "type":"string", "description":"Dengine", "enum":["PGPLOT", "VOGLE", "LIBSCIPLOT"] },
+                "ENGINE" : { "type":"string", "description":"engine", "enum":["PGPLOT", "VOGLE", "LIBSCIPLOT", "GRAPH"] },
                 "DRIVER" : { "type":"string", "description":"Driver PGPLOT-VOGLE-LIBSCIPLOT output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
-                "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
+                "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY",
                     "items" : { "type":"integer", "description":"in pixels" },
                     "minItems": 2,
                     "maxItems": 2
                 },
                 "LABELS_SIZE" : { "type":"number", "description":"" },
                 "SUB_WINDOWS" : { "type":"array", "description":"array of sub windows at position I,J in the window",
-                    "items" : { "type":"object", "description":"sub-window object", 
+                    "items" : { "type":"object", "description":"sub-window object",
 								"properties" : {
                             "IDXS"  : { "type":"array", "description":"position in array of subwindows", "minItems": 2, "maxItems": 2,
                                 "items" : { "type":"integer", "minimum":1, "maximum":3 , "description":"array position" }
@@ -762,18 +759,18 @@ but infact you need to define only a few of them. It just gives you an idea how 
                     }
                 }
             },
-            "GRAPHICS_2D" : { "type":"object", "description":"", 
+            "GRAPHICS_2D" : { "type":"object", "description":"",
                 "properties" : {
                     "ENGINE" : { "type":"string", "description":"Dengine", "enum":["VOGLE"] },
                     "DRIVER" : { "type":"string", "description":"Driver VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
-                    "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY", 
+                    "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY",
                         "items" : { "type":"integer", "description":"in pixels" },
                         "minItems": 2,
                         "maxItems": 2
                     },
                     "LABELS_SIZE" : { "type":"number", "description":"" },
-                    "SUB_WINDOWS" : { "type":"array", "description":"array of sub-windows", 
-						      "items": { "type":"object", "description":"sub-window object", 
+                    "SUB_WINDOWS" : { "type":"array", "description":"array of sub-windows",
+						      "items": { "type":"object", "description":"sub-window object",
 						          "properties" : {
 								        "IDXS"  : { "type":"array", "description":"position in array of subwindows", "minItems": 2, "maxItems": 2,
                                     "items" : { "type":"integer", "minimum":1, "maximum":3, "description":"array position" }
@@ -808,7 +805,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
     },
 
     "OUTPUT_LOG_FILE" : { "type":"string", "description":""},
-        
+
     "required": ["PDE", "COORDS_DIMS", "TARGET_DIMS", "PDE_PARAMATERS", "PDE_RESOLUTION", "PDE_RHS", "PDE_BOUNDARY_CONDITIONS", "OUTPUT_LOG_FILE"]
 }
 </code></pre>
@@ -825,12 +822,12 @@ will be checked against the schema and will this detect any errors in your input
 parameters do not require to recompile the driver program, and the parameters are set in a centralized place. We give
 below an example of such a configuration file.</p>
 
-<pre><code class="language-json">{  
+<pre><code class="language-json">{
     "PDE" : "LAPLACIAN",
-    
+
     "COORDS_DIMS" : 1,
     "TARGET_DIMS" : 1,
-    
+
     "PDE_PARAMATERS" : {
         "KAPPA"    : 1.000,
         "SIGMA"    : 0.0,
@@ -844,14 +841,14 @@ below an example of such a configuration file.</p>
 
         "LAPLACIAN_ALGO" : {
             "METHOD": "ITERATIVE-METHOD",
-				
+
 			"DIRECT-METHOD" : {
                 "BANDWIDTHREDUCTION" : {
-                    "OPTION" :         "PROFILE", 
+                    "OPTION" :         "PROFILE",
                     "IMPLEMENTATION" : "MESCHACH" # "MESCHACH", "AMD", "SPOOLES"
                 }
             },
-						
+
 	        "ITERATIVE-METHOD" : {
                 "METHOD"          : "BiCGStab" ,       # "CG", "CGS", "GMRES(k)", "BiCGStab"
                 "PRECONDITIONER"  : "ICH" ,            # null, "ICH", "ILU"
@@ -868,41 +865,41 @@ below an example of such a configuration file.</p>
     },
 
     # pde def -------------------------------------------------------------------------
-    
+
     "PDE_RHS" : {
         "DIM1" : { "FUNC_DEF": "2.0" },
         "DIM2" : { "FUNC_DEF": null },
-        "DIM3" : { "FUNC_DEF": null }, 
+        "DIM3" : { "FUNC_DEF": null },
     },
 
     "PDE_EXACT_SOL" : {
         "DIM1" : { "FUNC_DEF": "x*x" },
         "DIM2" : { "FUNC_DEF": null },
-        "DIM3" : { "FUNC_DEF": null }, 
+        "DIM3" : { "FUNC_DEF": null },
     },
-    
+
     "PDE_BOUNDARY_CONDITIONS" : {
-        
+
         "NB_BCS" : 2,
-         
+
         "DIM1" : [
            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "x*x" },
            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "math.cos(x)" }
         ]
     },
-    
+
     # mesh --------------------------------
 
     "MESH_1D" : {
-    
+
         "MESH_SPEC": "MESHDATADEFINITION",
-		
+
 		"MESHFILEDEFINITION" : {
              "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
              "MESHNAME" : "MESH_10",
              "MESHTYPE" : "line"
          }
-        
+
         "MESHDATADEFINITION" : {
             "XMIN"   : 0.0,
             "XMAX"   : 1.0,
@@ -913,29 +910,27 @@ below an example of such a configuration file.</p>
     },
 
     # graphics ---------------------------
-    
+
     "GRAPHICS_1D_OUTPUT" : {
         "GNUPLOT"    : false,
-        "GRAPH"      : false,
         "MATLAB"     : false,
         "VTK"        : false,
-        "SILO"       : false,
-        "MATPLOTLIB" : false
+        "SILO"       : false
     },
-    
+
     # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------
-    
+
     "GRAPHICS_1D" : {
         "ENGINE"      : "VOGLE",
-        "DRIVER"      : "/XWINDOW" , 
+        "DRIVER"      : "/XWINDOW" ,
         "WINDOW_SIZE" : [600, 400] ,
         "LABELS_SIZE" : 1.2 ,
-        
-        "SUB_WINDOWS" : 
+
+        "SUB_WINDOWS" :
         [
-           { 
+           {
               "IDXS"         : [1,1] , # ARRAY POSITION
-              "LEGEND"       : "U(x,t)" , 
+              "LEGEND"       : "U(x,t)" ,
               "LEGEND_AXE_X" : "(x)" ,
               "LEGEND_AXE_Y" : "(y)" ,
               "MARKER"       : 0 ,
@@ -944,9 +939,9 @@ below an example of such a configuration file.</p>
            }
         ]
     },
-    
+
     # logging -------------------------------------------------
-    
+
     "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/1D/OUTPUT_PDE_1D.dat"
 }
 </code></pre>
@@ -963,7 +958,7 @@ Like this, we can easily change of method by just changing the content of the ta
  * --- Numerical Resolution of PDE 1D ---
  *
  *     Laplacian :
- *        -e.LAPLACIEN(u) = F 
+ *        -e.LAPLACIEN(u) = F
  *        B.C. Dirichlet Type
  *
  */
@@ -1011,7 +1006,7 @@ int main()
 
     BC_1D    *MyBC;
     RHS_1D   *MyRhsFun;
- 
+
     VEC      *SOL;
 
     PARAMS   *MyParams;
@@ -1089,17 +1084,35 @@ int main()
     /* ----------------------- graphics output ------------------------------ */
 
     {
+        if (MyParams->graph_params.GNUPLOT == 1)
+        {
+            graphics1D("gnuplot", MyElt, MyGeom, SOL, "SolApproch1D.dat");
+            //graphics1D_gnuplot_script("SolApproch1D.dat", NULL, NULL, MyParams->resol_params.nb_steps, MyParams->misc_params.iter_file);
+        }
+
+        if (MyParams->graph_params.SILO == 1)
+        {
+            graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch1D");
+        }
+
+        if (MyParams->graph_params.VTK == 1)
+        {
+            graphics1D("vtk", MyElt, MyGeom, SOL, "SolApproch1D");
+        }
+
         VEC     *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
         GEOM_1D *GeomP1 = Geom1D_getP1geom_from(MyElt, MyGeom);
 
-        graphics1D("gnuplot", MyElt, MyGeom, SOL, "SolApproch1D.dat");
-        //graphics1D_gnuplot_script("SolApproch1D.dat", NULL, NULL, MyParams->resol_params.nb_steps, MyParams->misc_params.iter_file);
-
         printf("ef res\n");
         v_output(SOL);
-       
+
         printf("world res\n");
         v_output(WORLD);
+
+        if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "GRAPH") == 0)
+        {
+           graphics1D("graph", MyElt, MyGeom, SOL, "SolApproch1D.dat");
+        }
 
 #ifdef HAVE_VOGLE
         if (MyParams->graph_params.VOGLE == 1)
@@ -1130,27 +1143,27 @@ int main()
     if (MyParams->exactsol_params.exact_sol[0] >= 0)
     {
        VEC *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
-       
+
        FUN_1D *fun_exact = Fun1D_get();
        Fun1D_setCFunction(fun_exact, ExSol1D[MyParams->exactsol_params.exact_sol[0]]);
-       
+
        VEC* WORLD_EXACT = build_vec_world_from_function1D(MyElt, MyGeom, fun_exact, NULL, NULL);
-       
+
        printf("SOL (EF)\n");
        v_foutput(stdout, SOL);
-       
+
        printf("WORLD\n");
        v_foutput(stdout, WORLD);
        printf("WORLD_EXACT\n");
        v_foutput(stdout, WORLD_EXACT);
-       
+
        double diff = v_norm2(v_sub(WORLD, WORLD_EXACT, NULL));
        fprintf(stdout, "\ndiff solexacte-solapprochee = %le\n", diff);
        fprintf(stdout, "\n---------------------------------------\n");
-       
+
        V_FREE(WORLD);
        V_FREE(WORLD_EXACT);
-       
+
     }
 
     /* --------------------------------------------------------------------- */
