@@ -181,7 +181,7 @@
         "SILO"       : false
     },
 
-    # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------
+    # 1D interactive PDE 1D - graphics library ploting parameters ------------
 
     "GRAPHICS_1D" : {
         "ENGINE" : "GRAPH",

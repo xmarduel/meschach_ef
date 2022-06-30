@@ -14,6 +14,7 @@
 #include "MESCHACH/INCLUDES/matrix.h"
 #include "MESCHACH/INCLUDES/sparse.h"
 
+#include "MESCHACH_EF/INCLUDES/all_params.h"
 #include "MESCHACH_EF/INCLUDES/finite_elements.h"
 #include "MESCHACH_EF/INCLUDES/geometry_1D.h"
 #include "MESCHACH_EF/INCLUDES/graphics_output_1D.h"
@@ -48,7 +49,7 @@ static void graphics1D_gnuplot_write_script_ContPlot    (FILE *fp);
 static char * graphics1D_gnuplot_script(const char*filename, const VEC *SOL)
 {
    /* Script GNUPLOT */
-   char script_gnuplot[64];
+   char *script_gnuplot = malloc(64);
    FILE *fp;
 
    snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gpp", filename); script_gnuplot[63] = '\0';
@@ -372,10 +373,37 @@ static void graphics1D_gnuplot(const char *filename, const ELT_1D *element, cons
 
 static void graphics1D_graph  (const char *filename, const ELT_1D *element, const GEOM_1D *geom, const VEC  *SOL)
 {
+   PARAMS* p = Params_get_staticparam(0);
+   
    graphics1D_output_vec("graphics1D_graph_dummy.dat", element, geom, SOL);
 
-   system("graph -T X -C -m 1  < graphics1D_graph_dummy.dat");
-
+   // options
+   char driver[16] = "X";
+   char *title = p->graph_interactiv1Dplots_params.LABEL[1][1].LEGEND;
+   char *xlabel = p->graph_interactiv1Dplots_params.LABEL[1][1].AXE_X;
+   char *ylabel = p->graph_interactiv1Dplots_params.LABEL[1][1].AXE_Y;
+   double fontsize = p->graph_interactiv1Dplots_params.SIZE_LABELS; // graph : 0 < size < 1
+   int xsize = p->graph_interactiv1Dplots_params.SIZE_WINDOW_X;
+   int ysize = p->graph_interactiv1Dplots_params.SIZE_WINDOW_Y;
+   
+   //char cmd[512] = "graph -T X -C -m 1  < graphics1D_graph_dummy.dat";
+   char cmd[512] = "";
+   
+   snprintf(cmd, 512, "graph -T %s -C -m 1 "
+            "--top-label \"%s\" "
+            "--x-label \"%s\" "
+            "--y-label \"%s\" "
+            "--bitmap-size %dx%d < graphics1D_graph_dummy.dat",
+            driver,
+            title,
+            xlabel,
+            ylabel,
+            xsize,
+            ysize);
+   
+   printf("GRAPH -> %s \n", cmd);
+   
+   system(cmd);
    system("rm graphics1D_graph_dummy.dat");
 }
 
