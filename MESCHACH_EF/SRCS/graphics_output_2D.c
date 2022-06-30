@@ -46,7 +46,6 @@
 /*----------------------------------------------------------------------------------------------------*/
 
 static void graphics2D_gnuplot    (const char *filename, const ELT_2D *elt, const GEOM_2D *geom, const VEC  *SOL);
-static void graphics2D_matplotlib (const char *filename, const ELT_2D *elt, const GEOM_2D *geom, const VEC  *SOL);
 static void graphics2D_matlab     (const char *filename, const ELT_2D *elt, const GEOM_2D *geom, const VEC  *SOL);
 static void graphics2D_vtk        (const char *filename, const ELT_2D *elt, const GEOM_2D *geom, const VEC  *SOL);
 static void graphics2D_silo       (const char *filename, const ELT_2D *elt, const GEOM_2D *geom, const VEC  *SOL);
@@ -78,14 +77,6 @@ static void graphics2D_vtk_2var(const char *filename, const GEOM_2D *geom, const
 
 /*----------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------------------------*/
-
-static void graphics2D_matplotlib(const char *filename, const ELT_2D *element, const GEOM_2D *geom, const VEC  *SOL)
-{
-   warning(WARN_UNKNOWN, "graphics2D_matplotlib not implemented");
-}
 
 /*----------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
@@ -1671,11 +1662,6 @@ void graphics2D       (const char* format, const ELT_2D *element , const GEOM_2D
    {
       graphics2D_gnuplot(filename, element, geom, SOL);
       graphics2D_script_gnuplot(filename);
-   }
-   else
-   if ( strcmp("matplotlib", format) == 0 )
-   {
-      graphics2D_matplotlib(filename, element, geom, SOL);
    }
    else
    if ( strcmp("vtk", format) == 0 )

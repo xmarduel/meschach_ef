@@ -198,10 +198,8 @@ int  main()
    {
       if (MyParams->graph_params.GNUPLOT) graphics2D("gnuplot", MyElt, MyGeom, SOL, "SolApproch" );
       if (MyParams->graph_params.MATLAB)  graphics2D("matlab" , MyElt, MyGeom, SOL, "SolApproch" );
-
-
-      if (MyParams->graph_params.SILO)    graphics2D("silo", MyElt, MyGeom, SOL, "SolApproch");
-      if (MyParams->graph_params.VTK )    graphics2D("vtk" , MyElt, MyGeom, SOL, "SolApproch");
+      if (MyParams->graph_params.SILO)    graphics2D("silo",    MyElt, MyGeom, SOL, "SolApproch");
+      if (MyParams->graph_params.VTK )    graphics2D("vtk" ,    MyElt, MyGeom, SOL, "SolApproch");
    }
 
    if ( (strcmp(MyParams->problem, "LAPLACIAN") == 0) || (strcmp(MyParams->problem, "CONVECTION-DIFFUSION") == 0) )

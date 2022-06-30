@@ -15,6 +15,7 @@
 #include "MESCHACH_ADDS/INCLUDES/sparse_adds.h"
 
 #include "MESCHACH_EF/INCLUDES/finite_elements.h"      /* for errors definitions */
+#include "MESCHACH_EF/INCLUDES/functions_definitions.h"
 #include "MESCHACH_EF/INCLUDES/boundary_conditions.h"  /* for errors definitions */
 #include "MESCHACH_EF/INCLUDES/rhs.h"                  /* for errors definitions */
 #include "MESCHACH_EF/INCLUDES/assemblage_objects_3D.h"
@@ -1576,12 +1577,20 @@ VEC* assemblage3D_vector_fun( const ELT_3D *elt , const GEOM_3D *geom , const RH
    if ( RhsFun == NULL ) error(E_NULL, "assemblage3D_vector_Rhs");
    if ( RHS    == NULL ) error(E_NULL, "assemblage3D_vector_Rhs");
 
-   /* mem alloc */
-   RHS_el = v_get(elt->nb_somm_cell);
-
    /* initialisation of Mass */
    v_zero(RHS);
 
+   
+   if (( RhsFun->Fun[0][0].type == FUN_C_STATIONNARY && RhsFun->Fun[0][0].phi_xyz == Zero3D) ||
+       ( RhsFun->Fun[0][0].type == FUN_C_TRANSIENT && RhsFun->Fun[0][0].phi_xyzt == Zero3D_Transient))
+   {
+      return RHS;
+   }
+   
+
+   /* mem alloc */
+   RHS_el = v_get(elt->nb_somm_cell);
+   
    for(e=0; e<geom->NBELMT; e++)
    {
       RHS_el = _systel_vector_fun( e , elt , geom , RhsFun , RHS_el );

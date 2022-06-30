@@ -437,8 +437,7 @@ def run_test():
             "GNUPLOT"    : False,
             "MATLAB"     : False,
             "VTK"        : False,
-            "SILO"       : True,
-            "MATPLOTLIB" : False
+            "SILO"       : True
         },
     } ))
    

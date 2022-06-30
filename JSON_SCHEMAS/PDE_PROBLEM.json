@@ -386,23 +386,16 @@
 
     "GRAPHICS_1D_OUTPUT" : {
         "GNUPLOT"    : false,
-        "GRAPH"      : false,
         "MATLAB"     : false,
         "VTK"        : false,
-        "SILO"       : true,
-        "PGPLOT"     : false,
-        "VOGLE "     : true,
-        "LIBSCIPLOT" : false,
-        "MATPLOTLIB" : false
+        "SILO"       : true
     },
 
     "GRAPHICS_2D_OUTPUT" : {
         "GNUPLOT"    : false,
         "MATLAB"     : false,
         "VTK"        : false,
-        "SILO"       : true,
-        "VOGLE"      : true,
-        "MATPLOTLIB" : false
+        "SILO"       : true
     },
 
     "GRAPHICS_3D_OUTPUT" : {

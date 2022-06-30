@@ -1504,15 +1504,11 @@ static void json_config_PARAMS_graphics_output(PARAMS* p, const json_t* config)
       }
 
       json_t *GNUPLOT    = json_object_get(GRAPHICS_1D_OUTPUT, "GNUPLOT");
-      json_t *GRAPH      = json_object_get(GRAPHICS_1D_OUTPUT, "GRAPH");
-      json_t *LIBSCIPLOT = json_object_get(GRAPHICS_1D_OUTPUT, "LIBSCIPLOT");
       json_t *MATLAB     = json_object_get(GRAPHICS_1D_OUTPUT, "MATLAB");
       json_t *SILO       = json_object_get(GRAPHICS_1D_OUTPUT, "SILO");
       json_t *VTK        = json_object_get(GRAPHICS_1D_OUTPUT, "VTK");
 
       if ( GNUPLOT )    p->graph_params.GNUPLOT    = json_boolean_value(GNUPLOT);
-      if ( GRAPH )      p->graph_params.GRAPH      = json_boolean_value(GRAPH);
-      if ( LIBSCIPLOT ) p->graph_params.LIBSCIPLOT = json_boolean_value(LIBSCIPLOT);
       if ( MATLAB )     p->graph_params.MATLAB     = json_boolean_value(MATLAB);
       if ( SILO )       p->graph_params.SILO       = json_boolean_value(SILO);
       if ( VTK )        p->graph_params.VTK        = json_boolean_value(VTK);

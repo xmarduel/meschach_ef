@@ -35,7 +35,7 @@ static	char *rcsid = "$Header: /Users/xavier/CVSREP/MESCHACH_WORK/MESCHACH/SRCS/
 #include	"machine.h"
 
 #ifdef MACOSX_CBLAS
-#include "MESCHACH_WORK/CBLAS/cblas.h"
+#include "CBLAS/cblas.h"
 #endif
 
 

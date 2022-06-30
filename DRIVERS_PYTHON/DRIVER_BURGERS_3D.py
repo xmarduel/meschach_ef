@@ -131,13 +131,9 @@ Params_set_oneparam(MyParams, "geometry_params","meshfile", "cube3D_P1.cube" )  
                                                                                             "cube2D_P1_v3_ok2.gmsh"
 
 Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     1) # GNUPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",       0) # GRAPH
 Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
 Params_set_oneparam(MyParams, "graphics_output_params","VTK",         1) # VTK
 Params_set_oneparam(MyParams, "graphics_output_params","SILO",        0) # SILO
-Params_set_oneparam(MyParams, "graphics_output_params","PGPLOT",      0) # PGPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","VOGLE",       0) # VOGLE
-Params_set_oneparam(MyParams, "graphics_output_params","LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO;1=YES)
 
 Params_set_oneparam(MyParams, "miscellaneous_graphics","ispmatpattern", 1 ) # IHBF
 Params_set_oneparam(MyParams, "miscellaneous_graphics","igeomview",    1 ) # IHBF

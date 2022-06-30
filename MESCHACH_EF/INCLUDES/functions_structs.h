@@ -48,56 +48,6 @@ typedef enum
 } FUN_TYPE;
 
 
-typedef enum
-{
-   FUNCTION_RHSe      = 0,
-	FUNCTION_BCe       = 1,
-	FUNCTION_SOLe      = 2,
-	FUNCTION_ICe       = 3,
-   FUNCTION_ADVe      = 4,
-
-} FUN_CLASS;
-
-
-typedef struct FUNC_1D_NAMEMAP_ {
-
-	char name[64];
-	FUNC_1D func;
-
-} FUNC_1D_NAMEMAP;
-
-typedef struct FUNC_2D_NAMEMAP_ {
-
-	char name[64];
-	FUNC_2D func;
-
-} FUNC_2D_NAMEMAP;
-
-typedef struct FUNC_3D_NAMEMAP_ {
-
-	char name[64];
-	FUNC_3D func;
-
-} FUNC_3D_NAMEMAP;
-
-typedef struct FUNC_4D_NAMEMAP_ {
-
-	char name[64];
-	FUNC_4D func;
-
-} FUNC_4D_NAMEMAP;
-
-
-FUNC_1D function1D_by_name(const char *funcname, FUN_CLASS function_class);
-FUNC_2D function2D_by_name(const char *funcname, FUN_CLASS function_class);
-FUNC_3D function3D_by_name(const char *funcname, FUN_CLASS function_class);
-FUNC_4D function4D_by_name(const char *funcname, FUN_CLASS function_class);
-
-int function1Dindex_by_name(const char *funcname, FUN_CLASS function_class);
-int function2Dindex_by_name(const char *funcname, FUN_CLASS function_class);
-int function3Dindex_by_name(const char *funcname, FUN_CLASS function_class);
-int function4Dindex_by_name(const char *funcname, FUN_CLASS function_class);
-
 Real FunctionForEvaluatingLuaFunction1D(Real x, void *L);
 Real FunctionForEvaluatingLuaFunction2D(Real x, Real y, void *L);
 Real FunctionForEvaluatingLuaFunction3D(Real x, Real y, Real z, void *L);
@@ -141,8 +91,8 @@ static char *my_warn_mesg5[NB_WARNS5] =
 };
 
 
-#define	 E_FUN_UNKNOWN	           0
-#define	 E_FUN_NOTATRANSIENTFUNC   1
+#define  E_FUN_UNKNOWN	           0
+#define  E_FUN_NOTATRANSIENTFUNC   1
 #define  E_FUN_NOTASTATIONNARYFUNC 2
 #define  E_FUN_WRONGTYPE           3
 

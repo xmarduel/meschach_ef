@@ -8,8 +8,6 @@
 #include <string.h>
 #include <stdio.h>
 
-#include <jansson.h>
-
 #include "all_params_json_utils.h"
 
 #define BUFSIZE 65536

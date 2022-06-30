@@ -684,16 +684,6 @@ static void Params_set_oneparam0_cat_graphics_output_params(PARAMS* p, const cha
       p->graph_params.GNUPLOT = *(int*)val;
    }
    else
-   if ( strcmp(field,"GRAPH") == 0 )
-   {
-      p->graph_params.GRAPH = *(int*)val;
-   }
-   else
-   if ( strcmp(field,"LIBSCIPLOT") == 0 )
-   {
-      p->graph_params.LIBSCIPLOT = *(int*)val;
-   }
-   else
    if ( strcmp(field,"MATLAB") == 0 )
    {
       p->graph_params.MATLAB = *(int*)val;

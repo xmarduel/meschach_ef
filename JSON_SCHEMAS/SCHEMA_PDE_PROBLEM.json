@@ -582,11 +582,9 @@
         "GRAPHICS_1D_OUTPUT" : { "type":"object", "description":"",
             "properties" : {
                 "GNUPLOT"    : { "type":"boolean", "description":"" },
-                "GRAPH"      : { "type":"boolean", "description":"" },
                 "MATLAB"     : { "type":"boolean", "description":"" },
                 "VTK"        : { "type":"boolean", "description":"" },
-                "SILO"       : { "type":"boolean", "description":"" },
-                "MATPLOTLIB" : { "type":"boolean", "description":"" }
+                "SILO"       : { "type":"boolean", "description":"" }
             }
         },
 
@@ -595,8 +593,7 @@
                 "GNUPLOT"    : { "type":"boolean", "description":"" },
                 "MATLAB"     : { "type":"boolean", "description":"" },
                 "VTK"        : { "type":"boolean", "description":"" },
-                "SILO"       : { "type":"boolean", "description":"" },
-                "MATPLOTLIB" : { "type":"boolean", "description":"" }
+                "SILO"       : { "type":"boolean", "description":"" }
             }
         },
 
@@ -609,7 +606,7 @@
 
         "GRAPHICS_1D" : { "type":"object", "description":"",
             "properties" : {
-                "ENGINE" : { "type":"string", "description":"lib for graphics", "enum":["PGPLOT", "VOGLE", "LIBSCIPLOT"] },
+                "ENGINE" : { "type":"string", "description":"lib for graphics", "enum":["PGPLOT", "VOGLE", "LIBSCIPLOT", "GRAPH", "none"] },
                 "DRIVER" : { "type":"string", "description":"Driver PGPLOT-VOGLE output", "enum":["/PPM", "/GIF", "/XWINDOW"] },
                 "WINDOW_SIZE" : { "type":"array", "description":"2 items array NX and NY",
                     "items" : { "type":"integer", "description":"in pixels" },

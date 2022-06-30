@@ -15,6 +15,7 @@
 #include "MESCHACH_ADDS/INCLUDES/sparse_adds.h"
 
 #include "MESCHACH_EF/INCLUDES/finite_elements.h"  /* for errors definitions */
+#include "MESCHACH_EF/INCLUDES/functions_definitions.h"
 #include "MESCHACH_EF/INCLUDES/assemblage_objects_1D.h"
 #include "MESCHACH_EF/INCLUDES/triangle_integration_gauss_1D.h"
 #include "MESCHACH_EF/INCLUDES/all_params.h"
@@ -776,6 +777,12 @@ VEC* assemblage1D_vector_fun( const ELT_1D *elt , const GEOM_1D *geom , const RH
 
    /* initialisation of RHS */
    v_zero(RHS);
+   
+   if (( RhsFun->Fun[0][0].type == FUN_C_STATIONNARY && RhsFun->Fun[0][0].phi_x == Zero1D) ||
+       ( RhsFun->Fun[0][0].type == FUN_C_TRANSIENT && RhsFun->Fun[0][0].phi_xt == Zero1D_Transient))
+   {
+      return RHS;
+   }
 
 	RHS_el = v_get(elt->nb_somm_cell);
 
@@ -789,7 +796,6 @@ VEC* assemblage1D_vector_fun( const ELT_1D *elt , const GEOM_1D *geom , const RH
          fbase_k_ksi_m->me[k][m] = elt->f_base[k](ksi1D[m]) ;
       }
    }
-
 
    /* setup RHS */
    for(e=0; e<geom->NBELMT; e++)

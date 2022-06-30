@@ -116,13 +116,9 @@ if READ_PARAMS_FROM_FILE == 0 :
 	 Params_set_oneparam(MyParams, "geometry_params","periodicity" , NON_PERIODIC_MESHe)
     
     Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     0) # GNUPLOT
-    Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",       0) # GRAPH
     Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
 	 Params_set_oneparam(MyParams, "graphics_output_params","VTK",         0) # VTK
     Params_set_oneparam(MyParams, "graphics_output_params","SILO",        0) # SILO
-    Params_set_oneparam(MyParams, "graphics_output_params","PGPLOT",      1) # PGPLOT
-    Params_set_oneparam(MyParams, "graphics_output_params","VOGLE",       0) # VOGLE
-    Params_set_oneparam(MyParams, "graphics_output_params","LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO;1=YES)
 
     Params_set_oneparam(MyParams, "miscellaneous_params","itprint",      4) # ITPRINT
     Params_set_oneparam(MyParams, "miscellaneous_params","itsave",       1) # ITSAVE

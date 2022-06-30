@@ -132,11 +132,16 @@ int main()
     /* Boundary conditions */
     MyBC = Bc1D_setup_from_params(MyParams);
 
+    //MyBC = Bc1D_setCFunction(MyBC, BC_1De_DIRICHLET, 1, AXEe_X, Zero1D );
+   
     Geom1D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X);
     Geom1D_foutput(stdout, MyGeom);
 
     /* Right Hand Side */
     MyRhsFun = Rhs1D_setup_from_params(MyParams);
+   
+    //MyRhsFun = Rhs1D_setCFunction(MyRhsFun, 0, AXEe_X, Zero1D );
+
 
     /* Advection */
     MyAdvFun = Adv1D_setup_from_params(MyParams);
@@ -186,22 +191,36 @@ int main()
     /* ----------------------- graphics output ------------------------------ */
 
     {
+        if (MyParams->graph_params.GNUPLOT == 1)
+        {
+            graphics1D("gnuplot", MyElt, MyGeom, SOL, "SolApproch1D.dat");
+            //graphics1D_gnuplot_script("SolApproch1D.dat", NULL, NULL, MyParams->resol_params.nb_steps, MyParams->misc_params.iter_file);
+        }
+       
+        if (MyParams->graph_params.SILO == 1)
+        {
+            graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch");
+        }
+       
+        if (MyParams->graph_params.VTK == 1)
+        {
+            graphics1D("vtk", MyElt, MyGeom, SOL, "SolApproch");
+        }
+       
         VEC     *WORLD = build_vec_world_from_vec_ef_1D(MyElt, MyGeom, SOL);
         GEOM_1D *GeomP1 = Geom1D_getP1geom_from(MyElt, MyGeom);
-
-        graphics1D("gnuplot", MyElt, MyGeom, SOL, "SolApproch1D.dat");
-        //graphics1D_gnuplot_script("SolApproch1D.dat", NULL, NULL, MyParams->resol_params.nb_steps, MyParams->misc_params.iter_file);
-
+       
         printf("ef res\n");
         v_output(SOL);
 
         printf("world res\n");
         v_output(WORLD);
 
-       /*
-        * graphics1D("silo", MyElt, MyGeom, SOL, "SolApproch");
-        */
-
+       
+        if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "GRAPH") == 0)
+        {
+           graphics1D("graph", MyElt, MyGeom, SOL, "SolApproch1D.dat");
+        }
 #ifdef HAVE_VOGLE
         if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "VOGLE") == 0)
         {

@@ -12,6 +12,7 @@
 #include "MESCHACH_ADDS/INCLUDES/sparse_adds.h"
 
 #include "MESCHACH_EF/INCLUDES/finite_elements.h"      /* for errors definitions */
+#include "MESCHACH_EF/INCLUDES/functions_definitions.h"
 #include "MESCHACH_EF/INCLUDES/boundary_conditions.h"  /* for errors definitions */
 #include "MESCHACH_EF/INCLUDES/rhs.h"                  /* for errors definitions */
 #include "MESCHACH_EF/INCLUDES/assemblage_objects_2D.h"
@@ -1560,6 +1561,16 @@ VEC* assemblage2D_vector_fun( const ELT_2D *elt , const GEOM_2D *geom , const RH
    if ( RhsFun == RHS_2D_NULL  ) error(E_NULL, "assemblage2D_vector_Rhs");
    if ( RHS    == VNULL        ) error(E_NULL, "assemblage2D_vector_Rhs");
 
+   
+   /* initialisation of RHS */
+   v_zero(RHS);
+   
+   if (( RhsFun->Fun[0][0].type == FUN_C_STATIONNARY && RhsFun->Fun[0][0].phi_xy == Zero2D) ||
+       ( RhsFun->Fun[0][0].type == FUN_C_TRANSIENT && RhsFun->Fun[0][0].phi_xyt == Zero2D_Transient))
+   {
+      return RHS;
+   }
+   
    /* start */
    RHS_el = v_get(elt->nb_somm_cell);
 
@@ -1573,10 +1584,6 @@ VEC* assemblage2D_vector_fun( const ELT_2D *elt , const GEOM_2D *geom , const RH
          fbase_k_ksieta_m->me[k][m] = elt->f_base[k](ksi2D[m], eta2D[m]) ;
       }
    }
-
-
-   /* initialisation of Mass */
-   v_zero(RHS);
 
    for(e=0; e<geom->NBELMT; e++)
    {

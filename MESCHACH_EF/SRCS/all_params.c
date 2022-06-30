@@ -49,7 +49,7 @@ static void Params_init_miscellaneous_graphics(PARAMS* p);
 void Params_get_absolute_path(const char* input_file, char* absolute_input_file)
 {
    char path[BUFSIZE];
-   char *envvar = "MESCHACH_HOME";
+   char *envvar = "MESCHACH_EF";
 
    // Make sure envar actually exists
    if ( !getenv(envvar) )
@@ -325,8 +325,6 @@ static void Params_init_navierstokes_solver(PARAMS* p)
 static void Params_init_graphics_output(PARAMS* p)
 {
    p->graph_params.GNUPLOT    = 0;
-   p->graph_params.GRAPH      = 0;
-   p->graph_params.LIBSCIPLOT = 0;
    p->graph_params.MATLAB     = 0;
    p->graph_params.SILO       = 0;
    p->graph_params.VTK        = 0;
@@ -561,7 +559,7 @@ int Params_check_oneparam2_arguments(const char* category, const char* field, in
 
    while ( params_list2[k].p1 != NULL )
    {
-//      if ( (strcmp(category, params_list2[k].p1) == 0) && (strcmp(field, params_list2[k].p2) == 0) )
+      if ( (strcmp(category, params_list2[k].p1) == 0) && (strcmp(field, params_list2[k].p2) == 0) )
       {
          if ( (idx1 < params_list2[k].idx1_min) && (idx1 > params_list2[k].idx1_max) ) /* check idx */
          {

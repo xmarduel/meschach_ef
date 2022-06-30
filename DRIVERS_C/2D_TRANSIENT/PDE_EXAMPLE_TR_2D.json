@@ -233,8 +233,7 @@
         "GNUPLOT"    : false,
         "MATLAB"     : false,
         "VTK"        : false,
-        "SILO"       : false,
-        "MATPLOTLIB" : false
+        "SILO"       : false
     },
 
     # 2D interactive - graphics library ploting parameters ------------

@@ -13,13 +13,13 @@
     "PDE_TIME_PARAMETERS" : {
         "TIME_INI" : 0.0,
         "TIME_END" : 80.0,
-        "DELTA_T"  : 0.01
+        "DELTA_T"  : 0.001
     },
 
     # resolution -------------------------------------
 
     "PDE_RESOLUTION" : {
-        "EF" : "S3" ,         # "P1", "P2", "H3", "S3", "S5"
+        "EF" : "S4" ,         # "P1", "P2", "H3", "S3", "S5"
 
         "LAPLACIAN_ALGO" : {
             "METHOD" : "ITERATIVE-METHOD",
@@ -144,7 +144,7 @@
         "MESHDATADEFINITION" : {
             "XMIN"   : 0.0,
             "XMAX"   : 6.2831853071795862,
-            "NX"     : 40,
+            "NX"     : 100,
             "DISTRIBUTION" : "UNIFORM",
             "PERIODIC" : true  # true, false
         }
@@ -156,7 +156,7 @@
         "ITPRINT"          : 1,
         "ITSAVE"           : 1,
         "ITSTAT"           : 1,
-        "ITGRAPH"          : 1
+        "ITGRAPH"          : 50
     },
 
     # graphics ---------------------------
@@ -170,11 +170,9 @@
 
     "GRAPHICS_1D_OUTPUT" : {
         "GNUPLOT"    : false,
-        "GRAPH"      : false,
         "MATLAB"     : false,
         "VTK"        : false,
-        "SILO"       : false,
-        "MATPLOTLIB" : false
+        "SILO"       : false
     },
 
     # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------

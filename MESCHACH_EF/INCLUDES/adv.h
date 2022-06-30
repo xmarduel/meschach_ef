@@ -58,8 +58,8 @@ static char *my_warn_mesg7[NB_WARNS7] =
    "unknown rhs warning"               /* 0 */
 };
 
-#define	 E_ADV_UNKNOWN	            0
-#define	 E_ADV_INCOMPATIBLE         1
+#define  E_ADV_UNKNOWN	            0
+#define  E_ADV_INCOMPATIBLE         1
 #define  E_ADV_TOOMANYADV           2
 #define  E_ADV_WRONGIDXNUMBER       3
 #define  E_ADV_WRONGAXENUMBER       4

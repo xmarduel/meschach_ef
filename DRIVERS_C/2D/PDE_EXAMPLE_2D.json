@@ -214,11 +214,11 @@
 
     "MESH_2D" : {
 
-        #"MESHFILEDEFINITION" : {
-        #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/mesh2D.quad",
-        #    "MESHNAME" : "MESH_20",     # "MESH_03", "MESH_04", "MESH_05", "MESH_06", "MESH_10", "MESH_20", "MESH_40", "MESH_50"
-        #    "MESHTYPE" : "quad3"        # "quad1", "quad2", "quad3"
-        #}
+        "MESHFILEDEFINITION" : {
+            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/mesh2D.quad",
+            "MESHNAME" : "MESH_20",     # "MESH_03", "MESH_04", "MESH_05", "MESH_06", "MESH_10", "MESH_20", "MESH_40", "MESH_50"
+            "MESHTYPE" : "quad3"        # "quad1", "quad2", "quad3"
+        }
 
         #"MESHFILEDEFINITION" : {
         #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CUBE_11.emc2",
@@ -226,11 +226,11 @@
         #    "MESHTYPE" : "emc2"
         #}
 
-        "MESHFILEDEFINITION" : {
-            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/cube2D_P1_v3.gmsh",
-            "MESHNAME" : "null",
-            "MESHTYPE" : "gmsh"
-        }
+        #"MESHFILEDEFINITION" : {
+           #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/cube2D_P1_v3.gmsh",
+           # "MESHNAME" : "null",
+           # "MESHTYPE" : "gmsh"
+           #}
     },
 
     # infos ----------------------------------------
@@ -251,24 +251,9 @@
         "IGEOMTOTALVIEW"   : false
     },
 
-    "GRAPHICS_1D_OUTPUT" : {
-        "GNUPLOT"    : false,
-        "GRAPH"      : false,
-        "MATLAB"     : false,
-        "VTK"        : false,
-        "SILO"       : true,
-        "MATPLOTLIB" : false
-    },
-
     "GRAPHICS_2D_OUTPUT" : {
-        "GNUPLOT"    : false,
+        "GNUPLOT"    : true,
         "MATLAB"     : false,
-        "VTK"        : false,
-        "SILO"       : true,
-        "MATPLOTLIB" : false
-    },
-
-    "GRAPHICS_3D_OUTPUT" : {
         "VTK"        : false,
         "SILO"       : true
     },
@@ -286,8 +271,8 @@
             {
                 "IDXS"         : [1,1] ,
 
-                "GRAPHICS_TYPE"    : "CONTOURS",
-                #"GRAPHICS_TYPE"    : "SURFACE",
+                #"GRAPHICS_TYPE"    : "CONTOURS",
+                "GRAPHICS_TYPE"    : "SURFACE",
 
                 "LEGEND"       : "contours" ,
 

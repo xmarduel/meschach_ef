@@ -281,8 +281,6 @@ typedef struct {
 typedef struct {
 
    int GNUPLOT;
-   int GRAPH;
-   int LIBSCIPLOT;
    int MATLAB;
    int SILO;
    int VTK;
@@ -619,9 +617,7 @@ void  Params_get_absolute_path(const char* input_file, char* absolute_input_file
 * \brief the structure for storing all kind of graphics output formats
 *
 * Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     1) # GNUPLOT \n
-* Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",       0) # GRAPH \n
 * Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB \n
-* Params_set_oneparam(MyParams, "graphics_output_params","MATPLOTLIB",  0) # MATPLOTLIB \n
 * Params_set_oneparam(MyParams, "graphics_output_params","VTK",         1) # VTK \n
 * Params_set_oneparam(MyParams, "graphics_output_params","SILO",        1) # SILO \n
 *

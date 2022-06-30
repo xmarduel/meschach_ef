@@ -28,7 +28,6 @@
 static void graphics1D_gnuplot   (const char *filename, const ELT_1D *element, const GEOM_1D *geom, const VEC *SOL);
 static void graphics1D_graph     (const char *filename, const ELT_1D *element, const GEOM_1D *geom, const VEC *SOL);
 static void graphics1D_matlab    (const char *filename, const ELT_1D *element, const GEOM_1D *geom, const VEC *SOL);
-static void graphics1D_matplotlib(const char *filename, const ELT_1D *element, const GEOM_1D *geom, const VEC *SOL);
 static void graphics1D_vtk       (const char *filename, const ELT_1D *element, const GEOM_1D *geom, const VEC *SOL);
 static void graphics1D_silo      (const char *filename, const ELT_1D *element, const GEOM_1D *geom, const VEC *SOL);
 
@@ -49,7 +48,7 @@ static void graphics1D_gnuplot_write_script_ContPlot    (FILE *fp);
 static char * graphics1D_gnuplot_script(const char*filename, const VEC *SOL)
 {
    /* Script GNUPLOT */
-   char *script_gnuplot = (char*)malloc(64);
+   char script_gnuplot[64];
    FILE *fp;
 
    snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gpp", filename); script_gnuplot[63] = '\0';
@@ -383,14 +382,6 @@ static void graphics1D_graph  (const char *filename, const ELT_1D *element, cons
 /*----------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
 
-static void graphics1D_matplotlib(const char *filename, const ELT_1D *element, const GEOM_1D *geom, const VEC  *SOL)
-{
-   warning(WARN_UNKNOWN, "graphics1D_matplotlib not implemented");
-}
-
-/*----------------------------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------------------------*/
-
 static char * graphics1D_silo_script (const char* filename, const VEC  *SOL)
 {
    /* Script MESHTVX */
@@ -639,11 +630,6 @@ void graphics1D       (const char* format, const ELT_1D *element, const GEOM_1D 
    {
       graphics1D_gnuplot(filename, element, geom, SOL);
       graphics1D_gnuplot_script(filename, SOL);
-   }
-   else
-   if ( strcmp("matplotlib", format) == 0 )
-   {
-      graphics1D_matplotlib(filename, element, geom, SOL);
    }
    else
    if ( strcmp("graph", format) == 0 )

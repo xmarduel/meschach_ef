@@ -12,7 +12,7 @@ PressureMATRIX  1.50  * Stokes params : method (Uzawa - PressureMATRIX), rho par
 /Users/xavier/DEVELOPPEMENT/SANDBOX_PROJECTS/MESCHACH_WORK/EF_MESHES/mesh2D.quad       * Mesh File ("name.dat") ( MESH_P1.quad[1-2-3]  CUBE_11.emc2 cube2D_P1_v2.gmsh )
 MESH_20 quad2      * meshname meshtype (quad[1-2-3], emc2, gmsh)
 0.0  1.0  10  0  0 * xmin, xmax, nx, distribution, periodicity
-0 0 0 0 0 0 0 1 0  * GNUPLOT,GRAPH,MATLAB,MATPLOTLIB,VTK,SILO,PGPLOT,VOGLE,LIBSCIPLOT   (0=NO;1=YES)
+0 0 0 0 0 0 1 0    * GNUPLOT,GRAPH,MATLAB,VTK,SILO,PGPLOT,VOGLE,LIBSCIPLOT   (0=NO;1=YES)
 4  1  1  10        * ITPRINT, ITSAVE, ITSTAT, ITGRAPH
 0 0 0 0            * IMTXPROF, IGEOMVIEW , IGEOMCONTOURVIEW, IGEOMTOTALVIEW
 0  2   0.001       * TPS_INI, TPS_FIN, DT

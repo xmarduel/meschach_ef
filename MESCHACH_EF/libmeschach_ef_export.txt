@@ -158,10 +158,6 @@ _Bc3D_getNumberOfBC
 _Bc3D_getNumberOfBcOnSomms
 _Bc3D_getNumberOfBcOnFaces
 
-_function1Dindex_by_name
-_function2Dindex_by_name
-_function3Dindex_by_name
-
 
 _Fun1D_get
 _Fun1D_free
@@ -368,9 +364,13 @@ _solve2D_stokes_
 _solve3D_navier_stokes_
 _solve3D_stokes_
 
+_Zero1D
+_Zero1D_Transient
+_Zero2D
+_Zero2D_Transient
+_Zero3D
+_Zero3D_Transient
 
-_Src1D_00
-_Src1D_00_Transient
 _Src1D_01
 _Src1D_01_Transient
 _Src1D_02
@@ -381,16 +381,7 @@ _Src1D_04
 _Src1D_04_Transient
 _Src1D_05
 _Src1D_05_Transient
-_Src1D_06
-_Src1D_06_Transient
-_Src1D_07
-_Src1D_07_Transient
-_Src1D_08
-_Src1D_08_Transient
-_Src1D_09
-_Src1D_09_Transient
-_Src2D_00
-_Src2D_00_Transient
+
 _Src2D_01
 _Src2D_01_Transient
 _Src2D_02
@@ -401,16 +392,7 @@ _Src2D_04
 _Src2D_04_Transient
 _Src2D_05
 _Src2D_05_Transient
-_Src2D_06
-_Src2D_06_Transient
-_Src2D_07
-_Src2D_07_Transient
-_Src2D_08
-_Src2D_08_Transient
-_Src2D_09
-_Src2D_09_Transient
-_Src3D_00
-_Src3D_00_Transient
+
 _Src3D_01
 _Src3D_01_Transient
 _Src3D_02
@@ -421,17 +403,7 @@ _Src3D_04
 _Src3D_04_Transient
 _Src3D_05
 _Src3D_05_Transient
-_Src3D_06
-_Src3D_06_Transient
-_Src3D_07
-_Src3D_07_Transient
-_Src3D_08
-_Src3D_08_Transient
-_Src3D_09
-_Src3D_09_Transient
 
-_Phi1D_00
-_Phi1D_00_Transient
 _Phi1D_01
 _Phi1D_01_Transient
 _Phi1D_02
@@ -442,16 +414,7 @@ _Phi1D_04
 _Phi1D_04_Transient
 _Phi1D_05
 _Phi1D_05_Transient
-_Phi1D_06
-_Phi1D_06_Transient
-_Phi1D_07
-_Phi1D_07_Transient
-_Phi1D_08
-_Phi1D_08_Transient
-_Phi1D_09
-_Phi1D_09_Transient
-_Phi2D_00
-_Phi2D_00_Transient
+
 _Phi2D_01
 _Phi2D_01_Transient
 _Phi2D_02
@@ -462,16 +425,7 @@ _Phi2D_04
 _Phi2D_04_Transient
 _Phi2D_05
 _Phi2D_05_Transient
-_Phi2D_06
-_Phi2D_06_Transient
-_Phi2D_07
-_Phi2D_07_Transient
-_Phi2D_08
-_Phi2D_08_Transient
-_Phi2D_09
-_Phi2D_09_Transient
-_Phi3D_00
-_Phi3D_00_Transient
+
 _Phi3D_01
 _Phi3D_01_Transient
 _Phi3D_02
@@ -482,17 +436,7 @@ _Phi3D_04
 _Phi3D_04_Transient
 _Phi3D_05
 _Phi3D_05_Transient
-_Phi3D_06
-_Phi3D_06_Transient
-_Phi3D_07
-_Phi3D_07_Transient
-_Phi3D_08
-_Phi3D_08_Transient
-_Phi3D_09
-_Phi3D_09_Transient
 
-_Sol1D_00
-_Sol1D_00_Transient
 _Sol1D_01
 _Sol1D_01_Transient
 _Sol1D_02
@@ -503,16 +447,7 @@ _Sol1D_04
 _Sol1D_04_Transient
 _Sol1D_05
 _Sol1D_05_Transient
-_Sol1D_06
-_Sol1D_06_Transient
-_Sol1D_07
-_Sol1D_07_Transient
-_Sol1D_08
-_Sol1D_08_Transient
-_Sol1D_09
-_Sol1D_09_Transient
-_Sol2D_00
-_Sol2D_00_Transient
+
 _Sol2D_01
 _Sol2D_01_Transient
 _Sol2D_02
@@ -523,16 +458,7 @@ _Sol2D_04
 _Sol2D_04_Transient
 _Sol2D_05
 _Sol2D_05_Transient
-_Sol2D_06
-_Sol2D_06_Transient
-_Sol2D_07
-_Sol2D_07_Transient
-_Sol2D_08
-_Sol2D_08_Transient
-_Sol2D_09
-_Sol2D_09_Transient
-_Sol3D_00
-_Sol3D_00_Transient
+
 _Sol3D_01
 _Sol3D_01_Transient
 _Sol3D_02
@@ -543,14 +469,6 @@ _Sol3D_04
 _Sol3D_04_Transient
 _Sol3D_05
 _Sol3D_05_Transient
-_Sol3D_06
-_Sol3D_06_Transient
-_Sol3D_07
-_Sol3D_07_Transient
-_Sol3D_08
-_Sol3D_08_Transient
-_Sol3D_09
-_Sol3D_09_Transient
 
 
 _assemblage1D_matrix_Mass

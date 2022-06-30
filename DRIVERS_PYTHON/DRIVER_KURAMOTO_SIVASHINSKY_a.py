@@ -116,13 +116,9 @@ Params_set_oneparam(MyParams, "geometry_params","distribution",  "UNIFORM" ) # d
 Params_set_oneparam(MyParams, "geometry_params","periodicity", PERIODIC_MESHe )     # "non-periodic","periodic"
 
 Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     0) # GNUPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",       0) # GRAPH
 Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
 Params_set_oneparam(MyParams, "graphics_output_params","VTK",         0) # VTK
 Params_set_oneparam(MyParams, "graphics_output_params","SILO",        0) # SILO
-Params_set_oneparam(MyParams, "graphics_output_params","PGPLOT",      1) # PGPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","VOGLE",       0) # VOGLE
-Params_set_oneparam(MyParams, "graphics_output_params","LIBSCIPLOT",  0) # LIBSCIPLOT
 
 Params_set_oneparam(MyParams, "miscellaneous_params","itprint",     10) # ITPRINT
 Params_set_oneparam(MyParams, "miscellaneous_params","itsave",       1) # ITSAVE

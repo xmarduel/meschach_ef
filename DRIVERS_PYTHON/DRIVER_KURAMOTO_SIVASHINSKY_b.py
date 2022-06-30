@@ -105,7 +105,6 @@ def run_test():
     Params_set_oneparam(MyParams, "geometry_params", "periodicity", 1 ) # periodicity
 
     Params_set_oneparam(MyParams, "graphics_output_params", "GNUPLOT",     0) # GNUPLOT
-    Params_set_oneparam(MyParams, "graphics_output_params", "GRAPH",       0) # GRAPH
     Params_set_oneparam(MyParams, "graphics_output_params", "MATLAB",      0) # MATLAB
     Params_set_oneparam(MyParams, "graphics_output_params", "VTK",         0) # VTK
     Params_set_oneparam(MyParams, "graphics_output_params", "SILO",        0) # SILO
@@ -194,8 +193,8 @@ def run_test():
     Bc1D_setBcType(MyBC, BC_1De_DIRICHLET, 2, AXEe_X) # BC_1De_CAUCHY, BC_1De_DIRICHLET, BC_1De_NEUMANN
 
     MyRhsFun = Rhs1D_get()
-    #Rhs1D_setFunctionTransientPython(MyRhsFun, 0, AXEe_X, source ) # ref_e=0
-    Rhs1D_setFunctionTransientPython( MyRhsFun, 0, AXEe_X, lambda x,t: 0.0  )
+    #Rhs1D_setFunctionTransientPython( MyRhsFun, 0, AXEe_X, lambda x,t: 0.0  )
+    Rhs1D_setCFunctionTransient( MyRhsFun, 0, AXEe_X, Zero1D_Transient  )
 
 
     MyAdvFun = Adv1D_get()

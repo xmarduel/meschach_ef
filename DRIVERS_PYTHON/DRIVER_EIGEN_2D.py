@@ -96,13 +96,9 @@ Params_set_oneparam(MyParams, "geometry_params","meshtype", "quad1" )  #
 Params_set_oneparam(MyParams, "geometry_params","meshname", "MESH_20" )  #  
 
 Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     1) # GNUPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","GRAPH",       0) # GRAPH
 Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
 Params_set_oneparam(MyParams, "graphics_output_params","VTK",         1) # VTK
 Params_set_oneparam(MyParams, "graphics_output_params","SILO",        1) # SILO
-Params_set_oneparam(MyParams, "graphics_output_params","PGPLOT",      0) # PGPLOT
-Params_set_oneparam(MyParams, "graphics_output_params","VOGLE",       0) # VOGLE
-Params_set_oneparam(MyParams, "graphics_output_params","LIBSCIPLOT",  0) # LIBSCIPLOT   (0=NO;1=YES)
 
 Params_set_oneparam(MyParams, "miscellaneous_graphics","ispmatpattern", 0 ) # IHBF
 Params_set_oneparam(MyParams, "miscellaneous_graphics","igeomview",    1 ) # IHBF

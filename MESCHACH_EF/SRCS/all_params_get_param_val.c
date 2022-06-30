@@ -668,16 +668,6 @@ static void * Params_get_oneparam0_cat_graphics_output_params(const PARAMS* p, c
       return (void*)(&(p->graph_params.GNUPLOT));
    }
    else
-   if ( strcmp(field,"GRAPH") == 0 )
-   {
-      return (void*)(&(p->graph_params.GRAPH));
-   }
-   else
-   if ( strcmp(field,"LIBSCIPLOT") == 0 )
-   {
-      return (void*)(&(p->graph_params.LIBSCIPLOT));
-   }
-   else
    if ( strcmp(field,"MATLAB") == 0 )
    {
       return (void*)(&(p->graph_params.MATLAB));

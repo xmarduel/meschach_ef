@@ -168,9 +168,7 @@ static TYPE_PARAMS0 params_list0[] =
 	
 	
    { "graphics_output_params", "GNUPLOT"         , TYPEd_INT },
-   { "graphics_output_params", "GRAPH"           , TYPEd_INT },
    { "graphics_output_params", "MATLAB"          , TYPEd_INT },
-   { "graphics_output_params", "MATPLOTLIB"      , TYPEd_INT },
    { "graphics_output_params", "SILO"            , TYPEd_INT },
    { "graphics_output_params", "VTK"             , TYPEd_INT },
 
@@ -236,21 +234,20 @@ static TYPE_PARAMS2 params_list2[] =
    { "graphics_interactiv1D_params"  , "WINDOW_X_MIN"     , TYPEd_REAL    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
    { "graphics_interactiv1D_params"  , "WINDOW_Y_MIN"     , TYPEd_REAL    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
    { "graphics_interactiv1D_params"  , "MARKER"           , TYPEd_INT     , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv1D_params"  , "MARKER_END"        , TYPEd_INT    , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv1D_params"  , "MARKER_END"       , TYPEd_INT     , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
 
-   { "graphics_interactiv2D_params"  , "LABEL_LEGEND"      , TYPEd_STRING      , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv2D_params"  , "WINDOW_X_MAX"      , TYPEd_REAL        , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv2D_params"  , "WINDOW_Y_MAX"      , TYPEd_REAL        , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv2D_params"  , "WINDOW_X_MIN"      , TYPEd_REAL        , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv2D_params"  , "WINDOW_Y_MIN"      , TYPEd_REAL        , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv2D_params"  , "NB_LEVELS"         , TYPEd_INT         , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv2D_params"  , "LEVELS"            , TYPEd_REAL_VECTOR , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
-   { "graphics_interactiv2D_params"  , "GRAPHICS_TYPE"     , TYPEd_STRING      , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv2D_params"  , "LABEL_LEGEND"     , TYPEd_STRING      , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv2D_params"  , "WINDOW_X_MAX"     , TYPEd_REAL        , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv2D_params"  , "WINDOW_Y_MAX"     , TYPEd_REAL        , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv2D_params"  , "WINDOW_X_MIN"     , TYPEd_REAL        , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv2D_params"  , "WINDOW_Y_MIN"     , TYPEd_REAL        , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv2D_params"  , "NB_LEVELS"        , TYPEd_INT         , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv2D_params"  , "LEVELS"           , TYPEd_REAL_VECTOR , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
+   { "graphics_interactiv2D_params"  , "GRAPHICS_TYPE"    , TYPEd_STRING      , 0, GRAPHIC_NB_SUB_WINDOWS, 0, GRAPHIC_NB_SUB_WINDOWS },
 	
-   { NULL                            , NULL                , TYPEd_INT    , 0, 0, 0, 0 },
+   { NULL                            , NULL               , TYPEd_INT    , 0, 0, 0, 0 },
    
 };
-
 
 int Params_check_oneparam0_arguments(const char* category, const char* field);
 int Params_check_oneparam1_arguments(const char* category, const char* field, int idx1 );

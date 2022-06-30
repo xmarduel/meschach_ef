@@ -243,11 +243,9 @@ def run_test():
         "COORDS_DIMS"    : 1,
         "GRAPHICS_1D_OUTPUT" : {
             "GNUPLOT"    : False,
-            "GRAPH"      : False,
             "MATLAB"     : False,
             "VTK"        : False,
-            "SILO"       : False,
-            "MATPLOTLIB" : False
+            "SILO"       : False
         }
     } ))
 

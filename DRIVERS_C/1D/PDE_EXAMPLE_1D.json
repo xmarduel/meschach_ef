@@ -150,7 +150,7 @@
         "MESHDATADEFINITION" : {
             "XMIN"   : 0.0,
             "XMAX"   : 1.0,
-            "NX"     : 10,
+            "NX"     : 20,
             "DISTRIBUTION" : "UNIFORM",
             "PERIODIC" : false  # true, false
         }
@@ -176,9 +176,7 @@
 
     "GRAPHICS_1D_OUTPUT" : {
         "GNUPLOT"    : false,
-        "GRAPH"      : false,
         "MATLAB"     : false,
-        "MATPLOTLIB" : false,
         "VTK"        : false,
         "SILO"       : false
     },
@@ -186,7 +184,7 @@
     # 1D interactive PDE 1D TRANSIENT - graphics library ploting parameters ------------
 
     "GRAPHICS_1D" : {
-        "ENGINE" : "VOGLE",
+        "ENGINE" : "GRAPH",
         "DRIVER" : "/XWINDOW" ,
         "WINDOW_SIZE" : [600, 400] ,
         "LABELS_SIZE" : 1.2 ,
