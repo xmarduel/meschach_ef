@@ -225,8 +225,8 @@ Real Fun1D_evalCFunctionTransient  (const FUN_1D* MyFun, Real x, Real tps)
 {
    Real res = 0.0;
 
-   if ( MyFun         == NULL ) error(E_NULL, "Fun1D_evalFunctionTransient");
-   if ( MyFun->phi_xt == NULL ) error(E_NULL, "Fun1D_evalFunctionTransient");
+   if ( MyFun         == NULL ) error(E_NULL, "Fun1D_evalCFunctionTransient");
+   if ( MyFun->phi_xt == NULL ) error(E_NULL, "Fun1D_evalCFunctionTransient");
 
    /* eval function */
    res = MyFun->phi_xt(x, tps);

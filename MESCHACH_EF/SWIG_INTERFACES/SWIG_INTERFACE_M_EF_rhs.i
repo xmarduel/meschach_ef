@@ -98,6 +98,9 @@ RHS_1D *Rhs1D_setFunction          ( RHS_1D* RHS, int ref_e, int axe , FUN_TYPE 
 RHS_1D *Rhs1D_setCFunction         ( RHS_1D* RHS, int ref_e, int axe , FUNC_1D phi);
 RHS_1D *Rhs1D_setCFunctionTransient( RHS_1D* RHS, int ref_e, int axe , FUNC_2D phi);
 
+RHS_1D* Rhs1D_setLUAFunction         ( RHS_1D* MyRhs, int ref_e, int axe, const char *def);
+RHS_1D* Rhs1D_setLUAFunctionTransient( RHS_1D* MyRhs, int ref_e, int axe, const char *def);
+
 RHS_1D *Rhs1D_setTps               ( RHS_1D* RHS, Real tps );
 
 Real    Rhs1D_evalFunction         ( RHS_1D* RHS, int ref_e, int axe , Real x);
@@ -141,6 +144,9 @@ RHS_2D* Rhs2D_setFunction           ( RHS_2D* RHS, int ref_e, int axe , FUN_TYPE
 RHS_2D *Rhs2D_setCFunction          ( RHS_2D* RHS, int ref_e, int axe , FUNC_2D phi);
 RHS_2D *Rhs2D_setCFunctionTransient ( RHS_2D* RHS, int ref_e, int axe , FUNC_3D phi);
 
+RHS_2D* Rhs2D_setLUAFunction         (RHS_2D* MyRhs, int ref_e, int axe, const char *def);
+RHS_2D* Rhs2D_setLUAFunctionTransient(RHS_2D* MyRhs, int ref_e, int axe, const char *def);
+
 RHS_2D *Rhs2D_setTps                ( RHS_2D* RHS, Real tps );
 RHS_2D *Rhs2D_setCurrentSelectedAxe ( RHS_2D* RHS, int  axe );
 
@@ -183,6 +189,9 @@ RHS_3D* Rhs3D_setFunction          ( RHS_3D* RHS, int ref_e, int axe , FUN_TYPE 
 
 RHS_3D *Rhs3D_setCFunction         ( RHS_3D* RHS, int ref_e, int axe , FUNC_3D phi);
 RHS_3D *Rhs3D_setCFunctionTransient( RHS_3D* RHS, int ref_e, int axe , FUNC_4D phi);
+
+RHS_3D* Rhs3D_setLUAFunction         (RHS_3D* MyRhs, int ref_e, int axe, const char *def);
+RHS_3D* Rhs3D_setLUAFunctionTransient(RHS_3D* MyRhs, int ref_e, int axe, const char *def);
 
 RHS_3D *Rhs3D_setTps               ( RHS_3D* RHS, Real tps );
 RHS_3D *Rhs3D_setCurrentSelectedAxe( RHS_3D* RHS, int  axe );

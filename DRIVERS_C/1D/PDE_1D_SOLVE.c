@@ -219,7 +219,7 @@ int main()
        
         if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "GRAPH") == 0)
         {
-           graphics1D("graph", MyElt, MyGeom, SOL, "SolApproch1D.dat");
+           graphics1D("graph", MyElt, GeomP1, WORLD, "SolApproch1D.dat");
         }
 #ifdef HAVE_VOGLE
         if (strcmp(MyParams->graph_interactiv1Dplots_params.ENGINE , "VOGLE") == 0)

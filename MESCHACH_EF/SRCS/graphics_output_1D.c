@@ -371,14 +371,25 @@ static void graphics1D_gnuplot(const char *filename, const ELT_1D *element, cons
 /*----------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
 
-static void graphics1D_graph  (const char *filename, const ELT_1D *element, const GEOM_1D *geom, const VEC  *SOL)
+static void graphics1D_graph  (const char *filename, const ELT_1D *elt, const GEOM_1D *geom, const VEC  *SOL)
 {
    PARAMS* p = Params_get_staticparam(0);
-   
-   graphics1D_output_vec("graphics1D_graph_dummy.dat", element, geom, SOL);
 
    // options
    char driver[16] = "X";
+   char output[16] = "";
+   
+   if ( strcmp(p->graph_interactiv1Dplots_params.DRIVER, "/PPM") == 0 )
+   {
+      strcpy(driver, "pnm");
+      strcpy(output, " > plot.ppm");
+   }
+   if ( strcmp(p->graph_interactiv1Dplots_params.DRIVER, "/GIF") == 0 )
+   {
+      strcpy(driver, "gif");
+      strcpy(output, " > plot.gif");
+   }
+   
    char *title = p->graph_interactiv1Dplots_params.LABEL[1][1].LEGEND;
    char *xlabel = p->graph_interactiv1Dplots_params.LABEL[1][1].AXE_X;
    char *ylabel = p->graph_interactiv1Dplots_params.LABEL[1][1].AXE_Y;
@@ -386,25 +397,32 @@ static void graphics1D_graph  (const char *filename, const ELT_1D *element, cons
    int xsize = p->graph_interactiv1Dplots_params.SIZE_WINDOW_X;
    int ysize = p->graph_interactiv1Dplots_params.SIZE_WINDOW_Y;
    
-   //char cmd[512] = "graph -T X -C -m 1  < graphics1D_graph_dummy.dat";
    char cmd[512] = "";
    
    snprintf(cmd, 512, "graph -T %s -C -m 1 "
             "--top-label \"%s\" "
             "--x-label \"%s\" "
             "--y-label \"%s\" "
-            "--bitmap-size %dx%d < graphics1D_graph_dummy.dat",
+            "--bitmap-size %dx%d  %s",
             driver,
             title,
             xlabel,
             ylabel,
             xsize,
-            ysize);
+            ysize,
+            output);
    
    printf("GRAPH -> %s \n", cmd);
    
-   system(cmd);
-   system("rm graphics1D_graph_dummy.dat");
+   FILE *graph_pipe = popen(cmd, "w");
+   
+   for (int i=0; i<geom->XSOMM->dim; i++)
+   {
+      fprintf(graph_pipe, "%f %f  ", geom->XSOMM->ve[i], SOL->ve[i]);
+      fflush(graph_pipe);
+   }
+   
+   pclose(graph_pipe);
 }
 
 /*----------------------------------------------------------------------------------------------------*/

@@ -3,8 +3,8 @@
 //
 // interface file for MESCHACH_EF
 //
-/////////////////////////////////////////////////////////  
- 
+/////////////////////////////////////////////////////////
+
 #ifndef MEF_FUNCTIONS_STRUCTS__H
 #define MEF_FUNCTIONS_STRUCTS__H
 
@@ -37,7 +37,7 @@ typedef enum
    FUN_PY_TRANSIENT    =  3,  /**< function depends on t + space variables */
    FUN_LUA_STATIONNARY =  4,  /**< function depends on t + space variables */
    FUN_LUA_TRANSIENT   =  5   /**< function depends on t + space variables */
-   
+
 } FUN_TYPE;
 
 
@@ -48,11 +48,11 @@ typedef enum
 //   FUNC_2D phi_xt;              /**< phi for dim 1 with time            */
 //   FUNC_1D_PLUS_VOID phi_x_v;   /**< phi for dim 1 plus void            */
 //   FUNC_2D_PLUS_VOID phi_xt_v;  /**< phi for dim 1 plus_void with time  */
-//   
+//
 //   void*      clientdata;       /**< hold a pointer to a python object */
-//   
+//
 //   FUN_TYPE type;               /**< gives back the type of function stored im the object */
-//  
+//
 //} FUN_1D ;         /* to INITIALIZE in "Fun1D_get"          */
 
 
@@ -62,9 +62,9 @@ typedef enum
 //   FUNC_3D phi_xyt;              /**< phi for dim 2 with time            */
 //   FUNC_2D_PLUS_VOID phi_xy_v;   /**< phi for dim 2 plus void            */
 //   FUNC_3D_PLUS_VOID phi_xyt_v;  /**< phi for dim 2 plus_void with time  */
-//   
+//
 //   void*      clientdata;        /**< hold a pointer to a python object */
-//   
+//
 //   FUN_TYPE type;                /**< gives back the type of function stored im the object */
 //
 //} FUN_2D ;         /* to INITIALIZE in "Fun2D_get"          */
@@ -76,9 +76,9 @@ typedef enum
 //   FUNC_4D phi_xyzt;              /**< phi for dim 3 with time            */
 //   FUNC_3D_PLUS_VOID phi_xyz_v;   /**< phi for dim 3 plus void            */
 //   FUNC_4D_PLUS_VOID phi_xyzt_v;  /**< phi for dim 3 plus_void with time  */
-//   
+//
 //   void*      clientdata;         /**< hold a pointer to a python object */
-//   
+//
 //   FUN_TYPE type;                 /**< gives back the type of function stored im the object */
 //
 //} FUN_3D ;         /* to INITIALIZE in "Fun3D_get"          */
@@ -90,7 +90,7 @@ typedef enum
 
 //#define FUN_1D_NULL  ((FUN_1D *)NULL)
 //#define FUN_2D_NULL  ((FUN_2D *)NULL)
-//#define FUN_3D_NULL  ((FUN_3D *)NULL) 
+//#define FUN_3D_NULL  ((FUN_3D *)NULL)
 
 //#define FUN_1D_FREE(Fun) ( Fun1D_free(Fun), (Fun)=(FUN_1D *)NULL )
 //#define FUN_2D_FREE(Fun) ( Fun2D_free(Fun), (Fun)=(FUN_2D *)NULL )
@@ -108,6 +108,8 @@ int   Fun3D_free(FUN_3D *Fun);
 FUN_1D * Fun1D_init                    ( FUN_1D* Fun);
 FUN_1D * Fun1D_setCFunction            ( FUN_1D* Fun, FUNC_1D  phi);
 FUN_1D * Fun1D_setCFunctionTransient   ( FUN_1D* Fun, FUNC_2D  phi);
+FUN_1D * Fun1D_setLUAFunction          ( FUN_1D* Fun, const char* def);
+FUN_1D * Fun1D_setLUAFunctionTransient ( FUN_1D* Fun, const char* def);
 Real     Fun1D_evalCFunction           ( FUN_1D* Fun, Real x            );
 Real     Fun1D_evalCFunctionTransient  ( FUN_1D* Fun, Real x, Real tps  );
 Real     Fun1D_evalPyFunction          ( FUN_1D* Fun, Real x            );
@@ -157,7 +159,7 @@ Real     Fun3D_evalPyFunctionTransient( FUN_3D* Fun, Real x , Real y , Real z , 
 //   "fun_struct has a wrong type"                       /* 3 */
 //};
 
-//static char *my_warn_mesg5[NB_WARNS5] = 
+//static char *my_warn_mesg5[NB_WARNS5] =
 //{
 //   "unknown fun_struc warning"            /* 0 */
 //};
@@ -199,17 +201,17 @@ int err_warn_attach_lists5(void);
 
 
 void FUN_1D_FREE(FUN_1D* fun)
-{ 
+{
    Fun1D_free(fun);
    (fun)=(FUN_1D *)NULL;
 }
 void FUN_2D_FREE(FUN_2D* fun)
-{ 
+{
    Fun2D_free(fun);
    (fun)=(FUN_2D *)NULL;
 }
 void FUN_3D_FREE(FUN_3D* fun)
-{ 
+{
    Fun3D_free(fun);
    (fun)=(FUN_3D *)NULL;
 }

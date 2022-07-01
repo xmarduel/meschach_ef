@@ -2,9 +2,9 @@
 from sys import *
 from math import *
 
-from libmeschach      import *
-from libmeschach_adds import *
-from libmeschach_ef   import *
+from meschach      import *
+from meschach_adds import *
+from meschach_ef   import *
 
 
 import time
@@ -12,30 +12,27 @@ import profile
 
 #-------------------------------------------------------------------
 
-def toto(x):
-	return 10/4.0*(1.0/2.0-(x-0.5)*(x-0.5) )
-
-N = 200000
+N = 1000000
 x = 0.2
 
 
-MyFun1 = Fun1D_get()
-Fun1D_setFunctionPython(MyFun1, toto)
+MyFun1 = Rhs1D_get()
+Rhs1D_setCFunction(MyFun1, 0, 0, Sol1D_05)
 
-MyFun2 = Fun1D_get()
-Fun1D_setCFunction(MyFun2, Sol1D_08)
+MyFun2 = Rhs1D_get()
+Rhs1D_setFunctionPython(MyFun2, 0, 0, lambda x:10/4.0*(1.0/2.0-(x-0.5)*(x-0.5) ))
 
-MyFun3 = Fun1D_get()
-Fun1D_setFunctionPython(MyFun3, lambda x:10/4.0*(1.0/2.0-(x-0.5)*(x-0.5) ))
+MyFun3 = Rhs1D_get()
+Rhs1D_setLUAFunction(MyFun3, 0, 0, "10/4.0 * (1.0/2.0 - (x-0.5)*(x-0.5))")
 
 def Fun1D_test( fun , x ):
     a = time.time()
-    
+
     for i in range(N):
-        Fun1D_evalFunction(fun, x)
-    
+        Rhs1D_evalFunction(fun, 0, 0, x)
+
     b = time.time()
-    
+
     print("time test = ", b-a)
 
 

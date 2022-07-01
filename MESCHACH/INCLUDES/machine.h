@@ -76,9 +76,9 @@
 
 #include <sys/types.h>
 
-
-#define PLATFORM_WINDOWS 1
-
+//#define PLATFORM_LINUX 1
+//#define PLATFORM_WINDOWS 1
+#define PLATFORM_DARWIN 1
 
 /* if the system has malloc.h */
 #ifdef HAVE_MALLOC_H
