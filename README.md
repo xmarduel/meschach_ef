@@ -8,15 +8,28 @@ my **very old** finite element library ("framework"), based on the **meschach li
 with triangles/tetrahedras only.
 
 - C code similar in structure to the meschach library
-- Very nice python wrapper (3.7: updated recently!) : functions can be defined in python and plugged into the c solvers.
+- Very nice python wrapper (3.7: **updated recently!**) : functions can be defined in python and plugged into the c solvers.
 - Driver programs examples for laplacian, burgers, eigenvalues, stokes, navier-stokes etc. in C or python.
 - lots of graphics possibilities (1D, 2D: interactiv with xt window), 1D, 2D, 3D: vtk, silo etc.
 - Input parameters in JSON format (json schema for the structure od the parameters - see the demos).
+- **New**!: Lua interpreter linked-in to evaluate functions given as strings in configurations files
 
 Hopefully a framework with which beginners can learn how to solve FE problems.
 
 As Xcode project (10.1) for macOS 10.14 - maybe you have to adapt the project in order to compile it locally.
 
-External libs to compile separately.
+External libs to compile separately. Just updated/cleaned recently tomake it public
 
-Please see the html doc for more details
+Please see the html doc for more details. After successfull compiling, just type:
+> python DRIVER_1D.py
+
+> python DRIVER_2D.py
+
+> python DRIVER_3D.py
+
+or for C drivers
+> 1D.exe
+
+> 2D.exe
+
+> 3D.exe
