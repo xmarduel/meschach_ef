@@ -35,7 +35,7 @@ typedef enum {
 
 typedef struct {
 
-   char   BCname[16];         /**< name of bc : dirichlet, neumann, cauchy or robin         */
+   BC_3D_TYPE  bc_type;                   /**< type of bc : dirichlet, neumann, cauchy or robin    */
 
    FUN_3D Fun1[3][NBMAX_BC_3D_FUNCTIONS]; /**< 3xNBMAX_BC_3D_FUNCTIONS functions on the border (1) */
    FUN_3D Fun2[3][NBMAX_BC_3D_FUNCTIONS]; /**< 3xNBMAX_BC_3D_FUNCTIONS functions on the border (2) */

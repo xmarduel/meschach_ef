@@ -15,8 +15,8 @@
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static BC_3D_XTYPE* Bc3D_XTYPE_get( const char* name );
-static int Bc3D_XTYPE_free( BC_3D_XTYPE *MyBC );
+static BC_3D_XTYPE* Bc3D_XTYPE_get ( BC_3D_TYPE bc_type );
+static int          Bc3D_XTYPE_free( BC_3D_XTYPE *MyBC );
 
 static BC_3D_XTYPE* Bc3D_XTYPE_setFunction1   (BC_3D_XTYPE* MyBC, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
 static BC_3D_XTYPE* Bc3D_XTYPE_setFunction2   (BC_3D_XTYPE* MyBC, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
@@ -34,7 +34,7 @@ static int Bc3D_checkBCrobin    (const BC_3D *MyBC, int axe, int ref);
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static BC_3D_XTYPE*  Bc3D_XTYPE_get(const char* name)
+static BC_3D_XTYPE*  Bc3D_XTYPE_get(BC_3D_TYPE bc_type)
 {
    int i,j;
    BC_3D_XTYPE *My_BC;
@@ -50,8 +50,7 @@ static BC_3D_XTYPE*  Bc3D_XTYPE_get(const char* name)
    }
 
    /* on initialise BC_dirichlet, BC_neumann, BCcauchy et BC_robin */
-   strncpy(My_BC->BCname, name, 16);
-   My_BC->BCname[15] = '\0';
+   My_BC->bc_type = bc_type;
 
    My_BC->current_selected_axe = AXEe_X;
 
@@ -178,10 +177,10 @@ BC_3D*  Bc3D_get(void)
 
    /* on initialise BC_dirichlet, BC_neumann, BCcauchy et BC_robin */
    /* ie set the pointer to the right functions          */
-   My_BC->BC_dirichlet = Bc3D_XTYPE_get("dirichlet");
-   My_BC->BC_neumann   = Bc3D_XTYPE_get("neumann");
-   My_BC->BC_cauchy    = Bc3D_XTYPE_get("cauchy");
-   My_BC->BC_robin     = Bc3D_XTYPE_get("robin");
+   My_BC->BC_dirichlet = Bc3D_XTYPE_get(BC_3De_DIRICHLET);
+   My_BC->BC_neumann   = Bc3D_XTYPE_get(BC_3De_NEUMANN);
+   My_BC->BC_cauchy    = Bc3D_XTYPE_get(BC_3De_CAUCHY);
+   My_BC->BC_robin     = Bc3D_XTYPE_get(BC_3De_ROBIN);
 
    for (i=0; i<NBMAX_BC_3D_FUNCTIONS; i++)
    {
@@ -312,7 +311,7 @@ BC_3D        *Bc3D_setBcType            ( BC_3D* MyBC, BC_3D_TYPE type, int ref,
 		return MyBC;
 	}
 
-   if ( (type != BC_3De_DIRICHLET) && (type != BC_3De_NEUMANN) && (type != BC_3De_CAUCHY) ) error4(E_BC_WRONGBCTYPE, "Bc3D_setBcType");
+   if ( (type != BC_3De_DIRICHLET) && (type != BC_3De_NEUMANN) && (type != BC_3De_CAUCHY) && (type != BC_3De_ROBIN) ) error4(E_BC_WRONGBCTYPE, "Bc3D_setBcType");
 
 
    MyBC->BC_MASK[axe][ref] = type;

@@ -15,7 +15,7 @@
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static BC_1D_XTYPE* Bc1D_XTYPE_get (const char* name);
+static BC_1D_XTYPE* Bc1D_XTYPE_get (BC_1D_TYPE bc_type);
 static int          Bc1D_XTYPE_free(BC_1D_XTYPE *MyBC);
 
 static BC_1D_XTYPE* Bc1D_XTYPE_setFunction1   (BC_1D_XTYPE* MyBC, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
@@ -34,7 +34,7 @@ static int Bc1D_checkBCrobin    (const BC_1D *MyBC, int axe, int ref);
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static BC_1D_XTYPE*  Bc1D_XTYPE_get(const char* name)
+static BC_1D_XTYPE*  Bc1D_XTYPE_get(BC_1D_TYPE bc_type)
 {
    int i,j;
    BC_1D_XTYPE *My_BC;
@@ -50,8 +50,7 @@ static BC_1D_XTYPE*  Bc1D_XTYPE_get(const char* name)
    }
 
    /* on initialise BC_dirichlet, BC_neumann, BCcauchy et BC_robin */
-   strncpy(My_BC->BCname, name, 16);
-   My_BC->BCname[15] = '\0';
+   My_BC->bc_type = bc_type;
 
    for (i=0; i<1; i++)
    for (j=0; j<NBMAX_BC_1D_FUNCTIONS; j++)
@@ -175,10 +174,10 @@ BC_1D*  Bc1D_get(void)
 
    /* on initialise BC_dirichlet, BC_neumann, BCcauchy et BC_robin */
    /* ie set the pointer to the right functions          */
-   My_BC->BC_dirichlet = Bc1D_XTYPE_get("dirichlet");
-   My_BC->BC_neumann   = Bc1D_XTYPE_get("neumann");
-   My_BC->BC_cauchy    = Bc1D_XTYPE_get("cauchy");
-   My_BC->BC_robin     = Bc1D_XTYPE_get("robin");
+   My_BC->BC_dirichlet = Bc1D_XTYPE_get(BC_1De_DIRICHLET);
+   My_BC->BC_neumann   = Bc1D_XTYPE_get(BC_1De_NEUMANN);
+   My_BC->BC_cauchy    = Bc1D_XTYPE_get(BC_1De_CAUCHY);
+   My_BC->BC_robin     = Bc1D_XTYPE_get(BC_1De_ROBIN);
 
    for (i=0; i<NBMAX_BC_1D_FUNCTIONS; i++)
    {

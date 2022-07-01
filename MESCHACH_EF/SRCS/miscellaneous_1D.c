@@ -5,6 +5,7 @@
 #include "MESCHACH_SPOOLES/INCLUDES/spooles_wrapper_factor.h"
 
 #include "MESCHACH_ADDS/INCLUDES/sparse2_adds.h"
+#include "MESCHACH_ADDS/INCLUDES/iter_adds.h"
 
 #include "MESCHACH_EF/INCLUDES/finite_elements.h"
 #include "MESCHACH_EF/INCLUDES/geometry.h"

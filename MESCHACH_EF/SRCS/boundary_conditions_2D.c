@@ -15,7 +15,7 @@
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static BC_2D_XTYPE* Bc2D_XTYPE_get ( const char* name );
+static BC_2D_XTYPE* Bc2D_XTYPE_get ( BC_2D_TYPE bc_type );
 static int          Bc2D_XTYPE_free( BC_2D_XTYPE *MyBC );
 
 static BC_2D_XTYPE* Bc2D_XTYPE_setFunction1  ( BC_2D_XTYPE* MyBC, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
@@ -34,7 +34,7 @@ static int Bc2D_checkBCrobin    (const BC_2D *MyBC, int axe, int ref);
 /*-----------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------*/
 
-static BC_2D_XTYPE*  Bc2D_XTYPE_get(const char* name )
+static BC_2D_XTYPE*  Bc2D_XTYPE_get(BC_2D_TYPE bc_type)
 {
    int i,j;
    BC_2D_XTYPE *My_BC;
@@ -48,8 +48,7 @@ static BC_2D_XTYPE*  Bc2D_XTYPE_get(const char* name )
    }
 
    /* on initialise BC_dirichlet, BC_neumann, BCcauchy et BC_robin */
-   strncpy(My_BC->BCname, name, 16);
-   My_BC->BCname[15] = '\0';
+   My_BC->bc_type = bc_type;
 
    My_BC->current_selected_axe = AXEe_X;
 
@@ -176,10 +175,10 @@ BC_2D*  Bc2D_get( void )
 
    /* on initialise BC_dirichlet, BC_neumann, BCcauchy et BC_robin */
    /* ie set the pointer to the right functions          */
-   My_BC->BC_dirichlet = Bc2D_XTYPE_get("dirichlet");
-   My_BC->BC_neumann   = Bc2D_XTYPE_get("neumann");
-   My_BC->BC_cauchy    = Bc2D_XTYPE_get("cauchy");
-   My_BC->BC_robin     = Bc2D_XTYPE_get("robin");
+   My_BC->BC_dirichlet = Bc2D_XTYPE_get(BC_2De_DIRICHLET);
+   My_BC->BC_neumann   = Bc2D_XTYPE_get(BC_2De_NEUMANN);
+   My_BC->BC_cauchy    = Bc2D_XTYPE_get(BC_2De_CAUCHY);
+   My_BC->BC_robin     = Bc2D_XTYPE_get(BC_2De_ROBIN);
 
    for (i=0; i<NBMAX_BC_2D_FUNCTIONS; i++)
    {
