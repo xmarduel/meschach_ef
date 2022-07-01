@@ -17,8 +17,6 @@
 #include "MESCHACH_EF/INCLUDES/boundary_conditions.h"
 
 
-typedef int (*functionIndexByName)(const char *, FUN_CLASS);
-
 static void json_config_PARAMS_finite_element(PARAMS* p, const json_t* config);
 static void json_config_PARAMS_physical_parameters(PARAMS* p, const json_t* config);
 static void json_config_PARAMS_time_parameters(PARAMS* p, const json_t* config);

@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "MESCHACH_EF/INCLUDES/all_params.h"
 #include "MESCHACH_EF/INCLUDES/all_params_json_utils.h"
 
 #define BUFSIZE 65536
@@ -221,8 +222,8 @@ int json_check_data(const char* path, const char* schema, char *res)
    fclose(tmp);
 
    char cmd[CMDSIZE];
-   char PYTHON_EXE[64] = "/Library/Frameworks/Python.framework/Versions/2.7/bin/python";
-   char CHECKER[99]    = "JSON_SCHEMAS/check_json.py";
+   char PYTHON_EXE[16] = "python3";
+   char CHECKER[32]    = "JSON_SCHEMAS/check_json.py";
    char JSON_FILE[32]  = "schema_without_comments.json";
 
    char checker_abs_path[512];
