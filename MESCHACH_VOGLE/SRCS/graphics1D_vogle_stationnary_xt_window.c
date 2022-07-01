@@ -153,12 +153,12 @@ static void vogle_curve_hardcopy(const VOPL_GRAPH_DATA *pdata)
 
    VOGLE_OUTPUT_FORMAT output_format;
 
-   if      ( strcmp(pdata->driver,"/PPM" ) == 0 ) output_format = VOGLEe_PPM;
-   else if ( strcmp(pdata->driver,"/GIF" ) == 0 ) output_format = VOGLEe_GIF;
-   else if ( strcmp(pdata->driver,"/TIFF") == 0 ) output_format = VOGLEe_TIFF;
-   else if ( strcmp(pdata->driver,"/XBM" ) == 0 ) output_format = VOGLEe_XBM;
-	else if ( strcmp(pdata->driver,"/PNG" ) == 0 ) output_format = VOGLEe_PNG;
-   else if ( strcmp(pdata->driver,"/PPS" ) == 0 ) output_format = VOGLEe_PPS;
+   if      ( strcmp(pdata->driver, "/PPM" ) == 0 ) output_format = VOGLEe_PPM;
+   else if ( strcmp(pdata->driver, "/GIF" ) == 0 ) output_format = VOGLEe_GIF;
+   else if ( strcmp(pdata->driver, "/TIFF") == 0 ) output_format = VOGLEe_TIFF;
+   else if ( strcmp(pdata->driver, "/XBM" ) == 0 ) output_format = VOGLEe_XBM;
+	else if ( strcmp(pdata->driver, "/PNG" ) == 0 ) output_format = VOGLEe_PNG;
+   else if ( strcmp(pdata->driver, "/PPS" ) == 0 ) output_format = VOGLEe_PPS;
    else
    {
       fprintf(stderr, "Bad driver: %s\n", pdata->driver);
@@ -440,7 +440,7 @@ void * vopl_curve_with_xt_toolkit(void* data)
 
    /*-----------------------------------------------------------------------------------*/
 
-   if ( strcmp(pdata->driver,"/XWINDOW") != 0 )
+   if ( strcmp(pdata->driver, "/XWINDOW") != 0 )
    {
 	  /* no X11 */
       vogle_curve_hardcopy(pdata);

@@ -25,32 +25,14 @@
                     "NB_REFS"   : { "type":"integer", "description":"number of refs" },
                     "VERTICES_IDX" : { "type":"object", "description":"",
                         "properties" : {
-                      "TOP_FACE" : { "type":"array", "items" : {
-                          "type":"array", "items" : { "type":"integer" }
-                          }
-                      },
-                      "BOTTOM_FACE" : { "type":"array", "items" : {
-                          "type":"array", "items" : { "type":"integer" }
-                          }
-                     },
-                     "FRONT_FACE" : { "type":"array", "items" : {
-                         "type":"array", "items" : { "type":"integer" }
-                         }
-                     },
-                     "BACK_FACE" : { "type":"array", "items" : {
-                         "type":"array", "items" : { "type":"integer" }
-                         }
-                     },
-                     "RIGHT_FACE" : { "type":"array", "items" : {
-                         "type":"array", "items" : { "type":"integer" }
-                         }
-                     },
-                     "LEFT_FACE" : { "type":"array", "items" : {
-                         "type":"array", "items" : { "type":"integer" }
-                         }
-                     }
-                  }
-               }
+                            "TOP_FACE" : { "type":"array", "items" : { "type":"array", "items" : { "type":"integer" } } },
+                            "BOTTOM_FACE" : { "type":"array", "items" : { "type":"array", "items" : { "type":"integer" } } },
+                            "FRONT_FACE" : { "type":"array", "items" : { "type":"array", "items" : { "type":"integer" } } },
+                            "BACK_FACE" : { "type":"array", "items" : { "type":"array", "items" : { "type":"integer" } } },
+                            "RIGHT_FACE" : { "type":"array", "items" : { "type":"array", "items" : { "type":"integer" } } },
+                            "LEFT_FACE" : { "type":"array", "items" : { "type":"array", "items" : { "type":"integer" } } }
+                        }
+                    }
                 },
                 "required" : ["VERTICES_IDX"],
                 "additionalProperties": false

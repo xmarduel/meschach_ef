@@ -35,7 +35,7 @@ MAT* m_transp2(MAT *A)
    Real *tmp;
    
    /* check */
-   if ( A  == NULL ) error(E_NULL,"m_transp2");
+   if ( A  == NULL ) error(E_NULL, "m_transp2");
 
    /* start */
    old_m = A->m;
@@ -90,8 +90,8 @@ MAT* m_transp2(MAT *A)
 void b_foutput(FILE* fp, const BAND* B)
 {
    /* check */
-   if ( fp  == NULL ) error(E_NULL,"b_foutput");
-   if ( B   == NULL ) error(E_NULL,"b_foutput");
+   if ( fp  == NULL ) error(E_NULL, "b_foutput");
+   if ( B   == NULL ) error(E_NULL, "b_foutput");
 
    fprintf(fp, "# BAND lb = %d   ub = %d \n", B->lb, B->ub);
    m_foutput(fp,B->mat);
@@ -111,7 +111,7 @@ BAND *sp2band     (const SPMAT *A )
    double val;
    
    /* check */
-   if ( A  == SMNULL ) error(E_NULL,"sp2band");
+   if ( A  == SMNULL ) error(E_NULL, "sp2band");
 
    ub = 0;
    lb = 0;
@@ -173,7 +173,7 @@ BAND *sp2lowerband(const SPMAT *A )
    double val;
 
    /* check */
-   if ( A  == SMNULL ) error(E_NULL,"sp2lowerband");
+   if ( A  == SMNULL ) error(E_NULL, "sp2lowerband");
 
    lb = 0;
    /* calculate from the sparse matrix lb and lu */
@@ -247,8 +247,8 @@ MAT* band2lapackbanded(const BAND* in )
    int i;
 
    /* tests NULL structures */
-   if ( in==BDNULL ) error(E_NULL,"band2bandedlapack");
-   if ( in->mat==MNULL ) error(E_NULL,"band2bandedlapack");
+   if ( in==BDNULL ) error(E_NULL, "band2bandedlapack");
+   if ( in->mat==MNULL ) error(E_NULL, "band2bandedlapack");
 
 
    OUT  = m_get(in->mat->m, in->mat->n);
@@ -284,7 +284,7 @@ MAT  *spmat2lapackbanded(const SPMAT *A )
    BAND *X;
 
    /* tests NULL structures */
-   if ( A==SMNULL ) error(E_NULL,"spmat2lapackbanded");
+   if ( A==SMNULL ) error(E_NULL, "spmat2lapackbanded");
 
    /* first a meschach banded matrix */
    X = sp2band(A);
@@ -309,7 +309,7 @@ MAT  *spmat2lapacklowerbanded(const SPMAT *A )
    BAND *X;
 
    /* tests NULL structures */
-   if ( A==SMNULL ) error(E_NULL,"spmat2lapacklowerbanded");
+   if ( A==SMNULL ) error(E_NULL, "spmat2lapacklowerbanded");
 
    /* first a meschach banded matrix */
    X = sp2lowerband(A);
@@ -332,9 +332,9 @@ VEC* Ax_lapacklowerbanded(const SPMAT *A, const VEC * v1, VEC *v2)
    MAT *LAPACK;
 
    /* check */
-   if ( A == SMNULL) error(E_NULL,"Ax_lapacklowerbanded");
-   if ( v1 == VNULL) error(E_NULL,"Ax_lapacklowerbanded");
-   if ( v2 == VNULL) error(E_NULL,"Ax_lapacklowerbanded");
+   if ( A == SMNULL) error(E_NULL, "Ax_lapacklowerbanded");
+   if ( v1 == VNULL) error(E_NULL, "Ax_lapacklowerbanded");
+   if ( v2 == VNULL) error(E_NULL, "Ax_lapacklowerbanded");
    
    /* init */
    LAPACK = spmat2lapacklowerbanded(A);
@@ -369,9 +369,9 @@ VEC* Ax_lapackbanded(const SPMAT *A, const VEC * v1, VEC *v2)
    MAT *LAPACK;
 
    /* check */
-   if ( A == SMNULL) error(E_NULL,"Ax_lapackbanded");
-   if ( v1 == VNULL) error(E_NULL,"Ax_lapackbanded");
-   if ( v2 == VNULL) error(E_NULL,"Ax_lapackbanded");
+   if ( A == SMNULL) error(E_NULL, "Ax_lapackbanded");
+   if ( v1 == VNULL) error(E_NULL, "Ax_lapackbanded");
+   if ( v2 == VNULL) error(E_NULL, "Ax_lapackbanded");
    
    /* init */
    LAPACK = spmat2lapackbanded(A);

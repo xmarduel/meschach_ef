@@ -199,7 +199,7 @@ static void generic_output(const XAW_WINVOGLE *wxaw, const VOPL_GRAPH_DATA *pdat
 	}
 	
    /**/
-   fprintf(stderr,"Producing %s\n", string_output);
+   fprintf(stderr, "Producing %s\n", string_output);
    voutput(string_output);
    w2 = winopen(vogle_output_id, string_output);
    winset(w2);

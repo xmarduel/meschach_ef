@@ -294,7 +294,7 @@ static MAT* _systel_matrix_Mass( u_int  e , const ELT_1D *element , const GEOM_1
 
    sm_mlt( jac, Mass_el, Mass_el);
 
-   if ( strcmp(element->name_ef,"H3") == 0  )
+   if ( strcmp(element->name_ef, "H3") == 0  )
    {
       int i,j;
 
@@ -348,7 +348,7 @@ static MAT* _systel_matrix_Stiff1( u_int  e , const ELT_1D *element , const GEOM
 
    sm_mlt(un_sur_jac, Stiff1_el, Stiff1_el);
 
-   if ( strcmp(element->name_ef,"H3") == 0 )
+   if ( strcmp(element->name_ef, "H3") == 0 )
    {
       int i,j;
 
@@ -404,7 +404,7 @@ static MAT* _systel_matrix_Stiff2( u_int  e , const ELT_1D *element , const GEOM
    sm_mlt(un_sur_jac3, Stiff2_el, Stiff2_el);
 
 
-   if ( strcmp(element->name_ef,"H3") == 0 )
+   if ( strcmp(element->name_ef, "H3") == 0 )
    {
       int i,j;
 
@@ -447,7 +447,7 @@ static MAT* _systel_matrix_Convec( u_int  e , const ELT_1D *element , const GEOM
    }
    */
 
-   if ( strcmp(element->name_ef,"H3") == 0 )
+   if ( strcmp(element->name_ef, "H3") == 0 )
    {
       int i,j;
 
@@ -631,7 +631,7 @@ static TENSOR* _systel_matrix_AUx( u_int  e , const ELT_1D *element , const GEOM
    */
 
    /* only if element is "H3" */
-   if ( strcmp(element->name_ef,"H3") == 0 )
+   if ( strcmp(element->name_ef, "H3") == 0 )
    {
       int i,j,k;
       Real jac;
@@ -671,7 +671,7 @@ static TENSOR* _systel_matrix_AxU( u_int  e , const ELT_1D *element , const GEOM
    ts_copy(element->TENSOR_x_I_I, TENSOR_el);
 
    /* only if element is "H3"  */
-   if ( strcmp(element->name_ef,"H3") == 0 )
+   if ( strcmp(element->name_ef, "H3") == 0 )
    {
       int i,j,k;
       Real jac;
@@ -734,7 +734,7 @@ static TENSOR* _systel_matrix_A_U( u_int  e , const ELT_1D *element , const GEOM
 
 
    /* only if element is "H3"  */
-   if ( strcmp(element->name_ef,"H3") == 0 )
+   if ( strcmp(element->name_ef, "H3") == 0 )
    {
       int i,j,k;
 
@@ -814,22 +814,22 @@ VEC* assemblage1D_vector_fun( const ELT_1D *elt , const GEOM_1D *geom , const RH
 
    if ( geom->periodicity == NON_PERIODIC_MESHe )
 	{
-	    if ( (strcmp(elt->name_ef,"S2") == 0) )
+	    if ( strcmp(elt->name_ef, "S2") == 0 )
        {
            transform1D_vector_with_newbasis_bf( elt , geom , RHS );
        }
        else
-	    if ( (strcmp(elt->name_ef,"S3") == 0) )
+	    if ( strcmp(elt->name_ef, "S3") == 0 )
        {
            transform1D_vector_with_newbasis_bf( elt , geom , RHS );
        }
        else
-       if ( (strcmp(elt->name_ef,"S4") == 0) )
+       if ( strcmp(elt->name_ef, "S4") == 0 )
        {
           transform1D_vector_with_newbasis_bf( elt , geom , RHS );
        }
        else
-	    if ( (strcmp(elt->name_ef,"S5") == 0) )
+	    if ( strcmp(elt->name_ef, "S5") == 0 )
        {
            transform1D_vector_with_newbasis_bf( elt , geom , RHS );
        }
@@ -906,7 +906,7 @@ static VEC * _systel_vector_fun( u_int  e , const ELT_1D *elt , const GEOM_1D *g
    */
 
    /* post -process for H3 */
-   if ( strcmp(elt->name_ef,"H3") == 0 )
+   if ( strcmp(elt->name_ef, "H3") == 0 )
    {
       for (i=0; i<2; i++)
       {
@@ -961,7 +961,7 @@ static VEC* _systel_vector_fun_o( u_int  e , const ELT_1D *elt , const GEOM_1D *
    */
 
    /* post -process for H3 */
-   if ( strcmp(elt->name_ef,"H3") == 0 )
+   if ( strcmp(elt->name_ef, "H3") == 0 )
    {
       for (i=0; i<2; i++)
       {
@@ -1143,7 +1143,7 @@ static SPMAT* transform1D_matrix_with_newbasis_bf( const ELT_1D *elt , const GEO
    if ( A      == NULL ) error(E_NULL, "transform1D_matrix_with_newbasis_bf");
 
    /* ----- only for S3 and S5  ----------------------------------------------------*/
-   if ( !( (strcmp(elt->name_ef,"S2") == 0) || (strcmp(elt->name_ef,"S3") == 0) || (strcmp(elt->name_ef,"S4") == 0) || (strcmp(elt->name_ef,"S5") == 0) )  )
+   if ( !( (strcmp(elt->name_ef, "S2") == 0) || (strcmp(elt->name_ef, "S3") == 0) || (strcmp(elt->name_ef, "S4") == 0) || (strcmp(elt->name_ef, "S5") == 0) )  )
    {
       return A;
    }
@@ -1180,7 +1180,7 @@ static VEC * transform1D_vector_with_newbasis_bf( const ELT_1D *elt , const GEOM
    if ( RHS    == NULL ) error(E_NULL, "transform1D_vector_with_newbasis_bf");
 
 
-   if ( !( (strcmp(elt->name_ef,"S2")==0) || (strcmp(elt->name_ef,"S3")==0) || (strcmp(elt->name_ef,"S4") == 0) || (strcmp(elt->name_ef,"S5")==0) ) )
+   if ( !( (strcmp(elt->name_ef, "S2") == 0) || (strcmp(elt->name_ef, "S3") == 0) || (strcmp(elt->name_ef, "S4") == 0) || (strcmp(elt->name_ef, "S5") == 0) ) )
    {
       return RHS;
    }
@@ -1212,7 +1212,7 @@ static VEC * vector_cbf_to_bbf(  const ELT_1D *elt , const GEOM_1D *geom , const
 {
    char *ef = elt->name_ef;
 
-   if ( !( (strcmp(ef,"S2")==0) || (strcmp(ef,"S3")==0) || (strcmp(ef,"S4")==0) || (strcmp(ef,"S5")==0) ) )
+   if ( !( (strcmp(ef, "S2") == 0) || (strcmp(ef, "S3") == 0) || (strcmp(ef, "S4") == 0) || (strcmp(ef, "S5") == 0) ) )
    {
       return RHS_bbf;
    }
@@ -1257,31 +1257,31 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
     should i put in the struct ELT_1D the indices idx1 & idx2 ?
     */
 
-   if ( strcmp(elt->name_ef,"P1") == 0 )
+   if ( strcmp(elt->name_ef, "P1") == 0 )
    {
       *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
       *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][1] ] ;
    }
    else
-   if ( strcmp(elt->name_ef,"P2") == 0 )
+   if ( strcmp(elt->name_ef, "P2") == 0 )
    {
       *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
       *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][2] ] ;
    }
    else
-   if ( strcmp(elt->name_ef,"P3") == 0 )
+   if ( strcmp(elt->name_ef, "P3") == 0 )
    {
       *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
       *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][3] ] ;
    }
    else
-   if ( strcmp(elt->name_ef,"H3") == 0 )
+   if ( strcmp(elt->name_ef, "H3") == 0 )
    {
       *x1 = geom->XSOMM->ve[ geom->NSELMT->im[e][0] ] ;
       *x2 = geom->XSOMM->ve[ geom->NSELMT->im[e][2] ] ;
    }
    else
-   if ( strcmp(elt->name_ef,"S2") == 0 )
+   if ( strcmp(elt->name_ef, "S2") == 0 )
    {
       if (geom->periodicity == NON_PERIODIC_MESHe)
       {
@@ -1295,7 +1295,7 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
       }
    }
    else
-   if ( strcmp(elt->name_ef,"S3") == 0 )
+   if ( strcmp(elt->name_ef, "S3") == 0 )
    {
       if (geom->periodicity == NON_PERIODIC_MESHe)
       {
@@ -1309,7 +1309,7 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
       }
    }
    else
-   if ( strcmp(elt->name_ef,"S4") == 0 )
+   if ( strcmp(elt->name_ef, "S4") == 0 )
    {
       if (geom->periodicity == NON_PERIODIC_MESHe)
       {
@@ -1323,7 +1323,7 @@ static void eval_x1x2_on_e ( int e , const ELT_1D *elt , const GEOM_1D *geom , R
       }
    }
    else
-   if ( strcmp(elt->name_ef,"S5") == 0 )
+   if ( strcmp(elt->name_ef, "S5") == 0 )
    {
       if (geom->periodicity == NON_PERIODIC_MESHe)
       {

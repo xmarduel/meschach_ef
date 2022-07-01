@@ -146,18 +146,18 @@ GEOM_3D *Geom3D_get(const ELT_3D *element, const char *meshfile, const char *mes
 
    GeomP1 = Geom3D_Base_get(meshfile, meshname, meshtype);
 
-   if ( (strcmp(element->name_ef, "P1")==0 ) )
+   if ( strcmp(element->name_ef, "P1") == 0 )
    {
       Geom = GeomP1;
    }
    else
-   if ( (strcmp(element->name_ef, "P1b")==0 ) )
+   if ( strcmp(element->name_ef, "P1b") == 0 )
    {
       GeomP1b = Geom3D_Parent_get_fromBase("P1b", GeomP1);
       Geom    = GeomP1b;
    }
    else
-   if ( (strcmp(element->name_ef, "P2")==0 ) )
+   if ( strcmp(element->name_ef, "P2") == 0 )
    {
       GeomP2  = Geom3D_Parent_get_fromBase("P2", GeomP1);
       Geom    = GeomP2;
@@ -1201,7 +1201,7 @@ static GEOM_3D* Geom3D_Base_gmsh_get(const char *meshfile)
 
 
    /* IT IS A GMSH FORMAT */
-   strncpy(Geom->type,"gmsh", 16);
+   strncpy(Geom->type, "gmsh", 16);
 
 
    /* we first read NBSOMM, NBELMT and NBFACE */
@@ -1780,12 +1780,12 @@ GEOM_3D *Geom3D_getP1geom_from( const ELT_3D *element, const GEOM_3D* geom )
    if ( element  == NULL )  error(E_NULL, "Geom3D_getP1geom_from");
    if ( geom     == NULL )  error(E_NULL, "Geom3D_getP1geom_from");
 
-   if ( (strcmp(element->name_ef,"P2")==0 ) )
+   if ( strcmp(element->name_ef, "P2") == 0 )
    {
       GeomP1 = Geom3D_getP1geom_from_P2geom( element, geom);
    }
    else
-   if ( (strcmp(element->name_ef,"P3")==0 ) )
+   if ( strcmp(element->name_ef, "P3") == 0 )
    {
       GeomP1 = Geom3D_getP1geom_from_P3geom( element, geom);
    }
@@ -1810,12 +1810,12 @@ VEC *Geom3D_extract_P1geom_VEC_from(const ELT_3D *element, const GEOM_3D* geom, 
    if ( geom     == NULL )  error(E_NULL, "Geom3D_extract_P1geom_VEC_from");
    if ( v        == NULL )  error(E_NULL, "Geom3D_extract_P1geom_VEC_from");
 
-   if ( (strcmp(element->name_ef,"P2")==0 ) )
+   if ( strcmp(element->name_ef, "P2") == 0 )
    {
       w = Geom3D_extract_P1geom_VEC_from_P2geom_VEC(element, geom, v);
    }
    else
-   if ( (strcmp(element->name_ef,"P3")==0 ) )
+   if ( strcmp(element->name_ef, "P3") == 0 )
    {
       w = Geom3D_extract_P1geom_VEC_from_P3geom_VEC(element, geom, v);
    }
@@ -1849,7 +1849,7 @@ static GEOM_3D *Geom3D_getP1geom_from_P2geom( const ELT_3D *element, const GEOM_
    /* --------- create the structure GEOM_3D ----------- */
    if ( (GeomP1=NEW(GEOM_3D))== (GEOM_3D *)NULL )
    {
-      error(E_MEM,"Geom3D_getP1geom_from_P2geom");
+      error(E_MEM, "Geom3D_getP1geom_from_P2geom");
    }
    else if (mem_info_is_on())
    {
@@ -2361,7 +2361,7 @@ GEOM_3D *Geom3D_get_base_tetrahedra(int NX)
    }
    /* ---------------------------------------------------- */
 
-   strncpy(Geom->type,"tetra", 16);
+   strncpy(Geom->type, "tetra", 16);
 
    /* I- the unit tetrahedra */
 

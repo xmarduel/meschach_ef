@@ -1,11 +1,6 @@
 #
 # class IVec
 #
-#  ----------------------------------------------------------------
-#  $Author: xavier $
-#  $Date: 2014/11/22 12:24:10 $
-#  $Revision: 1.11 $
-#  ----------------------------------------------------------------
 
 #from libmeschach import *
 import libmeschach
@@ -15,7 +10,7 @@ import libmeschach_adds
 import sys
 
 
-class IVec(object):
+class IVec:
     """
     class for IntVector : self.this is a IVEC * structure
     """
@@ -27,7 +22,7 @@ class IVec(object):
             civec = libmeschach.iv_get(m)
             self.__dict__["this"] = civec
         except:
-            raise IndexError, "negative argument for <IVec> initialization"
+            raise IndexError("negative argument for <IVec> initialization")
 
     def __del__(self):
         """
@@ -54,7 +49,7 @@ class IVec(object):
     def __setattr__(self, name, value):
         
         if name == "this" :
-            raise AttributeError, "not allowed to change self.this in this way"
+            raise AttributeError( "not allowed to change self.this in this way")
         else:
             pass
             #raise AttributeError, "not allowed to add an attribute to an IMat instance"
@@ -63,14 +58,14 @@ class IVec(object):
 
     def __setitem__(self, key, ival):
         if not isinstance(key, int):
-            raise TypeError, "must be a integer"
+            raise TypeError("must be a integer")
         if not isinstance(ival, int):
-            raise TypeError, "must be a integer"
+            raise TypeError("must be a integer")
         return libmeschach.iv_set_val(self.this, key, ival)
 
     def __getitem__(self,key):
         if not isinstance(key, int):
-            raise TypeError, "must be a integer"
+            raise TypeError("must be a integer")
         return libmeschach.iv_get_val(self.this, key)
 
     #
@@ -86,9 +81,8 @@ class IVec(object):
         """
         libmeschach.iv_dump(file, self.this)
 
-
     def __str__(self): # as "out"
-        f_tmp = file("tmp.dat", "w+")
+        f_tmp = open("tmp.dat", "w+")
         libmeschach.iv_foutput(f_tmp, self.this)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
@@ -97,7 +91,7 @@ class IVec(object):
         return str
 
     def __repr__(self): # as "dump"
-        f_tmp = file("tmp.dat", "w+")
+        f_tmp = open("tmp.dat", "w+")
         libmeschach.iv_dump(f_tmp, self.this)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
@@ -155,7 +149,7 @@ class IVec(object):
             return ret
         # bad argument
         else:
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
 
     def __radd__(self,a):
         return self.__add__(a)
@@ -173,7 +167,7 @@ class IVec(object):
             return ret
         # bad argument
         else:
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
 
     def __rsub__(self,a):
         return self.__sub__(a)
@@ -191,7 +185,7 @@ class IVec(object):
             return ret
         #
         else: 
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
 
     def __rmul__(self,a):
         return self.__mul__(a)	
@@ -210,11 +204,11 @@ class IVec(object):
             return self
         # bad argument
         else:
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
 
     def __isub__(self,a):
         # a is a IVec
-        if (sinstance(a, IVec):
+        if isinstance(a, IVec):
             libmeschach.iv_sub(self.this, a.this, self.this)
             return self
         # a is a integer
@@ -223,7 +217,7 @@ class IVec(object):
             return self
         # bad argument
         else: 
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
 
     def __imul__(self,a):
         # a is a integer 
@@ -232,7 +226,7 @@ class IVec(object):
             return self
         # bad argument
         else:
-            raise TypeError, "wrong type"	
+            raise TypeError("wrong type")	
 
     #
     # assignation operator :

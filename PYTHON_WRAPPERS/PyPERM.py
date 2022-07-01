@@ -58,7 +58,7 @@ class Perm(object):
         #
         if ( name == "this" ):
             #
-            raise AttributeError, "not allowed to change self.this in this way"
+            raise AttributeError("not allowed to change self.this in this way")
             #
         else:
             pass;
@@ -147,7 +147,7 @@ class Perm(object):
             ret = Perm(self.size)
             libmeschach.px_mlt(self.this, a.this, ret.this)
         else: 
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
         #
         return ret
     #
@@ -163,7 +163,7 @@ class Perm(object):
             return ret
         #
         else:
-            raise TypeError, "wrong type"	
+            raise TypeError("wrong type")	
         #
     #
     #

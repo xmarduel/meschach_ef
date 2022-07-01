@@ -56,42 +56,42 @@ ELT_1D *elt1D_get(const char *type)
    /* ------------------------------------------------------------------------------------------- */
    /* ------------------------------------------------------------------------------------------- */
 
-   if ( strcmp(elt->name_ef,"P1") == 0 )
+   if ( strcmp(elt->name_ef, "P1") == 0 )
    {
       elt1D_get_P1(elt);
    }
    else
-   if ( strcmp(elt->name_ef,"P2") == 0  )
+   if ( strcmp(elt->name_ef, "P2") == 0  )
    {
       elt1D_get_P2(elt);
    }
    else
-   if ( strcmp(elt->name_ef,"P3") == 0 )
+   if ( strcmp(elt->name_ef, "P3") == 0 )
    {
       elt1D_get_P3(elt);
    }
    else
-   if ( strcmp(elt->name_ef,"H3") == 0 )
+   if ( strcmp(elt->name_ef, "H3") == 0 )
    {
       elt1D_get_H3(elt);
    }
    else
-   if ( strcmp(elt->name_ef,"S2") == 0 )
+   if ( strcmp(elt->name_ef, "S2") == 0 )
    {
       elt1D_get_S2(elt);
    }
    else
-   if ( strcmp(elt->name_ef,"S3") == 0 )
+   if ( strcmp(elt->name_ef, "S3") == 0 )
    {
       elt1D_get_S3(elt);
    }
    else
-   if ( strcmp(elt->name_ef,"S4") == 0 )
+   if ( strcmp(elt->name_ef, "S4") == 0 )
    {
       elt1D_get_S4(elt);
    }
    else
-   if ( strcmp(elt->name_ef,"S5") == 0 )
+   if ( strcmp(elt->name_ef, "S5") == 0 )
    {
       elt1D_get_S5(elt);
    }

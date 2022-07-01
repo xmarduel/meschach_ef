@@ -465,42 +465,42 @@ static GEOM_1D* Geom1D_get_from_segments(const ELT_1D *element, const VEC* H1, R
    /* --------------------------------------------------------------- */
    /* --------------------------------------------------------------- */
 
-   if ( strcmp(element->name_ef,"P1")==0 )
+   if ( strcmp(element->name_ef, "P1") == 0 )
    {
       Geom1D_get_P1geom_from_segments(Geom, element, H1);
    }
    else
-   if ( strcmp(element->name_ef,"P2")==0 )
+   if ( strcmp(element->name_ef, "P2") == 0 )
    {
       Geom1D_get_P2geom_from_segments(Geom, element, H1);
    }
    else
-   if ( strcmp(element->name_ef,"P3")==0 )
+   if ( strcmp(element->name_ef, "P3") == 0 )
    {
       Geom1D_get_P3geom_from_segments(Geom, element, H1);
    }
    else
-   if ( strcmp(element->name_ef,"H3")==0 )
+   if ( strcmp(element->name_ef, "H3") == 0 )
    {
       Geom1D_get_H3geom_from_segments(Geom, element, H1);
    }
    else
-   if ( strcmp(element->name_ef,"S2")==0 )
+   if ( strcmp(element->name_ef, "S2") == 0 )
    {
       Geom1D_get_S2geom_from_segments(Geom, element, H1);
    }
    else
-   if ( strcmp(element->name_ef,"S3")==0 )
+   if ( strcmp(element->name_ef, "S3") == 0 )
    {
       Geom1D_get_S3geom_from_segments(Geom, element, H1);
    }
    else
-   if ( strcmp(element->name_ef,"S4")==0 )
+   if ( strcmp(element->name_ef, "S4") == 0 )
    {
       Geom1D_get_S4geom_from_segments(Geom, element, H1);
    }
    else
-   if ( strcmp(element->name_ef,"S5")==0 )
+   if ( strcmp(element->name_ef, "S5") == 0 )
    {
       Geom1D_get_S5geom_from_segments(Geom, element, H1);
    }
@@ -1257,37 +1257,37 @@ GEOM_1D *Geom1D_getP1geom_from ( const ELT_1D *element, const GEOM_1D* geom )
    if ( geom     == NULL )  error(E_NULL, "Geom1D_getP1geom_from");
 
 
-   if ( (strcmp(element->name_ef,"P2")==0 ) )
+   if ( strcmp(element->name_ef, "P2") == 0 )
    {
       GeomP1 = Geom1D_get_fromParent_P2toP1( element , geom );
    }
    else
-   if ( (strcmp(element->name_ef,"P3")==0 ) )
+   if ( strcmp(element->name_ef, "P3") == 0 )
    {
       GeomP1 = Geom1D_get_fromParent_P3toP1( element , geom );
    }
    else
-   if ( (strcmp(element->name_ef,"H3")==0 ) )
+   if ( strcmp(element->name_ef, "H3") == 0 )
    {
       GeomP1 = Geom1D_get_fromParent_H3toP1( element , geom );
    }
    else
-   if ( (strcmp(element->name_ef,"S2")==0 ) )
+   if ( strcmp(element->name_ef, "S2") == 0 )
    {
       GeomP1 = Geom1D_get_fromParent_S2toP1( element , geom );
    }
    else
-   if ( (strcmp(element->name_ef,"S3")==0 ) )
+   if ( strcmp(element->name_ef, "S3") == 0 )
    {
       GeomP1 = Geom1D_get_fromParent_S3toP1( element , geom );
    }
    else
-   if ( (strcmp(element->name_ef,"S4")==0 ) )
+   if ( strcmp(element->name_ef, "S4") == 0 )
    {
       GeomP1 = Geom1D_get_fromParent_S4toP1( element , geom );
    }
    else
-   if ( (strcmp(element->name_ef,"S5")==0 ) )
+   if ( strcmp(element->name_ef, "S5") == 0 )
    {
       GeomP1 = Geom1D_get_fromParent_S5toP1( element , geom );
    }

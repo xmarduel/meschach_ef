@@ -76,6 +76,10 @@
 
 #include <sys/types.h>
 
+
+#define PLATFORM_WINDOWS 1
+
+
 /* if the system has malloc.h */
 #ifdef HAVE_MALLOC_H
 #define	MALLOCDECL	1

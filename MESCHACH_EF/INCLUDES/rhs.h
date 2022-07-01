@@ -80,10 +80,10 @@ int err_attach_list6(void);
 int warn_attach_list6(void);
 int err_warn_attach_lists6(void);
 
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define	 error6(err_num,fn_name) ev_err(__FILE__,err_num,__LINE__,fn_name,MY_LIST6)
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define	 warning6(warn_num,fn_name) ev_warn(__FILE__,warn_num,__LINE__,fn_name,MY_LIST6)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define	 error6(err_num, fn_name) ev_err(__FILE__,err_num,__LINE__,fn_name,MY_LIST6)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define	 warning6(warn_num, fn_name) ev_warn(__FILE__,warn_num,__LINE__,fn_name,MY_LIST6)
 
 #ifdef __cplusplus
 }

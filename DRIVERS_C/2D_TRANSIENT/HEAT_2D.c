@@ -141,7 +141,7 @@ int  main()
    }
    else
    {
-      error(E_UNKNOWN,"main");
+      error(E_UNKNOWN, "main");
    }
 
    MyGeom = Geom2D_get(MyElt,

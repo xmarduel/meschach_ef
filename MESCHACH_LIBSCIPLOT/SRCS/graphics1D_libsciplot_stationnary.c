@@ -62,17 +62,17 @@ int graphics1D_libsciplot_init_multigrapher(const char *driver, Display * displa
    }
 
    /* strings to pass to libplot */
-   if ( strcmp(driver,"X") == 0 )
+   if ( strcmp(driver, "X") == 0 )
    {
       display_type = strdup("Xdrawable");
    }
    else
-   if ( strcmp(driver,"GIF") == 0 )
+   if ( strcmp(driver, "GIF") == 0 )
    {
       display_type = strdup("GIF");
    }
    else
-   if ( strcmp(driver,"PNM") == 0 )
+   if ( strcmp(driver, "PNM") == 0 )
    {
       display_type = strdup("PNM");
    }

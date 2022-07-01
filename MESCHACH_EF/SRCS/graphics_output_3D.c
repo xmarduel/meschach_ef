@@ -869,7 +869,7 @@ static void graphics3D_stokes_vtk(const char *filename, const ELT_3D *element, c
 
    snprintf(V_vtk_file, 64, "%s_VV.vtk", filename); V_vtk_file[63] = '\0';
 
-   if ( strcmp(element->name_ef,"P1") == 0 )
+   if ( strcmp(element->name_ef, "P1") == 0 )
    {
       GeomV = geom;
       GeomP = geom;
@@ -878,7 +878,7 @@ static void graphics3D_stokes_vtk(const char *filename, const ELT_3D *element, c
       vtk_cell_type_P = XVTK_CELL_TYPE_LIN;
    }
    else
-   if ( strcmp(element->name_ef,"P2") == 0 )
+   if ( strcmp(element->name_ef, "P2") == 0 )
    {
       GeomV = geom;
       GeomX = Geom3D_getP1geom_from(element, geom);
@@ -888,7 +888,7 @@ static void graphics3D_stokes_vtk(const char *filename, const ELT_3D *element, c
       vtk_cell_type_P = XVTK_CELL_TYPE_LIN;
    }
    else
-   if ( strcmp(element->name_ef,"P1b") == 0 )
+   if ( strcmp(element->name_ef, "P1b") == 0 )
    {
       GeomV = geom->geomBase;
       GeomP = geom->geomBase;

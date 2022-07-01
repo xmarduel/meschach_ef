@@ -1,8 +1,6 @@
 import sys
 
 from jsonschema import validate as json_validate
-
-from jsonschema import Draft3Validator
 from jsonschema import Draft4Validator
 
 import json
@@ -16,62 +14,51 @@ def validate(jsonfile, jsonschema):
 
     try:
         instance = json.loads(cleaned_json_text)
-    except Exception, msg:
-        print "FAILED to read file %s : %s" % (jsonfile, str(msg))
+    except Exception as msg:
+        print("FAILED to read file %s : %s" % (jsonfile, str(msg)))
         return -1 
          
     try:
-        schema   = json.load(open(jsonschema))
-    except Exception, msg:
-        print "FAILED to read schema file %s : %s" % (jsonschema, str(msg))
+        schema = json.load(open(jsonschema))
+    except Exception as msg:
+        print("FAILED to read schema file %s : %s" % (jsonschema, str(msg)))
         return -1
-
-    #try:
-    #    print "check schema '%s' Draft3 ..." % jsonschema
-    #    Draft3Validator.check_schema(schema)
-    #    print "check schema '%s' Draft3Validator OK" % jsonschema
-    #except Exception, msg:
-    #    print "check schema '%s' Draft3Validator NOK" % jsonschema
-    #    print str(msg)
-    #    return 1
         
     try:
-        print ""
-        print "check schema '%s' Draft4  ..." % jsonschema
+        print("")
+        print("check schema '%s' Draft4  ..." % jsonschema)
         Draft4Validator.check_schema(schema)
-        print "check schema '%s' Draft4Validator OK" % jsonschema
-    except Exception, msg:
-        print "check schema '%s' Draft4Validator NOK" % jsonschema
-        print str(msg)
+        print("check schema '%s' Draft4Validator OK" % jsonschema)
+    except Exception as msg:
+        print("check schema '%s' Draft4Validator NOK" % jsonschema)
+        print(str(msg))
         return 1
         
     try:
-        print ""
-        print "validate file '%s' ..." % jsonfile
+        print("")
+        print("validate file '%s' ..." % jsonfile)
         rc = json_validate(instance, schema)
-    except Exception, msg:
-        print "validation file '%s' NOK" % jsonfile
-        print str(msg)
+    except Exception as msg:
+        print("validation file '%s' NOK" % jsonfile)
+        print(str(msg))
         return 1
     
-    print "validation file '%s' OK" % jsonfile
+    print("validation file '%s' OK" % jsonfile)
     
     return 0
 
 def main(jsonfile, jsonschema):
-    
     return validate(jsonfile, jsonschema=jsonschema)
 
 def usage():
-    print """
-    
+    print("""
     check_json.py <json file> <json schema>
-    
-"""
+""")
 
+#
+#
 
 if __name__ == '__main__':
-    
     if not len(sys.argv[1:]) == 2:
         usage()
         sys.exit(1)

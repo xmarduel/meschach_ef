@@ -513,8 +513,8 @@ static  void	__threaded_mltadd__( double *dp1, double *dp2, double s, int len)
 
 extern double in_prod_threaded(VEC *v1, VEC *v2)
 {
-   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )  error(E_NULL,"in_prod_threaded");
-   if ( v1->dim != v2->dim )                  error(E_SIZES,"in_prod_threaded");
+   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )  error(E_NULL, "in_prod_threaded");
+   if ( v1->dim != v2->dim )                  error(E_SIZES, "in_prod_threaded");
    
    return __threaded_ip__(v1->ve, v2->ve, v1->dim);
 }
@@ -524,8 +524,8 @@ extern double in_prod_threaded(VEC *v1, VEC *v2)
 
 extern VEC * v_add_threaded(VEC *v1, VEC *v2, VEC *out)
 {
-   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )  error(E_NULL,"v_add");
-   if ( v1->dim != v2->dim )                  error(E_SIZES,"v_add");
+   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )  error(E_NULL, "v_add");
+   if ( v1->dim != v2->dim )                  error(E_SIZES, "v_add");
 
    if ( out==(VEC *)NULL || out->dim != v1->dim )
    {
@@ -542,8 +542,8 @@ extern VEC * v_add_threaded(VEC *v1, VEC *v2, VEC *out)
 
 extern VEC * v_sub_threaded(VEC *v1, VEC *v2, VEC *out)
 {
-   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )  error(E_NULL,"v_sub_threaded");
-   if ( v1->dim != v2->dim )                  error(E_SIZES,"v_sub_threaded");
+   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )  error(E_NULL, "v_sub_threaded");
+   if ( v1->dim != v2->dim )                  error(E_SIZES, "v_sub_threaded");
 
    if ( out==(VEC *)NULL || out->dim != v1->dim )
    {
@@ -560,7 +560,7 @@ extern VEC * v_sub_threaded(VEC *v1, VEC *v2, VEC *out)
 
 extern VEC * sv_mlt_threaded(double s, VEC *v1, VEC *out)
 {
-   if ( v1==(VEC *)NULL )    error(E_NULL,"sv_mlt_threaded");
+   if ( v1==(VEC *)NULL )    error(E_NULL, "sv_mlt_threaded");
 
    if ( out==(VEC *)NULL || out->dim != v1->dim )
    {
@@ -578,8 +578,8 @@ extern VEC * sv_mlt_threaded(double s, VEC *v1, VEC *out)
 /* v_mltadd -- scalar/vector multiplication and addition -- out = v1 + scale.v2		*/
 VEC	*v_mltadd_threaded(VEC *v1,VEC *v2,double scale,VEC *out)
 {
-   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )   error(E_NULL ,"v_mltadd_threaded");
-   if ( v1->dim != v2->dim )                   error(E_SIZES,"v_mltadd_threaded");
+   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )   error(E_NULL , "v_mltadd_threaded");
+   if ( v1->dim != v2->dim )                   error(E_SIZES, "v_mltadd_threaded");
 
    if ( scale == 0.0 )  return v_copy(v1,out);
    if ( scale == 1.0 )  return v_add_threaded(v1,v2,out);

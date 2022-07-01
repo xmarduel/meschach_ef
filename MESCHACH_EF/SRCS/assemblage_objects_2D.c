@@ -160,17 +160,17 @@ SPMAT* assemblage2D_matrix_M_Stab( const ELT_2D *elt , const GEOM_2D *geom , SPM
    /* check method */
    method_stab = MyParams->adv_params.method;
 
-   if ( strncmp(method_stab,"GALS",4)==0 )
+   if ( strncmp(method_stab, "GALS", 4) == 0 )
    {
       MyParams->adv_params.rho_stab = 1.0;
    }
    else
-   if ( strncmp(method_stab,"SUPG",4)==0 )
+   if ( strncmp(method_stab, "SUPG", 4) == 0 )
    {
       MyParams->adv_params.rho_stab = 0.0;
    }
    else
-   if ( strncmp(method_stab,"DWG",3)==0 )
+   if ( strncmp(method_stab, "DWG", 3) == 0 )
    {
       MyParams->adv_params.rho_stab = -1.0;
    }

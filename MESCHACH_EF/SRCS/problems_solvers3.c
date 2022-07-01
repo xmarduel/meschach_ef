@@ -392,19 +392,19 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
 
       ITER_OUTPUT_INFO *info = iter_output_info(MyParams->resol_params.iter_info, MyParams->resol_params.iter_file);
 
-      if ( strcmp(ResolutionMethod,"CG") == 0 )
+      if ( strcmp(ResolutionMethod, "CG") == 0 )
       {
          iter_xspcg(A, ICH, RHS, eps_steps, SOL, max_steps, &nb_steps, info);
          printf(" cg: # of iter. = %d \n\n", nb_steps);
       }
 		else
-		if ( strcmp(ResolutionMethod,"CGS") == 0 )
+		if ( strcmp(ResolutionMethod, "CGS") == 0 )
 		{
 			iter_xspcgs(A, ILU, RHS, eps_steps, SOL, max_steps, &nb_steps, info);
 			printf(" cgs: # of iter. = %d \n\n", nb_steps);
 		}
       else
-      if ( strcmp(ResolutionMethod,"BiCGStab") == 0 )
+      if ( strcmp(ResolutionMethod, "BiCGStab") == 0 )
       {
          iter_xspbicgstab(A, ILU, RHS, eps_steps, SOL, max_steps, &nb_steps, info);
          printf(" bicgstab: # of iter. = %d \n\n", nb_steps);
@@ -425,8 +425,8 @@ static VEC* _solve3D_lin(PRBLMt_3D_TYPE problem, const ELT_3D *MyElt, const GEOM
 
    SP_FREE(A);
 
-   if ( strcmp(Preconditionning,"ILU") == 0 ) SP_FREE(ILU);
-   if ( strcmp(Preconditionning,"ICH") == 0 ) SP_FREE(ICH);
+   if ( strcmp(Preconditionning, "ILU") == 0 ) SP_FREE(ILU);
+   if ( strcmp(Preconditionning, "ICH") == 0 ) SP_FREE(ICH);
 
    return SOL;
 }

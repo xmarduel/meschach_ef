@@ -125,24 +125,24 @@ GEOM_2D *Geom2D_get( const ELT_2D *element, const char *meshfile, const char* me
 
    GeomP1 = Geom2D_Base_get(meshfile, meshname, meshtype); /* for element "P1" */
 
-   if ( (strcmp(element->name_ef,"P1")==0 ) )
+   if ( strcmp(element->name_ef, "P1") == 0 )
    {
       Geom = GeomP1;
    }
    else
-   if ( (strcmp(element->name_ef,"P1b")==0 ) )
+   if ( strcmp(element->name_ef, "P1b") == 0 )
    {
       GeomP1b = Geom2D_Parent_get_fromBase("P1b", GeomP1);
       Geom    = GeomP1b;
    }
    else
-   if ( (strcmp(element->name_ef,"P2")==0 ) )
+   if ( strcmp(element->name_ef, "P2") == 0 )
    {
       GeomP2  = Geom2D_Parent_get_fromBase("P2", GeomP1);
       Geom    = GeomP2;
    }
    else
-   if ( (strcmp(element->name_ef,"P3")==0 ) )
+   if ( strcmp(element->name_ef, "P3") == 0 )
    {
       GeomP3  = Geom2D_Parent_get_fromBase("P3", GeomP1);
       GeomP2  = Geom2D_Parent_get_fromBase("P2", GeomP1);
@@ -233,27 +233,27 @@ static GEOM_2D *Geom2D_Base_get( const char *meshfile, const char *meshname, con
    if ( meshtype == NULL ) error(E_NULL, "Geom2D_Base_get");
    if ( meshfile == NULL ) error(E_NULL, "Geom2D_Base_get");
 
-   if ( strcmp(meshtype,"gmsh") == 0 )
+   if ( strcmp(meshtype, "gmsh") == 0 )
    {
       Geom = Geom2D_Base_gmsh_get(meshfile);
    }
 
-   else if ( strcmp(meshtype,"emc2") == 0 )
+   else if ( strcmp(meshtype, "emc2") == 0 )
    {
       Geom = Geom2D_Base_emc2_get(meshfile);
    }
 
-   else if ( strcmp(meshtype,"quad1") == 0 )
+   else if ( strcmp(meshtype, "quad1") == 0 )
    {
       Geom = Geom2D_Base_quad1_get(meshfile, meshname);
    }
 
-   else if ( strcmp(meshtype,"quad2") == 0 )
+   else if ( strcmp(meshtype, "quad2") == 0 )
    {
       Geom = Geom2D_Base_quad2_get(meshfile, meshname);
    }
 
-   else if ( strcmp(meshtype,"quad3") == 0 )
+   else if ( strcmp(meshtype, "quad3") == 0 )
    {
       Geom = Geom2D_Base_quad3_get(meshfile, meshname);
    }
@@ -303,7 +303,7 @@ static GEOM_2D* Geom2D_Base_emc2_get(const char *meshfile)
 
 
    /* IT IS A "MSH" FORMAT */
-   strncpy(Geom->type,"emc2", 16);
+   strncpy(Geom->type, "emc2", 16);
    Geom->type[15] = '\0';
 
 
@@ -616,7 +616,7 @@ static GEOM_2D* Geom2D_Base_gmsh_get(const char *meshfile)
    /* ---------------------------------------------------- */
 
    /* IT IS A GMSH FORMAT */
-   strncpy(Geom->type,"gmsh", 16);
+   strncpy(Geom->type, "gmsh", 16);
    Geom->type[15] = '\0';
 
    /* get mesh dimensions */
@@ -2069,7 +2069,7 @@ GEOM_2D *Geom2D_get_base_triangle(const char* type, int nb_subdivisions)
    }
    /* ---------------------------------------------------- */
 
-   strncpy(Geom->type,"base_triangle", 16);
+   strncpy(Geom->type, "base_triangle", 16);
    Geom->type[15] = '\0';
 
    if ( strcmp(type, "P2isoP1") == 0 )
@@ -2361,12 +2361,12 @@ GEOM_2D *Geom2D_getP1geom_from( const ELT_2D *element, const GEOM_2D* geom )
    if ( element  == NULL )  error(E_NULL, "Geom2D_getP1geom_from");
    if ( geom     == NULL )  error(E_NULL, "Geom2D_getP1geom_from");
 
-   if ( (strcmp(element->name_ef,"P2")==0 ) )
+   if ( (strcmp(element->name_ef, "P2") == 0 ) )
    {
       GeomP1 = Geom2D_get_fromParent_P2toP1( element, geom);
    }
    else
-   if ( (strcmp(element->name_ef,"P3")==0 ) )
+   if ( (strcmp(element->name_ef, "P3") == 0 ) )
    {
       GeomP1 = Geom2D_get_fromParent_P3toP1( element, geom);
    }

@@ -68,7 +68,7 @@ class SpMat(object):
     def __setattr__(self, name, value):
 
         if name == "this" :
-            raise AttributeError, "not allowed to change self.this in this way"
+            raise AttributeError("not allowed to change self.this in this way")
         else:
             pass;
             #raise AttributeError, "not allowed to add an attribute to an IMat instance"
@@ -176,13 +176,13 @@ class SpMat(object):
             return ret
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
         #    ret = SpMat(self.m,self.n)
         #    sp_sadd(a, self.this, ret.this)
         #    sp_compact(ret.this, 0.0)
         #    return ret
         else:
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
 
     def __radd__(self,a):
         return self.__add__(a)
@@ -196,13 +196,13 @@ class SpMat(object):
             return ret
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
         #    ret = SpMat(self.m,self.n)
         #    sp_ssub(a, self.this, ret.this)
         #    sp_compact(ret.this, 0.0)
         #    return ret
         else:
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
 
     def __rsub__(self,a):
         return self.__sub__(a)
@@ -227,7 +227,7 @@ class SpMat(object):
             return ret
         #
         else:
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
 
     def __rmul__(self,a):
         return self.__mul__(a)	
@@ -243,12 +243,12 @@ class SpMat(object):
             return self
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
         #    sp_sadd(a, self.this, self.this)
         #    sp_compact(self.this, 0.0)
         #    return self
         else: 
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
         #
     #
     #
@@ -260,12 +260,12 @@ class SpMat(object):
             return self
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
         #    sp_ssub(a, self.this, self.this)
         #    sp_compact(self.this, 0.0)
         #    return self
         else: 
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
     
     def __imul__(self,a):
         # a is a SpMat
@@ -281,7 +281,7 @@ class SpMat(object):
             return self
         #
         else: 
-            raise TypeError, "wrong type"
+            raise TypeError("wrong type")
 
     #
     # assignation operator ??

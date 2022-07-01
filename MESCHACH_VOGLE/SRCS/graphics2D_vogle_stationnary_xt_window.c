@@ -150,7 +150,7 @@ static void generic_output(const XAW_WINVOGLE *wxaw, const VOGLE_SURFACE_DATA *p
 	}
 	
    /**/
-   fprintf(stderr,"Producing %s\n", string_output);
+   fprintf(stderr, "Producing %s\n", string_output);
    voutput(string_output);
    w2 = winopen(vogle_output_id, string_output);
    winset(w2);
@@ -193,7 +193,7 @@ static void motion_action(Widget widget, XEvent *event, String *params, Cardinal
       XtError ("Wrong number of args!");
    }
 
-   if ( strcmp(params[0],"rotate") == 0 )
+   if ( strcmp(params[0], "rotate") == 0 )
    {
       float rx,ry;
 
@@ -213,7 +213,7 @@ static void motion_action(Widget widget, XEvent *event, String *params, Cardinal
       repaint(widget, event, params, n_params);
    }
    
-   if ( strcmp(params[0],"translate") == 0 )
+   if ( strcmp(params[0], "translate") == 0 )
    {
       float rx,ry;
 
@@ -242,12 +242,12 @@ static void motion_action_start(Widget widget, XEvent *event, String *params, Ca
       XtError ("Wrong number of args!");
    }
 
-   if ( strcmp(params[0],"rotate") == 0 )
+   if ( strcmp(params[0], "rotate") == 0 )
    {
       xawWidgetUserdata->data->motion.MOTION_X_ROTATE = event->xmotion.x ;
       xawWidgetUserdata->data->motion.MOTION_Y_ROTATE = event->xmotion.y ;
    }
-   if ( strcmp(params[0],"translate") == 0 )
+   if ( strcmp(params[0], "translate") == 0 )
    {
       xawWidgetUserdata->data->motion.MOTION_X_TRANSLATE = event->xmotion.x ;
       xawWidgetUserdata->data->motion.MOTION_Y_TRANSLATE = event->xmotion.y ;

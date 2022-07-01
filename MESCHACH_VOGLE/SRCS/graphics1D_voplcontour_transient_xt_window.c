@@ -202,7 +202,7 @@ static void generic_output(WIDGET_USERDATA_STRUCT *xawUserData, VOGLE_OUTPUT_FOR
 	}
 	
    /**/
-   fprintf(stderr,"Producing %s\n", string_output);
+   fprintf(stderr, "Producing %s\n", string_output);
 	/*voutput(string_output);*/
 	
    prefsize(xawUserData->pdata->window_size_x, xawUserData->pdata->window_size_y);
@@ -229,12 +229,12 @@ static void idle_workproc_no_x(SVQueue *queue)
       return;
    }
 	
-   if      ( strcmp(pdata->driver,"/PPM" ) == 0 ) generic_output(NULL, VOGLEe_PPM);
-   else if ( strcmp(pdata->driver,"/GIF" ) == 0 ) generic_output(NULL, VOGLEe_GIF);
-   else if ( strcmp(pdata->driver,"/TIFF") == 0 ) generic_output(NULL, VOGLEe_TIFF);
-   else if ( strcmp(pdata->driver,"/XBM" ) == 0 ) generic_output(NULL, VOGLEe_XBM);
-	else if ( strcmp(pdata->driver,"/PNG" ) == 0 ) generic_output(NULL, VOGLEe_PNG);
-   else if ( strcmp(pdata->driver,"/PPS" ) == 0 ) generic_output(NULL, VOGLEe_PPS);
+   if      ( strcmp(pdata->driver, "/PPM" ) == 0 ) generic_output(NULL, VOGLEe_PPM);
+   else if ( strcmp(pdata->driver, "/GIF" ) == 0 ) generic_output(NULL, VOGLEe_GIF);
+   else if ( strcmp(pdata->driver, "/TIFF") == 0 ) generic_output(NULL, VOGLEe_TIFF);
+   else if ( strcmp(pdata->driver, "/XBM" ) == 0 ) generic_output(NULL, VOGLEe_XBM);
+	else if ( strcmp(pdata->driver, "/PNG" ) == 0 ) generic_output(NULL, VOGLEe_PNG);
+   else if ( strcmp(pdata->driver, "/PPS" ) == 0 ) generic_output(NULL, VOGLEe_PPS);
 }
 
 /*--------------------------------------------------------------------------------------*/

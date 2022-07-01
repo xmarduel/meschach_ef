@@ -98,10 +98,10 @@ static MAT *scilab_riccati(const MAT *A, const MAT *B, const MAT *C, MAT *X)
    Real eps=MACHEPS;
 
    /* check */
-   if ( A == MNULL ) error(E_NULL,"scilab_riccati");
-   if ( B == MNULL ) error(E_NULL,"scilab_riccati");
-   if ( C == MNULL ) error(E_NULL,"scilab_riccati");
-   if ( X == MNULL ) error(E_NULL,"scilab_riccati");
+   if ( A == MNULL ) error(E_NULL, "scilab_riccati");
+   if ( B == MNULL ) error(E_NULL, "scilab_riccati");
+   if ( C == MNULL ) error(E_NULL, "scilab_riccati");
+   if ( X == MNULL ) error(E_NULL, "scilab_riccati");
 
    /* init */
    long n  = A->m ;          /* Achtung : the transposed */
@@ -165,9 +165,9 @@ static MAT *scilab_lyapunov(const MAT *A, const MAT *C, MAT *X)
    Real eps=MACHEPS;
 
    /* check */
-   if ( A == MNULL ) error(E_NULL,"scilab_lyapunov");
-   if ( C == MNULL ) error(E_NULL,"scilab_lyapunov");
-   if ( X == MNULL ) error(E_NULL,"scilab_lyapunov");
+   if ( A == MNULL ) error(E_NULL, "scilab_lyapunov");
+   if ( C == MNULL ) error(E_NULL, "scilab_lyapunov");
+   if ( X == MNULL ) error(E_NULL, "scilab_lyapunov");
 
    /* init */
    long n  = A->m ;          /* Achtung : the transposed */
@@ -218,10 +218,10 @@ static MAT *scilab_sylvester(const MAT *A, const MAT *B, const MAT *C, MAT *X)
    Real eps=MACHEPS;
    
    /* check */
-   if ( A == MNULL ) error(E_NULL,"scilab_sylvester");
-   if ( B == MNULL ) error(E_NULL,"scilab_sylvester");
-   if ( C == MNULL ) error(E_NULL,"scilab_sylvester");
-   if ( X == MNULL ) error(E_NULL,"scilab_sylvester");
+   if ( A == MNULL ) error(E_NULL, "scilab_sylvester");
+   if ( B == MNULL ) error(E_NULL, "scilab_sylvester");
+   if ( C == MNULL ) error(E_NULL, "scilab_sylvester");
+   if ( X == MNULL ) error(E_NULL, "scilab_sylvester");
 
    /* init */
    long n  = A->m ;          /* Achtung : the transposed */
@@ -290,10 +290,10 @@ static MAT *slicot_riccati  (const MAT *A, const MAT *B, const MAT *C, MAT *X)
    long info;
    
    /* check */
-   if ( A == MNULL ) error(E_NULL,"slicot_sylvester");
-   if ( B == MNULL ) error(E_NULL,"slicot_sylvester");
-   if ( C == MNULL ) error(E_NULL,"slicot_sylvester");
-   if ( X == MNULL ) error(E_NULL,"slicot_sylvester");
+   if ( A == MNULL ) error(E_NULL, "slicot_sylvester");
+   if ( B == MNULL ) error(E_NULL, "slicot_sylvester");
+   if ( C == MNULL ) error(E_NULL, "slicot_sylvester");
+   if ( X == MNULL ) error(E_NULL, "slicot_sylvester");
 
    /* init */
    MAT* AA = m_transp((MAT*)A, MNULL);
@@ -359,9 +359,9 @@ static MAT *slicot_lyapunov (const MAT *A, const MAT *C, MAT *X)
    double sep, ferr;
 
    /* check */
-   if ( A == MNULL ) error(E_NULL,"slicot_lyapunov");
-   if ( C == MNULL ) error(E_NULL,"slicot_lyapunov");
-   if ( X == MNULL ) error(E_NULL,"slicot_lyapunov");
+   if ( A == MNULL ) error(E_NULL, "slicot_lyapunov");
+   if ( C == MNULL ) error(E_NULL, "slicot_lyapunov");
+   if ( X == MNULL ) error(E_NULL, "slicot_lyapunov");
 
    /* init */
    MAT* AA = m_transp((MAT*)A, MNULL);
@@ -418,10 +418,10 @@ static MAT *slicot_sylvester(const MAT *A, const MAT *B, const MAT *C, MAT *X)
    long info;
 
    /* check */
-   if ( A == MNULL ) error(E_NULL,"slicot_sylvester");
-   if ( B == MNULL ) error(E_NULL,"slicot_sylvester");
-   if ( C == MNULL ) error(E_NULL,"slicot_sylvester");
-   if ( X == MNULL ) error(E_NULL,"slicot_sylvester");
+   if ( A == MNULL ) error(E_NULL, "slicot_sylvester");
+   if ( B == MNULL ) error(E_NULL, "slicot_sylvester");
+   if ( C == MNULL ) error(E_NULL, "slicot_sylvester");
+   if ( X == MNULL ) error(E_NULL, "slicot_sylvester");
 
    /* init */
    MAT* AA = m_transp((MAT*)A, MNULL);

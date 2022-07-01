@@ -169,19 +169,19 @@ int  main()
 
    /* ---------------------------------------------------------------------- */
 
-   if ( strcmp(MyParams->problem,"LAPLACIAN") == 0 )
+   if ( strcmp(MyParams->problem, "LAPLACIAN") == 0 )
    {
       SOL = solve2D_laplacian(MyElt, MyGeom, MyBC, MyRHS);
    }
-   else if ( strcmp(MyParams->problem,"CONVECTION-DIFFUSION") == 0 )
+   else if ( strcmp(MyParams->problem, "CONVECTION-DIFFUSION") == 0 )
    {
       SOL = solve2D_convection_diffusion(MyElt, MyGeom, MyBC, MyRHS, MyADV);
    }
-   else if ( strcmp(MyParams->problem,"STOKES") == 0 )
+   else if ( strcmp(MyParams->problem, "STOKES") == 0 )
    {
       (void)solve2D_stokes(MyElt, MyEltM1, MyGeom, MyBC, MyRHS);
    }
-   else if ( strcmp(MyParams->problem,"NAVIER-STOKES") == 0 )
+   else if ( strcmp(MyParams->problem, "NAVIER-STOKES") == 0 )
    {
       (void)solve2D_navier_stokes(MyElt, MyEltM1, MyGeom, MyBC, MyRHS);
    }

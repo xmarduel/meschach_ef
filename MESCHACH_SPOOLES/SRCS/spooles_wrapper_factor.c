@@ -41,9 +41,9 @@ static DenseMtx* spXXresolution_spooles1(InpMtx *A, DenseMtx *X, DenseMtx *Y, BA
    int rc;
 
    /* check arguments */
-   if ( A == NULL ) error(E_NULL,"spXXresolution_spooles1");
-   if ( X == NULL ) error(E_NULL,"spXXresolution_spooles1");
-   if ( Y == NULL ) error(E_NULL,"spXXresolution_spooles1");
+   if ( A == NULL ) error(E_NULL, "spXXresolution_spooles1");
+   if ( X == NULL ) error(E_NULL, "spXXresolution_spooles1");
+   if ( Y == NULL ) error(E_NULL, "spXXresolution_spooles1");
 
    DenseMtx_dimensions (X,&m,&n);
 
@@ -78,9 +78,9 @@ VEC* spCHresolution_spooles(const SPMAT *A, const VEC *in, VEC *out)
 
    InpMtx *S;
 
-   if ( A   == NULL ) error(E_NULL,"spCHresolution_spooles");
-   if ( in  == NULL ) error(E_NULL,"spCHresolution_spooles");
-   if ( out == NULL ) error(E_NULL,"spCHresolution_spooles");
+   if ( A   == NULL ) error(E_NULL, "spCHresolution_spooles");
+   if ( in  == NULL ) error(E_NULL, "spCHresolution_spooles");
+   if ( out == NULL ) error(E_NULL, "spCHresolution_spooles");
 
    x = v_meschach_to_m_spooles(in, NULL);
    y = v_meschach_to_m_spooles(out, NULL);
@@ -112,9 +112,9 @@ VEC* spLUresolution_spooles(const SPMAT *A, const VEC *in, VEC *out)
 
    InpMtx *S;
 
-   if ( A   == NULL ) error(E_NULL,"spLUresolution_spooles");
-   if ( in  == NULL ) error(E_NULL,"spLUresolution_spooles");
-   if ( out == NULL ) error(E_NULL,"spLUresolution_spooles");
+   if ( A   == NULL ) error(E_NULL, "spLUresolution_spooles");
+   if ( in  == NULL ) error(E_NULL, "spLUresolution_spooles");
+   if ( out == NULL ) error(E_NULL, "spLUresolution_spooles");
 
    x = v_meschach_to_m_spooles(in, NULL);
    y = v_meschach_to_m_spooles(out, NULL);
@@ -146,9 +146,9 @@ PERM* sp_bandwr_spooles(const SPMAT *A, PERM *P, PERM *INVP, BANDWRt_SPOOLES_OPT
    int i,rc;
 
    /* check arguments */ 
-   if ( A    == NULL ) error(E_NULL,"sp_bandwr_spooles");
-   if ( P    == NULL ) error(E_NULL,"sp_bandwr_spooles");
-   if ( INVP == NULL ) error(E_NULL,"sp_bandwr_spooles");
+   if ( A    == NULL ) error(E_NULL, "sp_bandwr_spooles");
+   if ( P    == NULL ) error(E_NULL, "sp_bandwr_spooles");
+   if ( INVP == NULL ) error(E_NULL, "sp_bandwr_spooles");
 
    S = s_meschach_to_s_spooles(A, NULL);
 

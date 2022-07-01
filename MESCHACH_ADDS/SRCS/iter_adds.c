@@ -48,11 +48,11 @@ void iter_std1_info(const ITER *ip, Real nres, VEC *res, VEC *Bres)
    /* write the residuals in the file fp_iter , named ITER_FILE */
    if (nres >= 0.0)
    {
-      fprintf(stdout," %d   %g \n", ip->steps, nres);
+      fprintf(stdout, " %d   %g \n", ip->steps, nres);
    }
    else 
    {
-      fprintf(stdout,"# %d   %g (WARNING !!! should be >= 0) \n", ip->steps, nres);
+      fprintf(stdout, "# %d   %g (WARNING !!! should be >= 0) \n", ip->steps, nres);
    }
 }
 
@@ -88,9 +88,9 @@ void iter_std3_info(const ITER *ip, Real nres, VEC *res, VEC *Bres)
 {
 #ifdef MESCHACH__ITER_EXTENSIONS
    /* check input */
-   if ( !ip )  error(E_NULL,"iter_std3_info");
+   if ( !ip )  error(E_NULL, "iter_std3_info");
    /* check file */
-   if ( !ip->fp ) error(E_NULL,"iter_std3_info");
+   if ( !ip->fp ) error(E_NULL, "iter_std3_info");
    
    /* write the residuals in the file fp_iter , named ITER_FILE */
    /* write the residuals in the standart output                */
@@ -236,7 +236,7 @@ VEC  *iter_bicgstab(ITER *ip)
    for ( ip->steps = 1; ip->steps <= ip->limit; ip->steps++ )
    {
       rho = in_prod(rr,r);
-      if ( rho==0.0 ) error(E_SING,"iter_bicgstab");
+      if ( rho==0.0 ) error(E_SING, "iter_bicgstab");
       
       if ( ip->steps==1 )
       {
@@ -308,8 +308,8 @@ VEC  *iter_xspbicgstab(const SPMAT *A, const SPMAT *ILU, const VEC *b, Real eps,
    ITER *ip;
 	
    /* check input */
-   if ( !A   )  error(E_NULL,"iter_spbicgstab");
-   if ( !b   )  error(E_NULL,"iter_spbicgstab");
+   if ( !A   )  error(E_NULL, "iter_spbicgstab");
+   if ( !b   )  error(E_NULL, "iter_spbicgstab");
 	
    ip = iter_get(0,0);
 	
@@ -359,8 +359,8 @@ VEC  *iter_xspcg(const SPMAT *A, const SPMAT *LLT, const VEC *b, Real eps, VEC *
    ITER *ip;
 
 	/* check input */
-   if ( !A )  error(E_NULL,"iter_xspcg");
-   if ( !b )  error(E_NULL,"iter_xspcg");
+   if ( !A )  error(E_NULL, "iter_xspcg");
+   if ( !b )  error(E_NULL, "iter_xspcg");
    
    
    ip = iter_get(0,0);
@@ -408,8 +408,8 @@ VEC *iter_xspcgs(const SPMAT *A, const SPMAT *B, const VEC *b, Real eps, VEC *x,
    ITER *ip;
 	
 	/* check input */
-   if ( !A   )  error(E_NULL,"iter_xspcgs");
-   if ( !b   )  error(E_NULL,"iter_xspcgs");
+   if ( !A   )  error(E_NULL, "iter_xspcgs");
+   if ( !b   )  error(E_NULL, "iter_xspcgs");
    
    
    ip = iter_get(0,0);
@@ -462,8 +462,8 @@ VEC *iter_xspgmres(const SPMAT *A, const SPMAT *B, const VEC *b, Real eps, VEC *
    ITER *ip;
 
 	/* check input */
-   if ( !A )  error(E_NULL,"iter_xspgmres");
-   if ( !b )  error(E_NULL,"iter_xspgmres");
+   if ( !A )  error(E_NULL, "iter_xspgmres");
+   if ( !b )  error(E_NULL, "iter_xspgmres");
    
    
    ip = iter_get(0,0);
@@ -514,8 +514,8 @@ VEC *iter_xspmgcr(const SPMAT *A, const SPMAT *B, const VEC *b, Real eps, VEC *x
    ITER *ip;
    
 	/* check input */
-   if ( !A )  error(E_NULL,"iter_xspmgcr");
-   if ( !b )  error(E_NULL,"iter_xspmgcr");
+   if ( !A )  error(E_NULL, "iter_xspmgcr");
+   if ( !b )  error(E_NULL, "iter_xspmgcr");
    
    
    ip = iter_get(0,0);
@@ -572,12 +572,12 @@ VEC *iter_xspcg_bandwr      (const SPMAT *A, const SPMAT *LLT, const PERM *P, co
    VEC *x_perm = v_get(x->dim);
    
    /* check input */
-   if ( A == SMNULL )   error(E_NULL,"iter_xspcg_bandwr");
-   if ( LLT == SMNULL ) error(E_NULL,"iter_xspcg_bandwr");
-   if ( P == PNULL )    error(E_NULL,"iter_xspcg_bandwr");
-   if ( INVP == PNULL ) error(E_NULL,"iter_xspcg_bandwr");
-   if ( b == VNULL )    error(E_NULL,"iter_xspcg_bandwr");
-   if ( x == VNULL )    error(E_NULL,"iter_xspcg_bandwr");
+   if ( A == SMNULL )   error(E_NULL, "iter_xspcg_bandwr");
+   if ( LLT == SMNULL ) error(E_NULL, "iter_xspcg_bandwr");
+   if ( P == PNULL )    error(E_NULL, "iter_xspcg_bandwr");
+   if ( INVP == PNULL ) error(E_NULL, "iter_xspcg_bandwr");
+   if ( b == VNULL )    error(E_NULL, "iter_xspcg_bandwr");
+   if ( x == VNULL )    error(E_NULL, "iter_xspcg_bandwr");
    
    b_perm = px_vec(P, b, b_perm);     /* the permutated matrix must be st.  P * A * P'  */
    iter_xspcg(A, LLT, b_perm /* in */, eps, x_perm /* out */, limit, steps, iter_output_info);
@@ -600,12 +600,12 @@ VEC  *iter_xspbicgstab_bandwr(const SPMAT *A, const SPMAT *LLT, const PERM *P, c
    VEC *x_perm = v_get(x->dim);
 	
    /* check input */
-   if ( A == SMNULL )   error(E_NULL,"iter_xspbicgstab_bandwr");
-   if ( LLT == SMNULL ) error(E_NULL,"iter_xspbicgstab_bandwr");
-   if ( P == PNULL )    error(E_NULL,"iter_xspbicgstab_bandwr");
-   if ( INVP == PNULL ) error(E_NULL,"iter_xspbicgstab_bandwr");
-   if ( b == VNULL )    error(E_NULL,"iter_xspbicgstab_bandwr");
-   if ( x == VNULL )    error(E_NULL,"iter_xspbicgstab_bandwr");
+   if ( A == SMNULL )   error(E_NULL, "iter_xspbicgstab_bandwr");
+   if ( LLT == SMNULL ) error(E_NULL, "iter_xspbicgstab_bandwr");
+   if ( P == PNULL )    error(E_NULL, "iter_xspbicgstab_bandwr");
+   if ( INVP == PNULL ) error(E_NULL, "iter_xspbicgstab_bandwr");
+   if ( b == VNULL )    error(E_NULL, "iter_xspbicgstab_bandwr");
+   if ( x == VNULL )    error(E_NULL, "iter_xspbicgstab_bandwr");
    
    b_perm = px_vec(P, b, b_perm);     /* the permutated matrix must be st.  P * A * P'  */
    iter_xspbicgstab(A, LLT, b_perm /* in */, eps, x_perm /* out */, limit, steps, iter_output_info);

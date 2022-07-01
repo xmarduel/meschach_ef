@@ -162,13 +162,13 @@ static void pgplot_curve_hardcopy(const PGPLOT_GRAPH_DATA *pdata)
    }
    else
    {
-      fprintf(stderr,"Bad driver: %s\n", pdata->driver);
+      fprintf(stderr, "Bad driver: %s\n", pdata->driver);
       return;
    }
    
    pgplot_output = strncat(pgplot_output_id, pdata->driver, 7);
    /* a msg */
-   fprintf(stderr,"Producing output on file %s\n", pgplot_output);
+   fprintf(stderr, "Producing output on file %s\n", pgplot_output);
 
    /* start new driver plot */
    cpgopen(pgplot_output);
@@ -215,7 +215,7 @@ static void generic_output(const XAW_WINPGPLOT *wxaw, const PGPLOT_GRAPH_DATA *p
          return;
    }
 
-   fprintf(stderr,"Producing output on file %s\n", pgplot_output);
+   fprintf(stderr, "Producing output on file %s\n", pgplot_output);
 
    /* start new driver plot */
    cpgopen(pgplot_output);
@@ -233,7 +233,7 @@ static void generic_output(const XAW_WINPGPLOT *wxaw, const PGPLOT_GRAPH_DATA *p
 
 static void generic_quit(void)
 {
-   fprintf(stderr,"quit...\n");
+   fprintf(stderr, "quit...\n");
 
    switch(TYPE_OF_THREAD)
    {
@@ -303,7 +303,7 @@ void * pgplot_curve_with_xt_toolkit(void *data)
    
    /*--------------------------------------------------------------------------------------*/
 
-   if ( strcmp(pdata->driver,"/XWINDOW") != 0 )
+   if ( strcmp(pdata->driver, "/XWINDOW") != 0 )
    {
       /* no X11 */
       pgplot_curve_hardcopy(pdata);

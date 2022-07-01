@@ -1,4 +1,8 @@
 
+#
+# remove 'comments' of my fake json files
+#
+ 
 import sys
 
 def clean_json(path):
@@ -14,7 +18,7 @@ def clean_json(path):
         for line in lines:
             try:
                 a = line.split("#", 1)[0]
-            except Exception, _:
+            except Exception:
                 a = line
             xlines.append(a.rstrip())
         return "\n".join(xlines)
@@ -26,7 +30,7 @@ def clean_json(path):
         for k, line in enumerate(lines):
             xline = line.rstrip()
             if xline.endswith(","):
-                #print "xxxx: <%s> : <%s>" % ( xline, lines[k+1])
+                #print("xxxx: <%s> : <%s>" % (xline, lines[k+1]))
                 next_line = lines[k+1].lstrip()
                 if next_line.startswith("}"):
                     xline = xline[:-1]
@@ -43,8 +47,10 @@ def clean_json(path):
     return text
     
 def main(path):
-    print clean_json(path)
+    print(clean_json(path))
  
-    
+#
+#
+
 if __name__ == '__main__':
     main(sys.argv[1])

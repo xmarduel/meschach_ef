@@ -46,7 +46,7 @@ static DenseMtx* spEIGENspooles_bridge(InpMtx *A, InpMtx *B, DV* e_values, EIGEN
       case EIGENe_SPOOLES_NEAREST_2: which[1] = 'C';  break;     /* 'c' or 'C' nearest to central value */
       case EIGENe_SPOOLES_ALL      : which[1] = 'A';  break;     /* 'a' or 'A' all eigenvalues in interval */
 
-      default: warning(WARN_UNKNOWN,"spEIGENspooles_bridge"); which[1] = 'L';
+      default: warning(WARN_UNKNOWN, "spEIGENspooles_bridge"); which[1] = 'L';
    }
 
    switch(type) /* type of problem */
@@ -55,7 +55,7 @@ static DenseMtx* spEIGENspooles_bridge(InpMtx *A, InpMtx *B, DV* e_values, EIGEN
       case EIGENe_SPOOLES_GENERALIZED_SYMMETRIC_1: pbtype[1] = 'V';  break;   /* generalized symmetric problem (K,M) with M positive semidef. (vibration problem) */
       case EIGENe_SPOOLES_GENERALIZED_SYMMETRIC_2: pbtype[1] = 'B';  break;   /* generalized symmetric problem (K,K_s) K_s posibly indefinite (buckling problem) */
 
-      default: warning(WARN_UNKNOWN,"spEIGENspooles_bridge"); pbtype[1] = 'O';
+      default: warning(WARN_UNKNOWN, "spEIGENspooles_bridge"); pbtype[1] = 'O';
    }
 
    lfinit = 0;               /* if true, lftend is restriction on lower bound of eigenvalues. if false, no restriction on lower bound */
@@ -111,7 +111,7 @@ static DenseMtx* spEIGENspooles_bridge(InpMtx *A, InpMtx *B, DV* e_values, EIGEN
    */
    rc = Setup((void *) &bridge, &prbtyp, &nrow, &mxbksz, A, B, &seed, &msglvl, msgFile) ;
 
-   if ( rc != 1 ) error(E_UNKNOWN,"spEIGENspooles_bridge"); /* fatal error %d from Setup()", rc) ; */
+   if ( rc != 1 ) error(E_UNKNOWN, "spEIGENspooles_bridge"); /* fatal error %d from Setup()", rc) ; */
 
    /*--------------------------------------------------------------------*/
    /*
@@ -165,7 +165,7 @@ static DenseMtx* spEIGENspooles_bridge(InpMtx *A, InpMtx *B, DV* e_values, EIGEN
 
    rc = Cleanup(&bridge) ;
 
-   if ( rc != 1 ) error(E_UNKNOWN,"spEIGENspooles_bridge"); /* error return %d from Cleanup()", rc) ; */
+   if ( rc != 1 ) error(E_UNKNOWN, "spEIGENspooles_bridge"); /* error return %d from Cleanup()", rc) ; */
 
 
    /*
@@ -192,7 +192,7 @@ static DenseMtx* spEIGENspooles_bridge(InpMtx *A, InpMtx *B, DV* e_values, EIGEN
    return e_vectors;
 
 #else
-   error(E_UNKNOWN,"sp_eigen_spooles_bridge");
+   error(E_UNKNOWN, "sp_eigen_spooles_bridge");
    return NULL;
 #endif
 }
@@ -211,14 +211,14 @@ MAT* sp_eigen_spooles(const SPMAT *A, const SPMAT *B, VEC *eigen_values, EIGENt_
    InpMtx *BB;
    
    /* check */
-   if ( eigen_values  == NULL ) error(E_NULL,"sp_eigen_spooles");
-   if ( A             == NULL ) error(E_NULL,"sp_eigen_spooles");
-   if ( B             == NULL ) error(E_NULL,"sp_eigen_spooles");
+   if ( eigen_values  == NULL ) error(E_NULL, "sp_eigen_spooles");
+   if ( A             == NULL ) error(E_NULL, "sp_eigen_spooles");
+   if ( B             == NULL ) error(E_NULL, "sp_eigen_spooles");
    
-   if ( A->m          != eigen_values->dim ) error(E_SIZES,"sp_eigen_spooles");
+   if ( A->m          != eigen_values->dim ) error(E_SIZES, "sp_eigen_spooles");
    
-   if ( A->m != B->m ) error(E_SIZES,"sp_eigen_spooles");
-   if ( A->n != B->n ) error(E_SIZES,"sp_eigen_spooles");
+   if ( A->m != B->m ) error(E_SIZES, "sp_eigen_spooles");
+   if ( A->n != B->n ) error(E_SIZES, "sp_eigen_spooles");
 
    
    /* convert  meschach to spooles */

@@ -81,10 +81,10 @@ int err_attach_list7(void);
 int warn_attach_list7(void);
 int err_warn_attach_lists7(void);
 
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define	 error7(err_num,fn_name) ev_err(__FILE__,err_num,__LINE__,fn_name,MY_LIST7)
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define	 warning7(warn_num,fn_name) ev_warn(__FILE__,warn_num,__LINE__,fn_name,MY_LIST7)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define	 error7(err_num, fn_name) ev_err(__FILE__,err_num,__LINE__,fn_name,MY_LIST7)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define	 warning7(warn_num, fn_name) ev_warn(__FILE__,warn_num,__LINE__,fn_name,MY_LIST7)
 
 #ifdef __cplusplus
 }

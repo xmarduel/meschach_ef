@@ -62,8 +62,8 @@ PERM* sp_bandwr_meschach(const SPMAT* A, PERM* P, PERM *INVP, BANDWRt_OPTION_MES
    if ( P    == PNULL  ) error(E_NULL, "sp_bandwr_meschach");
    if ( INVP == PNULL  ) error(E_NULL, "sp_bandwr_meschach");
 
-   if ( INVP->size != P->size ) error(E_SIZES,"sp_bandwr_meschach");
-   if ( INVP->size != A->m    ) error(E_SIZES,"sp_bandwr_meschach");
+   if ( INVP->size != P->size ) error(E_SIZES, "sp_bandwr_meschach");
+   if ( INVP->size != A->m    ) error(E_SIZES, "sp_bandwr_meschach");
    
    switch(option)
    {

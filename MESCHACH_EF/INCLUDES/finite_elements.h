@@ -73,10 +73,10 @@ int err_attach_list2(void);
 int warn_attach_list2(void);
 int err_warn_attach_lists2(void);
 
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define	 error2(err_num,fn_name) ev_err(__FILE__,err_num,__LINE__,fn_name,MY_LIST2)
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define warning2(warn_num,fn_name) ev_warn(__FILE__,warn_num,__LINE__,fn_name,MY_LIST2)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define	 error2(err_num, fn_name) ev_err(__FILE__,err_num,__LINE__,fn_name,MY_LIST2)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define warning2(warn_num, fn_name) ev_warn(__FILE__,warn_num,__LINE__,fn_name,MY_LIST2)
 
 #ifdef __cplusplus
 }

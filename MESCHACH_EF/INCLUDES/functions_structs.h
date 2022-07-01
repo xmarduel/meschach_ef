@@ -105,10 +105,10 @@ int err_attach_list5(void);
 int warn_attach_list5(void);
 int err_warn_attach_lists5(void);
 
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define	 error5(err_num,fn_name) ev_err(__FILE__,err_num,__LINE__,fn_name,MY_LIST5)
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define	 warning5(warn_num,fn_name) ev_warn(__FILE__,warn_num,__LINE__,fn_name,MY_LIST5)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define	 error5(err_num, fn_name) ev_err(__FILE__,err_num,__LINE__,fn_name,MY_LIST5)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define	 warning5(warn_num, fn_name) ev_warn(__FILE__,warn_num,__LINE__,fn_name,MY_LIST5)
 
 #ifdef __cplusplus
 }

@@ -182,7 +182,7 @@ static void generic_output(WIDGET_USERDATA_STRUCT *xawUserData, VOGLE_OUTPUT_FOR
 	}
 
    /**/
-   fprintf(stderr,"Producing %s\n", string_output);
+   fprintf(stderr, "Producing %s\n", string_output);
    /*voutput(string_output);*/
 
    prefsize(xawUserData->pdata->window_size_x, xawUserData->pdata->window_size_y);
@@ -209,12 +209,12 @@ static void idle_workproc_no_x(SVQueue *queue)
       return;
    }
 
-   if      ( strcmp(pdata->driver,"/PPM" ) == 0 ) generic_output(NULL, VOGLEe_PPM);
-   else if ( strcmp(pdata->driver,"/GIF" ) == 0 ) generic_output(NULL, VOGLEe_GIF);
-   else if ( strcmp(pdata->driver,"/TIFF") == 0 ) generic_output(NULL, VOGLEe_TIFF);
-   else if ( strcmp(pdata->driver,"/XBM" ) == 0 ) generic_output(NULL, VOGLEe_XBM);
-	else if ( strcmp(pdata->driver,"/PNG" ) == 0 ) generic_output(NULL, VOGLEe_PNG);
-   else if ( strcmp(pdata->driver,"/PPS" ) == 0 ) generic_output(NULL, VOGLEe_PPS);
+   if      ( strcmp(pdata->driver, "/PPM" ) == 0 ) generic_output(NULL, VOGLEe_PPM);
+   else if ( strcmp(pdata->driver, "/GIF" ) == 0 ) generic_output(NULL, VOGLEe_GIF);
+   else if ( strcmp(pdata->driver, "/TIFF") == 0 ) generic_output(NULL, VOGLEe_TIFF);
+   else if ( strcmp(pdata->driver, "/XBM" ) == 0 ) generic_output(NULL, VOGLEe_XBM);
+	else if ( strcmp(pdata->driver, "/PNG" ) == 0 ) generic_output(NULL, VOGLEe_PNG);
+   else if ( strcmp(pdata->driver, "/PPS" ) == 0 ) generic_output(NULL, VOGLEe_PPS);
 }
 
 /*--------------------------------------------------------------------------------------*/
@@ -290,7 +290,7 @@ static void motion_action(Widget widget, XEvent *event, String *params, Cardinal
       XtError ("Wrong number of args!");
    }
 
-   if ( strcmp(params[0],"rotate") == 0 )
+   if ( strcmp(params[0], "rotate") == 0 )
    {
       float rx,ry;
 
@@ -310,7 +310,7 @@ static void motion_action(Widget widget, XEvent *event, String *params, Cardinal
       repaint(widget, event, params, n_params);
    }
    
-   if ( strcmp(params[0],"translate") == 0 )
+   if ( strcmp(params[0], "translate") == 0 )
    {
       float rx,ry;
 
@@ -339,12 +339,12 @@ static void motion_action_start(Widget widget, XEvent *event, String *params, Ca
       XtError ("Wrong number of args!");
    }
 
-   if ( strcmp(params[0],"rotate") == 0 )
+   if ( strcmp(params[0], "rotate") == 0 )
    {
       xawWidgetUserData->pdata->motion.MOTION_X_ROTATE = event->xmotion.x ;
       xawWidgetUserData->pdata->motion.MOTION_Y_ROTATE = event->xmotion.y ;
    }
-   if ( strcmp(params[0],"translate") == 0 )
+   if ( strcmp(params[0], "translate") == 0 )
    {
       xawWidgetUserData->pdata->motion.MOTION_X_TRANSLATE = event->xmotion.x ;
       xawWidgetUserData->pdata->motion.MOTION_Y_TRANSLATE = event->xmotion.y ;

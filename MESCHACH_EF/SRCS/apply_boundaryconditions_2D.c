@@ -906,20 +906,20 @@ static void apply_Bc2D_dirichlet_on_matNS(int axe , const ELT_2D *elt , const GE
  sv_mlt(  BCval * jac , elt->eltDM1->VEC_I, SCM_ar);
 
 
- if ( (strcmp(elt->name_ef,"P1")==0)  || (strcmp(elt->name_ef,"P1b")==0) )
+ if ( (strcmp(elt->name_ef, "P1") == 0)  || (strcmp(elt->name_ef, "P1b") == 0) )
  {
     SCM_ar->ve[0] = BCval*0.5*jac;
     SCM_ar->ve[1] = BCval*0.5*jac;
  }
  else
- if ( strcmp(elt->name_ef,"P2")==0 )
+ if ( strcmp(elt->name_ef, "P2") == 0 )
  {
     SCM_ar->ve[0] = BCval*1.0/6.0*jac;
     SCM_ar->ve[1] = BCval*4.0/6.0*jac;
     SCM_ar->ve[2] = BCval*1.0/6.0*jac;
  }
  else
- if ( strcmp(elt->name_ef,"P3")==0 )
+ if ( strcmp(elt->name_ef, "P3") == 0 )
  {
     SCM_ar->ve[0] = BCval*3.0/24.0*jac;
     SCM_ar->ve[1] = BCval*9.0/24.0*jac;

@@ -40,10 +40,10 @@ ELT_2D *elt2D_get(const char *type)
    }
 
    /* initialize also now the eltDM1 */
-   if ( strcmp(type,"P1" )==0 ) elt->eltDM1 = elt1D_get("P1");
-   if ( strcmp(type,"P2" )==0 ) elt->eltDM1 = elt1D_get("P2");
-   if ( strcmp(type,"P3" )==0 ) elt->eltDM1 = elt1D_get("P3");
-   if ( strcmp(type,"P1b")==0 ) elt->eltDM1 = elt1D_get("P1");
+   if ( strcmp(type, "P1")  == 0 ) elt->eltDM1 = elt1D_get("P1");
+   if ( strcmp(type, "P2" ) == 0 ) elt->eltDM1 = elt1D_get("P2");
+   if ( strcmp(type, "P3" ) == 0 ) elt->eltDM1 = elt1D_get("P3");
+   if ( strcmp(type, "P1b") == 0 ) elt->eltDM1 = elt1D_get("P1");
 
    /* and initialize our fe */
    elt->dim     = 2;
@@ -52,22 +52,22 @@ ELT_2D *elt2D_get(const char *type)
    /*---------------------------------------------------------------------------------------------*/
    /*---------------------------------------------------------------------------------------------*/
 
-   if (strcmp(elt->name_ef,"P1") == 0)
+   if (strcmp(elt->name_ef, "P1") == 0)
    {
       elt2D_get_P1(elt);
    }
    else
-   if (strcmp(elt->name_ef,"P1b") == 0)
+   if (strcmp(elt->name_ef, "P1b") == 0)
    {
       elt2D_get_P1b(elt);
    }
    else
-   if (strcmp(elt->name_ef,"P2") == 0)
+   if (strcmp(elt->name_ef, "P2") == 0)
    {
       elt2D_get_P2(elt);
    }
    else
-   if (strcmp(elt->name_ef,"P3") == 0)
+   if (strcmp(elt->name_ef, "P3") == 0)
    {
       elt2D_get_P3(elt);
    }

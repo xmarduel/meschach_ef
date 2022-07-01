@@ -405,7 +405,7 @@ static VEC *_solve2D_lin(PRBLMt_2D_TYPE problem, const ELT_2D *MyElt, const GEOM
 			printf(" cgs: # of iter. = %d \n\n", nb_steps);
 		}
       else
-      if ( strcmp(ResolutionMethod,"BiCGStab") == 0 )
+      if ( strcmp(ResolutionMethod, "BiCGStab") == 0 )
       {
          iter_xspbicgstab(A, ILU, RHS, eps_steps, SOL, max_steps, &nb_steps, info);
          printf(" bicgstab: # of iter. = %d \n\n", nb_steps);

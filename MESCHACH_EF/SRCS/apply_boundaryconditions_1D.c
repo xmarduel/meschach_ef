@@ -110,19 +110,19 @@ void transform1D_matrix_with_bc(const ELT_1D *elt, const GEOM_1D *geom, const BC
 
 static void apply_Bc1D_dirichlet_on_matrix(const ELT_1D *elt, const GEOM_1D *geom, const BC_1D *BC, SPMAT *A)
 {
-   if (strcmp(elt->name_ef, "S2") == 0 )
+   if ( strcmp(elt->name_ef, "S2") == 0 )
    {
       return apply_Bc1D_dirichlet_on_matrix_SPLINES(elt, geom, BC, A);
    }
-   if (strcmp(elt->name_ef, "S3") == 0 )
+   if ( strcmp(elt->name_ef, "S3") == 0 )
    {
       return apply_Bc1D_dirichlet_on_matrix_SPLINES(elt, geom, BC, A);
    }
-   if (strcmp(elt->name_ef, "S4") == 0 )
+   if ( strcmp(elt->name_ef, "S4") == 0 )
    {
       return apply_Bc1D_dirichlet_on_matrix_SPLINES(elt, geom, BC, A);
    }
-   if (strcmp(elt->name_ef, "S5") == 0 )
+   if ( strcmp(elt->name_ef, "S5") == 0 )
    {
       return apply_Bc1D_dirichlet_on_matrix_SPLINES(elt, geom, BC, A);
    }

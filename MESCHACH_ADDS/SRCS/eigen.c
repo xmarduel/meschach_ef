@@ -181,7 +181,7 @@ MAT  *sp_eigen(const SPMAT *A, const SPMAT *B, VEC *eigen_values, EIGENt_METHOD 
                break;
                
             default:
-               error(E_UNKNOWN,"sp_eigen");
+               error(E_UNKNOWN, "sp_eigen");
                return MNULL;
          }
       }
@@ -196,7 +196,7 @@ MAT  *sp_eigen(const SPMAT *A, const SPMAT *B, VEC *eigen_values, EIGENt_METHOD 
             case EIGENe_ORDINARY_SYMMETRIC     : prb = EIGENe_SPOOLES_ORDINARY_SYMMETRIC; break;
             case EIGENe_GENERALIZED_SYMMETRIC_1: prb = EIGENe_SPOOLES_GENERALIZED_SYMMETRIC_1; break;
             case EIGENe_GENERALIZED_SYMMETRIC_2: prb = EIGENe_SPOOLES_GENERALIZED_SYMMETRIC_2; break;
-            default:                             error(E_UNKNOWN,"sp_eigen");
+            default:                             error(E_UNKNOWN, "sp_eigen");
          }
       
          switch(eig_params->option)
@@ -208,7 +208,7 @@ MAT  *sp_eigen(const SPMAT *A, const SPMAT *B, VEC *eigen_values, EIGENt_METHOD 
             case EIGENe_IBOUNDS   : opt = EIGENe_SPOOLES_IBOUNDS; break;
             case EIGENe_RBOUNDS   : opt = EIGENe_SPOOLES_RBOUNDS; break;
             case EIGENe_ALL       : opt = EIGENe_SPOOLES_ALL; break;
-            default:                error(E_UNKNOWN,"sp_eigen");
+            default:                error(E_UNKNOWN, "sp_eigen");
          }
 
          return eigen_vectors = sp_eigen_spooles(A, B, eigen_values, prb, opt);
@@ -233,20 +233,20 @@ MAT  *sp_eigen(const SPMAT *A, const SPMAT *B, VEC *eigen_values, EIGENt_METHOD 
          {
             case EIGENe_ORDINARY_SYMMETRIC     : prb = EIGENe_LAPACK_ORDINARY; break;
             case EIGENe_GENERALIZED_SYMMETRIC_1: prb = EIGENe_LAPACK_GENERALIZED; break;
-            case EIGENe_GENERALIZED_SYMMETRIC_2: error(E_UNKNOWN,"sp_eigen");
-            default:                             error(E_UNKNOWN,"sp_eigen");
+            case EIGENe_GENERALIZED_SYMMETRIC_2: error(E_UNKNOWN, "sp_eigen");
+            default:                             error(E_UNKNOWN, "sp_eigen");
          }
 
          switch(eig_params->option)
          {
             case EIGENe_LOWER     : opt = EIGENe_LAPACK_LOWER; break;
             case EIGENe_UPPER     : opt = EIGENe_LAPACK_UPPER; break;
-            case EIGENe_NEAREST_1 : error(E_UNKNOWN,"sp_eigen"); break;
-            case EIGENe_NEAREST_2 : error(E_UNKNOWN,"sp_eigen"); break;
+            case EIGENe_NEAREST_1 : error(E_UNKNOWN, "sp_eigen"); break;
+            case EIGENe_NEAREST_2 : error(E_UNKNOWN, "sp_eigen"); break;
             case EIGENe_IBOUNDS   : opt = EIGENe_LAPACK_IBOUNDS; break;
             case EIGENe_RBOUNDS   : opt = EIGENe_LAPACK_RBOUNDS; break;
             case EIGENe_ALL       : opt = EIGENe_LAPACK_ALL; break;
-            default:                error(E_UNKNOWN,"sp_eigen");
+            default:                error(E_UNKNOWN, "sp_eigen");
          }
 
          /* do permutations to reduce the band width par default */
@@ -299,7 +299,7 @@ MAT  *sp_eigen(const SPMAT *A, const SPMAT *B, VEC *eigen_values, EIGENt_METHOD 
          
       default:
       {
-         error(E_UNKNOWN,"sp_eigen");
+         error(E_UNKNOWN, "sp_eigen");
          return MNULL;
       }
    }
@@ -321,9 +321,9 @@ MAT *eigen_ordinary(const MAT *A, VEC *eigen_values)
    MAT *eigen_vectors_im;
    
    /* check */
-   if ( A == MNULL ) error(E_NULL,"eigen_simple");
+   if ( A == MNULL ) error(E_NULL, "eigen_simple");
 
-   if ( eigen_values == VNULL ) error(E_NULL,"eigen_simple");
+   if ( eigen_values == VNULL ) error(E_NULL, "eigen_simple");
 
    NBSOMM = A->m;
 
@@ -371,9 +371,9 @@ MAT *sp_eigen_meschach_ordinary(const SPMAT *A, VEC *eigen_values)
    MAT *A_;
    
    /* check */
-   if ( A == SMNULL ) error(E_NULL,"sp_eigen_simple");
+   if ( A == SMNULL ) error(E_NULL, "sp_eigen_simple");
    
-   if ( eigen_values  == VNULL ) error(E_NULL,"sp_eigen_simple");
+   if ( eigen_values  == VNULL ) error(E_NULL, "sp_eigen_simple");
    
    A_ = sp_m2dense((SPMAT*)A,MNULL);
    
@@ -416,10 +416,10 @@ MAT *sp_eigen_meschach_generalized(const SPMAT *A, const SPMAT *B, VEC *eigen_va
    MAT *C;
 
    /* check */
-   if ( A == SMNULL ) error(E_NULL,"sp_eigen_generalized");
-   if ( B == SMNULL ) error(E_NULL,"sp_eigen_generalized");
+   if ( A == SMNULL ) error(E_NULL, "sp_eigen_generalized");
+   if ( B == SMNULL ) error(E_NULL, "sp_eigen_generalized");
 
-   if ( eigen_values  == VNULL ) error(E_NULL,"sp_eigen_generalized");
+   if ( eigen_values  == VNULL ) error(E_NULL, "sp_eigen_generalized");
 
    /* ------ calculate C = inv(L).A.inv(Lt)  ----- LLT Cholesky factorisation of B ---  */
 

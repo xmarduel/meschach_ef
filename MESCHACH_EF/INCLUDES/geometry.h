@@ -180,10 +180,10 @@ int err_attach_list3(void);
 int warn_attach_list3(void);
 int err_warn_attach_lists3(void);
 
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define	 error3(err_num,fn_name)    ev_err(__FILE__, err_num, __LINE__, fn_name, MY_LIST3)
-/* error(E_TYPE,"myfunc") raises error type E_TYPE for function my_func() */
-#define	 warning3(warn_num,fn_name) ev_warn(__FILE__, warn_num, __LINE__, fn_name, MY_LIST3)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define	 error3(err_num, fn_name)    ev_err(__FILE__, err_num, __LINE__, fn_name, MY_LIST3)
+/* error(E_TYPE, "myfunc") raises error type E_TYPE for function my_func() */
+#define	 warning3(warn_num, fn_name) ev_warn(__FILE__, warn_num, __LINE__, fn_name, MY_LIST3)
 
 #ifdef __cplusplus
 }

@@ -205,11 +205,11 @@ static void* idle_workproc_no_x(SVQueue *queue)
          }
          else
          {
-            fprintf(stderr,"Driver !!! %s\n", pdata->driver);
+            fprintf(stderr, "Driver !!! %s\n", pdata->driver);
             return NULL;
          }
       
-         fprintf(stderr,"Producing output on file %s\n", pgplot_output);
+         fprintf(stderr, "Producing output on file %s\n", pgplot_output);
 
          /* start new driver plot */
          cpgopen(pgplot_output);
@@ -378,7 +378,7 @@ static void generic_output(const WIDGET_USERDATA_STRUCT *widgetUserdata, PGPLOT_
          return;
    }
 
-   fprintf(stderr,"Producing %s\n", pgplot_output);
+   fprintf(stderr, "Producing %s\n", pgplot_output);
 
    
    /* start new driver plot */
@@ -447,7 +447,7 @@ void * pgplot_curve_with_xt_toolkit_transient(void* data)
 
    /*--------------------------------------------------------------------------------------*/
 
-   if ( strcmp(pdata->driver,"/XWINDOW") != 0 )
+   if ( strcmp(pdata->driver, "/XWINDOW") != 0 )
    {
       return idle_workproc_no_x(queue);
    }

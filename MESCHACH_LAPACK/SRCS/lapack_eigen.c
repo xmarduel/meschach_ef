@@ -319,7 +319,7 @@ static MAT *sp_eigen_lapack_ordinary_expert_common(const SPMAT *A, VEC *eig_valu
 
    /* ------ solve the system Ax = k.x  ----- */
 
-   if ( strcmp(range,"I") == 0 )
+   if ( strcmp(range, "I") == 0 )
    {
       /* fill-out the other eigenvalues */
       for (i=nb_eig; i<eig_values->dim; i++)
@@ -327,7 +327,7 @@ static MAT *sp_eigen_lapack_ordinary_expert_common(const SPMAT *A, VEC *eig_valu
          eig_values->ve[i] =  1.0e20;
       }
    }
-   if ( strcmp(range,"V") == 0 )
+   if ( strcmp(range, "V") == 0 )
    {
       /* fill-out the other eigenvalues */
       for (i=eig_found; i<eig_values->dim; i++)
@@ -564,7 +564,7 @@ static MAT *sp_eigen_lapack_generalized_expert_common  (const SPMAT *A, const SP
 
    /* ------ solve the system Ax = k.Bx  ----- */
 
-   if ( strcmp(range,"I") == 0 )
+   if ( strcmp(range, "I") == 0 )
    {
       /* fill-out the other eigenvalues */
       for (i=nb_eig; i<eig_values->dim; i++)
@@ -572,7 +572,7 @@ static MAT *sp_eigen_lapack_generalized_expert_common  (const SPMAT *A, const SP
          eig_values->ve[i] =  1.0e20;
       }
    }
-   if ( strcmp(range,"V") == 0 )
+   if ( strcmp(range, "V") == 0 )
    {
       /* fill-out the other eigenvalues */
       for (i=eig_found; i<eig_values->dim; i++)

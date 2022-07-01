@@ -28,9 +28,9 @@ PERM* sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type)
    /*printf(" ... AMD START ... \n");*/
 
    /* tests NULL structures */
-   if ( A      == (SPMAT *)NULL ) error(E_NULL,"sp_bandwr_amd");
-   if ( P      == (PERM  *)NULL ) error(E_NULL,"sp_bandwr_amd");
-   if ( INVP   == (PERM  *)NULL ) error(E_NULL,"sp_bandwr_amd");
+   if ( A      == (SPMAT *)NULL ) error(E_NULL, "sp_bandwr_amd");
+   if ( P      == (PERM  *)NULL ) error(E_NULL, "sp_bandwr_amd");
+   if ( INVP   == (PERM  *)NULL ) error(E_NULL, "sp_bandwr_amd");
    /* tests SIZE structures */
 
 

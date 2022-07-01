@@ -18,13 +18,13 @@
 static BC_3D_XTYPE* Bc3D_XTYPE_get( const char* name );
 static int Bc3D_XTYPE_free( BC_3D_XTYPE *MyBC );
 
-static BC_3D_XTYPE* Bc3D_XTYPE_setFunction1         (BC_3D_XTYPE* MyBC, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
-static BC_3D_XTYPE* Bc3D_XTYPE_setFunction2         (BC_3D_XTYPE* MyBC, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
+static BC_3D_XTYPE* Bc3D_XTYPE_setFunction1   (BC_3D_XTYPE* MyBC, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
+static BC_3D_XTYPE* Bc3D_XTYPE_setFunction2   (BC_3D_XTYPE* MyBC, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
 
-static Real         Bc3D_XTYPE_evalFunction1        (BC_3D_XTYPE* MyBC, int ref_s, int axe, Real x , Real y, Real z);
-static Real         Bc3D_XTYPE_evalFunction2        (BC_3D_XTYPE* MyBC, int ref_s, int axe, Real x , Real y, Real z);
+static Real         Bc3D_XTYPE_evalFunction1  (BC_3D_XTYPE* MyBC, int ref_s, int axe, Real x , Real y, Real z);
+static Real         Bc3D_XTYPE_evalFunction2  (BC_3D_XTYPE* MyBC, int ref_s, int axe, Real x , Real y, Real z);
 
-static BC_3D_TYPE   Bc3D_getBcType_NoWarn           (const BC_3D* MyBC, int axe, int ref);
+static BC_3D_TYPE   Bc3D_getBcType_NoWarn     (const BC_3D* MyBC, int axe, int ref);
 
 static int Bc3D_checkBCdirichlet(const BC_3D *MyBC, int axe, int ref);
 static int Bc3D_checkBCneumann  (const BC_3D *MyBC, int axe, int ref);

@@ -48,7 +48,7 @@ VEC* build_vec_ef_from_function3Dtransient(const ELT_3D *MyElt, const GEOM_3D *M
       vec->ve[s] = FUN->eval(FUN, MyGeom->XYSOMM->me[s][0],
                                   MyGeom->XYSOMM->me[s][1],
                                   MyGeom->XYSOMM->me[s][2],
-								 tps);
+                                  tps);
    }
 
    return vec;

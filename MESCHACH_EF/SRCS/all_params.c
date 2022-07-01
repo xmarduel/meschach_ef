@@ -142,7 +142,7 @@ static void Params_init_time_parameters(PARAMS* p)
 
 static void Params_init_finite_elements(PARAMS* p)
 {
-   strncpy(p->ef_params.name_ef,"", 2);
+   strncpy(p->ef_params.name_ef, "", 2);
 }
 
 static void Params_init_geometry(PARAMS* p)
@@ -350,10 +350,10 @@ static void Params_init_graphics_interactiv1D_plots(PARAMS* p)
    {
       for (j=0; j<=GRAPHIC_NB_SUB_WINDOWS; j++)
       {
-         strncpy(p->graph_interactiv1Dplots_params.LABEL[i][j].AXE_X,"???", 4);
-         strncpy(p->graph_interactiv1Dplots_params.LABEL[i][j].AXE_Y,"???", 4);
+         strncpy(p->graph_interactiv1Dplots_params.LABEL[i][j].AXE_X, "???", 4);
+         strncpy(p->graph_interactiv1Dplots_params.LABEL[i][j].AXE_Y, "???", 4);
 
-         strncpy(p->graph_interactiv1Dplots_params.LABEL[i][j].LEGEND,"???", 4);
+         strncpy(p->graph_interactiv1Dplots_params.LABEL[i][j].LEGEND, "???", 4);
 
          p->graph_interactiv1Dplots_params.WINDOW[i][j].X_MIN = 0.0;
          p->graph_interactiv1Dplots_params.WINDOW[i][j].X_MAX = 0.0;
@@ -387,7 +387,7 @@ static void Params_init_graphics_interactiv2D_plots(PARAMS* p)
    {
       for (j=0; j<=GRAPHIC_NB_SUB_WINDOWS; j++)
       {
-          strncpy(p->graph_interactiv2Dplots_params.LABEL[i][j].LEGEND,"???", 4);
+          strncpy(p->graph_interactiv2Dplots_params.LABEL[i][j].LEGEND, "???", 4);
 
           p->graph_interactiv2Dplots_params.WINDOW[i][j].X_MIN = 0.0;
           p->graph_interactiv2Dplots_params.WINDOW[i][j].X_MAX = 0.0;

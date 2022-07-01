@@ -9,7 +9,7 @@ DV *v_meschach_to_v_spooles(const VEC *v, DV* dv)
 {
    int i;
    
-   if ( v == NULL ) error(E_NULL,"v_meschach_to_v_spooles");
+   if ( v == NULL ) error(E_NULL, "v_meschach_to_v_spooles");
 
    if ( dv == NULL )
    {
@@ -37,7 +37,7 @@ DenseMtx *v_meschach_to_m_spooles(const VEC *v, DenseMtx *M)
 {
    int i;
 
-   if ( v == NULL ) error(E_NULL,"v_meschach_to_m_spooles");
+   if ( v == NULL ) error(E_NULL, "v_meschach_to_m_spooles");
 
    if ( M == NULL )
    {
@@ -71,7 +71,7 @@ DenseMtx *m_meschach_to_m_spooles(const MAT *A, DenseMtx *M)
 {
    int i,j;
 
-   if ( A == NULL ) error(E_NULL,"m_meschach_to_m_spooles");
+   if ( A == NULL ) error(E_NULL, "m_meschach_to_m_spooles");
 
    if ( M == NULL )
    {
@@ -108,7 +108,7 @@ InpMtx *s_meschach_to_s_spooles(const SPMAT *A, InpMtx *B)
    Real val;
    SPROW *r;
    
-   if ( A == NULL ) error(E_NULL,"s_meschach_to_s_spooles");
+   if ( A == NULL ) error(E_NULL, "s_meschach_to_s_spooles");
 
    if ( B == NULL )
    {
@@ -157,7 +157,7 @@ InpMtx *s_meschach_to_s_spooles_sym(const SPMAT *A, InpMtx *B)
    Real val;
    SPROW *r;
 
-   if ( A == NULL ) error(E_NULL,"s_meschach_to_s_spooles_sym");
+   if ( A == NULL ) error(E_NULL, "s_meschach_to_s_spooles_sym");
 
    if ( B == NULL )
    {
@@ -202,8 +202,8 @@ InpMtx *s_meschach_to_s_spooles_sym(const SPMAT *A, InpMtx *B)
 
 VEC *v_spooles_to_v_meschach(const DV *dv, VEC *v)
 {
-   if ( dv == NULL ) error(E_NULL,"v_spooles_to_v_meschach");
-   if ( dv->size <= 0 ) error(E_SIZES,"v_spooles_to_v_meschach");
+   if ( dv == NULL ) error(E_NULL, "v_spooles_to_v_meschach");
+   if ( dv->size <= 0 ) error(E_SIZES, "v_spooles_to_v_meschach");
 
    if ( v != NULL )
    {
@@ -233,8 +233,8 @@ VEC *v_spooles_to_v_meschach(const DV *dv, VEC *v)
 
 VEC *m_spooles_to_v_meschach(const DenseMtx *M, VEC *v)
 {
-   if ( M == NULL ) error(E_NULL,"m_spooles_to_v_meschach");
-   if ( v == NULL ) error(E_NULL,"m_spooles_to_v_meschach");
+   if ( M == NULL ) error(E_NULL, "m_spooles_to_v_meschach");
+   if ( v == NULL ) error(E_NULL, "m_spooles_to_v_meschach");
 
    /* retrieve v from M */
    /*
@@ -258,7 +258,7 @@ MAT *m_spooles_to_m_meschach(const DenseMtx *A, MAT *M)
    int i,j;
    Real val;
 
-   if ( A == NULL ) error(E_NULL,"m_spooles_to_m_meschach");
+   if ( A == NULL ) error(E_NULL, "m_spooles_to_m_meschach");
 
    DenseMtx_dimensions (A,&m,&n);
 
@@ -293,7 +293,7 @@ SPMAT *s_spooles_to_s_meschach(const InpMtx *A, SPMAT *S)
    int    *ivec2;
    double *dvec ;
 
-   if ( A == NULL ) error(E_NULL,"s_spooles_to_s_meschach");
+   if ( A == NULL ) error(E_NULL, "s_spooles_to_s_meschach");
 
    m = IV_max(&(A->ivec1IV));
    n = IV_max(&(A->ivec2IV));
@@ -316,9 +316,9 @@ SPMAT *s_spooles_to_s_meschach(const InpMtx *A, SPMAT *S)
 
    dvec  = InpMtx_dvec(A)  ;
 
-   if ( A->nent != IV_size(&(A->ivec1IV)) ) error(E_SIZES,"s_spooles_to_s_meschach");
-   if ( A->nent != IV_size(&(A->ivec2IV)) ) error(E_SIZES,"s_spooles_to_s_meschach");
-   if ( A->nent != DV_size(&(A->dvecDV))  ) error(E_SIZES,"s_spooles_to_s_meschach");
+   if ( A->nent != IV_size(&(A->ivec1IV)) ) error(E_SIZES, "s_spooles_to_s_meschach");
+   if ( A->nent != IV_size(&(A->ivec2IV)) ) error(E_SIZES, "s_spooles_to_s_meschach");
+   if ( A->nent != DV_size(&(A->dvecDV))  ) error(E_SIZES, "s_spooles_to_s_meschach");
 
    for ( idx = 0 ; idx < A->nent ; idx++ )
    {

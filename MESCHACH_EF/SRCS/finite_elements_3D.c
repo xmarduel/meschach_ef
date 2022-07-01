@@ -50,22 +50,22 @@ ELT_3D *elt3D_get(const char *type)
    /*---------------------------------------------------------------------------------------------*/
    /*---------------------------------------------------------------------------------------------*/
 
-   if (strcmp(elt->name_ef,"P1") == 0)
+   if (strcmp(elt->name_ef, "P1") == 0)
    {
       elt3D_get_P1(elt);
    }
    else
-   if (strcmp(elt->name_ef,"P1b") == 0)
+   if (strcmp(elt->name_ef, "P1b") == 0)
    {
       elt3D_get_P1b(elt);
    }
    else
-   if (strcmp(elt->name_ef,"P2") == 0)
+   if (strcmp(elt->name_ef, "P2") == 0)
    {
       elt3D_get_P2(elt);
    }
    else
-   if (strcmp(elt->name_ef,"P3") == 0)
+   if (strcmp(elt->name_ef, "P3") == 0)
    {
       elt3D_get_P3(elt);
    }

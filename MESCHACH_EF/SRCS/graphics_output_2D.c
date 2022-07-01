@@ -89,7 +89,7 @@ static char * graphics2D_script_gnuplot (const char* filename)
    /* write the script to dislay the solution */
    snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gnu" , filename); script_gnuplot[63] = '\0';
 
-   fp = fopen(script_gnuplot,"w");
+   fp = fopen(script_gnuplot, "w");
 
    fprintf(fp, "#! /usr/bin/env gnuplot\n");
    fprintf(fp, "# \n");
@@ -201,7 +201,7 @@ static void graphics2D_script_gnuplot_set (const char* filename, int nb_plots)
    snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gnu", filename);
    script_gnuplot[63] = '\0';
 
-   fp = fopen(script_gnuplot,"w");
+   fp = fopen(script_gnuplot, "w");
 
    fprintf(fp, "#! /usr/bin/env gnuplot\n");
    fprintf(fp, "# \n");
@@ -276,7 +276,7 @@ static char * graphics2D_script_matlab   (const char* filename)
    /* write the script to dislay the solution */
    snprintf(script_matlab, 64, "Script4matlab_%s.m", filename); script_matlab[63] = '\0';
 
-   fp = fopen(script_matlab,"w");
+   fp = fopen(script_matlab, "w");
 
    fprintf(fp, "%c \n",'%');
    fprintf(fp, "%c File automatically generated  - changes will not be kept - \n", '%');
@@ -328,7 +328,7 @@ static void graphics2D_matlab(const char *filename, const ELT_2D *element, const
 
 
    /* and write the files that this script reads */
-   fp = fopen(matlab_coordinates,"w");
+   fp = fopen(matlab_coordinates, "w");
    fprintf(fp, "%c Input-file of vertices for the mesh \n",'%');
    fprintf(fp, "%c node-number  /  x-coordinate  / y-coordinate \n",'%');
    for (s=0; s<GeomP1->NBSOMM; s++)
@@ -339,7 +339,7 @@ static void graphics2D_matlab(const char *filename, const ELT_2D *element, const
    }
    fclose(fp);
 
-   fp = fopen(matlab_elements3,"w");
+   fp = fopen(matlab_elements3, "w");
    fprintf(fp, "%c Input-file of triangles for the mesh \n",'%');
    fprintf(fp, "%c element-number  /  1-node  /  2-node  /  3-node \n",'%');
    for (e=0; e<GeomP1->NBELMT; e++)
@@ -351,7 +351,7 @@ static void graphics2D_matlab(const char *filename, const ELT_2D *element, const
    }
    fclose(fp);
 
-   fp = fopen(matlab_solution,"w");
+   fp = fopen(matlab_solution, "w");
    fprintf(fp, "%c vector solution on the mesh (element3.dat + coordinates) \n",'%');
    for (s=0; s<GeomP1->NBSOMM; s++)
    {
@@ -377,7 +377,7 @@ static char * graphics2D_script_silo(const char* filename)
 
    snprintf(script_meshtv, 64, "Script4meshtv_%s.sil", filename); script_meshtv[63] = '\0';
 
-   fp = fopen(script_meshtv,"w");
+   fp = fopen(script_meshtv, "w");
 
    fprintf(fp, "#! /usr/bin/env meshtvx\n");
    fprintf(fp, "#\n");

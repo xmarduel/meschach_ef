@@ -244,7 +244,7 @@ void * graphics1D_libsciplot_curve_with_xt_toolkit(void* data)
 
    /*-----------------------------------------------------------------------------------*/
 
-   if ( strcmp(pdata->driver,"/XWINDOW") != 0 )
+   if ( strcmp(pdata->driver, "/XWINDOW") != 0 )
    {
       /* no X11 */
       libsciplot_curve_hardcopy(pdata);

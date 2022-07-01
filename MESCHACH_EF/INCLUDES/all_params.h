@@ -526,15 +526,15 @@ void  Params_get_absolute_path(const char* input_file, char* absolute_input_file
 /*! \struct PARAMS_finite_elements
 * \brief the structure for storing the type of the finite element
 *
-* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P1" ) \n
-* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P2" ) \n
-* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P3" ) \n
-* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "H3" ) \n
-* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S2" ) \n
-* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S3" ) \n
-* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S4" ) \n
-* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S5" ) \n
-* Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P1b" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "P1" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "P2" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "P3" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "H3" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "S2" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "S3" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "S4" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "S5" ) \n
+* Params_set_oneparam(MyParams, "finite_elements_params", "name_ef", "P1b" ) \n
 *
 * In the script "P1" is a python object.
 */
@@ -542,9 +542,9 @@ void  Params_get_absolute_path(const char* input_file, char* absolute_input_file
 /*! \struct PARAMS_time_parameters
 * \brief the structure for storing the time parameters (for transient problems)
 *
-* Params_set_oneparam(MyParams, "time_params","TPS_INI",    0.0  )  \n
-* Params_set_oneparam(MyParams, "time_params","TPS_FIN",    10.0  )  \n
-* Params_set_oneparam(MyParams, "time_params","DT",         0.005 )  \n
+* Params_set_oneparam(MyParams, "time_params", "TPS_INI",    0.0  )  \n
+* Params_set_oneparam(MyParams, "time_params", "TPS_FIN",    10.0  )  \n
+* Params_set_oneparam(MyParams, "time_params", "DT",         0.005 )  \n
 *
 * In the script, the values are python objects.
 */
@@ -609,17 +609,17 @@ void  Params_get_absolute_path(const char* input_file, char* absolute_input_file
 /*! \struct PARAMS_matrix_solver
 * \brief the structure for storing all kind of parameters, for all kind of problems
 *
-* Params_set_oneparam(MyParams, "matrix_solver_params","max_steps",  500  )\n
-* Params_set_oneparam(MyParams, "matrix_solver_params","eps_steps", 1.e-12) \n
+* Params_set_oneparam(MyParams, "matrix_solver_params", "max_steps",  500  )\n
+* Params_set_oneparam(MyParams, "matrix_solver_params", "eps_steps", 1.e-12) \n
 */
 
 /*! \struct PARAMS_graphics_output
 * \brief the structure for storing all kind of graphics output formats
 *
-* Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     1) # GNUPLOT \n
-* Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB \n
-* Params_set_oneparam(MyParams, "graphics_output_params","VTK",         1) # VTK \n
-* Params_set_oneparam(MyParams, "graphics_output_params","SILO",        1) # SILO \n
+* Params_set_oneparam(MyParams, "graphics_output_params", "GNUPLOT",     1) # GNUPLOT \n
+* Params_set_oneparam(MyParams, "graphics_output_params", "MATLAB",      0) # MATLAB \n
+* Params_set_oneparam(MyParams, "graphics_output_params", "VTK",         1) # VTK \n
+* Params_set_oneparam(MyParams, "graphics_output_params", "SILO",        1) # SILO \n
 *
 */
 
