@@ -4,7 +4,7 @@ prerequisites: ( (*) means that the lib is modified and build by us)
 
 - libs:
 
-   - liblua
+   - liblua.a
 
    - libjansson.a
    - libsilo.a
