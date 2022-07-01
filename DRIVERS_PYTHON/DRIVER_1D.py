@@ -180,7 +180,7 @@ def run_test():
         },
                             
         "PDE_RESOLUTION" : {
-            "EF" : "S2" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
+            "EF" : "S4" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
                             
             "LAPLACIAN_ALGO" : {
                 "METHOD" : "ITERATIVE-METHOD",
@@ -229,7 +229,7 @@ def run_test():
             "MESHDATADEFINITION" : {
                 "XMIN"   : 0.0,
                 "XMAX"   : 1.0,
-                "NX"     : 30,
+                "NX"     : 50,
                 "DISTRIBUTION" : "UNIFORM",
                 "PERIODIC" : False
             },
@@ -254,7 +254,8 @@ def run_test():
     # graphics datas
     config = str(json.dumps( {
         "GRAPHICS_1D" : {
-            "ENGINE" : "VOGLE",
+            #"ENGINE" : "VOGLE",
+            "ENGINE" : "GRAPH",
             "DRIVER" : "/XWINDOW" ,
             "WINDOW_SIZE" : [700, 500] ,
             "LABELS_SIZE" : 1.1 ,
@@ -369,6 +370,10 @@ def run_test():
 
     #print("SOL_P1")
     #v_foutput(sys.stdout, SOL_P1)
+
+    if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "GRAPH" :
+        graphics1D("graph"    , MyElt, GeomP1, SOL_P1, "SolApproch1D")
+
 
     if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "PGPLOT" :
 	
