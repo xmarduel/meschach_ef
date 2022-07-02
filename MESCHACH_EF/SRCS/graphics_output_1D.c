@@ -393,24 +393,57 @@ static void graphics1D_graph  (const char *filename, const ELT_1D *elt, const GE
    char *title = p->graph_interactiv1Dplots_params.LABEL[1][1].LEGEND;
    char *xlabel = p->graph_interactiv1Dplots_params.LABEL[1][1].AXE_X;
    char *ylabel = p->graph_interactiv1Dplots_params.LABEL[1][1].AXE_Y;
-   double fontsize = p->graph_interactiv1Dplots_params.SIZE_LABELS; // graph : 0 < size < 1
+   
+   float xlimit1 = p->graph_interactiv1Dplots_params.WINDOW[1][1].X_MIN;
+   float xlimit2 = p->graph_interactiv1Dplots_params.WINDOW[1][1].X_MAX;
+   
+   float ylimit1 = p->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MIN;
+   float ylimit2 = p->graph_interactiv1Dplots_params.WINDOW[1][1].Y_MAX;
+   
+   // float fontsize = p->graph_interactiv1Dplots_params.SIZE_LABELS * 0.0525; // rubbish!
+   
    int xsize = p->graph_interactiv1Dplots_params.SIZE_WINDOW_X;
    int ysize = p->graph_interactiv1Dplots_params.SIZE_WINDOW_Y;
    
+   int use_viewport = p->graph_interactiv1Dplots_params.USE_VIEWPORT[1][1];
+   
    char cmd[512] = "";
    
-   snprintf(cmd, 512, "graph -T %s -C -m 1 "
+   if ( use_viewport ) {
+      snprintf(cmd, 512, "graph -T %s -C -m 1 "
             "--top-label \"%s\" "
             "--x-label \"%s\" "
             "--y-label \"%s\" "
+            "--x-limits  %f %f "
+            "--y-limits  %f %f "
             "--bitmap-size %dx%d  %s",
             driver,
             title,
             xlabel,
             ylabel,
+            xlimit1,
+            xlimit2,
+            ylimit1,
+            ylimit2,
             xsize,
             ysize,
             output);
+   }
+   else
+   {
+      snprintf(cmd, 512, "graph -T %s -C -m 1 "
+               "--top-label \"%s\" "
+               "--x-label \"%s\" "
+               "--y-label \"%s\" "
+               "--bitmap-size %dx%d  %s",
+               driver,
+               title,
+               xlabel,
+               ylabel,
+               xsize,
+               ysize,
+               output);
+   }
    
    printf("GRAPH -> %s \n", cmd);
    
@@ -452,7 +485,7 @@ static char * graphics1D_silo_script (const char* filename, const VEC  *SOL)
 
 /*
 import visit
-#
+
 visit.OpenDatabase("SolApproch1D.silo")
 visit.AddPlot("Curve", "curve")
 visit.DrawPlots()

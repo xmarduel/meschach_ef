@@ -632,7 +632,8 @@
                                     "Y_MIN"    : { "type":"number", "description":"" },
                                     "Y_MAX"    : { "type":"number", "description":"" }
                                 }
-                            }
+                            },
+                            "USE_VIEWPORT" : { "type":"boolean", "description":"" }
                         }
                     }
                 }

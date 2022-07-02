@@ -325,48 +325,23 @@ static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* conf
          if ( strcmp(bc_info.bctype, "DIRICHLET") == 0 )
          {
             p->bc_params.BcType[0][bc_info.idx] = BC_1De_DIRICHLET;
-
-            if ( coords_dims == 1 ) strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
-            if ( coords_dims == 2 ) strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
-            if ( coords_dims == 3 ) strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
+            strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
          }
          if ( strcmp(bc_info.bctype, "NEUMANN") == 0 )
          {
             p->bc_params.BcType[0][bc_info.idx] = BC_1De_NEUMANN;
-
-            if ( coords_dims == 1 ) strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
-            if ( coords_dims == 2 ) strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
-            if ( coords_dims == 3 ) strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
+            strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
          }
          if ( strcmp(bc_info.bctype, "CAUCHY") == 0 )
          {
             p->bc_params.BcType[0][bc_info.idx] = BC_1De_CAUCHY;
-
-            if ( coords_dims == 1 ) strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
-            if ( coords_dims == 2 ) strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
-            if ( coords_dims == 3 ) strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
+            strcpy(p->bc_params.BcDirichlet[0][bc_info.idx].fundef, bc_info.fundef1);
          }
          if ( strcmp(bc_info.bctype, "ROBIN") == 0 )
          {
             p->bc_params.BcType[0][bc_info.idx] = BC_1De_ROBIN;
-
-            if ( coords_dims == 1 )
-            {
-               strcpy(p->bc_params.BcRobin1[0][bc_info.idx].fundef , bc_info.fundef1) ;
-               strcpy(p->bc_params.BcRobin2[0][bc_info.idx].fundef , bc_info.fundef2) ;
-            }
-
-            if ( coords_dims == 2 )
-            {
-               strcpy(p->bc_params.BcRobin1[0][bc_info.idx].fundef , bc_info.fundef1) ;
-               strcpy(p->bc_params.BcRobin2[0][bc_info.idx].fundef , bc_info.fundef2) ;
-            }
-
-            if ( coords_dims == 3 )
-            {
-               strcpy(p->bc_params.BcRobin1[0][bc_info.idx].fundef , bc_info.fundef1) ;
-               strcpy(p->bc_params.BcRobin2[0][bc_info.idx].fundef , bc_info.fundef2) ;
-            }
+            strcpy(p->bc_params.BcRobin1[0][bc_info.idx].fundef , bc_info.fundef1) ;
+            strcpy(p->bc_params.BcRobin2[0][bc_info.idx].fundef , bc_info.fundef2) ;
          }
       }
 
@@ -425,39 +400,23 @@ static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* conf
             if ( strcmp(bc_info.bctype, "DIRICHLET") == 0 )
             {
                p->bc_params.BcType[dim-1][bc_info.idx] = BC_1De_DIRICHLET;
-
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
+               strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
             }
             if ( strcmp(bc_info.bctype, "NEUMANN") == 0 )
             {
                p->bc_params.BcType[dim-1][bc_info.idx] = BC_1De_NEUMANN;
-
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
+               strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
             }
             if ( strcmp(bc_info.bctype, "CAUCHY") == 0 )
             {
                p->bc_params.BcType[dim-1][bc_info.idx] = BC_1De_CAUCHY;
-
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
+               strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
             }
             if ( strcmp(bc_info.bctype, "ROBIN") == 0 )
             {
                p->bc_params.BcType[dim-1][bc_info.idx] = BC_1De_ROBIN;
-
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BcRobin1[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BcRobin2[dim-1][bc_info.idx].fundef, bc_info.fundef2) ;
-
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BcRobin1[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BcRobin2[dim-1][bc_info.idx].fundef, bc_info.fundef2) ;
-
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BcRobin1[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BcRobin2[dim-1][bc_info.idx].fundef, bc_info.fundef2) ;
+               strcpy(p->bc_params.BcRobin1[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
+               strcpy(p->bc_params.BcRobin2[dim-1][bc_info.idx].fundef, bc_info.fundef2) ;
             }
          }
       }
@@ -522,39 +481,23 @@ static void json_config_PARAMS_boundary_conditions(PARAMS* p, const json_t* conf
             if ( strcmp(bc_info.bctype, "DIRICHLET") == 0 )
             {
                p->bc_params.BcType[dim-1][bc_info.idx] = BC_1De_DIRICHLET;
-
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
+               strcpy(p->bc_params.BcDirichlet[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
             }
             if ( strcmp(bc_info.bctype, "NEUMANN") == 0 )
             {
                p->bc_params.BcType[dim-1][bc_info.idx] = BC_1De_NEUMANN;
-
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BCNeumann[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BCNeumann[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BCNeumann[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
+               strcpy(p->bc_params.BCNeumann[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
             }
             if ( strcmp(bc_info.bctype, "CAUCHY") == 0 )
             {
                p->bc_params.BcType[dim-1][bc_info.idx] = BC_1De_CAUCHY;
-
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BcCauchy[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BcCauchy[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BcCauchy[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
+               strcpy(p->bc_params.BcCauchy[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
             }
             if ( strcmp(bc_info.bctype, "ROBIN") == 0 )
             {
                p->bc_params.BcType[dim-1][bc_info.idx] = BC_1De_ROBIN;
-
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BcRobin1[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 1 ) strcpy(p->bc_params.BcRobin2[dim-1][bc_info.idx].fundef, bc_info.fundef2) ;
-
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BcRobin1[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 2 ) strcpy(p->bc_params.BcRobin2[dim-1][bc_info.idx].fundef, bc_info.fundef2) ;
-
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BcRobin1[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
-               if ( coords_dims == 3 ) strcpy(p->bc_params.BcRobin2[dim-1][bc_info.idx].fundef, bc_info.fundef2) ;
+               strcpy(p->bc_params.BcRobin1[dim-1][bc_info.idx].fundef, bc_info.fundef1) ;
+               strcpy(p->bc_params.BcRobin2[dim-1][bc_info.idx].fundef, bc_info.fundef2) ;
             }
          }
       }
@@ -1578,6 +1521,7 @@ static void json_config_PARAMS_graphics_interactiv1D_plots(PARAMS* p, const json
    json_array_foreach(SUB_WINDOWS_ARRAY, index, SUB_WINDOW)
    {
       json_t *SUB_WINDOW_IDXS = json_object_get(SUB_WINDOW, "IDXS");
+      json_t *USE_VIEWPORT = json_object_get(SUB_WINDOW, "USE_VIEWPORT");
 
       int i = json_integer_value(json_array_get(SUB_WINDOW_IDXS, 0));
       int j = json_integer_value(json_array_get(SUB_WINDOW_IDXS, 1));
@@ -1591,7 +1535,16 @@ static void json_config_PARAMS_graphics_interactiv1D_plots(PARAMS* p, const json
 
       p->graph_interactiv1Dplots_params.MARKER[i][j]     = json_object_get_integer_value(SUB_WINDOW, "MARKER");
       p->graph_interactiv1Dplots_params.MARKER_END[i][j] = json_object_get_integer_value(SUB_WINDOW, "MARKER_END");
-
+      
+      
+      if (USE_VIEWPORT != NULL)
+      {
+         p->graph_interactiv1Dplots_params.USE_VIEWPORT[i][j] = json_object_get_boolean_value(SUB_WINDOW, "USE_VIEWPORT");
+      }
+      else
+      {
+         p->graph_interactiv1Dplots_params.USE_VIEWPORT[i][j] = 1;
+      }
       json_t *VIEWPORT = json_object_get(SUB_WINDOW, "VIEWPORT");
 
       p->graph_interactiv1Dplots_params.WINDOW[i][j].X_MIN = json_object_get_real_value(VIEWPORT, "X_MIN");

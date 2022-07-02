@@ -328,6 +328,9 @@ typedef struct {
    /* misc */
    int   MARKER       [GRAPHIC_NB_SUB_WINDOWS+1][GRAPHIC_NB_SUB_WINDOWS+1];
    int   MARKER_END   [GRAPHIC_NB_SUB_WINDOWS+1][GRAPHIC_NB_SUB_WINDOWS+1];
+   
+   /* misc */
+   int   USE_VIEWPORT [GRAPHIC_NB_SUB_WINDOWS+1][GRAPHIC_NB_SUB_WINDOWS+1];
 
    
 } PARAMS_graphics_interactiv1D_plots ;
