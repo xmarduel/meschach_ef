@@ -224,9 +224,7 @@
 
     "MISC_GRAPHICS" : {
         "IMTXPROF"         : false,
-        "IGEOMVIEW"        : false,
-        "IGEOMCONTOURVIEW" : false,
-        "IGEOMTOTALVIEW"   : false
+        "IGEOMVIEW"        : false
     },
 
     "GRAPHICS_2D_OUTPUT" : {

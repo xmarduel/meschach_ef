@@ -245,17 +245,15 @@
     # graphics ---------------------------
 
     "MISC_GRAPHICS" : {
-        "IMTXPROF"         : false,
-        "IGEOMVIEW"        : false,
-        "IGEOMCONTOURVIEW" : false,
-        "IGEOMTOTALVIEW"   : false
+        "IMTXPROF"         : true,
+        "IGEOMVIEW"        : true
     },
 
     "GRAPHICS_2D_OUTPUT" : {
         "GNUPLOT"    : true,
         "MATLAB"     : false,
         "VTK"        : false,
-        "SILO"       : true
+        "SILO"       : false
     },
 
     # 2D interactive - graphics library ploting parameters ------------
