@@ -863,7 +863,6 @@
 		2509D51B0D2AA382000F82DF /* graphics2D_vogle_transient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = graphics2D_vogle_transient.c; sourceTree = "<group>"; };
 		251B99A614ADC7EF004D2D46 /* cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa.m; sourceTree = "<group>"; };
 		251E82E914B8FA8A0055F7BF /* test_vogle_cocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_vogle_cocoa.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		251E82EB14B8FA8A0055F7BF /* test_vogle_cocoa-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "test_vogle_cocoa-Info.plist"; sourceTree = "<group>"; };
 		25291D7E14B2E76D00930EDD /* balls.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = balls.c; sourceTree = "<group>"; };
 		252B46AE0B4057C30022CBE0 /* t5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = t5.c; sourceTree = "<group>"; };
 		252B46E50B405C450022CBE0 /* graphics1D_libsciplot_stationnary_xt_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = graphics1D_libsciplot_stationnary_xt_window.c; sourceTree = "<group>"; };
@@ -1297,7 +1296,6 @@
 		25A334AD0EE58ABD0002C3F5 /* makefile_swig_python_extension */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.sh; path = makefile_swig_python_extension; sourceTree = "<group>"; };
 		25A5C5C40EE2E7CC002D8B10 /* vogle_carbon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vogle_carbon.h; sourceTree = "<group>"; };
 		25A6224D0B1A063E00FD2DAF /* test2_libsciplot.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = test2_libsciplot.c; sourceTree = "<group>"; };
-		25AB55870EDC7FD800E9066B /* test_vogle_carbon-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "test_vogle_carbon-Info.plist"; sourceTree = "<group>"; };
 		25ABEC611A8A3B8E007CCE6D /* gif.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gif.c; sourceTree = "<group>"; };
 		25AC3C500F7FEAD100EFCC61 /* graphics_output.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = graphics_output.c; sourceTree = "<group>"; };
 		25AFAE210E98E7A000A58673 /* carbon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = carbon.c; sourceTree = "<group>"; };
@@ -1883,8 +1881,6 @@
 				2583E89D0A8536CC00B218E6 /* MESCHACH_LIBSCIPLOT */,
 				259CCCDC0AD8EB7200FFECC4 /* PYTHON_EXTENSIONS */,
 				25459F860A7B65C6004F50D1 /* Products */,
-				25AB55870EDC7FD800E9066B /* test_vogle_carbon-Info.plist */,
-				251E82EB14B8FA8A0055F7BF /* test_vogle_cocoa-Info.plist */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
