@@ -441,7 +441,7 @@ static char * graphics3D_script_silo(const char* filename)
    char *script_meshtv = (char*)malloc(64);
    FILE *fp;
 
-   snprintf(script_meshtv, 64, "Script4meshtv_%s.sil", filename); script_meshtv[63] = '\0';
+   snprintf(script_meshtv, 64, "Script4mtv_%s.sil", filename); script_meshtv[63] = '\0';
 
    fp = fopen(script_meshtv, "w");
 
@@ -936,7 +936,7 @@ static char * graphics3D_stokes_script_silo(const char *filename, const VEC *u, 
    char *script_meshtv = (char*)malloc(64);
    FILE *fp;
 
-   snprintf(script_meshtv, 64, "Script4meshtv_%s.sil", filename); script_meshtv[63] = '\0';
+   snprintf(script_meshtv, 64, "Script4mtv_%s.sil", filename); script_meshtv[63] = '\0';
 
    fp = fopen(script_meshtv, "w");
 

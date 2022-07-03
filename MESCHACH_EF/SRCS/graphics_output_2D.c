@@ -87,7 +87,7 @@ static char * graphics2D_script_gnuplot (const char* filename)
    char *script_gnuplot = (char*)malloc(64);
 
    /* write the script to dislay the solution */
-   snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gnu" , filename); script_gnuplot[63] = '\0';
+   snprintf(script_gnuplot, 64, "Script4gpl_%s.gnu" , filename); script_gnuplot[63] = '\0';
 
    fp = fopen(script_gnuplot, "w");
 
@@ -198,7 +198,7 @@ static void graphics2D_script_gnuplot_set (const char* filename, int nb_plots)
    int i;
 
    /* write the script to dislay the solution */
-   snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gnu", filename);
+   snprintf(script_gnuplot, 64, "Script4gpl_%s.gnu", filename);
    script_gnuplot[63] = '\0';
 
    fp = fopen(script_gnuplot, "w");
@@ -375,7 +375,7 @@ static char * graphics2D_script_silo(const char* filename)
    char *script_meshtv = (char*)malloc(64);
    FILE *fp;
 
-   snprintf(script_meshtv, 64, "Script4meshtv_%s.sil", filename); script_meshtv[63] = '\0';
+   snprintf(script_meshtv, 64, "Script4mtv_%s.sil", filename); script_meshtv[63] = '\0';
 
    fp = fopen(script_meshtv, "w");
 

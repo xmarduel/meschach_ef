@@ -52,7 +52,7 @@ static char * graphics1D_gnuplot_script(const char*filename, const VEC *SOL)
    char *script_gnuplot = malloc(64);
    FILE *fp;
 
-   snprintf(script_gnuplot, 64, "Script4gnuplot_%s.gpp", filename); script_gnuplot[63] = '\0';
+   snprintf(script_gnuplot, 64, "Script4gpl_%s.gpp", filename); script_gnuplot[63] = '\0';
 
    graphics1D_gnuplot_write_script(script_gnuplot, "SolApproch1D.dat", NULL, NULL, 100, "the_residuals.dat");
 
@@ -469,7 +469,7 @@ static char * graphics1D_silo_script (const char* filename, const VEC  *SOL)
    char *script_meshtv = (char*)malloc(64);
    FILE *fp;
 
-   snprintf(script_meshtv, 64, "Script4meshtv_%s.sil" , filename);
+   snprintf(script_meshtv, 64, "Script4mtv_%s.sil" , filename);
    script_meshtv[63] = '\0';
 
    fp = fopen(script_meshtv, "w");
