@@ -573,9 +573,7 @@
         "MISC_GRAPHICS" : { "type":"object", "description":"",
             "properties" : {
                 "IMTXPROF"         : { "type":"boolean", "description":"" },
-                "IGEOMVIEW"        : { "type":"boolean", "description":"" },
-                "IGEOMCONTOURVIEW" : { "type":"boolean", "description":"" },
-                "IGEOMTOTALVIEW"   : { "type":"boolean", "description":"" }
+                "IGEOMVIEW"        : { "type":"boolean", "description":"" }
             }
         },
 
