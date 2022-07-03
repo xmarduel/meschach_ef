@@ -840,16 +840,6 @@ static void Params_set_oneparam0_cat_miscellaneous_graphics(PARAMS* p, const cha
       p->misc_graphics.igeomview = *(int*)val;
    }
    else
-   if ( strcmp(field, "igeomcontourview") == 0 )
-   {
-      p->misc_graphics.igeomcontourview = *(int*)val;
-   }
-   else
-   if ( strcmp(field, "igeomtotalview") == 0 )
-   {
-      p->misc_graphics.igeomtotalview = *(int*)val;
-   }
-   else
    {
       error(E_UNKNOWN, "Params_set_oneparam0_cat_miscellaneous_graphics");
    }

@@ -138,23 +138,14 @@ int  main()
 
    MyGeom = Geom2D_get(MyElt,
                MyParams->geom_params.meshfile,
-                 MyParams->geom_params.meshname,
+               MyParams->geom_params.meshname,
                MyParams->geom_params.meshtype);  /* ".quad1" */  /* ".quad2" */  /* ".emc2"  */  /* ".gmsh"  */
 
    if (MyParams->misc_graphics.igeomview)
    {
       graphics_geom2D_view("X11", MyGeom, "dummy1" );
+      graphics_geom2D_view("gnuplot", MyGeom, "geom2D" );
    }
-
-   if (MyParams->misc_graphics.igeomtotalview)
-   {
-      GEOM_2D *MyGeomTotal = Geom2D_getP1geom_from(MyElt, MyGeom);
-
-      graphics_geom2D_view("X11", MyGeomTotal, "dummy2");
-
-      GEOM_2D_FREE(MyGeomTotal);
-   }
-
 
 
    MyBC = Bc2D_setup_from_params(MyParams);

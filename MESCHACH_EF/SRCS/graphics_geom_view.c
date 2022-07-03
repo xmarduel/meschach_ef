@@ -1,6 +1,6 @@
 
-/* Contains all the output functions
- *
+/*
+ * Contains output functions for the geometry
  */
 
 
@@ -58,16 +58,17 @@ static void graphics_geom2D_write_mesh( const GEOM_2D* Geom, const char *file_na
       x2 = Geom->XYSOMM->me[Geom->NSELMT->im[e][2]][0];
       y2 = Geom->XYSOMM->me[Geom->NSELMT->im[e][2]][1];
 
-      fprintf(fp, "## triangle %09d ( somm %d %d %d )\n", e,
+      fprintf(fp, "## triangle %d ( nodes %d %d %d )\n", e,
               Geom->NSELMT->im[e][0],
               Geom->NSELMT->im[e][1],
               Geom->NSELMT->im[e][2]);
+      fprintf(fp, "#m=1,S=0\n");
 
       fprintf(fp, "%lf %lf \n",x0,y0);
       fprintf(fp, "%lf %lf \n",x1,y1);
       fprintf(fp, "%lf %lf \n",x2,y2);
       fprintf(fp, "%lf %lf \n",x0,y0);
-      fprintf(fp, "\n\n"); /* for a "new" data set */
+      fprintf(fp, "\n\n"); /* for the "next" data set */
    }
 
    fclose(fp);
@@ -100,13 +101,14 @@ static void graphics_geom2D_write_edge   ( const GEOM_2D* Geom, const char *file
       x1 = Geom->XYSOMM->me[Geom->NSFACE->im[a][1]][0];
       y1 = Geom->XYSOMM->me[Geom->NSFACE->im[a][1]][1];
 
-      fprintf(fp, "## edge %09d ( somm %d %d )\n", a,
+      fprintf(fp, "## edge %d ( nodes %d %d )\n", a,
               Geom->NSFACE->im[a][0],
               Geom->NSFACE->im[a][1]);
+      fprintf(fp, "#m=1,S=0\n");
 
       fprintf(fp, "%lf %lf \n",x0,y0);
       fprintf(fp, "%lf %lf \n",x1,y1);
-      fprintf(fp, "\n\n"); /* for a "new" data set */
+      fprintf(fp, "\n\n"); /* for the "next" data set */
    }
 
    fclose(fp);
@@ -151,21 +153,21 @@ static void graphics_geom3D_write_mesh( const GEOM_3D* Geom, const char *file_na
       y3 = Geom->XYSOMM->me[Geom->NSELMT->im[e][3]][1];
       z3 = Geom->XYSOMM->me[Geom->NSELMT->im[e][3]][2];
 
-      fprintf(fp, "## tetrahedra %09d ( somm %d %d %d %d)\n", e,
+      fprintf(fp, "## tetrahedra %d (nodes %d %d %d %d)\n", e,
               Geom->NSELMT->im[e][0],
               Geom->NSELMT->im[e][1],
               Geom->NSELMT->im[e][2],
               Geom->NSELMT->im[e][3]);
 
-      fprintf(fp, "%lf %lf %lf \n",x0,y0,z0);
-      fprintf(fp, "%lf %lf %lf \n",x1,y1,z1);
-      fprintf(fp, "%lf %lf %lf \n",x2,y2,z2);
-      fprintf(fp, "%lf %lf %lf \n",x3,y3,z3);
-      fprintf(fp, "%lf %lf %lf \n",x0,y0,z0);
-      fprintf(fp, "%lf %lf %lf \n",x2,y2,z2);
-      fprintf(fp, "%lf %lf %lf \n",x1,y1,z1);
-      fprintf(fp, "%lf %lf %lf \n",x3,y3,z3);
-      fprintf(fp, "\n\n"); /* for a "new" data set */
+      fprintf(fp, "%lf %lf %lf \n", x0,y0,z0);
+      fprintf(fp, "%lf %lf %lf \n", x1,y1,z1);
+      fprintf(fp, "%lf %lf %lf \n", x2,y2,z2);
+      fprintf(fp, "%lf %lf %lf \n", x3,y3,z3);
+      fprintf(fp, "%lf %lf %lf \n", x0,y0,z0);
+      fprintf(fp, "%lf %lf %lf \n", x2,y2,z2);
+      fprintf(fp, "%lf %lf %lf \n", x1,y1,z1);
+      fprintf(fp, "%lf %lf %lf \n", x3,y3,z3);
+      fprintf(fp, "\n\n"); /* for the "next" data set */
    }
 
    fclose(fp);
@@ -205,7 +207,7 @@ static void graphics_geom3D_write_surf( const GEOM_3D *Geom, const char *file_na
       y2 = Geom->XYSOMM->me[Geom->NSFACE->im[a][2]][1];
       z2 = Geom->XYSOMM->me[Geom->NSFACE->im[a][2]][2];
 
-      fprintf(fp, "## triangle on face %09d ( somm %d %d %d )\n", a,
+      fprintf(fp, "## triangle on face %d (nodes %d %d %d)\n", a,
               Geom->NSFACE->im[a][0],
               Geom->NSFACE->im[a][1],
               Geom->NSFACE->im[a][2]);
@@ -214,7 +216,7 @@ static void graphics_geom3D_write_surf( const GEOM_3D *Geom, const char *file_na
       fprintf(fp, "%lf %lf %lf \n",x1,y1,z1);
       fprintf(fp, "%lf %lf %lf \n",x2,y2,z2);
       fprintf(fp, "%lf %lf %lf \n",x0,y0,z0);
-      fprintf(fp, "\n\n"); /* for a "new" data set */
+      fprintf(fp, "\n\n"); /* for the "next" data set */
    }
 
    fclose(fp);
@@ -230,11 +232,11 @@ static void graphics_geom2D_view_X11( const GEOM_2D* Geom ) /* with "graph" */
    graphics_geom2D_write_mesh( Geom, "geom2D_dummy" );
    graphics_geom2D_write_edge( Geom, "geom2D_dummy" );
 
-   /*system("graph -T X -C -m 1  < geom2D_dummy_edge.dat");*/
-   system("graph -T X -C -m 1  < geom2D_dummy_mesh.dat");
+   /*system("graph -T X -C   < geom2D_dummy_edge.dat");*/
+   system("graph -T X -C  < geom2D_dummy_mesh.dat");
 
-   system("rm -f geom2D_dummy_edge.dat");
-   system("rm -f geom2D_dummy_mesh.dat");
+   //system("rm -f geom2D_dummy_edge.dat");
+   //system("rm -f geom2D_dummy_mesh.dat");
 }
 
 /*----------------------------------------------------------------------------------------------------*/
@@ -266,33 +268,6 @@ static void graphics_geom2D_view_gnuplot( const GEOM_2D* Geom, const char *file_
    fprintf(fp, "# ----------------------------------------------------------- \n");
    fprintf(fp, "# \n");
 
-
-   fprintf(fp, "# \n");
-   fprintf(fp, "# \n");
-   fprintf(fp, "pause 0 \" \" \n");
-   fprintf(fp, "pause 0 \" \" \n");
-   fprintf(fp, "pause 0 \"reading the file %s_edge.dat ...\" \n", file_name);
-   fprintf(fp, "# \n");
-
-   fprintf(fp, "set title \"MESH (%s)\" \n", file_gnuplot);
-   fprintf(fp, "set nokey \n");
-   fprintf(fp, "#set size square \n");
-   fprintf(fp, "set size ratio -1 \n");
-
-   fprintf(fp, "#  \n");
-   fprintf(fp, "plot '%s_edge.dat' with lines\n", file_name);
-   fprintf(fp, "#  \n");
-   fprintf(fp, "pause 0 \"...done\" \n");
-   fprintf(fp, "pause -1 \n");
-
-
-   fprintf(fp, "# \n");
-   fprintf(fp, "# \n");
-   fprintf(fp, "pause 0 \" \" \n");
-   fprintf(fp, "pause 0 \" \" \n");
-   fprintf(fp, "pause 0 \"reading the file %s_mesh.dat ...\" \n", file_name);
-   fprintf(fp, "# \n");
-
    fprintf(fp, "set title \"MESH (%s)\" \n", file_gnuplot);
    fprintf(fp, "set nokey \n");
    fprintf(fp, "#set size square \n");
@@ -300,6 +275,18 @@ static void graphics_geom2D_view_gnuplot( const GEOM_2D* Geom, const char *file_
 
    fprintf(fp, "#  \n");
    fprintf(fp, "plot '%s_mesh.dat' with lines\n", file_name);
+   fprintf(fp, "#  \n");
+   fprintf(fp, "pause 0 \"...done\" \n");
+   fprintf(fp, "pause -1 \n");
+
+
+   fprintf(fp, "set title \"MESH - EDGES (%s)\" \n", file_gnuplot);
+   fprintf(fp, "set nokey \n");
+   fprintf(fp, "#set size square \n");
+   fprintf(fp, "set size ratio -1 \n");
+
+   fprintf(fp, "#  \n");
+   fprintf(fp, "plot '%s_edge.dat' with lines\n", file_name);
    fprintf(fp, "#  \n");
    fprintf(fp, "pause 0 \"...done\" \n");
    fprintf(fp, "pause -1 \n");
@@ -347,14 +334,6 @@ static void graphics_geom3D_view_gnuplot( const GEOM_3D* Geom, const char *file_
    fprintf(fp, "# ----------------------------------------------------------- \n");
    fprintf(fp, "# \n");
 
-
-   fprintf(fp, "# \n");
-   fprintf(fp, "# \n");
-   fprintf(fp, "pause 0 \" \" \n");
-   fprintf(fp, "pause 0 \" \" \n");
-   fprintf(fp, "pause 0 \"reading the file %s_surf.dat ...\" \n", file_name);
-   fprintf(fp, "# \n");
-
    fprintf(fp, "set title \"MESH (%s)\" \n", file_gnuplot);
    fprintf(fp, "set nokey \n");
    fprintf(fp, "#set size square \n");
@@ -365,14 +344,6 @@ static void graphics_geom3D_view_gnuplot( const GEOM_3D* Geom, const char *file_
    fprintf(fp, "#  \n");
    fprintf(fp, "pause 0 \"...done\" \n");
    fprintf(fp, "pause -1 \n");
-
-
-   fprintf(fp, "# \n");
-   fprintf(fp, "# \n");
-   fprintf(fp, "pause 0 \" \" \n");
-   fprintf(fp, "pause 0 \" \" \n");
-   fprintf(fp, "pause 0 \"reading the file %s_mesh.dat ...\" \n", file_name);
-   fprintf(fp, "# \n");
 
    fprintf(fp, "set title \"MESH (%s)\" \n", file_gnuplot);
    fprintf(fp, "set nokey \n");
@@ -386,7 +357,6 @@ static void graphics_geom3D_view_gnuplot( const GEOM_3D* Geom, const char *file_
    fprintf(fp, "pause -1 \n");
 
    fclose(fp);
-
 
    /* and write the files of the solutions */
    graphics_geom3D_write_mesh( Geom, file_name );
@@ -417,17 +387,17 @@ void graphics_geom2D_view( const char *format, const GEOM_2D * Geom, const char 
       return ;
    }
 
-   if ( strcmp("X11",format) == 0 )
+   if ( strcmp("X11", format) == 0 )
    {
       graphics_geom2D_view_X11(Geom);
    }
    else
-   if ( strcmp("gnuplot",format) == 0 )
+   if ( strcmp("gnuplot", format) == 0 )
    {
       graphics_geom2D_view_gnuplot(Geom, name_file);
    }
    else
-   if ( strcmp("graph",format) == 0 )
+   if ( strcmp("graph", format) == 0 )
    {
       graphics_geom2D_view_graph(Geom, name_file);
    }

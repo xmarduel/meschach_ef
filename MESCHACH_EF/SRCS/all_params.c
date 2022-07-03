@@ -423,8 +423,6 @@ static void Params_init_miscellaneous_graphics(PARAMS* p)
 {
    p->misc_graphics.ispmatpattern = 0;
    p->misc_graphics.igeomview = 0;
-   p->misc_graphics.igeomcontourview = 0;
-   p->misc_graphics.igeomtotalview = 0;
 }
 
 /*-----------------------------------------------------------------------------------------*/

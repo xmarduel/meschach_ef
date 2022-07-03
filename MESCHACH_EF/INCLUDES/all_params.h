@@ -272,8 +272,6 @@ typedef struct {
 		
    int ispmatpattern; 
    int igeomview;
-   int igeomcontourview;
-   int igeomtotalview;
 		
 } PARAMS_miscellaneous_graphics ;
 	

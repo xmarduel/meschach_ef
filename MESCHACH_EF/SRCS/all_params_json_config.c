@@ -1701,8 +1701,6 @@ static void json_config_PARAMS_miscellaneous_graphics(PARAMS* p, const json_t* c
 
    if ( json_object_get(MISC_GRAPHICS, "IMTXPROF") )         p->misc_graphics.ispmatpattern    = json_object_get_boolean_value(MISC_GRAPHICS, "IMTXPROF");
    if ( json_object_get(MISC_GRAPHICS, "IGEOMVIEW") )        p->misc_graphics.igeomview        = json_object_get_boolean_value(MISC_GRAPHICS, "IGEOMVIEW");
-   if ( json_object_get(MISC_GRAPHICS, "IGEOMCONTOURVIEW") ) p->misc_graphics.igeomcontourview = json_object_get_boolean_value(MISC_GRAPHICS, "IGEOMCONTOURVIEW");
-   if ( json_object_get(MISC_GRAPHICS, "IGEOMTOTALVIEW") )   p->misc_graphics.igeomtotalview   = json_object_get_boolean_value(MISC_GRAPHICS, "IGEOMTOTALVIEW");
 }
 
 static void json_config_PARAMS_io_files(PARAMS* p, const json_t* config)

@@ -416,6 +416,7 @@ static void graphics1D_graph  (const char *filename, const ELT_1D *elt, const GE
             "--y-label \"%s\" "
             "--x-limits  %f %f "
             "--y-limits  %f %f "
+            "--bg-color white "
             "--bitmap-size %dx%d  %s",
             driver,
             title,
@@ -435,6 +436,7 @@ static void graphics1D_graph  (const char *filename, const ELT_1D *elt, const GE
                "--top-label \"%s\" "
                "--x-label \"%s\" "
                "--y-label \"%s\" "
+               "--bg-color white "
                "--bitmap-size %dx%d  %s",
                driver,
                title,

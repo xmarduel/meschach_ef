@@ -802,16 +802,6 @@ static void * Params_get_oneparam0_cat_miscellaneous_graphics(const PARAMS* p, c
       return (void*)(&(p->misc_graphics.igeomview));
    }
    else
-   if ( strcmp(field, "igeomcontourview") == 0 )
-   {
-      return (void*)(&(p->misc_graphics.igeomcontourview));
-   }
-   else
-   if ( strcmp(field, "igeomtotalview") == 0 )
-   {
-      return (void*)(&(p->misc_graphics.igeomtotalview));
-   }
-   else
    {
       error(E_UNKNOWN, "Params_get_oneparam0_cat_miscellaneous_graphics");
    }

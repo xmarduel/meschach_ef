@@ -195,8 +195,6 @@ static TYPE_PARAMS0 params_list0[] =
 	
    { "miscellaneous_graphics", "ispmatpattern"   , TYPEd_INT },
    { "miscellaneous_graphics", "igeomview"       , TYPEd_INT },
-   { "miscellaneous_graphics", "igeomcontourview", TYPEd_INT },
-   { "miscellaneous_graphics", "igeomtotalview"  , TYPEd_INT },
    
    { NULL                    , NULL              , TYPEd_INT }
 };   
