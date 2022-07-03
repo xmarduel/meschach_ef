@@ -127,7 +127,7 @@ static int carbon_mapcolor(int ind, int r, int g, int b);
 static int carbon_font(const char *fontname);
 static int carbon_char(char c);
 static int carbon_string(const char *s);
-static int carbon_fill(int n, int [], int y[]);
+static int carbon_fill(int n, int x[], int y[]);
 static int carbon_backbuf(void *p, int old, int bw, int bh);
 static int carbon_swapbuf(void);
 static int carbon_frontbuf(void);
