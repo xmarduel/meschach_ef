@@ -10,14 +10,12 @@
 		250EEED2193BC01900C0EE46 /* all_params_json_config.c in Sources */ = {isa = PBXBuildFile; fileRef = 25C5AA58193786E500280DFA /* all_params_json_config.c */; };
 		251B99A714ADC7EF004D2D46 /* cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 251B99A614ADC7EF004D2D46 /* cocoa.m */; };
 		25442C531AAB287F004BDDA1 /* test1_libsciplot.c in Sources */ = {isa = PBXBuildFile; fileRef = 2583E8B40A8536CD00B218E6 /* test1_libsciplot.c */; };
-		25442C7A1AAB2F1C004BDDA1 /* gui.c in Sources */ = {isa = PBXBuildFile; fileRef = 25442C441AAB280A004BDDA1 /* gui.c */; };
 		254457161A8DFA7400915E85 /* cexcontour.c in Sources */ = {isa = PBXBuildFile; fileRef = 254456AB1A8DF17D00915E85 /* cexcontour.c */; };
 		2546E74B1B0E27EF008C156F /* licosa.c in Sources */ = {isa = PBXBuildFile; fileRef = 25099BBE0DC1F2B20076878F /* licosa.c */; };
 		25479D7F1A90E45000F230EB /* graphics1D_voplcontour_stationnary_xt_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 25479D7E1A90E45000F230EB /* graphics1D_voplcontour_stationnary_xt_window.c */; };
 		255143D8193A32640026ADA1 /* all_params_json_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 25CA62971913C37F00F96A6F /* all_params_json_utils.c */; };
 		2555C0EC132BC44900924C8E /* strfuncs.h in Headers */ = {isa = PBXBuildFile; fileRef = 25EE8E18132BBFE000BE6309 /* strfuncs.h */; };
 		2555C127132BC62A00924C8E /* strfuncs.c in Sources */ = {isa = PBXBuildFile; fileRef = 2555C126132BC62A00924C8E /* strfuncs.c */; };
-		255BDDB81A8CD81900EEE43D /* balls.c in Sources */ = {isa = PBXBuildFile; fileRef = 25291D7E14B2E76D00930EDD /* balls.c */; };
 		256C6D3C1A9695A5005F7029 /* graphics1D_voplcontour_transient_xt_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 256C6D3A1A9695A5005F7029 /* graphics1D_voplcontour_transient_xt_window.c */; };
 		2578205A11CE717600293CB2 /* verror.h in Headers */ = {isa = PBXBuildFile; fileRef = 25099C590DC1F2B30076878F /* verror.h */; };
 		2578205B11CE717600293CB2 /* vogle.h in Headers */ = {isa = PBXBuildFile; fileRef = 25099C5C0DC1F2B30076878F /* vogle.h */; };
@@ -349,6 +347,7 @@
 		258E29681A8D4AF40041F3C5 /* contour.c in Sources */ = {isa = PBXBuildFile; fileRef = 258E29661A8D4AF40041F3C5 /* contour.c */; };
 		259FA9001914378C0051223B /* all_params_json_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 259FA8FF1914362D0051223B /* all_params_json_config.h */; };
 		25ABEC621A8A3B8F007CCE6D /* gif.c in Sources */ = {isa = PBXBuildFile; fileRef = 25ABEC611A8A3B8E007CCE6D /* gif.c */; };
+		25AD05D82871AB45003A3516 /* balls.c in Sources */ = {isa = PBXBuildFile; fileRef = 25AD05D72871AB45003A3516 /* balls.c */; };
 		25CA629B1913C64700F96A6F /* all_params_json_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 25CA62991913C46500F96A6F /* all_params_json_utils.h */; };
 		25EE8E1A132BBFE100BE6309 /* strfuncs.h in Headers */ = {isa = PBXBuildFile; fileRef = 25EE8E18132BBFE000BE6309 /* strfuncs.h */; };
 /* End PBXBuildFile section */
@@ -367,13 +366,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2578205811CE717600293CB2;
 			remoteInfo = "libvogle-2.0";
-		};
-		252C4B9914B99A0E00DF2D2B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 253A9FAE132B63F700EB59E7;
-			remoteInfo = test_static_analyser;
 		};
 		254456E21A8DF88800915E85 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -634,13 +626,6 @@
 			remoteGlobalIDString = 2578205811CE717600293CB2;
 			remoteInfo = "libvogle-2.0";
 		};
-		259C50EC132A5D3F0070406E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2578204611CE717600293CB2;
-			remoteInfo = libsciplot;
-		};
 		25C3FC8D193B8A46001A58DB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
@@ -863,10 +848,8 @@
 		2509D51B0D2AA382000F82DF /* graphics2D_vogle_transient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = graphics2D_vogle_transient.c; sourceTree = "<group>"; };
 		251B99A614ADC7EF004D2D46 /* cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa.m; sourceTree = "<group>"; };
 		251E82E914B8FA8A0055F7BF /* test_vogle_cocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_vogle_cocoa.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		25291D7E14B2E76D00930EDD /* balls.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = balls.c; sourceTree = "<group>"; };
 		252B46AE0B4057C30022CBE0 /* t5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = t5.c; sourceTree = "<group>"; };
 		252B46E50B405C450022CBE0 /* graphics1D_libsciplot_stationnary_xt_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = graphics1D_libsciplot_stationnary_xt_window.c; sourceTree = "<group>"; };
-		253A9FAF132B63F700EB59E7 /* test_static_analyser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test_static_analyser; sourceTree = BUILT_PRODUCTS_DIR; };
 		2540DFF21A24F345000B0719 /* PDE_EXAMPLE_TR_2D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDE_EXAMPLE_TR_2D.json; sourceTree = "<group>"; };
 		2543F2AF195DF9CF0060BBF8 /* DRIVER_2D_schwarz.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = DRIVER_2D_schwarz.py; sourceTree = "<group>"; };
 		25442C441AAB280A004BDDA1 /* gui.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gui.c; sourceTree = "<group>"; };
@@ -1272,7 +1255,6 @@
 		258E29661A8D4AF40041F3C5 /* contour.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = contour.c; sourceTree = "<group>"; };
 		2595A5DB2840ADDC00D3A467 /* ef1D_S4_mtx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ef1D_S4_mtx.h; sourceTree = "<group>"; };
 		259B97381FA9D585005D800D /* anim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = anim.c; sourceTree = "<group>"; };
-		259C50F5132A5D3F0070406E /* test_libplot */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test_libplot; sourceTree = BUILT_PRODUCTS_DIR; };
 		259CCCEA0AD8EB7300FFECC4 /* python_extension.mk */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = python_extension.mk; sourceTree = "<group>"; };
 		259EEE320AD9166E00CF8A48 /* ALGO_BURGERS_2D.py */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.python; path = ALGO_BURGERS_2D.py; sourceTree = "<group>"; };
 		259EEE330AD9166E00CF8A48 /* ALGO_NAVIERSTOKES_2D.py */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.python; path = ALGO_NAVIERSTOKES_2D.py; sourceTree = "<group>"; };
@@ -1298,6 +1280,7 @@
 		25A6224D0B1A063E00FD2DAF /* test2_libsciplot.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = test2_libsciplot.c; sourceTree = "<group>"; };
 		25ABEC611A8A3B8E007CCE6D /* gif.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gif.c; sourceTree = "<group>"; };
 		25AC3C500F7FEAD100EFCC61 /* graphics_output.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = graphics_output.c; sourceTree = "<group>"; };
+		25AD05D72871AB45003A3516 /* balls.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = balls.c; sourceTree = "<group>"; };
 		25AFAE210E98E7A000A58673 /* carbon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = carbon.c; sourceTree = "<group>"; };
 		25B397531A221B9700F985D5 /* PDE_EXAMPLE_3D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDE_EXAMPLE_3D.json; sourceTree = "<group>"; };
 		25C1398E0ED561FB00B731F7 /* main.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = main.nib; sourceTree = "<group>"; };
@@ -1382,13 +1365,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		251E82E714B8FA8A0055F7BF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		253A9FAD132B63F700EB59E7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1529,13 +1505,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2578228A11CE717700293CB2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		259C50F0132A5D3F0070406E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1854,7 +1823,7 @@
 		25291D7D14B2E76D00930EDD /* cocoa */ = {
 			isa = PBXGroup;
 			children = (
-				25291D7E14B2E76D00930EDD /* balls.c */,
+				25AD05D72871AB45003A3516 /* balls.c */,
 			);
 			path = cocoa;
 			sourceTree = "<group>";
@@ -1907,8 +1876,6 @@
 				2578227711CE717700293CB2 /* test_vogle.exe */,
 				2578228211CE717700293CB2 /* test_libsciplot */,
 				2578228E11CE717700293CB2 /* test_vogle_carbon.app */,
-				259C50F5132A5D3F0070406E /* test_libplot */,
-				253A9FAF132B63F700EB59E7 /* test_static_analyser */,
 				251E82E914B8FA8A0055F7BF /* test_vogle_cocoa.app */,
 				254456EB1A8DF88800915E85 /* test_vopl.exe */,
 			);
@@ -3086,13 +3053,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		259C50ED132A5D3F0070406E /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -3113,22 +3073,6 @@
 			productName = test_vogle_cocoa;
 			productReference = 251E82E914B8FA8A0055F7BF /* test_vogle_cocoa.app */;
 			productType = "com.apple.product-type.application";
-		};
-		253A9FAE132B63F700EB59E7 /* test_static_analyser */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 253A9FB3132B642700EB59E7 /* Build configuration list for PBXNativeTarget "test_static_analyser" */;
-			buildPhases = (
-				253A9FAC132B63F700EB59E7 /* Sources */,
-				253A9FAD132B63F700EB59E7 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = test_static_analyser;
-			productName = test_static_analyser2;
-			productReference = 253A9FAF132B63F700EB59E7 /* test_static_analyser */;
-			productType = "com.apple.product-type.tool";
 		};
 		254456E01A8DF88800915E85 /* test_vopl */ = {
 			isa = PBXNativeTarget;
@@ -3561,27 +3505,6 @@
 			productReference = 2578228E11CE717700293CB2 /* test_vogle_carbon.app */;
 			productType = "com.apple.product-type.application";
 		};
-		259C50EA132A5D3F0070406E /* test_libplot */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 259C50F2132A5D3F0070406E /* Build configuration list for PBXNativeTarget "test_libplot" */;
-			buildPhases = (
-				259C50ED132A5D3F0070406E /* Headers */,
-				259C50EE132A5D3F0070406E /* Sources */,
-				259C50F0132A5D3F0070406E /* Frameworks */,
-				259C50F1132A5D3F0070406E /* Rez */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				252C4B9A14B99A0E00DF2D2B /* PBXTargetDependency */,
-				259C50EB132A5D3F0070406E /* PBXTargetDependency */,
-			);
-			name = test_libplot;
-			productInstallPath = /usr/local/bin;
-			productName = test_libsciplot;
-			productReference = 259C50F5132A5D3F0070406E /* test_libplot */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3621,8 +3544,6 @@
 				2578226C11CE717700293CB2 /* test_vogle */,
 				254456E01A8DF88800915E85 /* test_vopl */,
 				2578227911CE717700293CB2 /* test_libsciplot */,
-				259C50EA132A5D3F0070406E /* test_libplot */,
-				253A9FAE132B63F700EB59E7 /* test_static_analyser */,
 				2578228411CE717700293CB2 /* test_vogle_carbon */,
 				251E82E814B8FA8A0055F7BF /* test_vogle_cocoa */,
 			);
@@ -3780,13 +3701,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		259C50F1132A5D3F0070406E /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -3927,14 +3841,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				255BDDB81A8CD81900EEE43D /* balls.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		253A9FAC132B63F700EB59E7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3951,6 +3857,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				258036E011E8929500FCB2FE /* fontlist.c in Sources */,
+				25AD05D82871AB45003A3516 /* balls.c in Sources */,
 				2580373311E8960500FCB2FE /* linemode.c in Sources */,
 				2580373611E8960A00FCB2FE /* misc.c in Sources */,
 				2580373A11E8961100FCB2FE /* plotter.c in Sources */,
@@ -4297,14 +4204,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		259C50EE132A5D3F0070406E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				25442C7A1AAB2F1C004BDDA1 /* gui.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -4317,11 +4216,6 @@
 			isa = PBXTargetDependency;
 			target = 2578205811CE717600293CB2 /* libvogle-2.0 */;
 			targetProxy = 251E82EF14B8FA930055F7BF /* PBXContainerItemProxy */;
-		};
-		252C4B9A14B99A0E00DF2D2B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 253A9FAE132B63F700EB59E7 /* test_static_analyser */;
-			targetProxy = 252C4B9914B99A0E00DF2D2B /* PBXContainerItemProxy */;
 		};
 		254456E11A8DF88800915E85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4508,11 +4402,6 @@
 			target = 2578205811CE717600293CB2 /* libvogle-2.0 */;
 			targetProxy = 25949469120AE7A400F71FF7 /* PBXContainerItemProxy */;
 		};
-		259C50EB132A5D3F0070406E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2578204611CE717600293CB2 /* libsciplot */;
-			targetProxy = 259C50EC132A5D3F0070406E /* PBXContainerItemProxy */;
-		};
 		25C3FC8E193B8A46001A58DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 257820A311CE717600293CB2 /* libmeschach */;
@@ -4611,40 +4500,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = test_vogle_cocoa;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
-		253A9FB1132B63F800EB59E7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CONFIGURATION_BUILD_DIR = $HOME/x_local/bin;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = "";
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = "";
-				INSTALL_PATH = $HOME/x_local/bin;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = test_static_analyser;
-			};
-			name = Debug;
-		};
-		253A9FB2132B63F800EB59E7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CONFIGURATION_BUILD_DIR = $HOME/x_local/bin;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
-				GCC_VERSION = "";
-				INSTALL_PATH = $HOME/x_local/bin;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = test_static_analyser;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -6714,91 +6569,6 @@
 			};
 			name = Release;
 		};
-		259C50F3132A5D3F0070406E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
-				COPY_PHASE_STRIP = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = "";
-				HEADER_SEARCH_PATHS = "$HOME/x_local/plotutils-2.6/include";
-				INSTALL_PATH = /Users/xavier/x_local/bin;
-				LIBRARY_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6/lib",
-					"$HOME/x_local/plotutils-2.6/libplot/.libs",
-					/usr/X11/lib,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-lplot",
-					"-lcommon",
-					"-lXaw",
-					"-lXmu",
-					"-lXt",
-					"-lSM",
-					"-lICE",
-					"-lXext",
-					"-lX11",
-				);
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = test_libplot;
-				REZ_EXECUTABLE = YES;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Debug;
-		};
-		259C50F4132A5D3F0070406E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
-				COPY_PHASE_STRIP = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = "";
-				HEADER_SEARCH_PATHS = "$HOME/x_local/plotutils-2.6/include";
-				INSTALL_PATH = $HOME/x_local/bin;
-				LIBRARY_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6/lib",
-					"$HOME/x_local/plotutils-2.6/libplot/.libs",
-					/usr/X11/lib,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-lplot",
-					"-lcommon",
-					"-lXaw",
-					"-lXmu",
-					"-lXt",
-					"-lSM",
-					"-lICE",
-					"-lXext",
-					"-lX11",
-				);
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = test_libplot;
-				REZ_EXECUTABLE = YES;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -6807,15 +6577,6 @@
 			buildConfigurations = (
 				251E82EC14B8FA8A0055F7BF /* Debug */,
 				251E82ED14B8FA8A0055F7BF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		253A9FB3132B642700EB59E7 /* Build configuration list for PBXNativeTarget "test_static_analyser" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				253A9FB1132B63F800EB59E7 /* Debug */,
-				253A9FB2132B63F800EB59E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -7005,15 +6766,6 @@
 			buildConfigurations = (
 				2578228C11CE717700293CB2 /* Debug */,
 				2578228D11CE717700293CB2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		259C50F2132A5D3F0070406E /* Build configuration list for PBXNativeTarget "test_libplot" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				259C50F3132A5D3F0070406E /* Debug */,
-				259C50F4132A5D3F0070406E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
