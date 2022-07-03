@@ -51,6 +51,7 @@ static void graphics_matrix_pattern_outputfile( const SPMAT* A, const char *file
 
       for (idx=0; idx<r->len; idx++ )
       {
+         //fprintf(fp, "#m=1,S=0\n");
          fprintf(fp, "%d  -%d\n", r->elt[idx].col, i);
       }
       fprintf(fp, "\n");
@@ -67,8 +68,15 @@ static void graphics_matrix_pattern_X11( const SPMAT* A, const char* file_name)
    char command[128];
 
    /* a string to be executed by the shell */
-   snprintf(command, 128, "graph -T X --top-label %s -x 0 %d -y %d 0 -C -m -1 -S 2 0.02 < graphxx_%s.dat",
-            file_name, A->n, -A->m, suffix);
+   snprintf(command, 128, "graph -T X --top-label \"%s\" "
+            "-x 0 %d "
+            "-y %d 0 "
+            " -C -m -1 -S 2 0.02 "
+            " < graphxx_%s.dat",
+            file_name,
+            A->n,
+            -A->m,
+            suffix);
 
    command[127] = '\0';
 
@@ -79,7 +87,7 @@ static void graphics_matrix_pattern_X11( const SPMAT* A, const char* file_name)
    system(command);
 
    /* remove the file of the solution */
-   system("rm -f graphxx_mtxprof.dat");
+   //system("rm -f graphxx_mtxprof.dat");
 }
 
 /*-----------------------------------------------------------------------------------------------------------*/
