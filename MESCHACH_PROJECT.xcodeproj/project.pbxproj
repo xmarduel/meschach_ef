@@ -347,7 +347,6 @@
 		258E29681A8D4AF40041F3C5 /* contour.c in Sources */ = {isa = PBXBuildFile; fileRef = 258E29661A8D4AF40041F3C5 /* contour.c */; };
 		259FA9001914378C0051223B /* all_params_json_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 259FA8FF1914362D0051223B /* all_params_json_config.h */; };
 		25ABEC621A8A3B8F007CCE6D /* gif.c in Sources */ = {isa = PBXBuildFile; fileRef = 25ABEC611A8A3B8E007CCE6D /* gif.c */; };
-		25AD05D82871AB45003A3516 /* balls.c in Sources */ = {isa = PBXBuildFile; fileRef = 25AD05D72871AB45003A3516 /* balls.c */; };
 		25CA629B1913C64700F96A6F /* all_params_json_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 25CA62991913C46500F96A6F /* all_params_json_utils.h */; };
 		25EE8E1A132BBFE100BE6309 /* strfuncs.h in Headers */ = {isa = PBXBuildFile; fileRef = 25EE8E18132BBFE000BE6309 /* strfuncs.h */; };
 /* End PBXBuildFile section */
@@ -3857,7 +3856,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				258036E011E8929500FCB2FE /* fontlist.c in Sources */,
-				25AD05D82871AB45003A3516 /* balls.c in Sources */,
 				2580373311E8960500FCB2FE /* linemode.c in Sources */,
 				2580373611E8960A00FCB2FE /* misc.c in Sources */,
 				2580373A11E8961100FCB2FE /* plotter.c in Sources */,

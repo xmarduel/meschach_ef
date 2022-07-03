@@ -114,7 +114,7 @@ typedef enum {
 
 //typedef struct {
 //
-//   char   BCname[16];      /* name of bc : dirichlet                       */
+//   BC_1D_TYPE  bc_type;                    /**< type of bc : dirichlet, neumann, cauchy or robin  */
 //  
 //   FUN_1D Fun1[1][NBMAX_BC_1D_FUNCTIONS];  /* nb_bc_dirichlet+1 functions on the border    */
 //   FUN_1D Fun2[1][NBMAX_BC_1D_FUNCTIONS];  /* nb_bc_dirichlet+1 functions on the border    */
@@ -202,7 +202,7 @@ typedef enum {
 
 //typedef struct {
 //
-//   char   BCname[16];      /* name of bc : dirichlet                       */
+//   BC_2D_TYPE  bc_type;                    /**< type of bc : dirichlet, neumann, cauchy or robin  */
   
 //   FUN_2D Fun1[2][NBMAX_BC_2D_FUNCTIONS];         /* nb_bc_dirichlet+1 functions on the border    */
 //   FUN_2D Fun2[2][NBMAX_BC_2D_FUNCTIONS];         /* nb_bc_dirichlet+1 functions on the border    */
@@ -291,7 +291,7 @@ typedef enum {
 
 //typedef struct {
 
-//   char   BCname[16];        /* name of bc : dirichlet                       */
+//   BC_3D_TYPE  bc_type;                    /**< type of bc : dirichlet, neumann, cauchy or robin  */
   
 //   FUN_3D Fun1[3][NBMAX_BC_3D_FUNCTIONS];  /* nb_bc_dirichlet+1 functions on the border    */
 //   FUN_3D Fun2[3][NBMAX_BC_3D_FUNCTIONS];  /* nb_bc_dirichlet+1 functions on the border    */
