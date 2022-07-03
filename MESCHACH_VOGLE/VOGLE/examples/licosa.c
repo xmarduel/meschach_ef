@@ -1,7 +1,7 @@
 
 
 #include <stdlib.h>
-#include <vogle.h>
+#include "vogle.h"
 
 #define	TRANS		0.06
 void drawshape(int fill);

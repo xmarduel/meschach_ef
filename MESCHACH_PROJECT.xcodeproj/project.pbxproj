@@ -6581,16 +6581,17 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6",
-					"$HOME/x_local/plotutils-2.6/include",
+					EXTERNAL_LIBS,
+					"EXTERNAL_LIBS/plotutils-2.6",
+					"EXTERNAL_LIBS/plotutils-2.6/include",
 				);
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6/libplot/.libs",
+					"EXTERNAL_LIBS/plotutils-2.6/libplot/.libs",
 					/usr/X11/lib,
 					/Users/xavier/x_local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lsciplot",
@@ -6619,16 +6620,17 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6",
-					"$HOME/x_local/plotutils-2.6/include",
+					EXTERNAL_LIBS,
+					"EXTERNAL_LIBS/plotutils-2.6",
+					"EXTERNAL_LIBS/plotutils-2.6/include",
 				);
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					"$HOME/x_local/plotutils-2.6/libplot/.libs",
+					"EXTERNAL_LIBS/plotutils-2.6/libplot/.libs",
 					/usr/X11/lib,
 					/Users/xavier/x_local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lsciplot",
