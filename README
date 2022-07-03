@@ -18,7 +18,7 @@ prerequisites: ( (*) means that the lib is modified and build by us)
    - libamd.a
    - libclapack.a - libcblas.a
 
-- python:
+- python 3.7 or higher:
 
     - jsonschema (validation of input files -meshes and config- )
 
@@ -37,27 +37,8 @@ prerequisites: ( (*) means that the lib is modified and build by us)
     - VOGLE_FONTS
 
 
-Graphics:
---------
-  TODO:
-    unify cpgplot, vogle/vopl and libsciplot calls (1d)
-
-
-Params:
--------
-  TODO:
-    json config file
-
-- gmsh new file format for cube in 3D
-- AdvFunc clean
-- Bc clean
-- setup functions by names in C program
-
-
-
-
-compile first external libs
-----------------------------
+External libs
+-------------
 
 # plotutils
 +++++++++++++
@@ -90,3 +71,6 @@ build in the project (modified)
 +++++++++
 just compile ?
 
+# lua
++++++++++
+just compile

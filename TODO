@@ -1,13 +1,34 @@
-- finish HTML doc with many many examples, especially Stokes/Navier-Stoke
+Doc:
+----
+
+- finish HTML doc (folder "doc") with many many examples, especially Stokes/Navier-Stoke
 (will I ever have the time for it ?)
 
 - re-run mcstrip/cyclo, seems buggy on macosx (wrong function names)
 - nroff doc update (I have forgotten how to do this)
 
+Build:
+------
+
 - Makefile for linux
 
-- graphics: specifiy colors in config files
+Graphics:
+---------
+
+- unify cpgplot, vogle/vopl and libsciplot calls (1d)
+- specifiy colors in config files (and use them)
+- BUG: vogle ignores VIEWPORT specs
 - change MATLAB to OCTAVE for 1D and 2D
+
+Misc:
+-----
+
+- gmsh new file format for cube in 3D
+- AdvFunc clean
+- Bc clean
+- setup functions by names in C program
+
+
 
 it has been such a long time doing nothing with Meshach-EF, I do not know anymore
 what is to do ...

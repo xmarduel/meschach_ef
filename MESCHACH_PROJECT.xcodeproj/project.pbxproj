@@ -1217,6 +1217,9 @@
 		256C6D3A1A9695A5005F7029 /* graphics1D_voplcontour_transient_xt_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = graphics1D_voplcontour_transient_xt_window.c; sourceTree = "<group>"; };
 		25753D671A220300000ECA8D /* PDE_EXAMPLE_1D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDE_EXAMPLE_1D.json; sourceTree = "<group>"; };
 		25753E451A2210B2000ECA8D /* PDE_EXAMPLE_2D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDE_EXAMPLE_2D.json; sourceTree = "<group>"; };
+		2576E12928719C73001519AC /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
+		2576E12A28719C84001519AC /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		2576E12B28719C9B001519AC /* VERSION */ = {isa = PBXFileReference; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
 		2578205711CE717600293CB2 /* libsciplot.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libsciplot.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		2578208811CE717600293CB2 /* libvogle-2.0.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libvogle-2.0.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		257820A211CE717600293CB2 /* libvopl-2.0.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libvopl-2.0.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1862,6 +1865,9 @@
 			isa = PBXGroup;
 			children = (
 				25099BCA0DC1F2B20076878F /* README */,
+				2576E12A28719C84001519AC /* TODO */,
+				2576E12928719C73001519AC /* NEWS */,
+				2576E12B28719C9B001519AC /* VERSION */,
 				254902361FA9F1250019D16D /* EF_MESHES */,
 				254C1D961A6186210060FF18 /* JSON_SCHEMAS */,
 				25D307AB0A852F8B008BB241 /* DRIVERS_C */,
