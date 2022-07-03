@@ -1,0 +1,13 @@
+- finish HTML doc with many many examples, especially Stokes/Navier-Stoke
+(will I ever have the time for it ?)
+
+- re-run mcstrip/cyclo, seems buggy on macosx (wrong function names)
+- nroff doc update (I have forgotten how to do this)
+
+- Makefile for linux
+
+- graphics: specifiy colors in config files
+- change MATLAB to OCTAVE for 1D and 2D
+
+it has been such a long time doing nothing with Meshach-EF, I do not know anymore
+what is to do ...
