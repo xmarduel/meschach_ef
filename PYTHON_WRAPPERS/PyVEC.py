@@ -12,26 +12,11 @@ class Vec:
     """
     class for Vector : self.this is a VEC * structure
     """
-    def __init__(self,m):
+    def __init__(self, m):
         """
-        setup self.this
+        setup self.cvec
         """
-        try:
-            cvec = meschach.v_get(m)
-            self.__dict__["this"] = cvec
-        except:
-            #raise IndexError
-            raise IndexError("negative argument for <Vec> initialization")
-
-    def __del__(self):
-        """
-        free mem of self.this
-        """
-        if hasattr(self,"this"):
-            meschach.v_free(self.this)
-        self.__dict__["this"] = meschach.v_null()
-
-
+        self.cvec = meschach.v_get(m)
 
     @classmethod
     def Memory(cls, stream = sys.stdout):
@@ -41,7 +26,7 @@ class Vec:
     #  Get the dimension of the matrix
     #
     def _get_m(self):
-        return meschach_adds.v_dim(self)
+        return meschach_adds.v_dim(self.cvec)
 
     m = property( _get_m, doc="dim")
     dim = property( _get_m, doc="dim")
@@ -50,26 +35,26 @@ class Vec:
     # Getting the data
     #
     def __len__(self):
-        return meschach_adds.v_dim(self)
+        return meschach_adds.v_dim(self.cvec)
 
-    def __setitem__(self,key,ival):
-        if ( not isinstance(key, int) ):
+    def __setitem__(self, key, ival):
+        if not isinstance(key, int):
             raise TypeError("must be a integer")
-        if ( not  ( isinstance(ival, float) or isinstance(ival, int) ) ):
+        if not  ( isinstance(ival, float) or isinstance(ival, int) ):
             raise TypeError("must be a float")
-        return meschach.v_set_val(self.this,key,ival)
+        return meschach.v_set_val(self.cvec, key, ival)
 
-    def __getitem__(self,key):
-        if ( not isinstance(key, int) ):
+    def __getitem__(self, key):
+        if not isinstance(key, int):
             raise TypeError("must be a integer")
-        return meschach.v_get_val(self.this,key)
+        return meschach.v_get_val(self.cvec, key)
 
-    def __setattr__(self,name, value):
-        if name == "this" :
-            raise AttributeError("not allowed to change self.this in this way")
-        else:
-            pass
-            #raise AttributeError("not allowed to add an attribute to an IMat instance")
+    #def __setattr__(self, name, value):
+    #    if name == "cvec" :
+    #        raise AttributeError("not allowed to change self.cvec in this way")
+    #    else:
+    #        pass
+    #        #raise AttributeError("not allowed to add an attribute to an IMat instance")
 
     #
     # Input - Output diagnostics
@@ -77,18 +62,18 @@ class Vec:
     def out(self,file=None):
         """
         """
-        if (file==None):
-            meschach.v_foutput(sys.stdout, self.this)
+        if file == None:
+            meschach.v_foutput(sys.stdout, self.cvec)
         else:
-            meschach.v_foutput(file,self.this)
+            meschach.v_foutput(file, self.cvec)
 
     def dump(self,file=None):
         """
         """
-        if (file==None):
-            meschach.v_dump(sys.stdout,self.this)
+        if file == None:
+            meschach.v_dump(sys.stdout, self.cvec)
         else:
-            meschach.v_dump(file,self.this)
+            meschach.v_dump(file, self.cvec)
 
     def __str__(self): # as "out"
         f_tmp = open("tmp.dat", "w+")
@@ -114,50 +99,50 @@ class Vec:
     def free(self):
         """
         """
-        meschach.v_free(self.this)
-        self.__dict__["this"] = meschach.v_null()
+        meschach.v_free(self.cvec)
+        self.cvec = meschach.v_null()
 
     def resize(self,m):
         """
         """
-        meschach.v_resize(self.this, m)
-    #
+        meschach.v_resize(self.cvec, m)
+
     #
     # Members functions
     #
     def ones(self):
         """
         """
-        meschach.v_ones(self.this)
+        meschach.v_ones(self.cvec)
 
     def zero(self):
         """
         """
-        meschach.v_zero(self.this)
+        meschach.v_zero(self.cvec)
 
     def rand(self):
         """
         """
-        meschach.v_rand(self.this)
+        meschach.v_rand(self.cvec)
 
     def norm(self):
         """
         """
-        return meschach.v_norm2(self.this)
+        return meschach.v_norm2(self.cvec)
 
     #
     # operators creating temporary
     #
     def __add__(self,a):
         # a is a Vec
-        if ( isinstance(a, Vec) ):
+        if isinstance(a, Vec):
             ret = Vec(self.m)
-            meschach.v_add(self.this, a.this, ret.this)
+            meschach.v_add(self.cvec, a.cvec, ret.cvec)
             return ret
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
+        elif isinstance(a, int) or isinstance(a, float) :
             ret = Vec(self.m)
-            meschach_adds.v_sadd(a, self.this, ret.this)
+            meschach_adds.v_sadd(a, self.cvec, ret.cvec)
             return ret
         else:
             raise TypeError("wrong type")
@@ -165,38 +150,38 @@ class Vec:
     def __radd__(self,a):
         return self.__add__(a)
 
-    def __sub__(self,a):
+    def __sub__(self, a):
         # a is a Vec
-        if ( isinstance(a, Vec) ):
+        if isinstance(a, Vec):
             ret = Vec(self.m)
-            meschach.v_sub(self.this, a.this, ret.this)
+            meschach.v_sub(self.cvec, a.cvec, ret.cvec)
             return ret
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
+        elif isinstance(a, int) or isinstance(a, float):
             ret = Vec(self.m)
-            meschach_adds.v_ssub(a, self.this, ret.this)
+            meschach_adds.v_ssub(a, self.cvec, ret.cvec)
             return ret
         else:
             raise TypeError("wrong type")
 
-    def __rsub__(self,a):
+    def __rsub__(self, a):
         return self.__sub__(a)
 
-    def __mul__(self,a):
+    def __mul__(self, a):
         # a is a Vec
-        if ( isinstance(a, Vec) ):
+        if isinstance(a, Vec):
             ret = Vec(self.m)
-            ret = meschach.in_prod(self.this, a.this)
+            ret = meschach.in_prod(self.cvec, a.cvec)
             return ret
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
+        elif isinstance(a, int) or isinstance(a, float):
             ret = Vec(self.m)
-            meschach.sv_mlt(a, self.this, ret.this)
+            meschach.sv_mlt(a, self.cvec, ret.cvec)
             return ret
         else:
             raise TypeError("wrong type")
 
-    def __rmul__(self,a):
+    def __rmul__(self, a):
         return self.__mul__(a)
 
     #
@@ -204,32 +189,32 @@ class Vec:
     #
     def __iadd__(self,a):
         # a is a Vec
-        if ( isinstance(a, Vec) ):
-            meschach.v_add(self.this, a.this, self.this)
+        if isinstance(a, Vec):
+            meschach.v_add(self.cvec, a.cvec, self.cvec)
             return self
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
-            meschach_adds.v_sadd(a, self.this, self.this)
+        elif isinstance(a, int) or isinstance(a, float):
+            meschach_adds.v_sadd(a, self.cvec, self.cvec)
             return self
         else:
             raise TypeError("wrong type")
 
     def __isub__(self,a):
         # a is a Vec
-        if ( isinstance(a, Vec) ):
-            meschach.v_sub(self.this, a.this, self.this)
+        if isinstance(a, Vec):
+            meschach.v_sub(self.cvec, a.cvec, self.cvec)
             return self
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
-            meschach_adds.v_ssub(a, self.this, self.this)
+        elif isinstance(a, int) or isinstance(a, float):
+            meschach_adds.v_ssub(a, self.cvec, self.cvec)
             return self
         else:
             raise TypeError("wrong type")
 
     def __imul__(self,a):
         # a is a integer or a double
-        if ( isinstance(a, int) or isinstance(a, float) ):
-            meschach.sv_mlt(a, self.this, self.this)
+        if isinstance(a, int) or isinstance(a, float):
+            meschach.sv_mlt(a, self.cvec, self.cvec)
             return self
         else:
             raise TypeError("wrong type")
@@ -244,7 +229,7 @@ class Vec:
         to clone a Vector
         """
         ret = Vec(self.m)
-        meschach.v_copy(self.this, ret.this)
+        meschach.v_copy(self.cvec, ret.cvec)
         return ret
 
     # A = - B
@@ -252,6 +237,6 @@ class Vec:
         """
         """
         ret = Vec(self.m)
-        meschach.v_copy(self.this, ret.this)
-        meschach.sv_mlt(-1.0, ret.this, ret.this)
+        meschach.v_copy(self.cvec, ret.cvec)
+        meschach.sv_mlt(-1.0, ret.cvec, ret.cvec)
         return ret

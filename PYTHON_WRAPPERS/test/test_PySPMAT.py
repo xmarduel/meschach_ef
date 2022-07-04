@@ -1,32 +1,27 @@
 #! /usr/bin/env python
-#
+
 """ This module tests all the methods of the SpMat class (PySPMAT.py) """
-#
-#  ----------------------------------------------------------------
-#  $Author: xavier $
-#  $Date: 2004/07/24 14:32:23 $
-#  $Revision: 1.7 $
-#  ----------------------------------------------------------------
-#
+
+
 import unittest
 import PySPMAT
-#
-#
-#
-#
+
+
 class SpMatTest(unittest.TestCase):
-    #
-    #
-    def testInit(self): 
-        #
+
+    def testInit(self):
+
         m1 = PySPMAT.SpMat(4,4)
-        #
-        try: m2 = PySPMAT.SpMat(-4,4)
-        except IndexError:
+
+        try:
+            m2 = PySPMAT.SpMat(-4,4)
+        except ValueError:
             pass
-        try: m3 = PySPMAT.SpMat(4,-4)
-        except IndexError:
-            pass               
+
+        try:
+            m3 = PySPMAT.SpMat(4,-4)
+        except ValueError:
+            pass
     #
     #
     def test___del__(self):
@@ -87,7 +82,7 @@ class SpMatTest(unittest.TestCase):
     #
     #def resize(self,m):
     #    v_resize(self.this, m)
-    #	
+    #
     #
     # Members functions
     #
@@ -116,7 +111,7 @@ class SpMatTest(unittest.TestCase):
     #def rand(self):
     #    v_rand(self.this)
     #
-    # 
+    #
     #
     # operators creating temporary
     #
@@ -194,7 +189,7 @@ class SpMatTest(unittest.TestCase):
     #
     #
     #
-    # assignation operator : with __pos__ 
+    # assignation operator : with __pos__
     #
     # A = + B
     def test___pos__(self):

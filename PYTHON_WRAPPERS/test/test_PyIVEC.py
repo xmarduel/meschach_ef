@@ -11,10 +11,6 @@ class IVecTest(unittest.TestCase):
     def testInit(self):
         m1 =  PyIVEC.IVec(3)
         m2 =  PyIVEC.IVec(0)
-        print("try Ivec(-1) ...")
-        try: m3 = PyIVEC.IVec(-1)
-        except IndexError:
-            pass
 
     def test___del__(self):
         m1 =  PyIVEC.IVec(3)

@@ -34,88 +34,69 @@ class MatRow:
 
 class Mat:
     """
-    class for Dense Matrix : self.this is a MAT * structure
+    class for Dense Matrix : self.cmat is a MAT * structure
     """
-    def __init__(self,m,n):
+    def __init__(self, m, n):
         """
-        setup self.this
+        setup self.cmat
         """
-        try:
-            cmat = meschach.m_get(m,n)
-            self.__dict__["this"] = cmat
-        except:
-            raise IndexError("negative argument for <Mat> initialization")
-
-    def __del__(self):
-        """
-        free mem of self.this
-        """
-        if hasattr(self,"this"):
-            meschach.m_free(self.this)
-        self.__dict__["this"] = meschach.m_null()
+        self.cmat = meschach.m_get(m,n)
 
     #
     # Getting the data
     #
     # Get the dimension of the matrix
     #
+
     def get_m(self):
-        return meschach_adds.m_dim1(self)
+        return meschach_adds.m_dim1(self.cmat)
     def get_n(self):
-        return meschach_adds.m_dim2(self)
+        return meschach_adds.m_dim2(self.cmat)
 
     m = property( get_m, doc="1rst dim")
     n = property( get_n, doc="2nd dim")
 
-
-    def __setattr__(self,name, value):
-        if ( name == "this" ):
-            raise AttributeError("not allowed to change self.this in this way")
-        else:
-            pass
-            #raise AttributeError, "not allowed to add an attribute to an Mat instance"
-
     #
     # Getting the data
     #
-    def __setitem__(self,key,ival):
-        if ( not isinstance(key, int) ):
+    def __setitem__(self, key, ival):
+        if not isinstance(key, int):
             raise TypeError("must be a integer")
-        if ( not isinstance(ival, float) ):
+        if not isinstance(ival, float):
             raise TypeError("must be a float")
 
-        MatRowInstance = MatRow(self.this, key)
+        MatRowInstance = MatRow(self.cmat, key)
         return MatRowInstance
 
-    def __getitem__(self,key):
-        if ( not isinstance(key, int) ):
+    def __getitem__(self, key):
+        if not isinstance(key, int):
             raise TypeError("must be a integer")
 
-        MatRowInstance = MatRow(self.this, key)
+        MatRowInstance = MatRow(self.cmat, key)
         return MatRowInstance
 
     #
     # Input - Output diagnostics
     #
-    def out(self,file=None):
+    def out(self, file=None):
         """
         """
-        if (file==None):
-            meschach.m_foutput(sys.stdout,self.this)
+        if file == None:
+            meschach.m_foutput(sys.stdout, self.cmat)
         else:
-            meschach.m_foutput(file,self.this)
+            meschach.m_foutput(file, self.cmat)
 
-    def dump(self,file=None):
+    def dump(self, file=None):
         """
         """
-        if (file==None):
-            meschach.m_dump(sys.stdout,self.this)
+        if file == None:
+            meschach.m_dump(sys.stdout,self.cmat)
         else:
-            meschach.m_dump(file,self.this)
+            meschach.m_dump(file,self.cmat)
 
     def __str__(self): # as "out"
         f_tmp = open("tmp.dat", "w+")
-        meschach.m_foutput(f_tmp, self.this)
+        meschach.m_foutput(f_tmp, self.cmat)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
@@ -124,7 +105,7 @@ class Mat:
 
     def __repr__(self): # as "dump"
         f_tmp = open("tmp.dat", "w+")
-        meschach.m_dump(f_tmp, self.this)
+        meschach.m_dump(f_tmp, self.cmat)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
@@ -137,13 +118,13 @@ class Mat:
     def free(self):
         """
         """
-        meschach.m_free(self.this)
-        self.__dict__["this"] = meschach.m_null()
+        meschach.m_free(self.cmat)
+        self.cmat = meschach.m_null()
 
     def resize(self,m,n):
         """
         """
-        meschach.m_resize(self.this,m,n)
+        meschach.m_resize(self.cmat,m,n)
 
     #
     # Members functions
@@ -151,131 +132,131 @@ class Mat:
     def ones(self):
         """
         """
-        meschach.m_ones(self.this)
+        meschach.m_ones(self.cmat)
 
     def zero(self):
         """
         """
-        meschach.m_zero(self.this)
+        meschach.m_zero(self.cmat)
 
     def rand(self):
         """
         """
-        meschach.m_rand(self.this)
+        meschach.m_rand(self.cmat)
 
     def identity(self):
         """
         """
-        meschach.m_ident(self.this)
+        meschach.m_ident(self.cmat)
 
     def __invert__(self):
         """
         transpose of the matrix At = ~A
         """
         ret = Mat(self.n, self.m)
-        meschach.m_transp(self.this, ret.this)
+        meschach.m_transp(self.cmat, ret.cmat)
         return ret
 
     def norm_frob(self):
         """
         """
-        return meschach.m_norm_frob(self.this)
+        return meschach.m_norm_frob(self.cmat)
 
     #
     # operators creating temporary
     #
-    def __add__(self,a):
+    def __add__(self, a):
         # a is a Mat
-        if ( isinstance(a, Mat) ):
+        if isinstance(a, Mat):
             ret = Mat(self.m, self.n)
-            meschach.m_add(self.this, a.this, ret.this)
+            meschach.m_add(self.cmat, a.cmat, ret.cmat)
             return ret
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
+        elif isinstance(a, int) or isinstance(a, float):
             ret = Mat(self.m,self.n)
-            meschach_adds.m_sadd(a, self.this, ret.this)
+            meschach_adds.m_sadd(a, self.cmat, ret.cmat)
             return ret
         else:
             raise TypeError("wrong type")
 
-    def __radd__(self,a):
+    def __radd__(self, a):
         return self.__add__(a)
 
-    def __sub__(self,a):
+    def __sub__(self, a):
         # a is a Mat
-        if ( isinstance(a, Mat) ):
+        if isinstance(a, Mat):
             ret = Mat(self.m, self.n)
-            meschach.m_sub(self.this, a.this, ret.this)
+            meschach.m_sub(self.cmat, a.cmat, ret.cmat)
             return ret
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
+        elif isinstance(a, int) or isinstance(a, float):
             ret = Mat(self.m,self.n)
-            meschach_adds.m_ssub(a, self.this, ret.this)
+            meschach_adds.m_ssub(a, self.cmat, ret.cmat)
             return ret
         else:
             raise TypeError("wrong type")
 
-    def __rsub__(self,a):
+    def __rsub__(self, a):
         return self.__sub__(a)
 
-    def __mul__(self,a):
+    def __mul__(self, a):
         # a is a Mat
-        if ( isinstance(a, Mat) ):
+        if isinstance(a, Mat):
             ret = Mat(self.m, a.n)
-            meschach.m_mlt(self.this, a.this, ret.this)
+            meschach.m_mlt(self.cmat, a.cmat, ret.cmat)
             return ret
         # a is a Vec
-        elif ( isinstance(a, PyVEC.Vec) ):
+        elif isinstance(a, PyVEC.Vec):
             ret = PyVEC.Vec(self.n)
-            meschach.mv_mlt(self.this, a.this, ret.this)
+            meschach.mv_mlt(self.cmat, a.cmat, ret.cvec)
             return ret
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
+        elif isinstance(a, int) or isinstance(a, float):
             ret = Mat(self.m, self.n)
-            meschach.sm_mlt(a, self.this, ret.this)
+            meschach.sm_mlt(a, self.cmat, ret.cmat)
             return ret
         else:
             raise TypeError("wrong type")
 
-    def __rmul__(self,a):
+    def __rmul__(self, a):
         return self.__mul__(a)
 
     #
     # operator using and returning base object
     #
-    def __iadd__(self,a):
+    def __iadd__(self, a):
         # a is a Mat
-        if ( isinstance(a, Mat) ):
-            meschach.m_add(self.this, a.this, self.this)
+        if isinstance(a, Mat):
+            meschach.m_add(self.cmat, a.cmat, self.cmat)
             return self
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
-            meschach_adds.m_sadd(a, self.this, self.this)
+        elif isinstance(a, int) or isinstance(a, float):
+            meschach_adds.m_sadd(a, self.cmat, self.cmat)
             return self
         else:
             raise TypeError("wrong type")
 
-    def __isub__(self,a):
+    def __isub__(self, a):
         # a is a Mat
-        if ( isinstance(a, Mat) ):
-            meschach.m_sub(self.this, a.this, self.this)
+        if isinstance(a, Mat):
+            meschach.m_sub(self.cmat, a.cmat, self.cmat)
             return self
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
-            meschach_adds.m_ssub(a, self.this, self.this)
+        elif isinstance(a, int) or isinstance(a, float):
+            meschach_adds.m_ssub(a, self.cmat, self.cmat)
             return self
         else:
             raise TypeError("wrong type")
 
-    def __imul__(self,a):
+    def __imul__(self, a):
         # a is a Mat
-        if ( isinstance(a, Mat) ):
+        if isinstance(a, Mat):
             tmp = + self
-            meschach.m_mlt(tmp.this, a.this, self.this)
+            meschach.m_mlt(tmp.cmat, a.cmat, self.cmat)
             return self
         # a is a integer or a double
-        elif ( isinstance(a, int) or isinstance(a, float) ):
-            meschach.sm_mlt(a, self.this, self.this)
+        elif isinstance(a, int) or isinstance(a, float):
+            meschach.sm_mlt(a, self.cmat, self.cmat)
             return self
         else:
             raise TypeError("wrong type")
@@ -288,7 +269,7 @@ class Mat:
         to clone a matrix : m1 = + m2   --- memory is not shared ---
         """
         ret = Mat(self.m, self.n)
-        meschach.m_copy(self.this, ret.this)
+        meschach.m_copy(self.cmat, ret.cmat)
         return ret
 
     # A = - B
@@ -296,6 +277,6 @@ class Mat:
         """
         """
         ret = Mat(self.m, self.n)
-        meschach.m_copy(self.this, ret.this)
-        meschach.sm_mlt(-1.0, ret.this, ret.this)
+        meschach.m_copy(self.cmat, ret.cmat)
+        meschach.sm_mlt(-1.0, ret.cmat, ret.cmat)
         return ret

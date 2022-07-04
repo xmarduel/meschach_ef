@@ -26,55 +26,51 @@ class SpMatRow:
 
 class SpMat(object):
     """
-    class for  Sparse Matrix : self.this is a SPMAT * structure
+    class for  Sparse Matrix : self.cspmat is a SPMAT * structure
     """
-    def __init__(self,m,n):
+    def __init__(self, m, n):
         """
-        setup self.this ; this is a SPMAT* structure
+        setup self.cspmat ; this is a SPMAT* structure
         """
-        try:
-            cspmat = meschach.sp_get(m,n,10)
-            self.__dict__["this"] = cspmat
-        except:
-            raise IndexError, "negative argument for <SpMat> initialization"
+        self.cspmat = meschach.sp_get(m, n, 10)
 
-    def __del__(self):
-        """
-        free the storage in self.this
-        """
-        if hasattr(self,"this"):
-            meschach.sp_free(self.this)
-        self.__dict__["this"] = meschach.sp_null()
+    #def __del__(self):
+    #    """
+    #    free the storage in self.cspmat
+    #    """
+    #    if hasattr(self,"this"):
+    #        meschach.sp_free(self.cspmat)
+    #    self.__dict__["this"] = meschach.sp_null()
 
     #
     # Get the dimension of the matrix
     #
     def _get_m(self):
-        return meschach_adds.sp_dim1(self)
+        return meschach_adds.sp_dim1(self.cspmat)
     def _get_n(self):
-        return meschach_adds.sp_dim2(self)
+        return meschach_adds.sp_dim2(self.cspmat)
 
     m = property( _get_m, doc="1rst dim")
     n = property( _get_n, doc="2nd dim")
 
 
-    def __setattr__(self, name, value):
+    #def __setattr__(self, name, value):
 
-        if name == "this" :
-            raise AttributeError("not allowed to change self.this in this way")
-        else:
-            pass
-            #raise AttributeError("not allowed to add an attribute to an IMat instance")
+    #    if name == "this" :
+    #        raise AttributeError("not allowed to change self.cspmat in this way")
+    #    else:
+    #        pass
+     #       #raise AttributeError("not allowed to add an attribute to an IMat instance")
 
     #
     # Getting/Setting  the data
     #
     def __getitem__(self, key):
-        SpMatRowInstance = SpMatRow(self.this, key)
+        SpMatRowInstance = SpMatRow(self.cspmat, key)
         return SpMatRowInstance
 
     def __setitem__(self, key, val):
-        SpMatRowInstance = SpMatRow(self.this, key)
+        SpMatRowInstance = SpMatRow(self.cspmat, key)
         return SpMatRowInstance
 
     #
@@ -83,16 +79,16 @@ class SpMat(object):
     def out(self, stream=sys.stdout):
         """
         """
-        meschach.sp_foutput(stream, self.this)
+        meschach.sp_foutput(stream, self.cspmat)
 
     def dump(self,stream=sys.stdout):
         """
         """
-        ibmeschach.sp_dump(stream, self.this)
+        meschach.sp_dump(stream, self.cspmat)
 
     def __str__(self): # as "out"
-        f_tmp = file("tmp.dat", "w+")
-        meschach.sp_foutput(f_tmp, self.this)
+        f_tmp = open("tmp.dat", "w+")
+        meschach.sp_foutput(f_tmp, self.cspmat)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
@@ -100,8 +96,8 @@ class SpMat(object):
         return str
 
     def __repr__(self): # as "dump"
-        f_tmp = file("tmp.dat", "w+")
-        meschach.sp_dump(f_tmp, self.this)
+        f_tmp = open("tmp.dat", "w+")
+        meschach.sp_dump(f_tmp, self.cspmat)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
@@ -114,13 +110,13 @@ class SpMat(object):
     def free(self):
         """
         """
-        meschach.sp_free(self.this)
-        self.__dict__["this"] = meschach.sp_null()
+        meschach.sp_free(self.cspmat)
+        self.cspmat = meschach.sp_null()
 
     def resize(self,m,n):
         """
         """
-        meschach.sp_resize(self.this,m,n)
+        meschach.sp_resize(self.cspmat, m, n)
 
     #
     # Members functions
@@ -128,33 +124,33 @@ class SpMat(object):
     def ones(self):
         """
         """
-        meschach_adds.sp_ones(self.this)
+        meschach_adds.sp_ones(self.cspmat)
 
     def zero(self):
         """
         """
-        meschach.sp_zero(self.this)
-        meschach.sp_compact(self.this, 0.0) # because sp_zero don't
+        meschach.sp_zero(self.cspmat)
+        meschach.sp_compact(self.cspmat, 0.0) # because sp_zero don't
 
     def rand(self):
         """
         """
-        meschach_adds.sp_rand(self.this)
+        meschach_adds.sp_rand(self.cspmat)
 
     def identity(self):
         """
         """
-        meschach_adds.sp_ident(self.this)
+        meschach_adds.sp_ident(self.cspmat)
 
     def eye(self):
         """
         """
-        meschach_adds.sp_eye(self.this)
+        meschach_adds.sp_eye(self.cspmat)
 
     def tridiag(self, lower_val, diag_val, upper_val):
         """
         """
-        meschach_adds.sp_tridiag(self.this, lower_val, diag_val, upper_val)
+        meschach_adds.sp_tridiag(self.cspmat, lower_val, diag_val, upper_val)
 
     #
     # operators creating temporary
@@ -163,15 +159,15 @@ class SpMat(object):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             ret = SpMat(self.m, self.n)
-            meschach.sp_add(self.this, a.this, ret.this)
-            meschach.sp_compact(ret.this, 0.0)
+            meschach.sp_add(self.cspmat, a.cspmat, ret.cspmat)
+            meschach.sp_compact(ret.cspmat, 0.0)
             return ret
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
             raise TypeError("wrong type")
         #    ret = SpMat(self.m,self.n)
-        #    sp_sadd(a, self.this, ret.this)
-        #    sp_compact(ret.this, 0.0)
+        #    sp_sadd(a, self.cspmat, ret.cspmat)
+        #    sp_compact(ret.cspmat, 0.0)
         #    return ret
         else:
             raise TypeError("wrong type")
@@ -183,15 +179,15 @@ class SpMat(object):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             ret = SpMat(self.m, self.n)
-            meschach.sp_sub(self.this, a.this, ret.this)
-            meschach.sp_compact(ret.this, 0.0)
+            meschach.sp_sub(self.cspmat, a.cspmat, ret.cspmat)
+            meschach.sp_compact(ret.cspmat, 0.0)
             return ret
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
             raise TypeError("wrong type")
         #    ret = SpMat(self.m,self.n)
-        #    sp_ssub(a, self.this, ret.this)
-        #    sp_compact(ret.this, 0.0)
+        #    sp_ssub(a, self.cspmat, ret.cspmat)
+        #    sp_compact(ret.cspmat, 0.0)
         #    return ret
         else:
             raise TypeError("wrong type")
@@ -203,19 +199,19 @@ class SpMat(object):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             ret = SpMat(self.m, a.n)
-            meschach_adds.sp_m_mlt(self.this, a.this, ret.this)
-            meschach.sp_compact(ret.this, 0.0)
+            meschach_adds.sp_m_mlt(self.cspmat, a.cspmat, ret.cspmat)
+            meschach.sp_compact(ret.cspmat, 0.0)
             return ret
         # a is a Vec
         elif ( isinstance(a, PyVEC.Vec) ):
             ret = PyVEC.Vec(self.n)
-            meschach.sp_mv_mlt(self.this, a.this, ret.this)
+            meschach.sp_mv_mlt(self.cspmat, a.cspmat, ret.cvec)
             return ret
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
             ret = SpMat(self.m, self.n)
-            meschach.sp_smlt(self.this, a, ret.this)
-            meschach.sp_compact(ret.this, 0.0)
+            meschach.sp_smlt(self.cspmat, a, ret.cspmat)
+            meschach.sp_compact(ret.cspmat, 0.0)
             return ret
         #
         else:
@@ -230,14 +226,14 @@ class SpMat(object):
     def __iadd__(self,a):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
-            meschach.sp_add(self.this, a.this, self.this)
-            meschach.sp_compact(self.this, 0.0)
+            meschach.sp_add(self.cspmat, a.cspmat, self.cspmat)
+            meschach.sp_compact(self.cspmat, 0.0)
             return self
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
             raise TypeError("wrong type")
-        #    sp_sadd(a, self.this, self.this)
-        #    sp_compact(self.this, 0.0)
+        #    sp_sadd(a, self.cspmat, self.cspmat)
+        #    sp_compact(self.cspmat, 0.0)
         #    return self
         else:
             raise TypeError("wrong type")
@@ -247,14 +243,14 @@ class SpMat(object):
     def __isub__(self,a):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
-            meschach.sp_sub(self.this, a.this, self.this)
-            meschach.sp_compact(self.this, 0.0)
+            meschach.sp_sub(self.cspmat, a.cspmat, self.cspmat)
+            meschach.sp_compact(self.cspmat, 0.0)
             return self
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
             raise TypeError("wrong type")
-        #    sp_ssub(a, self.this, self.this)
-        #    sp_compact(self.this, 0.0)
+        #    sp_ssub(a, self.cspmat, self.cspmat)
+        #    sp_compact(self.cspmat, 0.0)
         #    return self
         else:
             raise TypeError("wrong type")
@@ -263,13 +259,13 @@ class SpMat(object):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             tmp = + self
-            meschach_adds.sp_m_mlt(tmp.this, a.this, self.this)
-            meschach.sp_compact(self.this, 0.0)
+            meschach_adds.sp_m_mlt(tmp.cspmat, a.cspmat, self.cspmat)
+            meschach.sp_compact(self.cspmat, 0.0)
             return self
         # a is a integer or a double
         elif ( isinstance(a, int) or isinstance(a, float) ):
-            meschach.sp_smlt(self.this, a, self.this)
-            meschach.sp_compact(self.this, 0.0)
+            meschach.sp_smlt(self.cspmat, a, self.cspmat)
+            meschach.sp_compact(self.cspmat, 0.0)
             return self
         #
         else:
@@ -284,8 +280,8 @@ class SpMat(object):
         to clone a Sparse Matrix
         """
         ret = SpMat(self.m, self.n)
-        meschach.sp_copy2(self.this, ret.this)
-        meschach.sp_compact(ret.this, 0.0)
+        meschach.sp_copy2(self.cspmat, ret.cspmat)
+        meschach.sp_compact(ret.cspmat, 0.0)
         return ret
 
     # A = - B
@@ -294,7 +290,7 @@ class SpMat(object):
         create a copy of the matrix , multiplied with (-1)
         """
         ret = SpMat(self.m, self.n)
-        meschach.sp_copy2(self.this, ret.this)
-        meschach.sp_smlt(ret.this, -1.0, ret.this)
-        meschach.sp_compact(ret.this, 0.0)
+        meschach.sp_copy2(self.cspmat, ret.cspmat)
+        meschach.sp_smlt(ret.cspmat, -1.0, ret.cspmat)
+        meschach.sp_compact(ret.cspmat, 0.0)
         return ret

@@ -8,10 +8,11 @@
 // U_steadystate = v_finput(fp, None)
 // fp.close()
 
-%nodefault; /* no constructor/destructor */ 
+%nodefault; /* no constructor/destructor */
 
 typedef unsigned int 	u_int;
 typedef double          Real;
+typedef double          real;
 
 %include "typemaps.i"
 
@@ -29,9 +30,9 @@ typedef double          Real;
 //	PyErr_SetString(PyExc_TypeError, "Need a file!");
 //	return NULL;
 //}
-   
+
    // PYTHON-3.x is not so easy
-   
+
    if ( PyLong_Check($input) == 1 ) {
       printf("--> PyLong_Check($input) = %d : IS INTEGER \n", PyLong_Check($input));
       PyErr_SetString(PyExc_TypeError, "Need a file (not an INTEGER)!");
@@ -47,13 +48,13 @@ typedef double          Real;
       PyErr_SetString(PyExc_TypeError, "Need a file (not a STRING)!");
       return NULL;
    }
-   
+
    int fd = PyObject_AsFileDescriptor($input);
    if ( fd < 0 ) {
          PyErr_SetString(PyExc_TypeError, "Need a file!");
          return NULL;
    }
-   
+
    if ( strstr("$symname", "input") != NULL) {
       //printf("--> FILE* typemap <r>\n");
       $1 = fdopen(fd, "r"); // a FILE * to read
@@ -81,7 +82,7 @@ if (!PyString_Check($input)) {
 $1 = PyString_AsString($input);
 }
 //////////////////////////////////////////////////////////////
-// TYPEMAP : 
+// TYPEMAP :
 %typemap(in) PyObject * {
 if (!PyCallable_Check($input)) {
 	PyErr_SetString(PyExc_TypeError, "Need a function!");

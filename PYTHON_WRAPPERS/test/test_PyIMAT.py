@@ -10,12 +10,14 @@ class IMatTest(unittest.TestCase):
 
     def testInit(self):
         m1 =  PyIMAT.IMat(3,3)
-        print("\ntry IMat(-1,4) (to raise an exception that will be caught)")
-        try: m3 = PyIMAT.IMat(-1,4)
-        except IndexError:
+
+        #print("\ntry IMat(-1,4) (to raise an exception that will be caught)")
+        try:
+            m3 = PyIMAT.IMat(-1,4)
+        except ValueError:
             pass
 
-        print("try IMat(4) (to raise an exception that will be caught)")
+        #print("try IMat(4) (to raise an exception that will be caught)")
         try:
             m4 = PyIMAT.IMat(4)
         except TypeError:

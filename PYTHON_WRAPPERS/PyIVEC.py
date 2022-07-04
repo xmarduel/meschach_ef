@@ -10,47 +10,34 @@ import sys
 
 class IVec:
     """
-    class for IntVector : self.this is a IVEC * structure
+    class for IntVector : self.civec is a IVEC * structure
     """
     def __init__(self, m):
         """
-        setup self.this
+        setup self.civec
         """
-        try:
-            civec = meschach.iv_get(m)
-            self.__dict__["this"] = civec
-        except:
-            raise IndexError("negative argument for <IVec> initialization")
-
-    def __del__(self):
-        """
-        free mem of self.this
-        """
-        if hasattr(self,"this"):
-            meschach.iv_free(self.this)
-        #self.__dict__["this"] = meschach_adds.iv_null()
-
+        self.civec = meschach.iv_get(m)
 
     #
     #  Get the dimension of the matrix
     #
     def _get_m(self):
-        return meschach_adds.iv_dim(self)
+        return meschach_adds.iv_dim(self.civec)
 
     m = property( _get_m , doc="dim")
 
 
     def __len__(self):
-        return meschach_adds.iv_dim(self)
+        return meschach_adds.iv_dim(self.civec)
 
 
-    def __setattr__(self, name, value):
+    #def __setattr__(self, name, value):
 
-        if name == "this" :
-            raise AttributeError( "not allowed to change self.this in this way")
-        else:
-            pass
-            #raise AttributeError, "not allowed to add an attribute to an IMat instance"
+    #    if name == "civec" :
+    #        raise AttributeError( "not allowed to change self.civec in this way")
+    #    else:
+    #        pass
+    #        #raise AttributeError, "not allowed to add an attribute to an IMat instance"
 
     # Getting the data
 
@@ -59,12 +46,12 @@ class IVec:
             raise TypeError("must be a integer")
         if not isinstance(ival, int):
             raise TypeError("must be a integer")
-        return meschach.iv_set_val(self.this, key, ival)
+        return meschach.iv_set_val(self.civec, key, ival)
 
     def __getitem__(self,key):
         if not isinstance(key, int):
             raise TypeError("must be a integer")
-        return meschach.iv_get_val(self.this, key)
+        return meschach.iv_get_val(self.civec, key)
 
     #
     # Input - Output diagnostics
@@ -72,16 +59,16 @@ class IVec:
     def out(self,file=sys.stdout):
         """
         """
-        meschach.iv_foutput(file, self.this)
+        meschach.iv_foutput(file, self.civec)
 
     def dump(self,file=None):
         """
         """
-        meschach.iv_dump(file, self.this)
+        meschach.iv_dump(file, self.civec)
 
     def __str__(self): # as "out"
         f_tmp = open("tmp.dat", "w+")
-        meschach.iv_foutput(f_tmp, self.this)
+        meschach.iv_foutput(f_tmp, self.civec)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
@@ -90,7 +77,7 @@ class IVec:
 
     def __repr__(self): # as "dump"
         f_tmp = open("tmp.dat", "w+")
-        meschach.iv_dump(f_tmp, self.this)
+        meschach.iv_dump(f_tmp, self.civec)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
@@ -103,14 +90,13 @@ class IVec:
     def free(self):
         """
         """
-        meschach.iv_free(self.this)
-        self.__dict__["this"] = meschach_adds.iv_null()
+        meschach.iv_free(self.civec)
+        self.civec = meschach_adds.iv_null()
 
     def resize(self,m):
         """
         """
-        meschach_adds.iv_resize(self.this, m)
-
+        meschach_adds.iv_resize(self.civec, m)
 
     #
     # Members functions
@@ -118,18 +104,17 @@ class IVec:
     def ones(self):
         """
         """
-        meschach_adds.iv_ones(self.this)
-    #
+        meschach_adds.iv_ones(self.civec)
+
     def zero(self):
         """
         """
-        meschach.iv_zero(self.this)
-    #
+        meschach.iv_zero(self.civec)
+
     def rand(self):
         """
         """
-        meschach_adds.iv_rand(self.this)
-
+        meschach_adds.iv_rand(self.civec)
 
     #
     # operators creating temporary
@@ -138,12 +123,12 @@ class IVec:
         # a is a IVec
         if isinstance(a, IVec):
             ret = IVec(self.m)
-            meschach.iv_add(self.this, a.this, ret.this)
+            meschach.iv_add(self.civec, a.civec, ret.civec)
             return ret
         # a is a integer
         elif isinstance(a, int):
             ret = IVec(self.m)
-            meschach_adds.iv_sadd(a, self.this, ret.this)
+            meschach_adds.iv_sadd(a, self.civec, ret.civec)
             return ret
         # bad argument
         else:
@@ -156,12 +141,12 @@ class IVec:
         # a is a IVec
         if isinstance(a, IVec):
             ret = IVec(self.m)
-            meschach.iv_sub(self.this, a.this, ret.this)
+            meschach.iv_sub(self.civec, a.civec, ret.civec)
             return ret
         # a is a integer
         elif isinstance(a, int):
             ret = IVec(self.m)
-            meschach_adds.iv_ssub(a, self.this, ret.this)
+            meschach_adds.iv_ssub(a, self.civec, ret.civec)
             return ret
         # bad argument
         else:
@@ -174,14 +159,13 @@ class IVec:
         # a is a IVec
         #if ( isinstance(a, IVec) ):
         #    ret = IVec(self.dim)
-        #    ret = in_prod(self.this, a.this)
+        #    ret = in_prod(self.civec, a.civec)
         #    return ret
         # a is a integer or a double
         if ( isinstance(a, int) ):
             ret = IVec(self.m)
-            meschach_adds.iv_smlt(a, self.this, ret.this)
+            meschach_adds.iv_smlt(a, self.civec, ret.civec)
             return ret
-        #
         else:
             raise TypeError("wrong type")
 
@@ -194,11 +178,11 @@ class IVec:
     def __iadd__(self,a):
         # a is a IVec
         if isinstance(a, IVec):
-            meschach.iv_add(self.this, a.this, self.this)
+            meschach.iv_add(self.civec, a.civec, self.civec)
             return self
         # a is a integer
         elif isinstance(a, int):
-            meschach_adds.iv_sadd(a, self.this, self.this)
+            meschach_adds.iv_sadd(a, self.civec, self.civec)
             return self
         # bad argument
         else:
@@ -207,11 +191,11 @@ class IVec:
     def __isub__(self,a):
         # a is a IVec
         if isinstance(a, IVec):
-            meschach.iv_sub(self.this, a.this, self.this)
+            meschach.iv_sub(self.civec, a.civec, self.civec)
             return self
         # a is a integer
         elif isinstance(a, int):
-            meschach_adds.iv_ssub(a, self.this, self.this)
+            meschach_adds.iv_ssub(a, self.civec, self.civec)
             return self
         # bad argument
         else:
@@ -219,8 +203,8 @@ class IVec:
 
     def __imul__(self,a):
         # a is a integer
-        if ( isinstance(a, int) ):
-            meschach_adds.iv_smlt(a, self.this, self.this)
+        if isinstance(a, int):
+            meschach_adds.iv_smlt(a, self.civec, self.civec)
             return self
         # bad argument
         else:
@@ -235,7 +219,7 @@ class IVec:
         to clone a vector : v1 = + v2   --- memory is not shared ---
         """
         ret = IVec(self.m)
-        meschach.iv_copy(self.this, ret.this)
+        meschach.iv_copy(self.civec, ret.civec)
         return ret
 
     # A = - B
@@ -244,6 +228,6 @@ class IVec:
         get the negativ of a vector -- a vector is created --
         """
         ret = IVec(self.m)
-        meschach.iv_copy(self.this, ret.this)
-        meschach_adds.iv_smlt(-1, ret.this, ret.this)
+        meschach.iv_copy(self.civec, ret.civec)
+        meschach_adds.iv_smlt(-1, ret.civec, ret.civec)
         return ret

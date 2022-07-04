@@ -10,82 +10,63 @@ import sys
 
 class Perm(object):
     """
-    class for Permutation : self.this is a PERM * structure
+    class for Permutation : self.cperm is a PERM * structure
     """
     def __init__(self,m):
         """
-        setup self.this
+        setup self.cperm
         """
-        try:
-            cperm = meschach.px_get(m)
-            self.__dict__["this"]  = cperm
-        except:
-            raise IndexError("negative argument for <Perm> initialization")
-
-    def __del__(self):
-        """
-        free mem of self.this
-        """
-        if hasattr(self,"this"):
-            meschach.px_free(self.this)
-        self.__dict__["this"] = meschach.px_null()
+        self.cperm = meschach.px_get(m)
 
     #
     # getting the data
     #
     def _get_size(self):
-        return meschach_adds.px_size(self)
+        return meschach_adds.px_size(self.cperm)
 
     size = property( _get_size, doc="size")
 
-
     def __len__(self):
-        return meschach_adds.px_size(self)
+        return meschach_adds.px_size(self.cperm)
 
-    def __setattr__(self,name, value):
-        if ( name == "this" ):
-            raise AttributeError("not allowed to change self.this in this way")
-        else:
-            pass
-            #raise AttributeError, "not allowed to add an attribute to an IMat instance"
+    def __setitem__(self, key, ival):
+        raise TypeError("use swap to manipulate a Permutation")
 
-    def __setitem__(self,key,ival):
-        raise TypeError("use swap to manipulate  a Permutation")
-
-    def __getitem__(self,key):
-        return meschach.px_get_val(self.this,key)
+    def __getitem__(self, key):
+        return meschach.px_get_val(self.cperm, key)
 
     #
     # Input - Output diagnostics
     #
-    def out(self,file=None):
+
+    def out(self, file=None):
         """
         """
-        if (file==None):
-            meschach.px_foutput(stdout,self.this)
+        if file == None:
+            meschach.px_foutput(sys.stdout, self.cperm)
         else:
-            meschach.px_foutput(file,self.this)
+            meschach.px_foutput(file, self.cperm)
 
     def dump(self,file=None):
         """
         """
-        if (file==None):
-            meschach.px_dump(stdout,self.this)
+        if file == None:
+            meschach.px_dump(sys.stdout, self.cperm)
         else:
-            meschach.px_dump(file,self.this)
+            meschach.px_dump(file, self.cperm)
 
     def __str__(self): # as "out"
         f_tmp = open("tmp.dat", "w+")
-        meschach.px_foutput(f_tmp, self.this)
+        meschach.px_foutput(f_tmp, self.cperm)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
 
         return str
-    #
+
     def __repr__(self): # as "dump"
         f_tmp = open("tmp.dat", "w+")
-        meschach.px_dump(f_tmp, self.this)
+        meschach.px_dump(f_tmp, self.cperm)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
@@ -98,32 +79,33 @@ class Perm(object):
     def free(self):
         """
         """
-        meschach.px_free(self.this)
-        self.__dict__["this"] = meschach.px_null()
+        meschach.px_free(self.cperm)
+        self.cperm = meschach.px_null()
 
     def resize(self,m):
         """
         """
-        meschach.px_resize(self.this, m)
+        meschach.px_resize(self.cperm, m)
 
     #
     # Members functions
     #
+
     def ident(self):
         """
         """
-        meschach.px_ident(self.this)
+        meschach.px_ident(self.cperm)
 
     def swap(self, i, j):
         """
         """
-        meschach.px_transp(self.this, i, j)
+        meschach.px_transp(self.cperm, i, j)
 
-    def __mul__(self,a):
+    def __mul__(self, a):
         # a is a Perm
-        if ( isinstance(a, Perm) ):
+        if isinstance(a, Perm):
             ret = Perm(self.size)
-            meschach.px_mlt(self.this, a.this, ret.this)
+            meschach.px_mlt(self.cperm, a.cperm, ret.cperm)
         else:
             raise TypeError("wrong type")
 
@@ -132,11 +114,11 @@ class Perm(object):
     #
     # operator using and returning base object
     #
-    def __imul__(self,a):
+    def __imul__(self, a):
         # a is a integer or a double
-        if ( isinstance(a, Perm) ):
+        if isinstance(a, Perm):
             ret = Perm(self.size)
-            meschach.px_mlt(self.this, a.this, ret.this) # not in-situ
+            meschach.px_mlt(self.cperm, a.cperm, ret.cperm) # not in-situ
             return ret
         else:
             raise TypeError("wrong type")
@@ -151,7 +133,7 @@ class Perm(object):
         to clone a permutation
         """
         ret = Perm(self.size)
-        meschach.px_copy(self.this, ret.this)
+        meschach.px_copy(self.cperm, ret.cperm)
         return ret
 
     # A = - B
@@ -159,5 +141,5 @@ class Perm(object):
         """
         """
         ret = Perm(self.size)
-        meschach.px_inv(self.this, ret.this)
+        meschach.px_inv(self.cperm, ret.cperm)
         return ret

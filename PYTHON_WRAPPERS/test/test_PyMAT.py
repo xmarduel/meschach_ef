@@ -10,19 +10,21 @@ class MatTest(unittest.TestCase):
 
     def testInit(self):
         m1 =  PyMAT.Mat(3,3)
-        print("try Mat(-1,4) ...")
-        try: m3 = PyMAT.Mat(-1,4)
-        except IndexError:
-            pass
 
-        print("try Mat(4) ...")
-        try: m4 = PyMAT.Mat(4)
+        #print("try Mat(-1,4) ...")
+        #try: m3 = PyMAT.Mat(-1,4)
+        #except IndexError:
+        #    pass
+
+        #print("try Mat(4) ...")
+        try:
+            m4 = PyMAT.Mat(4)
         except TypeError:
             print(" detected <TypeError>, it is OK ...")
 
-    def test___del__(self):
-        m1 =  PyMAT.Mat(3,3)
-        del m1
+    #def test___del__(self):
+    #    m1 =  PyMAT.Mat(3,3)
+    #    del m1
 
     #
     # Getting the data

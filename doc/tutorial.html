@@ -74,6 +74,9 @@ Makefiles)</p>
     and the Finite Element Methods.</li>
   <li>The python wrapper is nice and allows the user to quickly change the "right hand side" or the boundary conditions
     without recompiling, as the <strong>python functions are plugged into the C code</strong>.</li>
+  <li>Even with the C drivers, rhs and boundary conditions are easely changed as they are given as "string" in
+      the driver program configuration file and <strong>interpreted as LUA code</strong> within the C code</li>
+    </thead></li>
 </ul>
 
 <p><strong>Meschach-EF</strong> can solve <strong>1D</strong>, <strong>2D</strong> and <strong>3D</strong> equations,
@@ -105,8 +108,8 @@ display and X windows interactions (start/pause/step).</p>
 <ul>
   <li>1D: <strong>cpgplot</strong>, <strong>vogle/vopl</strong> (vopl extended by me)<strong></strong>,
     <strong>libsciplot</strong> (written by me from gnu libplot/graph code!)</li>
-  <li>2D: <strong>vogle,</strong> and output in <strong>vtk</strong> and <strong>silo</strong> formats + drivers
-    programs</li>
+  <li>2D: <strong>interactiv visualization with vogle,</strong> and output data in <strong>vtk</strong> and <strong>silo</strong>
+    formats + scripts programs to run to view the data</li>
   <li>3D: no interactiv plot, but output in <strong>vtk</strong> and <strong>silo</strong> formats + driver programs
     for vtk and the <strong>VisIt</strong> visualisation app (silo files) or <strong>Paraview</strong> app (vtk files)</li>
 </ul>
@@ -683,7 +686,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
             "additionalProperties" : false
         },
 
-        "MISC_OUTPUT" : { "type":"object", "description":"",
+        "MISC_OUTPUT" : { "type":"object", "description":"useful for transient problems",
             "properties" : {
                 "ITPRINT"          : { "type":"integer", "description":"" },
                 "ITSAVE"           : { "type":"integer", "description":"" },
@@ -695,9 +698,7 @@ but infact you need to define only a few of them. It just gives you an idea how 
         "MISC_GRAPHICS" : { "type":"object", "description":"",
             "properties" : {
                 "IMTXPROF"         : { "type":"boolean", "description":"" },
-                "IGEOMVIEW"        : { "type":"boolean", "description":"" },
-                "IGEOMCONTOURVIEW" : { "type":"boolean", "description":"" },
-                "IGEOMTOTALVIEW"   : { "type":"boolean", "description":"" }
+                "IGEOMVIEW"        : { "type":"boolean", "description":"" }
             }
         },
 

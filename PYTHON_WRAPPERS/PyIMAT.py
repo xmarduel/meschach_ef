@@ -30,69 +30,49 @@ class IMatRow:
 
 class IMat:
     """
-    class for Int Matrix : self.this is a IMAT * structure
+    class for Int Matrix : self.cimat is a IMAT * structure
     """
-    def __init__(self,m,n):
+    def __init__(self, m, n):
         """
-        setup self.this
+        setup self.cimat
         """
-        try:
-            cimat = meschach_adds.im_get(m,n)
-            self.__dict__["this"] = cimat
-        except:
-            raise IndexError("negative argument for <IMat> initialization")
-
-    def __del__(self):
-        """
-        free mem of self.this
-        """
-        if hasattr(self,"this"):
-            meschach_adds.im_free(self.this)
-        self.__dict__["this"] = meschach_adds.im_null()
+        self.cimat = meschach_adds.im_get(m, n)
 
     def resize(self,m,n):
         """
         """
-        if hasattr(self,"this"):
-            meschach_adds.im_resize(self.this,m,n)
+        if hasattr(self, "cimat"):
+            meschach_adds.im_resize(self.cimat, m, n)
 
     #
     # Get the dimension of the matrix
     #
 
     def _get_m(self):
-        return meschach_adds.im_dim1(self)
+        return meschach_adds.im_dim1(self.cimat)
     def _get_n(self):
-        return meschach_adds.im_dim2(self)
+        return meschach_adds.im_dim2(self.cimat)
 
     m = property( _get_m, doc="1rst dim")
     n = property( _get_n, doc="2nd dim")
 
-
-    def __setattr__(self,name, value):
-        if ( name == "this" ):
-            raise AttributeError("not allowed to change self.this in this way")
-        else:
-            pass
-            #raise AttributeError("not allowed to add an attribute to an IMat instance")
-
     #
     # Getting the data
     #
-    def __setitem__(self,key,ival):
-        if ( not isinstance(key, int) ):
+    def __setitem__(self, key, ival):
+        if not isinstance(key, int):
             raise TypeError("must be a integer")
-        if ( not isinstance(ival, int) ):
+        if not isinstance(ival, int):
             raise TypeError("must be a integer")
 
-        IMatRowInstance = IMatRow(self.this, key)
+        IMatRowInstance = IMatRow(self.cimat, key)
         return IMatRowInstance
 
     def __getitem__(self,key):
-        if ( not isinstance(key, int) ):
+        if not isinstance(key, int):
             raise TypeError("must be a integer")
 
-        IMatRowInstance = IMatRow(self.this, key)
+        IMatRowInstance = IMatRow(self.cimat, key)
         return IMatRowInstance
 
     #
@@ -101,22 +81,22 @@ class IMat:
     def out(self,file=None):
         """
         """
-        if (file==None):
-            meschach_adds.im_foutput(sys.stdout,self.this)
+        if file == None:
+            meschach_adds.im_foutput(sys.stdout, self.cimat)
         else:
-            meschach_adds.im_foutput(file,self.this)
+            meschach_adds.im_foutput(file, self.cimat)
 
     def dump(self,file=None):
         """
         """
-        if (file==None):
-            meschach_adds.im_dump(sys.stdout,self.this)
+        if file == None:
+            meschach_adds.im_dump(sys.stdout, self.cimat)
         else:
-            meschach_adds.im_dump(file,self.this)
+            meschach_adds.im_dump(file, self.cimat)
 
     def __str__(self): # as "out"
         f_tmp = open("tmp.dat", "w+")
-        meschach_adds.im_foutput(f_tmp, self.this)
+        meschach_adds.im_foutput(f_tmp, self.cimat)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
@@ -125,7 +105,7 @@ class IMat:
 
     def __repr__(self): # as "dump"
         f_tmp = open("tmp.dat", "w+")
-        meschach_adds.im_dump(f_tmp, self.this)
+        meschach_adds.im_dump(f_tmp, self.cimat)
         f_tmp.seek(0) # rewind
         str = f_tmp.read()
         f_tmp.close()
@@ -139,29 +119,29 @@ class IMat:
     def ones(self):
         """
         """
-        meschach_adds.im_ones(self.this)
+        meschach_adds.im_ones(self.cimat)
 
     def zero(self):
         """
         """
-        meschach_adds.im_zero(self.this)
+        meschach_adds.im_zero(self.cimat)
 
     def rand(self):
         """
         """
-        meschach_adds.im_rand(self.this)
+        meschach_adds.im_rand(self.cimat)
 
     def identity(self):
         """
         """
-        meschach_adds.im_ident(self.this)
+        meschach_adds.im_ident(self.cimat)
 
     def __invert__(self):
         """
         transpose of the matrix At = ~A
         """
         ret = IMat(self.n, self.m)
-        meschach_adds.im_transp(self.this, ret.this)
+        meschach_adds.im_transp(self.cimat, ret.cimat)
         return ret
 
     #
@@ -169,14 +149,14 @@ class IMat:
     #
     def __add__(self,a):
         # a is a IMat
-        if ( isinstance(a, IMat) ):
+        if isinstance(a, IMat):
             ret = IMat(self.m, self.n)
-            meschach_adds.im_add(self.this, a.this, ret.this)
+            meschach_adds.im_add(self.cimat, a.cimat, ret.cimat)
             return ret
         # a is a integer
-        elif ( isinstance(a, int) ):
+        elif isinstance(a, int):
             ret = IMat(self.m,self.n)
-            meschach_adds.im_sadd(a, self.this, ret.this)
+            meschach_adds.im_sadd(a, self.cimat, ret.cimat)
             return ret
         else:
             raise TypeError("wrong type")
@@ -186,14 +166,14 @@ class IMat:
 
     def __sub__(self,a):
         # a is a IMat
-        if ( isinstance(a, IMat) ):
+        if isinstance(a, IMat):
             ret = IMat(self.m, self.n)
-            meschach_adds.im_sub(self.this, a.this, ret.this)
+            meschach_adds.im_sub(self.cimat, a.cimat, ret.cimat)
             return ret
         # a is a integer
-        elif ( isinstance(a, int) ):
+        elif isinstance(a, int):
             ret = IMat(self.m,self.n)
-            meschach_adds.im_ssub(a, self.this, ret.this)
+            meschach_adds.im_ssub(a, self.cimat, ret.cimat)
             return ret
         else:
             raise TypeError("wrong type")
@@ -201,21 +181,21 @@ class IMat:
     def __rsub__(self,a):
         return self.__sub__(a)
 
-    def __mul__(self,a):
+    def __mul__(self, a):
         # a is a IMat
-        if ( isinstance(a, IMat) ):
+        if isinstance(a, IMat):
             ret = IMat(self.m, a.n)
-            meschach_adds.im_mlt(self.this, a.this, ret.this)
+            meschach_adds.im_mlt(self.cimat, a.cimat, ret.cimat)
             return ret
         # a is a IVec
-        if ( isinstance(a, PyIVEC.IVec) ):
+        if isinstance(a, PyIVEC.IVec):
             ret = PyIVEC.IVec(self.n)
-            meschach_adds.imv_mlt(self.this, a.this, ret.this)
+            meschach_adds.imv_mlt(self.cimat, a.cimat, ret.civec)
             return ret
         # a is a integer
-        elif ( isinstance(a, int) ):
+        elif isinstance(a, int):
             ret = IMat(self.m, self.n)
-            meschach_adds.im_smlt(self.this, a, ret.this)
+            meschach_adds.im_smlt(self.cimat, a, ret.cimat)
             return ret
         else:
             raise TypeError("wrong type")
@@ -228,24 +208,24 @@ class IMat:
     #
     def __iadd__(self,a):
         # a is a IMat
-        if ( isinstance(a, IMat) ):
-            meschach_adds.im_add(self.this, a.this, self.this)
+        if isinstance(a, IMat):
+            meschach_adds.im_add(self.cimat, a.cimat, self.cimat)
             return self
         # a is a integer
-        elif ( isinstance(a, int) ):
-            meschach_adds.im_sadd(a, self.this, self.this)
+        elif isinstance(a, int):
+            meschach_adds.im_sadd(a, self.cimat, self.cimat)
             return self
         else:
             raise TypeError("wrong type")
 
     def __isub__(self,a):
         # a is a IMat
-        if ( isinstance(a, IMat) ):
-            meschach_adds.im_sub(self.this, a.this, self.this)
+        if isinstance(a, IMat):
+            meschach_adds.im_sub(self.cimat, a.cimat, self.cimat)
             return self
         # a is a integer
         elif ( isinstance(a, int) ):
-            meschach_adds.im_ssub(a, self.this, self.this)
+            meschach_adds.im_ssub(a, self.cimat, self.cimat)
             return self
         else:
             raise TypeError("wrong type")
@@ -254,11 +234,11 @@ class IMat:
         # a is a IMat
         if ( isinstance(a, IMat) ):
             tmp = + self
-            meschach_adds.im_mlt(tmp.this, a.this, self.this)
+            meschach_adds.im_mlt(tmp.cimat, a.cimat, self.cimat)
             return self
         # a is a integer
-        elif ( isinstance(a, int) ):
-            meschach_adds.im_smlt(self.this, a, self.this)
+        elif isinstance(a, int):
+            meschach_adds.im_smlt(self.cimat, a, self.cimat)
             return self
         else:
             raise TypeError("wrong type")
@@ -271,7 +251,7 @@ class IMat:
         to clone a matrix : m1 = + m2   --- memory is not shared ---
         """
         ret = IMat(self.m, self.n)
-        meschach_adds.im_copy(self.this, ret.this)
+        meschach_adds.im_copy(self.cimat, ret.cimat)
         return ret
 
     # A = - B
@@ -279,6 +259,6 @@ class IMat:
         """
         """
         ret = IMat(self.m, self.n)
-        meschach_adds.im_copy(self.this, ret.this)
-        meschach_adds.im_smlt(ret.this, -1, ret.this)
+        meschach_adds.im_copy(self.cimat, ret.cimat)
+        meschach_adds.im_smlt(ret.cimat, -1, ret.cimat)
         return ret

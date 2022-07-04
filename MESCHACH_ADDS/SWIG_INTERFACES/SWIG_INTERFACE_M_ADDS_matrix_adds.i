@@ -4,7 +4,7 @@
 // interface file for MESCHACH_ADDS
 //
 /////////////////////////////////////////////////////////
- 
+
 #ifndef MATRIX_ADDS_H
 #define MATRIX_ADDS_H
 
@@ -130,7 +130,7 @@ IMAT*  im_ssub(int s, const IMAT* in, IMAT* out);
 /* --------------- Operations sur les TENSOR --------------- */
 
 /* manage memory --------------------------- */
-TENSOR *ts_get(int l, int m, int n); 
+TENSOR *ts_get(int l, int m, int n);
 
 /* Entrees-Sorties ------------------------- */
 void    ts_dump   (FILE *fp, TENSOR *a);
@@ -228,12 +228,12 @@ MAT* m_lincomb_transform(MAT* inout, const MAT *lincomb_coeffs);
 #undef  TS_FREE
 
 void IM_FREE(IMAT* imat)
-{ 
+{
    im_free(imat);
    (imat)=(IMAT *)NULL;
 }
 void TS_FREE(TENSOR* tnsr)
-{ 
+{
    ts_free(tnsr);
   (tnsr)=(TENSOR *)NULL;
 }
