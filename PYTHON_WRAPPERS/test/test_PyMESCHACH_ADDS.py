@@ -7,8 +7,8 @@ import unittest
 
 import  PyMESCHACH
 
-import libmeschach
-import libmeschach_adds
+import meschach
+import meschach_adds
 
 class MeschachAddsTest(unittest.TestCase):
 

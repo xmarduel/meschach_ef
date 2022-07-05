@@ -82,7 +82,7 @@ class Perm(object):
         meschach.px_free(self.cperm)
         self.cperm = meschach.px_null()
 
-    def resize(self,m):
+    def resize(self, m):
         """
         """
         meschach.px_resize(self.cperm, m)

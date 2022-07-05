@@ -1,10 +1,12 @@
 #
 # class IMat
 #
+
+import sys
+
 import meschach
 import meschach_adds
 
-import sys
 import PyIVEC
 
 
@@ -147,7 +149,7 @@ class IMat:
     #
     # operators creating temporary
     #
-    def __add__(self,a):
+    def __add__(self, a):
         # a is a IMat
         if isinstance(a, IMat):
             ret = IMat(self.m, self.n)
@@ -161,10 +163,10 @@ class IMat:
         else:
             raise TypeError("wrong type")
 
-    def __radd__(self,a):
+    def __radd__(self, a):
         return self.__add__(a)
 
-    def __sub__(self,a):
+    def __sub__(self, a):
         # a is a IMat
         if isinstance(a, IMat):
             ret = IMat(self.m, self.n)
@@ -178,7 +180,7 @@ class IMat:
         else:
             raise TypeError("wrong type")
 
-    def __rsub__(self,a):
+    def __rsub__(self, a):
         return self.__sub__(a)
 
     def __mul__(self, a):
@@ -200,13 +202,13 @@ class IMat:
         else:
             raise TypeError("wrong type")
 
-    def __rmul__(self,a):
+    def __rmul__(self, a):
         return self.__mul__(a)
 
     #
     # operator using and returning base object
     #
-    def __iadd__(self,a):
+    def __iadd__(self, a):
         # a is a IMat
         if isinstance(a, IMat):
             meschach_adds.im_add(self.cimat, a.cimat, self.cimat)
@@ -218,7 +220,7 @@ class IMat:
         else:
             raise TypeError("wrong type")
 
-    def __isub__(self,a):
+    def __isub__(self, a):
         # a is a IMat
         if isinstance(a, IMat):
             meschach_adds.im_sub(self.cimat, a.cimat, self.cimat)
@@ -230,7 +232,7 @@ class IMat:
         else:
             raise TypeError("wrong type")
 
-    def __imul__(self,a):
+    def __imul__(self, a):
         # a is a IMat
         if ( isinstance(a, IMat) ):
             tmp = + self

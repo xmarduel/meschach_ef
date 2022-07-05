@@ -1,44 +1,20 @@
 #! /usr/bin/env python
-#
+
 """ This module tests all the methods of the Perm class (PyPERM.py) """
-#
+
 import unittest
 import PyPERM
-#
-#  ----------------------------------------------------------------
-#  $Author: xavier $
-#  $Date: 2004/07/24 14:32:23 $
-#  $Revision: 1.5 $
-#
-#  $Log: test_PyPERM.py,v $
-#  Revision 1.5  2004/07/24 14:32:23  xavier
-#  No log message.
-#
-#  Revision 1.4  2004/07/04 10:01:36  xavier
-#  update
-#
-#  Revision 1.3  2003/10/07 15:03:57  xavier
-#  minor changes
-#
-#  Revision 1.2  2003/10/07 14:45:03  xavier
-#  new
-#
-#  Revision 1.1  2003/10/07 14:44:09  xavier
-#  new
-#
-#  ----------------------------------------------------------------
-#
-#
+
+
 class PermTest(unittest.TestCase):
-    #
-    #
+
     def testInit(self):
         px1 = PyPERM.Perm(5)
 
     def test___del__(self):
         px1 = PyPERM.Perm(4)
         del px1
-    #
+
     #
     # Getting the data
     #
@@ -61,8 +37,7 @@ class PermTest(unittest.TestCase):
         self.assertEqual(p1[0], 0)
         self.assertEqual(p1[1], 2)
         self.assertEqual(p1[2], 1)
-    #
-    #
+
     #
     # Input - Output diagnostics
     #
@@ -93,7 +68,7 @@ class PermTest(unittest.TestCase):
         p1 = PyPERM.Perm(3)
         p1.ident()
         self.assertEqual(p1.__str__(), 'Permutation: size: 3\n0->0 1->1 2->2 \n')
-    #
+
     def test_swap(self):
         p1 = PyPERM.Perm(3)
         p1.ident()
@@ -133,7 +108,7 @@ class PermTest(unittest.TestCase):
 
     #
     # assignation operator : with __pos__
-    #
+
     # A = + B
     def test___pos__(self):
         p1 = PyPERM.Perm(3)
@@ -162,4 +137,3 @@ class PermTest(unittest.TestCase):
 
 if __name__ == '__main__' :
     unittest.main()
-

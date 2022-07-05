@@ -121,10 +121,10 @@ class Mat:
         meschach.m_free(self.cmat)
         self.cmat = meschach.m_null()
 
-    def resize(self,m,n):
+    def resize(self, m, n):
         """
         """
-        meschach.m_resize(self.cmat,m,n)
+        meschach.m_resize(self.cmat, m, n)
 
     #
     # Members functions

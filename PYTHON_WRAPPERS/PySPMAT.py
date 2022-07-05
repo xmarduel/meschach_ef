@@ -34,14 +34,6 @@ class SpMat(object):
         """
         self.cspmat = meschach.sp_get(m, n, 10)
 
-    #def __del__(self):
-    #    """
-    #    free the storage in self.cspmat
-    #    """
-    #    if hasattr(self,"this"):
-    #        meschach.sp_free(self.cspmat)
-    #    self.__dict__["this"] = meschach.sp_null()
-
     #
     # Get the dimension of the matrix
     #
@@ -113,7 +105,7 @@ class SpMat(object):
         meschach.sp_free(self.cspmat)
         self.cspmat = meschach.sp_null()
 
-    def resize(self,m,n):
+    def resize(self, m, n):
         """
         """
         meschach.sp_resize(self.cspmat, m, n)
@@ -155,7 +147,7 @@ class SpMat(object):
     #
     # operators creating temporary
     #
-    def __add__(self,a):
+    def __add__(self, a):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             ret = SpMat(self.m, self.n)
@@ -172,10 +164,10 @@ class SpMat(object):
         else:
             raise TypeError("wrong type")
 
-    def __radd__(self,a):
+    def __radd__(self, a):
         return self.__add__(a)
 
-    def __sub__(self,a):
+    def __sub__(self, a):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             ret = SpMat(self.m, self.n)
@@ -192,10 +184,10 @@ class SpMat(object):
         else:
             raise TypeError("wrong type")
 
-    def __rsub__(self,a):
+    def __rsub__(self, a):
         return self.__sub__(a)
 
-    def __mul__(self,a):
+    def __mul__(self, a):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             ret = SpMat(self.m, a.n)
@@ -217,13 +209,13 @@ class SpMat(object):
         else:
             raise TypeError("wrong type")
 
-    def __rmul__(self,a):
+    def __rmul__(self, a):
         return self.__mul__(a)
 
     #
     # operator using and returning base object
     #
-    def __iadd__(self,a):
+    def __iadd__(self, a):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             meschach.sp_add(self.cspmat, a.cspmat, self.cspmat)
@@ -240,7 +232,7 @@ class SpMat(object):
         #
     #
     #
-    def __isub__(self,a):
+    def __isub__(self, a):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             meschach.sp_sub(self.cspmat, a.cspmat, self.cspmat)
@@ -255,7 +247,7 @@ class SpMat(object):
         else:
             raise TypeError("wrong type")
 
-    def __imul__(self,a):
+    def __imul__(self, a):
         # a is a SpMat
         if ( isinstance(a, SpMat) ):
             tmp = + self

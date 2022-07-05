@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		250EEED2193BC01900C0EE46 /* all_params_json_config.c in Sources */ = {isa = PBXBuildFile; fileRef = 25C5AA58193786E500280DFA /* all_params_json_config.c */; };
 		251B99A714ADC7EF004D2D46 /* cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 251B99A614ADC7EF004D2D46 /* cocoa.m */; };
+		252D479B2874C3C500C5EF9E /* machine_threaded.c in Sources */ = {isa = PBXBuildFile; fileRef = 252D478E2874C1BB00C5EF9E /* machine_threaded.c */; };
+		252D479C2874C3F700C5EF9E /* machine_threaded.h in Headers */ = {isa = PBXBuildFile; fileRef = 252D478B2874C1BB00C5EF9E /* machine_threaded.h */; };
 		25442C531AAB287F004BDDA1 /* test1_libsciplot.c in Sources */ = {isa = PBXBuildFile; fileRef = 2583E8B40A8536CD00B218E6 /* test1_libsciplot.c */; };
 		254457161A8DFA7400915E85 /* cexcontour.c in Sources */ = {isa = PBXBuildFile; fileRef = 254456AB1A8DF17D00915E85 /* cexcontour.c */; };
 		2546E74B1B0E27EF008C156F /* licosa.c in Sources */ = {isa = PBXBuildFile; fileRef = 25099BBE0DC1F2B20076878F /* licosa.c */; };
@@ -849,6 +851,13 @@
 		251E82E914B8FA8A0055F7BF /* test_vogle_cocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_vogle_cocoa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		252B46AE0B4057C30022CBE0 /* t5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = t5.c; sourceTree = "<group>"; };
 		252B46E50B405C450022CBE0 /* graphics1D_libsciplot_stationnary_xt_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = graphics1D_libsciplot_stationnary_xt_window.c; sourceTree = "<group>"; };
+		252D478B2874C1BB00C5EF9E /* machine_threaded.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = machine_threaded.h; sourceTree = "<group>"; };
+		252D478C2874C1BB00C5EF9E /* libmeschach_threaded_export.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = libmeschach_threaded_export.txt; sourceTree = "<group>"; };
+		252D478E2874C1BB00C5EF9E /* machine_threaded.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = machine_threaded.c; sourceTree = "<group>"; };
+		252D47902874C1BB00C5EF9E /* meschach_threaded.i */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c.preprocessed; path = meschach_threaded.i; sourceTree = "<group>"; };
+		252D47912874C1BB00C5EF9E /* makefile_swig_python_extension */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = makefile_swig_python_extension; sourceTree = "<group>"; };
+		252D47922874C1BB00C5EF9E /* SWIG_INTERFACE_M_THREADED_machine.i */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c.preprocessed; path = SWIG_INTERFACE_M_THREADED_machine.i; sourceTree = "<group>"; };
+		252D47972874C39F00C5EF9E /* libmeschach_threaded.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libmeschach_threaded.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		2540DFF21A24F345000B0719 /* PDE_EXAMPLE_TR_2D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDE_EXAMPLE_TR_2D.json; sourceTree = "<group>"; };
 		2543F2AF195DF9CF0060BBF8 /* DRIVER_2D_schwarz.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = DRIVER_2D_schwarz.py; sourceTree = "<group>"; };
 		25442C441AAB280A004BDDA1 /* gui.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gui.c; sourceTree = "<group>"; };
@@ -1370,6 +1379,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		252D47952874C39F00C5EF9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		254456E61A8DF88800915E85 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1827,6 +1843,43 @@
 			path = cocoa;
 			sourceTree = "<group>";
 		};
+		252D47892874C1BB00C5EF9E /* MESCHACH_THREADED */ = {
+			isa = PBXGroup;
+			children = (
+				252D478C2874C1BB00C5EF9E /* libmeschach_threaded_export.txt */,
+				252D478A2874C1BB00C5EF9E /* INCLUDES */,
+				252D478D2874C1BB00C5EF9E /* SRCS */,
+				252D478F2874C1BB00C5EF9E /* SWIG_INTERFACES */,
+			);
+			path = MESCHACH_THREADED;
+			sourceTree = "<group>";
+		};
+		252D478A2874C1BB00C5EF9E /* INCLUDES */ = {
+			isa = PBXGroup;
+			children = (
+				252D478B2874C1BB00C5EF9E /* machine_threaded.h */,
+			);
+			path = INCLUDES;
+			sourceTree = "<group>";
+		};
+		252D478D2874C1BB00C5EF9E /* SRCS */ = {
+			isa = PBXGroup;
+			children = (
+				252D478E2874C1BB00C5EF9E /* machine_threaded.c */,
+			);
+			path = SRCS;
+			sourceTree = "<group>";
+		};
+		252D478F2874C1BB00C5EF9E /* SWIG_INTERFACES */ = {
+			isa = PBXGroup;
+			children = (
+				252D47902874C1BB00C5EF9E /* meschach_threaded.i */,
+				252D47912874C1BB00C5EF9E /* makefile_swig_python_extension */,
+				252D47922874C1BB00C5EF9E /* SWIG_INTERFACE_M_THREADED_machine.i */,
+			);
+			path = SWIG_INTERFACES;
+			sourceTree = "<group>";
+		};
 		25459F140A7B655C004F50D1 = {
 			isa = PBXGroup;
 			children = (
@@ -1847,6 +1900,7 @@
 				2556DFE20A7BCD2100130628 /* MESCHACH_VOGLE */,
 				25D3082A0A8530D6008BB241 /* MESCHACH_CPGPLOT */,
 				2583E89D0A8536CC00B218E6 /* MESCHACH_LIBSCIPLOT */,
+				252D47892874C1BB00C5EF9E /* MESCHACH_THREADED */,
 				259CCCDC0AD8EB7200FFECC4 /* PYTHON_EXTENSIONS */,
 				25459F860A7B65C6004F50D1 /* Products */,
 			);
@@ -1877,6 +1931,7 @@
 				2578228E11CE717700293CB2 /* test_vogle_carbon.app */,
 				251E82E914B8FA8A0055F7BF /* test_vogle_cocoa.app */,
 				254456EB1A8DF88800915E85 /* test_vopl.exe */,
+				252D47972874C39F00C5EF9E /* libmeschach_threaded.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2796,6 +2851,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		252D47932874C39F00C5EF9E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				252D479C2874C3F700C5EF9E /* machine_threaded.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		254456E31A8DF88800915E85 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3072,6 +3135,24 @@
 			productName = test_vogle_cocoa;
 			productReference = 251E82E914B8FA8A0055F7BF /* test_vogle_cocoa.app */;
 			productType = "com.apple.product-type.application";
+		};
+		252D47962874C39F00C5EF9E /* libmeschach_threaded */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 252D47982874C39F00C5EF9E /* Build configuration list for PBXNativeTarget "libmeschach_threaded" */;
+			buildPhases = (
+				252D47932874C39F00C5EF9E /* Headers */,
+				252D47942874C39F00C5EF9E /* Sources */,
+				252D47952874C39F00C5EF9E /* Frameworks */,
+				252D479D2874C43C00C5EF9E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libmeschach_threaded;
+			productName = libmeschach_threaded;
+			productReference = 252D47972874C39F00C5EF9E /* libmeschach_threaded.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
 		};
 		254456E01A8DF88800915E85 /* test_vopl */ = {
 			isa = PBXNativeTarget;
@@ -3511,6 +3592,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1010;
+				TargetAttributes = {
+					252D47962874C39F00C5EF9E = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
 			};
 			buildConfigurationList = 25459F170A7B655C004F50D1 /* Build configuration list for PBXProject "MESCHACH_PROJECT" */;
 			compatibilityVersion = "Xcode 10.0";
@@ -3545,6 +3631,7 @@
 				2578227911CE717700293CB2 /* test_libsciplot */,
 				2578228411CE717700293CB2 /* test_vogle_carbon */,
 				251E82E814B8FA8A0055F7BF /* test_vogle_cocoa */,
+				252D47962874C39F00C5EF9E /* libmeschach_threaded */,
 			);
 		};
 /* End PBXProject section */
@@ -3703,6 +3790,23 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		252D479D2874C43C00C5EF9E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo `pwd`; echo \"this is the current folder\"; make --directory MESCHACH_THREADED/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
+		};
 		2578208411CE717600293CB2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3840,6 +3944,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		252D47942874C39F00C5EF9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				252D479B2874C3C500C5EF9E /* machine_threaded.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4499,6 +4611,95 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = test_vogle_cocoa;
 				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		252D47992874C39F00C5EF9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = "";
+				EXPORTED_SYMBOLS_FILE = MESCHACH_THREADED/libmeschach_threaded_export.txt;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = .;
+				LIBRARY_SEARCH_PATHS = .;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "-ansi";
+				OTHER_LDFLAGS = "-lmeschach";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SYMROOT = "";
+			};
+			name = Debug;
+		};
+		252D479A2874C39F00C5EF9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/lib;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				EXECUTABLE_PREFIX = "";
+				EXPORTED_SYMBOLS_FILE = MESCHACH_THREADED/libmeschach_threaded_export.txt;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = .;
+				LIBRARY_SEARCH_PATHS = .;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "-ansi";
+				OTHER_LDFLAGS = "-lmeschach";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SYMROOT = "";
 			};
 			name = Release;
 		};
@@ -6575,6 +6776,15 @@
 			buildConfigurations = (
 				251E82EC14B8FA8A0055F7BF /* Debug */,
 				251E82ED14B8FA8A0055F7BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		252D47982874C39F00C5EF9E /* Build configuration list for PBXNativeTarget "libmeschach_threaded" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				252D47992874C39F00C5EF9E /* Debug */,
+				252D479A2874C39F00C5EF9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

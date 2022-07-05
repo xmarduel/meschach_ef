@@ -5,9 +5,7 @@
 import sys
 import unittest
 
-
 import PyMESCHACH
-
 
 class MeschachTest(unittest.TestCase):
 

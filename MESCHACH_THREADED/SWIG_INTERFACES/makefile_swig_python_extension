@@ -2,59 +2,27 @@
 #
 #/////////////////////////////////////////////////////////
 #//
-#// interface file for MESCHACHPLUS-SWIG
+#// interface file for MESCHACH_THREADED
 #// 
 #/////////////////////////////////////////////////////////
-CC = gcc-3.3
 #
+MODULE               = meschach_threaded
 #
-.PHONY : PYTHON_EXTENSION_LIB
+PYTHON_EXTENSION     = $(MODULE).so
+SWIG_INTERFACE_FILE  = $(MODULE).i
 #
-#
-MODULE     = libmeschach_threaded
-#
-PYTHON_EXTENSION    = $(MODULE).so
-SWIG_INTERFACE_FILE = $(MODULE).i
-#
-#
-INSTALL_DIR      = ./PYTHON_EXTENSIONS
-SRCS_DIR         = ./MESCHACH_THREADED/SWIG_INTERFACES
-#
-#
-SRC_WRAP = $(SRCS_DIR)/$(MODULE)_wrap.c
+SRC_WRAP = $(MODULE)_wrap.c
 OBJ_WRAP = $(SRC_WRAP:.c=.o)
 #
-$(SRCS_DIR)/SWIG_DEPENDANCIES =  $(SRCS_DIR)/$(SWIG_INTERFACE_FILE) \
-         $(SRCS_DIR)/SWIG_INTERFACE_M_THREADED_machine.i
+SWIG_DEPENDANCIES =  $(SWIG_INTERFACE_FILE) \
+SWIG_INTERFACE_M_THREADED_machine.i \
 #
 #
-LIB_MESCHACH          = ./build/libmeschach.dylib
-LIB_MESCHACH_THREADED = ./build/libmeschach_threaded.dylib
-#
-DYLIBS_LINKED_TO_BUNDLE =  $(LIB_MESCHACH) $(LIB_MESCHACH_THREADED)
+DYLIBS_LINKED_TO_BUNDLE = $(LIB_MESCHACH_THREADED) \
+   $(LIB_MESCHACH)
 #
 #
-CFLAGS = -DNDEBUG -g -Wall -Wno-long-double -no-cpp-precomp
+TOP = ../..
 #
-CC_INC = -I/Library/Frameworks/Python.framework/Headers \
-         -I./MESCHACH/INCLUDES \
-         -I./MESCHACH_THREADED/INCLUDES
-#
-#
-SWIG_INC = -I/Users/xavier/x_local/lib/swig1.3 -I/Users/xavier/x_local/lib/swig1.3/python
-SWIG_EXE = /Users/xavier/x_local/bin/swig
-#
-#
-#
-#
-$(SRC_WRAP) : $(SWIG_DEPENDANCIES)
-	@echo "---> create new wrapper file ..."
-	$(SWIG_EXE)  $(SWIG_INC) -python -noproxy $(SRCS_DIR)/$(SWIG_INTERFACE_FILE)
-	@echo "---> and compile it ..."
-	$(CC) -c $(CFLAGS) $(CC_INC) $(SRC_WRAP) -o $(OBJ_WRAP)
-#
-#
-PYTHON_EXTENSION_LIB : $(SRC_WRAP)
-	$(CC) -bundle $(CC_INC) $(OBJ_WRAP) -o $(PYTHON_EXTENSION) -framework Python $(DYLIBS_LINKED_TO_BUNDLE)
-	mv $(PYTHON_EXTENSION) $(INSTALL_DIR)
+include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk
 #

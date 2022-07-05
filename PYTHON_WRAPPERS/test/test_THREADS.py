@@ -1,25 +1,27 @@
 #! /usr/bin/env python
 
-from sys  import *
-from time import *
-from math import *
+import sys
+import time
 
 from meschach import *
-#from meschach_threaded import *
+from meschach_threaded import *
 
 
 
 DO_IN_PROD  = True
-DO_IN_PROD_THREADED  = False
+DO_IN_PROD_THREADED  = True
 
 DO_V_ADD    = True
-DO_V_ADD_THREADED  = False
+DO_V_ADD_THREADED  = True
 
 DO_V_SUB    = True
-DO_V_SUB_THREADED   = False
+DO_V_SUB_THREADED   = True
 
-DO_SV_MLT   = False
-DO_V_MLTADD = False
+DO_SV_MLT   = True
+DO_SV_MLT_THREADED   = True
+
+DO_V_MLTADD = True
+DO_V_MLTADD_THREADED   = True
 
 
 # test in_prod & in_prod_threaded
@@ -36,24 +38,24 @@ if DO_IN_PROD:
 
     print("start in_prod ...")
 
-    t1 = time()
+    t1 = time.time()
 
     for i in range(20):
         ip1 = in_prod(v1,v2)
 
-    t2 = time()
+    t2 = time.time()
 
     print("time (in_prod) =", t2-t1)
 
     # ----------------------------------------
 
     if DO_IN_PROD_THREADED:
-        t1 = time()
+        t1 = time.time()
 
         for i in range(20):
             ip1 = in_prod_threaded(v1,v2)
 
-        t2 = time()
+        t2 = time.time()
 
         print("time (in_prod_threaded) =", t2-t1)
 
@@ -81,24 +83,24 @@ if DO_V_ADD:
 
     print("start v_add ...")
 
-    t1 = time()
+    t1 = time.time()
 
     for i in range(5):
         v_add(v1,v2,v3)
 
-    t2 = time()
+    t2 = time.time()
 
     print("time (v_add) =", t2-t1)
 
     # ----------------------------------------
 
     if DO_V_ADD_THREADED:
-        t1 = time()
+        t1 = time.time()
 
         for i in range(5):
             v_add_threaded(v1,v2,v3)
 
-        t2 = time()
+        t2 = time.time()
 
         print("time (v_add_threaded) =", t2-t1)
 
@@ -127,12 +129,12 @@ if DO_V_SUB:
 
     print("start v_sub ...")
 
-    t1 = time()
+    t1 = time.time()
 
     for i in range(50):
         v_sub(v1,v2,v3)
 
-    t2 = time()
+    t2 = time.time()
 
     print("time (v_add) =", t2-t1)
 
@@ -140,12 +142,12 @@ if DO_V_SUB:
 
     if DO_V_SUB_THREADED:
 
-        t1 = time()
+        t1 = time.time()
 
         for i in range(50):
             v_sub_threaded(v1,v2,v3)
 
-        t2 = time()
+        t2 = time.time()
 
         print("time (v_sub_threaded) =", t2-t1)
 
@@ -160,7 +162,7 @@ if DO_V_SUB:
 
 # test sv_mlt & sv_mlt_threaded
 # ---------------------------
-if (DO_SV_MLT):
+if DO_SV_MLT:
 
     DIM = 2000000
 
@@ -173,27 +175,29 @@ if (DO_SV_MLT):
 
     print("start sv_mlt ...")
 
-    t1 = time()
+    t1 = time.time()
 
     for i in range(50):
         sv_mlt(2.5,v1,v2)
 
-    #v_foutput(stdout, v2)
-    t2 = time()
+    #v_foutput(sys.stdout, v2)
+    t2 = time.time()
 
     print("time (sv_mlt) =", t2-t1)
 
     # ----------------------------------------
 
-    t1 = time()
+    if DO_SV_MLT_THREADED:
 
-    for i in range(50):
-        sv_mlt_threaded(2.5,v1,v2)
+        t1 = time.time()
 
-    #v_foutput(stdout, v2)
-    t2 = time()
+        for i in range(50):
+            sv_mlt_threaded(2.5,v1,v2)
 
-    print("time (sv_mlt_threaded) =", t2-t1)
+        #v_foutput(sys.stdout, v2)
+        t2 = time.time()
+
+        print("time (sv_mlt_threaded) =", t2-t1)
 
     V_FREE(v1)
     V_FREE(v2)
@@ -203,7 +207,7 @@ if (DO_SV_MLT):
 #
 # test sv_mltadd & sv_mltadd_threaded
 # ---------------------------
-if (DO_V_MLTADD):
+if DO_V_MLTADD:
 
     DIM = 2000000
 
@@ -217,27 +221,29 @@ if (DO_V_MLTADD):
 
     print("start sv_mltadd ...")
 
-    t1 = time()
+    t1 = time.time()
 
     for i in range(50):
         v_mltadd(v1,v2,2.5,v3)
 
-    #v_foutput(stdout, v3)
-    t2 = time()
+    #v_foutput(sys.stdout, v3)
+    t2 = time.time()
 
     print("time (sv_mltadd) =", t2-t1)
 
     # ----------------------------------------
 
-    t1 = time()
+    if DO_V_MLTADD_THREADED:
 
-    for i in range(50):
-        v_mltadd_threaded(v1,v2,2.5,v3)
+        t1 = time.time()
 
-    #v_foutput(stdout, v3)
-    t2 = time()
+        for i in range(50):
+            v_mltadd_threaded(v1,v2,2.5,v3)
 
-    print("time (sv_mltadd_threaded) =", t2-t1)
+        #v_foutput(sys.stdout, v3)
+        t2 = time.time()
+
+        print("time (sv_mltadd_threaded) =", t2-t1)
 
     V_FREE(v1)
     V_FREE(v2)

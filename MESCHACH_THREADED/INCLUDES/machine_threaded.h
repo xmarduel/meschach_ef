@@ -13,7 +13,7 @@
 * $Log: eigen.h,v $
 * ------------------------------------------------------------------------- */
 
-#include "matrix.h"
+#include "MESCHACH/INCLUDES/matrix.h"
 
 
 #ifdef __cplusplus

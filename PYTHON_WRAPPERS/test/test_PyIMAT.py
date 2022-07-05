@@ -49,14 +49,14 @@ class IMatTest(unittest.TestCase):
 
     def test___setitem__(self):
         m1 = PyIMAT.IMat(3,2)
-        #
+
         m1.ones()
         m1[1][1] = 33
         self.assertEqual(m1.__str__(), 'IntMatrix: 3 by 2\nrow 0:      1      1 \nrow 1:      1     33 \nrow 2:      1      1 \n')
-    #
+
     def test___getitem__(self):
         m1 = PyIMAT.IMat(3,2)
-        #
+
         m1.ones()
         val = 33
         m1[1][1] = val
@@ -215,7 +215,3 @@ class IMatTest(unittest.TestCase):
 
 if __name__ == '__main__' :
     unittest.main()
-#
-#
-#'Matrix: 3 by 2\nrow 0:      0      0 \nrow 1:      0      0 \nrow 2:      0      0 \n' !=
-#'Matrix: 3 by 2\nrow 0:      0      0 \nrow 1:      0      0 \nrow 2:      0      0 \n'

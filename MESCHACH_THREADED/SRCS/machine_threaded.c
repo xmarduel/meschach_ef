@@ -1,10 +1,11 @@
 
 
-#include	"machine.h"
-#include        "matrix.h"
+#include "MESCHACH_THREADED/INCLUDES/machine_threaded.h"
+
+#include "MESCHACH/INCLUDES/matrix.h"
 
 #include <pthread.h>
-#define NUM_THREADS 1
+#define NUM_THREADS 2
 
 
 /* ------------------------------------------------------------------------------------------- */

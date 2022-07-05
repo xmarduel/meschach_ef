@@ -1,33 +1,26 @@
 /////////////////////////////////////////////////////////
 //
-// interface file for MESCHACHPLUS-SWIG
+// interface file for MESCHACH_THREADED
 //
 ///////////////////////////////////////////////////////// 
 
-/* 
- * ---------------
- * $Author: xavier $
- * $Date: 2004/07/23 09:00:28 $
- * $Revision: 1.2 $
- * -------------------------------------------------------------------- */
- 
-%module libmeschach_threaded
+%module meschach_threaded
 
 %{
 #undef HAVE_PROTOTYPES
 
-#include <machine.h>
-#include <err.h>
-#include <matrix.h>
-#include <matrix2.h>
-#include <zmatrix.h>
-#include <zmatrix2.h>
-#include <sparse.h>
-#include <sparse2.h>
-#include <iter.h>
-#include <matlab.h>
+#include "MESCHACH/INCLUDES/machine.h"
+#include "MESCHACH/INCLUDES/err.h"
+#include "MESCHACH/INCLUDES/matrix.h"
+#include "MESCHACH/INCLUDES/matrix2.h"
+#include "MESCHACH/INCLUDES/zmatrix.h"
+#include "MESCHACH/INCLUDES/zmatrix2.h"
+#include "MESCHACH/INCLUDES/sparse.h"
+#include "MESCHACH/INCLUDES/sparse2.h"
+#include "MESCHACH/INCLUDES/iter.h"
+#include "MESCHACH/INCLUDES/matlab.h"
 
-#include <machine_threaded.h>
+#include "MESCHACH_THREADED/INCLUDES/machine_threaded.h"
 %}
 
 typedef	unsigned int	u_int;
@@ -99,5 +92,5 @@ static void * exception_catcher(int exception_status)
 
 //////////////////////////////////////////////////////////////
 
-%include ./MESCHACH_THREADED/SWIG_INTERFACES/SWIG_INTERFACE_M_THREADED_machine.i
+%include SWIG_INTERFACE_M_THREADED_machine.i
 

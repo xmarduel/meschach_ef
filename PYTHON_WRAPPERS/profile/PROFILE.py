@@ -1,14 +1,12 @@
 
 from sys import *
 from math import *
+import time
+import profile
 
 from meschach      import *
 from meschach_adds import *
 from meschach_ef   import *
-
-
-import time
-import profile
 
 #-------------------------------------------------------------------
 

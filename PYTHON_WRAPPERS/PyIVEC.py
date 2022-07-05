@@ -2,10 +2,10 @@
 # class IVec
 #
 
+import sys
+
 import meschach
 import meschach_adds
-
-import sys
 
 
 class IVec:
@@ -29,15 +29,6 @@ class IVec:
 
     def __len__(self):
         return meschach_adds.iv_dim(self.civec)
-
-
-    #def __setattr__(self, name, value):
-
-    #    if name == "civec" :
-    #        raise AttributeError( "not allowed to change self.civec in this way")
-    #    else:
-    #        pass
-    #        #raise AttributeError, "not allowed to add an attribute to an IMat instance"
 
     # Getting the data
 
@@ -134,10 +125,10 @@ class IVec:
         else:
             raise TypeError("wrong type")
 
-    def __radd__(self,a):
+    def __radd__(self, a):
         return self.__add__(a)
 
-    def __sub__(self,a):
+    def __sub__(self, a):
         # a is a IVec
         if isinstance(a, IVec):
             ret = IVec(self.m)
@@ -152,30 +143,30 @@ class IVec:
         else:
             raise TypeError("wrong type")
 
-    def __rsub__(self,a):
+    def __rsub__(self, a):
         return self.__sub__(a)
 
-    def __mul__(self,a):
+    def __mul__(self, a):
         # a is a IVec
         #if ( isinstance(a, IVec) ):
         #    ret = IVec(self.dim)
         #    ret = in_prod(self.civec, a.civec)
         #    return ret
         # a is a integer or a double
-        if ( isinstance(a, int) ):
+        if isinstance(a, int):
             ret = IVec(self.m)
             meschach_adds.iv_smlt(a, self.civec, ret.civec)
             return ret
         else:
             raise TypeError("wrong type")
 
-    def __rmul__(self,a):
+    def __rmul__(self, a):
         return self.__mul__(a)
 
     #
     # operator using and returning base object
     #
-    def __iadd__(self,a):
+    def __iadd__(self, a):
         # a is a IVec
         if isinstance(a, IVec):
             meschach.iv_add(self.civec, a.civec, self.civec)
@@ -188,7 +179,7 @@ class IVec:
         else:
             raise TypeError("wrong type")
 
-    def __isub__(self,a):
+    def __isub__(self, a):
         # a is a IVec
         if isinstance(a, IVec):
             meschach.iv_sub(self.civec, a.civec, self.civec)
@@ -201,7 +192,7 @@ class IVec:
         else:
             raise TypeError("wrong type")
 
-    def __imul__(self,a):
+    def __imul__(self, a):
         # a is a integer
         if isinstance(a, int):
             meschach_adds.iv_smlt(a, self.civec, self.civec)

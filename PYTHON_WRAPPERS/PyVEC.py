@@ -49,13 +49,6 @@ class Vec:
             raise TypeError("must be a integer")
         return meschach.v_get_val(self.cvec, key)
 
-    #def __setattr__(self, name, value):
-    #    if name == "cvec" :
-    #        raise AttributeError("not allowed to change self.cvec in this way")
-    #    else:
-    #        pass
-    #        #raise AttributeError("not allowed to add an attribute to an IMat instance")
-
     #
     # Input - Output diagnostics
     #
@@ -133,7 +126,7 @@ class Vec:
     #
     # operators creating temporary
     #
-    def __add__(self,a):
+    def __add__(self, a):
         # a is a Vec
         if isinstance(a, Vec):
             ret = Vec(self.m)
@@ -147,7 +140,7 @@ class Vec:
         else:
             raise TypeError("wrong type")
 
-    def __radd__(self,a):
+    def __radd__(self, a):
         return self.__add__(a)
 
     def __sub__(self, a):
@@ -187,7 +180,7 @@ class Vec:
     #
     # operator using and returning base object
     #
-    def __iadd__(self,a):
+    def __iadd__(self, a):
         # a is a Vec
         if isinstance(a, Vec):
             meschach.v_add(self.cvec, a.cvec, self.cvec)
@@ -199,7 +192,7 @@ class Vec:
         else:
             raise TypeError("wrong type")
 
-    def __isub__(self,a):
+    def __isub__(self, a):
         # a is a Vec
         if isinstance(a, Vec):
             meschach.v_sub(self.cvec, a.cvec, self.cvec)
@@ -211,7 +204,7 @@ class Vec:
         else:
             raise TypeError("wrong type")
 
-    def __imul__(self,a):
+    def __imul__(self, a):
         # a is a integer or a double
         if isinstance(a, int) or isinstance(a, float):
             meschach.sv_mlt(a, self.cvec, self.cvec)

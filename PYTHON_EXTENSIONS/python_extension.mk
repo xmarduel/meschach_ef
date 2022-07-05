@@ -21,7 +21,7 @@ LIB_MESCHACH_EF          = $(DYLIBS_DIR)/libmeschach_ef.dylib
 LIB_MESCHACH_CPGPLOT     = $(DYLIBS_DIR)/libmeschach_cpgplot.dylib
 LIB_MESCHACH_VOGLE       = $(DYLIBS_DIR)/libmeschach_vogle.dylib
 LIB_MESCHACH_LIBSCIPLOT  = $(DYLIBS_DIR)/libmeschach_libsciplot.dylib
-
+LIB_MESCHACH_THREADED    = $(DYLIBS_DIR)/libmeschach_threaded.dylib
 
 #CC_ARCH = -arch $(CURRENT_ARCH)
 

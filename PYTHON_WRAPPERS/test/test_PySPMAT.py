@@ -2,7 +2,6 @@
 
 """ This module tests all the methods of the SpMat class (PySPMAT.py) """
 
-
 import unittest
 import PySPMAT
 
@@ -22,14 +21,7 @@ class SpMatTest(unittest.TestCase):
             m3 = PySPMAT.SpMat(4,-4)
         except ValueError:
             pass
-    #
-    #
-    def test___del__(self):
-        #
-        m1 = PySPMAT.SpMat(4,4)
-        del m1
-    #
-    #
+
     #
     # Getting the data
     #
@@ -37,29 +29,27 @@ class SpMatTest(unittest.TestCase):
         M = 5
         m1 = PySPMAT.SpMat(M,4)
         self.assertEqual(m1.m, M)
-    #
+
     def test_property_n(self):
         N = 5
         m1 = PySPMAT.SpMat(4,N)
         self.assertEqual(m1.n, N)
-    #
-    #
+
     def test___setitem__(self):
         m1 = PySPMAT.SpMat(3,2)
         #
         m1.ones()
         m1[1][1] = 33
         self.assertEqual(m1.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:1                    1:1                    \nrow 1: 0:1                    1:33                   \nrow 2: 0:1                    1:1                    \n#\n')
-    #
+
     def test___getitem__(self):
         m1 = PySPMAT.SpMat(3,2)
-        #
+
         m1.ones()
         val = 33.3
         m1[1][1] = val
         self.assertEqual(m1[1][1], val)
-    #
-    #
+
     #
     # Input - Output diagnostics
     #
@@ -72,7 +62,7 @@ class SpMatTest(unittest.TestCase):
     def test___str__(self):
         m1 = PySPMAT.SpMat(3,2)
         self.assertEqual(m1.__str__(), 'SparseMatrix: 3 by 2\nrow 0: \nrow 1: \nrow 2: \n#\n')    #
-    #
+
     #
     # playing with storage
     #
@@ -90,19 +80,19 @@ class SpMatTest(unittest.TestCase):
         m1 = PySPMAT.SpMat(3,2)
         m1.ones()
         self.assertEqual(m1.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:1                    1:1                    \nrow 1: 0:1                    1:1                    \nrow 2: 0:1                    1:1                    \n#\n')
-    #
+
     def test_zero(self):
         m1 = PySPMAT.SpMat(3,2)
         m1.ones()
         m1.zero()
         self.assertEqual(m1.__str__(), 'SparseMatrix: 3 by 2\nrow 0: \nrow 1: \nrow 2: \n#\n')
-    #
+
     def test_eye(self):
         m1 = PySPMAT.SpMat(2,2)
         m1.ones()
         m1.eye()
         self.assertEqual(m1.__str__(), 'SparseMatrix: 2 by 2\nrow 0: 0:1                    \nrow 1: 1:1                    \n#\n')
-    #
+
     def test_tridiag(self):
         m1 = PySPMAT.SpMat(3,3)
         m1.tridiag(-1,4,-1)
@@ -110,8 +100,6 @@ class SpMatTest(unittest.TestCase):
     #
     #def rand(self):
     #    v_rand(self.this)
-    #
-    #
     #
     # operators creating temporary
     #
@@ -125,8 +113,7 @@ class SpMatTest(unittest.TestCase):
         self.assertEqual(m3.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:2                    1:2                    \nrow 1: 0:2                    1:2                    \nrow 2: 0:2                    1:2                    \n#\n')
         m3 = m1 + m3
         self.assertEqual(m3.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:3                    1:3                    \nrow 1: 0:3                    1:3                    \nrow 2: 0:3                    1:3                    \n#\n')
-    #
-    #
+
     def test___sub__(self):
         m1 = PySPMAT.SpMat(3,2)
         m2 = PySPMAT.SpMat(3,2)
@@ -137,12 +124,11 @@ class SpMatTest(unittest.TestCase):
         self.assertEqual(m3.__str__(), 'SparseMatrix: 3 by 2\nrow 0: \nrow 1: \nrow 2: \n#\n')
         m3 = m1 - m3
         self.assertEqual(m3.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:1                    1:1                    \nrow 1: 0:1                    1:1                    \nrow 2: 0:1                    1:1                    \n#\n')
-    #
-    #
+
     def test___mul__(self):
         m1 = PySPMAT.SpMat(3,2)
         m2 = PySPMAT.SpMat(2,2)
-        #
+
         m1.ones()
         m2.ones()
         m3 = m1 * m2
@@ -151,8 +137,7 @@ class SpMatTest(unittest.TestCase):
         self.assertEqual(m2.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:2                    1:2                    \nrow 1: 0:2                    1:2                    \nrow 2: 0:2                    1:2                    \n#\n')
         m2 = 2*m2
         self.assertEqual(m2.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:4                    1:4                    \nrow 1: 0:4                    1:4                    \nrow 2: 0:4                    1:4                    \n#\n')
-    #
-    #
+
     #
     # operator using and returning base object
     #
@@ -164,8 +149,7 @@ class SpMatTest(unittest.TestCase):
         m2.ones()
         m1 += m2
         self.assertEqual(m1.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:2                    1:2                    \nrow 1: 0:2                    1:2                    \nrow 2: 0:2                    1:2                    \n#\n')
-    #
-    #
+
     def test___isub__(self):
         m1 = PySPMAT.SpMat(3,2)
         m2 = PySPMAT.SpMat(3,2)
@@ -174,23 +158,21 @@ class SpMatTest(unittest.TestCase):
         m2.ones()
         m1 -= m2
         self.assertEqual(m1.__str__(), 'SparseMatrix: 3 by 2\nrow 0: \nrow 1: \nrow 2: \n#\n')
-    #
-    #
+
     def test___imul__(self):
         m1 = PySPMAT.SpMat(3,2)
         m2 = PySPMAT.SpMat(2,2)
-        #
+
         m1.ones()
         m2.ones()
         m1 *= 3
         self.assertEqual(m1.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:3                    1:3                    \nrow 1: 0:3                    1:3                    \nrow 2: 0:3                    1:3                    \n#\n')
         m1 *= m2
         self.assertEqual(m1.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:6                    1:6                    \nrow 1: 0:6                    1:6                    \nrow 2: 0:6                    1:6                    \n#\n')
-    #
-    #
+
     #
     # assignation operator : with __pos__
-    #
+
     # A = + B
     def test___pos__(self):
         m1 = PySPMAT.SpMat(3,2)
@@ -199,22 +181,19 @@ class SpMatTest(unittest.TestCase):
         m2 = + m1
         m1 *= 2 # change m1
         self.assertEqual(m2.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:1                    1:1                    \nrow 1: 0:1                    1:1                    \nrow 2: 0:1                    1:1                    \n#\n')
-    #
+
     # A = - B
     def test___neg__(self):
         m1 = PySPMAT.SpMat(3,2)
-        #
+
         m1.ones()
         m2 = - m1
         m1 *= 2 # change m1
         self.assertEqual(m2.__str__(), 'SparseMatrix: 3 by 2\nrow 0: 0:-1                   1:-1                   \nrow 1: 0:-1                   1:-1                   \nrow 2: 0:-1                   1:-1                   \n#\n')
-    #
-    #
-    #
+
+
 #
 #
-#
+
 if __name__ == '__main__' :
     unittest.main()
-#
-#

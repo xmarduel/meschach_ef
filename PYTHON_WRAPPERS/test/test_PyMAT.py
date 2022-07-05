@@ -41,7 +41,7 @@ class MatTest(unittest.TestCase):
 
     def test___setitem__(self):
         m1 = PyMAT.Mat(3,2)
-        #
+
         m1.ones()
         m1[1][1] = 33
         self.assertEqual(m1.__str__(), 'Matrix: 3 by 2\nrow 0:              1              1 \nrow 1:              1             33 \nrow 2:              1              1 \n')
@@ -93,8 +93,7 @@ class MatTest(unittest.TestCase):
 
     #def rand(self):
     #    v_rand(self.this)
-    #
-    #
+
     #
     # operators creating temporary
     #
@@ -138,15 +137,14 @@ class MatTest(unittest.TestCase):
         self.assertEqual(m2.__str__(), 'Matrix: 3 by 2\nrow 0:              2              2 \nrow 1:              2              2 \nrow 2:              2              2 \n')
         m2 = 2*m2
         self.assertEqual(m2.__str__(), 'Matrix: 3 by 2\nrow 0:              4              4 \nrow 1:              4              4 \nrow 2:              4              4 \n')
-    #
-    #
+
     #
     # operator using and returning base object
     #
     def test___iadd__(self):
         m1 = PyMAT.Mat(3,2)
         m2 = PyMAT.Mat(3,2)
-        #
+
         m1.ones()
         m2.ones()
         m1 += m2
