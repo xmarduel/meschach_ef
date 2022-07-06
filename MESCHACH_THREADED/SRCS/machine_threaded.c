@@ -1,12 +1,11 @@
 
 
-#include "MESCHACH_THREADED/INCLUDES/machine_threaded.h"
+#include <pthread.h>
 
 #include "MESCHACH/INCLUDES/matrix.h"
+#include "MESCHACH_THREADED/INCLUDES/machine_threaded.h"
 
-#include <pthread.h>
-#define NUM_THREADS 2
-
+#define NUM_THREADS 4
 
 /* ------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------- */
@@ -23,7 +22,7 @@ typedef struct
    double in_prod_val;
 
    int start; /* for debugging */
-   
+
 } IN_PROD_PARTIAL;
 
 /* ------------------------------------------------------------------------------------------- */
@@ -67,44 +66,49 @@ typedef SV_MLT_PARTIAL V_MLTADD_PARTIAL;
 /* ------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------- */
 
-static void  init_threaded_data_for_ip(IN_PROD_PARTIAL *data, int nb_threads, int total_len, double *v1, double *v2)
+static void  init_threaded_data_for_ip(IN_PROD_PARTIAL *data, int nb_threads, int vec_len, double *v1, double *v2)
 {
    int i;
 
-   int dim_1  = floor( total_len / nb_threads );
-   int dim_2  = dim_1 + 1;
+   int vec_dim_1  = floor(vec_len / nb_threads);
 
-   int nb_threads_with_dim_2 = total_len % nb_threads;
-   int nb_threads_with_dim_1 = nb_threads - nb_threads_with_dim_2 ;
+   int nb_threads_with_v_dim_1 = floor(vec_len / vec_dim_1);
+   int nb_threads_with_v_dim_2 = nb_threads -  nb_threads_with_v_dim_1;
 
-   for (i=0; i<nb_threads_with_dim_2; i++)
+   int vec_dim_2  = vec_len - vec_dim_1 * nb_threads_with_v_dim_1;
+
+   //printf("nb_threads_with_v_dim_1 = %d (dim1=%d)\n", nb_threads_with_v_dim_1, vec_dim_1);
+   //printf("nb_threads_with_v_dim_2 = %d (dim2=%d)\n", nb_threads_with_v_dim_2, vec_dim_2);
+
+   for (i=0; i<nb_threads_with_v_dim_1; i++)
    {
       data[i].thread_id = i;
 
-      data[i].start = dim_2*i;
+      data[i].start = vec_dim_1*i;
 
       data[i].v1 = v1 + data[i].start;
       data[i].v2 = v2 + data[i].start;
 
-      data[i].len = dim_2  ;
+      data[i].len = vec_dim_1;
    }
 
-   for (i=nb_threads_with_dim_2; i<nb_threads_with_dim_2+nb_threads_with_dim_1; i++)
+   for (i=nb_threads_with_v_dim_1; i<nb_threads_with_v_dim_1+nb_threads_with_v_dim_2; i++)
    {
       data[i].thread_id = i;
 
-      data[i].start = nb_threads_with_dim_2*dim_2 + (i-nb_threads_with_dim_2)*dim_1;
+      data[i].start = nb_threads_with_v_dim_1 * vec_dim_1 + (i-nb_threads_with_v_dim_2) * vec_dim_2;
 
       data[i].v1 = v1 + data[i].start;
       data[i].v2 = v2 + data[i].start;
 
-      data[i].len = dim_1;
+      data[i].len = vec_dim_2;
    }
 
    /*
    for (i=0; i<nb_threads; i++)
    {
-      printf(" thread %d : start = %9d   len = %9d \n", data[i].thread_id, data[i].start, data[i].len);
+      printf(" thread %d : data -> start = %9d   len = %9d \n", data[i].thread_id, data[i].start, data[i].len);
+      fflush(stdout);
    }
    */
 }
@@ -218,6 +222,11 @@ static void * routine_threaded_ip(void *pdata)
 
    ((IN_PROD_PARTIAL*)pdata)->in_prod_val = __ip__(v1,v2,len);
 
+   //printf("routine_threaded_ip : partial ip = %f for [%d]\n",
+   //    ((IN_PROD_PARTIAL*)pdata)->in_prod_val,
+   //    ((IN_PROD_PARTIAL*)pdata)->thread_id);
+   //fflush(stdout);
+
    return NULL;
 }
 
@@ -269,7 +278,7 @@ static void * routine_threaded_smlt(void *pdata)
    __smlt__(v1,s,v2,len);
 
    /*printf("thread %d finished \n", ((SV_MLT_PARTIAL*)pdata)->thread_id ); fflush(stdout);*/
-   
+
    return NULL;
 }
 
@@ -306,8 +315,9 @@ static  double	__threaded_ip__( double *dp1,  double *dp2, int len)
    pthread_attr_t attr;
    pthread_t threads[NUM_THREADS];
    IN_PROD_PARTIAL data[NUM_THREADS];
-    
-   int rc,t,status;
+
+   int rc,t;
+   void *status;
 
    init_threaded_data_for_ip(data, NUM_THREADS, len, dp1, dp2);
 
@@ -315,33 +325,51 @@ static  double	__threaded_ip__( double *dp1,  double *dp2, int len)
    pthread_attr_init(&attr);
    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 
-   for(t=0 ; t < NUM_THREADS ; t++)
+   for (t = 0 ; t < NUM_THREADS ; t++)
    {
-      rc = pthread_create(&threads[t], &attr , routine_threaded_ip , &data[t]);
-      if (rc)
+      rc = pthread_create(&(threads[t]), &attr , routine_threaded_ip , &data[t]);
+      if (rc != 0)
       {
          printf("ERROR; return code from pthread_create() is %d\n", rc); exit(-1);
+         fflush(stdout);
+      }
+      else
+      {
+         //printf("-> created thread [%d] for t = %d\n", data[t].thread_id, t);
+         //fflush(stdout);
       }
    }
 
-   for(t=0; t < NUM_THREADS; t++)
+   //printf("All started -> joining \n");
+   //flush(stdout);
+
+   for (t = 0; t < NUM_THREADS; t++)
    {
+      //printf("-> joining thread %d\n", t);
+      //fflush(stdout);
+
       rc = pthread_join(threads[t], (void **)&status);
-      if (rc)
+      if (rc != 0)
       {
-         printf("ERROR; return code from pthread_join() is %d\n", rc); exit(-1);
+         printf("ERROR; return code from pthread_join() [%d] is %d\n", t, rc); exit(-1);
+         fflush(stdout);
+      }
+      else
+      {
+         //printf("-> joined thread [%d] for t = %d\n", data[t].thread_id, t);
+         //fflush(stdout);
       }
    }
 
    for(t=0; t < NUM_THREADS; t++)
    {
       val += data[t].in_prod_val;
-   }    
+   }
 
    /* Free attribute */
    pthread_attr_destroy(&attr);
 
-   return val; 
+   return val;
 }
 
 /* ------------------------------------------------------------------------------------------- */
@@ -355,7 +383,8 @@ static  void	__threaded_add__( double *dp1,  double *dp2,  double *dp3,  int len
    pthread_t threads[NUM_THREADS];
    V_ADD_PARTIAL data[NUM_THREADS];
 
-   int rc,t,status;
+   int rc,t;
+   void *status;
 
    init_threaded_data_for_add(data, NUM_THREADS, len, dp1, dp2, dp3);
 
@@ -363,7 +392,7 @@ static  void	__threaded_add__( double *dp1,  double *dp2,  double *dp3,  int len
    pthread_attr_init(&attr);
    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 
-   for(t=0 ; t < NUM_THREADS ; t++)
+   for(t = 0; t < NUM_THREADS ; t++)
    {
       rc = pthread_create(&threads[t], &attr , routine_threaded_add , &data[t]);
       if (rc)
@@ -372,7 +401,7 @@ static  void	__threaded_add__( double *dp1,  double *dp2,  double *dp3,  int len
       }
    }
 
-   for(t=0; t < NUM_THREADS; t++)
+   for(t =0 ; t < NUM_THREADS; t++)
    {
       rc = pthread_join(threads[t], (void **)&status);
       if (rc)
@@ -395,7 +424,8 @@ static  void	__threaded_sub__( double *dp1,  double *dp2,  double *dp3,  int len
    pthread_t threads[NUM_THREADS];
    V_SUB_PARTIAL data[NUM_THREADS];
 
-   int rc,t,status;
+   int rc,t;
+   void *status;
 
    init_threaded_data_for_add(data, NUM_THREADS, len, dp1, dp2, dp3);
 
@@ -403,7 +433,7 @@ static  void	__threaded_sub__( double *dp1,  double *dp2,  double *dp3,  int len
    pthread_attr_init(&attr);
    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 
-   for(t=0 ; t < NUM_THREADS ; t++)
+   for(t = 0; t < NUM_THREADS ; t++)
    {
       rc = pthread_create(&threads[t], &attr , routine_threaded_sub , &data[t]);
       if (rc)
@@ -412,7 +442,7 @@ static  void	__threaded_sub__( double *dp1,  double *dp2,  double *dp3,  int len
       }
    }
 
-   for(t=0; t < NUM_THREADS; t++)
+   for(t = 0; t < NUM_THREADS; t++)
    {
       rc = pthread_join(threads[t], (void **)&status);
       if (rc)
@@ -435,7 +465,8 @@ static  void	__threaded_smlt__( double *dp1,  double s,  double *dp2,  int len)
    pthread_t threads[NUM_THREADS];
    SV_MLT_PARTIAL data[NUM_THREADS];
 
-   int rc,t,status;
+   int rc,t;
+   void *status;
 
    init_threaded_data_for_smlt(data, NUM_THREADS, len, dp1, s, dp2);
 
@@ -443,7 +474,7 @@ static  void	__threaded_smlt__( double *dp1,  double s,  double *dp2,  int len)
    pthread_attr_init(&attr);
    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 
-   for(t=0 ; t < NUM_THREADS ; t++)
+   for(t = 0; t < NUM_THREADS ; t++)
    {
       rc = pthread_create(&threads[t], &attr , routine_threaded_smlt , &data[t]);
 
@@ -453,7 +484,7 @@ static  void	__threaded_smlt__( double *dp1,  double s,  double *dp2,  int len)
       }
    }
 
-   for(t=0; t < NUM_THREADS; t++)
+   for(t = 0; t < NUM_THREADS; t++)
    {
       rc = pthread_join(threads[t], (void **)&status);
       if (rc)
@@ -476,7 +507,8 @@ static  void	__threaded_mltadd__( double *dp1, double *dp2, double s, int len)
    pthread_t threads[NUM_THREADS];
    V_MLTADD_PARTIAL data[NUM_THREADS];
 
-   int rc,t,status;
+   int rc,t;
+   void *status;
 
    init_threaded_data_for_smlt(data, NUM_THREADS, len, dp1, s, dp2);
 
@@ -484,7 +516,7 @@ static  void	__threaded_mltadd__( double *dp1, double *dp2, double s, int len)
    pthread_attr_init(&attr);
    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 
-   for(t=0 ; t < NUM_THREADS ; t++)
+   for(t= 0; t < NUM_THREADS ; t++)
    {
       rc = pthread_create(&threads[t], &attr , routine_threaded_mltadd , &data[t]);
       if (rc)
@@ -493,7 +525,7 @@ static  void	__threaded_mltadd__( double *dp1, double *dp2, double s, int len)
       }
    }
 
-   for(t=0; t < NUM_THREADS; t++)
+   for(t=  0; t < NUM_THREADS; t++)
    {
       rc = pthread_join(threads[t], (void **)&status);
       if (rc)
@@ -516,7 +548,7 @@ extern double in_prod_threaded(VEC *v1, VEC *v2)
 {
    if ( v1==(VEC *)NULL || v2==(VEC *)NULL )  error(E_NULL, "in_prod_threaded");
    if ( v1->dim != v2->dim )                  error(E_SIZES, "in_prod_threaded");
-   
+
    return __threaded_ip__(v1->ve, v2->ve, v1->dim);
 }
 
@@ -525,8 +557,8 @@ extern double in_prod_threaded(VEC *v1, VEC *v2)
 
 extern VEC * v_add_threaded(VEC *v1, VEC *v2, VEC *out)
 {
-   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )  error(E_NULL, "v_add");
-   if ( v1->dim != v2->dim )                  error(E_SIZES, "v_add");
+   if ( v1==(VEC *)NULL || v2==(VEC *)NULL )  error(E_NULL, "v_add_threaded");
+   if ( v1->dim != v2->dim )                  error(E_SIZES, "v_add_threaded");
 
    if ( out==(VEC *)NULL || out->dim != v1->dim )
    {

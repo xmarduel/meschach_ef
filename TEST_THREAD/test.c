@@ -19,8 +19,8 @@ typedef struct
 
 /* Define globally accessible variables and a mutex */
 
-#define NUMTHRDS 1
-#define VECLEN 4000000
+#define NUMTHRDS 4
+#define VECLEN 400000
 DOTDATA dotstr;
 pthread_t callThd[NUMTHRDS];
 pthread_mutex_t mutexsum;
@@ -91,10 +91,10 @@ int main (int argc, char *argv[])
    time_t t1, t2;
    int i;
    double *a, *b;
-   int status;
+   void* status;
    pthread_attr_t attr;
    int indices[NUMTHRDS] = {0,1,2,3};
-  
+
    printf("start ... \n"); fflush(stdout);
 
    /* Assign storage and initialize values */
@@ -136,14 +136,19 @@ int main (int argc, char *argv[])
    for(i=0;i < NUMTHRDS;i++)
    {
       pthread_join( callThd[i], (void **)&status);
+      printf("joined %d\n", i);
    }
 
    t2 = time(NULL);
 
    /* After joining, print out the results and cleanup */
    printf ("Sum =  %f -- time = %lf \n", dotstr.sum, difftime(t2,t1));
+   printf("here 0 \n");
    free (a);
+   printf("here 1 \n");
    free (b);
+   printf("here 2 \n");
    pthread_mutex_destroy(&mutexsum);
+   printf("here 3 \n");
    pthread_exit(NULL);
 }

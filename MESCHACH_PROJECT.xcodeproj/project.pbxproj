@@ -4652,8 +4652,14 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				OTHER_CFLAGS = "-ansi";
-				OTHER_LDFLAGS = "-lmeschach";
+				OTHER_CFLAGS = (
+					"-g",
+					"-ansi",
+				);
+				OTHER_LDFLAGS = (
+					"-lmeschach",
+					"-lpthread",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -4694,8 +4700,14 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_CFLAGS = "-ansi";
-				OTHER_LDFLAGS = "-lmeschach";
+				OTHER_CFLAGS = (
+					"-g",
+					"-ansi",
+				);
+				OTHER_LDFLAGS = (
+					"-lmeschach",
+					"-lpthread",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
