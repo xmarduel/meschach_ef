@@ -1,4 +1,5 @@
 #include <pthread.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/malloc.h>
 
@@ -51,7 +52,7 @@ void *dotprod(void *arg)
    x = dotstr.a;
    y = dotstr.b;
 
-   printf("start thread %d... \n", pthread_self()); fflush(stdout);
+   printf("start thread %p... \n", pthread_self()); fflush(stdout);
    /*
     Perform the dot product and assign result
     to the appropriate variable in the structure.
@@ -93,7 +94,7 @@ int main (int argc, char *argv[])
    double *a, *b;
    void* status;
    pthread_attr_t attr;
-   int indices[NUMTHRDS] = {0,1,2,3};
+   long long indices[NUMTHRDS] = {0,1,2,3};
 
    printf("start ... \n"); fflush(stdout);
 
