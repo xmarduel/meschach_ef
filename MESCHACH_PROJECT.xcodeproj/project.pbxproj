@@ -1024,6 +1024,7 @@
 		254C1D9B1A6186210060FF18 /* SCHEMA_MESH_2D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SCHEMA_MESH_2D.json; sourceTree = "<group>"; };
 		254C1D9C1A6186210060FF18 /* SCHEMA_MESH_3D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SCHEMA_MESH_3D.json; sourceTree = "<group>"; };
 		254C1D9D1A6186210060FF18 /* SCHEMA_PDE_PROBLEM.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SCHEMA_PDE_PROBLEM.json; sourceTree = "<group>"; };
+		254F6D2F28776B7D00977497 /* meschach_threaded.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; path = meschach_threaded.so; sourceTree = "<group>"; };
 		2555C126132BC62A00924C8E /* strfuncs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strfuncs.c; sourceTree = "<group>"; };
 		255604EE1FA4763100074C5B /* nselmt_1.dat */ = {isa = PBXFileReference; lastKnownFileType = text; path = nselmt_1.dat; sourceTree = "<group>"; };
 		255604EF1FA4763100074C5B /* sol_1.dat */ = {isa = PBXFileReference; lastKnownFileType = text; path = sol_1.dat; sourceTree = "<group>"; };
@@ -2586,6 +2587,7 @@
 				2566AE390EFA589A004FA061 /* meschach_lapack.so */,
 				2566AE3A0EFA589A004FA061 /* meschach_libsciplot.so */,
 				2566AE3B0EFA589A004FA061 /* meschach_spooles.so */,
+				254F6D2F28776B7D00977497 /* meschach_threaded.so */,
 				2566AE3C0EFA589A004FA061 /* meschach_vogle.so */,
 				2566AE3D0EFA589A004FA061 /* meschach.so */,
 				2566AE3E0EFA589A004FA061 /* vogle.so */,
