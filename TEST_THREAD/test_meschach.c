@@ -7,12 +7,20 @@
 
 int main (int argc, char *argv[])
 {
-   int LOOP = 50;
+   int LOOP = 5;
    int DIM = 100000000;
 
    VEC* v1 = v_get(DIM);
    VEC* v2 = v_get(DIM);
 
+   printf("sizeof long double = %ld\n", sizeof(long double));
+   printf("sizeof      double = %ld\n", sizeof(double));
+   printf("sizeof      float  = %ld\n", sizeof(float));
+   printf("sizeof      void*  = %ld\n", sizeof(void*));
+   printf("sizeof long long   = %ld\n", sizeof(long long));
+   printf("sizeof      long   = %ld\n", sizeof(long));
+   printf("sizeof      int    = %ld\n", sizeof(int));
+   
    v1 = v_ones(v1);
    sv_mlt(2.0, v1, v1);
 
