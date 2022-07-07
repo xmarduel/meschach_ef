@@ -1,6 +1,6 @@
 
-from sys import *
-from math import *
+import sys
+import math
 import time
 import profile
 

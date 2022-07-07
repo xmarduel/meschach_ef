@@ -36,9 +36,9 @@ def fill_sparse_matrix(A):
     sp_set_val(A,NX-2,1, -2.0)
 
     #plus
-    for i in range(NX/2):
-        sp_set_val(A, i,i+NX/2, -1.0)
-        sp_set_val(A, i+NX/2,i, -1.0)
+    for i in range(NX//2):
+        sp_set_val(A, i,i+NX//2, -1.0)
+        sp_set_val(A, i+NX//2,i, -1.0)
 # ------------------------------------
 
 P    = px_get(NX)
@@ -72,8 +72,8 @@ time1 = time()
 print("without bandwr ... ")
 LLT_1 = sp_copy(A)
 spCHfactor(LLT_1)
-print("without bandwr, nnz(LLT) = ", sp_nonzeros(LLT_1)
-print("without bandwr, nnz(LLT) (sym) = ", sp_nonzeros_symmetric_part(LLT_1), "\n")
+print("without bandwr, nnz(LLT) = ", sp_nonzeros(LLT_1))
+print("without bandwr, nnz(LLT) (sym) = %s \n" % sp_nonzeros_symmetric_part(LLT_1))
 time2 = time()
 print("without bandwr, time CHOLESKY FACTORISATION = ", time2 - time1)
 

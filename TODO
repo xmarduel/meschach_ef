@@ -16,7 +16,7 @@ Graphics:
 ---------
 
 - unify cpgplot, vogle/vopl and libsciplot calls (1d)
-- specifiy colors in config files (and use them)
+- specifiy colors / background color in config files (and use them)
 - BUG: vogle ignores VIEWPORT specs
 - change MATLAB to OCTAVE for 1D and 2D
 
