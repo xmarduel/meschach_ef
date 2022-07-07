@@ -1,6 +1,6 @@
 
-//#include "InpMtx.h"
-#include "LinSol.h"
+#include "EXTERNAL_LIBS/spooles/InpMtx.h"
+#include "EXTERNAL_LIBS/spooles/LinSol/Bridge.h"
 
 int main(void)
 {
@@ -25,7 +25,7 @@ int main(void)
    {
       fp = fopen("test_spooles_dump.txt","w");
    }
-   
+
    A_NSYM  = InpMtx_new();
    A_UPPER = InpMtx_new();
    A_LOWER = InpMtx_new();
@@ -33,7 +33,7 @@ int main(void)
    InpMtx_init(A_NSYM , INPMTX_BY_ROWS, SPOOLES_REAL, 0, 0);
    InpMtx_init(A_UPPER, INPMTX_BY_ROWS, SPOOLES_REAL, 0, 0);
    InpMtx_init(A_LOWER, INPMTX_BY_ROWS, SPOOLES_REAL, 0, 0);
-   
+
    for (i=0; i<SIZE; i++)
    {
       InpMtx_inputRealEntry(A_NSYM ,i,i, 4.0); /* the diagonal */
@@ -46,7 +46,7 @@ int main(void)
       InpMtx_inputRealEntry(A_NSYM ,i+1,i, -1.0 ); /* the lower part */
 
       InpMtx_inputRealEntry(A_UPPER,i,i+1, -1.0 ); /* the upper part */
-      
+
       InpMtx_inputRealEntry(A_LOWER,i+1,i, -1.0 ); /* the lower part */
    }
 
@@ -81,12 +81,12 @@ int main(void)
    }
    /* ---------------------------------------------- */
 
-   
+
    x = DenseMtx_new();
 
    DenseMtx_init(x, SPOOLES_REAL, 0,0, SIZE,1 , 1,1);
    DenseMtx_zero(x);
-   
+
    for (i=0; i<SIZE; i++)
    {
       DenseMtx_setRealEntry(x,i,0, (double)((i+1)*(i+1)) );
@@ -148,7 +148,7 @@ int main(void)
    Wrapp1 = Bridge_new();
    Wrapp2 = Bridge_new();
    Wrapp3 = Bridge_new();
-   
+
    Bridge_setMatrixParams(Wrapp1, SIZE, SPOOLES_REAL, SPOOLES_NONSYMMETRIC);
    Bridge_setMatrixParams(Wrapp2, SIZE, SPOOLES_REAL, SPOOLES_SYMMETRIC);
    Bridge_setMatrixParams(Wrapp3, SIZE, SPOOLES_REAL, SPOOLES_SYMMETRIC);
@@ -222,7 +222,7 @@ int main(void)
       /*DenseMtx_writeForHumanEye(y3, stdout);*/ /* y3 is changed ( permutated ) */
    }
 
-   
+
    fclose(fp);
 
    return 0;
