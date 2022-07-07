@@ -5,6 +5,7 @@
 *.lo
 JSON_SCHEMAS/__pycache__/
 MESCHACH_PROJECT/build
+MESCHACH_LIBS
 DRIVERS_PYTHON/without_comments.json
 DRIVERS_PYTHON/SolApproch2D.dat
 DRIVERS_PYTHON/SolApproch2D.silo
