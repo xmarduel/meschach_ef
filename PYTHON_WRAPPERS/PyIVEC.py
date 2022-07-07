@@ -18,6 +18,10 @@ class IVec:
         """
         self.civec = meschach.iv_get(m)
 
+    def __del__(self):
+        """ """
+        self.free()
+
     #
     #  Get the dimension of the matrix
     #

@@ -42,6 +42,10 @@ class Mat:
         """
         self.cmat = meschach.m_get(m,n)
 
+    def __del__(self):
+        """ """
+        self.free()
+
     #
     # Getting the data
     #
@@ -173,7 +177,7 @@ class Mat:
             return ret
         # a is a integer or a double
         elif isinstance(a, int) or isinstance(a, float):
-            ret = Mat(self.m,self.n)
+            ret = Mat(self.m, self.n)
             meschach_adds.m_sadd(a, self.cmat, ret.cmat)
             return ret
         else:

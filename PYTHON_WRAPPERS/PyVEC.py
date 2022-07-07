@@ -18,6 +18,10 @@ class Vec:
         """
         self.cvec = meschach.v_get(m)
 
+    def __del__(self):
+        """ """
+        self.free()
+
     @classmethod
     def Memory(cls, stream = sys.stdout):
         meschach.mem_info_file_onetype(stream, 0, meschach.TYPE_VEC)

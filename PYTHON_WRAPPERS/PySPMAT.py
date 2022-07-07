@@ -34,6 +34,10 @@ class SpMat(object):
         """
         self.cspmat = meschach.sp_get(m, n, 10)
 
+    def __del__(self):
+        """ """
+        self.free()
+
     #
     # Get the dimension of the matrix
     #

@@ -46,6 +46,10 @@ class IMat:
         if hasattr(self, "cimat"):
             meschach_adds.im_resize(self.cimat, m, n)
 
+    def __del__(self):
+        """ """
+        self.free()
+
     #
     # Get the dimension of the matrix
     #
@@ -113,6 +117,15 @@ class IMat:
         f_tmp.close()
 
         return str
+
+    #
+    # playing with storage
+    #
+    def free(self):
+        """
+        """
+        meschach.im_free(self.cimat)
+        self.cimat = meschach.im_null()
 
     #
     # Members functions

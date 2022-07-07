@@ -18,6 +18,10 @@ class Perm(object):
         """
         self.cperm = meschach.px_get(m)
 
+    def __del__(self):
+        """ """
+        self.free()
+
     #
     # getting the data
     #
@@ -86,6 +90,15 @@ class Perm(object):
         """
         """
         meschach.px_resize(self.cperm, m)
+
+    #
+    # playing with storage
+    #
+    def free(self):
+        """
+        """
+        meschach.m_free(self.cperm)
+        self.cperm = meschach.px_null()
 
     #
     # Members functions
