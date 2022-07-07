@@ -1,12 +1,6 @@
 
 //
 //
-//
-
-// crash for
-// fp = open("schwarz.dat", "r")
-// U_steadystate = v_finput(fp, None)
-// fp.close()
 
 %nodefault; /* no constructor/destructor */
 
@@ -15,12 +9,6 @@ typedef double          Real;
 typedef double          real;
 
 %include "typemaps.i"
-
-
-// FIXME:
-// v_finput(FILE*, vec);  -> "r"
-// v_foutput(FILE*, vec);  -> "w"
-
 
 //////////////////////////////////////////////////////////////
 // TYPEMAP : allow to write to file opened from python
