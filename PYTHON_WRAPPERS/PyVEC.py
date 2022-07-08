@@ -14,9 +14,18 @@ class Vec:
     """
     def __init__(self, m):
         """
-        setup self.cvec
+        setup object
+        - m is a VEC*
+        - m is a dimension
         """
-        self.cvec = meschach.v_get(m)
+        if Vec.is_cvec(m):
+            self.cvec = m
+        else:
+            self.cvec = meschach.v_get(m)
+
+    @classmethod
+    def is_cvec(cls, cvec):
+        return "VEC *" in str(cvec)
 
     def __del__(self):
         """ """

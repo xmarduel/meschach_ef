@@ -36,11 +36,20 @@ class Mat:
     """
     class for Dense Matrix : self.cmat is a MAT * structure
     """
-    def __init__(self, m, n):
+    def __init__(self, m, n = 0):
         """
-        setup self.cmat
+        setup object
+        - m is a MAT*
+        - m is a dimension
         """
-        self.cmat = meschach.m_get(m,n)
+        if Mat.is_cmat(m):
+            self.cmat = m
+        else:
+            self.cmat = meschach.m_get(m,n)
+
+    @classmethod
+    def is_cmat(cls, cmat):
+        return "MAT *" in str(cmat)
 
     def __del__(self):
         """ """
@@ -212,7 +221,7 @@ class Mat:
         # a is a Vec
         elif isinstance(a, PyVEC.Vec):
             ret = PyVEC.Vec(self.n)
-            meschach.mv_mlt(self.cmat, a.cmat, ret.cvec)
+            meschach.mv_mlt(self.cmat, a.cvec, ret.cvec)
             return ret
         # a is a integer or a double
         elif isinstance(a, int) or isinstance(a, float):
