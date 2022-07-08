@@ -7,6 +7,10 @@ from PyPERM import *
 
 import meschach
 
+#
+# just the beginning...
+#
+
 def CHfactor(a: Mat) -> Mat :
     return  Mat(meschach.CHfactor(a.cmat))
 
