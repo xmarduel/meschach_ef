@@ -5,8 +5,6 @@ TOP              = .
 
 INSTALLDIR       = .
 
-include ./LINUX_MAKEFILES/mk.platform
-
 # - where ALL build artefacts go
 BUILDDIR        = $(CWD)/0BUILD.$(PLATFORM_KEY)
 BUILDDIRS       = $(CWD)/0BUILD.*
@@ -20,12 +18,9 @@ DRIVER_1D = driver_1D.exe
 DRIVER_2D = driver_2D.exe
 DRIVER_3D = driver_3D.exe
 
+# --------------------------------------------------------------
 
-
-
-
-
-DEFINES = -DHAVE_LUA -DANSI -DMESCHACH__ITER_EXTENSIONS 
+DEFINES = -DHAVE_LUA -DANSI -DMESCHACH__ITER_EXTENSIONS
 
 NO_WARNINGS =  -Wno-format \
 		-Wno-parentheses \
@@ -55,7 +50,7 @@ LDFLAGS = -L./LINUX_MAKEFILES \
 all: libmeschach libmeschach_adds libmeschach_ef libmeschach_spooles driver_1D driver_2D driver_3D
 
 clean:
-	$(RM) -rf $(BUILDDIR) ./LINUX_MAKEFILES/libmeschach.a ./LINUX_MAKEFILES/libmeschach_adds.a ./LINUX_MAKEFILES/libmeschach_spooles.a ./LINUX_MAKEFILES/libmeschach_ef.a  ./LINUX_MAKEFILESd/driver_1D.exe
+	$(RM) -rf $(BUILDDIR) ./LINUX_MAKEFILES/libmeschach.a ./LINUX_MAKEFILES/libmeschach_adds.a ./LINUX_MAKEFILES/libmeschach_spooles.a ./LINUX_MAKEFILES/libmeschach_ef.a  ./LINUX_MAKEFILES/driver_1D.exe ./LINUX_MAKEFILES/driver_2D.exe ./LINUX_MAKEFILES/driver_3D.exe
 
 libmeschach: $(LIB_MESCHACH)
 	ar rcs LINUX_MAKEFILES/$(LIB_MESCHACH) $(LIB_MESCHACH.objs)
@@ -238,5 +233,4 @@ $(DRIVER_1D): $(DRIVER_1D.obj)
 $(DRIVER_2D): $(DRIVER_2D.obj)
 $(DRIVER_3D): $(DRIVER_3D.obj)
 
-include ./LINUX_MAKEFILES/mk.subdirs
 include ./LINUX_MAKEFILES/mk.rules
