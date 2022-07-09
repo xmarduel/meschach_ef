@@ -195,6 +195,7 @@ int  main()
 
    if ( (strcmp(MyParams->problem, "LAPLACIAN") == 0) || (strcmp(MyParams->problem, "CONVECTION-DIFFUSION") == 0) )
    {
+#ifdef HAVE_VOGLE
       if (strcmp(MyParams->graph_interactiv2Dplots_params.ENGINE , "VOGLE") == 0)
       {
          GEOM_2D *geomP1 = Geom2D_getP1geom_from(MyElt, MyGeom);
@@ -232,6 +233,7 @@ int  main()
 
          GEOM_2D_FREE(geomP1);
       }
+#endif
    }
 
    /* ------ graphics output ----------------------------------------------- */

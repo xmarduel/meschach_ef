@@ -239,8 +239,11 @@ void  solve2D_navier_stokes_(const ELT_2D *elt2 , const ELT_2D *elt1 , const GEO
    /* ----------- call the algorithms -------------- */
    /* ---------------------------------------------- */
    {
-      BANDWRt_METHOD  bandwr_method = MyParams->stokes_params.uzawa.rho;
-      BANDWRt_OPTION  bandwr_option = MyParams->stokes_params.uzawa.innerloop_solver.bandwidth_method;
+      Real rho = MyParams->stokes_params.uzawa.rho;
+      
+      BANDWRt_METHOD  bandwr_method    = MyParams->stokes_params.uzawa.innerloop_solver.bandwidth_method;
+      BANDWRt_OPTION  bandwr_option    = MyParams->stokes_params.uzawa.innerloop_solver.bandwidth_option;
+      
       BANDWRt_MATRIXTYPE  bandwr_mtype = BANDWRe_NONSYM;
 
       int  s,s1,s2;

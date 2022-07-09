@@ -3,6 +3,7 @@
 *_wrap.o
 *.o
 *.lo
+0BUILD.x86-linux64
 JSON_SCHEMAS/__pycache__/
 MESCHACH_PROJECT/build
 MESCHACH_LIBS

@@ -185,7 +185,7 @@ static VEC *_solve2D_lin(PRBLMt_2D_TYPE problem, const ELT_2D *MyElt, const GEOM
 
       default:
           error(E_UNKNOWN, "_solve2D_lin");
-          return -1;
+          return NULL;
    }
 
 

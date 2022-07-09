@@ -1,3 +1,6 @@
+it has been such a long time doing nothing with Meshach-EF,
+I do not know anymore what is to do ...
+
 Doc:
 ----
 
@@ -29,6 +32,10 @@ Misc:
 - setup functions by names in C program
 
 
+Python
+------
 
-it has been such a long time doing nothing with Meshach-EF, I do not know anymore
-what is to do ...
+- shall I continue the "python classes" wrappers of the SWIG objects ?
+(lots of work but no real need). See PYTHON_WRAPPERS PyMAT etc...
+
+

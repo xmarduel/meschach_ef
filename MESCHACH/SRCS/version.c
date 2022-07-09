@@ -59,9 +59,6 @@ void m_version()
 			"To update the version number"); */
 }
 
-/* $Log: version.c,v $
-/* Revision 1.1  2003/08/09 16:25:32  xavier
-/* Initial revision
 /*
  * Revision 1.9  1994/03/24  00:04:05  des
  * Added notes on changes to spILUfactor() and px_inv().
