@@ -1,0 +1,59 @@
+
+ifeq ($(_MK_RULES_INCLUDED_),)
+_MK_RULES_INCLUDED_ := true
+
+# ------------------------------------------------------------------------
+
+ifeq ($(VERBOSE),1)
+    VERB_HIDE = @true
+    VERB_SHOW =
+else
+    VERB_HIDE = @echo
+    VERB_SHOW = @
+endif
+
+# ------------------------------------------------------------------------
+# define a bunch of functions for compiling and linking
+
+define COMPILE.c
+	$(VERB_HIDE) COMPILE.c $< '->' '$(subst $(BUILDDIR)/,<BUILD>/,$@)'
+	$(VERB_SHOW) @[ -d "$(dir $@)" ] || mkdir -p "$(dir $@)"
+	$(VERB_SHOW) $(RM) $@
+	$(VERB_SHOW) $(CC) $(1) $(CFLAGS) -MMD -MF $(@:.o=.d) -MP -c $< -o $@
+endef
+
+define LINK.exe
+	$(VERB_HIDE) LINK.exe '$(subst $(BUILDDIR)/,<BUILD>/,$@)'
+	$(VERB_SHOW) $(RM) $@
+	$(VERB_SHOW) $(CC) $(XLD_FLAGS) $(LDFLAGS) -o $@ $^ $(JEMALLOC) $(LIBS)
+endef
+
+define LINK.shlib
+	$(VERB_HIDE) LINK.shlib '$(subst $(BUILDDIR)/,<BUILD>/,$@)'
+	$(VERB_SHOW) $(RM) $@
+	$(VERB_SHOW) $(CC) $(XLD_FLAGS) $(LDFLAGS) -shared -o $@ $^ $(LIBS) $(1)
+endef
+
+define LINK.lib
+        $(VERB_HIDE) LINK.lib '$(subst $(BUILDDIR)/,<BUILD>/,$@)'
+        $(VERB_SHOW) $(RM) $@
+        $(VERB_SHOW) $(AR) -cr $@ $^
+        $(VERB_SHOW) $(RANLIB) $@
+endef
+
+# ------------------------------------------------------------------------
+# - rules for compiling shared objects
+
+$(BUILDDIR)/%_so.o: %.c
+	$(call COMPILE.c,-fPIC)
+
+# ------------------------------------------------------------------------
+# - rules for compiling non-shared objects
+
+$(BUILDDIR)/%_st.o: %.c
+	$(call COMPILE.c,)
+
+# -------------------------------------------------------------------------
+
+# ifeq ($(_MK_RULES_INCLUDED_),)
+endif
