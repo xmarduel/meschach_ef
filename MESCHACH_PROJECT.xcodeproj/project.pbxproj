@@ -666,7 +666,6 @@
 
 /* Begin PBXFileReference section */
 		25041BDE0D2D1CAA003039E9 /* HEAT_2D.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = HEAT_2D.c; sourceTree = "<group>"; };
-		25041BE00D2D1CAA003039E9 /* INPUT_PDE_2D_TRANSIENT.dat */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = INPUT_PDE_2D_TRANSIENT.dat; sourceTree = "<group>"; };
 		25041BE10D2D1CAA003039E9 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		25041C8B0D2D22D5003039E9 /* graphics2D_vogle_transient_xt_window.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = graphics2D_vogle_transient_xt_window.c; sourceTree = "<group>"; };
 		250525BA132A5CE60087B775 /* draw_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = draw_c.c; sourceTree = "<group>"; };
@@ -1210,7 +1209,6 @@
 		25753E451A2210B2000ECA8D /* PDE_EXAMPLE_2D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDE_EXAMPLE_2D.json; sourceTree = "<group>"; };
 		2576E12928719C73001519AC /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
 		2576E12A28719C84001519AC /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
-		2576E12B28719C9B001519AC /* VERSION */ = {isa = PBXFileReference; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
 		2578205711CE717600293CB2 /* libsciplot.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libsciplot.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		2578208811CE717600293CB2 /* libvogle-2.0.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libvogle-2.0.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		257820A211CE717600293CB2 /* libvopl-2.0.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libvopl-2.0.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1535,7 +1533,6 @@
 			children = (
 				2540DFF21A24F345000B0719 /* PDE_EXAMPLE_TR_2D.json */,
 				25041BDE0D2D1CAA003039E9 /* HEAT_2D.c */,
-				25041BE00D2D1CAA003039E9 /* INPUT_PDE_2D_TRANSIENT.dat */,
 				25041BE10D2D1CAA003039E9 /* Makefile */,
 			);
 			path = 2D_TRANSIENT;
@@ -1887,7 +1884,6 @@
 				25099BCA0DC1F2B20076878F /* README */,
 				2576E12A28719C84001519AC /* TODO */,
 				2576E12928719C73001519AC /* NEWS */,
-				2576E12B28719C9B001519AC /* VERSION */,
 				254902361FA9F1250019D16D /* EF_MESHES */,
 				254C1D961A6186210060FF18 /* JSON_SCHEMAS */,
 				25D307AB0A852F8B008BB241 /* DRIVERS_C */,
@@ -2088,7 +2084,6 @@
 		2545A1400A7B75F7004F50D1 /* SRCS */ = {
 			isa = PBXGroup;
 			children = (
-				2555C126132BC62A00924C8E /* strfuncs.c */,
 				2545A1410A7B75F7004F50D1 /* amd_wrapper.c */,
 				2545A1420A7B75F7004F50D1 /* control.c */,
 				2545A1430A7B75F7004F50D1 /* eigen.c */,
@@ -2100,6 +2095,7 @@
 				2545A14A0A7B75F7004F50D1 /* sparse2_adds.c */,
 				2545A14B0A7B75F7004F50D1 /* sparse_adds.c */,
 				2545A14C0A7B75F7004F50D1 /* spmat2formats.c */,
+				2555C126132BC62A00924C8E /* strfuncs.c */,
 			);
 			path = SRCS;
 			sourceTree = "<group>";

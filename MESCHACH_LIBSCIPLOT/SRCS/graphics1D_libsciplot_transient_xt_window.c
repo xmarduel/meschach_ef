@@ -227,7 +227,7 @@ static void stop_run(Widget w, XEvent *ev, String *params, Cardinal *n_params) /
 
    /* >>> change the label of the Xaw button */
    /*       XtVaGetValues (w, XmNuserData, &canvasUserData, NULL); */
-   switch (widgetUserData->xaw_win->stop==1)
+   switch (widgetUserData->xaw_win->stop)
    {
       case 0: XtSetArg(wargs[0], XtNlabel, "Run"); break;
       case 1: XtSetArg(wargs[0], XtNlabel, "Stop"); break;

@@ -18,6 +18,7 @@
 
 
 #include <time.h>
+#include <pthread.h>
 
 #include "MESCHACH/INCLUDES/matrix.h"
 #include "MESCHACH/INCLUDES/sparse.h"

@@ -3,21 +3,19 @@ PWD              = .
 CWD              = .
 TOP              = .
 
-INSTALLDIR       = .
-
 # - where ALL build artefacts go
-BUILDDIR        = $(CWD)/0BUILD.$(PLATFORM_KEY)
-BUILDDIRS       = $(CWD)/0BUILD.*
+BUILDDIR        = $(CWD)/0BUILD.x86-linux64
 
-LIB_MESCHACH = libmeschach.a
-LIB_MESCHACH_ADDS = libmeschach_adds.a
-LIB_MESCHACH_SPOOLES = libmeschach_spooles.a
-LIB_MESCHACH_EF = libmeschach_ef.a
-LIBSCIPLOT = libsciplot.a
+LIB_MESCHACH            = libmeschach.a
+LIB_MESCHACH_ADDS       = libmeschach_adds.a
+LIB_MESCHACH_SPOOLES    = libmeschach_spooles.a
+LIB_MESCHACH_EF         = libmeschach_ef.a
+LIBSCIPLOT              = libsciplot.a
 LIB_MESCHACH_LIBSCIPLOT = libmeschach_libsciplot.a
-LIBVOGLE = libvogle.a
-LIBVOPL = libvopl.a
-LIB_MESCHACH_VOGLE = libmeschach_vogle.a
+LIBVOGLE                = libvogle.a
+LIBVOPL                 = libvopl.a
+LIB_MESCHACH_VOGLE      = libmeschach_vogle.a
+LIB_MESCHACH_CPGPLOT    = libmeschach_cpgplot.a
 
 DRIVER_1D = driver_1D.exe
 DRIVER_2D = driver_2D.exe
@@ -27,7 +25,7 @@ DRIVER_2D_TRANSIENT = driver_2D_TRANSIENT.exe
 
 # --------------------------------------------------------------
 
-DEFINES = -DHAVE_X11 -DHAVE_VOGLE -DHAVE_LIBSCIPLOT -DHAVE_LUA -DANSI -DMESCHACH__ITER_EXTENSIONS
+DEFINES = -DHAVE_X11 -DHAVE_CPGPLOT -DHAVE_VOGLE -DHAVE_LIBSCIPLOT -DHAVE_LUA -DANSI -DMESCHACH__ITER_EXTENSIONS
 
 NO_WARNINGS =  -Wno-format \
 	-Wno-parentheses \
@@ -35,7 +33,11 @@ NO_WARNINGS =  -Wno-format \
 	-Wno-incompatible-pointer-types \
 	-Wno-incompatible-pointer-types-discards-qualifiers
 
-CFLAGS += -g $(DEFINES)  $(NO_WARNINGS) \
+#CFLAGS_OPT = -g
+CFLAGS_OPT = -O3
+
+CFLAGS += $(CFLAGS_OPT) \
+	$(DEFINES)  $(NO_WARNINGS) \
 	-I./MESCHACH/INCLUDES \
 	-I. \
 	-I./EXTERNAL_LIBS/amd \
@@ -43,6 +45,7 @@ CFLAGS += -g $(DEFINES)  $(NO_WARNINGS) \
 	-I./EXTERNAL_LIBS/lua-5.4.3/src \
 	-I./EXTERNAL_LIBS \
 	-I./EXTERNAL_LIBS/spooles \
+	-I./EXTERNAL_LIBS/pgplot_srcs \
 	-I/opt/X11/include \
 	-I./MESCHACH_LIBSCIPLOT/LIBSCIPLOT \
 	-I./EXTERNAL_LIBS/plotutils-2.6 \
@@ -59,13 +62,15 @@ LDFLAGS = -L./LINUX_MAKEFILES \
 	-L./EXTERNAL_LIBS/spooles/LinSol/srcMT \
 	-L./EXTERNAL_LIBS/plotutils-2.6/lib \
 	-L./EXTERNAL_LIBS/plotutils-2.6/libplot/.libs \
+	-L./EXTERNAL_LIBS/pgplot \
+	-L/usr/local/gfortran/lib \
 	-L/opt/X11/lib 
 
 
-all: libmeschach libmeschach_adds libmeschach_spooles libmeschach_ef libsciplot libmeschach_libsciplot libvogle libvopl libmeschach_vogle driver_1D driver_2D driver_3D driver_1D_TRANSIENT driver_2D_TRANSIENT
+all: libmeschach libmeschach_adds libmeschach_spooles libmeschach_ef libsciplot libmeschach_libsciplot libvogle libvopl libmeschach_vogle libmeschach_cpgplot driver_1D driver_2D driver_3D driver_1D_TRANSIENT driver_2D_TRANSIENT
 
 clean:
-	$(RM) -rf $(BUILDDIR) ./LINUX_MAKEFILES/libmeschach.a ./LINUX_MAKEFILES/libmeschach_adds.a ./LINUX_MAKEFILES/libmeschach_spooles.a ./LINUX_MAKEFILES/libmeschach_ef.a ./LINUX_MAKEFILES/libsciplot.a ./LINUX_MAKEFILES/libmeschach_libsciplot.a ./LINUX_MAKEFILES/libvogle.a  ./LINUX_MAKEFILES/libvopl.a ./LINUX_MAKEFILES/libmeschach_vogle.a ./LINUX_MAKEFILES/driver_1D.exe ./LINUX_MAKEFILES/driver_2D.exe ./LINUX_MAKEFILES/driver_3D.exe ./LINUX_MAKEFILES/driver_1D_TRANSIENT.exe ./LINUX_MAKEFILES/driver_2D_TRANSIENT.exe
+	$(RM) -rf $(BUILDDIR) ./LINUX_MAKEFILES/libmeschach.a ./LINUX_MAKEFILES/libmeschach_adds.a ./LINUX_MAKEFILES/libmeschach_spooles.a ./LINUX_MAKEFILES/libmeschach_ef.a ./LINUX_MAKEFILES/libsciplot.a ./LINUX_MAKEFILES/libmeschach_libsciplot.a ./LINUX_MAKEFILES/libvogle.a  ./LINUX_MAKEFILES/libvopl.a ./LINUX_MAKEFILES/libmeschach_vogle.a ./LINUX_MAKEFILES/libmeschach_cpgplot.a ./LINUX_MAKEFILES/driver_1D.exe ./LINUX_MAKEFILES/driver_2D.exe ./LINUX_MAKEFILES/driver_3D.exe ./LINUX_MAKEFILES/driver_1D_TRANSIENT.exe ./LINUX_MAKEFILES/driver_2D_TRANSIENT.exe
 
 libmeschach: $(LIB_MESCHACH)
 	ar rcs LINUX_MAKEFILES/$(LIB_MESCHACH) $(LIB_MESCHACH.objs)
@@ -94,20 +99,23 @@ libvopl: $(LIBVOPL)
 libmeschach_vogle: $(LIB_MESCHACH_VOGLE)
 	ar rcs LINUX_MAKEFILES/$(LIB_MESCHACH_VOGLE) $(LIB_MESCHACH_VOGLE.objs)
 
+libmeschach_cpgplot: $(LIB_MESCHACH_CPGPLOT)
+	ar rcs LINUX_MAKEFILES/$(LIB_MESCHACH_CPGPLOT) $(LIB_MESCHACH_CPGPLOT.objs)
+
 driver_1D: $(DRIVER_1D)
-	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_1D) $(DRIVER_1D.obj) -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
+	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_1D) $(DRIVER_1D.obj) -lmeschach_cpgplot -lXaPgplot -lcpgplot -lpgplot -lgfortran -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
 
 driver_2D: $(DRIVER_2D)
-	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_2D) $(DRIVER_2D.obj) -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
+	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_2D) $(DRIVER_2D.obj) -lmeschach_cpgplot -lXaPgplot -lcpgplot -lpgplot -lgfortran  -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
 
 driver_3D: $(DRIVER_3D)
-	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_3D) $(DRIVER_3D.obj) -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
+	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_3D) $(DRIVER_3D.obj) -lmeschach_cpgplot -lXaPgplot -lcpgplot -lpgplot -lgfortran -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
 
 driver_1D_TRANSIENT: $(DRIVER_1D_TRANSIENT)
-	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_1D_TRANSIENT) $(DRIVER_1D_TRANSIENT.obj) -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
+	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_1D_TRANSIENT) $(DRIVER_1D_TRANSIENT.obj) -lmeschach_cpgplot -lXaPgplot -lcpgplot -lpgplot -lgfortran -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
 
 driver_2D_TRANSIENT: $(DRIVER_2D_TRANSIENT)
-	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_2D_TRANSIENT) $(DRIVER_2D_TRANSIENT.obj) -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
+	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_2D_TRANSIENT) $(DRIVER_2D_TRANSIENT.obj) -lmeschach_cpgplot -lXaPgplot -lcpgplot -lpgplot -lgfortran -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach -lamd -ljansson -llua -lspooles -lBridge -lplot -lcommon -lXaw -lXt -lX11
 
 
 DRIVER_1D.src = DRIVERS_C/1D/PDE_1D_SOLVE.c
@@ -334,6 +342,14 @@ LIB_MESCHACH_VOGLE.srcs        = \
         MESCHACH_VOGLE/SRCS/graphics1D_voplcontour_stationnary_xt_window.c \
         MESCHACH_VOGLE/SRCS/graphics1D_voplcontour_transient_xt_window.c
 
+LIB_MESCHACH_CPGPLOT.srcs        = \
+        MESCHACH_CPGPLOT/SRCS/graphics1D_pgplot.c \
+	MESCHACH_CPGPLOT/SRCS/graphics1D_pgplot_stationnary.c \
+	MESCHACH_CPGPLOT/SRCS/graphics1D_pgplot_stationnary_xt_window.c \
+	MESCHACH_CPGPLOT/SRCS/graphics1D_pgplot_svqueue.c \
+	MESCHACH_CPGPLOT/SRCS/graphics1D_pgplot_transient.c \
+	MESCHACH_CPGPLOT/SRCS/graphics1D_pgplot_transient_xt_window.c
+
 
 LIB_MESCHACH.objs            = $(LIB_MESCHACH.srcs:%.c=$(BUILDDIR)/%_st.o)
 LIB_MESCHACH_ADDS.objs       = $(LIB_MESCHACH_ADDS.srcs:%.c=$(BUILDDIR)/%_st.o)
@@ -344,6 +360,7 @@ LIB_MESCHACH_LIBSCIPLOT.objs = $(LIB_MESCHACH_LIBSCIPLOT.srcs:%.c=$(BUILDDIR)/%_
 LIBVOGLE.objs                = $(LIBVOGLE.srcs:%.c=$(BUILDDIR)/%_st.o)
 LIBVOPL.objs                 = $(LIBVOPL.srcs:%.c=$(BUILDDIR)/%_st.o)
 LIB_MESCHACH_VOGLE.objs      = $(LIB_MESCHACH_VOGLE.srcs:%.c=$(BUILDDIR)/%_st.o)
+LIB_MESCHACH_CPGPLOT.objs    = $(LIB_MESCHACH_CPGPLOT.srcs:%.c=$(BUILDDIR)/%_st.o)
 
 DRIVER_1D.obj           = $(DRIVER_1D.src:%.c=$(BUILDDIR)/%_st.o)
 DRIVER_2D.obj           = $(DRIVER_2D.src:%.c=$(BUILDDIR)/%_st.o)
@@ -362,6 +379,7 @@ $(LIB_MESCHACH_LIBSCIPLOT): $(LIB_MESCHACH_LIBSCIPLOT.objs)
 $(LIBVOGLE): $(LIBVOGLE.objs)
 $(LIBVOPL): $(LIBVOPL.objs)
 $(LIB_MESCHACH_VOGLE): $(LIB_MESCHACH_VOGLE.objs)
+$(LIB_MESCHACH_CPGPLOT): $(LIB_MESCHACH_CPGPLOT.objs)
 
 $(DRIVER_1D): $(DRIVER_1D.obj)
 $(DRIVER_2D): $(DRIVER_2D.obj)

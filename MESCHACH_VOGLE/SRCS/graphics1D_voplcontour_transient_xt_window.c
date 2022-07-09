@@ -158,7 +158,7 @@ static void generic_output(WIDGET_USERDATA_STRUCT *xawUserData, VOGLE_OUTPUT_FOR
    char vogle_output_id[8];
    char *ext = "ppm";
 	
-   if ( xawUserData->pdata == NULL || xawUserData->pdata->title == NULL )
+   if ( xawUserData->pdata == NULL )
    {
       return;
    }
@@ -224,7 +224,7 @@ static void idle_workproc_no_x(SVQueue *queue)
    /* get the data from the SQueue - this waits in case of the queue is empty ... */
    VOPL_GRAPH_DATA * pdata = queue->xget(queue);
 	
-   if ( pdata == NULL || pdata->title == NULL)
+   if ( pdata == NULL )
    {
       return;
    }

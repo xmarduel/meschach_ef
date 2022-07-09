@@ -152,7 +152,7 @@ int vopl_windel(int win)
       /*
        * Clear it, in case it get's reused later.
        */
-      memset(&vopl_device.window[win], 0, sizeof(vopl_device.window));
+      memset(&vopl_device.window[win], 0, sizeof(*vopl_device.window));
       vopl_device.window[win].id = -1;
       
       if (vopl_device.curwin == win)
