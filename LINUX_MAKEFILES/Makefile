@@ -1,10 +1,11 @@
 
 # - where ALL build artefacts go
-BUILDDIR        = ./0BUILD.x86-linux64
+BUILDDIR                = ./0BUILD.x86-linux64
 
 # targets
 LIB_MESCHACH            = libmeschach.a
 LIB_MESCHACH_ADDS       = libmeschach_adds.a
+LIB_MESCHACH_LAPACK     = libmeschach_lapack.a
 LIB_MESCHACH_SPOOLES    = libmeschach_spooles.a
 LIB_MESCHACH_EF         = libmeschach_ef.a
 LIBSCIPLOT              = libsciplot.a
@@ -19,6 +20,10 @@ DRIVER_2D               = 2D.exe
 DRIVER_3D               = 3D.exe
 DRIVER_1D_TRANSIENT     = 1D_TRANSIENT.exe
 DRIVER_2D_TRANSIENT     = 2D_TRANSIENT.exe
+
+#
+# lapack not yet linked so -DHAVE_LAPACK not set
+#
 
 # --------------------------------------------------------------
 
@@ -64,7 +69,7 @@ LDFLAGS = -L./LINUX_MAKEFILES \
 	-L/opt/X11/lib 
 
 
-all: libmeschach libmeschach_adds libmeschach_spooles libmeschach_ef libsciplot libmeschach_libsciplot libvogle libvopl libmeschach_vogle libmeschach_cpgplot driver_1D driver_2D driver_3D driver_1D_TRANSIENT driver_2D_TRANSIENT
+all: libmeschach libmeschach_adds libmeschach_spooles libmeschach_lapack libmeschach_ef libsciplot libmeschach_libsciplot libvogle libvopl libmeschach_vogle libmeschach_cpgplot driver_1D driver_2D driver_3D driver_1D_TRANSIENT driver_2D_TRANSIENT
 
 clean:
 	$(RM) -rf $(BUILDDIR) ./LINUX_MAKEFILES/libmeschach.a ./LINUX_MAKEFILES/libmeschach_adds.a ./LINUX_MAKEFILES/libmeschach_spooles.a ./LINUX_MAKEFILES/libmeschach_ef.a ./LINUX_MAKEFILES/libsciplot.a ./LINUX_MAKEFILES/libmeschach_libsciplot.a ./LINUX_MAKEFILES/libvogle.a  ./LINUX_MAKEFILES/libvopl.a ./LINUX_MAKEFILES/libmeschach_vogle.a ./LINUX_MAKEFILES/libmeschach_cpgplot.a ./LINUX_MAKEFILES/1D.exe ./LINUX_MAKEFILES/2D.exe ./LINUX_MAKEFILES/3D.exe ./LINUX_MAKEFILES/1D_TRANSIENT.exe ./LINUX_MAKEFILES/2D_TRANSIENT.exe
@@ -76,6 +81,10 @@ libmeschach: $(LIB_MESCHACH)
 libmeschach_adds: $(LIB_MESCHACH_ADDS)
 	ar rc  LINUX_MAKEFILES/$(LIB_MESCHACH_ADDS) $(LIB_MESCHACH_ADDS.objs)
 	ranlib LINUX_MAKEFILES/$(LIB_MESCHACH_ADDS)
+
+libmeschach_lapack: $(LIB_MESCHACH_LAPACK)
+	ar rc  LINUX_MAKEFILES/$(LIB_MESCHACH_LAPACK) $(LIB_MESCHACH_LAPACK.objs)
+	ranlib LINUX_MAKEFILES/$(LIB_MESCHACH_LAPACK)
 
 libmeschach_spooles: $(LIB_MESCHACH_SPOOLES)
 	ar rc  LINUX_MAKEFILES/$(LIB_MESCHACH_SPOOLES) $(LIB_MESCHACH_SPOOLES.objs)
@@ -205,6 +214,10 @@ LIB_MESCHACH_ADDS.srcs        = \
         MESCHACH_ADDS/SRCS/spmat2formats.c \
         MESCHACH_ADDS/SRCS/sparse_adds.c \
         MESCHACH_ADDS/SRCS/strfuncs.c
+
+LIB_MESCHACH_LAPACK.srcs        = \
+        MESCHACH_LAPACK/SRCS/lapack_base.c \
+        MESCHACH_LAPACK/SRCS/lapack_eigen.c
 
 LIB_MESCHACH_SPOOLES.srcs        = \
         MESCHACH_SPOOLES/SRCS/spooles_wrapper.c \
@@ -360,6 +373,7 @@ LIB_MESCHACH_CPGPLOT.srcs        = \
 
 LIB_MESCHACH.objs            = $(LIB_MESCHACH.srcs:%.c=$(BUILDDIR)/%_st.o)
 LIB_MESCHACH_ADDS.objs       = $(LIB_MESCHACH_ADDS.srcs:%.c=$(BUILDDIR)/%_st.o)
+LIB_MESCHACH_LAPACK.objs     = $(LIB_MESCHACH_LAPACK.srcs:%.c=$(BUILDDIR)/%_st.o)
 LIB_MESCHACH_SPOOLES.objs    = $(LIB_MESCHACH_SPOOLES.srcs:%.c=$(BUILDDIR)/%_st.o)
 LIB_MESCHACH_EF.objs         = $(LIB_MESCHACH_EF.srcs:%.c=$(BUILDDIR)/%_st.o)
 LIBSCIPLOT.objs              = $(LIBSCIPLOT.srcs:%.c=$(BUILDDIR)/%_st.o)
@@ -379,6 +393,7 @@ DRIVER_2D_TRANSIENT.obj = $(DRIVER_2D_TRANSIENT.src:%.c=$(BUILDDIR)/%_st.o)
 
 $(LIB_MESCHACH): $(LIB_MESCHACH.objs)
 $(LIB_MESCHACH_ADDS): $(LIB_MESCHACH_ADDS.objs)
+$(LIB_MESCHACH_LAPACK): $(LIB_MESCHACH_LAPACK.objs)
 $(LIB_MESCHACH_SPOOLES): $(LIB_MESCHACH_SPOOLES.objs)
 $(LIB_MESCHACH_EF): $(LIB_MESCHACH_EF.objs)
 $(LIBSCIPLOT): $(LIBSCIPLOT.objs)

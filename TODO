@@ -13,7 +13,8 @@ Doc:
 Build:
 ------
 
-- Makefile for linux
+- Makefile for linux (OK) but still python wrappers to build
+(to build, copy the Makefile in LINUX_MAKEFILES in the root folder)
 
 Graphics:
 ---------
@@ -28,14 +29,12 @@ Misc:
 
 - gmsh new file format for cube in 3D
 - AdvFunc clean
-- Bc clean
-- setup functions by names in C program
 
 
 Python
 ------
 
 - shall I continue the "python classes" wrappers of the SWIG objects ?
-(lots of work but no real need). See PYTHON_WRAPPERS PyMAT etc...
+(lots of work but no real need). See PYTHON_WRAPPERS PyMAT etc... not finished anyway.
 
 
