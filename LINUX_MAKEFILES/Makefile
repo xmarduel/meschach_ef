@@ -74,7 +74,7 @@ LDFLAGS = -L./LINUX_MAKEFILES \
 all: libmeschach libmeschach_adds libmeschach_spooles libmeschach_lapack libmeschach_ef libsciplot libmeschach_libsciplot libvogle libvopl libmeschach_vogle libmeschach_cpgplot driver_1D driver_2D driver_3D driver_1D_TRANSIENT driver_2D_TRANSIENT
 
 clean:
-	$(RM) -rf $(BUILDDIR) ./LINUX_MAKEFILES/libmeschach.a ./LINUX_MAKEFILES/libmeschach_adds.a ./LINUX_MAKEFILES/libmeschach_spooles.a ./LINUX_MAKEFILES/libmeschach_ef.a ./LINUX_MAKEFILES/libsciplot.a ./LINUX_MAKEFILES/libmeschach_libsciplot.a ./LINUX_MAKEFILES/libvogle.a  ./LINUX_MAKEFILES/libvopl.a ./LINUX_MAKEFILES/libmeschach_vogle.a ./LINUX_MAKEFILES/libmeschach_cpgplot.a ./LINUX_MAKEFILES/1D.exe ./LINUX_MAKEFILES/2D.exe ./LINUX_MAKEFILES/3D.exe ./LINUX_MAKEFILES/1D_TRANSIENT.exe ./LINUX_MAKEFILES/2D_TRANSIENT.exe
+	$(RM) -rf $(BUILDDIR) ./LINUX_MAKEFILES/libmeschach.a ./LINUX_MAKEFILES/libmeschach_adds.a ./LINUX_MAKEFILES/libmeschach_lapack.a ./LINUX_MAKEFILES/libmeschach_spooles.a ./LINUX_MAKEFILES/libmeschach_ef.a ./LINUX_MAKEFILES/libsciplot.a ./LINUX_MAKEFILES/libmeschach_libsciplot.a ./LINUX_MAKEFILES/libvogle.a  ./LINUX_MAKEFILES/libvopl.a ./LINUX_MAKEFILES/libmeschach_vogle.a ./LINUX_MAKEFILES/libmeschach_cpgplot.a ./LINUX_MAKEFILES/1D.exe ./LINUX_MAKEFILES/2D.exe ./LINUX_MAKEFILES/3D.exe ./LINUX_MAKEFILES/1D_TRANSIENT.exe ./LINUX_MAKEFILES/2D_TRANSIENT.exe
 
 libmeschach: $(LIB_MESCHACH)
 	ar rc  LINUX_MAKEFILES/$(LIB_MESCHACH) $(LIB_MESCHACH.objs)
