@@ -12,7 +12,7 @@ prerequisites: ( (*) means that the lib is modified and build by us)
 
    - libXaPgplot.a - libcpgplot.a - libpgplot.a
    - (*)libvogle.a - (*)libvopl.a
-   - (*)libsciplot.a - libplot.a
+   - (*)libsciplot.a
 
    - libspooles.a, libBridge.a
    - libamd.a
@@ -28,13 +28,17 @@ prerequisites: ( (*) means that the lib is modified and build by us)
 
 - define(s):
 
-  - -DHAVE_X11 -DHAVE_VOGLE -DHAVE_CPGPLOT -DHAVE_LIBSCIPLOT -DHAVE_SILO -DHAVE_LUA
+  - -DHAVE_X11 -DHAVE_VOGLE -DHAVE_CPGPLOT -DHAVE_LIBSCIPLOT -DHAVE_SILO -DHAVE_LUA -DANSI -DMESCHACH__ITER_EXTENSIONS
 
 - graphics:
 
   - fonts path must be given:
     - PGPLOT_FONTS
     - VOGLE_FONTS
+
+how to compile the "hershey" fonts from vogle ?
+TODO
+
 
 
 External libs
@@ -44,6 +48,14 @@ External libs
 +++++++++++++
 > ./configure
 > make
+
+maby error by compile: replace
+
+setjmp(png_ptr->jmpbuf)        -> setjmp(png_jmpbuf(png_ptr))
+longjmp (png_ptr->jmpbuf, 1);  -> longjmp(png_jmpbuf(png_ptr), 1);
+
+- put in LD_LIBRARY_PATH the location where the libplot.so is
+- be sure the "graph" executable is in your "PATH"
 
 # silo
 +++++++++
@@ -55,6 +67,9 @@ External libs
 > ./configure
 > make
 
+by linking meschach_ef demos , error. Replace in jansson.h "real" with "xreal"
+
+
 # spooles
 ++++++++++
 > make lib
@@ -62,6 +77,7 @@ External libs
 
 > cd LinSol
 > make lib
+> cp Bridge.a libBridge.a
 
 # vogle/vopl
 +++++++++++++
@@ -71,6 +87,29 @@ build in the project (modified)
 +++++++++
 just compile ?
 
+follow the instructions 
+- g77 must be on system
+- rename untar'ed folder "pgplot_srcs"
+- create new "pgplot" folder and copy in it the file "drivers.list"
+- cd in your "pgplot" folder
+- drivers.list: select PPM, GIF, XWINDOW, XSERVE, XADRIV(ATHENA) - not Motif!
+- ../pgplot_srcs/makemake ../pgplot_srcs  linux g77_gcc
+
 # lua
 +++++++++
 just compile
+> make
+
+
+
+env variables (linux) :
+
+export MESCHACH_EF=$HOME/GITHUB/meschach_ef
+export PGPLOT_DIR=$MESCHACH_EF/EXTERNAL_LIBS/pgplot
+export PGPLOT_DEV=/XWINDOW
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MESCHACH_EF/EXTERNAL_LIBS/plotutils-2.6/libplot/.libs
+
+export VDEVICE=X11
+export VFONTLIB=/usr/local/lib/hershey or /usr/share/hershey-fonts  # copy all fonts of vogle in this folder
+export P6TO=PPM
