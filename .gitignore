@@ -3,7 +3,10 @@
 *_wrap.o
 *.o
 *.lo
-0BUILD.
+0BUILD.Darwin
+0BUILD.x86-linux64
+LINUX_MAKEFILES/*.a
+LINUX_MAKEFILES/*.exe
 JSON_SCHEMAS/__pycache__/
 MESCHACH_PROJECT/build
 MESCHACH_LIBS
