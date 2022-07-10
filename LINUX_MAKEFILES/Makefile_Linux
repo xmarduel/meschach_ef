@@ -38,6 +38,8 @@ NO_WARNINGS =  -Wno-format \
 #CFLAGS_OPT = -g
 CFLAGS_OPT = -O3
 
+X11_INCL   = /usr/include
+
 CFLAGS += $(CFLAGS_OPT) \
 	$(DEFINES)  $(NO_WARNINGS) \
 	-I./MESCHACH/INCLUDES \
@@ -48,7 +50,7 @@ CFLAGS += $(CFLAGS_OPT) \
 	-I./EXTERNAL_LIBS \
 	-I./EXTERNAL_LIBS/spooles \
 	-I./EXTERNAL_LIBS/pgplot_srcs \
-	-I/opt/X11/include \
+	-I$(X11_INCL) \
 	-I./MESCHACH_LIBSCIPLOT/LIBSCIPLOT \
 	-I./EXTERNAL_LIBS/plotutils-2.6 \
 	-I./EXTERNAL_LIBS/plotutils-2.6/include \
