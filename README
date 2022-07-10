@@ -67,7 +67,7 @@ longjmp (png_ptr->jmpbuf, 1);  -> longjmp(png_jmpbuf(png_ptr), 1);
 > ./configure
 > make
 
-by linking meschach_ef demos , error. Replace in jansson.h "real" with "xreal"
+by linking meschach_ef demos , error -> Replace in jansson.h "real" with "xreal"
 
 
 # spooles

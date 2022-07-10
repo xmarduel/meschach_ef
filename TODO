@@ -13,8 +13,8 @@ Doc:
 Build:
 ------
 
-- Makefile for linux (OK) but still python wrappers to build
-(to build, copy the Makefile in LINUX_MAKEFILES in the root folder)
+- Makefile for linux (OK) but python wrappers still to build
+(to build, copy the Makefile "Makefile_Linux" from LINUX_MAKEFILES in the root folder)
 
 Graphics:
 ---------
@@ -23,6 +23,8 @@ Graphics:
 - specifiy colors / background color in config files (and use them)
 - BUG: vogle ignores VIEWPORT specs
 - change MATLAB to OCTAVE for 1D and 2D
+- Cairo based plotting lib (giza?, kplot?) to enable Win32 plotting
+- Dislin ?
 
 Misc:
 -----
