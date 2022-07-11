@@ -14,27 +14,27 @@ from meschach_ef       import *
 #                             Uxx = -cos(x-t)
 #                             Ut  =  sin(x-t)
 #
-#  Ut - k.Uxx + UUx = f(x,t)  ( kappa = 1.0  ) 
+#  Ut - k.Uxx + UUx = f(x,t)  ( kappa = 1.0  )
 
 #-------------------------------------------------------------------
 
-mem_attach_list1();
-mem_attach_list2();
-mem_attach_list3();
-mem_attach_list4();
-mem_attach_list5();
-mem_attach_list6();
-mem_attach_list7();
+mem_attach_list1()
+mem_attach_list2()
+mem_attach_list3()
+mem_attach_list4()
+mem_attach_list5()
+mem_attach_list6()
+mem_attach_list7()
 
-err_attach_list2();
-err_attach_list3();
-err_attach_list4();
-err_attach_list5();
-err_attach_list6();
-err_attach_list7();
+err_attach_list2()
+err_attach_list3()
+err_attach_list4()
+err_attach_list5()
+err_attach_list6()
+err_attach_list7()
 
 
-set_err_flag(EF_JUMP);
+set_err_flag(EF_JUMP)
 
 
 eps = 0.0
@@ -65,7 +65,7 @@ def source(x,t):
     #return 0.0
 
 
-fun1Dex = Fun1D_get();
+fun1Dex = Fun1D_get()
 Fun1D_setFunctionTransientPython(fun1Dex, U); # the solution
 
 
@@ -75,16 +75,16 @@ def Dinit_condition(x):
     return Ux(x,0)
 
 def bc_left(x,t):
-    return  U(x,t);
+    return  U(x,t)
 
 def bc_right(x,t):
-    return  U(x,t);
+    return  U(x,t)
 
 
 
-MyParams = Params_get();
+MyParams = Params_get()
 
-#-------------------------------------------------------------------   
+#-------------------------------------------------------------------
 # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
 # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
 #--------------------------------------------------------------------------------------
@@ -93,12 +93,12 @@ Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "H3" )    # Ty
 #-physical parameters------------------------------------------------------------------
 
 Params_set_oneparam(MyParams, "physical_params","kappa",    kap ) # kappa
-Params_set_oneparam(MyParams, "physical_params","sigma",    sig ) # sigma 
+Params_set_oneparam(MyParams, "physical_params","sigma",    sig ) # sigma
 Params_set_oneparam(MyParams, "physical_params","epsilon",  eps ) # epsilon  -k*LAPLACIEN(u) + e.BILAPL(u) + sigma.u = F
 
 #- geometry-----------------------------------------------------------------------------
 
-Params_set_oneparam(MyParams, "geometry_params","meshfile", "NULL" )     #  meshfile ("name.dat") 
+Params_set_oneparam(MyParams, "geometry_params","meshfile", "NULL" )     #  meshfile ("name.dat")
 Params_set_oneparam(MyParams, "geometry_params","meshtype", "line" )     #
 #
 Params_set_oneparam(MyParams, "geometry_params","xmin"  , 0.0  ) # xmax
@@ -107,25 +107,25 @@ Params_set_oneparam(MyParams, "geometry_params","nx"    ,  20 ) # nx
 Params_set_oneparam(MyParams, "geometry_params","distribution",  "UNIFORM" ) # nx
 Params_set_oneparam(MyParams, "geometry_params","periodicity" , PERIODIC_MESHe)
 
-MyIC  = Fun1D_get();
-MyDIC = Fun1D_get();
+MyIC  = Fun1D_get()
+MyDIC = Fun1D_get()
 Fun1D_setFunctionPython(MyIC , init_condition ); # ref_e=0
 Fun1D_setFunctionPython(MyDIC, Dinit_condition ); # ref_e=0
 
 
-MyBC = Bc1D_get();
-Bc1D_setFunctionTransientPython(MyBC, BC_1De_DIRICHLET, 1, AXEe_X, bc_left ); # ref_s=1 (left) 
+MyBC = Bc1D_get()
+Bc1D_setFunctionTransientPython(MyBC, BC_1De_DIRICHLET, 1, AXEe_X, bc_left ); # ref_s=1 (left)
 Bc1D_setFunctionTransientPython(MyBC, BC_1De_DIRICHLET, 2, AXEe_X, bc_right); # ref_s=2 (right)
 
-Bc1D_setBcType(MyBC, BC_1De_DIRICHLET, 1, AXEe_X);
+Bc1D_setBcType(MyBC, BC_1De_DIRICHLET, 1, AXEe_X)
 Bc1D_setBcType(MyBC, BC_1De_DIRICHLET, 2, AXEe_X); # BC_1De_CAUCHY, BC_1De_DIRICHLET, BC_1De_NEUMANN
 
 
-MyRhsFun = Rhs1D_get();
+MyRhsFun = Rhs1D_get()
 Rhs1D_setFunctionTransientPython(MyRhsFun, 0, AXEe_X, source ); # ref_e=0
 
 #############################################################################################
-Params_set_staticparam(MyParams, 0);
+Params_set_staticparam(MyParams, 0)
 #############################################################################################
 
 MyElt  = elt1D_get(Params_get_oneparam(MyParams, "finite_elements_params", "name_ef"));

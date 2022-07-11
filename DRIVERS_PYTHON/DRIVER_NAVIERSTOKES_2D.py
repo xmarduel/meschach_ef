@@ -36,7 +36,7 @@ TEST = 'KOVASZNAY'
 #TEST = 'CN41'
 #TEST = 'CAVITY'
 
-	
+
 Re = 400.0
 
 def source_u(x,y):
@@ -66,10 +66,10 @@ if TEST == 'CN41':
  	#   |                |
   	#   |                |
  	#   |                |
-	#   *----------------*  
+	#   *----------------*
 	#          1
 	#
-	 
+
     CN = 4.0
 
     def bcENTRANCE(x,y):
@@ -77,7 +77,7 @@ if TEST == 'CN41':
     def bcEXIT(x,y):
         return (1.0 - y*y)
 
-		  
+
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 1, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 2, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 3, AXEe_X )
@@ -125,7 +125,7 @@ elif TEST == 'KOVASZNAY':
         return (L / (2*pi)) * exp(L*x)*sin(2*pi*y)
     def dvdx(x,y):
         return (L*L / (2*pi)) * exp(L*x)*sin(2*pi*y)
-	 
+
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 1, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 2, AXEe_X )
     #Bc2D_setBcType(MyBC, BC_2De_NEUMANN, 2, AXEe_X )
@@ -150,7 +150,7 @@ elif TEST == 'CANAL_WITH_BOULE':
 
     def bcEXIT(x,y):
         return (1.0 - y*y)
-	 
+
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 1, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 2, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_NEUMANN  , 3, AXEe_X )
@@ -185,15 +185,15 @@ elif TEST == 'CANAL_WITH_BOULE':
 elif TEST == 'CAVITY':
 
     Re = 400.0
-    
+
     def bc_u1(x,y):
         return 1.0
         return 4.0*x*(1.0-x)
-		  
+
     def bc_u2(x,y):
         return 0.0
         return 16.0*x*(1.0-x)
-	 
+
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 1, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 2, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 3, AXEe_X )
@@ -214,20 +214,20 @@ elif TEST == 'CAVITY':
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 2, AXEe_Y, bc0) # v always 0 on boundaries
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 3, AXEe_Y, bc0) # v always 0 on boundaries
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 4, AXEe_Y, bc0) # v always 0 on boundaries
-	 
+
 else:
 
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 1, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 2, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_NEUMANN  , 3, AXEe_X )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 4, AXEe_X )
-    #
+
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 1, AXEe_Y )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 2, AXEe_Y )
     Bc2D_setBcType(MyBC, BC_2De_NEUMANN  , 3, AXEe_Y )
     Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 4, AXEe_Y )
-    #
-    #
+
+
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 1, AXEe_X, bc0 )
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 2, AXEe_X, bcEXIT )
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 3, AXEe_X, bcEXIT )
@@ -235,18 +235,18 @@ else:
     #Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 2, AXEe_X, bc0 )
     #Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 3, AXEe_X, bc_u )
     #Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 4, AXEe_X, bc0 )
-    #
+
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 1, AXEe_Y, bc0)
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 2, AXEe_Y, bc0)
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 3, AXEe_Y, bc0)
     Bc2D_setFunctionPython(MyBC, BC_2De_DIRICHLET, 4, AXEe_Y, bc0)
-    #
-    #
+
+
     Bc2D_setFunctionPython(MyBC, BC_2De_NEUMANN, 1, AXEe_X, bc0 )
     Bc2D_setFunctionPython(MyBC, BC_2De_NEUMANN, 2, AXEe_X, bc0 )
     Bc2D_setFunctionPython(MyBC, BC_2De_NEUMANN, 3, AXEe_X, bc0 )
     Bc2D_setFunctionPython(MyBC, BC_2De_NEUMANN, 4, AXEe_X, bc0 )
-    #
+
     Bc2D_setFunctionPython(MyBC, BC_2De_NEUMANN, 1, AXEe_Y, bc0)
     Bc2D_setFunctionPython(MyBC, BC_2De_NEUMANN, 2, AXEe_Y, bc0)
     Bc2D_setFunctionPython(MyBC, BC_2De_NEUMANN, 3, AXEe_Y, bc0)
@@ -257,7 +257,7 @@ MyRhsFun = Rhs2D_get()
 Rhs2D_setFunctionPython(MyRhsFun, 0, AXEe_X, source_u)
 Rhs2D_setFunctionPython(MyRhsFun, 0, AXEe_Y, source_v)
 
-#-------------------------------------------------------------------   
+#-------------------------------------------------------------------
 
 MyParams = Params_get()
 
@@ -267,7 +267,7 @@ Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P2" )    # Ty
 Params_set_oneparam(MyParams, "main_problem","NULL", "NAVIER-STOKES" )  # Laplacian Stokes NavierStokes
 
 Params_set_oneparam(MyParams, "navierstokes_params", "method", "NEWTON-EXACT" ) # "NEWTON-EXACT", "NEWTON-APPROCH"
-Params_set_oneparam(MyParams, "navierstokes_params", "max_steps", 10 ) 
+Params_set_oneparam(MyParams, "navierstokes_params", "max_steps", 10 )
 Params_set_oneparam(MyParams, "navierstokes_params", "eps_steps", 1.e-12)
 Params_set_oneparam(MyParams, "navierstokes_params", "outer_method", "UZAWA" ) # "UZAWA", "PRESSUREMATRIX"
 
@@ -275,14 +275,14 @@ Params_set_oneparam(MyParams, "navierstokes_params", "uzawa.rho", 1.0/Re)
 Params_set_oneparam(MyParams, "navierstokes_params", "uzawa.innerloop_method", "DIRECT-METHOD" )  # "DIRECT-METHOD" "ITERATIV-METHOD"
 Params_set_oneparam(MyParams, "navierstokes_params", "uzawa.innerloop_solver.max_steps", 1000 )
 Params_set_oneparam(MyParams, "navierstokes_params", "uzawa.innerloop_solver.eps_steps", 1.e-12)
-Params_set_oneparam(MyParams, "navierstokes_params", "uzawa.innerloop_solver.bandwidth_option", BANDWRe_PROFILE )  # 
-Params_set_oneparam(MyParams, "navierstokes_params", "uzawa.innerloop_solver.bandwidth_method", BANDWRe_SPOOLES )  # 
+Params_set_oneparam(MyParams, "navierstokes_params", "uzawa.innerloop_solver.bandwidth_option", BANDWRe_PROFILE )  #
+Params_set_oneparam(MyParams, "navierstokes_params", "uzawa.innerloop_solver.bandwidth_method", BANDWRe_SPOOLES )  #
 
 Params_set_oneparam(MyParams, "navierstokes_params", "pressurematrix.innerloop_method", "DIRECT-METHOD" )  # "DIRECT-METHOD" "ITERATIV-METHOD"
 Params_set_oneparam(MyParams, "navierstokes_params", "pressurematrix.innerloop_solver.max_steps", 1000 )
 Params_set_oneparam(MyParams, "navierstokes_params", "pressurematrix.innerloop_solver.eps_steps", 1.e-12)
-Params_set_oneparam(MyParams, "navierstokes_params", "pressurematrix.innerloop_solver.bandwidth_option", BANDWRe_PROFILE )  # 
-Params_set_oneparam(MyParams, "navierstokes_params", "pressurematrix.innerloop_solver.bandwidth_method", BANDWRe_SPOOLES )  # 
+Params_set_oneparam(MyParams, "navierstokes_params", "pressurematrix.innerloop_solver.bandwidth_option", BANDWRe_PROFILE )  #
+Params_set_oneparam(MyParams, "navierstokes_params", "pressurematrix.innerloop_solver.bandwidth_method", BANDWRe_SPOOLES )  #
 
 #--------------------------------------------------------------------------------------
 
@@ -332,13 +332,13 @@ else :
 
 #------------------------------------------------------------------------------------------
 
-MyGeom = Geom2D_get(MyElt, 
+MyGeom = Geom2D_get(MyElt,
         Params_get_oneparam(MyParams, "geometry_params", "meshfile"),
         Params_get_oneparam(MyParams, "geometry_params", "meshname"),
         Params_get_oneparam(MyParams, "geometry_params", "meshtype"))
 
-Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)  
-Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_Y) 
+Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
+Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_Y)
 
 graphics_geom2D_view("X11", MyGeom, "dummy")
 graphics_geom2D_view("gnuplot", MyGeom, "geometry_view")
@@ -353,7 +353,7 @@ print("METHOD is ", METHOD)
 
 if   PROBLEM == "LAPLACIAN" :
 
-    SOL = solve2D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun ) 
+    SOL = solve2D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun )
 
 elif PROBLEM == "CONVECTION-DIFFUSION" :
 
@@ -362,7 +362,7 @@ elif PROBLEM == "CONVECTION-DIFFUSION" :
 elif PROBLEM == "STOKES" :
 
     (U,V,P) = Py_solve2D_stokes( MyElt , MyEltM1 , MyGeom , MyBC , MyRhsFun )
-	
+
 elif PROBLEM == "NAVIER-STOKES" :
 
     (U,V,P) = Py_solve2D_NavierStokes( MyElt , MyEltM1 , MyGeom , MyBC , MyRhsFun )
@@ -371,8 +371,8 @@ else:
 
     print("Problem \"%s\" not yet implemented" % PROBLEM)
     exit(EXIT_FAILURE)
-   
-   
+
+
 #----------------------- graphics output -----------------------------
 
 if   PROBLEM == "LAPLACIAN" :
@@ -405,7 +405,7 @@ else:
 
 #---------------------------------------------------------------------
 
-   
+
 # free memory
 # -----------
 
@@ -421,16 +421,16 @@ RHS_2D_FREE(MyRhsFun)
 
 
 PARAMS_FREE(MyParams)
-   
+
 #---------------------------------------------------------------------
 
 mem_info_file(stdout,0)
-   
+
 mem_info_file(stdout,MY_LIST1)
-mem_info_file(stdout,MY_LIST2) 
-mem_info_file(stdout,MY_LIST3) 
-mem_info_file(stdout,MY_LIST4) 
-mem_info_file(stdout,MY_LIST5) 
+mem_info_file(stdout,MY_LIST2)
+mem_info_file(stdout,MY_LIST3)
+mem_info_file(stdout,MY_LIST4)
+mem_info_file(stdout,MY_LIST5)
 mem_info_file(stdout,MY_LIST6)
 mem_info_file(stdout,MY_LIST7)
 

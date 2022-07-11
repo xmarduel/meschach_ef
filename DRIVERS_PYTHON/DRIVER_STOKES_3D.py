@@ -86,17 +86,17 @@ Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 1, AXEe_X, cv1) # z = 1
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 2, AXEe_X, cv1) # z = 0
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 3, AXEe_X, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 4, AXEe_X, bc0)
-Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 5, AXEe_X, bc0) 
+Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 5, AXEe_X, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 6, AXEe_X, bc0)
 
-Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 1, AXEe_Y, bc0) 
+Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 1, AXEe_Y, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 2, AXEe_Y, bc0) # x = 1
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 3, AXEe_Y, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 4, AXEe_Y, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 5, AXEe_Y, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 6, AXEe_Y, bc0)
 
-Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 1, AXEe_Z, bc0) 
+Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 1, AXEe_Z, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 2, AXEe_Z, cv2)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 3, AXEe_Z, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_DIRICHLET, 4, AXEe_Z, bc0)
@@ -111,14 +111,14 @@ Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 4, AXEe_X, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 5, AXEe_X, bc0) # z = 0
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 6, AXEe_X, bc0)
 
-Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 1, AXEe_Y, bc0) 
+Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 1, AXEe_Y, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 2, AXEe_Y, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 3, AXEe_Y, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 4, AXEe_Y, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 5, AXEe_Y, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 6, AXEe_Y, bc0)
 
-Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 1, AXEe_Z, bc0) 
+Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 1, AXEe_Z, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 2, AXEe_Z, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 3, AXEe_Z, bc0)
 Bc3D_setFunctionPython(MyBC, BC_3De_NEUMANN, 4, AXEe_Z, bc0)
@@ -146,10 +146,10 @@ Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.innerloop_method"
 Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.innerloop_solver.bandwidth_option", BANDWRe_SPOOLES )
 Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.innerloop_solver.bandwidth_method", BANDWRe_SPOOLES_NONSYM )
 
-#Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.iterative_solver.eps_steps", 1.0e-12 )  
+#Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.iterative_solver.eps_steps", 1.0e-12 )
 #Params_set_oneparam(MyParams, "stokes_params", "pressurematrix.iterative_solver.max_steps", 500 )
 
-Params_set_oneparam(MyParams, "stokes_params", "uzawa.rho"         , 0.50 ) #  for "UZAWA" 
+Params_set_oneparam(MyParams, "stokes_params", "uzawa.rho"         , 0.50 ) #  for "UZAWA"
 Params_set_oneparam(MyParams, "stokes_params", "augmentedlagrangian.rho" , 0.50 ) #  for "AUGMENTEDLAGR"
 
 #--------------------------------------------------------------------------------------
@@ -202,11 +202,11 @@ MyElt  = elt3D_get(Params_get_oneparam(MyParams, "finite_elements_params", "name
 elt_P2 = elt3D_get("P2")
 elt_P1 = elt3D_get("P1")
 
-if   ( "P2" == ELT_3D_name_ef_get(MyElt) ) :
+if   "P2" == ELT_3D_name_ef_get(MyElt) :
     MyEltM1 = elt_P1
-elif ( "P1b"== ELT_3D_name_ef_get(MyElt) ) :
+elif "P1b"== ELT_3D_name_ef_get(MyElt) :
     MyEltM1 = elt_P1
-elif ( "P1" == ELT_3D_name_ef_get(MyElt) ) :
+elif "P1" == ELT_3D_name_ef_get(MyElt) :
     MyEltM1 = elt_P1
 else :
     pass
@@ -218,7 +218,7 @@ MyGeom = Geom3D_get(MyElt,
                     Params_get_oneparam(MyParams, "geometry_params", "meshname"),
                     Params_get_oneparam(MyParams, "geometry_params", "meshtype"))
 
-Geom3D_check_with_boundaryconditions(MyGeom , MyBC, AXEe_X )  
+Geom3D_check_with_boundaryconditions(MyGeom , MyBC, AXEe_X )
 Geom3D_check_with_boundaryconditions(MyGeom , MyBC, AXEe_Y )
 Geom3D_check_with_boundaryconditions(MyGeom , MyBC, AXEe_Z )
 
@@ -232,7 +232,7 @@ print("METHOD is ", METHOD)
 
 if   PROBLEM == "LAPLACIAN" :
 
-    SOL = solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun )   
+    SOL = solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun )
 
 elif PROBLEM == "CONVECTION-DIFFUSION" :
 
@@ -241,7 +241,7 @@ elif PROBLEM == "CONVECTION-DIFFUSION" :
 elif PROBLEM == "STOKES" :
 
     (U,V,W,P) = Py_solve3D_stokes( MyElt , MyEltM1 , MyGeom , MyBC , MyRhsFun )
-	
+
 elif PROBLEM == "NAVIER-STOKES" :
 
     (U,V,W,P) = Py_solve3D_navier_stokes( MyElt , MyEltM1 , MyGeom , MyBC , MyRhsFun )
@@ -251,11 +251,11 @@ else:
     print("Problem \"%s\" not yet implemented" % PROBLEM)
     sys.exit(sys.EXIT_FAILURE)
 
-   
+
 #----------------------- graphics output -----------------------------
 
 if    PROBLEM == "LAPLACIAN"  :
-	
+
     graphics3D( "vtk" , MyElt , MyGeom , SOL , "Sol_Approch3D")
 
 elif PROBLEM == "CONVECTION-DIFFUSION" :
@@ -269,7 +269,7 @@ elif PROBLEM == "STOKES" :
     #graphics3D( "vtk" , MyElt , MyGeom , W , "Stokes3D_W_")
     #graphics3D( "vtk" , MyEltM1 , GEOM_3D_geomBase_get(MyGeom), P , "Stokes3D_P_")
     graphics3D_stokes("vtk", MyElt , MyGeom , U,V,W,P, "Stokes3D")
-        
+
     #graphics3D( "silo" , MyElt , MyGeom , U , "Stokes3D_U_")
     #graphics3D( "silo" , MyElt , MyGeom , V , "Stokes3D_V_")
     #graphics3D( "silo" , MyElt , MyGeom , W , "Stokes3D_W_")
@@ -316,6 +316,6 @@ mem_info_file(sys.stdout,MY_LIST3)
 mem_info_file(sys.stdout,MY_LIST4)
 mem_info_file(sys.stdout,MY_LIST5)
 mem_info_file(sys.stdout,MY_LIST6)
-mem_info_file(sys.stdout,MY_LIST7) 
+mem_info_file(sys.stdout,MY_LIST7)
 
 #----------------------------------------------------------------------
