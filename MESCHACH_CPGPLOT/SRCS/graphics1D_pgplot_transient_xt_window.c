@@ -24,7 +24,7 @@
 #include <X11/Xaw/SmeLine.h>
 #include <X11/Xaw/Viewport.h>
 #include <X11/Xaw/Dialog.h>
-#include <X11/Xaw/Toggle.h> 
+#include <X11/Xaw/Toggle.h>
 
 #include "XaPgplot.h"
 #include "cpgplot.h"
@@ -43,7 +43,7 @@ typedef struct XAW_WINPGPLOT_
 
    /* Xt id workproc */
    int id_idleworkproc;
-   
+
    /* pointer to widgets */
    Widget * buttonStopRun;
    Widget * buttonStep;
@@ -67,10 +67,10 @@ typedef struct XAW_WINPGPLOT_
 typedef struct WIDGET_USERDATA_STRUCT_
 {
    XAW_WINPGPLOT  * xaw_win; /* pointer to window stuff */
-   
+
    SVQueue        * queue; /* include the data to plot */
    PGPLOT_GRAPH_DATA * pdata; /* stores the last data got from the queue */
-   
+
 } WIDGET_USERDATA_STRUCT;
 
 
@@ -112,9 +112,9 @@ static void drawscene_init(Widget w, XtPointer data)
 
    double size_x = pdata->window_size_x;
    double size_y = pdata->window_size_y;
-   
+
    cpgscr(0, 0.0, 0.0, 0.0); /* black background */
-   cpgpap(PIXEL_TO_CENTIMETER(pdata->window_size_x), size_y/size_x);
+   cpgpap(PGPLOT_PIXEL_TO_CENTIMETER(pdata->window_size_x), size_y/size_x);
    cpgask(0);
 
    cpgsubp(nx,ny); /* plotting window divided in (nx x ny) sub-windows */
@@ -139,7 +139,7 @@ static void drawscene(Widget w, XtPointer data)
 
    nx = pdata->nx;
    ny = pdata->ny;
-   
+
    cpgbbuf();
    /**/
    for (k=0; k<nx*ny; k++)
@@ -208,22 +208,22 @@ static void* idle_workproc_no_x(SVQueue *queue)
             fprintf(stderr, "Driver !!! %s\n", pdata->driver);
             return NULL;
          }
-      
+
          fprintf(stderr, "Producing output on file %s\n", pgplot_output);
 
          /* start new driver plot */
          cpgopen(pgplot_output);
-   
+
          drawscene_init(NULL, pdata);
          drawscene(NULL, pdata);
 
          /* close it */
          cpgclos();
       }
-      
+
       /* free mem */
       queue->freed(pdata);
-      
+
    } while (1);
 
    /**/
@@ -236,7 +236,7 @@ static void* idle_workproc_no_x(SVQueue *queue)
 static Boolean idle_workproc (XtPointer data)
 {
    WIDGET_USERDATA_STRUCT * canvasUserData =  (WIDGET_USERDATA_STRUCT *)data;
-   
+
    if ( canvasUserData->xaw_win->exit == 1 )
    {
       XtRemoveWorkProc ( canvasUserData->xaw_win->id_idleworkproc );
@@ -246,7 +246,7 @@ static Boolean idle_workproc (XtPointer data)
 
    if ( canvasUserData->xaw_win->stop == 1 && canvasUserData->xaw_win->step == 0 )  /* stop handler */
    {
-      usleep(100); 
+      usleep(100);
       return False;
    }
 
@@ -256,7 +256,7 @@ static Boolean idle_workproc (XtPointer data)
       canvasUserData->xaw_win->stop = 1; /* and stop later */
    }
 
-   
+
    {
       /* get the data from the SQueue - this waits in case of the queue is empty ... */
       PGPLOT_GRAPH_DATA * pdata = canvasUserData->queue->xget(canvasUserData->queue);
@@ -264,7 +264,7 @@ static Boolean idle_workproc (XtPointer data)
       canvasUserData->queue->freed(canvasUserData->pdata); /* trying to free the old mem there */
       /* store pointer to new data */
       canvasUserData->pdata = pdata;
-      
+
       /* and then */
       redraw(*canvasUserData->xaw_win->w_plot, pdata);
 
@@ -296,7 +296,7 @@ static void do_quit(Widget w, XtPointer data, XtPointer data2) /* Xaw callback *
 static void do_stop(Widget w, XtPointer data, XtPointer data2) /* Xaw callback */
 {
    WIDGET_USERDATA_STRUCT  *xdata = (WIDGET_USERDATA_STRUCT *)data;
-   
+
    /* >>> change legend of button Stop/Run */
    Arg		wargs[1];
 
@@ -305,17 +305,17 @@ static void do_stop(Widget w, XtPointer data, XtPointer data2) /* Xaw callback *
       case 0: XtSetArg(wargs[0], XtNlabel, "Run"); break;
       case 1: XtSetArg(wargs[0], XtNlabel, "Stop"); break;
    }
-   
+
    XtSetValues(w, wargs, 1);
    /* <<< change legend of button Stop/Run */
-   
+
    xdata->xaw_win->stop = (xdata->xaw_win->stop==0) ? 1: 0;
 }
 
 static void do_step(Widget w, XtPointer data, XtPointer data2) /* Xaw callback */
 {
    WIDGET_USERDATA_STRUCT  *xdata = (WIDGET_USERDATA_STRUCT *)data;
-   
+
    /* >>> change legend of button Stop/Run */
    Arg wargs[1];
    XtSetArg(wargs[0], XtNlabel, "Run");
@@ -328,7 +328,7 @@ static void do_step(Widget w, XtPointer data, XtPointer data2) /* Xaw callback *
 static void do_film(Widget w, XtPointer data, XtPointer data2) /* Xaw callback */
 {
    WIDGET_USERDATA_STRUCT  *xdata = (WIDGET_USERDATA_STRUCT *)data;
-   
+
    /* >>> change legend of button Film On/Off */
    Arg		wargs[1];
 
@@ -356,7 +356,7 @@ static void generic_output(const WIDGET_USERDATA_STRUCT *widgetUserdata, PGPLOT_
    {
       return;
    }
-        
+
    switch(output_format)
    {
       case PGPLOTe_PPM:
@@ -380,13 +380,13 @@ static void generic_output(const WIDGET_USERDATA_STRUCT *widgetUserdata, PGPLOT_
 
    fprintf(stderr, "Producing %s\n", pgplot_output);
 
-   
+
    /* start new driver plot */
    cpgopen(pgplot_output);
 
    drawscene_init(*widgetUserdata->xaw_win->w_plot, widgetUserdata->pdata);
    drawscene(*widgetUserdata->xaw_win->w_plot, widgetUserdata->pdata);
-   
+
    /* close it */
    cpgclos();
 
@@ -402,7 +402,7 @@ static void do_ppm_output(Widget w, XtPointer data, XtPointer data2)
    {
       generic_output(xdata, PGPLOTe_PPM);
    }
-	
+
    xdata->xaw_win->film_output_type = PGPLOTe_PPM;
 }
 
@@ -414,9 +414,9 @@ static void do_pps_output(Widget w, XtPointer data, XtPointer data2)
    {
       generic_output(xdata, PGPLOTe_PPS);
    }
-	
+
    xdata->xaw_win->film_output_type = PGPLOTe_PPS;
-} 
+}
 
 static void do_gif_output(Widget w, XtPointer data, XtPointer data2)
 {
@@ -426,7 +426,7 @@ static void do_gif_output(Widget w, XtPointer data, XtPointer data2)
    {
       generic_output(xdata, PGPLOTe_GIF);
    }
-	
+
    xdata->xaw_win->film_output_type = PGPLOTe_GIF;
 }
 
@@ -477,7 +477,7 @@ void * pgplot_curve_with_xt_toolkit_transient(void* data)
 
    Widget w_frame;  /* A frame widget */
    Widget w_plot;
-      
+
    XAW_WINPGPLOT *xaw_pgplot_window = malloc( sizeof(XAW_WINPGPLOT) );
 
    WIDGET_USERDATA_STRUCT xawButtonUserdata;
@@ -486,9 +486,9 @@ void * pgplot_curve_with_xt_toolkit_transient(void* data)
    xaw_pgplot_window->step = 0;
    xaw_pgplot_window->exit = 0;
    xaw_pgplot_window->film = 0;
-	
+
 	xaw_pgplot_window->film_output_type = PGPLOTe_NO_OUTPUT;
-   
+
    /* ---------------------------------------------------------------------------------------- */
 
    /* create toplevel shell widget */
@@ -574,7 +574,7 @@ void * pgplot_curve_with_xt_toolkit_transient(void* data)
    xawButtonUserdata.xaw_win->buttonFilm    = &film_button;
    xawButtonUserdata.xaw_win->w_frame       = &w_frame;
    xawButtonUserdata.xaw_win->w_plot        = &w_plot;
-   
+
    /* set callback & callback data for XAW buttons --------------------------*/
    XtAddCallback(quit_button, XtNcallback, do_quit      , &xawButtonUserdata);
    XtAddCallback(stop_button, XtNcallback, do_stop      , &xawButtonUserdata);
@@ -595,7 +595,7 @@ void * pgplot_curve_with_xt_toolkit_transient(void* data)
     * Create the application menu-bar.
     */
    XtManageChild(xpanel);
-   
+
    /* finish */
    XtRealizeWidget(shell);
 
@@ -615,18 +615,18 @@ void * pgplot_curve_with_xt_toolkit_transient(void* data)
     */
    drawscene_init(w_plot, pdata);
    drawscene(w_plot, pdata);
-   
+
    /* set a idle_workproc who will stop/run throught thread condition/signal */
    xawButtonUserdata.xaw_win->id_idleworkproc = XtAppAddWorkProc (app_con, (XtWorkProc)idle_workproc, &xawButtonUserdata );
    /* set a idle_workproc who will stop/run throught thread condition/signal */
 
    /* the event-loop */
    XtAppMainLoop(app_con);
-   
+
 
    /* end of the routine */
    pthread_exit(NULL);
-   
+
    /* as return value ! */
    return NULL;
 }

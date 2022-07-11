@@ -21,7 +21,7 @@
 #include <X11/Xaw/SmeLine.h>
 #include <X11/Xaw/Viewport.h>
 #include <X11/Xaw/Dialog.h>
-#include <X11/Xaw/Toggle.h> 
+#include <X11/Xaw/Toggle.h>
 
 #include "XaPgplot.h"
 #include "cpgplot.h"
@@ -71,7 +71,7 @@ typedef struct XAW_WINPGPLOT_
    int exit ;
 
    Widget * w_frame;  /* A frame widget */
-   Widget * w_plot;   
+   Widget * w_plot;
 
 } XAW_WINPGPLOT ;
 
@@ -100,9 +100,9 @@ static void drawscene_init(const PGPLOT_GRAPH_DATA *pdata, Widget w)
 
    double  size_x = pdata->window_size_x;
    double  size_y = pdata->window_size_y;
-	
+
    cpgscr(0, 0.0, 0.0, 0.0); /* black background */
-   cpgpap(PIXEL_TO_CENTIMETER(pdata->window_size_x), size_y/size_x);
+   cpgpap(PGPLOT_PIXEL_TO_CENTIMETER(pdata->window_size_x), size_y/size_x);
    cpgask(0);
 
    cpgsubp(nx, nx);
@@ -165,7 +165,7 @@ static void pgplot_curve_hardcopy(const PGPLOT_GRAPH_DATA *pdata)
       fprintf(stderr, "Bad driver: %s\n", pdata->driver);
       return;
    }
-   
+
    pgplot_output = strncat(pgplot_output_id, pdata->driver, 7);
    /* a msg */
    fprintf(stderr, "Producing output on file %s\n", pgplot_output);
@@ -300,7 +300,7 @@ void * pgplot_curve_with_xt_toolkit(void *data)
    SVQueue *queue = (SVQueue*)data;
 
    PGPLOT_GRAPH_DATA * pdata = queue->xget(queue);
-   
+
    /*--------------------------------------------------------------------------------------*/
 
    if ( strcmp(pdata->driver, "/XWINDOW") != 0 )
@@ -317,13 +317,13 @@ void * pgplot_curve_with_xt_toolkit(void *data)
    /* default parameters for widgets */
    static String default_resources[] =
    {
-      (String)NULL 
+      (String)NULL
    };
 
    /*--------------------------------------------------------------------------------------*/
 
    XtAppContext app_con;   /* application context */
-   
+
    int pgplot_win = -1;
    /* on this separate thread, the Xt window ... */
    int ac    = 0;
@@ -339,7 +339,7 @@ void * pgplot_curve_with_xt_toolkit(void *data)
    /*--------------------------------------------------------------------------------------*/
 
    XAW_WINPGPLOT *xaw_winpgplot = malloc( sizeof(XAW_WINPGPLOT) );
-   
+
    WIDGET_USERDATA_STRUCT xawButtonUserdata;
 
    xaw_winpgplot->exit = 0;
@@ -365,7 +365,7 @@ void * pgplot_curve_with_xt_toolkit(void *data)
    XtSetArg(wargs[0], XtNlabel, "Quit");
    quit_button = XtCreateManagedWidget("quit", commandWidgetClass, xpanel, wargs, 1);
 
-   /* pgplot ppm-output */   
+   /* pgplot ppm-output */
    XtSetArg(wargs[0], XtNlabel, "PPM");
    XtSetArg(wargs[1], XtNhorizDistance, pdata->window_size_x - 90);
    ppm_button = XtCreateManagedWidget("ppm", commandWidgetClass, xpanel, wargs, 2);
@@ -379,7 +379,7 @@ void * pgplot_curve_with_xt_toolkit(void *data)
    XtSetArg(wargs[0], XtNlabel, "PS");
    XtSetArg(wargs[1], XtNfromHoriz, gif_button);
    pps_button = XtCreateManagedWidget("pps", commandWidgetClass, xpanel, wargs, 2);
-   
+
 
    /*
     * Create an etched-in frame widget to provide a border for the
@@ -441,9 +441,9 @@ void * pgplot_curve_with_xt_toolkit(void *data)
    drawscene_init(pdata, w_plot);
    drawscene(pdata, w_plot);
 
-   
+
    XtAppMainLoop(app_con);
-   
+
    return NULL;
 }
 
@@ -479,12 +479,12 @@ static void xaw_cursor_inputs(Widget w, XtPointer client_data, XtPointer call_da
 
    switch(cursor->key)
    {
-      
+
       case 'A':
          printf("cursor -> A \n");
          do_quit(w, client_data, call_data);
          break;
-      
+
       /*
       case 'X':
          printf("cursor -> X \n");
