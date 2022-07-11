@@ -29,14 +29,14 @@ from meschach_vogle   import *
 #                    !             !
 #          ref = 1   !             ! ref = 2
 #                    *             *
-#                    !          / 
-#                    !       /    
+#                    !          /
+#                    !       /
 #                    !     !
 #                    !     ! ref = 3
 #                    !     !
 #       ref = 2      !      \
 #                    !          \
-#                    !             * 
+#                    !             *
 #                    !             ! ref = 2
 #                    !             !
 #                    *-------------*
@@ -96,7 +96,7 @@ MyRhsFun = Rhs2D_get()
 Rhs2D_setFunctionPython(MyRhsFun, 0, AXEe_X, laplacian_src) # ref_e=0, axe=1
 
 
-#-------------------------------------------------------------------   
+#-------------------------------------------------------------------
 #
 # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
 # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
@@ -108,7 +108,7 @@ Params_set_oneparam(MyParams, "main_problem","NULL", "LAPLACIAN" )
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P1" )    # Type d'EF : "P1","P2", "P3"
 
-Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
+Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k)
 Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
 
 Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/schwarz.msh" )  #  Mesh File ("name.dat")
@@ -196,10 +196,10 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
     RHS = v_get(NBSOMM)
     RHS_fun = v_get(NBSOMM)
     RHS_bc = v_get(NBSOMM)
-    
+
     VIT = v_get(NBSOMM)
 
-    # ----- assemblage matrix and rhs ------ 
+    # ----- assemblage matrix and rhs ------
 
     A_stiff = assemblage2D_matrix_Stiff1( MyElt , MyGeom , A_stiff )
     A_bc = assemblage2D_matrix_fromBC( MyElt , MyGeom , MyBC, A_bc )
@@ -209,13 +209,13 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
     AA = sp_add(A_stiff, A_bc, A)
     RHS = v_add(RHS_fun, RHS_bc, RHS)
-    
+
     transform2D_matrix_vector_with_bc( MyElt , MyGeom , MyBC , A , RHS )
 
 
     graphics_matrix_pattern("gnuplot", A, "matrix_profile") # no empty character !
 
-    # ------ solve the system Ax = b   ----- 
+    # ------ solve the system Ax = b   -----
 
     ILU = sp_null()
     ICH = sp_null()
@@ -228,9 +228,9 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
         if   ( BANDWR_METHOD == BANDWRe_AMD ):
             spCHresolution_amd(A, RHS, VIT)
-        elif ( BANDWR_METHOD == BANDWRe_SPOOLES ):    
+        elif ( BANDWR_METHOD == BANDWRe_SPOOLES ):
             spCHresolution_spooles(A, RHS, VIT)
-        elif ( BANDWR_METHOD == BANDWRe_MESCHACH ): 
+        elif ( BANDWR_METHOD == BANDWRe_MESCHACH ):
             spCHresolution_meschach(A, RHS, VIT)
         else :
             spCHresolution_meschach(A, RHS, VIT)
@@ -246,11 +246,11 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
         return VIT
 
     # other methods "ITERATIVES"...
-    
+
     if preconditionning == "ICH" :
 
         ICH = sp_copy(A)
-        spICHfactor(ICH)    
+        spICHfactor(ICH)
 
     elif preconditionning == "ILU" :
 
@@ -258,7 +258,7 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
         print(" -> use preferrably the LLT preconditionning + CG ")
 
         ILU = sp_copy(A)
-        spILUfactor(ILU,0.0)    
+        spILUfactor(ILU,0.0)
 
     elif preconditionning == "NULL" :
 
@@ -298,7 +298,6 @@ def Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun ) :
 
 
     return VIT
- 
 
 # --------------------------------------------------------------------
 # --------------------------------------------------------------------
@@ -313,7 +312,7 @@ if   PROBLEM == "HELMHOLZ" :
 
 elif PROBLEM == "LAPLACIAN" :
 
-    SOL = Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun )    
+    SOL = Py_solve2D_laplacian( MyElt , MyGeom , MyBC , MyRhsFun )
 
 elif PROBLEM == "CONVECTION-DIFFUSION" :
 
@@ -351,7 +350,7 @@ elif PROBLEM == "LAPLACIAN" :
     graphics2D( "vtk"     , MyElt , MyGeom , SOL , "SolApproch2D")
 
     #graphics2D_vogle_plotsurface(VOGLEe_COLOR_RED, SOL, GEOM_2D_NSELMT_get(MyGeom), GEOM_2D_XYSOMM_get(MyGeom) )
-    
+
     print("XXX", VOPL_CONTOURS)
     graphics1D_vopl_initialize(Params_get_oneparam(MyParams,"graphics_interactiv2D_params","DRIVER"),
                                Params_get_oneparam(MyParams,"graphics_interactiv2D_params","SIZE_WINDOW_X"),
@@ -362,12 +361,12 @@ elif PROBLEM == "LAPLACIAN" :
                                 Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","WINDOW_X_MAX",1,1),
                                 Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","WINDOW_Y_MIN",1,1),
                                 Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","WINDOW_Y_MAX",1,1))
-									
+
     graphics1D_vopl_nblevels(1, 1, Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","NB_LEVELS",1,1))
     graphics1D_vopl_levels(1, 1, Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","LEVELS",1,1))
     graphics1D_vopl_contourmeshdata(1, 1, GEOM_2D_NSELMT_get(MyGeom), GEOM_2D_XYSOMM_get(MyGeom))
     graphics1D_vopl_contourplotdata(1, 1, SOL)
-	 
+
     t1 = threading.Thread( target=Py_vopl_contour_with_xt_toolkit )
     t1.start()
 
@@ -428,14 +427,14 @@ PARAMS_FREE(MyParams)
 #---------------------------------------------------------------------
 
 #mem_info_file(sys.stdout,0)
-# 
+
 #mem_info_file(sys.stdout,MY_LIST1)
-#mem_info_file(sys.stdout,MY_LIST2) 
-#mem_info_file(sys.stdout,MY_LIST3) 
-#mem_info_file(sys.stdout,MY_LIST4) 
-#mem_info_file(sys.stdout,MY_LIST5) 
+#mem_info_file(sys.stdout,MY_LIST2)
+#mem_info_file(sys.stdout,MY_LIST3)
+#mem_info_file(sys.stdout,MY_LIST4)
+#mem_info_file(sys.stdout,MY_LIST5)
 #mem_info_file(sys.stdout,MY_LIST6)
-#mem_info_file(sys.stdout,MY_LIST7) 
+#mem_info_file(sys.stdout,MY_LIST7)
 
 #----------------------------------------------------------------------
 

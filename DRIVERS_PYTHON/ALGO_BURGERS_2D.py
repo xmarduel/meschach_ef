@@ -13,9 +13,9 @@ from meschach_spooles  import *
 def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
     """
     solve A*Un = F - UUx - UUy - UU
-    
+
        with A = STIFF
-            U = Unm1 
+            U = Unm1
     """
     NBSOMM = GEOM_2D_NBSOMM_get(MyGeom)
 
@@ -50,14 +50,14 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
 
     transform2D_matrix_with_bc( MyElt , MyGeom , MyBC , Abc )
 
-    # ------ solve the system Ax = b   ----- 
+    # ------ solve the system Ax = b   -----
 
     ILU = sp_null()
     ICH = sp_null()
 
     Pe  = px_get(NBSOMM)
     INVPe = px_get(NBSOMM)
-    
+
     if  ResolutionMethod == "DIRECT-METHOD" :
 
         ICH = sp_copy(Abc)
@@ -69,7 +69,7 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
     elif preconditionning == "ICH" :
 
         ICH = sp_copy(Abc)
-        spICHfactor(ICH)    
+        spICHfactor(ICH)
 
     elif preconditionning == "ILU" :
 
@@ -77,7 +77,7 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
         print(" -> use preferrably the LLT preconditionning + CG ")
 
         ILU = sp_copy(Abc)
-        spILUfactor(ILU,0.0)    
+        spILUfactor(ILU,0.0)
 
     elif preconditionning == "NULL" :
 
@@ -110,7 +110,7 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
         if  ResolutionMethod == "DIRECT-METHOD" :
 
             #spCHsolve(ICH, RHS, SOL)
-            spCHsolve_bandwr(ICH, Pe, INVPe, RHS, SOL)  
+            spCHsolve_bandwr(ICH, Pe, INVPe, RHS, SOL)
 
         elif  ResolutionMethod == "CG" :
 
@@ -134,11 +134,11 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
         if diff < eps_steps:
             break
 
-         
+
     delete_intp(nb_steps)
 
     V_FREE(RHS)
-    SP_FREE(A) 
+    SP_FREE(A)
     if preconditionning == "ILU" :
         SP_FREE(ILU)
     if preconditionning == "ICH" or ResolutionMethod == "DIRECT-METHOD" :
@@ -153,14 +153,14 @@ def Py_solve2D_burgers1(MyElt, MyGeom, MyBC, MyRhsFun, MyParams):
 def Py_solve2D_burgers2( MyElt , MyGeom , MyBC , MyRhsFun , MyParams ) :
 
     """
-    solve A*Un = F 
-    
+    solve A*Un = F
+
        with A = STIFF + Cx(U) + Cy(U) + D(U)
             U = Unm1
-            
-            Cx(U) from term U_Ux 
-            Cy(U) from term U_Uy 
-            D(U)  from term U_U 
+
+            Cx(U) from term U_Ux
+            Cy(U) from term U_Uy
+            D(U)  from term U_U
     """
     NBSOMM = GEOM_2D_NBSOMM_get(MyGeom)
 
@@ -203,7 +203,7 @@ def Py_solve2D_burgers2( MyElt , MyGeom , MyBC , MyRhsFun , MyParams ) :
         v_copy(RHS, RHSbc)
 
 
-        Cx  = assemblage2D_matrix_AUx   ( MyElt , MyGeom , Un, Cx ) 
+        Cx  = assemblage2D_matrix_AUx   ( MyElt , MyGeom , Un, Cx )
         Cy  = assemblage2D_matrix_AUy   ( MyElt , MyGeom , Un, Cy )
         D   = assemblage2D_matrix_A_U   ( MyElt , MyGeom , Un, D  )
 
@@ -219,9 +219,9 @@ def Py_solve2D_burgers2( MyElt , MyGeom , MyBC , MyRhsFun , MyParams ) :
 
         if  ResolutionMethod == "DIRECT-METHOD" :
 
-            #spLUfactor_solve_bridge_meschach(Abc, RHSbc, SOL)  
+            #spLUfactor_solve_bridge_meschach(Abc, RHSbc, SOL)
             spLUfactor_solve_bridge_amd(Abc, RHSbc, SOL)
-            #spLUfactor_solve_bridge_spooles(Abc, RHSbc, SOL)  
+            #spLUfactor_solve_bridge_spooles(Abc, RHSbc, SOL)
 
         elif ResolutionMethod == "BiCGStab" :
 
@@ -231,7 +231,7 @@ def Py_solve2D_burgers2( MyElt , MyGeom , MyBC , MyRhsFun , MyParams ) :
         else :
 
             raise AssertionError(ERRORS_DICT["E_METHOD"])
-        
+
 
         # test convergence
         diff = v_norm2( v_sub(SOL, Un, RES) )
@@ -244,19 +244,19 @@ def Py_solve2D_burgers2( MyElt , MyGeom , MyBC , MyRhsFun , MyParams ) :
         res = v_norm2( v_sub( sp_mv_mlt(Abc, Un, RES), RHSbc, RES) )
         print("\niter=",n,"  -> res = ", res)
 
-         
+
     delete_intp(nb_steps)
 
     V_FREE(RHS); V_FREE(RHSbc)
     V_FREE(RES)
     V_FREE(Un)
 
-    SP_FREE(A); SP_FREE(Abc) 
+    SP_FREE(A); SP_FREE(Abc)
 
-    SP_FREE(S) 
-    SP_FREE(Cx) 
-    SP_FREE(Cy) 
-    SP_FREE(D) 
+    SP_FREE(S)
+    SP_FREE(Cx)
+    SP_FREE(Cy)
+    SP_FREE(D)
 
     return SOL
 

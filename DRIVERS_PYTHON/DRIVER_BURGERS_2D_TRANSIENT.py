@@ -14,7 +14,7 @@ from meschach_cpgplot  import *
 #                             Uxx = -cos(x-t)
 #                             Ut  =  sin(x-t)
 #
-#  Ut - k.Uxx + UUx = f(x,t)  ( kappa = 1.0  ) 
+#  Ut - k.Uxx + UUx = f(x,t)  ( kappa = 1.0  )
 
 #-------------------------------------------------------------------
 
@@ -80,31 +80,31 @@ MyParams = Params_get()
 
 if READ_PARAMS_FROM_FILE == 0 :
 
-    #-------------------------------------------------------------------   
+    #-------------------------------------------------------------------
     # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
     # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
     #--------------------------------------------------------------------------------------
     Params_set_oneparam(MyParams, "main_problem","NULL", "Convection-Diffusion" )
     #--------------------------------------------------------------------------------------
     Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "S3" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S5"
-    
-    Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "DIRECT-METHOD" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
+
+    Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "DIRECT-METHOD" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k)
     Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
-    
+
     #-physical parameters------------------------------------------------------------------
-    
+
     Params_set_oneparam(MyParams, "physical_params","kappa",    0.11 ) # kappa
     Params_set_oneparam(MyParams, "physical_params","sigma",    0.0 ) # sigma
     Params_set_oneparam(MyParams, "physical_params","epsilon",  0.0 ) # epsilon  -k*LAPLACIEN(u) + e.BILAPL(u) + sigma.u =F
-    
+
     #-time parameters------------------------------------------------------------------
-    
-    Params_set_oneparam(MyParams, "time_params","TPS_INI",    0.0  ) # 
-    Params_set_oneparam(MyParams, "time_params","TPS_FIN",    65.0  ) # 
-    Params_set_oneparam(MyParams, "time_params","DT",         0.001 ) # 
-    
+
+    Params_set_oneparam(MyParams, "time_params","TPS_INI",    0.0  ) #
+    Params_set_oneparam(MyParams, "time_params","TPS_FIN",    65.0  ) #
+    Params_set_oneparam(MyParams, "time_params","DT",         0.001 ) #
+
     #- geometry-----------------------------------------------------------------------------
-    
+
     Params_set_oneparam(MyParams, "geometry_params","meshfile", "NULL" )     # meshfile
     Params_set_oneparam(MyParams, "geometry_params","meshname", "NULL" )     # meshname
 	 Params_set_oneparam(MyParams, "geometry_params","meshtype", "line" )     #
@@ -114,7 +114,7 @@ if READ_PARAMS_FROM_FILE == 0 :
     Params_set_oneparam(MyParams, "geometry_params","nx"    ,  100 ) # nx
 	 Params_set_oneparam(MyParams, "geometry_params","distribution" , "UNIFORM")
 	 Params_set_oneparam(MyParams, "geometry_params","periodicity" , NON_PERIODIC_MESHe)
-    
+
     Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     0) # GNUPLOT
     Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
 	 Params_set_oneparam(MyParams, "graphics_output_params","VTK",         0) # VTK
@@ -136,27 +136,27 @@ if READ_PARAMS_FROM_FILE == 0 :
 
     #-parameter for plotting------------------------------------
 
-    Params_set_oneparam(MyParams, "graphics_curveplots_params", "DRIVER" , "/XWINDOW" )  #"/XWINDOW"  "/PPM"  "/GIF"  
+    Params_set_oneparam(MyParams, "graphics_curveplots_params", "DRIVER" , "/XWINDOW" )  #"/XWINDOW"  "/PPM"  "/GIF"
 
-    Params_set_oneparam(MyParams, "graphics_curveplots_params", "SIZE_WINDOW_X", 700) 
-    Params_set_oneparam(MyParams, "graphics_curveplots_params", "SIZE_WINDOW_Y", 500) 
+    Params_set_oneparam(MyParams, "graphics_curveplots_params", "SIZE_WINDOW_X", 700)
+    Params_set_oneparam(MyParams, "graphics_curveplots_params", "SIZE_WINDOW_Y", 500)
 
     Params_set_oneparam(MyParams, "graphics_curveplots_params", "SIZE_LABELS", 2.0 )
 
-    Params_set_oneparam(MyParams, "graphics_curveplots_params", "NX", 2  ) 
-    Params_set_oneparam(MyParams, "graphics_curveplots_params", "NY", 2  ) 
+    Params_set_oneparam(MyParams, "graphics_curveplots_params", "NX", 2  )
+    Params_set_oneparam(MyParams, "graphics_curveplots_params", "NY", 2  )
 
-    #Params_set_oneparam(MyParams, "graphics_curveplots_params", "CURSOR", 1  ) 
+    #Params_set_oneparam(MyParams, "graphics_curveplots_params", "CURSOR", 1  )
 
-    Params_set_oneparam2(MyParams, "graphics_curveplots_params","LABEL_LEGEND", 1,1, "U(x,t)") 
-    Params_set_oneparam2(MyParams, "graphics_curveplots_params","LABEL_AXE_X" , 1,1, "(x)") 
-    Params_set_oneparam2(MyParams, "graphics_curveplots_params","LABEL_AXE_Y" , 1,1, "(y)") 
+    Params_set_oneparam2(MyParams, "graphics_curveplots_params","LABEL_LEGEND", 1,1, "U(x,t)")
+    Params_set_oneparam2(MyParams, "graphics_curveplots_params","LABEL_AXE_X" , 1,1, "(x)")
+    Params_set_oneparam2(MyParams, "graphics_curveplots_params","LABEL_AXE_Y" , 1,1, "(y)")
     Params_set_oneparam2(MyParams, "graphics_curveplots_params","MARKER"      , 1,1, 0  )
     Params_set_oneparam2(MyParams, "graphics_curveplots_params","MARKER_END"  , 1,1, 0  )
-    Params_set_oneparam2(MyParams, "graphics_curveplots_params","WINDOW_X_MIN", 1,1,  0.0  ) 
+    Params_set_oneparam2(MyParams, "graphics_curveplots_params","WINDOW_X_MIN", 1,1,  0.0  )
     Params_set_oneparam2(MyParams, "graphics_curveplots_params","WINDOW_X_MAX", 1,1,  2*math.pi )
-    Params_set_oneparam2(MyParams, "graphics_curveplots_params","WINDOW_Y_MIN", 1,1, -2.0  ) 
-    Params_set_oneparam2(MyParams, "graphics_curveplots_params","WINDOW_Y_MAX", 1,1,  2.0  ) 
+    Params_set_oneparam2(MyParams, "graphics_curveplots_params","WINDOW_Y_MIN", 1,1, -2.0  )
+    Params_set_oneparam2(MyParams, "graphics_curveplots_params","WINDOW_Y_MAX", 1,1,  2.0  )
 
     Params_set_oneparam2(MyParams, "graphics_curveplots_params","LABEL_LEGEND", 2,1, "KS - L2 Norm of Sol")
     Params_set_oneparam2(MyParams, "graphics_curveplots_params","LABEL_AXE_X" , 2,1, "(t)")
@@ -212,20 +212,20 @@ if READ_PARAMS_FROM_FILE == 0 :
     MyDIC = Fun1D_get()
     Fun1D_setFunctionPython(MyIC , init_condition ) # ref_e=0
     Fun1D_setFunctionPython(MyDIC, Dinit_condition ) # ref_e=0
-    
-    
+
+
     MyBC = Bc1D_get()
-    Bc1D_setFunctionTransientPython1(MyBC, BC_1De_DIRICHLET, 1, AXEe_X, bc_left ) # ref_s=1 (left) 
-    Bc1D_setFunctionTransientPython1(MyBC, BC_1De_DIRICHLET, 2, AXEe_X, bc_right) # ref_s=2 (right)   
-    
+    Bc1D_setFunctionTransientPython1(MyBC, BC_1De_DIRICHLET, 1, AXEe_X, bc_left ) # ref_s=1 (left)
+    Bc1D_setFunctionTransientPython1(MyBC, BC_1De_DIRICHLET, 2, AXEe_X, bc_right) # ref_s=2 (right)
+
     Bc1D_setMaskValue(MyBC, BC_1De_DIRICHLET, 1, AXEe_X)
     Bc1D_setMaskValue(MyBC, BC_1De_DIRICHLET, 2, AXEe_X) # BC_1De_CAUCHY, BC_1De_DIRICHLET, BC_1De_NEUMANN
-    
+
     MyRhsFun = Rhs1D_get()
     #Rhs1D_setFunctionTransientPython(MyRhsFun, 0, AXEe_X, source ) # ref_e=0
     Rhs1D_setCFunctionTransient( MyRhsFun, 0, AXEe_X, Src1D_00_Transient )
-    
-    
+
+
     MyAdvFun = Adv1D_get()
     Adv1D_setFunctionTransientPython(MyAdvFun, 0, AXEe_X, AXEe_X, AXEe_X, lambda x,t: 0.0 ) # ref_e=0
 
@@ -234,12 +234,12 @@ else :
     # Boundary conditions
     MyBC = Bc1D_get()
     for i in range(1, Params_get_oneparam(MyParams,"boundary_conditions_params","nb_BCdirichlet")+1) :
-    
+
         idx = Params_get_oneparam2(MyParams,"boundary_conditions_params","BcDirichlet", AXEe_X, i)
         print("idx bc dirichlet =", idx)
         Bc1D_setCFunction( MyBC, BC_1De_DIRICHLET, i, AXEe_X , Src1D_00 )
-    
-    
+
+
     # Right Hand Side
     MyRhsFun = Rhs1D_get()
     idx = Params_get_oneparam1(MyParams,"right_hand_side_params", "rhs", AXEe_X)
@@ -275,7 +275,6 @@ else:
         Params_get_oneparam(MyParams, "geometry_params", "nx"),
         Params_get_oneparam(MyParams, "geometry_params", "periodicity"),
         Params_get_oneparam(MyParams, "geometry_params", "distribution"))
-   
 
 
 bCheckBCwithGEOM = Geom1D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
@@ -343,7 +342,7 @@ RHS_LIN     = v_get(NBSOMM)
 
 #----------------------- graphics interative -------------------------
 
-x_left  = Params_get_oneparam(MyParams, "geometry_params","xmin" ) 
+x_left  = Params_get_oneparam(MyParams, "geometry_params","xmin" )
 x_right = Params_get_oneparam(MyParams, "geometry_params","xmax" )
 NBSOMM  = Params_get_oneparam(MyParams, "geometry_params","nx"   )
 
@@ -373,27 +372,27 @@ if  Params_get_oneparam(MyParams, "graphics_output_params", "PGPLOT") :
 
    NX = Params_get_oneparam(MyParams, "graphics_curveplots_params", "NX")
    NY = Params_get_oneparam(MyParams, "graphics_curveplots_params", "NY")
-   
+
    graphics1D_cpgplot_initialize(NX, NY)
-   
-   
+
+
    dim_graph = SPMAT_m_get(GEOM_1D_EF_to_WORLD_get(MyGeom))
    print("dim_graph =", dim_graph)
-   
+
    #sp_mv_mlt(MyGeom->EF_to_WORLD, U_o, U_graph1)
    sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), U_o, U_graph1 )
-   
+
    v_set_val(U_graph2, 0, v_norm2(U_graph1)*sqrt(DX))
    #U_graph2->ve[0] = v_norm2(U_graph1)*sqrt(DX)
-   
+
    v_set_val(U_graph3, 0, 0.0)
    #U_graph3->ve[0] = 0.0
-   
+
    graphics1D_cpgplot_plotcurves1(1,1, PGPLOTe_VIEWPORT_OLD,  -1,-1, PGPLOTe_COLOR_GREEN, ABSCISSAS1, U_graph1 )
    graphics1D_cpgplot_plotcurves1(2,1, PGPLOTe_VIEWPORT_OLD,   0, 1, PGPLOTe_COLOR_RED  , ABSCISSAS2, U_graph2 )
    graphics1D_cpgplot_plotcurves1(1,2, PGPLOTe_VIEWPORT_OLD,   0, 1, PGPLOTe_COLOR_RED  , ABSCISSAS2, U_graph2 )
    graphics1D_cpgplot_plotcurves1(2,2, PGPLOTe_VIEWPORT_OLD,   0, 1, PGPLOTe_COLOR_RED  , U_graph2  , U_graph3 )
-   
+
    graphics1D_cpgplot_checkcursor()
 
 #---------------------------------------------------------------------
@@ -406,8 +405,8 @@ for n in range(1,2):
     # set the cuurent time in the functions structs
     Bc1D_setTps ( MyBC    , n*DT )
     Rhs1D_setTps( MyRhsFun, n*DT )
-    
-    
+
+
     # term from time discretisation
     RHS_TDISCR = sp_mv_mlt( MASS, U_nm1, RHS_TDISCR)                               #  RHS_TDISCR = MASS * U_nm1
 
@@ -426,7 +425,7 @@ for n in range(1,2):
     # finally, set the bc on the rhs
     transform1D_vector_with_bc( MyElt , MyGeom , MyBC , A_REF , RHS )
 
-    # solve the system 
+    # solve the system
     U_n = spCHsolve( LLT, RHS, U_n )
 
     #-----------------------  statistics -------------------------
@@ -448,31 +447,31 @@ for n in range(1,2):
         print("time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*diff*(DX))
 
     #----------------------- graphics interativ -------------------------
-    
+
     #U_graph1 = sp_mv_mlt(MyGeom->EF_to_WORLD, U_n, U_graph1)
     sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), U_n, U_graph1 )
     #U_graph2->ve[k] = v_norm2(U_graph1)*sqrt(DX)
     v_set_val(U_graph2, n, v_norm2(U_graph1)*sqrt(DX))
     #U_graph3->ve[k] = ( U_graph2->ve[k] - U_graph2->ve[k-1] ) / DT
     v_set_val(U_graph3, n, ( v_get_val(U_graph2,n) - v_get_val(U_graph2,n-1) ) / DT)
-		  
+
 
     itgraph = Params_get_oneparam(MyParams, "miscellaneous_params", "itgraph")
-    
-	 if (n % itgraph) == 0 :
-    
-        # -- Graphics with PGPLOT library ---- 
+
+    if (n % itgraph) == 0 :
+
+        # -- Graphics with PGPLOT library ----
         if Params_get_oneparam(MyParams, "graphics_output_params", "PGPLOT") :
-    
+
             k1 = n - itgraph
             k2 = n
 
             tmp_title = "U(x,t)  ( t = %10.5lf )" %(n*DT)
 
             graphics1D_cpgplot_newlabel(1,1, tmp_title)
-	
+
             # create new pages if DRIVER = "GIF" or "PS" e.g. */
-            if ( Params_get_oneparam(MyParams, "graphics_curveplots_params", "DRIVER") != "/XWINDOW" ) :    
+            if ( Params_get_oneparam(MyParams, "graphics_curveplots_params", "DRIVER") != "/XWINDOW" ) :
 
                 graphics1D_cpgplot_cpgpage()
 
@@ -484,12 +483,12 @@ for n in range(1,2):
             else :
 
                 graphics1D_cpgplot_inquirecursor()
-                
+
                 graphics1D_cpgplot_plotcurves1(1,1, PGPLOTe_VIEWPORT_NEW,  -1,-1, PGPLOTe_COLOR_RED   , ABSCISSAS1, U_graph1 )
                 graphics1D_cpgplot_plotcurves1(2,1, PGPLOTe_VIEWPORT_OLD,  k1,k2, PGPLOTe_COLOR_BLUE1 , ABSCISSAS2, U_graph2 )
                 graphics1D_cpgplot_plotcurves1(1,2, PGPLOTe_VIEWPORT_OLD,  k1,k2, PGPLOTe_COLOR_BLUE1 , ABSCISSAS2, U_graph2 )
                 graphics1D_cpgplot_plotcurves1(2,2, PGPLOTe_VIEWPORT_OLD,  k1,k2, PGPLOTe_COLOR_BLUE1 , U_graph2  , U_graph3 )
-                
+
                 graphics1D_cpgplot_drawboxes(0)
                 graphics1D_cpgplot_drawboxes(1)
 
@@ -510,7 +509,7 @@ for n in range(1,2):
 
 sp_zero(A)
 
-A = sp_mltadd( A, MASS  , 1.5         , A) 
+A = sp_mltadd( A, MASS  , 1.5         , A)
 A = sp_mltadd( A, STIFF1, 0.5*DT*kappa, A)
 
 # On sauvegarde A dans A_OLD pour les CL sur le 2nd membre
@@ -523,55 +522,55 @@ sp_copy2(A, LLT)
 spCHfactor(LLT)
 
 for n in range(2,NBITER+1):
-   
+
     # set the curent time in the functions structs
     Bc1D_setTps ( MyBC    , n*DT )
     Rhs1D_setTps( MyRhsFun, n*DT )
-    
-    
+
+
     v_zero( U_tps )
     U_tps = v_mltadd( U_tps , U_nm1 ,  2.0 , U_tps )
     U_tps = v_mltadd( U_tps , U_nm2 , -0.5 , U_tps )
     #U_tps = v_mltadd( U_tps , U_nm1 , 1.0 , U_tps )
-    
+
     v_zero( U_lin )
     #U_lin = v_mltadd( U_lin , U_nm1 ,  1.0 , U_lin ) # explicit
     #U_lin = v_mltadd( U_lin , U_nm2 ,  0.0 , U_lin ) # implicit
     U_lin = v_mltadd( U_lin , U_nm1 ,   0.5 , U_lin ) # Crank-Nicholson
-    
+
     v_zero( U_nli )
     U_nli = v_mltadd( U_nli , U_nm1 ,  2.0 , U_nli )
     U_nli = v_mltadd( U_nli , U_nm2 , -1.0 , U_nli )
-    
-    
+
+
     # term from linear operator
     RHS_LIN = sp_mv_mlt( STIFF1 , U_lin , RHS_LIN )
-    
+
     # term from time discretisation
     RHS_TDISCR= sp_mv_mlt( MASS, U_tps, RHS_TDISCR)                                #  RHS_TDISCR = MASS * U_tps
-    
+
     # term from rhs function
     RHS_FUN = assemblage1D_vector_fun( MyElt, MyGeom, MyRhsFun , RHS_FUN )         #  RHS_FUN   = DT * F_n
-    
+
     # term from convection
     RHS_UUx = assemblage1D_vector_abx( MyElt, MyGeom, U_nli, U_nli , RHS_UUx )     #  RHS_UUx   = DT * [ U_nli * GRAD( U_nli ) ]
-    
-    
+
+
     v_zero(RHS)
     v_mltadd( RHS , RHS_TDISCR, 1.0 , RHS )
     v_mltadd( RHS , RHS_UUx   , -DT , RHS )
     v_mltadd( RHS , RHS_FUN   ,  DT , RHS )
     v_mltadd( RHS , RHS_LIN   , -DT*kappa , RHS )
-    
-    
+
+
     # finally, set the bc on the rhs
     transform1D_vector_with_bc( MyElt , MyGeom , MyBC , A_REF , RHS )
-    
-    # solve the system 
+
+    # solve the system
     U_n = spCHsolve( LLT, RHS, U_n )
-    
+
     #-----------------------  statistics -------------------------
-    
+
     itstat = Params_get_oneparam(MyParams, "miscellaneous_params", "itstat")
 
     if ( (itstat > 0) and (n % itstat) == 0 ):
@@ -583,17 +582,17 @@ for n in range(2,NBITER+1):
         print("time = ", (n*DT) , "-> diff solexacte-solapprochee = ", diff*diff*(DX))
 
     #----------------------- graphics interativ -------------------------
-    
+
     #U_graph1 = sp_mv_mlt(MyGeom->EF_to_WORLD, U_n, U_graph1)
     sp_mv_mlt(GEOM_1D_EF_to_WORLD_get(MyGeom), U_n, U_graph1 )
     #U_graph2->ve[k] = v_norm2(U_graph1)*sqrt(DX)
     v_set_val(U_graph2, n, v_norm2(U_graph1)*sqrt(DX) )
     #U_graph3->ve[k] = ( U_graph2->ve[n] - U_graph2->ve[n-1] ) / DT
     v_set_val(U_graph3, n, ( v_get_val(U_graph2,n) - v_get_val(U_graph2,n-1) ) / DT )
-		  
-		  
+
+
     itgraph = Params_get_oneparam(MyParams, "miscellaneous_params", "itgraph")
-    
+
 	 if (n % itgraph) == 0 :
 
         # -- Graphics with PGPLOT library ----
@@ -607,7 +606,7 @@ for n in range(2,NBITER+1):
             graphics1D_cpgplot_newlabel(1,1, tmp_title)
 
             # create new pages if DRIVER = "GIF" or "PS" e.g. */
-            if ( Params_get_oneparam(MyParams, "graphics_curveplots_params", "DRIVER") != "/XWINDOW" ) :    
+            if ( Params_get_oneparam(MyParams, "graphics_curveplots_params", "DRIVER") != "/XWINDOW" ) :
 
                 graphics1D_cpgplot_cpgpage()
 

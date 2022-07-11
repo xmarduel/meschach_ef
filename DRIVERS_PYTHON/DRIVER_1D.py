@@ -19,7 +19,7 @@ from meschach_ef         import *
 
 def run_test():
     '''
-    ''' 
+    '''
     mem_attach_list1()
     mem_attach_list2()
     mem_attach_list3()
@@ -44,7 +44,7 @@ def run_test():
     warn_attach_list6()
     warn_attach_list7()
     warn_attach_list8()
-    
+
 
     set_err_flag(EF_JUMP)
     set_warn_flag(EF_SILENT)
@@ -112,7 +112,7 @@ def run_test():
     def Csol_right(x): # cauchy BC : df + A.f = 0  (REF_S = 2)
         return -Dsol(x)/sol(x)  # A =  df/f
 
-    def Csol_left(x): # cauchy BC : df + A.f = 0  (REF_S = 1) 
+    def Csol_left(x): # cauchy BC : df + A.f = 0  (REF_S = 1)
         return  Dsol(x)/sol(x)  # A = -df/f because df is seen from the right to the left
 
 
@@ -121,7 +121,7 @@ def run_test():
         kappa = 0.01
         sol = ( exp(x/kappa) -1.0 ) / ( exp(1.0/kappa) -1.0 )
         return sol
-		  
+
     def CONVECTION_SOLEXACTE_DISCRETE(x, j, M):
         kapa = 0.01
         M    = 20
@@ -133,7 +133,7 @@ def run_test():
 
         return sol
     #-------------------------------------------------------------------
-	 
+
     MyBC = Bc1D_get()
 
     Bc1D_setBcType(MyBC, BC_1De_DIRICHLET, 1, AXEe_X)
@@ -143,16 +143,16 @@ def run_test():
     Bc1D_setFunctionPython(MyBC, BC_1De_DIRICHLET, 2, AXEe_X, lambda x : sol(x) + 0 )
 
     Bc1D_setFunctionPython(MyBC, BC_1De_NEUMANN, 1, AXEe_X, Nsol_left)
-    Bc1D_setFunctionPython(MyBC, BC_1De_NEUMANN, 2, AXEe_X, Nsol_right) 
+    Bc1D_setFunctionPython(MyBC, BC_1De_NEUMANN, 2, AXEe_X, Nsol_right)
 
     Bc1D_setFunctionPython(MyBC, BC_1De_CAUCHY, 1, AXEe_X, Csol_left)
-    Bc1D_setFunctionPython(MyBC, BC_1De_CAUCHY, 2, AXEe_X, Csol_right) 
+    Bc1D_setFunctionPython(MyBC, BC_1De_CAUCHY, 2, AXEe_X, Csol_right)
 
     Bc1D_setFunctionPython (MyBC, BC_1De_ROBIN, 1, AXEe_X, R1sol_left)
-    Bc1D_setFunctionPython2(MyBC, BC_1De_ROBIN, 1, AXEe_X, R2sol_left) 
+    Bc1D_setFunctionPython2(MyBC, BC_1De_ROBIN, 1, AXEe_X, R2sol_left)
 
     Bc1D_setFunctionPython (MyBC, BC_1De_ROBIN, 2, AXEe_X, R1sol_right)
-    Bc1D_setFunctionPython2(MyBC, BC_1De_ROBIN, 2, AXEe_X, R2sol_right) 
+    Bc1D_setFunctionPython2(MyBC, BC_1De_ROBIN, 2, AXEe_X, R2sol_right)
 
     Bc1D_checkBC(MyBC)
 
@@ -166,7 +166,7 @@ def run_test():
     Adv1D_setFunctionPython(MyAdvFun, 0, AXEe_X, AXEe_X, AXEe_X, adv ) # ref_e=0, axe=1
 
 
-    #-------------------------------------------------------------------   
+    #-------------------------------------------------------------------
 
     MyParams = Params_get()
 
@@ -178,13 +178,13 @@ def run_test():
             "SIGMA"    : 0.0,
             "EPSILON"  : 0.0
         },
-                            
+
         "PDE_RESOLUTION" : {
             "EF" : "S4" ,         # "P1", "P2", "H3", "S2", "S3", "S4", "S5"
-                            
+
             "LAPLACIAN_ALGO" : {
                 "METHOD" : "ITERATIVE-METHOD",
-                            
+
                 "ITERATIVE-METHOD" : {
                     "METHOD"          : "CG" ,       # "CG", "CGS", "BiCGStab"
                     "PRECONDITIONER"  : "NULL" ,     # "NULL", "ICH", "ILU"
@@ -197,7 +197,7 @@ def run_test():
                         "FILE"   : "residuals.dat"
                     }
                 },
-                           
+
                 "DIRECT-METHOD" : {
                     "BANDWIDTHREDUCTION" : {
                         "OPTION" :         "PROFILE",
@@ -206,11 +206,11 @@ def run_test():
                 }
             }
         },
-      
+
         "OUTPUT_LOG_FILE"    : "output.txt"
 
     } ))
-                            
+
     MyParams = Params_append_from_string(MyParams, config)
 
     # geom  data
@@ -218,14 +218,14 @@ def run_test():
         "COORDS_DIMS"    : 1,
         "MESH_1D"        : {
             "MESH_SPEC": "MESHDATADEFINITION",
-            
+
             "MESHFILEDEFINITION" : {
               "MESHFILE": "NULL",
               "MESHFILE"     : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
               "MESHNAME"     : "MESH_50",
               "MESHTYPE"     : "line"
             },
-                            
+
             "MESHDATADEFINITION" : {
                 "XMIN"   : 0.0,
                 "XMAX"   : 1.0,
@@ -259,7 +259,7 @@ def run_test():
             "DRIVER" : "/XWINDOW" ,
             "WINDOW_SIZE" : [700, 500] ,
             "LABELS_SIZE" : 1.1 ,
-            
+
             "SUB_WINDOWS" : [
                 {
                 "IDXS"         : [1,1] , # ARRAY POSITION
@@ -275,8 +275,8 @@ def run_test():
     } ))
 
     MyParams = Params_append_from_string(MyParams, config)
-   
-   
+
+
     Params_set_staticparam(MyParams, 0)
 
 
@@ -302,7 +302,7 @@ def run_test():
 
 
     Geom1D_foutput(sys.stdout,MyGeom)
-    n = Geom1D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)  
+    n = Geom1D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 
     #--------------------------------------------------------------------
 
@@ -312,11 +312,11 @@ def run_test():
 
     if   PROBLEM == "LAPLACIAN" :
 
-        SOL = solve1D_laplacian( MyElt , MyGeom , MyBC, MyRhsFun )   
+        SOL = solve1D_laplacian( MyElt , MyGeom , MyBC, MyRhsFun )
 
     elif PROBLEM == "BIPAPLACIAN"  :
 
-        SOL = solve1D_bilaplacian( MyElt , MyGeom , MyBC, MyRhsFun )    
+        SOL = solve1D_bilaplacian( MyElt , MyGeom , MyBC, MyRhsFun )
 
     elif PROBLEM == "CONVECTION-DIFUSION":
 
@@ -324,11 +324,11 @@ def run_test():
 
     elif PROBLEM == "HELMHOLZ"  :
 
-        SOL = solve1D_helmholz( MyElt , MyGeom , MyBC, MyRhsFun )    
+        SOL = solve1D_helmholz( MyElt , MyGeom , MyBC, MyRhsFun )
 
     elif PROBLEM == "BURGERS"  :
 
-        SOL = solve1D_burgers( MyElt , MyGeom , MyBC, MyRhsFun )    
+        SOL = solve1D_burgers( MyElt , MyGeom , MyBC, MyRhsFun )
 
     else:
 
@@ -376,7 +376,7 @@ def run_test():
 
 
     if Params_get_oneparam(MyParams,"graphics_interactiv1D_params","ENGINE") == "PGPLOT" :
-	
+
         graphics1D_cpgplot_initialize(Params_get_oneparam(MyParams,"graphics_interactiv1D_params","DRIVER"),
                                       Params_get_oneparam(MyParams,"graphics_interactiv1D_params","SIZE_WINDOW_X"),
                                       Params_get_oneparam(MyParams,"graphics_interactiv1D_params","SIZE_WINDOW_Y"), 1,1)
@@ -389,7 +389,7 @@ def run_test():
                                        Params_get_oneparam2(MyParams,"graphics_interactiv1D_params","WINDOW_Y_MAX",1,1))
         graphics1D_cpgplot_setbox(1,1, 1)
         graphics1D_cpgplot_curvedata(1, 1, PGPLOTe_COLOR_BLUE1, MESH_P1, SOL_P1)
-	
+
         t1 = threading.Thread( target=Py_pgplot_curve_with_xt_toolkit )
         t1.start()
 
@@ -419,10 +419,10 @@ def run_test():
                                          Params_get_oneparam(MyParams,"graphics_interactiv1D_params","SIZE_WINDOW_X"),
                                          Params_get_oneparam(MyParams,"graphics_interactiv1D_params","SIZE_WINDOW_Y"), 1,1)
         graphics1D_libsciplot_curvedata1(1,1, LIBSCIPLOTe_COLOR_BLUE, MESH_P1, SOL_P1, -1,-1 )
-        
+
         graphics1D_libsciplot_framecolor(1,1, LIBSCIPLOTe_COLOR_RED)
         graphics1D_libsciplot_framecolor(1,1, LIBSCIPLOTe_COLOR_GREEN)
-        
+
         graphics1D_libsciplot_title("SOLUTION")
         graphics1D_libsciplot_legend(1,1, "SOLUTION")
         graphics1D_libsciplot_labelsize(1,1, Params_get_oneparam(MyParams,"graphics_interactiv1D_params","SIZE_LABELS") )
@@ -431,7 +431,7 @@ def run_test():
                                          Params_get_oneparam2(MyParams,"graphics_interactiv1D_params","WINDOW_Y_MIN",1,1),
                                          Params_get_oneparam2(MyParams,"graphics_interactiv1D_params","WINDOW_Y_MAX",1,1))
         graphics1D_libsciplot_setbox(1,1, 1)
-        
+
         t1 = threading.Thread( target=Py_libsciplot_curve_with_xt_toolkit )
         t1.start()
 
@@ -451,15 +451,15 @@ def run_test():
         v_foutput(sys.stdout, WORLD)
         print("WORLD EXACT")
         v_foutput(sys.stdout, WORLD_exact)
-        
+
         print("diff solexacte-solapprochee in EF = %le" % v_norm2( v_sub(WORLD, WORLD_exact, None) ))
 
         FUN_1D_FREE(fun1D)
         V_FREE(WORLD_exact)
         V_FREE(WORLD)
-		  
-		  
-    
+
+
+
     # free memory
     # -----------
 

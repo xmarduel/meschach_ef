@@ -127,8 +127,7 @@ Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P2" )    # Ty
 Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "DIRECT-METHOD" )     # Methode : DIRECT-METHOD,CG,CGS
 Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
 
-Params_set_oneparam(MyParams, "geometry_params","meshfile", "cube3D_P1.cube" )  #  Mesh File ("name.dat") "MESH_P1.quad2"
-                                                                                            "cube2D_P1_v3_ok2.gmsh"
+Params_set_oneparam(MyParams, "geometry_params","meshfile", "cube3D_P1.cube" )  #  Mesh File ("name.dat") "MESH_P1.quad2" / "cube2D_P1_v3_ok2.gmsh"
 
 Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     1) # GNUPLOT
 Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
@@ -171,123 +170,123 @@ elt_P1 = elt3D_get("P1")
 
 MyGeom = Geom3D_get(MyElt, Params_get_oneparam(MyParams, "geometry_params", "meshfile"))
 
-Geom3D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)  
+Geom3D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 
 # --------------------------------------------------------------------------------------------
 def Py_solve3D_burgers( MyElt , MyGeom , MyBC , MyRhsFun ) :
-   
+
     NBSOMM = GEOM_3D_NBSOMM_get(MyGeom)
-    
+
     print("NBSOMM = ", NBSOMM)
-    #
+
     ResolutionMethod = Params_get_oneparam(MyParams,"matrix_solver_params","resolution_method")
     Preconditionning = Params_get_oneparam(MyParams,"matrix_solver_params","preconditionning")
     print("ResolutionMethod =", ResolutionMethod)
     print("Preconditionning =", Preconditionning)
-    
+
     eps_steps = Params_get_oneparam(MyParams,"matrix_solver_params","eps_steps")
     max_steps = Params_get_oneparam(MyParams,"matrix_solver_params","max_steps")
     nb_steps  = new_intp()
-    
+
     A   = sp_get(NBSOMM,NBSOMM,10)
     Abc = sp_get(NBSOMM,NBSOMM,10)
-    
+
     SOL = v_get(NBSOMM); v_zero(SOL)
-    
+
     Un  = v_get(NBSOMM); v_zero(Un)
-    
+
     UU  = v_get(NBSOMM)
     UUx = v_get(NBSOMM)
     UUy = v_get(NBSOMM)
     UUz = v_get(NBSOMM)
     LIN = v_get(NBSOMM)
     RHS = v_get(NBSOMM)
-    
-    # ----- assemblage matrix and rhs ------ 
-    
+
+    # ----- assemblage matrix and rhs ------
+
     A   = assemblage3D_matrix_Stiff1( MyElt , MyGeom , A )
     Abc = sp_copy2(A, Abc)
-    
+
     # calculate once for all
     LIN  = assemblage3D_vector_fun( MyElt , MyGeom , MyRhsFun , LIN )
-    
+
     transform3D_matrix_with_bc( MyElt , MyGeom , MyBC , Abc )
-    
-    # ------ solve the system Ax = b   ----- 
-    
+
+    # ------ solve the system Ax = b   -----
+
     ILU = sp_null()
     ICH = sp_null()
-    
+
     Pe    = px_get(NBSOMM)
     INVPe = px_get(NBSOMM)
-    
+
     if  ResolutionMethod == "DIRECT-METHOD" :
         #
         ICH = sp_copy(Abc)
         ICH = sp_transformwithbandwr(Abc , Pe, INVPe, BANDWRe_AMD, BANDWRe_AMD, ICH )
-        
+
         spCHfactor(ICH)
-    
-    
+
+
     elif Preconditionning == "ICH" :
-       
+
         ICH = sp_copy(Abc)
-        spICHfactor(ICH)    
-    
+        spICHfactor(ICH)
+
     elif Preconditionning == "ILU" :
         #
         print("for problem = \"Laplacien\", the matrix A should be symmetric")
         print("-> use preferrably the LLT preconditionning + CG ")
-        
+
         ILU = sp_copy(Abc)
-        spILUfactor(ILU,0.0)    
+        spILUfactor(ILU,0.0)
 
     elif Preconditionning == "NULL" :
-       
+
         print("no precond for iterativ method")
 
     else :
-       
+
         warnings.warn(WARNINGS_DICT["W_PRECONDITIONNING"])
 
 
 
 
     for n in range(300):
-    
+
         v_copy( SOL, Un )
-        
+
         UU   = assemblage3D_vector_ab ( MyElt , MyGeom , Un, Un , UU  )   #  UU    = [ U_n * U_n       ]
         #UUx  = assemblage3D_vector_abx( MyElt , MyGeom , Un, Un , UUx )   #  UUx   = [ U_n * DX( U_n ) ]
         #UUy  = assemblage3D_vector_aby( MyElt , MyGeom , Un, Un , UUy )   #  UUy   = [ U_n * DY( U_n ) ]
         #UUz  = assemblage3D_vector_abz( MyElt , MyGeom , Un, Un , UUz )   #  UUz   = [ U_n * DZ( U_n ) ]
-        
+
         RHS = v_copy(LIN, RHS)
         RHS = v_sub( RHS, UU, RHS)
         #RHS = v_sub( RHS, UUx, RHS)
         #RHS = v_sub( RHS, UUy, RHS)
         #RHS = v_sub( RHS, UUz, RHS)
-        
+
         transform3D_vector_with_bc( MyElt , MyGeom , MyBC , A, RHS )
-        
-        
+
+
         if  ResolutionMethod == "DIRECT-METHOD" :
 
             #spCHsolve(ICH, RHS, SOL)
-            spCHsolve_bandwr(ICH, Pe, INVPe, RHS, SOL)  
-        
+            spCHsolve_bandwr(ICH, Pe, INVPe, RHS, SOL)
+
         elif  ResolutionMethod == "CG" :
-        
+
             iter_spcg2(A,ICH,RHS,eps_steps, SOL,max_steps,nb_steps)
             print("cg: # of iter. = ",intp_value(nb_steps))
 
         elif ResolutionMethod == "BiCGStab" :
-        
+
             iter_spbicgstab(A,ILU,RHS,eps_steps, SOL,max_steps,nb_steps)
             print("bicgstab: # of iter. = ",intp_value(nb_steps))
 
         else :
-        
+
             raise AssertionError(ERRORS_DICT["E_METHOD"])
 
 
@@ -296,13 +295,13 @@ def Py_solve3D_burgers( MyElt , MyGeom , MyBC , MyRhsFun ) :
         print("iter=",n,"  -> diff = ", diff )
 
         if ( diff < eps_steps ): break
-        
-        
+
+
 
     delete_intp(nb_steps)
-    
+
     V_FREE(RHS)
-    SP_FREE(A) 
+    SP_FREE(A)
     if Preconditionning == "ILU" :
         SP_FREE(ILU)
     if Preconditionning == "ICH" or ResolutionMethod == "DIRECT-METHOD" :
@@ -319,7 +318,7 @@ print("PROBLEM is ",PROBLEM)
 
 if   PROBLEM == "LAPLACIAN" :
 
-    SOL = solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun )    
+    SOL = solve3D_laplacien( MyElt , MyGeom , MyBC , MyRhsFun )
 
 elif PROBLEM == "CONVECTION-DIFFUSION" :
 
@@ -336,11 +335,11 @@ elif PROBLEM == "STOKES" :
 elif PROBLEM == "NAVIER-STOKES" :
 
     #(U,V,P) = Py_solve3D_navier_stokes( elt_P2 , elt_P1 , MyGeom , MyBC , MyRhsFun )
-	 pass
-	
+    pass
+
 else:
 
-	 print("Problem \"%s\" not yet implemented" % PROBLEM)
+    print("Problem \"%s\" not yet implemented" % PROBLEM)
     sys.exit(EXIT_FAILURE)
 
 
@@ -348,28 +347,28 @@ else:
 
 if   PROBLEM == "LAPLACIAN" :
 
-	 graphics3D( "gnuplot" , MyElt , MyGeom , SOL , "Sol_Approch")
+    graphics3D( "gnuplot" , MyElt , MyGeom , SOL , "Sol_Approch")
     #graphics3D( "vtk" , MyElt , MyGeom , SOL , "Sol_Approch")
 
 elif PROBLEM == "CONVECTION-DIFFUSION" :
 
-	 graphics3D( "vtk" , MyElt , MyGeom , SOL , "Sol_Approch")
+    graphics3D( "vtk" , MyElt , MyGeom , SOL , "Sol_Approch")
 
 elif PROBLEM == "BURGERS" :
 
-	 graphics3D( "vtk" , MyElt , MyGeom , SOL , "Sol_Approch")
+    graphics3D( "vtk" , MyElt , MyGeom , SOL , "Sol_Approch")
 
 elif PROBLEM == "STOKES" :
 
-	 #graphics3D( "vtk" , MyElt , MyGeom , U , "Sol_U_Approch")
-	 #graphics3D( "vtk" , MyElt , MyGeom , V , "Sol_V_Approch")
-	 #graphics3D( "vtk" , MyElt , MyGeom , P , "Sol_P_Approch")
-	
+    #graphics3D( "vtk" , MyElt , MyGeom , U , "Sol_U_Approch")
+    #graphics3D( "vtk" , MyElt , MyGeom , V , "Sol_V_Approch")
+    #graphics3D( "vtk" , MyElt , MyGeom , P , "Sol_P_Approch")
+
     graphics3D_stokes( "vtk", MyElt , MyGeom , U, V, P, "Stokes")
 
 elif PROBLEM == "NAVIER-STOKES" :
 
-	 pass
+    pass
 
 else:
 
@@ -382,13 +381,13 @@ if True :
 
     fun3D = Fun3D_get()
     Fun3D_setFunctionPython(fun3D, spheric) # ref_e=0, axe=1
-    #Fun3D_setCFunction(fun3D, ExSol3D[MyParams->misc_params.Exact_sol] ) 
+    #Fun3D_setCFunction(fun3D, ExSol3D[MyParams->misc_params.Exact_sol] )
 
     diff = diff_vec_function3D( MyElt, MyGeom, SOL, fun3D, SOL )
     print("diff solexacte-solapprochee = %le" % diff)
-      
+
     #v_foutput(sys.stdout, SOL)
-    
+
     FUN_3D_FREE(fun3D)
 
 
@@ -416,11 +415,11 @@ PARAMS_FREE(MyParams)
 #mem_info_file(sys.stdout,0)
 
 #mem_info_file(sys.stdout,MY_LIST1)
-#mem_info_file(sys.stdout,MY_LIST2) 
-#mem_info_file(sys.stdout,MY_LIST3) 
-#mem_info_file(sys.stdout,MY_LIST4) 
-#mem_info_file(sys.stdout,MY_LIST5) 
+#mem_info_file(sys.stdout,MY_LIST2)
+#mem_info_file(sys.stdout,MY_LIST3)
+#mem_info_file(sys.stdout,MY_LIST4)
+#mem_info_file(sys.stdout,MY_LIST5)
 #mem_info_file(sys.stdout,MY_LIST6)
-#mem_info_file(sys.stdout,MY_LIST7) 
+#mem_info_file(sys.stdout,MY_LIST7)
 
 #----------------------------------------------------------------------

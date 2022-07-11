@@ -80,7 +80,7 @@ def bc_cauchy(x,y):
 
 MyParams = Params_get()
 
-#-------------------------------------------------------------------   
+#-------------------------------------------------------------------
 # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
 # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
 #--------------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ Params_set_staticparam(MyParams, 0)
 
 MyRhsFun = Rhs2D_get()
 Rhs2D_setFunctionTransientPython(MyRhsFun, 0, AXEe_X, source)
- 
+
 MyBC = Bc2D_get()
 
 Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 1, AXEe_X )
@@ -178,7 +178,7 @@ MyGeom = Geom2D_get(MyElt,
         Params_get_oneparam(MyParams, "geometry_params", "meshname"),
         Params_get_oneparam(MyParams, "geometry_params", "meshtype"))
 
-Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)  
+Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 
 NBSOMM = GEOM_2D_NBSOMM_get(MyGeom)
 
@@ -281,7 +281,7 @@ U_n   = v_get(NBSOMM)
 
 U_nm1 = v_copy( U_o, U_nm1 )
 
-		  
+
 graphics1D_vopl_initialize(Params_get_oneparam(MyParams,"graphics_interactiv2D_params","DRIVER"),
 						Params_get_oneparam(MyParams,"graphics_interactiv2D_params","SIZE_WINDOW_X"),
 						Params_get_oneparam(MyParams,"graphics_interactiv2D_params","SIZE_WINDOW_Y"),
@@ -291,7 +291,7 @@ graphics1D_vopl_window(1, 1, Params_get_oneparam2(MyParams,"graphics_interactiv2
 						Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","WINDOW_X_MAX",1,1),
 						Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","WINDOW_Y_MIN",1,1),
 						Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","WINDOW_Y_MAX",1,1))
-			
+
 graphics1D_vopl_nblevels(1, 1, Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","NB_LEVELS",1,1))
 graphics1D_vopl_levels(1, 1, Params_get_oneparam2(MyParams,"graphics_interactiv2D_params","LEVELS",1,1))
 graphics1D_vopl_contourmeshdata(1, 1, GEOM_2D_NSELMT_get(MyGeom), GEOM_2D_XYSOMM_get(MyGeom))
@@ -300,7 +300,7 @@ graphics1D_vopl_contourplotdata(1, 1, U_o)
 t1 = threading.Thread( target=Py_vopl_contours_with_xt_toolkit_transient )
 t1.start()
 #graphics1D_vopl_plotcontours_start()
-			
+
 #---------------------------------------------------------------------
 
 atime_start = time.time()
@@ -313,23 +313,23 @@ NBITER = int( TPS_FIN / DT )
 for k in range(1,NBITER+1):
 
     TPS    = k*DT
-	 
+
     #print("k = %d => TIME = %lf" % (k, TPS))
-	 
+
     # set the curent time in the functions structs
     Bc2D_setTps (MyBC, TPS)
-    
+
     Rhs2D_setTps( MyRhsFun, TPS - DT)
     RHS_FUN1    = assemblage2D_vector_fun( MyElt , MyGeom , MyRhsFun, RHS_FUN1 )
     Rhs2D_setTps( MyRhsFun, TPS )
     RHS_FUN2    = assemblage2D_vector_fun( MyElt , MyGeom , MyRhsFun, RHS_FUN2 )
-	 
+
     v_zero(RHS_FUN)
     RHS_FUN     = v_mltadd(RHS_FUN, RHS_FUN1, 0.5, RHS_FUN)
     RHS_FUN     = v_mltadd(RHS_FUN, RHS_FUN2, 0.5, RHS_FUN)
     RHS_FUN     = v_mltadd(RHS_FUN, RHS_BC  , 1.0, RHS_FUN)
-	 
-	 
+
+
     RHS_TDISCR = sp_mv_mlt(A, U_nm1, RHS_TDISCR)
 
     # init RHS
@@ -339,14 +339,14 @@ for k in range(1,NBITER+1):
     RHS = v_add(RHS, RHS_TDISCR, RHS)
 
     transform2D_vector_with_bc (MyElt, MyGeom, MyBC, B_REF, RHS)
-    
-	 
+
+
     # -- Calcul de U_np1 -----------------
     U_n =  spCHsolve(LLT, RHS, U_n)
-		
+
     #-----------------------  statistics -------------------------
     if itstat > 0 and k % itstat == 0 :
-		  
+
         U_diff = v_sub(U_n, U_steadystate, U_diff)
         diff = v_norm2(U_diff)
         print("time = %5.2f    --> ||sol_steadystate - sol_approchee|| = %lf" % (TPS, diff))
@@ -355,11 +355,11 @@ for k in range(1,NBITER+1):
     if itgraph > 0 and k % itgraph == 0 :
 
         title = "SOL_%010.5lf" % TPS
-	     
+
         graphics1D_vopl_contourtransientbuildinfo(1,1)
         graphics1D_vopl_contourplotdata(1, 1, U_n)
         graphics1D_vopl_title(title)
-					
+
         graphics1D_vopl_plotcontours_flush()
 
     #--------------------------------------------------------------------

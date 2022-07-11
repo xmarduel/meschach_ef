@@ -11,13 +11,13 @@ from meschach_spooles  import *
 def Py_solve2D_NavierStokes( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun ) :
     """
     solve Navier-Stokes
-    
+
     2 methods : 1-NEWTON-EXACT
                 2-NEWTON-APPROCH
     """
 
     MyParams = Params_get_staticparam(0)
-	 
+
     METHOD = Params_get_oneparam(MyParams, "navierstokes_params", "method")
 
 
@@ -40,10 +40,10 @@ def Py_solve2D_NavierStokes( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun ) :
 def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun , MyParams ) :
     """
     solve Navier-Stokes - NEWTON-EXACT Algorithm
-    
+
     (U,V,P) = Py_solve2D_NavierStokes_NE( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun , MyParams )
     """
-	 
+
     NBSOMM_U = GEOM_2D_NBSOMM_get(MyGeom)
     NBSOMM_P = GEOM_2D_NBSOMM_get(GEOM_2D_geomBase_get(MyGeom))
 
@@ -109,11 +109,11 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
     Vnp1 = v_get(NBSOMM_U)
 
     VIT = v_get(2*NBSOMM_U);   v_zero(VIT) # [ U , V ]
-    P   = v_get(  NBSOMM_P);
+    P   = v_get(  NBSOMM_P)
 
-    SOL = v_get(2*NBSOMM_U+ NBSOMM_P);   v_zero(SOL); # [ U , V , P])
+    SOL = v_get(2*NBSOMM_U+ NBSOMM_P);   v_zero(SOL) # [ U , V , P])
 
-    # ----- assemblage matrix and rhs ------ 
+    # ----- assemblage matrix and rhs ------
 
     J  = assemblage2D_matrix_Mass  ( MyEltM1 , GEOM_2D_geomBase_get(MyGeom) , J  )
 
@@ -159,17 +159,17 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
         Vn = v_move(VIT, NBSOMM_U,NBSOMM_U, Vn,0)
 
 
-        UnUx  = assemblage2D_matrix_AUx   ( MyElt , MyGeom , Un, UnUx ) 
+        UnUx  = assemblage2D_matrix_AUx   ( MyElt , MyGeom , Un, UnUx )
         VnUy  = assemblage2D_matrix_AUy   ( MyElt , MyGeom , Vn, VnUy )
 
-        UnVx  = assemblage2D_matrix_AUx   ( MyElt , MyGeom , Un, UnVx ) 
+        UnVx  = assemblage2D_matrix_AUx   ( MyElt , MyGeom , Un, UnVx )
         VnVy  = assemblage2D_matrix_AUy   ( MyElt , MyGeom , Vn, VnVy )
 
 
         UUnx  = assemblage2D_matrix_AxU   ( MyElt , MyGeom , Un, UUnx )
         VUny  = assemblage2D_matrix_AyU   ( MyElt , MyGeom , Un, VUny )
 
-        UVnx  = assemblage2D_matrix_AxU   ( MyElt , MyGeom , Vn, UVnx ) 
+        UVnx  = assemblage2D_matrix_AxU   ( MyElt , MyGeom , Vn, UVnx )
         VVny  = assemblage2D_matrix_AyU   ( MyElt , MyGeom , Vn, VVny )
 
 
@@ -222,7 +222,7 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
 
 
         # build the matrix "NAVIER_STOKES"
-        transform2D_navierstokes_matrix_vector_with_bc( MyElt, MyGeom, GEOM_2D_geomBase_get(MyGeom), MyBC, STOKES_bc, STOKES_RHS_bc);
+        transform2D_navierstokes_matrix_vector_with_bc( MyElt, MyGeom, GEOM_2D_geomBase_get(MyGeom), MyBC, STOKES_bc, STOKES_RHS_bc)
 
 
         OUTER_METHOD = Params_get_oneparam(MyParams, "navierstokes_params", "outer_method")
@@ -241,7 +241,7 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
         if OUTER_METHOD == "UZAWA" :
 
             navierstokes_resol_uzawa (A, B, C, J, VIT, P, F, G)
-        
+
         elif OUTER_METHOD == "PRESSUREMATRIX" :
 
             navierstokes_resol_pressurematrix(A, B, VIT, P, F, G)
@@ -256,8 +256,8 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
         Unp1 = v_move(VIT,        0,NBSOMM_U, Unp1,0);
         Vnp1 = v_move(VIT, NBSOMM_U,NBSOMM_U, Vnp1,0);
         # test convergence
-        diff = v_norm2( v_sub(Unp1, Un, Unp1) ) + v_norm2( v_sub(Vnp1, Vn, Vnp1) ) 
-        
+        diff = v_norm2( v_sub(Unp1, Un, Unp1) ) + v_norm2( v_sub(Vnp1, Vn, Vnp1) )
+
         print("iter = %d -> diff = %lf" % (n, diff))
 
         if diff < 100*eps_steps :
@@ -322,7 +322,7 @@ def Py_solve2D_NavierStokes_NEWTON_EXACT( MyElt , MyEltM1, MyGeom , MyBC , MyRhs
 def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun , MyParams ) :
     """
     solve Navier-Stokes - NEWTON_APPROCH Algorithm
-    
+
     (U,V,P) = Py_solve2D_NavierStokes_NA( MyElt , MyEltM1, MyGeom , MyBC , MyRhsFun , MyParams )
     """
 
@@ -417,7 +417,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
     print("Stokes ... Done")
 
 
-    # ----- assemblage matrix and rhs ------ 
+    # ----- assemblage matrix and rhs ------
 
     J  = assemblage2D_matrix_Mass  ( MyEltM1 , GEOM_2D_geomBase_get(MyGeom) , J  )
 
@@ -481,7 +481,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
     Fu = assemblage2D_vector_fun( MyElt, MyGeom, MyRhsFun, Fu)
 
     Rhs2D_setCurrentSelectedAxe(MyRhsFun, AXEe_Y)
-    Fv = v_get(NBSOMM_U);
+    Fv = v_get(NBSOMM_U)
     Fv = assemblage2D_vector_fun( MyElt, MyGeom, MyRhsFun, Fv)
 
 
@@ -510,7 +510,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
     LU_A = sp_copy(A)
     LU_P = sp_copy(J)
 
-    # set the matrix with reduced band width 
+    # set the matrix with reduced band width
     LU_A = sp_dopermutationforbandwr(A , Pu, INVPu, BANDWRe_AMD, BANDWRe_PROFILE , BANDWRe_NONSYM, LU_A )
 
     # set the matrix with reduced band width */
@@ -561,7 +561,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
         RHS_NLIN_V = v_add( RHS_NLIN_V, VomnVny, RHS_NLIN_V)
         RHS_NLIN_V = v_add( RHS_NLIN_V, UnVox  , RHS_NLIN_V)
         RHS_NLIN_V = v_add( RHS_NLIN_V, VnVoy  , RHS_NLIN_V)
-	
+
 
         STOKES_RHS_NLIN = v_move(RHS_NLIN_U, 0, NBSOMM_U, STOKES_RHS_NLIN,        0) # set RHS_NLIN_U into STOKES_RHS_NLIN
         STOKES_RHS_NLIN = v_move(RHS_NLIN_V, 0, NBSOMM_U, STOKES_RHS_NLIN, NBSOMM_U) # set RHS_NLIN_V into STOKES_RHS_NLIN
@@ -586,7 +586,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
         elif OUTER_METHOD == "PRESSUREMATRIX" :
 
             navierstokes_resol_pressurematrix_factOk(A, LU_A, PERM_LU_A, B, VIT, P, F, G, Pu, INVPu )
-	
+
         else:
 
             print("outer method for NavierStokes is \"%s\" \n" % OUTER_METHOD)
@@ -597,7 +597,7 @@ def Py_solve2D_NavierStokes_NEWTON_APPROCH( MyElt , MyEltM1, MyGeom , MyBC , MyR
         Unp1 = v_move(VIT,        0,NBSOMM_U, Unp1,0)
         Vnp1 = v_move(VIT, NBSOMM_U,NBSOMM_U, Vnp1,0)
         # test convergence
-        diff = v_norm2( v_sub(Unp1, Un, Unp1) ) + v_norm2( v_sub(Vnp1, Vn, Vnp1) ) 
+        diff = v_norm2( v_sub(Unp1, Un, Unp1) ) + v_norm2( v_sub(Vnp1, Vn, Vnp1) )
         print("iter = %d -> diff = %ld " % (n, diff))
 
         if diff < eps_steps :

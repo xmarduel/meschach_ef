@@ -31,21 +31,21 @@ set_err_flag(EF_JUMP)
 
 WITH_SURFACE = 0
 
-PI = acos(-1.0) 
+PI = acos(-1.0)
 
 def init_condition(x,y):
     return 0.0
-	 
+
 CUBE    = 0 # CUBE
- 
+
 def source(x,t):
     return 10.0
 def bc(x,y,t):
     return 10/4.0*(1.0/2.0-(x-0.5)*(x-0.5)-(y-0.5)*(y-0.5) )
-	 
-	 
+
+
 SINSIN   = 0 # SINSIN
- 
+
 def solexacte(x,y,t):
     return sin(2*PI*x)*sin(2*PI*y)*cos(t)
 def source(x,y,t): # Ut - Uxx - Uyy = source
@@ -54,14 +54,14 @@ def bc(x,y,t):
     return 0.0 # sin(2*PI*x)*sin(2*PI*y)
 def init_condition(x,y):
     return sin(2*PI*x)*sin(2*PI*y)
-	 
+
 fun_exact = Fun2D_get()
-Fun2D_setFunctionTransientPython(fun_exact, solexacte) 
+Fun2D_setFunctionTransientPython(fun_exact, solexacte)
 
 
 MyParams = Params_get()
 
-#-------------------------------------------------------------------   
+#-------------------------------------------------------------------
 # LECTURE  IN  INPUT FILE "INPUT_PDE.dat"
 # ECRITURE IN OUTOUT FILE "OUTPUT_PDE.dat"
 #--------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ Params_set_oneparam(MyParams, "main_problem","NULL", "LAPLACIAN" )
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P1" )    # Type d'EF : "P1","P2", "P3" , "H3", "S3", "S5"
 
-Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
+Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k)
 Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
 
 #-physical parameters------------------------------------------------------------------
@@ -80,7 +80,7 @@ Params_set_oneparam(MyParams, "physical_params","epsilon",  0.0 ) # epsilon  -k*
 
 #-time parameters------------------------------------------------------------------
 
-Params_set_oneparam(MyParams, "time_params","TPS_INI",    0.0  ) # 
+Params_set_oneparam(MyParams, "time_params","TPS_INI",    0.0  ) #
 Params_set_oneparam(MyParams, "time_params","TPS_FIN",    60.0  ) #
 Params_set_oneparam(MyParams, "time_params","DT",         0.02  ) #
 
@@ -130,14 +130,14 @@ Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","WINDOW_X_MAX", 1,
 Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","WINDOW_Y_MIN", 1,1,  0.0  )
 Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","WINDOW_Y_MAX", 1,1,  1.0  )
 Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","NB_LEVELS"   , 1,1, 7    )
-Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","LEVELS"      , 1,1, [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3 ]) 
+Params_set_oneparam2(MyParams, "graphics_interactiv2D_params","LEVELS"      , 1,1, [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3 ])
 
 
 
 
 MyRhsFun = Rhs2D_get()
 Rhs2D_setFunctionTransientPython(MyRhsFun, 0, AXEe_X, source )
-	 
+
 MyBC = Bc2D_get()
 
 Bc2D_setBcType(MyBC, BC_2De_DIRICHLET, 1, AXEe_X )
@@ -162,7 +162,7 @@ MyGeom = Geom2D_get(MyElt,
         Params_get_oneparam(MyParams, "geometry_params", "meshname"),
         Params_get_oneparam(MyParams, "geometry_params", "meshtype"))
 
-Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)  
+Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 
 NBSOMM = GEOM_2D_NBSOMM_get(MyGeom)
 
@@ -267,14 +267,14 @@ U_nm1 = v_copy(U_o, U_nm1)
 
 
 graphics2D_vogle_initialize(Params_get_oneparam(MyParams,"graphics_interactiv2D_params","DRIVER"),
-						    Params_get_oneparam(MyParams,"graphics_interactiv2D_params","SIZE_WINDOW_X"),
-						    Params_get_oneparam(MyParams,"graphics_interactiv2D_params","SIZE_WINDOW_Y"))
+                            Params_get_oneparam(MyParams,"graphics_interactiv2D_params","SIZE_WINDOW_X"),
+                            Params_get_oneparam(MyParams,"graphics_interactiv2D_params","SIZE_WINDOW_Y"))
 
 graphics2D_vogle_store_surfacedata(GEOM_2D_NSELMT_get(MyGeom), GEOM_2D_XYSOMM_get(MyGeom))
 graphics2D_vogle_store_plotdata(U_o)
-				
+
 graphics2D_vogle_plotsurface_start()
-			
+
 #---------------------------------------------------------------------
 
 atime_start = time()
@@ -287,23 +287,23 @@ NBITER = int( TPS_FIN / DT )
 for k in range(1,NBITER+1):
 
     TPS    = k*DT
-	 
+
     print("k = %d => TIME = %lf" % (k, TPS))
-	 
+
     # set the curent time in the functions structs
     Bc2D_setTps (MyBC, TPS)
-    
+
     Rhs2D_setTps( MyRhsFun, TPS - DT)
     RHS_FUN1    = assemblage2D_vector_fun( MyElt , MyGeom , MyRhsFun, RHS_FUN1 )
     Rhs2D_setTps( MyRhsFun, TPS )
     RHS_FUN2    = assemblage2D_vector_fun( MyElt , MyGeom , MyRhsFun, RHS_FUN2 )
-	 
+
     v_zero(RHS_FUN)
     RHS_FUN     = v_mltadd(RHS_FUN, RHS_FUN1, 0.5, RHS_FUN)
     RHS_FUN     = v_mltadd(RHS_FUN, RHS_FUN2, 0.5, RHS_FUN)
     RHS_FUN     = v_mltadd(RHS_FUN, RHS_BC  , 1.0, RHS_FUN)
-	 
-	 
+
+
     RHS_TDISCR = sp_mv_mlt(A, U_nm1, RHS_TDISCR)
 
     # init RHS
@@ -313,14 +313,14 @@ for k in range(1,NBITER+1):
     RHS = v_add(RHS, RHS_TDISCR, RHS)
 
     transform2D_vector_with_bc (MyElt, MyGeom, MyBC, B_REF, RHS)
-    
-	 
-	 # -- Calcul de U_np1 -----------------
+
+
+    # -- Calcul de U_np1 -----------------
     U_n =  spCHsolve(LLT, RHS, U_n)
-		
-	 #-----------------------  statistics -------------------------
+
+    #-----------------------  statistics -------------------------
     if itstat > 0 and k % itstat == 0 :
-		  
+
         U_diff = v_sub(U_n, U_steadystate, U_diff)
         diff = v_norm2(U_diff)
         print("time = " , TPS , " --> |sol_steadystate - sol_approchee| = " , diff)
