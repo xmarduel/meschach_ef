@@ -79,7 +79,7 @@ MyAdvFun = Adv2D_get()
 Adv2D_setFunctionPython(MyAdvFun, 0, AXEe_X, AXEe_X, AXEe_X, bc1) # ref_e=0, axe=1,1
 Adv2D_setFunctionPython(MyAdvFun, 0, AXEe_X, AXEe_Y, AXEe_X, bc1) # ref_e=0, axe=1,2
 
-#-------------------------------------------------------------------   
+#-------------------------------------------------------------------
 
 MyParams = Params_get()
 #--------------------------------------------------------------------------------------
@@ -87,13 +87,13 @@ Params_set_oneparam(MyParams, "main_problem","NULL", "HELMHOLZ" ) # CONVECTION-D
 #--------------------------------------------------------------------------------------
 Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P1" )    # Type d'EF : "P1","P2", "P3"
 
-Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k) 
+Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k)
 Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "ICH" )   # Precond : NULL, ICH, ILU
 
-#Params_set_oneparam(MyParams, "geometry_params","meshfile", "CUBE_11.emc2" )  #  Mesh File ("name.dat") 
+#Params_set_oneparam(MyParams, "geometry_params","meshfile", "CUBE_11.emc2" )  #  Mesh File ("name.dat")
 Params_set_oneparam(MyParams, "geometry_params","meshfile", "MESH_P1.quad"  )  #  Mesh File ("name.dat")
-Params_set_oneparam(MyParams, "geometry_params","meshtype", "quad1" )  # 
-Params_set_oneparam(MyParams, "geometry_params","meshname", "MESH_20" )  #  
+Params_set_oneparam(MyParams, "geometry_params","meshtype", "quad1" )  #
+Params_set_oneparam(MyParams, "geometry_params","meshname", "MESH_20" )  #
 
 Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     1) # GNUPLOT
 Params_set_oneparam(MyParams, "graphics_output_params","MATLAB",      0) # MATLAB
@@ -136,7 +136,7 @@ elt_P3 = elt2D_get("P3")
 
 #--------------------------------------------------------------------
 
-MyGeom = Geom2D_get(MyElt, 
+MyGeom = Geom2D_get(MyElt,
         Params_get_oneparam(MyParams, "geometry_params", "meshfile"),
         Params_get_oneparam(MyParams, "geometry_params", "meshname"),
         Params_get_oneparam(MyParams, "geometry_params", "meshtype"))
@@ -145,54 +145,54 @@ graphics_geom2D_view("X11", MyGeom, "dummy")
 #graphics_geom2D_view("gnuplot", MyGeom, "geometry_view")
 
 
-Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)  
+Geom2D_check_with_boundaryconditions(MyGeom, MyBC, AXEe_X)
 
-#Geom2D_foutput(sys.stdout, MyGeom)  
+#Geom2D_foutput(sys.stdout, MyGeom)
 
 # --------------------------------------------------------------------
 # --------------------------------------------------------------------
 
 def Py_solve2D_eigen( MyElt , MyGeom , MyBC ) :
-   
+
     NBSOMM = GEOM_2D_NBSOMM_get(MyGeom)
-    
+
     ResolutionMethod = Params_get_oneparam(MyParams,"matrix_solver_params","resolution_method")
     Preconditionning = Params_get_oneparam(MyParams,"matrix_solver_params","preconditionning")
     print("ResolutionMethod =", ResolutionMethod)
     print("Preconditionning =", Preconditionning)
-    
+
     A  = sp_get(NBSOMM,NBSOMM,10)
-    
-    # ----- assemblage matrix and rhs ------ 
-    
+
+    # ----- assemblage matrix and rhs ------
+
     A = assemblage2D_matrix_Stiff1( MyElt , MyGeom , A )
-    
+
     transform2D_matrix_with_bc( MyElt , MyGeom , MyBC , A )
-    
-    # ------ solve the system Ax = k.x  ----- 
-    
+
+    # ------ solve the system Ax = k.x  -----
+
     B = m_get(NBSOMM,NBSOMM)
     T = m_get(NBSOMM,NBSOMM)
     Q = m_get(NBSOMM,NBSOMM)
-    
+
     B = sp_m2dense(A,B)
     T = m_copy(B,T)
-    
+
     # schur form B = Q.T.Q'
     schur(T,Q)
-    
+
     # eigenvalues
     eigen_re = v_get(NBSOMM)
     eigen_im = v_get(NBSOMM)
-    
+
     schur_evals(T, eigen_re, eigen_im)
-    
+
     # k-th eigenvector is k-th colunm of (X_re + i.X_im)
     X_re = m_get(NBSOMM,NBSOMM)
     X_im = m_get(NBSOMM,NBSOMM)
-    
+
     schur_vecs(T,Q, X_re, X_im)
-    
+
     # finito
     return (X_re, X_im, eigen_re, eigen_im)
 
@@ -218,10 +218,10 @@ for k in range(NBSOMM):
 
     #extract k-th column
     get_col(X_re, k, SOL)
-    
+
     # title
     tmp_title = "EigenVec_%d_" %(k)
-    
+
     graphics2D( "gnuplot" , MyElt , MyGeom , SOL , tmp_title)
     #graphics2D( "silo"    , MyElt , MyGeom , SOL , "SolApproch")
     #graphics2D( "vtk"     , MyElt , MyGeom , SOL , "SolApproch")
@@ -248,13 +248,13 @@ PARAMS_FREE(MyParams)
 #---------------------------------------------------------------------
 
 mem_info_file(sys.stdout,0)
-#
+
 #mem_info_file(sys.stdout,MY_LIST1)
-#mem_info_file(sys.stdout,MY_LIST2) 
-#mem_info_file(sys.stdout,MY_LIST3) 
-#mem_info_file(sys.stdout,MY_LIST4) 
-#mem_info_file(sys.stdout,MY_LIST5) 
+#mem_info_file(sys.stdout,MY_LIST2)
+#mem_info_file(sys.stdout,MY_LIST3)
+#mem_info_file(sys.stdout,MY_LIST4)
+#mem_info_file(sys.stdout,MY_LIST5)
 #mem_info_file(sys.stdout,MY_LIST6)
-#mem_info_file(sys.stdout,MY_LIST7) 
+#mem_info_file(sys.stdout,MY_LIST7)
 
 #----------------------------------------------------------------------
