@@ -10,7 +10,7 @@ extern "C"
 /** \file graphics1D_vogle_stationnary.h
  *
  * Contains the routines for plotting with VOGLE library
- * 
+ *
  */
 
 #include "MESCHACH_VOGLE/INCLUDES/graphics1D_vogle.h"
@@ -20,9 +20,9 @@ extern "C"
 
 int  graphics1D_vopl_plotcurve(void);
 int  graphics1D_vopl_plotcontour(void);
-	
+
 /*--------------------------------------------------------------------------------------*/
-/*--------------------------------------------------------------------------------------*/      
+/*--------------------------------------------------------------------------------------*/
 
 #ifdef __cplusplus
 }

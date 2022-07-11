@@ -12,7 +12,7 @@ extern "C"
  *
  */
 
-   
+
 #include "MESCHACH_CPGPLOT/INCLUDES/graphics1D_pgplot.h"
 
 /*--------------------------------------------------------------------------------------*/
@@ -35,7 +35,7 @@ int  graphics1D_cpgplot_plotcurve(void);
 /*! \fn  graphics1D_cpgplot_plotcurve();
  *
  * \brief
- * 
+ *
  * Plot the curve X-Y in a Xt-window with color
  */
 

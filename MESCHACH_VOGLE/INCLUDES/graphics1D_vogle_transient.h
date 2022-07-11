@@ -25,7 +25,7 @@ void graphics1D_vopl_plotcontours_start(void);
 void graphics1D_vopl_plotcontours_flush(void);
 
 void graphics1D_vopl_finalize_transient(void);
-	
+
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 

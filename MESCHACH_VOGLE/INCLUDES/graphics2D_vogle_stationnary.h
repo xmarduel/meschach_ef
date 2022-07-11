@@ -10,13 +10,13 @@ extern "C"
 /** \file graphics2D_vogle_stationnary.h
  *
  * Contains the routines for plotting with VOGLE library
- * 
+ *
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-   
+
 #include "MESCHACH/INCLUDES/matrix.h"
 #include "MESCHACH_ADDS/INCLUDES/matrix_adds.h"
 

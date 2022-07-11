@@ -79,8 +79,8 @@ typedef enum
    LIBSCIPLOTe_PPS = 3,
 
 } LIBSCIPLOT_OUTPUT;
-   
-   
+
+
 typedef enum
 {
     LIBSCIPLOTe_SYMBOL_VOID                        =    0,
@@ -116,14 +116,14 @@ typedef enum
     LIBSCIPLOTe_SYMBOL_OCTAGON                      =  30,
     LIBSCIPLOTe_SYMBOL_FILLED_OCTAGON               =  31,
 
-} LIBSCIPLOT_SYMBOL;   
-   
+} LIBSCIPLOT_SYMBOL;
+
 #define  LIBSCIPLOTd_IDX_FIRST  (-1)   /**< indicates the range of indices where a vector must be plotted */
 #define  LIBSCIPLOTd_IDX_LAST   (-1)   /**< indicates the range of indices where a vector must be plotted */
 
 #define  LIBSCIPLOT_NB_MAX_SUBPLOTS  4
 
-/*--------------------------------------------------------------------------------------*/  
+/*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
 typedef struct LIBSCIPLOT_CURVE_DATA_
@@ -141,10 +141,10 @@ typedef struct LIBSCIPLOT_CURVE_DATA_
    double labels_size;
 
    int  color;
-	
+
    int marker;
 	int end_marker;
-	
+
    int adjustscale;
 
    double xmin, xmax; /* window */
@@ -154,7 +154,7 @@ typedef struct LIBSCIPLOT_CURVE_DATA_
    int frame_on_top;
    int frame_color;
    int legend_color;
- 
+
    /* draw itself */
    void (*draw)(const struct LIBSCIPLOT_CURVE_DATA_ * pdata);
    /* it has a default "draw", but we can change it */
@@ -232,7 +232,7 @@ int  graphics1D_libsciplot_framecolor( int ix, int iy, const int framecolor);
 int  graphics1D_libsciplot_legendcolor( int ix, int iy, const int legendcolor);
 int  graphics1D_libsciplot_setup_window(int ix, int iy, VEC *X, VEC *Y);
 int  graphics1D_libsciplot_window( int ix, int iy, double window_xmin , double window_xmax , double window_ymin , double window_ymax );
-                                
+
 int  graphics1D_libsciplot_curvedata ( int ix, int iy, int color1, const VEC *X, const VEC *Y);
 int  graphics1D_libsciplot_curvedata1( int ix, int iy, int color1, const VEC *X, const VEC *Y, int idx_plot_start, int idx_plot_end );
 

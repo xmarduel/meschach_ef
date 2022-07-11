@@ -10,15 +10,15 @@ extern "C"
 /** \file graphics_vogle.h
  *
  * Contains the enumerations for the VOGLE library
- * 
+ *
  * ----------------------------------------------------------------------- */
-  
+
 typedef int vogle_color;
 
 
 typedef enum
 {
-   VOGLEe_COLOR_BLACK           =  0 , 
+   VOGLEe_COLOR_BLACK           =  0 ,
    VOGLEe_COLOR_RED             =  1 , /* default */
    VOGLEe_COLOR_GREEN           =  2 ,
    VOGLEe_COLOR_YELLOW          =  3 ,
@@ -26,7 +26,7 @@ typedef enum
    VOGLEe_COLOR_MAGENTA         =  5 ,
    VOGLEe_COLOR_CYAN            =  6 ,
    VOGLEe_COLOR_WHITE           =  7 ,
-   
+
    VOGLE_NB_COLORS              =  8
 
 } VOGLE_COLOR;
@@ -53,7 +53,7 @@ typedef enum
    VOGLEe_FILL_STYLE_OUTLINE       =  2 ,
    VOGLEe_FILL_STYLE_HATCHED       =  3 ,
    VOGLEe_FILL_STYLE_CROSS_HATCHED =  4 ,
-   
+
    VOGLE_NB_FILL_STYLES =  5
 
 } VOGLE_FILL_STYLE;
@@ -72,7 +72,7 @@ typedef enum
    VOGLEe_MARKER_ADDITION      =  7 ,
    VOGLEe_MARKER_MULTIPICATION =  8 ,
    VOGLEe_MARKER_STAR          =  9 ,
-   
+
    VOGLEe_NB_MARKERS           = 10
 
 } VOGLE_MARKER;

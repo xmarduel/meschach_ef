@@ -10,16 +10,16 @@ extern "C"
 /** \file graphics1D_vogle.h
  *
  * Contains the routines for plotting with VOPL library
- * 
+ *
  * ----------------------------------------------------------------------- */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-   
+
 #include "MESCHACH/INCLUDES/matrix.h"
 #include "MESCHACH_ADDS/INCLUDES/matrix_adds.h"
-	
+
 #include "MESCHACH_VOGLE/INCLUDES/graphics_vogle.h"
 
 
@@ -27,63 +27,63 @@ extern "C"
 
 #define VOPL_CURVE    1
 #define VOPL_CONTOURS 2
-	
+
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
 /* base struct for CURVE & CONTOURS - all common stuff is here - */
-	
+
 typedef struct VOPL_PLOT_DATA_
 {
 	int plot_type; /* VOPL_CURVE or VOPL_CONTOURS */
-	
+
 	int ix,iy; /* (sub)panel indices */
-	
+
 	double xmin, xmax; /* window */
    double ymin, ymax; /* window */
-   
+
 	char legend[64];
-	
+
 	double labels_size;
    int    font;
-	
+
 	/* drawing function */
 	void (*draw)(void * pdata);
 	/* it has a default "draw", but we can change it */
 	void (*set_drawfunc)(void* pdata, void (*drawfunc)(void *plotdata));
 
 } VOPL_PLOT_DATA;
-		
+
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
-		
+
 typedef struct VOPL_CURVE_DATA_
 {
    int plot_type; /* VOPL_CURVE */
-	
-	int ix,iy; /* panel */
 
-	double xmin, xmax; /* window */
+   int ix,iy; /* panel */
+
+   double xmin, xmax; /* window */
    double ymin, ymax; /* window */
-	
+
    char legend[64];
 
    double labels_size;
    int    font;
-	
-	/* draw itself */
+
+   /* draw itself */
    void (*draw)(const struct VOPL_CURVE_DATA_ * pdata);
    /* it has a default "draw", but we can change it */
    void (*set_drawfunc)(struct VOPL_CURVE_DATA_ * pdata, void (*drawfunc)(const struct VOPL_CURVE_DATA_ *curvedata));
-	
-	VEC * x;
+
+   VEC * x;
    VEC * y;
-   
+
    int color;
-   
-	int marker;
-	int end_marker;
-	
+
+   int marker;
+   int end_marker;
+
    int adjustscale;
 
    int withbox;
@@ -102,87 +102,87 @@ void set_drawfunc_voplcurve(VOPL_CURVE_DATA* q, VOPL_CURVE_DRAW_FUNC drawfunc);
 
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
-	
+
 struct VOPL_CONTOUR_DATA;
 typedef void (*VOPL_CONTOUR_DRAW_FUNC)(struct VOPL_CONTOUR_DATA *pdata);
 
 void delete_voplcontour_objects(void * data);
 void setup_voplcontour_objects(void * data);
-	
-	
+
+
 typedef struct VOPL_CONTOUR_DATA_
 {
-	int plot_type; /* VOPL_CONTOURS */
-	
-	int ix,iy; /* panel */
-	
-	double xmin, xmax; /* window */
+   int plot_type; /* VOPL_CONTOURS */
+
+   int ix,iy; /* panel */
+
+   double xmin, xmax; /* window */
    double ymin, ymax; /* window */
-   
-	char legend[64];	
-	
+
+   char legend[64];
+
    double labels_size;
    int    font;
-	
-	/* drawing function */
-	void (*draw)(const struct VOPL_CONTOUR_DATA_ * pdata);
-	/* it has a default "draw", but we can change it */
-	void (*set_drawfunc)(struct VOPL_CONTOUR_DATA_* pdata, void (*drawfunc)(const struct VOPL_CONTOUR_DATA_ *curvedata));
-	
-	/* the raw values */
-	VEC  *VALUES;
-	IMAT *NSELMT;
-	MAT  *XYSOMM;
-	/* the raw values */
-		
-	/* vogle objects id */
-	int BORDER;
-	int MESH;
-	int CONTOURS;
-		
-	/* flags */
-	int    show_border;
-	int    show_mesh;
-	int    show_contours;
-		
-	int mesh_color;
-	int border_color;
-		
-	/* number of levels to draw */
-	int nb_levels;
-	/* and the levels */
-	VEC *levels;
-	
-	/* governs which object to delete */
-	int delete_border_object_flag;
-	int delete_mesh_object_flag;
-	int delete_contours_object_flag;
-	
-	/* governs which object to build */
-	int build_border_object_flag;
-	int build_mesh_object_flag;
-	int build_contours_object_flag;
 
-	/* for transient problem, store once for all the full mesh info */
-	void *ucdmesh;
-	
-	/**/
-	VOPL_CONTOUR_DRAW_FUNC setup_objects;
-	VOPL_CONTOUR_DRAW_FUNC delete_objects;
-		
+   /* drawing function */
+   void (*draw)(const struct VOPL_CONTOUR_DATA_ * pdata);
+   /* it has a default "draw", but we can change it */
+   void (*set_drawfunc)(struct VOPL_CONTOUR_DATA_* pdata, void (*drawfunc)(const struct VOPL_CONTOUR_DATA_ *curvedata));
+
+   /* the raw values */
+   VEC  *VALUES;
+   IMAT *NSELMT;
+   MAT  *XYSOMM;
+   /* the raw values */
+
+   /* vogle objects id */
+   int BORDER;
+   int MESH;
+   int CONTOURS;
+
+   /* flags */
+   int    show_border;
+   int    show_mesh;
+   int    show_contours;
+
+   int mesh_color;
+   int border_color;
+
+   /* number of levels to draw */
+   int nb_levels;
+   /* and the levels */
+   VEC *levels;
+
+   /* governs which object to delete */
+   int delete_border_object_flag;
+   int delete_mesh_object_flag;
+   int delete_contours_object_flag;
+
+   /* governs which object to build */
+   int build_border_object_flag;
+   int build_mesh_object_flag;
+   int build_contours_object_flag;
+
+   /* for transient problem, store once for all the full mesh info */
+   void *ucdmesh;
+
+   /**/
+   VOPL_CONTOUR_DRAW_FUNC setup_objects;
+   VOPL_CONTOUR_DRAW_FUNC delete_objects;
+
 } VOPL_CONTOUR_DATA;
-	
+
 VOPL_CONTOUR_DATA  *contourdata_new(void);
 void               *contourdata_free (VOPL_CONTOUR_DATA *in);
 VOPL_CONTOUR_DATA  *contourdata_clone(VOPL_CONTOUR_DATA *in);
-	
+
 void drawcontours_vopl1D(const VOPL_CONTOUR_DATA *pdata);
-	
+
 void set_drawfunc_voplcontours(VOPL_CONTOUR_DATA* q, VOPL_CONTOUR_DRAW_FUNC drawfunc);
-	
+
 /* ------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------ */
-	
+
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
@@ -221,13 +221,13 @@ VOPL_GRAPH_DATA * pdata_vopl_set_static(VOPL_GRAPH_DATA *data);
 void graphics1D_vopl_initialize(const char * driver, int window_size_x, int window_size_y, int nx, int ny, int vopl_plot_type);
 
 char *graphics1D_vopl_title    (const char * title);
-	
+
 int  graphics1D_vopl_legend    (int ix, int iy, const char *legend);
 int  graphics1D_vopl_window    (int ix, int iy, double window_xmin , double window_xmax , double window_ymin , double window_ymax );
 int  graphics1D_vopl_labelsize (int ix, int iy, double size);
-int  graphics1D_vopl_font      (int ix, int iy, int font_id);	
+int  graphics1D_vopl_font      (int ix, int iy, int font_id);
 
-/* -------------------------------------------------------------------------------------- */	
+/* -------------------------------------------------------------------------------------- */
 
 int  graphics1D_vopl_endmarker  (int ix, int iy, int end_marker);  /* for VOPL_CURVE */
 int  graphics1D_vopl_setbox     (int ix, int iy, int hasbox);      /* for VOPL_CURVE */
@@ -240,13 +240,13 @@ int  graphics1D_vopl_nblevels   (int ix, int iy, int nb_levels); /* for VOPL_CON
 int  graphics1D_vopl_levels     (int ix, int iy, VEC *levels); /* for VOPL_CONTOURS */
 int  graphics1D_vopl_contourmeshdata(int ix, int iy, const IMAT *NSELMT, const MAT *XYSOMM); /* for VOPL_CONTOURS */
 int  graphics1D_vopl_contourplotdata(int ix, int iy, const VEC *SOL); /* for VOPL_CONTOURS */
-	
+
 int  graphics1D_vopl_contourtransientbuildinfo(int ix, int iy); /* for VOPL_CONTOURS */
-	
+
 /* -------------------------------------------------------------------------------------- */
-	
+
 void graphics1D_vopl_set_plotdata_in_queue(void);
-	
+
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 

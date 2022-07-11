@@ -10,7 +10,7 @@ extern "C"
 /** \file graphics2D_vogle.h
  *
  * Contains the routines for plotting with VOGLE library
- * 
+ *
  */
 
 #include <stdio.h>
@@ -34,7 +34,7 @@ typedef struct _VOGLE_SURFACE_MOTION_ACTION
    int MOTION_Y_TRANSLATE;
 
    double MOTION_SCALE_FACTOR;
-   
+
 } VOGLE_SURFACE_MOTION_ACTION;
 
 
@@ -102,7 +102,7 @@ typedef struct VOGLE_SURFACE_DATA_
    /* drawing function */
    VOGLE_DRAW_FUNC draw;
    /* it has a default "draw", but we can change it */
-   void (*set_drawfunc)(struct VOGLE_SURFACE_DATA_* pdata, VOGLE_DRAW_FUNC drawfunc); 
+   void (*set_drawfunc)(struct VOGLE_SURFACE_DATA_* pdata, VOGLE_DRAW_FUNC drawfunc);
 
    /**/
    VOGLE_DRAW_FUNC setup_view;
@@ -131,16 +131,16 @@ VOGLE_SURFACE_DATA * pdata_vogle_set_static(VOGLE_SURFACE_DATA *data);
 /* ------------------------------------------------------------------------------------ */
 
 void graphics2D_vogle_initialize(char *driver, int window_size_x, int window_size_y);
-	
+
 char *graphics2D_vogle_title(const char *title);
 
 int  graphics2D_vogle_store_surfacedata(const IMAT *NSELMT, const MAT *XYSOMM);
 int  graphics2D_vogle_store_plotdata(const VEC *U_o);
 
 /* ------------------------------------------------------------------------------------ */
-	
+
 void graphics2D_vogle_set_plotdata_in_queue(void);
-	
+
 /* ------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------ */
 
