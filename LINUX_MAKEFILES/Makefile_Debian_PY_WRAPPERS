@@ -3,6 +3,7 @@ CC = gcc
 
 # - where ALL build artefacts go
 BUILDDIR                = ./0BUILD.x86-linux64
+INSTALLDIR              = ./LINUX_MAKEFILES
 
 # targets
 LIB_MESCHACH            = libmeschach.so
@@ -50,7 +51,7 @@ LIB_LAPACK     = -llapack -lblas
 
 # --------------------------------------------------------------
 
-DEFINES = -DHAVE_X11 -DHAVE_CPGPLOT -DHAVE_VOGLE -DHAVE_LIBSCIPLOT -DHAVE_LUA -DHAVE_SILO -DHAVE_LAPACK -DANSI_C -DMESCHACH__ITER_EXTENSIONS
+DEFINES = -DHAVE_X11 -DHAVE_CPGPLOT -DHAVE_VOGLE -DHAVE_LIBSCIPLOT -DHAVE_LUA -DHAVE_SILO -DHAVE_LAPACK -DANSI_C -DMESCHACH__ITER_EXTENSIONS -DPPM -DGIF
 
 NO_WARNINGS =  -Wno-format \
 	-Wno-parentheses \
@@ -61,12 +62,12 @@ NO_WARNINGS =  -Wno-format \
 #CFLAGS_OPT = -g
 CFLAGS_OPT = -O3
 
-X11_INCDIR = /usr/include
+X11_INCDIR = -I/usr/include
 
 CFLAGS += $(CFLAGS_OPT) \
 	$(NO_WARNINGS) \
 	$(DEFINES) \
-	-I$(X11_INCDIR) \
+	$(X11_INCDIR) \
 	-I./MESCHACH/INCLUDES \
 	-I. \
 	-I./EXTERNAL_LIBS/amd \
@@ -75,12 +76,12 @@ CFLAGS += $(CFLAGS_OPT) \
 	-I./EXTERNAL_LIBS \
 	-I./EXTERNAL_LIBS/spooles \
 	-I./EXTERNAL_LIBS/pgplot \
-	-I./MESCHACH_LIBSCIPLOT/LIBSCIPLOT \
 	-I./EXTERNAL_LIBS/plotutils-2.6 \
 	-I./EXTERNAL_LIBS/plotutils-2.6/include \
+	-I./EXTERNAL_LIBS/silo-4.10.2/src/silo \
+	-I./MESCHACH_LIBSCIPLOT/LIBSCIPLOT \
 	-I./MESCHACH_VOGLE/VOGLE/src \
-	-I./MESCHACH_VOGLE/VOPL/SRC \
-	-I./EXTERNAL_LIBS/silo-4.10.2/src/silo
+	-I./MESCHACH_VOGLE/VOPL/SRC
 
 LDFLAGS = -L./LINUX_MAKEFILES \
 	-L./EXTERNAL_LIBS/amd \
@@ -98,15 +99,19 @@ LDFLAGS = -L./LINUX_MAKEFILES \
 	-L/usr/lib/x86_64-linux-gnu
 
 
-all: libmeschach libmeschach_lapack libmeschach_spooles libmeschach_adds libmeschach_ef libsciplot libmeschach_libsciplot libvogle libvopl libmeschach_vogle libmeschach_cpgplot driver_1D driver_2D driver_3D driver_1D_TR driver_2D_TR
+all: lib exe py
+
+lib: libmeschach libmeschach_lapack libmeschach_spooles libmeschach_adds libmeschach_ef libsciplot libmeschach_libsciplot libvogle libvopl libmeschach_vogle libmeschach_cpgplot
+
+exe: exe_1D exe_2D exe_3D exe_1D_TR exe_2D_TR
 
 py: py_meschach py_meschach_adds py_meschach_ef py_meschach_vogle py_meschach_cpgplot py_meschach_libsciplot py_meschach_spooles py_meschach_lapack
 
 install:
-	mv ./*wrap.c ./*.so ./*.o  ./LINUX_MAKEFILES
+	mv ./*wrap.c ./*.so ./*wrap.o  $(INSTALLDIR)
 
 clean:
-	$(RM) -rf $(BUILDDIR) ./LINUX_MAKEFILES/*wrap.o ./LINUX_MAKEFILES/*wrap.c ./LINUX_MAKEFILES/libmeschach.so ./LINUX_MAKEFILES/libmeschach_adds.so ./LINUX_MAKEFILES/libmeschach_lapack.so ./LINUX_MAKEFILES/libmeschach_spooles.so ./LINUX_MAKEFILES/libmeschach_ef.so ./LINUX_MAKEFILES/libsciplot.so ./LINUX_MAKEFILES/libmeschach_libsciplot.so ./LINUX_MAKEFILES/libvogle.so  ./LINUX_MAKEFILES/libvopl.so ./LINUX_MAKEFILES/libmeschach_vogle.so ./LINUX_MAKEFILES/libmeschach_cpgplot.so ./LINUX_MAKEFILES/1D.exe ./LINUX_MAKEFILES/2D.exe ./LINUX_MAKEFILES/3D.exe ./LINUX_MAKEFILES/1D_TR.exe ./LINUX_MAKEFILES/2D_TR.exe ./LINUX_MAKEFILES/meschach.so  ./LINUX_MAKEFILES/meschach_adds.so ./LINUX_MAKEFILES/meschach_ef.so ./LINUX_MAKEFILES/meschach_vogle.so ./LINUX_MAKEFILES/meschach_cpgplot.so ./LINUX_MAKEFILES/meschach_libsciplot.so ./LINUX_MAKEFILES/meschach_lapack.so ./LINUX_MAKEFILES/meschach_spooles.so
+	$(RM) -rf $(BUILDDIR) $(INSTALLDIR)/*wrap.* $(INSTALLDIR)/*.so $(INSTALLDIR)/*.exe 
 
 # -----------------------------------------------------------------------------------------------------
 
@@ -133,12 +138,15 @@ libvopl: $(LIBVOPL)
 libmeschach_vogle: $(LIB_MESCHACH_VOGLE)
 libmeschach_cpgplot: $(LIB_MESCHACH_CPGPLOT)
 
-driver_1D: $(DRIVER_1D)
-driver_2D: $(DRIVER_2D)
-driver_3D: $(DRIVER_3D)
-driver_1D_TR: $(DRIVER_1D_TR)
-driver_2D_TR: $(DRIVER_2D_TR)
+# -----------------------------------------------------------------------------------------------------
 
+exe_1D: $(DRIVER_1D)
+exe_2D: $(DRIVER_2D)
+exe_3D: $(DRIVER_3D)
+exe_1D_TR: $(DRIVER_1D_TR)
+exe_2D_TR: $(DRIVER_2D_TR)
+
+# -----------------------------------------------------------------------------------------------------
 
 DRIVER_1D.src = DRIVERS_C/1D/PDE_1D_SOLVE.c
 DRIVER_2D.src = DRIVERS_C/2D/PDE_2D_SOLVE.c
@@ -412,12 +420,12 @@ LIB_MESCHACH_ADDS.objs       = $(LIB_MESCHACH_ADDS.srcs:%.c=$(BUILDDIR)/%_so.o)
 LIB_MESCHACH_LAPACK.objs     = $(LIB_MESCHACH_LAPACK.srcs:%.c=$(BUILDDIR)/%_so.o)
 LIB_MESCHACH_SPOOLES.objs    = $(LIB_MESCHACH_SPOOLES.srcs:%.c=$(BUILDDIR)/%_so.o)
 LIB_MESCHACH_EF.objs         = $(LIB_MESCHACH_EF.srcs:%.c=$(BUILDDIR)/%_so.o)
-LIBSCIPLOT.objs              = $(LIBSCIPLOT.srcs:%.c=$(BUILDDIR)/%_so.o)
 LIB_MESCHACH_LIBSCIPLOT.objs = $(LIB_MESCHACH_LIBSCIPLOT.srcs:%.c=$(BUILDDIR)/%_so.o)
-LIBVOGLE.objs                = $(LIBVOGLE.srcs:%.c=$(BUILDDIR)/%_so.o)
-LIBVOPL.objs                 = $(LIBVOPL.srcs:%.c=$(BUILDDIR)/%_so.o)
 LIB_MESCHACH_VOGLE.objs      = $(LIB_MESCHACH_VOGLE.srcs:%.c=$(BUILDDIR)/%_so.o)
 LIB_MESCHACH_CPGPLOT.objs    = $(LIB_MESCHACH_CPGPLOT.srcs:%.c=$(BUILDDIR)/%_so.o)
+LIBSCIPLOT.objs              = $(LIBSCIPLOT.srcs:%.c=$(BUILDDIR)/%_so.o)
+LIBVOGLE.objs                = $(LIBVOGLE.srcs:%.c=$(BUILDDIR)/%_so.o)
+LIBVOPL.objs                 = $(LIBVOPL.srcs:%.c=$(BUILDDIR)/%_so.o)
 
 DRIVER_1D.obj           = $(DRIVER_1D.src:%.c=$(BUILDDIR)/%_so.o)
 DRIVER_2D.obj           = $(DRIVER_2D.src:%.c=$(BUILDDIR)/%_so.o)
@@ -458,19 +466,19 @@ $(MESCHACH_LIBSCIPLOT_WRAP.src): MESCHACH_LIBSCIPLOT/SWIG_INTERFACES/meschach_li
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_LIBSCIPLOT/SWIG_INTERFACES/meschach_libsciplot.i
 	mv MESCHACH_LIBSCIPLOT/SWIG_INTERFACES/meschach_libsciplot_wrap.c .
 $(MESCHACH_LIBSCIPLOT_WRAP.obj): $(MESCHACH_LIBSCIPLOT_WRAP.src)
-	gcc -c -fpic -I$(X11_INCDIR) -DHAVE_X11 -I/usr/include/python3.9 -I. $(MESCHACH_LIBSCIPLOT_WRAP.src) -o $(MESCHACH_LIBSCIPLOT_WRAP.obj)
+	gcc -c -fpic $(X11_INCDIR) -DHAVE_X11 -I/usr/include/python3.9 -I. $(MESCHACH_LIBSCIPLOT_WRAP.src) -o $(MESCHACH_LIBSCIPLOT_WRAP.obj)
  
 $(MESCHACH_VOGLE_WRAP.src): MESCHACH_VOGLE/SWIG_INTERFACES/meschach_vogle.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_VOGLE/SWIG_INTERFACES/meschach_vogle.i
 	mv MESCHACH_VOGLE/SWIG_INTERFACES/meschach_vogle_wrap.c .
 $(MESCHACH_VOGLE_WRAP.obj): $(MESCHACH_VOGLE_WRAP.src)
-	gcc -c -fpic -I$(X11_INCDIR) -I/usr/include/python3.9 -I. $(MESCHACH_VOGLE_WRAP.src) -o $(MESCHACH_VOGLE_WRAP.obj)
+	gcc -c -fpic $(X11_INCDIR) -I/usr/include/python3.9 -I. $(MESCHACH_VOGLE_WRAP.src) -o $(MESCHACH_VOGLE_WRAP.obj)
  
 $(MESCHACH_CPGPLOT_WRAP.src): MESCHACH_CPGPLOT/SWIG_INTERFACES/meschach_cpgplot.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_CPGPLOT/SWIG_INTERFACES/meschach_cpgplot.i
 	mv MESCHACH_CPGPLOT/SWIG_INTERFACES/meschach_cpgplot_wrap.c .
 $(MESCHACH_CPGPLOT_WRAP.obj): $(MESCHACH_CPGPLOT_WRAP.src)
-	gcc -c -fpic -I$(X11_INCDIR) -I/usr/include/python3.9 -I. $(MESCHACH_CPGPLOT_WRAP.src) -o $(MESCHACH_CPGPLOT_WRAP.obj)
+	gcc -c -fpic $(X11_INCDIR) -I/usr/include/python3.9 -I. $(MESCHACH_CPGPLOT_WRAP.src) -o $(MESCHACH_CPGPLOT_WRAP.obj)
  
 $(MESCHACH_SPOOLES_WRAP.src): MESCHACH_SPOOLES/SWIG_INTERFACES/meschach_spooles.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_SPOOLES/SWIG_INTERFACES/meschach_spooles.i

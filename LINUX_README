@@ -7,27 +7,28 @@ There are 2 makefiles provided for this task
 
 The first one compiles static libraries from the sources and build
 the 5 "c drivers" demos executables. For this, you have to have -DHAVE_LUA
-because the c code uses lua in order to interpret the functions "code" strings.
+because the c code use lua in order to interpret the functions "code".
 
-So copy the makefile "Makefile_Debian" in the root directory and type
+So copy the makefile "Makefile_Debian"
+in the root directory and type
+
 > make all
 
 
 
-The second makefile also compiles static libraries but with -fPIC option so that
-these libraries can be themselves be linked to shared libraries. And this is the case
-as the python extension modules are then built.
-One problem is that some external libraries (spooles etc) have to be also build
+The second one also compiles static libraries but with -fPIC option so that
+these libraries can be themselves linked to shared libraries. And it is the case
+as the python extension modules are built.
+One problem is that the external libraries (spooles etc) have to be also build
 with the -fPIC flag if they are not. This is unfortunately the case for
-- libamd (not sure)
+- libamd
 - libspooles
 - liblua
 
 
 So first you should try to build the external libs as they are and
 use the Makefile_Debian makefile as a first try. Upon success, you can
-try then to build anew with the Makefile_Debian_PY_WRAPPERS 
-so that the pythons wrappers are built (and thus the python demos are usable)
+try then to build the pythons wrappers (and thus use the python demos)
 
 What need to be done with the makefile "Makefile_Debian_PY_WRAPPERS" ?
 
@@ -51,7 +52,7 @@ edit the makefile
 +       ranlib libamd.a
 
 
-?? what ?? I omit including -fPIC and it can be linked anyway ??
+?? what ?? I omit including -fPIC and it can be linked ??
 
 
 - spooles
@@ -63,10 +64,9 @@ in Make.inc:
 -# CC = /usr/lang-4.0/bin/cc
 +CC = gcc
 
-+FPIC = -fPIC
- 
+
 -  CFLAGS = $(OPTLEVEL)
-+  CFLAGS = $(OPTLEVEL) $(FPIC)
++  CFLAGS = $(OPTLEVEL) -fPIC
 
 
 - lua
@@ -82,8 +82,10 @@ Of course for the python module you have to install swig. Paths in the makefile
 are all for the Debian system.
 
 So copy the makefile "Makefile_Debian_PY_WRAPPERS" in the root directory and type
-> make all
+> make lib
+> make exe
 > make py
+> make install
 
 
 - lapack
@@ -92,3 +94,10 @@ So copy the makefile "Makefile_Debian_PY_WRAPPERS" in the root directory and typ
 make alias for the installed libs
 >ln -s liblapack.so.3 liblapack.so
 >ln -s libcblas.sp.3 libcblas.so 
+
+
+- pgplot
+--------
+
+ppm and gif: see the drivers source code and modify it accordingly to the 
+indication : "INTEGER -> INTEGER*8"
