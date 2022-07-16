@@ -92,9 +92,11 @@ follow the instructions
 - rename untar'ed folder "pgplot_srcs"
 - create new "pgplot" folder and copy in it the file "drivers.list"
 - cd in your "pgplot" folder
-- drivers.list: select PPM, GIF, XWINDOW, XSERVE, XADRIV(ATHENA) - not Motif!
+- drivers.list: select PNG, PPM, GIF, XWINDOW, XSERVE, XADRIV(ATHENA) - not Motif!
 - ../pgplot_srcs/makemake ../pgplot_srcs  linux g77_gcc
 
+
+error at compile: see png fix from plotutils
 # lua
 +++++++++
 just compile
@@ -108,7 +110,8 @@ export MESCHACH_EF=$HOME/GITHUB/meschach_ef
 export PGPLOT_DIR=$MESCHACH_EF/EXTERNAL_LIBS/pgplot
 export PGPLOT_DEV=/XWINDOW
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MESCHACH_EF/EXTERNAL_LIBS/plotutils-2.6/libplot/.libs
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MESCHACH_EF/EXTERNAL_LIBS/pgplot:$MESCHACH_EF/EXTERNAL_LIBS/plotutils-2.6/libplot/.libs
+export PATH=$PATH:$MESCHACH_EF/EXTERNAL_LIBS/plotutils-2.6/graph
 
 export VDEVICE=X11
 export VFONTLIB=/usr/local/lib/hershey or /usr/share/hershey-fonts  # copy all fonts of vogle in this folder
