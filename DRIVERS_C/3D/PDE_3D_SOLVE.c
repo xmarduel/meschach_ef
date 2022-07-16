@@ -164,12 +164,12 @@ int  main()
       VEC *sol_exacte = v_get(MyGeom->NBSOMM);
       sol_exacte = build_vec_ef_from_function3D(MyElt, MyGeom, fun3D, sol_exacte);
 
-      VEC *v_diff = v_get(MyGeom->NBSOMM);
-      double diff = v_norm2( v_sub(SOL, sol_exacte, v_diff) );
+      VEC *V_DIFF = v_get(MyGeom->NBSOMM);
+      double diff = v_norm2( v_sub(SOL, sol_exacte, V_DIFF) );
 
       printf("diff solexacte-solapprochee = %le \n", norm_diff);
 
-      graphics3D("vtk",  MyElt, MyGeom, SOL, "Diff_Approch");
+      graphics3D("vtk",  MyElt, MyGeom, V_DIFF, "Diff_Approch");
 
       FUN_3D_FREE(fun3D);
    }
