@@ -1,6 +1,6 @@
 
 # - where ALL build artefacts go
-BUILDDIR                = ./0BUILD.Darwin
+BUILDDIR                = ./0BUILD.x86-linux64
 
 # targets
 LIB_MESCHACH            = libmeschach.a
@@ -29,12 +29,12 @@ LIB_SPOOLES = -lBridge -lspooles
 LIB_LIBPLOT = -lplot -lcommon
 LIB_AMD     = -lamd
 LIB_CPGPLOT = -lXaPgplot -lcpgplot -lpgplot -lgfortran
-LIB_LUA     = -llua
+LIB_LUA     = -llua -ldl -lm
 LIB_AMD     = -lamd
 LIB_JANSSON = -ljansson
 LIB_SILO    = -lsilo
 LIB_X11     = -lXaw -lXt -lX11
-LIB_PTHREAD = 
+LIB_PTHREAD = -lpthread
 
 # --------------------------------------------------------------
 
@@ -49,7 +49,7 @@ NO_WARNINGS =  -Wno-format \
 #CFLAGS_OPT = -g
 CFLAGS_OPT = -O3
 
-X11_INCDIR = /opt/X11/include
+X11_INCDIR = /usr/include
 
 CFLAGS += $(CFLAGS_OPT) \
 	$(NO_WARNINGS) \
@@ -62,7 +62,7 @@ CFLAGS += $(CFLAGS_OPT) \
 	-I./EXTERNAL_LIBS/lua-5.4.3/src \
 	-I./EXTERNAL_LIBS \
 	-I./EXTERNAL_LIBS/spooles \
-	-I./EXTERNAL_LIBS/pgplot_srcs \
+	-I./EXTERNAL_LIBS/pgplot \
 	-I./MESCHACH_LIBSCIPLOT/LIBSCIPLOT \
 	-I./EXTERNAL_LIBS/plotutils-2.6 \
 	-I./EXTERNAL_LIBS/plotutils-2.6/include \
@@ -86,9 +86,6 @@ LDFLAGS = -L./LINUX_MAKEFILES \
 
 
 all: libmeschach libmeschach_adds libmeschach_spooles libmeschach_lapack libmeschach_ef libsciplot libmeschach_libsciplot libvogle libvopl libmeschach_vogle libmeschach_cpgplot driver_1D driver_2D driver_3D driver_1D_TR driver_2D_TR
-
-python_wrappers: py_meschach
-
 
 clean:
 	$(RM) -rf $(BUILDDIR) ./LINUX_MAKEFILES/libmeschach.a ./LINUX_MAKEFILES/libmeschach_adds.a ./LINUX_MAKEFILES/libmeschach_lapack.a ./LINUX_MAKEFILES/libmeschach_spooles.a ./LINUX_MAKEFILES/libmeschach_ef.a ./LINUX_MAKEFILES/libsciplot.a ./LINUX_MAKEFILES/libmeschach_libsciplot.a ./LINUX_MAKEFILES/libvogle.a  ./LINUX_MAKEFILES/libvopl.a ./LINUX_MAKEFILES/libmeschach_vogle.a ./LINUX_MAKEFILES/libmeschach_cpgplot.a ./LINUX_MAKEFILES/1D.exe ./LINUX_MAKEFILES/2D.exe ./LINUX_MAKEFILES/3D.exe ./LINUX_MAKEFILES/1D_TR.exe ./LINUX_MAKEFILES/2D_TR.exe
@@ -152,15 +149,6 @@ driver_1D_TR: $(DRIVER_1D_TR)
 driver_2D_TR: $(DRIVER_2D_TR)
 	gcc $(LDFLAGS) -o LINUX_MAKEFILES/$(DRIVER_2D_TR) $(DRIVER_2D_TR.obj) -lmeschach_cpgplot $(LIB_CPGPLOT) -lmeschach_vogle -lvopl -lvogle -lmeschach_libsciplot -lsciplot $(LIB_LIBPLOT) -lmeschach_ef -lmeschach_spooles -lmeschach_adds -lmeschach $(LIB_AMD) $(LIB_JANSSON) $(LIB_LUA) $(LIB_SPOOLES) $(LIB_SILO) $(LIB_X11) $(LIB_PTHREAD)
 
-
-# ----------------------------------------------------------------
-
-py_meschach: $(LIB_MESCHACH)
-	@echo python-wrapper for libmeschach
-	make --directory MESCHACH/SWIG_INTERFACES -f makefile_swig_python_extension all
-
-
-# ----------------------------------------------------------------
 
 DRIVER_1D.src = DRIVERS_C/1D/PDE_1D_SOLVE.c
 DRIVER_2D.src = DRIVERS_C/2D/PDE_2D_SOLVE.c
