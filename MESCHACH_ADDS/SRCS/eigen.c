@@ -262,11 +262,14 @@ MAT  *sp_eigen(const SPMAT *A, const SPMAT *B, VEC *eigen_values, EIGENt_METHOD 
          sp_makepermutation    (B , P, INVP, PBPt);
          sp_makepermutation    (A , P, INVP, PAPt);
 
+#ifdef HAVE_LAPACK
          eigen_vectors = sp_eigen_lapack(PAPt, PBPt, eigen_values, prb, opt,
                                          eig_params->nb_eig,
                                          eig_params->lower_ibound, eig_params->upper_ibound,
                                          eig_params->lower_rbound, eig_params->upper_rbound);
-
+#else
+	     eigen_vectors = NULL;
+#endif
          if ( eigen_vectors != MNULL )
          {
             int i;
