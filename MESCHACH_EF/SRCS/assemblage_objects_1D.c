@@ -1367,6 +1367,12 @@ static void apply_Bc1D_robin_on_vector(const ELT_1D *elt, const GEOM_1D *geom, c
       if ( (geom->REF_A->ive[a] > 0) && (BC_1De_ROBIN==Bc1D_getBcType(BC, AXEe_X, geom->REF_A->ive[a])) )
       {
          idx2 = geom->NSFACE->im[a][0];
+         
+         int dof = idx2 ;
+         if      ( strcmp(elt->name_ef, "S2") == 0 ) dof = geom->SPLINES_REF_S_TO_DOF->ive[idx2];
+         else if ( strcmp(elt->name_ef, "S3") == 0 ) dof = geom->SPLINES_REF_S_TO_DOF->ive[idx2];
+         else if ( strcmp(elt->name_ef, "S4") == 0 ) dof = geom->SPLINES_REF_S_TO_DOF->ive[idx2];
+         else if ( strcmp(elt->name_ef, "S5") == 0 ) dof = geom->SPLINES_REF_S_TO_DOF->ive[idx2];
 
          RHS->ve[idx2] += Bc1D_evalFunction2(BC, BC_1De_ROBIN, geom->REF_A->ive[a], AXEe_X, geom->XSOMM->ve[idx2]);
       }
@@ -1385,8 +1391,19 @@ static void apply_Bc1D_neumann_on_vector(const ELT_1D *elt, const GEOM_1D *geom,
       if ( (geom->REF_A->ive[a] > 0) && (BC_1De_NEUMANN==Bc1D_getBcType(BC, AXEe_X, geom->REF_A->ive[a])) )
       {
          idx2 = geom->NSFACE->im[a][0];
-
-         RHS->ve[idx2] += Bc1D_evalFunction1(BC, BC_1De_NEUMANN, geom->REF_A->ive[a], AXEe_X, geom->XSOMM->ve[idx2]);
+          
+         int dof = idx2 ;
+         if      ( strcmp(elt->name_ef, "S2") == 0 ) dof = geom->SPLINES_REF_S_TO_DOF->ive[idx2];
+         else if ( strcmp(elt->name_ef, "S3") == 0 ) dof = geom->SPLINES_REF_S_TO_DOF->ive[idx2];
+         else if ( strcmp(elt->name_ef, "S4") == 0 ) dof = geom->SPLINES_REF_S_TO_DOF->ive[idx2];
+         else if ( strcmp(elt->name_ef, "S5") == 0 ) dof = geom->SPLINES_REF_S_TO_DOF->ive[idx2];
+         
+         // I do not understand anymore... it should be "1" (left) or "dof-1" (right) : 
+         // the dof where the derivative is "1"    and anyway named "SPLINE_REF_A_TO_DOF" ...
+         // 
+         // printf("XXXXXXXXXXXXXXXXXXXXXX neumann a = %d  -> idx2 = %d  -> dof = %d  NBDOF=%d\n", a, idx2, dof, geom->NB_DOF);
+          
+         RHS->ve[dof] += Bc1D_evalFunction1(BC, BC_1De_NEUMANN, geom->REF_A->ive[a], AXEe_X, geom->XSOMM->ve[idx2]);
       }
    }
 }

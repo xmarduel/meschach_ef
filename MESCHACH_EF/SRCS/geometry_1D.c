@@ -2754,7 +2754,7 @@ static void     Geom1D_get_S2geom_init_matrix_nsface_with_refa(GEOM_1D* geom, co
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
       geom->NSFACE->im[0][0] = 0;
-      geom->NSFACE->im[1][0] = NBSOMM;
+      geom->NSFACE->im[1][0] = NBSOMM-1;
    }
 
    /* initialisation a zero */
@@ -2778,7 +2778,7 @@ static void     Geom1D_get_S3geom_init_matrix_nsface_with_refa(GEOM_1D* geom, co
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
       geom->NSFACE->im[0][0] = 0;
-      geom->NSFACE->im[1][0] = NBSOMM+1;
+      geom->NSFACE->im[1][0] = NBSOMM-1;
    }
 
    /* initialisation a zero */
@@ -2802,7 +2802,7 @@ static void     Geom1D_get_S4geom_init_matrix_nsface_with_refa(GEOM_1D* geom, co
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
       geom->NSFACE->im[0][0] = 0;
-      geom->NSFACE->im[1][0] = NBSOMM+2;
+      geom->NSFACE->im[1][0] = NBSOMM-1;
    }
 
 
@@ -2826,7 +2826,7 @@ static void     Geom1D_get_S5geom_init_matrix_nsface_with_refa(GEOM_1D* geom, co
    if ( geom->periodicity == NON_PERIODIC_MESHe )
    {
       geom->NSFACE->im[0][0] = 0;
-      geom->NSFACE->im[1][0] = NBSOMM+3;
+      geom->NSFACE->im[1][0] = NBSOMM-1;
    }
 
 
