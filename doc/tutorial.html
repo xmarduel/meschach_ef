@@ -63,8 +63,11 @@ comes with the library too for convenience.</p>
 
 <p>It has been written in the early <strong>2000</strong>, and I have now put it in github in <strong>2022</strong> in
 order to not completely lose this work forever. From time to time I used to update/improve it so that it still stays
-compilable/usable over the years (nowadays as XCode project, so easely compilable only on MacOS X - sorry, no
-Makefiles)</p>
+compilable/usable over the years (nowadays as XCode project, so easely compilable on MacOS X)</p>
+
+<p>For Linux, there is a basic Makefile, taylored for Debian only. All dependencies have to be installed ("dev" headers, SWIG etc.).</p>
+
+<p>Note: The external libs have to be compiled separately on your own, and this can be cumbersome...</p>
 
 <p>For sure there are much powerfull EF libraries in the internet.</p>
 
@@ -97,7 +100,7 @@ user has full access to all functions constructing the mass, stiff matrices and 
 
 <p>Boundary conditions can be of any type (<strong>Dirichlet</strong>, <strong>Neumann</strong>,
 <strong>Cauchy</strong>, <strong>Robin</strong>) based on the "nodes refs" of the nodes of the geometry or/and the
-"faces refs" of the faces (boundary faces) of the geometry.</p>
+"faces refs" of the faces (boundary faces) of the geometry. [for Splines 1D, only Dirichlet and Neumann]</p>
 
 <p>Meshes are either built <strong>"per hand"</strong> (line, quadra, cube) or through the meshes programs
 <strong>"emc2"</strong> (2D) or <strong>"gmsh"</strong> (2D or 3D). New meshes format should be
@@ -949,7 +952,7 @@ below an example of such a configuration file.</p>
 #<p>As you can see, the config file is not quite exacty a JSON file: there are comments!
 These comment are cut away from our reader.</p>
 
-<p>Even if we c´have chosen the "ITERATIVE-METHOD" for the resolution, we have kept the parameters for the "DIRECT-METHOD" in the file.
+<p>Even if we have chosen the "ITERATIVE-METHOD" for the resolution, we have kept the parameters for the "DIRECT-METHOD" in the file.
 Like this, we can easily change of method by just changing the content of the tag "METHOD": "ITERATIVE-METHOD"</p>
 
 
