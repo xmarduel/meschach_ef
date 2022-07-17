@@ -10,7 +10,7 @@
 */
 double
 Zabs (
-   double  reel,
+   double  real,
    double  imag
 ) ;
 /*
@@ -82,7 +82,7 @@ Zrecip2 (
 double *
 ZVinit (
    int      n,
-   double   reel,
+   double   real,
    double   imag
 ) ;
 /*

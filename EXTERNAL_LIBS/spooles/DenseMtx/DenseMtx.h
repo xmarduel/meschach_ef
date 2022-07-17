@@ -259,7 +259,7 @@ DenseMtx_setComplexEntry (
    DenseMtx   *mtx,
    int        irow,
    int        jcol,
-   double     reel,
+   double     real,
    double     imag
 ) ;
 /*

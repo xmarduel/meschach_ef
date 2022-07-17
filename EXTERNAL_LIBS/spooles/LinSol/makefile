@@ -1,14 +1,10 @@
 all_drivers :
 	
 
-#lib :
-#        cd srcST  ; make Bridge.a
-#        cd srcMT  ; make BridgeMT.a
-#        cd srcMPI ; make BridgeMPI.a
-
 lib :
 	cd srcST  ; make Bridge.a
 	cd srcMT  ; make BridgeMT.a
+	cd srcMPI ; make BridgeMPI.a
 
 clean :
 	cd srcST   ; make clean

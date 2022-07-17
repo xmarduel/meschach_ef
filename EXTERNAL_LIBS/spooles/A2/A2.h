@@ -250,7 +250,7 @@ A2_setComplexEntry (
    A2       *mtx,
    int      irow,
    int      jcol,
-   double   reel,
+   double   real,
    double   imag
 ) ;
 /*

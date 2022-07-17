@@ -259,7 +259,7 @@ void
 ZV_setEntry (
    ZV       *dv,
    int      loc,
-   double   reel,
+   double   real,
    double   imag
 ) ;
 /*--------------------------------------------------------------------*/
@@ -296,7 +296,7 @@ ZV_shiftBase (
 void
 ZV_push (
    ZV       *zv,
-   double   reel,
+   double   real,
    double   imag
 ) ;
 /*
@@ -331,7 +331,7 @@ ZV_sizeOf (
 void
 ZV_fill (
    ZV       *zv,
-   double   reel,
+   double   real,
    double   imag
 ) ;
 /*

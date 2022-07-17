@@ -70,8 +70,6 @@ print <<'EOF' ;
 .c.o :
 	$(PURIFY) $(CC) -c $(CFLAGS) $*.c -o $(OBJ)_$*.o
 
-#$(AR) $(ARFLAGS) ../../spooles.a $(OBJ)_*.o
-#$(RANLIB) ../../spooles.a
 ../../spooles.a : ${OBJ_FILES}
 	$(AR) $(ARFLAGS) ../../spooles.a $(OBJ)_*.o
 	rm -f $(OBJ)_*.o

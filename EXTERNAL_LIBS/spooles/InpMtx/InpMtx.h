@@ -556,7 +556,7 @@ InpMtx_inputComplexEntry (
    InpMtx   *inpmtx,
    int       row,
    int       col,
-   double    reel,
+   double    real,
    double    imag
 ) ;
 /*
