@@ -16,9 +16,12 @@ extern "C"
 #include "MESCHACH/INCLUDES/sparse.h"
 #include "MESCHACH/INCLUDES/iter.h"
 
+#ifdef real
+#undef real
 #include "spooles/DV.h"
 #include "spooles/DenseMtx.h"
 #include "spooles/InpMtx.h"
+#endif
 
 
 
