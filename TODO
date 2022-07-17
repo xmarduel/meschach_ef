@@ -10,13 +10,14 @@ Doc:
 - re-run mcstrip/cyclo, seems buggy on macosx (wrong function names)
 - nroff doc update (I have forgotten how to do this)
 
-Build:
-------
 
-- Makefile for linux (OK)
+Bugs:
+-----
 
-to build, copy the Makefile "Makefile_Debian" or "Makefile_Debian_PY_WRAPPERS" 
-from LINUX_MAKEFILES in the root folder
+- for splines 1D , bc cauchy/robin do not work (not finished), but Dirichlet/Neumann Ok
+- what else ?
+- what else ?
+- what else ?
 
 
 Graphics:
@@ -35,12 +36,6 @@ Misc:
 - gmsh new file format for cube in 3D
 - AdvFunc clean
 
-
-Bugs:
------
-
-- for splines 1D , bc cauchy/robin do not work (not finished), but Dirichlet/Neumann Ok
-- what else ?
 
 Python
 ------
