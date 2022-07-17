@@ -19,16 +19,19 @@ with triangles/tetrahedras only.
 Hopefully a framework with which beginners can learn how to solve FE problems.
 
 As Xcode project (10.1) for macOS 10.14 - maybe you have to adapt the project in order to compile it locally.
-**New**! Linux makefile
+
+**New**! Linux makefile (follow the instructions!)
 
 External libs to compile separately. 
 
-Please see the html doc for more details. After successfull compiling, just type:
+After successfull compiling (and settings some environment variables), just type:
 > python DRIVER_1D.py
 
 > python DRIVER_2D.py
 
 > python DRIVER_3D.py
+
+> python DRIVER_KURAMOTO_SIVASHINSKY_b.py  (for fun)
 
 or for C drivers
 > 1D.exe
@@ -38,6 +41,3 @@ or for C drivers
 > 3D.exe
 
 Please see the html doc for more details
-
-test
-
