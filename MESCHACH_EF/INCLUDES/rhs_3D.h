@@ -19,6 +19,11 @@ extern "C"
  * MyRhs = Rhs3D_setCFunction( MyRhs, 0, AXEe_Y, the_c_function2) # 0 correspond to the reference "0" of the geometry's element \n
  * MyRhs = Rhs3D_setCFunction( MyRhs, 0, AXEe_Z, the_c_function3) # 0 correspond to the reference "0" of the geometry's element \n
  *
+ * MyRhs = Rhs3D_get() \n
+ * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_X, "x + y+ +z") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Y, "x + y+ +z") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Z, "x + y+ +z") # 0 correspond to the reference "0" of the geometry's element \n
+ *
  * In a Python program : \n
  *
  * MyRhs = Rhs3D_get() \n
@@ -126,6 +131,26 @@ Real    Rhs3D_evalFunction         (const RHS_3D* MyRhs, int ref_e, int axe, Rea
 * \param ref_e   : 0
 * \param axe     : AXEe_X , AXEe_Y or AXEe_Z
 * \param phi     : the "C" function ( 4 arguments (x,y,z,tps) )
+*
+* Set into the structure a function
+*/
+
+/*! \fn Rhs3D_setLUAFunction   ( RHS_3D* MyRhs, int ref_e, int axe, const char* def);
+*
+* \param MyRhs   : the RHS structure 
+* \param ref_e   : 0
+* \param axe     : AXEe_X , AXEe_Y or AXEe_Z
+* \param def     : the "C" function  as string( 3 arguments (x,y,z) )
+*
+* Set into the structure a function
+*/
+
+/*! \fn Rhs3D_setLUAFunctionTransient   ( RHS_3D* MyRhs, int ref_e, int axe, const char* def);
+*
+* \param MyRhs   : the RHS structure
+* \param ref_e   : 0
+* \param axe     : AXEe_X , AXEe_Y or AXEe_Z
+* \param def     : the "C" function as string ( 4 arguments (x,y,z,tps) )
 *
 * Set into the structure a function
 */

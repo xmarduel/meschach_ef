@@ -17,6 +17,9 @@ extern "C"
  * MyRhs = Rhs1D_get() \n
  * MyRhs = Rhs1D_setCFunction( MyRhs, 0, AXEe_X, the_c_function) # 0 correspond to the reference "0" of the geometry's element \n
  *
+ * MyRhs = Rhs1D_get() \n
+ * MyRhs = Rhs1D_setLUAFunction( MyRhs, 0, AXEe_X, "2 +x") # 0 correspond to the reference "0" of the geometry's element \n
+ *
  * In a Python program :  \n
  *
  * MyRhs = Rhs1D_get() \n
@@ -118,6 +121,26 @@ Real    Rhs1D_evalFunction         ( const RHS_1D* MyRhs, int ref_e, int axe, Re
 * \param ref_e   : 0
 * \param axe     : AXEe_X
 * \param phi     : the "C" function ( 2 arguments (x,tps) )
+*
+* Set into the structure a function
+*/
+
+/*! \fn Rhs1D_setLUAFunction   ( RHS_1D* MyRhs, int ref_e, int axe, const char* def);
+*
+* \param MyRhs   : the RHS structure
+* \param ref_e   : 0
+* \param axe     : AXEe_X
+* \param def     : the "C" function as string ( 1 argument (x) )
+*
+* Set into the structure a function
+*/
+
+/*! \fn Rhs1D_setLUAFunctionTransient   ( RHS_1D* MyRhs, int ref_e, int axe, const char* def);
+*
+* \param MyRhs   : the RHS structure
+* \param ref_e   : 0
+* \param axe     : AXEe_X
+* \param def     : the "C" function as string( 2 arguments (x,tps) )
 *
 * Set into the structure a function
 */

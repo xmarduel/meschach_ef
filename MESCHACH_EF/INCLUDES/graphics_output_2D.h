@@ -38,7 +38,7 @@ void graphics2D_stokes_fun(const char* format, const ELT_2D *elt, const GEOM_2D 
 
 /*! \fn graphics2D (const char* format, const ELT_2D *element , const GEOM_2D *Geom , const VEC    *SOL , const char *name_file)
 * 
-* \param format    : the output-format ( "gnuplot", "matlab", "silo", "vtk", "avs" )
+* \param format    : the output-format ( "gnuplot", "matlab", "silo", "vtk" )
 * \param element   : 
 * \param Geom      : the geometry
 * \param SOL       : the vector to plot
@@ -57,9 +57,6 @@ void graphics2D_stokes_fun(const char* format, const ELT_2D *elt, const GEOM_2D 
 * format is "gnuplot" and file_name is "SolApproch", the files creared are\n
 *   1- Script4gpl_SolApproch2D.gnu \n
 *   2- SolApproch2D.dat \n
-* \n
-* format is "avs" and file_name is "SolApproch", the files creared are\n
-*   1- SolApproch2D.avs \n
 * \n
 * format is "matlab" and file_name is "SolApproch", the files creared are\n
 *   1- Script4matlab_SolApproch2D.m \n

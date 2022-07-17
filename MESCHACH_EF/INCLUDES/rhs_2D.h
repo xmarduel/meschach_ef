@@ -18,6 +18,10 @@ extern "C"
  * MyRhs = Rhs2D_setCFunction( MyRhs, 0, AXEe_X, the_c_function1) # 0 correspond to the reference "0" of the geometry's element \n
  * MyRhs = Rhs2D_setCFunction( MyRhs, 0, AXEe_Y, the_c_function2) # 0 correspond to the reference "0" of the geometry's element \n
  *
+ * MyRhs = Rhs2D_get() \n
+ * MyRhs = Rhs2D_setLUAFunction( MyRhs, 0, AXEe_X, "x + y") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs2D_setLUAFunction( MyRhs, 0, AXEe_Y, "math.sin(x) + math.exp(y)") # 0 correspond to the reference "0" of the geometry's element \n
+ *
  * In a Python program :  \n
  *
  * MyRhs = Rhs2D_get() \n
@@ -124,6 +128,26 @@ Real    Rhs2D_evalFunction         (const RHS_2D* MyRhs, int ref_e, int axe, Rea
 * \param ref_e   : 0
 * \param axe     : AXEe_X or AXEe_Y
 * \param phi     : the "C" function ( 3 arguments (x,y,tps) )
+*
+* Set into the structure a function
+*/
+
+/*! \fn Rhs2D_setCFunction   ( RHS_2D* MyRhs, int ref_e, int axe, const char* def);
+*
+* \param MyRhs   : the RHS structure
+* \param ref_e   : 0
+* \param axe     : AXEe_X or AXEe_Y
+* \param def     : the "C" function as string ( 2 arguments (x,y) )
+*
+* Set into the structure a function
+*/
+
+/*! \fn Rhs2D_setLUAFunctionTransient   ( RHS_2D* MyRhs, int ref_e, int axe, const char* def);
+*
+* \param MyRhs   : the RHS structure
+* \param ref_e   : 0
+* \param axe     : AXEe_X or AXEe_Y
+* \param def     : the "C" function as string ( 3 arguments (x,y,tps) )
 *
 * Set into the structure a function
 */
