@@ -144,6 +144,7 @@ a11 =   -1.0/22
 a12 =    1.0/22
 a13 =   11.0/22
 #
+# bad ! derivee should be  0 at 0!
 a20 = -11.0/24
 a21 =  11.0/24
 a22 = -11.0/24
@@ -162,10 +163,10 @@ NEW_SPLINE3(t) = a30*SPLINE0(t) + a31*SPLINE1(t) + a32*SPLINE2(t) + a33*SPLINE3(
 set size square
 #
 plot [-5:5][-10:12] \
-	NEW_SPLINE0(t)   title "NEW_SPLINE0(t)" with lines ,\
-	NEW_SPLINE1(t)   title "NEW_SPLINE1(t)" with lines ,\
-	NEW_SPLINE2(t)   title "NEW_SPLINE1(t)" with lines ,\
-	NEW_SPLINE3(t)   title "NEW_SPLINE3(t)" with lines 
+	NEW_SPLINE0(t)   title "NEW-SPLINE0(t)" with lines ,\
+	NEW_SPLINE1(t)   title "NEW-SPLINE1(t)" with lines ,\
+	NEW_SPLINE2(t)   title "NEW-SPLINE2(t)" with lines ,\
+	NEW_SPLINE3(t)   title "NEW-SPLINE3(t)" with lines 
 
 pause -1
 #                

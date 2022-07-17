@@ -181,11 +181,11 @@ a32 =  0.0
 a33 =  -1.0/1440
 a34 =  1.0/144
 #
-a40 = 3.0/50
-a41 = -3.0/200
-a42 = 1.0/100
-a43 = -3.0/200
-a44 = 3.0/50
+a40 = 3.0/50/2
+a41 = -3.0/200/2
+a42 = 1.0/100/2
+a43 = -3.0/200/2
+a44 = 3.0/50/2
 #
 #
 BB0(t) = a00*B0(t) + a01*B1(t) + a02*B2(t) + a03*B3(t) + a04*B4(t)
@@ -196,7 +196,7 @@ BB4(t) = a40*B0(t) + a41*B1(t) + a42*B2(t) + a43*B3(t) + a44*B4(t)
 #
 plot [-5.0:5.0][-3.0:5.0] \
 	BB0(t)    title "BB0(t)"  with lines ,\
-	BB1(t)    title "BB2(t)"  with lines ,\
+	BB1(t)    title "BB1(t)"  with lines ,\
 	BB2(t)    title "BB2(t)"  with lines ,\
 	BB3(t)    title "BB3(t)"  with lines ,\
 	BB4(t)    title "BB4(t)"  with lines
