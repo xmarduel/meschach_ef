@@ -4,7 +4,6 @@ include ../../Make.inc
  
 OBJ = Bridge
 
-#$(RANLIB) $(OBJ).a
 $(OBJ).a : \
       $(OBJ).a(basics.o) \
       $(OBJ).a(factor.o) \
