@@ -39,7 +39,7 @@ Misc:
 Bugs:
 -----
 
-- for splines 1D , bc cauchy/robin do not work (not finished), bit Dirichlet/Neumann Ok
+- for splines 1D , bc cauchy/robin do not work (not finished), but Dirichlet/Neumann Ok
 - what else ?
 
 Python
