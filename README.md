@@ -1,6 +1,8 @@
 # meschach_ef
 my **very old** finite element library ("framework"), based on the **meschach library** for the linear algebra.
 
+Just updated/cleaned recently in order to make it public in github.
+
 - 1D -> lots of fe : P1,P2,P3, Hermite, Splines S2,S3,S4,S5  for periodic geometries or not (for splines too!)
 - 2D -> P1,P2,P3
 - 3D -> P1,P2,P3
@@ -17,8 +19,9 @@ with triangles/tetrahedras only.
 Hopefully a framework with which beginners can learn how to solve FE problems.
 
 As Xcode project (10.1) for macOS 10.14 - maybe you have to adapt the project in order to compile it locally.
+**New**! Linux makefile
 
-External libs to compile separately. Just updated/cleaned recently tomake it public
+External libs to compile separately. 
 
 Please see the html doc for more details. After successfull compiling, just type:
 > python DRIVER_1D.py
