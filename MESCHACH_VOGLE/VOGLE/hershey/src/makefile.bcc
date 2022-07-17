@@ -1,0 +1,12 @@
+CC = bcc
+
+CFLAGS = -w-rvl -DPC -ml -I..\..\src
+
+all: h2v.exe 
+
+h2v.obj: h2v.c h2v.h
+
+getchar.obj: getchar.c
+
+h2v.exe: h2v.c getchar.c
+	$(CC) $(CFLAGS) h2v.c getchar.c

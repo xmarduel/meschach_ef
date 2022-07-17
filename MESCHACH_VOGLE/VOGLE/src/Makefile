@@ -13,7 +13,7 @@ SHAREDLIB = libvogle.so
 RANLIB = ranlib		# = "ar ts" for SYS5
 
 #DEVICES = DTEK -DHPGL -DPOSTSCRIPT -DPOSTSCRIPTP -DDXY
-DEVICES = -DX11
+DEVICES = -DX11 -DPPM -DGIF
 
 FONTLIB=/usr/local/lib/hershey/
 
