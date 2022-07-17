@@ -160,10 +160,10 @@ a22 = -1.0/12.0
 a23 =  6.0/24.0
 #
 # F(0) = 0, DF(0) = 0  OK
-a30 =  -11.0/22
-a31 =    1.0/22
-a32 =    1.0/22
-a33 =  -11.0/22
+a30 =  -11.0/22/2
+a31 =    1.0/22/2
+a32 =    1.0/22/2
+a33 =  -11.0/22/2
 #
 NEW_SPLINE0(t) = a00*SPLINE0(t) + a01*SPLINE1(t) + a02*SPLINE2(t) + a03*SPLINE3(t)
 NEW_SPLINE1(t) = a10*SPLINE0(t) + a11*SPLINE1(t) + a12*SPLINE2(t) + a13*SPLINE3(t)
@@ -172,22 +172,10 @@ NEW_SPLINE3(t) = a30*SPLINE0(t) + a31*SPLINE1(t) + a32*SPLINE2(t) + a33*SPLINE3(
 #
 set size square
 #
-plot [-5:5][-10:12] \
+plot [-5:5][-5:5] \
 	NEW_SPLINE0(t)   title "NEW-SPLINE0(t)" with lines ,\
 	NEW_SPLINE1(t)   title "NEW-SPLINE1(t)" with lines ,\
 	NEW_SPLINE2(t)   title "NEW-SPLINE2(t)" with lines ,\
 	NEW_SPLINE3(t)   title "NEW-SPLINE3(t)" with lines
 
 pause -1
-#
-
-set size square
-#
-plot [-1:1][-1:1] \
-	NEW_SPLINE0(t)   title "NEW-SPLINE0(t)" with lines ,\
-	NEW_SPLINE1(t)   title "NEW-SPLINE1(t)" with lines ,\
-	NEW_SPLINE2(t)   title "NEW-SPLINE2(t)" with lines ,\
-	NEW_SPLINE3(t)   title "NEW-SPLINE3(t)" with lines
-
-pause -1
-#
