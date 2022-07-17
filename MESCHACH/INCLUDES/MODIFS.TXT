@@ -1,0 +1,27 @@
+ANDERUNGEN :
+------------
+
+in matrix.h
+------------
+
+#define	MEM_COPY(from,to,size)	memmove((to),(from),(size))
+#define	MEM_ZERO(where,size)	memset((where),'\0',(size))MEM_COPY
+
+/*#define	MEM_COPY(from,to,size)	bcopy((char *)(from),(char*)(to),(int)(size)) */
+/*#define	MEM_ZERO(where,size)	bzero((char *)(where),(int)(size)) */
+
+
+/* XAV : int missing ! */
+extern  int	m_free(MAT *), v_free(VEC *), px_free(PERM *);
+/* XAV : extern   int _(BAND *); ?? */
+extern int bd_free(BAND*);
+
+#define	BD_FREE(bd)	( bd_free(bd),	(bd)=(BAND *)NULL )
+
+#define MAXDIM  	M_MAX_INT  /*INT_MAX*/ /*2001*/
+
+
+in sparse.h :
+-------------
+
+#define SPROW_FREE((r)) ...
