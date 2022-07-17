@@ -14,8 +14,8 @@ Doc:
 Bugs:
 -----
 
-- for splines 1D , bc cauchy/robin do not work (not finished), but Dirichlet/Neumann Ok
-- what else ?
+- splines 1D : bc cauchy/robin do not work (not finished), but Dirichlet/Neumann Ok
+- splines 1D : world->EF for non-periodic still missing (useful for transient sim as ini data)
 - what else ?
 - what else ?
 

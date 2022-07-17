@@ -1,3 +1,13 @@
+1.1.0   [14.07.2022]
+--------------------
+
+makefile for LINUX Ok
+fixed SPLINES 1D neumann BC (cauchy/robin still buggy),
+they were broken after new splines handling
+
+clean,clean,clean! (removed nearly all what I do not understand anymore...)
+
+
 1.0.0   [01.07.2022]
 --------------------
 
