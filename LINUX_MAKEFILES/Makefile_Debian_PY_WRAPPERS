@@ -51,7 +51,8 @@ LIB_LAPACK     = -llapack -lblas
 
 # --------------------------------------------------------------
 
-DEFINES = -DHAVE_X11 -DHAVE_CPGPLOT -DHAVE_VOGLE -DHAVE_LIBSCIPLOT -DHAVE_LUA -DHAVE_SILO -DHAVE_LAPACK -DANSI_C -DMESCHACH__ITER_EXTENSIONS -DPPM -DGIF
+DEFINES_MESCHACH = -DHAVE_X11 -DHAVE_CPGPLOT -DHAVE_VOGLE -DHAVE_LIBSCIPLOT -DHAVE_LUA -DHAVE_SILO -DHAVE_LAPACK -DANSI_C -DMESCHACH__ITER_EXTENSIONS
+DEFINES_VOGLE    = -DX11 -DPPM -DGIF -DPOSTSCRIPT
 
 NO_WARNINGS =  -Wno-format \
 	-Wno-parentheses \
@@ -66,7 +67,7 @@ X11_INCDIR = -I/usr/include
 
 CFLAGS += $(CFLAGS_OPT) \
 	$(NO_WARNINGS) \
-	$(DEFINES) \
+	$(DEFINES_MESCHACH) $(DEFINES_VOGLE) \
 	$(X11_INCDIR) \
 	-I./MESCHACH/INCLUDES \
 	-I. \
@@ -111,7 +112,7 @@ install:
 	mv ./*wrap.c ./*.so ./*wrap.o  $(INSTALLDIR)
 
 clean:
-	$(RM) -rf $(BUILDDIR) $(INSTALLDIR)/*wrap.* $(INSTALLDIR)/*.so $(INSTALLDIR)/*.exe 
+	$(RM) -rf $(BUILDDIR) $(INSTALLDIR)/*wrap.* $(INSTALLDIR)/*.so $(INSTALLDIR)/*.exe
 
 # -----------------------------------------------------------------------------------------------------
 
@@ -435,7 +436,7 @@ DRIVER_2D_TR.obj        = $(DRIVER_2D_TR.src:%.c=$(BUILDDIR)/%_so.o)
 
 # -----------------------------------------------------------------------------------------------
 
-SWIG_EXE = swig 
+SWIG_EXE = swig
 SWIG_DIR = /usr/share/swig4.0
 
 SWIG_INC = -I$(MESCHACH_EF)/PYTHON_EXTENSIONS \
@@ -449,52 +450,52 @@ $(MESCHACH_WRAP.src): MESCHACH/SWIG_INTERFACES/meschach.i
 	mv MESCHACH/SWIG_INTERFACES/meschach_wrap.c .
 $(MESCHACH_WRAP.obj): $(MESCHACH_WRAP.src)
 	gcc -c -fpic -I/usr/include/python3.9 -I. $(MESCHACH_WRAP.src) -o $(MESCHACH_WRAP.obj)
- 
+
 $(MESCHACH_ADDS_WRAP.src): MESCHACH_ADDS/SWIG_INTERFACES/meschach_adds.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_ADDS/SWIG_INTERFACES/meschach_adds.i
 	mv MESCHACH_ADDS/SWIG_INTERFACES/meschach_adds_wrap.c .
 $(MESCHACH_ADDS_WRAP.obj): $(MESCHACH_ADDS_WRAP.src)
 	gcc -c -fpic -I/usr/include/python3.9 -I. $(MESCHACH_ADDS_WRAP.src) -o $(MESCHACH_ADDS_WRAP.obj)
- 
+
 $(MESCHACH_EF_WRAP.src): MESCHACH_EF/SWIG_INTERFACES/meschach_ef.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_EF/SWIG_INTERFACES/meschach_ef.i
 	mv MESCHACH_EF/SWIG_INTERFACES/meschach_ef_wrap.c .
 $(MESCHACH_EF_WRAP.obj): $(MESCHACH_EF_WRAP.src)
 	gcc -c -fpic -I/usr/include/python3.9 -I. -I/usr $(MESCHACH_EF_WRAP.src) -o $(MESCHACH_EF_WRAP.obj)
- 
+
 $(MESCHACH_LIBSCIPLOT_WRAP.src): MESCHACH_LIBSCIPLOT/SWIG_INTERFACES/meschach_libsciplot.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_LIBSCIPLOT/SWIG_INTERFACES/meschach_libsciplot.i
 	mv MESCHACH_LIBSCIPLOT/SWIG_INTERFACES/meschach_libsciplot_wrap.c .
 $(MESCHACH_LIBSCIPLOT_WRAP.obj): $(MESCHACH_LIBSCIPLOT_WRAP.src)
 	gcc -c -fpic $(X11_INCDIR) -DHAVE_X11 -I/usr/include/python3.9 -I. $(MESCHACH_LIBSCIPLOT_WRAP.src) -o $(MESCHACH_LIBSCIPLOT_WRAP.obj)
- 
+
 $(MESCHACH_VOGLE_WRAP.src): MESCHACH_VOGLE/SWIG_INTERFACES/meschach_vogle.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_VOGLE/SWIG_INTERFACES/meschach_vogle.i
 	mv MESCHACH_VOGLE/SWIG_INTERFACES/meschach_vogle_wrap.c .
 $(MESCHACH_VOGLE_WRAP.obj): $(MESCHACH_VOGLE_WRAP.src)
 	gcc -c -fpic $(X11_INCDIR) -I/usr/include/python3.9 -I. $(MESCHACH_VOGLE_WRAP.src) -o $(MESCHACH_VOGLE_WRAP.obj)
- 
+
 $(MESCHACH_CPGPLOT_WRAP.src): MESCHACH_CPGPLOT/SWIG_INTERFACES/meschach_cpgplot.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_CPGPLOT/SWIG_INTERFACES/meschach_cpgplot.i
 	mv MESCHACH_CPGPLOT/SWIG_INTERFACES/meschach_cpgplot_wrap.c .
 $(MESCHACH_CPGPLOT_WRAP.obj): $(MESCHACH_CPGPLOT_WRAP.src)
 	gcc -c -fpic $(X11_INCDIR) -I/usr/include/python3.9 -I. $(MESCHACH_CPGPLOT_WRAP.src) -o $(MESCHACH_CPGPLOT_WRAP.obj)
- 
+
 $(MESCHACH_SPOOLES_WRAP.src): MESCHACH_SPOOLES/SWIG_INTERFACES/meschach_spooles.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_SPOOLES/SWIG_INTERFACES/meschach_spooles.i
 	mv MESCHACH_SPOOLES/SWIG_INTERFACES/meschach_spooles_wrap.c .
 $(MESCHACH_SPOOLES_WRAP.obj): $(MESCHACH_SPOOLES_WRAP.src)
 	gcc -c -fpic -I./EXTERNAL_LIBS -I./EXTERNAL_LIBS/spooles -I/usr/include/python3.9 -I. $(MESCHACH_SPOOLES_WRAP.src) -o $(MESCHACH_SPOOLES_WRAP.obj)
- 
+
 $(MESCHACH_LAPACK_WRAP.src): MESCHACH_LAPACK/SWIG_INTERFACES/meschach_lapack.i
 	$(SWIG_EXE) $(SWIG_INC) $(SWIG_OPTIONS) -python MESCHACH_LAPACK/SWIG_INTERFACES/meschach_lapack.i
 	mv MESCHACH_LAPACK/SWIG_INTERFACES/meschach_lapack_wrap.c .
 $(MESCHACH_LAPACK_WRAP.obj): $(MESCHACH_LAPACK_WRAP.src)
 	gcc -c -fpic -I./EXTERNAL_LIBS -I/usr/include/python3.9 -I. $(MESCHACH_LAPACK_WRAP.src) -o $(MESCHACH_LAPACK_WRAP.obj)
- 
+
 # -----------------------------------------------------------------------------------------------
 
-$(PY_MESCHACH): $(LIB_MESCHACH) $(MESCHACH_WRAP.obj) 
+$(PY_MESCHACH): $(LIB_MESCHACH) $(MESCHACH_WRAP.obj)
 	gcc -shared -o $(PY_MESCHACH) $(MESCHACH_WRAP.obj) /home/xavier/meschach_ef/LINUX_MAKEFILES/$(LIB_MESCHACH)
 
 $(PY_MESCHACH_ADDS): $(LIB_MESCHACH_ADDS) $(MESCHACH_ADDS_WRAP.obj)
