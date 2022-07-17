@@ -13,8 +13,11 @@ Doc:
 Build:
 ------
 
-- Makefile for linux (OK) but python wrappers still to build
-(to build, copy the Makefile "Makefile_Linux" from LINUX_MAKEFILES in the root folder)
+- Makefile for linux (OK)
+
+to build, copy the Makefile "Makefile_Debian" or "Makefile_Debian_PY_WRAPPERS" 
+from LINUX_MAKEFILES in the root folder
+
 
 Graphics:
 ---------
@@ -32,6 +35,12 @@ Misc:
 - gmsh new file format for cube in 3D
 - AdvFunc clean
 
+
+Bugs:
+-----
+
+- for splines 1D , bc cauchy/robin do not work (not finished), bit Dirichlet/Neumann Ok
+- what else ?
 
 Python
 ------
