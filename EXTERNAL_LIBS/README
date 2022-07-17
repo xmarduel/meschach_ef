@@ -11,3 +11,7 @@ So far as I remember (20 years ago), I added
 - double instead of float for array of values
 - sub-viewports API as in pgplot
 - contours lines on a ucd mesh
+
+
+
+Unpack spooles.2.2.tar in its own folder "spooles"

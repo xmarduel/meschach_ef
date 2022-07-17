@@ -106,14 +106,14 @@ B2(t) = -4*(1-t)**4 +  4*(1-t)**3 + 6*(1-t)**2 + 4*(1-t)**1 + 1
 B3(t) =  6*t**4 - 12*t**3 - 6*t**2 + 12*t**1 + 11
 B4(t) = -4*t**4 +  4*t**3 + 6*t**2 +  4*t**1 + 1
 B5(t) =    t**4
-# 
+#
 plot [0:1] B1(t), \
            B2(t), \
            B3(t), \
            B4(t), \
            B5(t), \
 	   B1(t) + B2(t) + B3(t) + B4(t) + B5(t)
-pause -1  
+pause -1
 
 
 SPLINE0(t) = spline2(t+1)
@@ -127,32 +127,42 @@ plot [-4.03:4.03][-1.0:15.0] \
 	SPLINE0(t)   title "SPLINE0(t)" with lines ,\
 	SPLINE1(t)   title "SPLINE1(t)" with lines ,\
 	SPLINE2(t)   title "SPLINE1(t)" with lines ,\
-	SPLINE3(t)   title "SPLINE3(t)" with lines 
+	SPLINE3(t)   title "SPLINE3(t)" with lines
 
 pause -1
-#       
+#
 #
 # how to calculate them ???
 #
-a00 = 11.0/(44)
-a01 =  1.0/(44)
-a02 =  1.0/(44)
-a03 = 11.0/(44)
+# F(0) = 1, DF(0) = 0
+a00 = 11.0/44
+a01 =  1.0/44
+a02 =  1.0/44
+a03 = 11.0/44
 #
-a10 =  -11.0/22
-a11 =   -1.0/22
-a12 =    1.0/22
-a13 =   11.0/22
+# F(0) = 0, DF(0) = 1
+a10 =  -11.0/90
+a11 =   -1.0/90
+a12 =    1.0/90
+a13 =   11.0/90
 #
-# bad ! derivee should be  0 at 0!
-a20 = -11.0/24
-a21 =  11.0/24
-a22 = -11.0/24
-a23 =  11.0/24
+# F(0) = 0, DF(0) = 0
+# bad ! derivee should be 0 at 0!
+#a20 = -11.0/24
+#a21 =  11.0/24
+#a22 = -11.0/24
+#a23 =  11.0/24
 #
+# F(0) = 0, DF(0) = 0  OK
+a20 = -6.0/24.0
+a21 =  1.0/12.0
+a22 = -1.0/12.0
+a23 =  6.0/24.0
+#
+# F(0) = 0, DF(0) = 0  OK
 a30 =  -11.0/22
-a31 =  1.0/22
-a32 =  1.0/22
+a31 =    1.0/22
+a32 =    1.0/22
 a33 =  -11.0/22
 #
 NEW_SPLINE0(t) = a00*SPLINE0(t) + a01*SPLINE1(t) + a02*SPLINE2(t) + a03*SPLINE3(t)
@@ -166,7 +176,18 @@ plot [-5:5][-10:12] \
 	NEW_SPLINE0(t)   title "NEW-SPLINE0(t)" with lines ,\
 	NEW_SPLINE1(t)   title "NEW-SPLINE1(t)" with lines ,\
 	NEW_SPLINE2(t)   title "NEW-SPLINE2(t)" with lines ,\
-	NEW_SPLINE3(t)   title "NEW-SPLINE3(t)" with lines 
+	NEW_SPLINE3(t)   title "NEW-SPLINE3(t)" with lines
 
 pause -1
-#                
+#
+
+set size square
+#
+plot [-1:1][-1:1] \
+	NEW_SPLINE0(t)   title "NEW-SPLINE0(t)" with lines ,\
+	NEW_SPLINE1(t)   title "NEW-SPLINE1(t)" with lines ,\
+	NEW_SPLINE2(t)   title "NEW-SPLINE2(t)" with lines ,\
+	NEW_SPLINE3(t)   title "NEW-SPLINE3(t)" with lines
+
+pause -1
+#
