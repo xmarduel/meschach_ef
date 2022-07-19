@@ -14,9 +14,9 @@ if __name__ == '__main__':
     args = sys.argv
 
     if len(sys.argv) != 2:
-        print "usage:"
-        print "       python ef3D.py <arg>"
-        print "           with <arg> = P1 or P2 or P3"
+        print("usage:")
+        print("       python ef3D.py <arg>")
+        print("           with <arg> = P1 or P2 or P3")
     
         exit(0)
 
@@ -56,4 +56,4 @@ if __name__ == '__main__':
 
     t2 = time.time()
 
-    print "Done (%d s. = %d min.)" % ((t2 - t1), (t2-t1)/60) 
+    print("Done (%d s. = %d min.)" % ((t2 - t1), (t2-t1)/60) )

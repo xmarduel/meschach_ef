@@ -456,7 +456,7 @@ int  graphics1D_cpgplot_labelsize(int ix, int iy, const double size)
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-int  graphics1D_cpgplot_endmarker(int ix, int iy, const int end_marker)
+int  graphics1D_cpgplot_endmarker(int ix, int iy, const int marker)
 {
    PGPLOT_GRAPH_DATA* pdata = pdata_pgplot_get_static();
    /*
@@ -469,7 +469,7 @@ int  graphics1D_cpgplot_endmarker(int ix, int iy, const int end_marker)
 
    int k = (ix-1)*ny + (iy-1);
 
-   pdata->dataplot[k]->end_marker = end_marker;
+   pdata->dataplot[k]->end_marker = marker;
 
    /* end */
    return EXIT_SUCCESS;

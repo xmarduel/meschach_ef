@@ -293,7 +293,7 @@ int graphics1D_libsciplot_setbox(int ix, int iy, const int hasbox)
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-int  graphics1D_libsciplot_endmarker(int ix, int iy, const int end_marker)
+int  graphics1D_libsciplot_endmarker(int ix, int iy, const int marker)
 {
    LIBSCIPLOT_GRAPH_DATA* pdata = pdata_libsciplot_get_static();
    /*
@@ -306,7 +306,7 @@ int  graphics1D_libsciplot_endmarker(int ix, int iy, const int end_marker)
 
    int k = (ix-1)*ny + (iy-1);
 
-   pdata->dataplot[k]->end_marker = end_marker;
+   pdata->dataplot[k]->end_marker = marker;
 
    return EXIT_SUCCESS;
 }

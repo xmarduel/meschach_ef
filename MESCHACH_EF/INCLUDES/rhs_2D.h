@@ -132,7 +132,7 @@ Real    Rhs2D_evalFunction         (const RHS_2D* MyRhs, int ref_e, int axe, Rea
 * Set into the structure a function
 */
 
-/*! \fn Rhs2D_setCFunction   ( RHS_2D* MyRhs, int ref_e, int axe, const char* def);
+/*! \fn Rhs2D_setLUAFunction   ( RHS_2D* MyRhs, int ref_e, int axe, const char* def);
 *
 * \param MyRhs   : the RHS structure
 * \param ref_e   : 0

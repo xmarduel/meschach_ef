@@ -22,7 +22,7 @@ class IMatTest(unittest.TestCase):
             m4 = PyIMAT.IMat(4)
         except TypeError:
             pass
-            #print " detected <TypeError>, it is OK ..."
+            #print(" detected <TypeError>, it is OK ...")
 
     def test___del__(self):
         m1 =  PyIMAT.IMat(3,3)

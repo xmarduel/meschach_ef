@@ -117,6 +117,10 @@ Real     Fun3D_evalLUAFunctionTransient  (const FUN_3D* Fun, Real x, Real y, Rea
 * Fun3D_setCFunction         ( FUN_3D* Fun, FUNC_3D phi); \n
 * Fun3D_setCFunctionTransient( FUN_3D* Fun, FUNC_4D phi); \n
 * \n
+* We set the members of the structure from a "C" program with the functions \n
+* Fun3D_setLUAFunction         ( FUN_3D* Fun, const char* def); \n
+* Fun3D_setLUAFunctionTransient( FUN_3D* Fun, const char* def); \n
+* \n
 * We set the members of the structure from a "Python" program with the functions \n
 * Fun3D_setPythonFunction         ( FUN_3D* Fun, python_object); \n
 * Fun3D_setPythonFunctionTransient( FUN_3D* Fun, python_object); \n

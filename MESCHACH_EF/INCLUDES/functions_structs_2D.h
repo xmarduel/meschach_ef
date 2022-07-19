@@ -119,6 +119,10 @@ Real     Fun2D_evalLUAFunctionTransient(const FUN_2D* Fun, Real x, Real y, Real 
 * Fun2D_setCFunction         ( FUN_2D* Fun, FUNC_2D phi); \n
 * Fun2D_setCFunctionTransient( FUN_2D* Fun, FUNC_3D phi); \n
 * \n
+* We set the members of the structure from a "C" program with the functions \n
+* Fun2D_setLUAFunction         ( FUN_2D* Fun, const char* def); \n
+* Fun2D_setLUAFunctionTransient( FUN_2D* Fun, const char* def); \n
+* \n
 * We set the members of the structure from a "Python" program with the functions \n
 * Fun2D_setPythonFunction         ( FUN_2D* Fun, python_object); \n
 * Fun2D_setPythonFunctionTransient( FUN_2D* Fun, python_object); \n

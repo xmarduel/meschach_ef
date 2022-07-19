@@ -152,6 +152,12 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 * Bc2D_setCFunction(MyBC, BC_2De_ROBIN    , 4, AXEe_X, MyFunRobin1) \n
 * Bc2D_setCFunction(MyBC, BC_2De_DIRICHLET, 5, AXEe_X, MyFunDirichlet_b) \n
 *
+* Bc2D_setLUAFunction(MyBC, BC_2De_DIRICHLET, 1, AXEe_X, "x + y") \n
+* Bc2D_setLUAFunction(MyBC, BC_2De_NEUMANN  , 2, AXEe_X, "x + y") \n
+* Bc2D_setLUAFunction(MyBC, BC_2De_CAUCHY   , 3, AXEe_X, "x + y") \n
+* Bc2D_setLUAFunction(MyBC, BC_2De_ROBIN    , 4, AXEe_X, "x + y") \n
+* Bc2D_setLUAFunction(MyBC, BC_2De_DIRICHLET, 5, AXEe_X, "x + 2*y") \n
+* 
 * Bc2D_setCFunction2(MyBC, BC_2De_ROBIN   , 4, AXEe_X, MyFunRobin2) \n
 */
 
@@ -163,13 +169,13 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 * \param axe  : AXEe_X or AXEe_Y
 *
 * Ex: If we have Dirichlet boundary conditions on the somms of the geometry with reference 1, we do \n
-* Bc2D_setBcType(BC, BC_2De_DIRICHLET, 1, AXEe_X)
+* Bc2D_setBcType(BC, BC_2De_DIRICHLET, 1, AXEe_X)\n
 * Ex: If we have Neumann boundary conditions on the faces of the geometry with reference 2, we do \n
 * Bc2D_setBcType(BC, BC_2De_NEUMANN  , 2, AXEe_X)\n
 * Ex: If we have Cauchy boundary conditions on the somms of the geometry with reference 3, we do \n
-* Bc2D_setBcType(BC, BC_2De_CAUCHY   , 3, AXEe_X)
+* Bc2D_setBcType(BC, BC_2De_CAUCHY   , 3, AXEe_X)\n
 * Ex: If we have Robin boundary conditions on the somms of the geometry with reference 4, we do \n
-* Bc2D_setBcType(BC, BC_2De_ROBIN   , 4, AXEe_X)
+* Bc2D_setBcType(BC, BC_2De_ROBIN    , 4, AXEe_X)\n
 */
 
 /*! \fn Bc2D_getBcType             ( const BC_2D* MyBC, int axe, int ref)
@@ -187,8 +193,9 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 * \param bctype     : the type of boundary condition we set a function into
 * \param ref_s      : the reference index of the geometry that we consider
 * \param axe        : AXEe_X or AXEe_Y
+* \param type       : the type of the function
 * \param phi        : the function we set into the BC_2D structure
-* \param clientdata : the function we set into the BC_2D structure (used for Python function)
+* \param clientdata : the function we set into the BC_2D structure (used for LUA and Python function)
 *
 * set the "first" function in the boundary condition \n
 * Note: Do not use this function. It should be declared static (and thus hidden), but we have to expose it for the python wrapper.
@@ -196,11 +203,13 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 
 /*! \fn Bc2D_setFunction2         ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, FUN_TYPE type, void* phi, void* clientdata);
 *
-* \param MyBC   : the BC structure
-* \param bctype : the type of boundary condition we set a function into
-* \param ref_s  : the reference index that we consider
-* \param axe    : AXEe_X or AXEe_Y
-* \param phi    : the function we set into the BC_2D structure
+* \param MyBC       : the BC structure
+* \param bctype     : the type of boundary condition we set a function into
+* \param ref_s      : the reference index that we consider
+* \param axe        : AXEe_X or AXEe_Y
+* \param type       : the type of the function
+* \param phi        : the function we set into the BC_2D structure
+* \param clientdata : the function we set into the BC_2D structure (used for LUA and Python function)
 *
 * set the "second" function in the boundary condition \n
 * Note: Do not use this function. It should be declared static (and thus hidden), but we have to expose it for the python wrapper.
@@ -268,6 +277,72 @@ int         Bc2D_getNumberOfBcOnFaces  (const BC_2D* MyBC, int axe);
 *
 * Ex: to set the "second" function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
 * do Bc2D_setCFunctionTransient2(BC, BC_2De_ROBIN, 4, AXEe_X, MyFunRobin2) \n
+*
+* Attention : Use this fuction only for the "robin" boundary conditions
+*/
+
+
+/*! \fn Bc2D_setLUAFunction          ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, const char* def)
+*
+* \param MyBC   : the BC structure
+* \param bctype : the type of boundary condition we set a function into
+* \param ref_s  : the reference index that we consider
+* \param axe    : AXEe_X or AXEe_Y
+* \param def    : the function as string (LUA syntax) we set into the BC_2D structure
+*
+* Ex: to set a function corresponding to the faces of the geometry with reference 1 (with Dirichlet boundary conditions), \n
+* do Bc2D_setLUAFunction(BC, BC_2De_DIRICHLET, 1, AXEe_X, "x + y") \n
+* Ex: to set a function corresponding to the somms of the geometry with reference 2 (with Neumann boundary conditions), \n
+* do Bc2D_setLUAFunction(BC, BC_2De_NEUMANN  , 2, AXEe_X, "x + y") \n
+* Ex: to set a function corresponding to the faces of the geometry with reference 3 (with Cauchy boundary conditions), \n
+* do Bc2D_setLUAFunction(BC, BC_2De_CAUCHY   , 3, AXEe_X, "x + y") \n
+* Ex: to set a function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
+* do Bc2D_setLUAFunction(BC, BC_2De_ROBIN    , 4, AXEe_X, "x + y") \n
+*/
+
+/*! \fn Bc2D_setLUAFunction2          ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, const char* def)
+*
+* \param MyBC   : the BC structure
+* \param bctype : the type of boundary condition we set a function into
+* \param ref_s  : the reference index that we consider
+* \param axe    : AXEe_X or AXEe_Y
+* \param def    : the function as string (LUA syntax) we set into the BC_2D structure
+*
+* Ex: to set the "second" function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
+* do Bc2D_setCFunction2(BC, "robin", 4, AXEe_X, "x + y") \n
+*
+* Attention : Use this fuction only for the "robin" boundary conditions
+*/
+
+/*! \fn Bc2D_setLUAFunctionTransient   ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, const char* def)
+*
+* \param MyBC   : the BC structure
+* \param bctype : the type of boundary condition we set a function into
+* \param ref_s  : the reference index that we consider
+* \param axe    : AXEe_X or AXEe_Y
+* \param def    : the function as string (LUA syntax) we set into the BC_2D structure
+*
+* Ex: to set a function corresponding to the faces of the geometry with reference 1 (with Dirichlet boundary conditions), \n
+* do Bc2D_setLUAFunctionTransient(BC, BC_2De_DIRICHLET, 1, AXEe_X, "x + y  + math.sin(t)") \n
+* Ex: to set a function corresponding to the somms of the geometry with reference 2 (with Neumann boundary conditions), \n
+* do Bc2D_setLUAFunctionTransient(BC, BC_2De_NEUMANN  , 2, AXEe_X, "x + y  + math.sin(t)") \n
+* Ex: to set a function corresponding to the faces of the geometry with reference 3 (with Cauchy boundary conditions), \n
+* do Bc2D_setLUAFunctionTransient(BC, BC_2De_CAUCHY   , 3, AXEe_X, "x + y  + math.sin(t)") \n
+* Ex: to set a function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
+* do Bc2D_setLUAFunctionTransient(BC, BC_2De_ROBIN    , 4, AXEe_X, "x + y  + math.sin(t)") \n
+*
+*/
+
+/*! \fn Bc2D_setCFunctionTransient2   ( BC_2D* MyBC, BC_2D_TYPE bctype, int ref_s, int axe, const char* def)
+*
+* \param MyBC   : the BC structure
+* \param bctype : the type of boundary condition we set a function into
+* \param ref_s  : the reference index that we consider
+* \param axe    : AXEe_X or AXEe_Y
+* \param def    : the function as string (LUA syntax) we set into the BC_2D structure
+*
+* Ex: to set the "second" function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
+* do Bc2D_setLUAFunctionTransient2(BC, BC_2De_ROBIN, 4, AXEe_X, "x + y  + math.sin(t)") \n
 *
 * Attention : Use this fuction only for the "robin" boundary conditions
 */

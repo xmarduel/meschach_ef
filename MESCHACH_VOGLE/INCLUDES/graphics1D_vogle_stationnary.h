@@ -32,7 +32,13 @@ int  graphics1D_vopl_plotcontour(void);
 #endif
 
 
-/*! \fn  graphics1D_vogle_plotcurve( vogle_color color1, const VEC *X , const VEC *Y );
+/*! \fn  graphics1D_vopl_plotcurve(void);
+* \brief
+*
+* Plot the curve X-Y in a Xt-window
+*/
+
+/*! \fn  graphics1D_vopl_plotcontour(void);
 * \brief
 *
 * Plot the curve X-Y in a Xt-window

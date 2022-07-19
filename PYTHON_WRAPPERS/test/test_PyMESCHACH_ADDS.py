@@ -43,7 +43,7 @@ class MeschachAddsTest(unittest.TestCase):
 
         # with A, B and X, deduce C
         C =  - At*X - X*A + X*B*X
-        #print "\nC with - At*X - X*A + X*B*X  "
+        #print("\nC with - At*X - X*A + X*B*X  ")
         #C.out()
         #
         libmeschach_adds.set_control_method(libmeschach_adds.CONTROLe_SLICOT)
@@ -51,9 +51,9 @@ class MeschachAddsTest(unittest.TestCase):
         # with A, B and C, find Y : it should be  equal to X ...
         Y = riccati(A, B, C)
 
-        #print " we find Y :"
+        #print(" we find Y :")
         #Y.out()
-        #print "and retrieve C with - At*Y - Y*A + Y*B*Y"
+        #print("and retrieve C with - At*Y - Y*A + Y*B*Y")
         #CC = - At*Y - Y*A + Y*B*Y
         #CC.out()
 
@@ -88,7 +88,7 @@ class MeschachAddsTest(unittest.TestCase):
         At = ~A
         # with A, B and X, deduce C: C = A'.X + X.A
         C = At*X + X*A
-        #print "C is  "
+        #print("C is  ")
         #C.out()
         #
         libmeschach_adds.set_control_method(libmeschach_adds.CONTROLe_SLICOT)
@@ -96,9 +96,9 @@ class MeschachAddsTest(unittest.TestCase):
         # with A and C, find Y : it should be  equal to X ...
         Y = lyapunov(A, C)
         #
-        #print " we find Y :"
+        #print(" we find Y :")
         #Y.out()
-        #print "and retrieve C ... "
+        #print("and retrieve C ... ")
         #CC = At*Y + Y*A
         #CC.out()
         #
@@ -146,9 +146,9 @@ class MeschachAddsTest(unittest.TestCase):
         # with A, B and C, find Y : it should be  equal to X ...
         Y = sylvester(A, B, C)
 
-        #print " we find Y :"
+        #print(" we find Y :")
         #Y.out()
-        #print "and retrieve C ... "
+        #print("and retrieve C ... ")
         #CC = A*Y + Y*B
         #CC.out()
 

@@ -227,7 +227,7 @@ int  graphics1D_libsciplot_bgcolor(const int bgcolor);
 int  graphics1D_libsciplot_setbox( int ix , int iy ,  const int hasbox);
 int  graphics1D_libsciplot_labelsize(int ix, int iy, double size);
 int  graphics1D_libsciplot_legend( int ix , int iy ,  const char *legend);
-int  graphics1D_libsciplot_endmarker( int ix, int iy, const int endmarker);
+int  graphics1D_libsciplot_endmarker( int ix, int iy, const int marker);
 int  graphics1D_libsciplot_framecolor( int ix, int iy, const int framecolor);
 int  graphics1D_libsciplot_legendcolor( int ix, int iy, const int legendcolor);
 int  graphics1D_libsciplot_setup_window(int ix, int iy, VEC *X, VEC *Y);

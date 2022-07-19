@@ -154,6 +154,10 @@ FUN_1D * Fun1D_setLUAFunctionTransient  (FUN_1D* Fun, const char* def);
 * Fun1D_setCFunction         ( FUN_1D* Fun, FUNC_1D   phi); \n
 * Fun1D_setCFunctionTransient( FUN_1D* Fun, FUNC_2D   phi); \n
 * \n
+* We set the members of the structure from a "C" program with the functions \n
+* Fun1D_setLUAFunction         ( FUN_1D* Fun, const char* def); \n
+* Fun1D_setLUAFunctionTransient( FUN_1D* Fun, const char* def); \n
+* \n
 * We set the members of the structure from a "Python" program with the functions \n
 * Fun1D_setPythonFunction         ( FUN_1D* Fun, python_object); \n
 * Fun1D_setPythonFunctionTransient( FUN_1D* Fun, python_object); \n

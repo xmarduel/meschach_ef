@@ -18,6 +18,7 @@ extern "C"
  *    ELT_1D *elt = elt1D_get("H3"); \n
  *    ELT_1D *elt = elt1D_get("S2"); \n
  *    ELT_1D *elt = elt1D_get("S3"); \n
+ *    ELT_1D *elt = elt1D_get("S4"); \n
  *    ELT_1D *elt = elt1D_get("S5"); \n
  *
  * ------------------------------------------------------------------------ */

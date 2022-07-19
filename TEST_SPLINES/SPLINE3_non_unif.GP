@@ -36,6 +36,8 @@ print "DF4(X4) = " ,dy4
 #       DEF of SPLINE :            #
 # ##################################
 # 
+set dummy x
+
 spline(x) = (x>X0)? \
               (x>X1)? \
                 (x>X2)? \

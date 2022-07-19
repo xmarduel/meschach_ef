@@ -20,9 +20,9 @@ extern "C"
  * MyRhs = Rhs3D_setCFunction( MyRhs, 0, AXEe_Z, the_c_function3) # 0 correspond to the reference "0" of the geometry's element \n
  *
  * MyRhs = Rhs3D_get() \n
- * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_X, "x + y+ +z") # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Y, "x + y+ +z") # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Z, "x + y+ +z") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_X, "x + y + z") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Y, "x + y + z") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Z, "x + y + z") # 0 correspond to the reference "0" of the geometry's element \n
  *
  * In a Python program : \n
  *

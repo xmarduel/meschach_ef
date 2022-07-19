@@ -18,7 +18,7 @@ extern "C"
  * MyRhs = Rhs1D_setCFunction( MyRhs, 0, AXEe_X, the_c_function) # 0 correspond to the reference "0" of the geometry's element \n
  *
  * MyRhs = Rhs1D_get() \n
- * MyRhs = Rhs1D_setLUAFunction( MyRhs, 0, AXEe_X, "2 +x") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs1D_setLUAFunction( MyRhs, 0, AXEe_X, "2 + x + math.sin(x)") # 0 correspond to the reference "0" of the geometry's element \n
  *
  * In a Python program :  \n
  *

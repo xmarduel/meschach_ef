@@ -723,7 +723,7 @@ int graphics1D_vopl_setbox( int ix,  int iy,  int hasbox     )
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-int  graphics1D_vopl_endmarker(int ix, int iy, const int end_marker)
+int  graphics1D_vopl_endmarker(int ix, int iy, const int marker)
 {
    VOPL_GRAPH_DATA* pdata = pdata_vopl_get_static();
    /*
@@ -738,7 +738,7 @@ int  graphics1D_vopl_endmarker(int ix, int iy, const int end_marker)
 
    VOPL_CURVE_DATA * pcurvedata = (VOPL_CURVE_DATA*)(pdata->dataplot[k]);
 	
-	pcurvedata->end_marker = end_marker;
+	pcurvedata->end_marker = marker;
 
    return EXIT_SUCCESS;
 }

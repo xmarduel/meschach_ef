@@ -129,6 +129,18 @@ Real    Adv1D_evalFunction         ( const ADV_1D* MyAdv, int ref_e, int axe1, i
 * Set into the structure a function
 */
 
+/*! \fn Adv1D_setLUAFunction   ( ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char *def);
+* \brief Set a "C" function in the structure MyAdv for zones of reference number ref_e for axes axe1, axe2 and axe3
+* \param MyAdv   : the ADV_1D structure
+* \param ref_e   : 0
+* \param axe1    : AXEe_X only
+* \param axe2    : AXEe_X only
+* \param axe3    : AXEe_X only
+* \param def     : the "C" function  as string ( 1 argument (x) )
+*
+* Set into the structure a function
+*/
+
 /*! \fn Adv1D_setCFunctionTransient   ( ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, FUNC_2D phi);
 * \brief Set a "C" function in the structure MyAdv for zones of reference number ref_e for axes axe1, axe2 and axe3
 * \param MyAdv   : the ADV_1D structure
@@ -137,6 +149,18 @@ Real    Adv1D_evalFunction         ( const ADV_1D* MyAdv, int ref_e, int axe1, i
 * \param axe2    : AXEe_X only
 * \param axe3    : AXEe_X only
 * \param phi     : the "C" function ( 2 arguments (x,tps) )
+*
+* Set into the structure a function
+*/
+
+/*! \fn Adv1D_setLUAFunctionTransient   ( ADV_1D* MyAdv, int ref_e, int axe1, int axe2, int axe3, const char *def);
+* \brief Set a "C" function in the structure MyAdv for zones of reference number ref_e for axes axe1, axe2 and axe3
+* \param MyAdv   : the ADV_1D structure
+* \param ref_e   : 0
+* \param axe1    : AXEe_X only
+* \param axe2    : AXEe_X only
+* \param axe3    : AXEe_X only
+* \param def     : the "C" function as string ( 2 arguments (x,tps) )
 *
 * Set into the structure a function
 */

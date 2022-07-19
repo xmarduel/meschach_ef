@@ -192,8 +192,9 @@ int         Bc1D_getNumberOfBcOnFaces    (const BC_1D* MyBC, int axe);
 * \param bctype     : the type of boundary condition we set a function into
 * \param ref_s      : the reference index of the geometry that we consider
 * \param axe        : AXEe_X only
+* \param type       : the type of the function
 * \param phi        : the function we set into the BC_1D structure
-* \param clientdata : the function we set into the BC_1D structure (used for Python function)
+* \param clientdata : the function we set into the BC_1D structure (used for LUA and Python function)
 *
 * set the "first" function in the boundary condition \n
 * Note: Do not use this function. It should be declared static (and thus hidden), but we have to expose it for the python wrapper.
@@ -205,8 +206,9 @@ int         Bc1D_getNumberOfBcOnFaces    (const BC_1D* MyBC, int axe);
 * \param bctype     : the type of boundary condition we set a function into
 * \param ref_s      : the reference index of the geometry that we consider
 * \param axe        : AXEe_X only
+* \param type       : the type of the function
 * \param phi        : the function we set into the BC_1D structure
-* \param clientdata : the function we set into the BC_1D structure (used for Python function)
+* \param clientdata : the function we set into the BC_1D structure (used for LUA and Python function)
 *
 * set the "second" function in the boundary condition \n
 * Note: Do not use this function. It should be declared static (and thus hidden), but we have to expose it for the python wrapper.
@@ -273,6 +275,71 @@ int         Bc1D_getNumberOfBcOnFaces    (const BC_1D* MyBC, int axe);
 *
 * Ex: to set the "second" function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
 * do Bc1D_setCFunctionTransient2(BC, "robin", 4, AXEe_X, MyFunRobin2) \n
+*
+* Attention : Use this fuction only for the "robin" boundary conditions
+*/
+
+/*! \fn Bc1D_setLUAFunction          ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, const char* def)
+* \brief Set the "first" function at axe "axe" for node of reference "ref_s" in MyBC
+* \param MyBC   : the BC structure
+* \param bctype : the type of boundary condition we set a function into
+* \param ref_s  : the reference index that we consider
+* \param axe    : AXEe_X only
+* \param def    : the function as string (LUA syntax) we set into the BC_1D structure
+*
+* Ex: to set a function corresponding to the faces of the geometry with reference 1 (with Dirichlet boundary conditions), \n
+* do Bc1D_setLUAFunction(BC, BC_1De_DIRICHLET, 1, AXEe_X, "x + 1") \n
+* Ex: to set a function corresponding to the somms of the geometry with reference 2 (with Neumann boundary conditions), \n
+* do Bc1D_setLUAFunction(BC, BC_1De_NEUMANN  , 2, AXEe_X, "math.cos(x)") \n
+* Ex: to set a function corresponding to the faces of the geometry with reference 3 (with Cauchy boundary conditions), \n
+* do Bc1D_setLUAFunction(BC, BC_1De_CAUCHY   , 3, AXEe_X, "math.exp(x)") \n
+* Ex: to set a function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
+* do Bc1D_setLUAFunction(BC, BC_1De_ROBIN    , 4, AXEe_X, "x*x") \n
+*/
+
+/*! \fn Bc1D_setLUAFunction2          ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, const char* def)
+* \brief Set the "second" function at axe "axe" for node of reference "ref_s" in MyBC 
+* \param MyBC   : the BC structure
+* \param bctype : the type of boundary condition we set a function into
+* \param ref_s  : the reference index that we consider
+* \param axe    : AXEe_X only
+* \param def    : the function as string (LUA syntax) we set into the BC_1D structure
+*
+* Ex: to set the "second" function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
+* do Bc1D_setLUAFunction2(BC, "robin", 4, AXEe_X, "x * 2") \n
+*
+* Attention : Use this fuction only for the "robin" boundary conditions
+*/
+
+/*! \fn Bc1D_setLUAFunctionTransient   ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, const char* def)
+* \brief Set the "first" function at axe "axe" for node of reference "ref_s" in MyBC - phi is a "C" function -
+* \param MyBC   : the BC structure
+* \param bctype : the type of boundary condition we set a function into
+* \param ref_s  : the reference index that we consider
+* \param axe    : AXEe_X only
+* \param def    : the function as string (LUA syntax) we set into the BC_1D structure (function of (x,t))
+*
+* Ex: to set a function corresponding to the faces of the geometry with reference 1 (with Dirichlet boundary conditions), \n
+* do Bc1D_setLUAFunctionTransient1(BC, BC_1De_DIRICHLET, 1, AXEe_X, "x") \n
+* Ex: to set a function corresponding to the somms of the geometry with reference 2 (with Neumann boundary conditions), \n
+* do Bc1D_setLUAFunctionTransient(BC, BC_1De_NEUMANN   , 2, AXEe_X, "x + math.cos(t)") \n
+* Ex: to set a function corresponding to the faces of the geometry with reference 3 (with Cauchy boundary conditions), \n
+* do Bc1D_setLUAFunctionTransient(BC, BC_1De_CAUCHY    , 3, AXEe_X, "x * x") \n
+* Ex: to set a function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
+* do Bc1D_setLUAFunctionTransient(BC, BC_1De_ROBIN     , 4, AXEe_X, "x + math.sin(t)") \n
+*
+*/
+
+/*! \fn Bc1D_setLUAFunctionTransient2   ( BC_1D* MyBC, BC_1D_TYPE bctype, int ref_s, int axe, const char* def)
+* \brief Set the "second" function at axe "axe" for node of reference "ref_s" in MyBC - phi is a "C" function -
+* \param MyBC   : the BC structure
+* \param bctype : the type of boundary condition we set a function into
+* \param ref_s  : the reference index that we consider
+* \param axe    : AXEe_X only
+* \param def    : the function as string (LUA syntax) we set into the BC_1D structure (function of (x,t))
+*
+* Ex: to set the "second" function corresponding to the faces of the geometry with reference 4 (with Robin boundary conditions), \n
+* do Bc1D_setCFunctionTransient2(BC, "robin", 4, AXEe_X, "x + math.cos(t)") \n
 *
 * Attention : Use this fuction only for the "robin" boundary conditions
 */

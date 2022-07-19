@@ -112,7 +112,7 @@ def main():
    
     if vogle.backbuffer() < 0:
         vogle.vexit()
-        print "licosa: device doesn't support double buffering.\n"
+        print("licosa: device doesn't support double buffering.\n")
         exit(0)
 
 
@@ -155,16 +155,16 @@ def main():
             if key == ord('r'):	# Reduce
                 vogle.scale(0.9, 0.9, 0.9)
             if key == ord('w'):	# WireFrame
-                print "WireFrame"
+                print("WireFrame")
                 POLYFILL = 0
                 #vogle.polyfill(0)
             if key == ord('s'):	# Solid
-                print "Solid"
+                print("Solid")
                 POLYFILL = 1
                  #vogle.polyfill(1)
             if key == ord('g'):
                 # gif
-                print "make licosa.gif"
+                print("make licosa.gif")
                 w_gif = vogle.winopen("gif", "licosa.gif")
                 
                 for i in range(1,21):
@@ -228,39 +228,39 @@ def main():
                         DELTA_X = vogle.Vevent_x_get(vev) - EVENT_X
                         DELTA_Y = vogle.Vevent_y_get(vev) - EVENT_Y
 
-                        print " In VMOTION , (DELTA_X,DELTA_Y) = (%d,%d) )\n" % (DELTA_X, DELTA_Y)
+                        print(" In VMOTION , (DELTA_X,DELTA_Y) = (%d,%d) )\n" % (DELTA_X, DELTA_Y))
 
                         EVENT_X = vogle.Vevent_x_get(vev)
                         EVENT_Y = vogle.Vevent_y_get(vev)
 
-                        print " In VMOTION , (EVENT_X,EVENT_Y) = (%d,%d) )\n"  % (EVENT_X, EVENT_Y)
+                        print(" In VMOTION , (EVENT_X,EVENT_Y) = (%d,%d) )\n"  % (EVENT_X, EVENT_Y))
 
                         rx = 2 * DELTA_X / (float)(SIZE)
                         ry = 2 * DELTA_Y / (float)(SIZE)
 
-                        print " In VMOTION , (rx,ry) = (%6.3lf , %6.3lf) \n"  % (rx,ry)
+                        print(" In VMOTION , (rx,ry) = (%6.3lf , %6.3lf) \n"  % (rx,ry))
 
                         XROT  = vogle.fmod( XROT + 180*ry , 360 )
                         YROT  = vogle.fmod( YROT + 180*rx , 360 )
 
-                        print " In VMOTION , (XROT,YROT) = (%6.3lf , %6.3lf) \n"  % (XROT, YROT)
+                        print(" In VMOTION , (XROT,YROT) = (%6.3lf , %6.3lf) \n"  % (XROT, YROT))
 
                     if vogle.Vevent_data_get(vev) == 2:
                    
                         DELTA_X = vogle.Vevent_x_get(vev) - EVENT_X
                         DELTA_Y = Vvogle.event_y_get(vev) - EVENT_Y
 
-                        print " In VMOTION , (DELTA_X,DELTA_Y) = (%d,%d) )\n"  %( DELTA_X,DELTA_Y)
+                        print(" In VMOTION , (DELTA_X,DELTA_Y) = (%d,%d) )\n"  %( DELTA_X,DELTA_Y))
 
                         EVENT_X = vogle.Vevent_x_get(vev)
                         EVENT_Y = vogle.Vevent_y_get(vev)
 
-                        print " In VMOTION , (EVENT_X,EVENT_Y) = (%d,%d) )\n"  % (EVENT_X,EVENT_Y)
+                        print(" In VMOTION , (EVENT_X,EVENT_Y) = (%d,%d) )\n"  % (EVENT_X,EVENT_Y))
 
                         rx = 2000 * DELTA_X / (float)(SIZE)
                         ry = 2000 * DELTA_Y / (float)(SIZE)
 
-                        print " In VMOTION , (rx,ry) = (%6.3lf , %6.3lf) \n" % (rx, ry)
+                        print(" In VMOTION , (rx,ry) = (%6.3lf , %6.3lf) \n" % (rx, ry))
 
                         XTRANS  -= rx
                         YTRANS  -= ry
@@ -275,7 +275,7 @@ def main():
          
                 DRAG = 1
                 #
-                # print " In VBUTTONPRESS , (x.y) = (%d , %d)\n" %(vev.x,vev.y)
+                # print(" In VBUTTONPRESS , (x.y) = (%d , %d)\n" %(vev.x,vev.y))
                 #
                 EVENT_X = Vevent_x_get(vev)
                 EVENT_Y = Vevent_y_get(vev)
@@ -288,11 +288,11 @@ def main():
             if vogle.Vevent_type_get(vev) == vogle.VKEYPRESS:
       
                 if vogle.Vevent_data_get(vev) == ord('s'):
-                    print "Sild2"
+                    print("Sild2")
                     POLYFILL = 1
                     #vogle.polyfill(1)
                 if vogle.Vevent_data_get(vev) == ord('w'):
-                    print "WireFrame2"
+                    print("WireFrame2")
                     POLYFILL = 0
                     pass
                     #vogle.polyfill(0)

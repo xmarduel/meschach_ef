@@ -8,7 +8,7 @@ extern "C"
 
 /** \file functions_structs.h
  *
- * Contains the structures describing a "C" or a "Python" function in 1-D, 2-D, 3-D
+ * Contains the structures describing a "C", LUA or a "Python" function in 1-D, 2-D, 3-D
  *
  * -------------------------------------------------------------------- */
 

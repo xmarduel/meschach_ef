@@ -1,5 +1,5 @@
 
-/** \file graphics_pgplot_svqueue.c
+/** \file graphics1D_pgplot_svqueue.c
  *
  * Contains the routines for plotting with PGPLOT library
  *

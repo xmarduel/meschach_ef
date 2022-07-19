@@ -6,7 +6,7 @@ extern "C"
 {
 #endif
 
-/** \file graphics_pgplot_svqueue.h
+/** \file graphics1D_pgplot_svqueue.h
  *
  * Contains the routines for plotting with PGPLOT library
  *

@@ -43,17 +43,17 @@ def get_all_monoms(polynom):
 #
 def integrate3D_on_tetrahedra_symbolic(polynom):
     ip_x_   = integrate(polynom, x)
-    #print "int on x = ", ip_x_
+    #print("int on x = ", ip_x_)
     ip_x    = ip_x_.subs(x, 1-y-z) - ip_x_.subs(x, 0)
-    #print "int on x from 0 to 1-y-z = ", ip_x
+    #print("int on x from 0 to 1-y-z = ", ip_x)
     ip_xy_  = integrate(ip_x, y)
-    #print "int on y = ", ip_x_y_
+    #print("int on y = ", ip_x_y_)
     ip_xy   = ip_xy_.subs(y, 1-z) - ip_xy_.subs(y, 0)
-    #print "int on y from 0 to 1-z = ", ip_xy
+    #print("int on y from 0 to 1-z = ", ip_xy)
     ip_xyz_ = integrate(ip_xy, z)
-    #print "int on z = ", ip_xyz_
+    #print("int on z = ", ip_xyz_)
     ip_xyz  = ip_xyz_.subs(z, 1) - ip_xyz_.subs(z, 0)
-    #print "int on z from 0 to 1 = ", ip_xyz
+    #print("int on z from 0 to 1 = ", ip_xyz)
     return ip_xyz
 
 def fact(n):
@@ -158,28 +158,28 @@ def to_c_matrix(matrix):
 
 def integrate2D(polynom):
     ip_ = integrate(polynom, x)
-    #print "int on x = ", ip_
+    #print("int on x = ", ip_)
     ip_0_1my = ip_.subs(x, 1-y) - ip_.subs(x, 0)
-    #print "int on x from 0 to 1-y = ", ip_0_1my
+    #print("int on x from 0 to 1-y = ", ip_0_1my)
     ip_0_1my_ = integrate(ip_0_1my, y)
-    #print "int on y = ", ip_0_1my_
+    #print("int on y = ", ip_0_1my_)
     ip_0_1my_0_1 = ip_0_1my_.subs(y, 1) - ip_0_1my_.subs(y, 0)
-    #print "int on y from 0 to 1 = ", ip_0_1my_0_1
+    #print("int on y from 0 to 1 = ", ip_0_1my_0_1)
     return ip_0_1my_0_1
 
 def integrate3D(polynom):
     ip_ = integrate(polynom, x)
-    #print "int on x = ", ip_
+    #print("int on x = ", ip_)
     ip_0_1mymz = ip_.subs(x, 1-y-z) - ip_.subs(x, 0)
-    #print "int on x from 0 to 1-y-z = ", ip_0_1mymz
+    #print("int on x from 0 to 1-y-z = ", ip_0_1mymz)
     ip_0_1mymz_ = integrate(ip_0_1mymz, y)
-    #print "int on y = ", ip_0_1mymz_
+    #print("int on y = ", ip_0_1mymz_)
     ip_0_1mymz_0_1mz = ip_0_1mymz_.subs(y, 1-z) - ip_0_1mymz_.subs(y, 0)
-    #print "int on y from 0 to 1-z = ", ip_0_1mymz_0_1mz
+    #print("int on y from 0 to 1-z = ", ip_0_1mymz_0_1mz)
     ip_0_1mymz_0_1mz_ = integrate(ip_0_1mymz_0_1mz, z)
-    #print "int on z = ", ip_0_1mymz_0_1mz_
+    #print("int on z = ", ip_0_1mymz_0_1mz_)
     ip_0_1mymz_0_1mz_0_1 = ip_0_1mymz_0_1mz_.subs(z, 1) - ip_0_1mymz_0_1mz_.subs(z, 0)
-    #print "int on z from 0 to 1 = ", ip_0_1mymz_0_1mz_0_1
+    #print("int on z from 0 to 1 = ", ip_0_1mymz_0_1mz_0_1)
     return ip_0_1mymz_0_1mz_0_1
 
 

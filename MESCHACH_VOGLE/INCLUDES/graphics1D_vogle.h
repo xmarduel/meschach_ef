@@ -229,7 +229,7 @@ int  graphics1D_vopl_font      (int ix, int iy, int font_id);
 
 /* -------------------------------------------------------------------------------------- */
 
-int  graphics1D_vopl_endmarker  (int ix, int iy, int end_marker);  /* for VOPL_CURVE */
+int  graphics1D_vopl_endmarker  (int ix, int iy, int marker);      /* for VOPL_CURVE */
 int  graphics1D_vopl_setbox     (int ix, int iy, int hasbox);      /* for VOPL_CURVE */
 int  graphics1D_vopl_curvedata  (int ix, int iy, int color1, const VEC *X, const VEC *Y); /* for VOPL_CURVE */
 int  graphics1D_vopl_curvedata1 (int ix, int iy, int color1, const VEC *X, const VEC *Y, int idx1, int idx2); /* for VOPL_CURVE */
