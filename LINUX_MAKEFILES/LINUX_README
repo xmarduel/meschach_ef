@@ -88,16 +88,11 @@ So copy the makefile "Makefile_Debian_PY_WRAPPERS" in the root directory and typ
 > make install
 
 
-- lapack
---------
+- lapack (install with Debian package manager)
+-----------------------------------------------
 
-make alias for the installed libs
+make alias for the installed libs folder (needs root rights)
+
 >ln -s liblapack.so.3 liblapack.so
->ln -s libcblas.sp.3 libcblas.so 
+>ln -s libcblas.so.3 libcblas.so 
 
-
-- pgplot
---------
-
-ppm and gif: see the drivers source code and modify it accordingly to the 
-indication : "INTEGER -> INTEGER*8"

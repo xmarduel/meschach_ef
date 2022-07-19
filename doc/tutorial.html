@@ -65,9 +65,12 @@ comes with the library too for convenience.</p>
 order to not completely lose this work forever. From time to time I used to update/improve it so that it still stays
 compilable/usable over the years (nowadays as XCode project, so easely compilable on MacOS X)</p>
 
-<p>For Linux, there is a basic Makefile, taylored for Debian only. All dependencies have to be installed ("dev" headers, SWIG etc.).</p>
+<p><strong>Meschach-EF</strong> depends on some "external libs" have to be compiled separately on your own, 
+and this can be cumbersome... These external libraries are given as tar files in the folder "EXTERNAL_LIBS".</p>
 
-<p>Note: The external libs have to be compiled separately on your own, and this can be cumbersome...</p>
+<p>For Linux, there is a basic Makefile, taylored for Debian only. All other dependencies have to be installed
+("dev" headers as the X11 ones, libs, SWIG etc.), probably with the help of the Debian package manager, 
+in order to compile.</p>
 
 <p>For sure there are much powerfull EF libraries in the internet.</p>
 
@@ -76,9 +79,9 @@ compilable/usable over the years (nowadays as XCode project, so easely compilabl
   <li>Well it is a <strong>small, yet powerfull library</strong>, and is good if you want to learn C programming
     and the Finite Element Methods.</li>
   <li>The python wrapper is nice and allows the user to quickly change the "right hand side" or the boundary conditions
-    without recompiling, as the <strong>python functions are plugged into the C code</strong>.</li>
-  <li>Even with the C drivers, rhs and boundary conditions are easely changed as they are given as "string" in
-      the driver program configuration file and <strong>interpreted as LUA code</strong> within the C code</li>
+    functions without recompiling, as the <strong>python functions are plugged into the C code</strong>.</li>
+  <li>Even with the C drivers, rhs and boundary conditions are easely changed as they are given as "string" (in LUA syntax) 
+      in the driver program configuration files and <strong>interpreted as LUA code</strong> within the C code</li>
     </thead></li>
 </ul>
 
@@ -949,7 +952,7 @@ below an example of such a configuration file.</p>
     "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/1D/OUTPUT_PDE_1D.dat"
 }
 </code></pre>
-#<p>As you can see, the config file is not quite exacty a JSON file: there are comments!
+<p>As you can see, the config file is not quite exacty a JSON file: there are comments!
 These comment are cut away from our reader.</p>
 
 <p>Even if we have chosen the "ITERATIVE-METHOD" for the resolution, we have kept the parameters for the "DIRECT-METHOD" in the file.

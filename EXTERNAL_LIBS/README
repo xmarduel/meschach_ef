@@ -1,3 +1,85 @@
+
+# plotutils
++++++++++++++
+> ./configure
+> make
+
+maybe error by compile: replace
+
+setjmp(png_ptr->jmpbuf)        -> setjmp(png_jmpbuf(png_ptr))
+longjmp (png_ptr->jmpbuf, 1);  -> longjmp(png_jmpbuf(png_ptr), 1);
+
+- put in LD_LIBRARY_PATH the location where the libplot.so is
+- be sure the "graph" executable is in your "PATH"
+
+# silo
++++++++++
+> ./configure
+> make
+
+# jansson
+++++++++++
+> ./configure
+> make
+
+by linking meschach_ef demos , error -> Replace in jansson.h "real" with "xreal"
+
+
+# spooles
+++++++++++
+
+# unpack in subfolder!
+> mkdir spooles
+> cd spooles
+> cp ../spooles.2.2.tar .
+> tar -xvf spooles.2.2.tar
+
+> make lib
+> cp spooles.a libspooles.a
+
+> cd LinSol/srcST
+> make lib
+> cp Bridge.a libBridge.a
+
+# vogle/vopl
++++++++++++++
+build in the project (modified)
+
+# pgplot
++++++++++
+
+follow the instructions 
+- g77 must be on system
+- rename untar'ed folder "pgplot_srcs"
+- create new "pgplot" folder and copy in it the file "drivers.list"
+- cd in your "pgplot" folder
+- drivers.list: select PNG, PPM, GIF, XWINDOW, XSERVE, XADRIV(ATHENA) - not Motif!
+
+ppm and gif: see the drivers source code and modify it accordingly to the 
+indication given in the source files: "INTEGER -> INTEGER*8"
+
+- ../pgplot_srcs/makemake ../pgplot_srcs  linux g77_gcc
+
+
+maybe error by compile: replace
+
+setjmp(png_ptr->jmpbuf)        -> setjmp(png_jmpbuf(png_ptr))
+longjmp (png_ptr->jmpbuf, 1);  -> longjmp(png_jmpbuf(png_ptr), 1);
+
+- put in LD_LIBRARY_PATH the location where the libpglot.so/libcpgplot.so are
+
+
+
+# lua
++++++++++
+just compile
+> make
+
+
+
+# ------------------------------------------------------------------
+# ------------------------------------------------------------------
+
 I'm using a modified version of vogle-2.0b for my purpose. I have forgotten what I have modified...(about 20 years ago)
 The version 2.0b had support for multiple windows (good).
 - cocoa or carbon support (seems to be broken, I do not known why nowadays)
@@ -12,6 +94,6 @@ So far as I remember (20 years ago), I added
 - sub-viewports API as in pgplot
 - contours lines on a ucd mesh
 
+how to compile the "hershey" fonts from vogle ?
+TODO
 
-
-Unpack spooles.2.2.tar in its own folder "spooles"

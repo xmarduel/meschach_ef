@@ -36,77 +36,20 @@ prerequisites: ( (*) means that the lib is modified and build by us)
     - PGPLOT_FONTS
     - VOGLE_FONTS
 
-how to compile the "hershey" fonts from vogle ?
-TODO
-
 
 
 External libs
 -------------
 
-# plotutils
-+++++++++++++
-> ./configure
-> make
-
-maby error by compile: replace
-
-setjmp(png_ptr->jmpbuf)        -> setjmp(png_jmpbuf(png_ptr))
-longjmp (png_ptr->jmpbuf, 1);  -> longjmp(png_jmpbuf(png_ptr), 1);
-
-- put in LD_LIBRARY_PATH the location where the libplot.so is
-- be sure the "graph" executable is in your "PATH"
-
-# silo
-+++++++++
-> ./configure
-> make
-
-# jansson
-++++++++++
-> ./configure
-> make
-
-by linking meschach_ef demos , error -> Replace in jansson.h "real" with "xreal"
-
-
-# spooles
-++++++++++
-> make lib
-> cp spooles.a libspooles.a
-
-> cd LinSol
-> make lib
-> cp Bridge.a libBridge.a
-
-# vogle/vopl
-+++++++++++++
-build in the project (modified)
-
-# pgplot
-+++++++++
-just compile ?
-
-follow the instructions 
-- g77 must be on system
-- rename untar'ed folder "pgplot_srcs"
-- create new "pgplot" folder and copy in it the file "drivers.list"
-- cd in your "pgplot" folder
-- drivers.list: select PNG, PPM, GIF, XWINDOW, XSERVE, XADRIV(ATHENA) - not Motif!
-- ../pgplot_srcs/makemake ../pgplot_srcs  linux g77_gcc
-
-
-error at compile: see png fix from plotutils
-# lua
-+++++++++
-just compile
-> make
+see README in EXTERNAL_LIBS folder
 
 
 
-env variables (linux) :
+Environment Variables :
+-----------------------
 
-export MESCHACH_EF=$HOME/GITHUB/meschach_ef
+export MESCHACH_EF=$HOME/<path_to>/meschach_ef
+
 export PGPLOT_DIR=$MESCHACH_EF/EXTERNAL_LIBS/pgplot
 export PGPLOT_DEV=/XWINDOW
 
