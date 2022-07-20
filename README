@@ -59,3 +59,9 @@ export PATH=$PATH:$MESCHACH_EF/EXTERNAL_LIBS/plotutils-2.6/graph
 export VDEVICE=X11
 export VFONTLIB=/usr/local/lib/hershey or /usr/share/hershey-fonts  # copy all fonts of vogle in this folder
 export P6TO=PPM
+
+
+Man Pages:
+----------
+
+run doxygen with given config file "mef_doxygen.cfg"
