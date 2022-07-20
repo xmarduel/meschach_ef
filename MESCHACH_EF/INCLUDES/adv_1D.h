@@ -95,6 +95,12 @@ Real    Adv1D_evalFunction         ( const ADV_1D* MyAdv, int ref_e, int axe1, i
 * Create an uninitialized structure (to be filled later)
 */
 
+/*! \fn Adv1D_setup_from_params ( const PARAMS *params );
+* \brief Create a new structure of type ADV_1D
+*
+* Create an structure filled from the params specifications.
+*/
+
 /*! \fn Adv1D_free          (ADV_1D  *MyAdv);
 * \brief Release the structure MyAdv
 * \param MyAdv   : the ADV_1D structure

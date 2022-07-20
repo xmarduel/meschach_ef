@@ -7,7 +7,7 @@ extern "C"
 {
 #endif
 
-/** \file miscellaneous_2D.h
+/** \file miscellaneous_1D.h
  *
  * ----------------------------------------------------------------------- */
 

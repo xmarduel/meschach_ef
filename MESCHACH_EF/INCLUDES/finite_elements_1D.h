@@ -60,8 +60,8 @@ typedef struct {
    MAT*     MAT_FuncBasis_CL_L;   /**< basis permutation to fit BC  with splines */
    MAT*     MAT_FuncBasis_CL_R;   /**< basis permutation to fit BC  with splines */
 
-   /* only for "S2", "S3" or "S5" with non-uniform mesh */
-   /*SPLINES_1D*/void *splines_def; /* definition of all functions on the mesh : will depend on the geometry */
+   /* only for "S2", "S3", "S4" or "S5" with non-uniform mesh */
+   /*SPLINES_1D*/void *splines_def; /**< definition of all functions on the mesh : will depend on the geometry */
 
 
 } ELT_1D;

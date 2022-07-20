@@ -58,7 +58,7 @@ static  char *my_err_mesg4[NB_ERRS4] =
    "robin function not set on a ref'ed somm"          /* 9 */
 };
 
-static char *my_warn_mesg4[NB_WARNS4] = 
+static char *my_warn_mesg4[NB_WARNS4] =
 {
    "unknown bc warning"	, 			      /* 0 */
    "more boundary functions than refs on somms",      /* 1 */
@@ -137,7 +137,7 @@ int err_warn_attach_lists4(void);
 
 
 /*! \fn mem_stat_reg4(void **var, int type)
-* 
+*
 * \param var  : adress of a pointer to a BC_nD structure
 * \param type : TYPE_BC_1D, TYPE_BC_2D or TYPE_BC_3D
 *
@@ -155,8 +155,8 @@ int err_warn_attach_lists4(void);
 */
 
 /*! \fn mem_stat_free4(int mark)
-* 
-* \param mark  : the index of the "workspace" whre the static variables are registered
+*
+* \param mark  : the index of the "workspace" where the static variables are registered
 *
 * Free the static variables created in a workspace
 *

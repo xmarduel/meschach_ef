@@ -5638,7 +5638,7 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					./EXTERNAL_LIBS/pgplot,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/pgplot,
 					/opt/X11/lib,
 					/usr/local/gfortran/lib,
 				);
@@ -5700,7 +5700,7 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					./EXTERNAL_LIBS/pgplot,
+					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/pgplot,
 					/opt/X11/lib,
 					/usr/local/gfortran/lib,
 				);

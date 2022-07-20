@@ -12,7 +12,7 @@
  *
  */
 
-PERM* sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type)
+PERM * sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type)
 {
    int rc;
 
@@ -44,13 +44,13 @@ PERM* sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type)
 
 
    /*
-   int amd_order (	    // returns 0 if OK, negative value if error 
-      int n,		    // A is n-by-n.  n must be >= 0. 
-      const int Ap [ ],	    // column pointers for A, of size n+1 
-      const int Ai [ ],	    // row indices of A, of size nz = Ap [n] 
-      int P [ ],	    // output permutation, of size n 
-      double Control [ ],    // input Control settings, of size AMD_CONTROL 
-      double Info [ ]	    // output Info statistics, of size AMD_INFO 
+   int amd_order (	    // returns 0 if OK, negative value if error
+      int n,		    // A is n-by-n.  n must be >= 0.
+      const int Ap [ ],	    // column pointers for A, of size n+1
+      const int Ai [ ],	    // row indices of A, of size nz = Ap [n]
+      int P [ ],	    // output permutation, of size n
+      double Control [ ],    // input Control settings, of size AMD_CONTROL
+      double Info [ ]	    // output Info statistics, of size AMD_INFO
    */
 
    rc = amd_order(A->m, Ap->ive, Ai->ive, P->pe, NULL, NULL);

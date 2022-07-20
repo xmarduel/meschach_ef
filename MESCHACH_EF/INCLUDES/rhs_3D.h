@@ -15,21 +15,21 @@ extern "C"
  * so that the structure can be set with \n
  *
  * MyRhs = Rhs3D_get() \n
- * MyRhs = Rhs3D_setCFunction( MyRhs, 0, AXEe_X, the_c_function1) # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs3D_setCFunction( MyRhs, 0, AXEe_Y, the_c_function2) # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs3D_setCFunction( MyRhs, 0, AXEe_Z, the_c_function3) # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setCFunction( MyRhs, 0, AXEe_X, the_c_function1) # 0 is the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setCFunction( MyRhs, 0, AXEe_Y, the_c_function2) # 0 is the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setCFunction( MyRhs, 0, AXEe_Z, the_c_function3) # 0 is the reference "0" of the geometry's element \n
  *
  * MyRhs = Rhs3D_get() \n
- * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_X, "x + y + z") # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Y, "x + y + z") # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Z, "x + y + z") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_X, "x + y + z") # 0 is the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Y, "x + y + z") # 0 is the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setLUAFunction( MyRhs, 0, AXEe_Z, "x + y + z") # 0 is the reference "0" of the geometry's element \n
  *
  * In a Python program : \n
  *
  * MyRhs = Rhs3D_get() \n
- * MyRhs = Rhs3D_setPythonFunction( MyRhs, 0, AXEe_X, the_python_function1) # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs3D_setPythonFunction( MyRhs, 0, AXEe_Y, the_python_function2) # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs3D_setPythonFunction( MyRhs, 0, AXEe_Z, the_python_function3) # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setPythonFunction( MyRhs, 0, AXEe_X, the_python_function1) # 0 is the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setPythonFunction( MyRhs, 0, AXEe_Y, the_python_function2) # 0 is the reference "0" of the geometry's element \n
+ * MyRhs = Rhs3D_setPythonFunction( MyRhs, 0, AXEe_Z, the_python_function3) # 0 is the reference "0" of the geometry's element \n
  *
  * ------------------------------------------------------------------------ */
 
@@ -83,7 +83,8 @@ Real    Rhs3D_evalFunction         (const RHS_3D* MyRhs, int ref_e, int axe, Rea
 #endif
 
 /*! \struct RHS_3D
-* \brief the structure for the RHS in 3-D
+*
+* The structure for the RHS in 3-D
 *
 * The RHS structure contains the pointers to the functions defined in the domain\n
 * as well as the time (for transient problems)
@@ -91,15 +92,15 @@ Real    Rhs3D_evalFunction         (const RHS_3D* MyRhs, int ref_e, int axe, Rea
 
 
 /*! \fn Rhs3D_get          ( void );
-* \brief Create an uninitialized structure (to be filled later)
+*
+* Create an uninitialized structure
 */
 
 /*! \fn Rhs3D_free          (RHS_3D  *MyRhs);
-* \brief Release a RHS_3D structure
 *
 * \param MyRhs     : the RHS structure
 *
-* Release the structure
+* Release a RHS_3D structure
 */
 
 /*! \fn Rhs3D_setFunction   ( RHS_3D* MyRhs, int ref_e, int axe, FUN_TYPE type, void* phi, void* clientdata);

@@ -15,7 +15,7 @@ extern "C" {
  *
  * ------------------------------------------------------------------------ */
 
-PERM* sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type);
+PERM * sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type);
 
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ PERM* sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type);
 
 /*! \fn PERM * sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type);
 * \brief Evaluate the permutation to perform a band/profile reductioni
-* 
+*
 * \param A :
 * \param P : the calculated permutation
 * \param INVP : and its inverse

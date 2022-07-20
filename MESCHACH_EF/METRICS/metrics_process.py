@@ -107,7 +107,8 @@ if __name__ == '__main__':
 
     USE_LC = False
 
-    metrics = os.popen("sh metrics.sh")
+    #metrics = os.popen("sh metrics.sh")
+    metrics = os.popen("sh xpmccabe.sh")
 
     if USE_LC :
         stats   = os.popen("lc ../SRCS/*.c")

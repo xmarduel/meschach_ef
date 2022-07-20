@@ -29,7 +29,7 @@ typedef struct FUN_3D_
 
    FUN_TYPE type;                 /**< gives back the type of function stored in the object */
 
-   double (*eval)(const struct FUN_3D_ * fun3D , double x, double y, double z,  ... );
+   double (*eval)(const struct FUN_3D_ * fun3D , double x, double y, double z,  ... );  /**< the evaluation function */
 
 } FUN_3D ;         /* to INITIALIZE in "Fun3D_get"          */
 

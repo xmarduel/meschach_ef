@@ -126,7 +126,7 @@ int err_warn_attach_lists2(void);
 
 /*! \fn mem_stat_free2(int mark)
 *
-* \param mark  : the index of the "workspace" whre the static variables are registered
+* \param mark  : the index of the "workspace" where the static variables are registered
 *
 * Free the static variables created in a workspace
 *

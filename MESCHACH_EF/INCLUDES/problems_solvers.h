@@ -7,7 +7,7 @@ extern "C"
 #endif
 
 /** \file problems_solvers.h
- * 
+ *
  * Contains solvers algorithms for
  * - laplacian
  * - bilaplacian
@@ -16,7 +16,8 @@ extern "C"
  * - burgers
  *
  * - stokes
- * - navier-stokes
+ * - navier stokes
+ *
  * ----------------------------------------------------------------------- */
 
 #include "MESCHACH_EF/INCLUDES/finite_elements.h"

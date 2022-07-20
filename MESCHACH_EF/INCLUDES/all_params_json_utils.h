@@ -1,6 +1,6 @@
 /** \file all_params_json_utils.h
  *
- * misc functions to read a json config file containing comments
+ * misc functions to read a json config file
  *
  */
 
@@ -11,18 +11,18 @@
 extern "C"
 {
 #endif
-	
+
 #include <jansson.h>
 
 json_t *json_load_xfile(const char *path);
 
 int json_object_get_boolean_value(const json_t *p, const char *objname);
-   
+
 /* shorcuts to retrieve values */
 int         json_object_get_integer_value(const json_t *p, const char *objname);
 double      json_object_get_real_value   (const json_t *p, const char *objname);
 const char *json_object_get_string_value (const json_t *p, const char *objname);
-	
+
 int         json_array_get_integer_value(const json_t *p, int idx);
 double      json_array_get_real_value   (const json_t *p, int idx);
 const char* json_array_get_string_value (const json_t *p, int idx);
@@ -30,13 +30,21 @@ const char* json_array_get_string_value (const json_t *p, int idx);
 int         json_object_get_arrayitem_integer_value(const json_t *p, const char *objname, int idx);
 double      json_object_get_arrayitem_real_value   (const json_t *p, const char *objname, int idx);
 const char* json_object_get_arrayitem_string_value (const json_t *p, const char *objname, int idx);
-	
+
 /* validation */
 int     json_check_data(const char* data, const char* schema, char* output);
-	
-	
+
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif
+
+
+/*! \fn json_load_xfile(const char *path);
+*
+* \param path   : the file name
+*
+* Read a "custom" json file  containing "comments"
+*/

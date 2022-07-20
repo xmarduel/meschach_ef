@@ -52,7 +52,7 @@ static  char *my_err_mesg6[NB_ERRS6] =
    "rhs axe wrong"                     /* 4 */
 };
 
-static char *my_warn_mesg6[NB_WARNS6] = 
+static char *my_warn_mesg6[NB_WARNS6] =
 {
    "unknown rhs warning"               /* 0 */
 };
@@ -113,7 +113,7 @@ int err_warn_attach_lists6(void);
 */
 
 /*! \fn mem_stat_reg6(void **var, int type)
-* 
+*
 * \param var  : adress of a pointer to a RHS_nD structure
 * \param type : TYPE_RHS_1D, TYPE_RHS_2D or TYPE_RHS_3D
 *
@@ -132,7 +132,7 @@ int err_warn_attach_lists6(void);
 
 /*! \fn mem_stat_free7(int mark)
 *
-* \param mark  : the index of the "workspace" whre the static variables are registered
+* \param mark  : the index of the "workspace" where the static variables are registered
 *
 * Free the static variables created in a workspace
 *

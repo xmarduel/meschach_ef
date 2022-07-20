@@ -6,7 +6,8 @@ extern "C"
 {
 #endif
 
-/* 
+/** \file graphics_output_geoms.h
+ *
  * Contains all the output files functions
  *
  */

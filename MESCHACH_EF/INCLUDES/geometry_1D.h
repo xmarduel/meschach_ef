@@ -30,7 +30,7 @@ typedef enum {
 
 typedef struct GEOM_1D {
 
-   char type[16];     /* "line" */
+   char type[16];     /**< "line" */
 
    int periodicity;    /**< 1->"periodic" or 0->"non-periodic" */
 
@@ -48,8 +48,8 @@ typedef struct GEOM_1D {
    IVEC *REF_T ;     /**< references on the elements(segments)  */
    IVEC *REF_A ;     /**< references on the boundary faces      */
 
-   Real X_LEFT;
-   Real X_RIGHT;
+   Real X_LEFT;      /**< rthe left bound of the line */
+   Real X_RIGHT;     /**< rthe right bound of the line */
 
    SPMAT* EF_to_WORLD; /**< map EF coords to PHYSIC coords */
 

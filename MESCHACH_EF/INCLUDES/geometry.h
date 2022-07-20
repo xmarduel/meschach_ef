@@ -24,7 +24,7 @@ extern "C"
 #include "MESCHACH_EF/INCLUDES/geometry_1D.h"
 #include "MESCHACH_EF/INCLUDES/geometry_2D.h"
 #include "MESCHACH_EF/INCLUDES/geometry_3D.h"
- 
+
 
 /* --------------------------------------------------------------------------- */
 
@@ -33,7 +33,7 @@ static char *my_names3[NB_STRUCTS3] = { "GEOM_1D" ,
                                         "GEOM_3D" };
 
 static int (*my_frees3[NB_STRUCTS3])(void*) = { (int (*)(void *))Geom1D_free ,
-                                                (int (*)(void *))Geom2D_free ,  
+                                                (int (*)(void *))Geom2D_free ,
                                                 (int (*)(void *))Geom3D_free };
 
 static MEM_ARRAY my_tnums3[NB_STRUCTS3]; /* initialised to zeros */
@@ -91,14 +91,14 @@ static char *my_err_mesg3[NB_ERRS3] =
 	"FAILED TO FIND $Elements in GMSH 3D MESH",     /* 43 */
 };
 
-static char *my_warn_mesg3[NB_WARNS3] = 
+static char *my_warn_mesg3[NB_WARNS3] =
 {
    "unknown warning",	                                                  /* 0 */
    "geometry already P1 -> no need for subdivision",                      /* 1 */
    "more bc functions set than geometry has references (unused bc functions)",        /* 2 */
    "geometry has more ref. than a bc can handle ( increase NBMAX_BC_nD_FUNCTIONS )",  /* 3 */
-   "geometry has more ref. than a bc can handle ( increase NBMAX_BC_nD_FUNCTIONS )",  /* 4 */ 
-   "geometry has more ref. than a bc can handle ( increase NBMAX_BC_nD_FUNCTIONS )"   /* 5 */ 
+   "geometry has more ref. than a bc can handle ( increase NBMAX_BC_nD_FUNCTIONS )",  /* 4 */
+   "geometry has more ref. than a bc can handle ( increase NBMAX_BC_nD_FUNCTIONS )"   /* 5 */
 };
 
 #define  E_GEOM_UNKNOWN	                0
@@ -110,16 +110,16 @@ static char *my_warn_mesg3[NB_WARNS3] =
 #define  E_GEOM_2D_NBSOMM_P3_TOO_SMALL  6
 #define  E_GEOM_INCOMPATIBLE_WITH_BC    7
 #define  E_GEOM_WRONG_CUBE              8
-	
+
 #define	E_GEOM_2D_GMSH_WRONG_ELT_NUMBER  9
 #define	E_GEOM_3D_GMSH_WRONG_ELT_NUMBER 10
 
 #define  E_GEOM_MESHFILE_JSON_VALIDATION                11
 #define  E_GEOM_MESHFILE_JSON_MESH_NOT_FOUND            12
-	
+
 #define	E_GEOM_MESH1D_JSON_SEGMENTS_BAD_ARRAY_SIZE     13
 #define	E_GEOM_MESH1D_JSON_SEGMENTS_BAD_TOTAL_SIZE     14
-	
+
 #define  E_GEOM_MESH2D_JSON_X_AXIS_SEGMENTS_BAD_ARRAY_SIZE            15
 #define  E_GEOM_MESH2D_JSON_Y_AXIS_SEGMENTS_BAD_ARRAY_SIZE            16
 #define  E_GEOM_MESH2D_JSON_SIDE_INFOS_SIDE_IDX_SOUTH_BAD_ARRAY_SIZE  17
@@ -132,21 +132,21 @@ static char *my_warn_mesg3[NB_WARNS3] =
 #define  E_GEOM_MESH3D_JSON_X_AXIS_SEGMENTS_BAD_ARRAY_SIZE            23
 #define  E_GEOM_MESH3D_JSON_Y_AXIS_SEGMENTS_BAD_ARRAY_SIZE            24
 #define  E_GEOM_MESH3D_JSON_Z_AXIS_SEGMENTS_BAD_ARRAY_SIZE            25
-	
+
 #define	E_GEOM_MESH3D_JSON_TOP_FACE_BAD_ARRAY_SIZE         26
 #define	E_GEOM_MESH3D_JSON_BOTTOM_FACE_BAD_ARRAY_SIZE      27
 #define	E_GEOM_MESH3D_JSON_FRONT_FACE_BAD_ARRAY_SIZE       28
 #define	E_GEOM_MESH3D_JSON_BACK_FACE_BAD_ARRAY_SIZE        29
 #define	E_GEOM_MESH3D_JSON_RIGHT_FACE_BAD_ARRAY_SIZE       30
 #define	E_GEOM_MESH3D_JSON_LEFT_FACE_BAD_ARRAY_SIZE        31
-	
+
 #define	E_GEOM_MESH3D_JSON_TOP_FACE_LINE_BAD_ARRAY_SIZE         32
 #define	E_GEOM_MESH3D_JSON_BOTTOM_FACE_LINE_BAD_ARRAY_SIZE      33
 #define	E_GEOM_MESH3D_JSON_FRONT_FACE_LINE_BAD_ARRAY_SIZE       34
 #define	E_GEOM_MESH3D_JSON_BACK_FACE_LINE_BAD_ARRAY_SIZE        35
 #define	E_GEOM_MESH3D_JSON_RIGHT_FACE_LINE_BAD_ARRAY_SIZE       36
 #define	E_GEOM_MESH3D_JSON_LEFT_FACE_LINE_BAD_ARRAY_SIZE        37
-	
+
 #define	E_GEOM_2D_GMSH_CANNOT_FIND_MESHFORMAT_LINE  38
 #define	E_GEOM_2D_GMSH_CANNOT_FIND_NODE_LINE        39
 #define	E_GEOM_2D_GMSH_CANNOT_FIND_ELEMENT_LINE     40
@@ -154,7 +154,7 @@ static char *my_warn_mesg3[NB_WARNS3] =
 #define	E_GEOM_3D_GMSH_CANNOT_FIND_MESHFORMAT_LINE  41
 #define	E_GEOM_3D_GMSH_CANNOT_FIND_NODE_LINE        42
 #define	E_GEOM_3D_GMSH_CANNOT_FIND_ELEMENT_LINE     43
-	
+
 
 
 
@@ -213,7 +213,7 @@ int err_warn_attach_lists3(void);
 */
 
 /*! \fn mem_stat_reg3(void **var, int type)
-* 
+*
 * \param var  : adress of a pointer to a ELT_nD structure
 * \param type : TYPE_GEOM_1D, TYPE_GEOM_2D or TYPE_GEOM_3D
 *
@@ -231,8 +231,8 @@ int err_warn_attach_lists3(void);
 */
 
 /*! \fn mem_stat_free3(int mark)
-* 
-* \param mark  : the index of the "workspace" whre the static variables are registered
+*
+* \param mark  : the index of the "workspace" where the static variables are registered
 *
 * Free the static variables created in a workspace
 *

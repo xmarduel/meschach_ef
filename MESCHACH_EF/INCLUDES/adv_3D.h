@@ -161,6 +161,11 @@ Real    Adv3D_evalFunction         ( const ADV_3D* MyAdv, int ref_e, int axe1, i
 * as well as the time (for transient problems)
 */
 
+/*! \fn Adv3D_setup_from_params ( const PARAMS *params );
+* \brief Create a new structure of type ADV_3D
+*
+* Create an structure filled from the params specifications.
+*/
 
 /*! \fn Adv3D_get          ( void );
 * \brief Create a new structure of type ADV_3D

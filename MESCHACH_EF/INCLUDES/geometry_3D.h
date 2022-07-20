@@ -7,6 +7,7 @@ extern "C"
 #endif
 
 /** \file geometry_3D.h
+ *
  * Contains the structure of the geometry in 3 dimensions
  *
  */

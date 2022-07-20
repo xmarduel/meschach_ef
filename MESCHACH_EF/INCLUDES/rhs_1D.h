@@ -15,15 +15,15 @@ extern "C"
  * so that the structure can be set with \n
  *
  * MyRhs = Rhs1D_get() \n
- * MyRhs = Rhs1D_setCFunction( MyRhs, 0, AXEe_X, the_c_function) # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs1D_setCFunction( MyRhs, 0, AXEe_X, the_c_function) # 0 is the reference of the geometry's element \n
  *
  * MyRhs = Rhs1D_get() \n
- * MyRhs = Rhs1D_setLUAFunction( MyRhs, 0, AXEe_X, "2 + x + math.sin(x)") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs1D_setLUAFunction( MyRhs, 0, AXEe_X, "2 + x + math.sin(x)") # 0 is the reference "0" of the geometry's element \n
  *
  * In a Python program :  \n
  *
  * MyRhs = Rhs1D_get() \n
- * MyRhs = Rhs1D_setPythonFunction( MyRhs, 0, AXEe_X, the_python_function) # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs1D_setPythonFunction( MyRhs, 0, AXEe_X, the_python_function) # 0 is the reference "0" of the geometry's element \n
  *
  * ------------------------------------------------------------------------ */
 
@@ -83,13 +83,15 @@ Real    Rhs1D_evalFunction         ( const RHS_1D* MyRhs, int ref_e, int axe, Re
 
 
 /*! \fn Rhs1D_get          ( void );
-* \brief Create an uninitialized structure RHS_1D (to be filled later)
+* 
+* Create an uninitialized structure RHS_1D (to be filled later)
 */
 
 /*! \fn Rhs1D_free          (RHS_1D  *MyRhs);
-* \brief Release a RHS_1D structure
 *
 * \param MyRhs   : the RHS structure
+*
+* Release a RHS_1D structure
 */
 
 /*! \fn Rhs1D_setFunction   ( RHS_1D* MyRhs, int ref_e, int axe, FUN_TYPE type, void* phi, void* clientdata);

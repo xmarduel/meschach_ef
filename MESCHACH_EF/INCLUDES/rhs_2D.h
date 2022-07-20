@@ -15,18 +15,18 @@ extern "C"
  * so that the structure can be set with \n
  *
  * MyRhs = Rhs2D_get() \n
- * MyRhs = Rhs2D_setCFunction( MyRhs, 0, AXEe_X, the_c_function1) # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs2D_setCFunction( MyRhs, 0, AXEe_Y, the_c_function2) # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs2D_setCFunction( MyRhs, 0, AXEe_X, the_c_function1) # 0 is the reference "0" of the geometry's element \n
+ * MyRhs = Rhs2D_setCFunction( MyRhs, 0, AXEe_Y, the_c_function2) # 0 is the reference "0" of the geometry's element \n
  *
  * MyRhs = Rhs2D_get() \n
- * MyRhs = Rhs2D_setLUAFunction( MyRhs, 0, AXEe_X, "x + y") # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs2D_setLUAFunction( MyRhs, 0, AXEe_Y, "math.sin(x) + math.exp(y)") # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs2D_setLUAFunction( MyRhs, 0, AXEe_X, "x + y")                     # 0 is the reference "0" of the geometry's element \n
+ * MyRhs = Rhs2D_setLUAFunction( MyRhs, 0, AXEe_Y, "math.sin(x) + math.exp(y)") # 0 is the reference "0" of the geometry's element \n
  *
  * In a Python program :  \n
  *
  * MyRhs = Rhs2D_get() \n
- * MyRhs = Rhs2D_setPythonFunction( MyRhs, 0, AXEe_X, the_python_function1) # 0 correspond to the reference "0" of the geometry's element \n
- * MyRhs = Rhs2D_setPythonFunction( MyRhs, 0, AXEe_Y, the_python_function2) # 0 correspond to the reference "0" of the geometry's element \n
+ * MyRhs = Rhs2D_setPythonFunction( MyRhs, 0, AXEe_X, the_python_function1) # 0 is the reference "0" of the geometry's element \n
+ * MyRhs = Rhs2D_setPythonFunction( MyRhs, 0, AXEe_Y, the_python_function2) # 0 is the reference "0" of the geometry's element \n
  *
  * ------------------------------------------------------------------------ */
 
@@ -82,7 +82,8 @@ Real    Rhs2D_evalFunction         (const RHS_2D* MyRhs, int ref_e, int axe, Rea
 #endif
 
 /*! \struct RHS_2D
-* \brief the structure for the RHS in 2-D
+* 
+* the structure for the RHS in 2-D
 *
 * The RHS structure contains the pointers to the functions defined in the domain\n
 * as well as the time (for transient problems)
@@ -90,13 +91,15 @@ Real    Rhs2D_evalFunction         (const RHS_2D* MyRhs, int ref_e, int axe, Rea
 
 
 /*! \fn Rhs2D_get          ( void );
-* \brief Create an uninitialized RHS_2D structure (to be filled later)
+* 
+* Create an uninitialized RHS_2D structure (to be filled later)
 */
 
 /*! \fn Rhs2D_free          (RHS_2D  *MyRhs);
-* \brief Release the structure
 *
 * \param MyRhs   : the RHS structure
+*
+* Release the structure
 */
 
 /*! \fn Rhs2D_setFunction   ( RHS_2D* MyRhs, int ref_e, int axe, FUN_TYPE type, void* phi, void* clientdata);

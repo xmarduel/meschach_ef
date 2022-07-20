@@ -128,6 +128,12 @@ Real    Adv2D_evalFunction         ( const ADV_2D* MyAdv, int ref_e, int axe1, i
 * Create an uninitialized structure (to be filled later)
 */
 
+/*! \fn Adv2D_setup_from_params ( const PARAMS *params );
+* \brief Create a new structure of type ADV_2D
+*
+* Create an structure filled from the params specifications.
+*/
+
 /*! \fn Adv2D_free          (ADV_2D  *MyAdv);
 * \brief Release the structure MyAdv
 * \param MyAdv   : the ADV_2D structure

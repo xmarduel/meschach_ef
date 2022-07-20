@@ -66,6 +66,9 @@ static void json_dump_error(const char* prefix, json_error_t *error)
    fprintf(stderr, "\t error: position %d\n", error->position);
 }
 
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- */
+
 json_t *json_load_xfile(const char *path)
 {
    int k;
