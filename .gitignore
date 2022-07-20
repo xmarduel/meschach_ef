@@ -8,6 +8,7 @@
 man/
 LINUX_MAKEFILES/*.a
 LINUX_MAKEFILES/*.exe
+LINUX_MAKEFILES/*.so
 JSON_SCHEMAS/__pycache__/
 MESCHACH_PROJECT/build
 MESCHACH_LIBS
@@ -26,13 +27,13 @@ MESCHACH_PROJECT/test_vogle_carbon-Info.plist
 MESCHACH_PROJECT/test_vogle_cocoa-Info.plist
 /test_vogle_cocoa-Info.plist
 /test_vogle_carbon-Info.plist
+EXTERNAL_LIBS/pgplot/
+EXTERNAL_LIBS/pgplot_srcs/
 EXTERNAL_LIBS/spooles/
 EXTERNAL_LIBS/lua-5.4.3/
 EXTERNAL_LIBS/jansson-2.13
 EXTERNAL_LIBS/silo-4.10.2/
 EXTERNAL_LIBS/plotutils-2.6/
-EXTERNAL_LIBS/spooles/libspooles.a
-EXTERNAL_LIBS/spooles/spooles.a
 MESCHACH_LIBSCIPLOT/LIBSCIPLOT/TEST_LIBPLOT/anim
 MESCHACH_LIBSCIPLOT/LIBSCIPLOT/TEST_LIBPLOT/draw_c
 MESCHACH_LIBSCIPLOT/LIBSCIPLOT/TEST_LIBPLOT/gui
