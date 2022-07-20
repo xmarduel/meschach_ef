@@ -22,7 +22,7 @@ longjmp (png_ptr->jmpbuf, 1);  -> longjmp(png_jmpbuf(png_ptr), 1);
 > ./configure
 > make
 
-by linking meschach_ef demos , error -> Replace in jansson.h "real" with "xreal"
+by linking meschach_ef , error -> Replace in jansson.h "real" with "xreal"
 
 
 # spooles
@@ -43,19 +43,22 @@ by linking meschach_ef demos , error -> Replace in jansson.h "real" with "xreal"
 
 # vogle/vopl
 +++++++++++++
+
+DO NOT build them!
+
 build in the project (modified)
 
 # pgplot
 +++++++++
 
-follow the instructions 
+follow the instructions:
 - g77 must be on system
 - rename untar'ed folder "pgplot_srcs"
 - create new "pgplot" folder and copy in it the file "drivers.list"
 - cd in your "pgplot" folder
 - drivers.list: select PNG, PPM, GIF, XWINDOW, XSERVE, XADRIV(ATHENA) - not Motif!
 
-ppm and gif: see the drivers source code and modify it accordingly to the 
+ppm and gif: see the drivers source code and modify it accordingly to the
 indication given in the source files: "INTEGER -> INTEGER*8"
 
 - ../pgplot_srcs/makemake ../pgplot_srcs  linux g77_gcc
@@ -68,13 +71,10 @@ longjmp (png_ptr->jmpbuf, 1);  -> longjmp(png_jmpbuf(png_ptr), 1);
 
 - put in LD_LIBRARY_PATH the location where the libpglot.so/libcpgplot.so are
 
-
-
 # lua
 +++++++++
 just compile
 > make
-
 
 
 # ------------------------------------------------------------------

@@ -8,7 +8,6 @@ Doc:
 (will I ever have the time for it ?)
 
 - re-run mcstrip/cyclo, seems buggy on macosx (wrong function names)
-- nroff doc update (I have forgotten how to do this)
 
 
 Bugs:
