@@ -1,5 +1,5 @@
 # meschach_ef
-my **very old** finite element library ("framework"), based on the **meschach library** for the linear algebra.
+my **old** finite element library (years 2000), based on the **meschach library** for the linear algebra.
 
 Just updated/cleaned recently in order to make it public in github.
 
