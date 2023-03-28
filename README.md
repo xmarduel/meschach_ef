@@ -25,20 +25,18 @@ As Xcode project (10.1) for macOS 10.14 - maybe you have to adapt the project in
 External libs to compile separately. 
 
 After successfull compiling (and settings some environment variables), just type:
+```
 > python DRIVER_1D.py
-> 
 > python DRIVER_2D.py
-> 
 > python DRIVER_3D.py
-> 
 > python DRIVER_KURAMOTO_SIVASHINSKY_b.py  (for fun)
+```
 
 or for C drivers
+```
 > 1D.exe
-> 
 > 2D.exe
-> 
 > 3D.exe
-> 
+```
 
 Please see the html doc for more details
