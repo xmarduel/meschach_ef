@@ -22,9 +22,6 @@
 **
 ***************************************************************************/
 
-
-/* iter.c 17/09/93 */
-
 /* 
   ITERATIVE METHODS - implementation of several iterative methods;
   see also iter0.c
@@ -34,8 +31,6 @@
 #include        "matrix2.h"
 #include	"sparse.h"
 #include        "iter.h"
-
-static char rcsid[] = "$Id: iternsym.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
 
 
 #ifdef ANSI_C

@@ -28,9 +28,6 @@
 	Matrix factorisation routines to work with the other matrix files.
 */
 
-/* LUfactor.c 1.5 11/25/87 */
-static	char	rcsid[] = "$Id: lufactor.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
-
 #include	"matrix.h"
 #include        "matrix2.h"
 

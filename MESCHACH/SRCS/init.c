@@ -29,7 +29,6 @@
 	This is to be included in the matrix.a library
 */
 
-static	char	rcsid[] = "$Id: init.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 #include	"matrix.h"
 

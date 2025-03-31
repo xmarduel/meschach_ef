@@ -1,0 +1,35 @@
+
+                                 VOGLE PM
+
+                 VOGLE driver for OS/2 Presentation Manager
+
+                     (C) Copyright Claudio Fahey, 1994
+                         claudio@uclink.berkeley.edu
+
+
+    To install this driver, make sure you have Borland C++ for OS/2 and run 
+    BuildOS2.CMD.  This will create the library SRC\VOGLEPM.LIB and then 
+    compile the example programs in EXAMPLES\OS2PM.  Due to a bug in Borland 
+    C++, H2V.EXE does not work correctly so the Hershey fonts are not created.  
+    Another compiler must be used to create H2V.EXE.  I have successfully used 
+    EMX/GCC to create H2V.EXE.  
+
+    If you don't have Borland C++ for OS/2, then just about any compiler that 
+    can compile the main VOGLE code should be able to compile the PM driver.  
+    The makefiles, of course, will have to be modified.  NOTE:  If you 
+    successfully compile this using another compiler, please send me 
+    the makefile and diffs (if any) so that I can include them in future 
+    versions of this driver.  
+ 
+    The final executable must contain the PM resources contained in 
+    VOGLEPM.RES which is created from VOGLEPM.RC, VOGLEPM.ICO and VOGLEPM.DLG.  
+    These files are in EXAMPLES\OS2PM.  
+
+    The Postscript and HPGL drivers are included in the PM library.
+
+    For features and limitations of this driver, see the source file in 
+    DRIVERS\IBMPC\VOGLEPM.C.  
+
+    Feel free to send comments, bug reports, or suggestions to me.  I'll do
+    my best to incorporate them in future releases.
+

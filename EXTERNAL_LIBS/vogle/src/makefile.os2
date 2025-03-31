@@ -1,0 +1,66 @@
+#
+# This Makefile is used to compile the OS/2 PM version of VOGLE
+# with Borland C++ 1.0 for OS/2.
+#
+
+CC = bcc
+TLIB = tlib
+
+CFLAGS = -c -sm -4 -O2 -ff -w-pro -w-pia \
+         -DPC -DOS2 -DTC -DPOSTSCRIPT -DDXY -DHPGL
+
+LIB = voglepm.lib
+
+all: $(LIB)
+
+HDRS = vogle.h
+
+OBJS = \
+    attr.obj \
+    aspect.obj \
+    buffer.obj \
+    pref.obj \
+    clip.obj \
+    curves.obj \
+    arcs.obj \
+    draw.obj \
+    drivers.obj \
+    valloc.obj \
+    viewing.obj \
+    viewp.obj \
+    mapping.obj \
+    matrix.obj \
+    move.obj \
+    objects.obj \
+    patches.obj \
+    points.obj \
+    polygons.obj \
+    rect.obj \
+    tensor.obj \
+    text.obj \
+    trans.obj \
+    scale.obj \
+    getgp.obj \
+    newtokens.obj \
+    yobbarays.obj \
+    getstring.obj \
+    ps.obj \
+    hpdxy.obj \
+    voglepm.obj
+
+voglepm.obj: ..\drivers\ibmpc\voglepm.c vogle.h
+    $(CC) $(CFLAGS) -I..\drivers\ibmpc ..\drivers\ibmpc\voglepm.c
+
+ps.obj: ..\drivers\ps.c
+    $(CC) $(CFLAGS) ..\drivers\ps.c
+
+hpdxy.obj: ..\drivers\hpdxy.c
+    $(CC) $(CFLAGS) ..\drivers\hpdxy.c
+
+$(LIB): $(OBJS) tlibpm.in
+    @if exist $(LIB) del $(LIB)
+    $(TLIB) $(LIB) @tlibpm.in, voglepm.lst
+
+.c.obj:
+    $(CC) $(CFLAGS) $<
+

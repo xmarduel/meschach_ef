@@ -330,8 +330,9 @@ static  double	__threaded_ip__( double *dp1,  double *dp2, int len)
       rc = pthread_create(&(threads[t]), &attr , routine_threaded_ip , &data[t]);
       if (rc != 0)
       {
-         printf("ERROR; return code from pthread_create() is %d\n", rc); exit(-1);
+         printf("ERROR; return code from pthread_create() is %d\n", rc);
          fflush(stdout);
+          exit(-1);
       }
       else
       {
@@ -351,8 +352,9 @@ static  double	__threaded_ip__( double *dp1,  double *dp2, int len)
       rc = pthread_join(threads[t], (void **)&status);
       if (rc != 0)
       {
-         printf("ERROR; return code from pthread_join() [%d] is %d\n", t, rc); exit(-1);
+         printf("ERROR; return code from pthread_join() [%d] is %d\n", t, rc);
          fflush(stdout);
+         exit(-1);
       }
       else
       {

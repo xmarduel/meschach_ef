@@ -1,0 +1,19 @@
+F = -FPc
+CFLAGS = -DPC -DMSC -c -AL -I../src -I../../vogle/src $(F)
+
+LIBS = ..\src\vopl.lib vogle.lib
+
+OBJS = gpp.obj doargs.obj legend.obj read.obj
+.c.obj:
+	cl $(CFLAGS) $*.c
+
+gpp.obj: gpp.c
+
+doargs.obj: doargs.c
+
+legend.obj: legend.c
+
+read.obj: read.c
+
+gpp.exe: $(OBJS)
+	link /NOE $(OBJS),,,$(LIBS);

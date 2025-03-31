@@ -14,8 +14,6 @@
 
 PERM * sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type)
 {
-   int rc;
-
    VEC  *Values;
    IVEC *Ap;
    IVEC *Ai;
@@ -53,7 +51,7 @@ PERM * sp_bandwr_amd(const SPMAT *A, PERM* P, PERM *INVP, int type)
       double Info [ ]	    // output Info statistics, of size AMD_INFO
    */
 
-   rc = amd_order(A->m, Ap->ive, Ai->ive, P->pe, NULL, NULL);
+   amd_order(A->m, Ap->ive, Ai->ive, P->pe, NULL, NULL);
 
    /* set INVP */
    INVP = px_inv(P, INVP);

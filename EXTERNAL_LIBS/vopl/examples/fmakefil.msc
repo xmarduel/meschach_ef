@@ -1,0 +1,21 @@
+F = -FPc
+
+FFLAGS = -AL -4Nt $(F)
+
+.for.obj:
+	fl -c $(FFLAGS) $*.for
+
+.obj.exe:
+	link /NOE $*.obj,,,..\src\vopl.lib vogle.lib;
+
+fex1.obj: fex1.for
+
+fex1.exe: fex1.obj
+
+fex2.obj: fex2.for
+
+fex2.exe: fex2.obj
+
+fex3.obj: fex3.for
+
+fex3.exe: fex3.obj

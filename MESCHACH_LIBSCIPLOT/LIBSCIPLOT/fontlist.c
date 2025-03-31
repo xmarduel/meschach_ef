@@ -261,7 +261,7 @@ svg, ps, ai, cgm, fig, pcl, hpgl, regis, tek (vector formats).\n",
 	       "Names of supported Hershey vector fonts (case-insensitive):\n");
       for (i=0; i < numpairs; i++)
 	{
-	  int len;
+	  unsigned long len;
 	  
 	  len = strlen (hershey_font_info[j].name);
 	  fprintf (stdout, "\t%s", hershey_font_info[j].name);
@@ -312,7 +312,7 @@ svg, ps, ai, cgm, fig, pcl, hpgl, regis, tek (vector formats).\n",
 	       "Names of supported HP vector fonts (case-insensitive):\n");
       for (i=0, j=0, k=numpairs + (odd ? 1 : 0); i < numpairs; i++)
 	{
-	  int len;
+	  unsigned long len;
 	  
 	  len = strlen (stick_font_info[goodfonts[j]].ps_name);
 	  fprintf (stdout, "\t%s", stick_font_info[goodfonts[j++]].ps_name);
@@ -342,7 +342,7 @@ svg, ps, ai, cgm, fig, pcl, hpgl, regis, tek (vector formats).\n",
 	       "Names of supported PCL fonts (case-insensitive):\n");
       for (i=0, j=0, k=numpairs + (odd ? 1 : 0); i < numpairs; i++)
 	{
-	  int len;
+	  unsigned long len;
 	  
 	  len = strlen (pcl_font_info[j].ps_name);
 	  fprintf (stdout, "\t%s", pcl_font_info[j++].ps_name);
@@ -369,7 +369,7 @@ svg, ps, ai, cgm, fig, pcl, hpgl, regis, tek (vector formats).\n",
 	       "Names of supported Postscript fonts (case-insensitive):\n");
       for (i=0, j=0, k=numpairs + (odd ? 1 : 0); i < numpairs; i++)
 	{
-	  int len;
+	  unsigned long len;
 	  
 	  len = strlen (ps_font_info[j].ps_name);
 	  fprintf (stdout, "\t%s", ps_font_info[j++].ps_name);

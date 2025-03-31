@@ -11,7 +11,7 @@
 all: everything
 
 C = $(CC) $(CFLAGS) 
-C = gcc -arch x86_64
+C = gcc -arch arm64
 
 everything:
 	$(C) -DDINT -c amd_aat.c -o amd_i_aat.o

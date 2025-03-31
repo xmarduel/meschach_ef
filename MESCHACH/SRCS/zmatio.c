@@ -25,7 +25,6 @@
 
 #include        "zmatrix.h"
 
-static char rcsid[] = "$Id: zmatio.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 #if defined(__cplusplus) && defined(CODE_WARRIOR)
 inline int putc(int _C, FILE *_Str)  {return ((_Str->_Next

@@ -27,7 +27,6 @@
 
 #include	"matrix.h"
 
-static	char	rcsid[] = "$Id: vecop.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 
 /* _in_prod -- inner product of two vectors from i0 downwards */

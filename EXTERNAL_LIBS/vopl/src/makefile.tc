@@ -1,0 +1,42 @@
+#
+CFLAGS = -c -ml -DPC -I..\..\vogle\src
+
+OBJS = adjustsc.obj err.obj  mem.obj  scalers.obj \
+ilinfit.obj axis.obj  plot.obj  hist.obj spline.obj \
+cubicsp.obj lsfit.obj  savestr.obj switches.obj 
+
+all: vopl.lib
+
+adjustsc.obj: adjustsc.c
+
+axis.obj: axis.c
+
+cubicsp.obj: cubicsp.c
+
+ilinfit.obj: ilinfit.c
+
+err.obj: err.c
+
+lsfit.obj: lsfit.c
+
+mem.obj: mem.c
+
+plot.obj: plot.c
+
+hist.obj: hist.c
+
+savestr.obj: savestr.c
+
+scalers.obj: scalers.c
+
+spline.obj: spline.c
+
+switches.obj: switches.c
+
+vopl.lib: $(OBJS)
+	del vopl.lib
+	tlib vopl.lib @tlib.in, vopl.lst
+
+.c.obj:
+	tcc $(CFLAGS) $*.c
+

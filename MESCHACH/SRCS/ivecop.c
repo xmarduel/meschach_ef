@@ -27,8 +27,6 @@
 
 #include 	"matrix.h"
 
-static	char	rcsid[] = "$Id: ivecop.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
-
 static char    line[MAXLINE];
 
 

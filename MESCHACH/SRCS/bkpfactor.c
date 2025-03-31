@@ -28,8 +28,6 @@
 	Matrix factorisation routines to work with the other matrix files.
 */
 
-static	char	rcsid[] = "$Id: bkpfactor.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
-
 #include	"matrix.h"
 #include        "matrix2.h"
 

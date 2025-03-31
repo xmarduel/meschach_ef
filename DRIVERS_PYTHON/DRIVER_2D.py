@@ -413,15 +413,15 @@ def run_test():
 
         "MESH_2D" : {
             "MESHFILEDEFINITION" : {
-                "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/mesh2D.quad",
+                "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/2D/mesh2D.quad",
                 "MESHNAME" : "MESH_40",     # "MESH_03", "MESH_04", "MESH_05", "MESH_06", "MESH_10", "MESH_20", "MESH_40", "MESH_50"
                 "MESHTYPE" : "quad1"        # "quad1", "quad2", "quad3"
             
-                # "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/2D/CUBE_11.emc2",
+                # "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/2D/CUBE_11.emc2",
                 # "MESHNAME" : null,
                 # "MESHTYPE" : "emc2"
                
-                # "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/2D/cube2D_P1_v2.gmsh",
+                # "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/2D/cube2D_P1_v2.gmsh",
                 # "MESHNAME" : null,
                 # "MESHTYPE" : "gmsh"
             },

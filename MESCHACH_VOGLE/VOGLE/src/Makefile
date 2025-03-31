@@ -52,7 +52,7 @@ COBJS =	arcs.o aspect.o attr.o buffer.o clip.o curves.o draw.o drivers.o \
 #
 FONTLIB = /tmp/hfonts/
 
-CARCH= -arch x86_64
+CARCH= -arch arm64
 CFLAGS= $(CARCH) $(DEVICES) -DFONTLIB=\"$(FONTLIB)\" $(MCFLAGS)
 LINTFLAGS=
 

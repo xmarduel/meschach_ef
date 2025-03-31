@@ -1,0 +1,75 @@
+#
+# This Makefile is used to compile the the VOGLE examples for
+# the OS/2 PM driver with Borland C++ 1.0 for OS/2.
+#
+
+CC = bcc
+
+CFLAGS = -c -sm -4 -O2 -ff -w-pro -I..\..\src -DTC
+
+LIB = ..\..\src\voglepm.lib
+
+TESTS = trivial.exe simple.exe shapes.exe poly.exe views.exe circtxt.exe \
+        moretxt.exe curves1.exe patches1.exe balls.exe objvws.exe world.exe \
+        getstr.exe loc.exe teapot.exe cube.exe lcube.exe \
+        tetra.exe jtext.exe lstyles.exe licosa.exe
+
+all: $(TESTS)
+
+voglepm.res: voglepm.rc
+    brcc.exe -R -I..\..\drivers\ibmpc -FO voglepm.res voglepm.rc
+
+.obj.exe:
+    tlink /Toe /aa $*.obj \BCOS2\LIB\C02.OBJ, $*.exe, nul, $(LIB) C2MT.LIB OS2.LIB,
+    rc voglepm.res $*.exe
+
+# Use this to create OS/2 examples from Windows examples.
+#{..\mswin}.c.obj:
+#    @echo Creating $*.c from mswin example $< ...
+#    sed -e "s/mswin/os2pm/" $< > $*.c
+#    $(CC) $(CFLAGS) $*.c
+
+trivial.exe: $(LIB) voglepm.res trivial.obj 
+
+simple.exe: $(LIB) voglepm.res simple.obj 
+
+licosa.exe: $(LIB) voglepm.res licosa.obj 
+
+shapes.exe: $(LIB) voglepm.res shapes.obj 
+
+poly.exe: $(LIB) voglepm.res poly.obj 
+
+views.exe: $(LIB) voglepm.res views.obj 
+
+circtxt.exe: $(LIB) voglepm.res circtxt.obj 
+
+jtext.exe: $(LIB) voglepm.res jtext.obj 
+
+moretxt.exe: $(LIB) voglepm.res moretxt.obj 
+
+getstr.exe: $(LIB) voglepm.res getstr.obj 
+
+curves1.exe: $(LIB) voglepm.res curves1.obj 
+
+patches1.exe: $(LIB) voglepm.res patches1.obj 
+
+objvws.exe: $(LIB) voglepm.res objvws.obj 
+
+balls.exe: $(LIB) voglepm.res balls.obj 
+
+world.exe: $(LIB) voglepm.res world.obj  
+
+loc.exe: $(LIB) voglepm.res loc.obj  
+
+lstyles.exe: $(LIB) voglepm.res lstyles.obj  
+
+teapot.exe: $(LIB) voglepm.res teapot.obj  
+
+distrt.exe: $(LIB) voglepm.res distrt.obj  
+
+cube.exe: $(LIB) voglepm.res cube.obj  
+
+lcube.exe: $(LIB) voglepm.res lcube.obj  
+
+tetra.exe: $(LIB) voglepm.res tetra.obj  
+

@@ -28,8 +28,6 @@
 
 #include	"zmatrix.h"
 
-static	char	rcsid[] = "$Id: zmemory.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
-
 
 
 /* zv_zero -- zeros all entries of a complex vector

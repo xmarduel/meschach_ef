@@ -23,13 +23,7 @@
 **
 ***************************************************************************/
 
-
-/* memory.c 1.3 11/25/87 */
-
 #include 	"matrix.h"
-
-
-static	char	rcsid[] = "$Id: memory.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
 
 /* m_get -- gets an mxn matrix (in MAT form) by dynamic memory allocation */
 extern  MAT	*m_get(int m, int n)

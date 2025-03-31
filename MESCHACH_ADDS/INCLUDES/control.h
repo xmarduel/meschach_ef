@@ -22,7 +22,7 @@ typedef enum
 } CONTROLt_METHOD ;
 
 void set_control_method( int method );
-int  get_control_method();
+int  get_control_method(void);
 
 MAT *riccati  (const MAT *A, const MAT *B, const MAT *C, MAT *X);
 MAT *lyapunov (const MAT *A, const MAT *C,               MAT *X);

@@ -35,7 +35,7 @@ typedef struct XAW_WINLIBPLOT_
    int libplot_win;
 
    /* MOTIF id workproc */
-   int id_idleworkproc;
+   unsigned long id_idleworkproc;
 
    /* pointer to widgets */
    Widget * buttonStopRun;
@@ -407,7 +407,7 @@ void* graphics1D_libsciplot_curve_with_xt_toolkit_transient(void* data)
    int SIZEX = pdata->window_size_x;
    int SIZEY = pdata->window_size_y;
    
-   int id_idleworkproc;
+   unsigned long id_idleworkproc;
    /* on this separate thread, the Xt window ... */
    int ac    = 0;
    char **av = NULL;

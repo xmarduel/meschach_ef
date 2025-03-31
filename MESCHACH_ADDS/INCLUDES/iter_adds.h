@@ -32,9 +32,9 @@ typedef struct
 
 ITER_OUTPUT_INFO* iter_output_info(ITER_INFOe iter_output_type, const char* output_filename);
 	
-void iter_std1_info(const ITER *ip, Real nres, VEC *res, VEC *Bres);
-void iter_std2_info(const ITER *ip, Real nres, VEC *res, VEC *Bres);
-void iter_std3_info(const ITER *ip, Real nres, VEC *res, VEC *Bres);
+void iter_std1_info(ITER *ip, Real nres, VEC *res, VEC *Bres);
+void iter_std2_info(ITER *ip, Real nres, VEC *res, VEC *Bres);
+void iter_std3_info(ITER *ip, Real nres, VEC *res, VEC *Bres);
 
 VEC *iter_bicgstab  (ITER *ip);
 

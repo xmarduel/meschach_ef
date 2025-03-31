@@ -193,19 +193,19 @@
     "MESH_2D" : {
 
        #"MESHFILEDEFINITION" : {
-       #        "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/mesh2D.quad",
+       #     "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/2D/mesh2D.quad",
        #     "MESHNAME" : "MESH_40",     # "MESH_03", "MESH_04", "MESH_05", "MESH_06", "MESH_10", "MESH_20", "MESH_40", "MESH_50"
        #     "MESHTYPE" : "quad2"        # "quad1", "quad2", "quad3"
        # }
 
         #"MESHFILEDEFINITION" : {
-        #    "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/CUBE_11.emc2",
+        #    "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/2D/CUBE_11.emc2",
         #    "MESHNAME" : "",
         #    "MESHTYPE" : "emc2"
         #}
 
         "MESHFILEDEFINITION" : {
-            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/cube2D_P1_v3.gmsh",
+            "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/2D/cube2D_P1_v3.gmsh",
             "MESHNAME" : "",
             "MESHTYPE" : "gmsh"
         }
@@ -268,5 +268,5 @@
 
     # logging -------------------------------------------------
 
-    "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/2D_TRANSIENT/OUTPUT_PDE_2D_TRANSIENT.dat"
+    "OUTPUT_LOG_FILE": "${MESCHACH_EF}/DRIVERS_C/2D_TRANSIENT/OUTPUT_PDE_2D_TRANSIENT.dat"
 }

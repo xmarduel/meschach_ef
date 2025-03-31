@@ -22,9 +22,6 @@
 **
 ***************************************************************************/
 
-
-/* iter0.c  14/09/93 */
-
 /* ITERATIVE METHODS - service functions */
 
 /* functions for creating and releasing ITER structures;
@@ -35,9 +32,6 @@
 */
 
 #include "iter.h"
-
-
-static char rcsid[] = "$Id: iter0.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
 
 
 /* standard functions */

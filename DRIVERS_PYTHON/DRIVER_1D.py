@@ -223,7 +223,7 @@ def run_test():
 
             "MESHFILEDEFINITION" : {
               "MESHFILE": "NULL",
-              "MESHFILE"     : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
+              "MESHFILE"     : "${MESCHACH_EF}/EF_MESHES/1D/mesh1D.line",
               "MESHNAME"     : "MESH_50",
               "MESHTYPE"     : "line"
             },
@@ -257,7 +257,8 @@ def run_test():
     config = str(json.dumps( {
         "GRAPHICS_1D" : {
             #"ENGINE" : "VOGLE",
-            "ENGINE" : "GRAPH",
+            "ENGINE" : "PGPLOT",
+            #"ENGINE" : "LIBSCIPLOT",
             "DRIVER" : "/XWINDOW" ,
             "WINDOW_SIZE" : [700, 500] ,
             "LABELS_SIZE" : 1.1 ,

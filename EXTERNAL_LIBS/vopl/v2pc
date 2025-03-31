@@ -1,0 +1,10 @@
+mv Makefile makefile
+mv README readme
+mv src/Makefile src/makefile
+mv src/README src/readme
+mv src/sunfort/Makefile src/sunfort/makefile
+mv src/adjustscale.c src/adjustsc.c
+mv gpp/Makefile gpp/makefile
+mv gpp/README gpp/readme
+mv examples/Makefile examples/makefile
+mv examples/Makefile.f77 examples/makefile.f77

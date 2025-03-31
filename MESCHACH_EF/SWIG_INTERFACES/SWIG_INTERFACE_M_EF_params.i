@@ -84,8 +84,12 @@ PARAMS*  Params_append_from_string(PARAMS* p, const char* text);
                          break;
 
       case TYPEd_REAL:   if (PyFloat_Check($input)) {
-                            $1 = &(PyFloat_AS_DOUBLE($input));
-	                         printf("--> %s %s \t %le \n", arg2 , arg3 , *((double*)$1));
+                            // OLD $1 = &(PyFloat_AS_DOUBLE($input));
+                            // NEW ---
+                            double d = PyFloat_AS_DOUBLE($input);
+                            $1 = &d;
+                            // --- NEW
+	                         printf("--> %s %s \t %e \n", arg2 , arg3 , *((double*)$1));
 	                      }
                          else { ok = 0;
                          }
@@ -94,7 +98,7 @@ PARAMS*  Params_append_from_string(PARAMS* p, const char* text);
       case TYPEd_INT:    if (PyLong_Check($input)) {
                             long along = PyLong_AS_LONG($input);
                             $1 = (void*)&along;
-                            printf("--> %s %s \t %ld \n", arg2 , arg3 , *((int*)$1));
+                            printf("--> %s %s \t %d \n", arg2 , arg3 , *((int*)$1));
 	                      }
                          else { ok = 0;
                          }

@@ -64,7 +64,7 @@
 
 /* ------------------------------------------------------------------------ */
 
-int main()
+int main(int argc, char** argv)
 {
     ELT_1D   *MyElt, *elt_P1, *elt_P2, *elt_P3, *elt_H3, *elt_S2, *elt_S3, *elt_S4, *elt_S5;
 
@@ -343,15 +343,15 @@ int main()
 
     /* ----------------------------------------------------------------------- */
 
-    mem_info_file(stdout, 0);    /* = mem_info(); */
-
+    //mem_info_file(stdout, 0);    /* = mem_info(); */
+/*
     mem_info_file(stdout, MY_LIST1);
     mem_info_file(stdout, MY_LIST2);
     mem_info_file(stdout, MY_LIST3);
     mem_info_file(stdout, MY_LIST4);
     mem_info_file(stdout, MY_LIST5);
     mem_info_file(stdout, MY_LIST6);
-    mem_info_file(stdout, MY_LIST7);
+    mem_info_file(stdout, MY_LIST7);*/
 
     pthread_exit(NULL);
 

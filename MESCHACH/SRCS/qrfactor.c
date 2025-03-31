@@ -38,8 +38,6 @@
 */
 
 
-static	char	rcsid[] = "$Id: qrfactor.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
-
 #include        "matrix2.h"
 
 

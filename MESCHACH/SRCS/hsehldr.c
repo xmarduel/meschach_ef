@@ -32,8 +32,6 @@
 	by both row & column.
 */
 
-/* hsehldr.c 1.3 10/8/87 */
-static	char	rcsid[] = "$Id: hsehldr.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
 
 #include	"matrix.h"
 #include    "matrix2.h"

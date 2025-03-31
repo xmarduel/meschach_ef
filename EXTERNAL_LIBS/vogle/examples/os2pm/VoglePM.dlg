@@ -1,0 +1,25 @@
+
+DLGTEMPLATE DID_CANCEL LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "About VOGLE PM", DID_CANCEL, 22, 17, 210, 124, WS_VISIBLE, 
+            FCF_SYSMENU | FCF_TITLEBAR
+    BEGIN
+        CTEXT           "VOGLE PM", 4, 5, 104, 200, 15, NOT WS_GROUP
+                        PRESPARAMS PP_FONTNAMESIZE, "16.Times New Roman"
+        CTEXT           "Very Ordinary Graphics Learning Environment", 3, 5, 
+                        95, 200, 8, NOT WS_GROUP
+        CTEXT           "OS/2 Presentation Manager Driver", 101, 5, 79, 200, 
+                        8, NOT WS_GROUP
+        CTEXT           "Version 1.0", 7, 5, 70, 200, 8, NOT WS_GROUP
+        CTEXT           "Copyright Claudio Fahey, 1994", 5, 5, 55, 200, 8, 
+                        NOT WS_GROUP
+        CTEXT           "claudio@uclink.berkeley.edu", 6, 5, 46, 200, 8, NOT 
+                        WS_GROUP
+                        PRESPARAMS PP_FONTNAMESIZE, "9.Courier"
+        LTEXT           "Permission granted to use, distribute, and modify, "
+                        "provided this notice remains intact.", 8, 14, 24, 
+                        191, 18, DT_WORDBREAK | NOT WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00000000L
+        PUSHBUTTON      "OK", DID_OK, 85, 7, 40, 14
+    END
+END

@@ -142,7 +142,7 @@
         "MESH_SPEC" : "MESHDATADEFINITION",
 
         "MESHFILEDEFINITION" : {
-            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
+            "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/1D/mesh1D.line",
             "MESHNAME" : "MESH_10",
             "MESHTYPE" : "line"
         },
@@ -182,7 +182,7 @@
     # 1D interactive PDE 1D - graphics library ploting parameters ------------
 
     "GRAPHICS_1D" : {
-        "ENGINE" : "GRAPH",
+        "ENGINE" : "VOGLE",
         "DRIVER" : "/XWINDOW" ,
         "WINDOW_SIZE" : [600, 400] ,
         "LABELS_SIZE" : 1.2 ,
@@ -204,5 +204,5 @@
 
     # logging -------------------------------------------------
 
-    "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/1D/OUTPUT_PDE_1D.dat"
+    "OUTPUT_LOG_FILE": "${MESCHACH_EF}/DRIVERS_C/1D/OUTPUT_PDE_1D.dat"
 }

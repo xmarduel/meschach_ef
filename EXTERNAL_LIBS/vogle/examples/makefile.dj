@@ -1,0 +1,37 @@
+#
+# examples makefile 
+#
+CC = gcc
+
+CEXAMPS = trivial simple shapes poly views circtxt moretxt jtext curves \
+	  lstyles getstr patches balls objvws world loc teapot showg \
+	  cube lcube tetra licosa beer
+
+COBJS = trivial.o simple.o shapes.o poly.o views.o circtxt.o jtext.o moretxt.o \
+	lstyles.o getstr.o curves.o patches.o balls.o objvws.o world.o loc.o \
+	teapot.o showg.o cube.o lcube.o tetra.o licosa.o beer.o
+
+#
+# Where to find librarys
+#
+OURLIBS = -L../src -lvogle
+LIBS = -lgrx
+MCFLAGS = -O -I../src
+
+CFLAGS = $(MCFLAGS)
+
+all:	$(CEXAMPS)
+
+$(CEXAMPS): $(COBJS) ..\src\libvogle.a
+	$(CC) $(CFLAGS) -o $@ $@.o $(OURLIBS) $(LIBS) -lm
+	aout2exe $@
+	del $@
+
+clean:
+	del *.o
+
+install:
+
+clobber:
+	del *.o
+	del *.exe

@@ -23,12 +23,8 @@
 **
 ***************************************************************************/
 
-
-/* 1.2 submat.c 11/25/87 */
-
 #include	"matrix.h"
 
-static	char	rcsid[] = "$Id: submat.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 
 /* get_col -- gets a specified column of a matrix and retruns it as a vector */

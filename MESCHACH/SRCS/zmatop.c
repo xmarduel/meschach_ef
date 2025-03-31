@@ -25,7 +25,6 @@
 
 #include	"zmatrix.h"
 
-static	char	rcsid[] = "$Id: zmatop.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 
 #define	is_zero(z)	((z).re == 0.0 && (z).im == 0.0)

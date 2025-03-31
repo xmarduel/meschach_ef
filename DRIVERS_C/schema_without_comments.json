@@ -1,0 +1,208 @@
+{
+    "PDE" : "LAPLACIAN",   
+
+    "COORDS_DIMS" : 1,
+    "TARGET_DIMS" : 1,
+
+    "PDE_PARAMATERS" : {
+        "KAPPA"    : 1.000,
+        "SIGMA"    : 0.0,
+        "EPSILON"  : 0.0
+    },
+
+    "PDE_TIME_PARAMETERS" : {
+        "TIME_INI" : 0.0,
+        "TIME_END" : 10.0,
+        "DELTA_T"  : 0.005
+    },
+
+    
+
+    "PDE_RESOLUTION" : {
+        "EF" : "S2" ,         
+
+        "LAPLACIAN_ALGO" : {
+            "METHOD": "ITERATIVE-METHOD",
+
+               "ITERATIVE-METHOD" : {
+                "METHOD"          : "BiCGStab" ,       
+                "PRECONDITIONER"  : "ICH" ,           
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 500,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : "residuals.dat"
+                }
+            }
+        },
+
+        "CONVECTION_DIFFUSION_ALGO" : {
+            "METHOD": "ITERATIVE-METHOD",
+            "METHOD_STABILIZATION" : "GALS" ,   
+            "DELTA" : 10.0,
+
+            "ITERATIVE-METHOD" : {
+                "METHOD"           : "CG" ,
+                "PRECONDITIONER"   : "ILU",
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 250,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : null
+                }
+            }
+        },
+
+        "BURGERS_ALGO" : {
+            "METHOD": "NEWTON-EXACT",
+            "METHOD_STABILIZATION" : "GALS" ,   
+            "DELTA" : 10.0,
+
+            "NB_OUTER_ITERATIONS" : 100,
+
+            "INNER-METHOD": "ITERATIVE-METHOD",
+
+            "ITERATIVE-METHOD" : {
+                "METHOD"           : "BiCGStab" ,
+                "PRECONDITIONER"   : "ILU",
+                "PARAMETERS" : {
+                    "NMAX_ITER" : 250,
+                    "EPSILON"   : 1.0e-12
+                },
+                "OUTPUT" : {
+                    "STDOUT" : true,
+                    "FILE"   : null
+                }
+            }
+        },
+
+        "EIGEN_ALGO" : {
+            "EIGEN_PROBLEM" : "ORDINARY_SYMMETRIC",
+            "EIGEN_OPTION"  : "LOWER",
+
+            "NB_EIGENS"     : 10,
+
+            "LOWER_IBOUND"  : 5,
+            "UPPER_IBOUND"  : 9,
+
+            "LOWER_RBOUND"  : 1.0,
+            "UPPER_RBOUND"  : 1.0
+        }
+
+    },
+
+    
+
+    "PDE_INITIAL_CONDITION" : {
+        "DIM1" : {"FUNC_DEF" : null},
+        "DIM2" : {"FUNC_DEF" : null},
+        "DIM3" : {"FUNC_DEF" : null}
+    },
+
+    "PDE_RHS" : {
+        "DIM1": {"FUNC_DEF" : "-2.0" },
+        "DIM2": {"FUNC_DEF" : null},
+        "DIM3": {"FUNC_DEF" : null}
+    },
+
+    "PDE_EXACT_SOL" : {
+        "DIM1": {"FUNC_DEF" : "x*(x-1) + 2.0" },
+        "DIM2": {"FUNC_DEF" : null},
+        "DIM3": {"FUNC_DEF" : null}
+    },
+
+    "PDE_BOUNDARY_CONDITIONS" : {
+
+        "NB_BCS" : 2,
+
+        "DIM1" : [
+            { "IDX" : 1 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "x*(x-1) + 2.0" },
+            { "IDX" : 2 , "BC_TYPE" : "DIRICHLET" , "FUNC_DEF" : "x*(x-1) + 2.0" }
+        ]
+
+    },
+
+    "PDE_CONVECTION_DIFFUSION_FUNCTIONS" : {
+
+        "1-DIM" : {
+            "FUNC_dudx" : "x",
+            "FUNC_dudy" : "y",
+            "FUNC_dudz" : "z"
+        }
+    },
+
+    
+
+    "MESH_1D" : {
+
+        "MESH_SPEC" : "MESHDATADEFINITION",
+
+        "MESHFILEDEFINITION" : {
+            "MESHFILE" : "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
+            "MESHNAME" : "MESH_10",
+            "MESHTYPE" : "line"
+        },
+
+        "MESHDATADEFINITION" : {
+            "XMIN"   : 0.0,
+            "XMAX"   : 1.0,
+            "NX"     : 20,
+            "DISTRIBUTION" : "UNIFORM",
+            "PERIODIC" : false  
+        }
+    },
+
+    
+
+    "MISC_OUTPUT" : {
+        "ITPRINT"          : 1,
+        "ITSAVE"           : 1,
+        "ITSTAT"           : 1,
+        "ITGRAPH"          : 1
+    },
+
+    
+
+    "MISC_GRAPHICS" : {
+        "IMTXPROF"         : false,
+        "IGEOMVIEW"        : false
+    },
+
+    "GRAPHICS_1D_OUTPUT" : {
+        "GNUPLOT"    : false,
+        "MATLAB"     : false,
+        "VTK"        : false,
+        "SILO"       : false
+    },
+
+    
+
+    "GRAPHICS_1D" : {
+        "ENGINE" : "PGPLOT",
+        "DRIVER" : "/XWINDOW" ,
+        "WINDOW_SIZE" : [600, 400] ,
+        "LABELS_SIZE" : 1.2 ,
+
+        "SUB_WINDOWS" :
+        [
+           {
+                "IDXS"         : [1,1] , 
+                "LEGEND"       : "U(x,t)" ,
+                "LEGEND_AXE_X" : "(x)" ,
+                "LEGEND_AXE_Y" : "(y)" ,
+                "MARKER"       : 0 ,
+                "MARKER_END"   : 0 ,
+                "USE_VIEWPORT" : false,
+                "VIEWPORT"     : { "X_MIN":0.0, "X_MAX":1.0, "Y_MIN":1.5 , "Y_MAX":2.3 }
+            }
+        ]
+    },
+
+    
+
+    "OUTPUT_LOG_FILE": "/Users/xavier/GITHUB/meschach_ef/DRIVERS_C/1D/OUTPUT_PDE_1D.dat"
+}

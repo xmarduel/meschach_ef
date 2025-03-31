@@ -31,7 +31,6 @@
 
 #include        "sparse.h"
 
-static char rcsid[] = "$Id: sparseio.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 /* local variables */
 static char line[MAXLINE];

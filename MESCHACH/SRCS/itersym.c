@@ -22,10 +22,6 @@
 **
 ***************************************************************************/
 
-
-/* itersym.c 17/09/93 */
-
-
 /* 
   ITERATIVE METHODS - implementation of several iterative methods;
   see also iter0.c
@@ -43,8 +39,6 @@ extern  VEC	*trieig(VEC *,VEC *,MAT *);
 VEC	*spCHsolve();
 VEC	*trieig();
 #endif
-
-static char rcsid[] = "$Id: itersym.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
 
 
 /* iter_spcg -- a simple interface to iter_cg() which uses sparse matrix

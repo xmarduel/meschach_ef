@@ -317,7 +317,7 @@
     "MESH_1D" : {
 
         #"MESHFILEDEFINITION" : {
-        #    "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/1D/mesh1D.line",
+        #    "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/1D/mesh1D.line",
         #    "MESHNAME" : "MESH_50",
         #    "MESHTYPE" : "line",
         #},
@@ -334,19 +334,19 @@
     "MESH_2D" : {
 
         "MESHFILEDEFINITION" : {
-            "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/mesh2D.quad",
+            "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/mesh2D.quad",
             "MESHNAME" : "MESH_10",     # "MESH_03", "MESH_04", "MESH_05", "MESH_06", "MESH_10", "MESH_20", "MESH_40", "MESH_50"
             "MESHTYPE" : "quad1"        # "quad1", "quad2", "quad3"
         }
 
         #"MESHFILEDEFINITION" : {
-        #    "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/2D/CUBE_11.emc2",
+        #    "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/2D/CUBE_11.emc2",
         #    "MESHNAME" : null,
         #    "MESHTYPE" : "emc2"
         #}
 
         #"MESHFILEDEFINITION" : {
-        #    "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/2D/cube2D_P1_v2.gmsh",
+        #    "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/2D/cube2D_P1_v2.gmsh",
         #    "MESHNAME" : null,
         #    "MESHTYPE" : "gmsh"
         #}
@@ -354,13 +354,13 @@
 
     "MESH_3D" : {
         "MESHFILEDEFINITION" : {
-            "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/3D/mesh3D.cube",
+            "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/3D/mesh3D.cube",
             "MESHNAME" : "MESH_20", # "MESH_10", "MESH_20"
             "MESHTYPE" : "cube"
         }
 
         #"MESHFILEDEFINITION" : {
-        #    "MESHFILE" : "/Users/xavier/DEVELOPPEMENT/MESCHACH_WORK/EF_MESHES/3D/cube3D_P1_v4.gmsh" # cube3D_P1_v[4-5-6-7-8].gmsh
+        #    "MESHFILE" : "${MESCHACH_EF}/EF_MESHES/3D/cube3D_P1_v4.gmsh" # cube3D_P1_v[4-5-6-7-8].gmsh
         #    "MESHNAME" : null,
         #    "MESHTYPE" : "gmsh"
         #}

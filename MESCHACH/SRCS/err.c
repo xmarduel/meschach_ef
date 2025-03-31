@@ -30,8 +30,6 @@
   Ported to Pyramid 9810 late 1987
   */
 
-static	char	rcsid[] = "$Id: err.c,v 1.10 2005/12/26 19:23:56 xavier Exp $";
-
 #include        "err.h"
 
 

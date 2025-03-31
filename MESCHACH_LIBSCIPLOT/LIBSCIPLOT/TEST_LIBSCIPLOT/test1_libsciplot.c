@@ -1,8 +1,8 @@
 
 #include "libsciplot.h"
 
-#define SIZE 2000
-#define NBITER 100
+#define SIZE 5000
+#define NBITER 200
 
 int main(int argc, char **argv)
 {

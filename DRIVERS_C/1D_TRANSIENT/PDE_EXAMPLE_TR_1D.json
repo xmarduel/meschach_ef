@@ -19,7 +19,7 @@
     # resolution -------------------------------------
 
     "PDE_RESOLUTION" : {
-        "EF" : "S4" ,         # "P1", "P2", "H3", "S3", "S5"
+        "EF" : "S3" ,         # "P1", "P2", "H3", "S3", "S5"
 
         "LAPLACIAN_ALGO" : {
             "METHOD" : "ITERATIVE-METHOD",
@@ -144,7 +144,7 @@
         "MESHDATADEFINITION" : {
             "XMIN"   : 0.0,
             "XMAX"   : 6.2831853071795862,
-            "NX"     : 100,
+            "NX"     : 200,
             "DISTRIBUTION" : "UNIFORM",
             "PERIODIC" : true  # true, false
         }
@@ -224,5 +224,5 @@
 
     # logging -------------------------------------------------
 
-    "OUTPUT_LOG_FILE": "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/DRIVERS_C/1D_TRANSIENT/OUTPUT_PDE_1D_TRANSIENT.dat"
+    "OUTPUT_LOG_FILE": "${MESCHACH_EF}/DRIVERS_C/1D_TRANSIENT/OUTPUT_PDE_1D_TRANSIENT.dat"
 }

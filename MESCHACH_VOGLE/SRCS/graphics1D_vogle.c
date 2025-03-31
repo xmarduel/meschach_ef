@@ -148,24 +148,24 @@ VOPL_CONTOUR_DATA *contourdata_new(void)
    pdata->plot_type = VOPL_CONTOURS;
 	
    pdata->ix = -1; /* to be set later */
-	pdata->iy = -1; /* to be set later */
+   pdata->iy = -1; /* to be set later */
 	
 	/* window - must be set from the config file */
    pdata->xmin   = 0.0;
    pdata->xmax   = 1.0;
    pdata->ymin   = 0.0;
-	pdata->ymax   = 1.0;
+   pdata->ymax   = 1.0;
 	
-	strcpy(pdata->legend, "solution");
+   strcpy(pdata->legend, "solution");
 	
-	pdata->labels_size  = 1.5;
-	pdata->font         = VOGLEe_FONT_FUTURA_L;
+   pdata->labels_size  = 1.5;
+   pdata->font         = VOGLEe_FONT_FUTURA_L;
 	
-	/* the drawing function */
+   /* the drawing function */
    pdata->draw = drawcontours_vopl1D;
-	pdata->set_drawfunc = set_drawfunc_voplcontours; /* to set a new drawing function */
+    pdata->set_drawfunc = (void (*)(VOPL_CONTOUR_DATA*, void (*)(VOPL_CONTOUR_DATA *)))set_drawfunc_voplcontours; /* to set a new drawing function */
 	
-	/* plot datas */
+   /* plot datas */
    pdata->VALUES = NULL;
    pdata->NSELMT = NULL;
    pdata->XYSOMM = NULL;
@@ -200,8 +200,8 @@ VOPL_CONTOUR_DATA *contourdata_new(void)
 	
 	pdata->ucdmesh = NULL;
 
-   pdata->setup_objects  = setup_voplcontour_objects;
-   pdata->delete_objects = delete_voplcontour_objects;
+   pdata->setup_objects  = (VOPL_CONTOUR_DRAW_FUNC)setup_voplcontour_objects;
+   pdata->delete_objects = (VOPL_CONTOUR_DRAW_FUNC)delete_voplcontour_objects;
 	
    /* finito */
    return pdata;
@@ -309,7 +309,7 @@ VOPL_CONTOUR_DATA *contourdata_clone(VOPL_CONTOUR_DATA *in)
 
 void set_drawfunc_voplcontours(VOPL_CONTOUR_DATA* pdata, VOPL_CONTOUR_DRAW_FUNC drawfunc)
 {
-   pdata->draw = drawfunc; /* set the function who draws */
+   pdata->draw = (VOPL_CONTOUR_DATA*)drawfunc; /* set the function who draws */
 }
 
 /*--------------------------------------------------------------------------------------*/
@@ -561,7 +561,7 @@ void drawcurve_vopl1D(const VOPL_CURVE_DATA *dataplot )
 void graphics1D_vopl_initialize(const char *driver, int window_size_x, int window_size_y, int nx, int ny, int vopl_plot_type)
 {	
    /* create a queue , set it in a static data  */
-   SVQueue *queue = svqueue_new(vopl_graphdata_clone, vopl_graphdata_free);
+   SVQueue *queue = svqueue_new((CLONE_FUNC)vopl_graphdata_clone, (FREED_FUNC)vopl_graphdata_free);
 	
    svqueue_vogle_set_static(queue);
 	
@@ -959,7 +959,7 @@ int graphics1D_vopl_contourtransientbuildinfo(int ix, int iy)
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
-void drawcontours_vopl1D(const VOPL_CONTOUR_DATA *pdata)
+void drawcontours_vopl1D(VOPL_CONTOUR_DATA *pdata)
 {	
 	color(VOGLEe_COLOR_BLACK);
    clear();

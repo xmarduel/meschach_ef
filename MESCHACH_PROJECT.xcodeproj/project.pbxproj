@@ -368,6 +368,20 @@
 			remoteGlobalIDString = 2578205811CE717600293CB2;
 			remoteInfo = "libvogle-2.0";
 		};
+		253E15932D95500800FFEA9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2578215811CE717600293CB2;
+			remoteInfo = libmeschach_cpgplot;
+		};
+		253E15972D955A2B00FFEA9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2578211311CE717600293CB2;
+			remoteInfo = libmeschach_adds;
+		};
 		254456E21A8DF88800915E85 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
@@ -395,34 +409,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2578211311CE717600293CB2;
 			remoteInfo = libmeschach_adds;
-		};
-		255858C012FE029B00F9704B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2578218711CE717600293CB2;
-			remoteInfo = libmeschach_ef;
-		};
-		255858C412FE02B300F9704B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2578216F11CE717600293CB2;
-			remoteInfo = libmeschach_libsciplot;
-		};
-		255858CC12FE02F700F9704B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 257820A311CE717600293CB2;
-			remoteInfo = libmeschach;
-		};
-		255858CE12FE030200F9704B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2578213711CE717600293CB2;
-			remoteInfo = libmeschach_vogle;
 		};
 		2570D13211D89DDE00DB56B8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -480,13 +466,6 @@
 			remoteGlobalIDString = 2578213711CE717600293CB2;
 			remoteInfo = "libmeschach_vogle (Upgraded)";
 		};
-		257822A611CE717700293CB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2578215811CE717600293CB2;
-			remoteInfo = "libmeschach_cpgplot (Upgraded)";
-		};
 		257822A811CE717700293CB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
@@ -508,13 +487,6 @@
 			remoteGlobalIDString = 2578213711CE717600293CB2;
 			remoteInfo = "libmeschach_vogle (Upgraded)";
 		};
-		257822AE11CE717700293CB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2578215811CE717600293CB2;
-			remoteInfo = "libmeschach_cpgplot (Upgraded)";
-		};
 		257822B011CE717700293CB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
@@ -528,13 +500,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2578213711CE717600293CB2;
 			remoteInfo = "libmeschach_vogle (Upgraded)";
-		};
-		257822B611CE717700293CB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2578215811CE717600293CB2;
-			remoteInfo = "libmeschach_cpgplot (Upgraded)";
 		};
 		257822B811CE717700293CB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -557,13 +522,6 @@
 			remoteGlobalIDString = 2578213711CE717600293CB2;
 			remoteInfo = "libmeschach_vogle (Upgraded)";
 		};
-		257822BE11CE717700293CB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2578215811CE717600293CB2;
-			remoteInfo = "libmeschach_cpgplot (Upgraded)";
-		};
 		257822C011CE717700293CB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
@@ -584,13 +542,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2578213711CE717600293CB2;
 			remoteInfo = "libmeschach_vogle (Upgraded)";
-		};
-		257822C611CE717700293CB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2578215811CE717600293CB2;
-			remoteInfo = "libmeschach_cpgplot (Upgraded)";
 		};
 		257822C811CE717700293CB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -641,19 +592,19 @@
 			remoteGlobalIDString = 257820A311CE717600293CB2;
 			remoteInfo = libmeschach;
 		};
+		25C510582D97D12400D9A4BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2578215811CE717600293CB2;
+			remoteInfo = libmeschach_cpgplot;
+		};
 		25F1E76C1B11C05E00A13704 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2578211311CE717600293CB2;
 			remoteInfo = libmeschach_adds;
-		};
-		25F1E76E1B11C0E900A13704 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 257820A311CE717600293CB2;
-			remoteInfo = libmeschach;
 		};
 		25F1E7701B11C0ED00A13704 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -3125,7 +3076,6 @@
 				254456E31A8DF88800915E85 /* Headers */,
 				254456E41A8DF88800915E85 /* Sources */,
 				254456E61A8DF88800915E85 /* Frameworks */,
-				254456E71A8DF88800915E85 /* Rez */,
 			);
 			buildRules = (
 			);
@@ -3148,7 +3098,6 @@
 				2578204711CE717600293CB2 /* Headers */,
 				2578204B11CE717600293CB2 /* Sources */,
 				2578205211CE717600293CB2 /* Frameworks */,
-				2578205311CE717600293CB2 /* Rez */,
 			);
 			buildRules = (
 			);
@@ -3167,7 +3116,6 @@
 				2578205911CE717600293CB2 /* Headers */,
 				2578205F11CE717600293CB2 /* Sources */,
 				2578208211CE717600293CB2 /* Frameworks */,
-				2578208311CE717600293CB2 /* Rez */,
 				2578208411CE717600293CB2 /* ShellScript */,
 			);
 			buildRules = (
@@ -3187,7 +3135,6 @@
 				2578208C11CE717600293CB2 /* Headers */,
 				2578208F11CE717600293CB2 /* Sources */,
 				2578209D11CE717600293CB2 /* Frameworks */,
-				2578209E11CE717600293CB2 /* Rez */,
 				25E125161A616D7000B1D803 /* ShellScript */,
 			);
 			buildRules = (
@@ -3208,7 +3155,6 @@
 				257820A411CE717600293CB2 /* Headers */,
 				257820B011CE717600293CB2 /* Sources */,
 				257820EC11CE717600293CB2 /* Frameworks */,
-				257820ED11CE717600293CB2 /* Rez */,
 				257820EE11CE717600293CB2 /* ShellScript */,
 			);
 			buildRules = (
@@ -3228,7 +3174,6 @@
 				257820F411CE717600293CB2 /* Headers */,
 				257820F911CE717600293CB2 /* Sources */,
 				257820FC11CE717600293CB2 /* Frameworks */,
-				257820FD11CE717600293CB2 /* Rez */,
 				257820FE11CE717600293CB2 /* ShellScript */,
 			);
 			buildRules = (
@@ -3249,7 +3194,6 @@
 				2578210411CE717600293CB2 /* Headers */,
 				2578210811CE717600293CB2 /* Sources */,
 				2578210C11CE717600293CB2 /* Frameworks */,
-				2578210D11CE717600293CB2 /* Rez */,
 				2578210E11CE717600293CB2 /* ShellScript */,
 			);
 			buildRules = (
@@ -3270,7 +3214,6 @@
 				2578211811CE717600293CB2 /* Headers */,
 				2578212411CE717600293CB2 /* Sources */,
 				2578213011CE717600293CB2 /* Frameworks */,
-				2578213111CE717600293CB2 /* Rez */,
 				2578213211CE717600293CB2 /* ShellScript */,
 			);
 			buildRules = (
@@ -3292,7 +3235,6 @@
 				2578213C11CE717600293CB2 /* Headers */,
 				2578214511CE717600293CB2 /* Sources */,
 				2578215111CE717600293CB2 /* Frameworks */,
-				2578215211CE717600293CB2 /* Rez */,
 				2578215311CE717600293CB2 /* ShellScript */,
 			);
 			buildRules = (
@@ -3315,16 +3257,12 @@
 				2578215B11CE717600293CB2 /* Headers */,
 				2578216111CE717600293CB2 /* Sources */,
 				2578216811CE717600293CB2 /* Frameworks */,
-				2578216911CE717600293CB2 /* Rez */,
 				2578216A11CE717600293CB2 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				255858CD12FE02F700F9704B /* PBXTargetDependency */,
-				255858C112FE029B00F9704B /* PBXTargetDependency */,
-				255858CF12FE030200F9704B /* PBXTargetDependency */,
-				255858C512FE02B300F9704B /* PBXTargetDependency */,
+				253E15982D955A2B00FFEA9A /* PBXTargetDependency */,
 			);
 			name = libmeschach_cpgplot;
 			productInstallPath = /usr/local/lib;
@@ -3339,14 +3277,12 @@
 				2578217411CE717600293CB2 /* Headers */,
 				2578217911CE717600293CB2 /* Sources */,
 				2578218011CE717600293CB2 /* Frameworks */,
-				2578218111CE717600293CB2 /* Rez */,
 				2578218211CE717600293CB2 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				25F1E7711B11C0ED00A13704 /* PBXTargetDependency */,
-				25F1E76F1B11C0E900A13704 /* PBXTargetDependency */,
 				2578229F11CE717700293CB2 /* PBXTargetDependency */,
 			);
 			name = libmeschach_libsciplot;
@@ -3362,7 +3298,6 @@
 				2578218A11CE717600293CB2 /* Headers */,
 				257821CD11CE717600293CB2 /* Sources */,
 				2578220411CE717600293CB2 /* Frameworks */,
-				2578220511CE717600293CB2 /* Rez */,
 				2578220611CE717600293CB2 /* ShellScript */,
 			);
 			buildRules = (
@@ -3383,14 +3318,13 @@
 				2578221411CE717600293CB2 /* Headers */,
 				2578221511CE717600293CB2 /* Sources */,
 				2578221711CE717600293CB2 /* Frameworks */,
-				2578221811CE717600293CB2 /* Rez */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				253E15942D95500800FFEA9A /* PBXTargetDependency */,
 				257822A311CE717700293CB2 /* PBXTargetDependency */,
 				257822A511CE717700293CB2 /* PBXTargetDependency */,
-				257822A711CE717700293CB2 /* PBXTargetDependency */,
 				257822A911CE717700293CB2 /* PBXTargetDependency */,
 			);
 			name = 1D;
@@ -3406,14 +3340,13 @@
 				2578222911CE717600293CB2 /* Headers */,
 				2578222A11CE717600293CB2 /* Sources */,
 				2578222C11CE717600293CB2 /* Frameworks */,
-				2578222D11CE717600293CB2 /* Rez */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				25C510592D97D12400D9A4BE /* PBXTargetDependency */,
 				257822AB11CE717700293CB2 /* PBXTargetDependency */,
 				257822AD11CE717700293CB2 /* PBXTargetDependency */,
-				257822AF11CE717700293CB2 /* PBXTargetDependency */,
 				257822B111CE717700293CB2 /* PBXTargetDependency */,
 			);
 			name = 1D_TRANSIENT;
@@ -3429,14 +3362,12 @@
 				2578223C11CE717600293CB2 /* Headers */,
 				2578223D11CE717600293CB2 /* Sources */,
 				2578223F11CE717600293CB2 /* Frameworks */,
-				2578224011CE717600293CB2 /* Rez */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				257822BB11CE717700293CB2 /* PBXTargetDependency */,
 				257822B511CE717700293CB2 /* PBXTargetDependency */,
-				257822B711CE717700293CB2 /* PBXTargetDependency */,
 				257822B911CE717700293CB2 /* PBXTargetDependency */,
 			);
 			name = 2D;
@@ -3452,14 +3383,12 @@
 				2578224F11CE717700293CB2 /* Headers */,
 				2578225011CE717700293CB2 /* Sources */,
 				2578225211CE717700293CB2 /* Frameworks */,
-				2578225311CE717700293CB2 /* Rez */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				257822C311CE717700293CB2 /* PBXTargetDependency */,
 				257822BD11CE717700293CB2 /* PBXTargetDependency */,
-				257822BF11CE717700293CB2 /* PBXTargetDependency */,
 				257822C111CE717700293CB2 /* PBXTargetDependency */,
 			);
 			name = 2D_TRANSIENT;
@@ -3475,14 +3404,12 @@
 				2578226211CE717700293CB2 /* Headers */,
 				2578226311CE717700293CB2 /* Sources */,
 				2578226511CE717700293CB2 /* Frameworks */,
-				2578226611CE717700293CB2 /* Rez */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				257822CB11CE717700293CB2 /* PBXTargetDependency */,
 				257822C511CE717700293CB2 /* PBXTargetDependency */,
-				257822C711CE717700293CB2 /* PBXTargetDependency */,
 				257822C911CE717700293CB2 /* PBXTargetDependency */,
 			);
 			name = 3D;
@@ -3498,7 +3425,6 @@
 				2578226F11CE717700293CB2 /* Headers */,
 				2578227011CE717700293CB2 /* Sources */,
 				2578227211CE717700293CB2 /* Frameworks */,
-				2578227311CE717700293CB2 /* Rez */,
 			);
 			buildRules = (
 			);
@@ -3518,7 +3444,6 @@
 				2578227A11CE717700293CB2 /* Headers */,
 				2578227B11CE717700293CB2 /* Sources */,
 				2578227D11CE717700293CB2 /* Frameworks */,
-				2578227E11CE717700293CB2 /* Rez */,
 			);
 			buildRules = (
 			);
@@ -3567,6 +3492,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 25459F140A7B655C004F50D1;
@@ -3617,142 +3543,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXRezBuildPhase section */
-		254456E71A8DF88800915E85 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578205311CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578208311CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578209E11CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		257820ED11CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		257820FD11CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578210D11CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578213111CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578215211CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578216911CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578218111CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578220511CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578221811CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578222D11CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578224011CE717600293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578225311CE717700293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578226611CE717700293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578227311CE717700293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2578227E11CE717700293CB2 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXRezBuildPhase section */
-
 /* Begin PBXShellScriptBuildPhase section */
 		252D479D2874C43C00C5EF9E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3769,7 +3559,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo `pwd`; echo \"this is the current folder\"; make --directory MESCHACH_THREADED/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
+			shellScript = "echo `pwd`; \necho \"this is the current folder\"; \nmake --directory MESCHACH_THREADED/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
 		};
 		2578208411CE717600293CB2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3847,7 +3637,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo `pwd`; make --directory MESCHACH_VOGLE/SWIG_INTERFACES -f makefile_swig_python_extension all";
+			shellScript = "echo `pwd`; make --directory MESCHACH_VOGLE/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
 		};
 		2578216A11CE717600293CB2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4291,6 +4081,16 @@
 			target = 2578205811CE717600293CB2 /* libvogle-2.0 */;
 			targetProxy = 251E82EF14B8FA930055F7BF /* PBXContainerItemProxy */;
 		};
+		253E15942D95500800FFEA9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2578215811CE717600293CB2 /* libmeschach_cpgplot */;
+			targetProxy = 253E15932D95500800FFEA9A /* PBXContainerItemProxy */;
+		};
+		253E15982D955A2B00FFEA9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2578211311CE717600293CB2 /* libmeschach_adds */;
+			targetProxy = 253E15972D955A2B00FFEA9A /* PBXContainerItemProxy */;
+		};
 		254456E11A8DF88800915E85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2578205811CE717600293CB2 /* libvogle-2.0 */;
@@ -4310,26 +4110,6 @@
 			isa = PBXTargetDependency;
 			target = 2578211311CE717600293CB2 /* libmeschach_adds */;
 			targetProxy = 254456F11A8DF8A400915E85 /* PBXContainerItemProxy */;
-		};
-		255858C112FE029B00F9704B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2578218711CE717600293CB2 /* libmeschach_ef */;
-			targetProxy = 255858C012FE029B00F9704B /* PBXContainerItemProxy */;
-		};
-		255858C512FE02B300F9704B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2578216F11CE717600293CB2 /* libmeschach_libsciplot */;
-			targetProxy = 255858C412FE02B300F9704B /* PBXContainerItemProxy */;
-		};
-		255858CD12FE02F700F9704B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 257820A311CE717600293CB2 /* libmeschach */;
-			targetProxy = 255858CC12FE02F700F9704B /* PBXContainerItemProxy */;
-		};
-		255858CF12FE030200F9704B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2578213711CE717600293CB2 /* libmeschach_vogle */;
-			targetProxy = 255858CE12FE030200F9704B /* PBXContainerItemProxy */;
 		};
 		2570D13311D89DDE00DB56B8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4371,11 +4151,6 @@
 			target = 2578213711CE717600293CB2 /* libmeschach_vogle */;
 			targetProxy = 257822A411CE717700293CB2 /* PBXContainerItemProxy */;
 		};
-		257822A711CE717700293CB2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2578215811CE717600293CB2 /* libmeschach_cpgplot */;
-			targetProxy = 257822A611CE717700293CB2 /* PBXContainerItemProxy */;
-		};
 		257822A911CE717700293CB2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2578216F11CE717600293CB2 /* libmeschach_libsciplot */;
@@ -4391,11 +4166,6 @@
 			target = 2578213711CE717600293CB2 /* libmeschach_vogle */;
 			targetProxy = 257822AC11CE717700293CB2 /* PBXContainerItemProxy */;
 		};
-		257822AF11CE717700293CB2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2578215811CE717600293CB2 /* libmeschach_cpgplot */;
-			targetProxy = 257822AE11CE717700293CB2 /* PBXContainerItemProxy */;
-		};
 		257822B111CE717700293CB2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2578216F11CE717600293CB2 /* libmeschach_libsciplot */;
@@ -4405,11 +4175,6 @@
 			isa = PBXTargetDependency;
 			target = 2578213711CE717600293CB2 /* libmeschach_vogle */;
 			targetProxy = 257822B411CE717700293CB2 /* PBXContainerItemProxy */;
-		};
-		257822B711CE717700293CB2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2578215811CE717600293CB2 /* libmeschach_cpgplot */;
-			targetProxy = 257822B611CE717700293CB2 /* PBXContainerItemProxy */;
 		};
 		257822B911CE717700293CB2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4426,11 +4191,6 @@
 			target = 2578213711CE717600293CB2 /* libmeschach_vogle */;
 			targetProxy = 257822BC11CE717700293CB2 /* PBXContainerItemProxy */;
 		};
-		257822BF11CE717700293CB2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2578215811CE717600293CB2 /* libmeschach_cpgplot */;
-			targetProxy = 257822BE11CE717700293CB2 /* PBXContainerItemProxy */;
-		};
 		257822C111CE717700293CB2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2578216F11CE717600293CB2 /* libmeschach_libsciplot */;
@@ -4445,11 +4205,6 @@
 			isa = PBXTargetDependency;
 			target = 2578213711CE717600293CB2 /* libmeschach_vogle */;
 			targetProxy = 257822C411CE717700293CB2 /* PBXContainerItemProxy */;
-		};
-		257822C711CE717700293CB2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2578215811CE717600293CB2 /* libmeschach_cpgplot */;
-			targetProxy = 257822C611CE717700293CB2 /* PBXContainerItemProxy */;
 		};
 		257822C911CE717700293CB2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4486,15 +4241,15 @@
 			target = 257820A311CE717600293CB2 /* libmeschach */;
 			targetProxy = 25C3FC9A193B8B1C001A58DB /* PBXContainerItemProxy */;
 		};
+		25C510592D97D12400D9A4BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2578215811CE717600293CB2 /* libmeschach_cpgplot */;
+			targetProxy = 25C510582D97D12400D9A4BE /* PBXContainerItemProxy */;
+		};
 		25F1E76D1B11C05E00A13704 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2578211311CE717600293CB2 /* libmeschach_adds */;
 			targetProxy = 25F1E76C1B11C05E00A13704 /* PBXContainerItemProxy */;
-		};
-		25F1E76F1B11C0E900A13704 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 257820A311CE717600293CB2 /* libmeschach */;
-			targetProxy = 25F1E76E1B11C0E900A13704 /* PBXContainerItemProxy */;
 		};
 		25F1E7711B11C0ED00A13704 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4701,7 +4456,7 @@
 					./MESCHACH_LIBS,
 				);
 				MACH_O_TYPE = mh_execute;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lmeschach_adds",
@@ -4738,7 +4493,7 @@
 					/usr/X11/lib,
 					./MESCHACH_LIBS,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lmeschach_adds",
@@ -4863,15 +4618,14 @@
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lplot",
 					"-lcommon",
 					"-lXaw",
 					"-lXt",
-					"-lXp",
 					"-lXpm",
 					"-lXext",
 					"-lX11",
@@ -4917,14 +4671,13 @@
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lplot",
 					"-lcommon",
 					"-lXaw",
 					"-lXt",
-					"-lXp",
 					"-lXpm",
 					"-lXext",
 					"-lX11",
@@ -4976,7 +4729,7 @@
 				LIBRARY_SEARCH_PATHS = /opt/X11/lib;
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-Wall",
 					"-pipe",
@@ -5086,7 +4839,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-ansi";
 				OTHER_LDFLAGS = "-lvogle-2.0";
 				OTHER_LIBTOOL_FLAGS = "";
@@ -5162,7 +4915,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LIBTOOL_FLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -5238,7 +4991,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lmeschach",
@@ -5325,7 +5078,7 @@
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lmeschach",
@@ -5371,8 +5124,8 @@
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lmeschach",
@@ -5423,8 +5176,8 @@
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-ansi";
 				OTHER_LDFLAGS = (
 					"-lmeschach_lapack",
@@ -5478,7 +5231,7 @@
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = "-ansi";
 				OTHER_LDFLAGS = (
 					"-lmeschach_lapack",
@@ -5529,7 +5282,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-Wall";
 				OTHER_LDFLAGS = (
 					"-lmeschach_adds",
@@ -5630,22 +5383,24 @@
 					.,
 					/opt/X11/include,
 					$HOME/x_local/include,
+					$HOME/GITHUB/meschach_ef/EXTERNAL_LIBS/pgplot,
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = (
 					.,
 					/opt/X11/include,
 					$HOME/x_local/include,
+					$HOME/GITHUB/meschach_ef/EXTERNAL_LIBS/pgplot,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/pgplot,
 					/opt/X11/lib,
+					$HOME/GITHUB/meschach_ef/EXTERNAL_LIBS/pgplot,
 					/usr/local/gfortran/lib,
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-Wno-unused-variable",
 					"-Wno-missing-braces",
@@ -5697,16 +5452,17 @@
 					.,
 					/opt/X11/include,
 					$HOME/x_local/include,
+					$HOME/GITHUB/meschach_ef/EXTERNAL_LIBS/pgplot,
 				);
 				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = (
-					/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EXTERNAL_LIBS/pgplot,
 					/opt/X11/lib,
+					$HOME/GITHUB/meschach_ef/EXTERNAL_LIBS/pgplot,
 					/usr/local/gfortran/lib,
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = (
 					"-Wno-unused-variable",
 					"-Wno-missing-braces",
@@ -5772,7 +5528,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lmeschach_adds",
@@ -5866,8 +5622,8 @@
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_SILO=1",
 					"HAVE_LUA=1",
+					"HAVE_SILO=1",
 				);
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
 				GCC_VERSION = "";
@@ -5888,7 +5644,7 @@
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-Wno-unused-variable";
 				OTHER_LDFLAGS = (
@@ -5897,8 +5653,8 @@
 					"-lmeschach",
 					"-lBridge",
 					"-lspooles",
-					"-lsilo",
 					"-lamd",
+					"-lsilo",
 					"-ljansson",
 					"-llua",
 					"-lm",
@@ -5930,8 +5686,8 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_SILO=1",
 					"HAVE_LUA=1",
+					"HAVE_SILO=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_USE_GCC3_PFE_SUPPORT = NO;
@@ -5953,8 +5709,8 @@
 				);
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-Wno-unused-variable";
 				OTHER_LDFLAGS = (
 					"-lmeschach_adds",
@@ -5962,8 +5718,8 @@
 					"-lmeschach",
 					"-lBridge",
 					"-lspooles",
-					"-lsilo",
 					"-lamd",
+					"-lsilo",
 					"-ljansson",
 					"-llua",
 					"-lm",
@@ -5993,10 +5749,10 @@
 				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
+					"HAVE_CPGPLOT=1",
 				);
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
@@ -6005,12 +5761,13 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
+					./MESCHACH_LIBS,
 					./EXTERNAL_LIBS/amd,
 					./EXTERNAL_LIBS/spooles,
-					./MESCHACH_LIBS,
+					./EXTERNAL_LIBS/pgplot,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-Wno-unused-variable",
 					"-Wno-missing-braces",
@@ -6028,7 +5785,6 @@
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = 1D.exe;
-				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -6048,10 +5804,10 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
+					"HAVE_CPGPLOT=1",
 				);
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
@@ -6060,9 +5816,10 @@
 				);
 				INSTALL_PATH = /Users/xavier/x_local/bin;
 				LIBRARY_SEARCH_PATHS = (
+					./MESCHACH_LIBS,
 					./EXTERNAL_LIBS/amd,
 					./EXTERNAL_LIBS/spooles,
-					./MESCHACH_LIBS,
+					./EXTERNAL_LIBS/pgplot,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_CFLAGS = (
@@ -6081,7 +5838,6 @@
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = 1D.exe;
-				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -6101,10 +5857,10 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
+					"HAVE_CPGPLOT=1",
 				);
 				GCC_USE_GCC3_PFE_SUPPORT = "";
 				GCC_VERSION = "";
@@ -6118,10 +5874,11 @@
 					./EXTERNAL_LIBS/amd,
 					./EXTERNAL_LIBS/spooles/LinSol/srcST,
 					./EXTERNAL_LIBS/spooles,
+					./EXTERNAL_LIBS/pgplot,
 					./MESCHACH_LIBS,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-Wno-unused-variable",
 					"-Wno-missing-braces",
@@ -6160,12 +5917,12 @@
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
+					"HAVE_CPGPLOT=1",
 				);
 				GCC_VERSION = "";
 				GENERATE_PROFILING_CODE = YES;
@@ -6178,9 +5935,10 @@
 					./EXTERNAL_LIBS/amd,
 					./EXTERNAL_LIBS/spooles/LinSol/srcST,
 					./EXTERNAL_LIBS/spooles,
+					./EXTERNAL_LIBS/pgplot,
 					./MESCHACH_LIBS,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = (
 					"-Wno-unused-variable",
 					"-Wno-missing-braces",
@@ -6220,7 +5978,6 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
@@ -6234,14 +5991,13 @@
 					./MESCHACH_LIBS,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-Wno-unused-variable",
 					"-Wno-missing-braces",
 				);
 				OTHER_LDFLAGS = (
 					"-lmeschach_vogle",
-					"-lmeschach_cpgplot",
 					"-lmeschach_libsciplot",
 					"-lmeschach_ef",
 					"-lmeschach_adds",
@@ -6271,7 +6027,6 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
@@ -6291,7 +6046,6 @@
 				);
 				OTHER_LDFLAGS = (
 					"-lmeschach_vogle",
-					"-lmeschach_cpgplot",
 					"-lmeschach_libsciplot",
 					"-lmeschach_ef",
 					"-lmeschach_adds",
@@ -6321,7 +6075,6 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
@@ -6336,7 +6089,7 @@
 					./MESCHACH_LIBS,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-Wno-unused-variable",
 					"-Wno-missing-braces",
@@ -6344,7 +6097,6 @@
 				OTHER_LDFLAGS = (
 					"-lmeschach_ef",
 					"-lmeschach_vogle",
-					"-lmeschach_cpgplot",
 					"-lmeschach_libsciplot",
 					"-lmeschach_adds",
 					"-lmeschach_spooles",
@@ -6376,7 +6128,6 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
@@ -6398,7 +6149,6 @@
 				OTHER_LDFLAGS = (
 					"-lmeschach_ef",
 					"-lmeschach_vogle",
-					"-lmeschach_cpgplot",
 					"-lmeschach_libsciplot",
 					"-lmeschach_adds",
 					"-lmeschach_spooles",
@@ -6430,7 +6180,6 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
@@ -6445,14 +6194,13 @@
 					./MESCHACH_LIBS,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-Wno-unused-variable",
 					"-Wno-missing-braces",
 				);
 				OTHER_LDFLAGS = (
 					"-lmeschach_vogle",
-					"-lmeschach_cpgplot",
 					"-lmeschach_libsciplot",
 					"-lmeschach_ef",
 					"-lmeschach_adds",
@@ -6482,7 +6230,6 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_CPGPLOT=1",
 					"HAVE_LIBSCIPLOT=1",
 					"HAVE_VOGLE=1",
 					"HAVE_X11=1",
@@ -6503,7 +6250,6 @@
 				);
 				OTHER_LDFLAGS = (
 					"-lmeschach_vogle",
-					"-lmeschach_cpgplot",
 					"-lmeschach_libsciplot",
 					"-lmeschach_ef",
 					"-lmeschach_adds",
@@ -6544,7 +6290,7 @@
 					./MESCHACH_LIBS,
 				);
 				MACH_O_TYPE = mh_execute;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lmeschach",
@@ -6579,7 +6325,7 @@
 					/usr/X11/lib,
 					./MESCHACH_LIBS,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-lmeschach",
@@ -6607,7 +6353,7 @@
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
@@ -6647,7 +6393,7 @@
 				CONFIGURATION_BUILD_DIR = /Users/xavier/x_local/bin;
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					EXTERNAL_LIBS,

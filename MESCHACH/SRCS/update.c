@@ -28,9 +28,6 @@
 	Matrix factorisation routines to work with the other matrix files.
 */
 
-/* update.c 1.3 11/25/87 */
-static	char	rcsid[] = "$Id: update.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
-
 #include	"matrix.h"
 #include    "matrix2.h"
 

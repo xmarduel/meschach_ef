@@ -22,7 +22,7 @@ DYLIBS_LINKED_TO_BUNDLE = $(LIB_VOGLE) $(LIB_VOPL)
 TOP = ../../..
 #
 # find vogle.h header
-CFLAGS = -I/Users/xavier/DEVELOPMENT/MESCHACH_WORK/MESCHACH_VOGLE/VOGLE/src
+CFLAGS = -I${MESCHACH_EF}/MESCHACH_VOGLE/VOGLE/src
 #
 #
 include $(TOP)/PYTHON_EXTENSIONS/python_extension.mk

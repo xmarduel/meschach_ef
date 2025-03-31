@@ -12,7 +12,7 @@ static LIBSCIPLOT_GRAPH_DATA *pdata_libsciplot  =  NULL;
 /* ------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------ */
 
-LIBSCIPLOT_GRAPH_DATA * pdata_libsciplot_get_static()
+LIBSCIPLOT_GRAPH_DATA * pdata_libsciplot_get_static(void)
 {
    return pdata_libsciplot;
 }

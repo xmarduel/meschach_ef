@@ -30,7 +30,6 @@
 	"Digital Signal Processing"
 */
 
-static char rcsid[] = "$Id: fft.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
 
 #include        "matrix.h"
 #include        "matrix2.h"

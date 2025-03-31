@@ -29,6 +29,12 @@ void graphics1D_vopl_finalize_transient(void);
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
+void * vopl_curve_with_xt_toolkit_transient(void* data); /* the thread function -> plot into a Xt window */
+void * vopl_contours_with_xt_toolkit_transient(void* data); /* the thread function -> plot into a Xt window */
+
+/*--------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------*/
+
 #ifdef __cplusplus
 }
 #endif

@@ -13,6 +13,7 @@
 
 #include "MESCHACH_ADDS/INCLUDES/matrix_adds.h"
 #include "MESCHACH_ADDS/INCLUDES/eigen.h"
+#include "MESCHACH_ADDS/INCLUDES/strfuncs.h"
 
 #include "MESCHACH_EF/INCLUDES/boundary_conditions.h"
 
@@ -190,7 +191,10 @@ static void json_config_PARAMS_geometry(PARAMS* p, const json_t* config)
                }
             }
 
-            strncpy(p->geom_params.meshfile, json_string_value(MESHFILE), 256);
+            const char *meshfile = json_string_value(MESHFILE);
+            char *meshfile_ok = str_replace(meshfile, "${MESCHACH_EF}", getenv("MESCHACH_EF"));
+                                             
+             strncpy(p->geom_params.meshfile, meshfile_ok, 256);
             if (MESHNAME != NULL && json_string_value(MESHNAME) != NULL) strncpy(p->geom_params.meshname, json_string_value(MESHNAME), 64);
             strncpy(p->geom_params.meshtype, json_string_value(MESHTYPE), 64);
          }
@@ -1723,9 +1727,13 @@ static void json_config_PARAMS_io_files(PARAMS* p, const json_t* config)
       fclose(p->logger);
    }
 
-   p->logger = fopen(logger_file_name, "w");
+   // given with env variable ?
+   char *logger_file_name_ok = str_replace(logger_file_name_ok, "${MESCHACH_EF}", getenv("MESCHACH_EF"));
 
-   printf("Using log file %s ...\n", logger_file_name);
+    
+   p->logger = fopen(logger_file_name_ok, "w");
+
+   printf("Using log file %s ...\n", logger_file_name_ok);
 }
 
 /* --------------------------------------------------------------- */

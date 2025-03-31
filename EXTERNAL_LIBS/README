@@ -1,7 +1,7 @@
 
 # plotutils
 +++++++++++++
-> ./configure
+> ./configure --with-x --with-athena=/usr/X11/lib --x-libraries=/usr/X11/lib --x-includes=/usr/X11/include 
 > make
 
 maybe error by compile: replace
@@ -52,11 +52,11 @@ build in the project (modified)
 +++++++++
 
 follow the instructions:
-- g77 must be on system
+- g77/gfortran must be on system
 - rename untar'ed folder "pgplot_srcs"
-- create new "pgplot" folder and copy in it the file "drivers.list"
+- create new "pgplot" folder and copy in it the file "drivers.list" from "pgplot_srcs"
 - cd in your "pgplot" folder
-- drivers.list: select PNG, PPM, GIF, XWINDOW, XSERVE, XADRIV(ATHENA) - not Motif!
+- drivers.list: select PPM, GIF, XWINDOW, XSERVE, XADRIV(ATHENA) - not Motif!
 
 ppm and gif: see the drivers source code and modify it accordingly to the
 indication given in the source files: "INTEGER -> INTEGER*8"
@@ -70,6 +70,30 @@ setjmp(png_ptr->jmpbuf)        -> setjmp(png_jmpbuf(png_ptr))
 longjmp (png_ptr->jmpbuf, 1);  -> longjmp(png_jmpbuf(png_ptr), 1);
 
 - put in LD_LIBRARY_PATH the location where the libpglot.so/libcpgplot.so are
+
+compile fixes:
+
+pgplot_srcs/sys/grfileio.c:  
+#include <string.h>
+#include <unistd.h>
+
+pgplot_srcs/sys/grtermio.c:
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+
+misc notes: makefile fix
+FCOMPL=gfortran
+FFLAGC= -Wall -fPIC -O -fallow-argument-mismatch
+- link with -L/usr/local/gfortran/lib -lgfortran -L/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem
+
+pgawdemo : XATHENA driver not found!
+the "fake" xadriv is not replaced with the real one written in XaPgplot.c
+solution: avoid compiling the libpgplot.so
+
+lib : libpgplot.a
+#lib : libpgplot.a $(SHARED_LIB)
 
 # lua
 +++++++++

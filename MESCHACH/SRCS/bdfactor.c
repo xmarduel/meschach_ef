@@ -29,10 +29,6 @@
   Band matrix factorisation routines
   */
 
-/* bdfactor.c  18/11/93 */
-static	char	rcsid[] = "$Id: ";
-
-
 #include        "matrix2.h"
 
 

@@ -416,7 +416,7 @@ head:
    if (lookahead == (int)'#')
    {
       int new_symbol, new_linemode;
-      int items_read;
+      unsigned long items_read;
 
       items_read = fscanf (input,
                            "# m = %d, S = %d", &new_linemode, &new_symbol);
@@ -491,7 +491,7 @@ head:
    if (lookahead == (int)'#')
    {
       int new_symbol, new_linemode;
-      int items_read;
+      unsigned long items_read;
 
       items_read = fscanf (input,
                            "# m = %d, S = %d", &new_linemode, &new_symbol);
@@ -557,7 +557,7 @@ head:
 
 static dataset_status_t read_point_binary (Reader *reader, Point *point)
 {
-   int items_read;
+   unsigned long items_read;
    data_type format_type = reader->format_type;
    FILE *input = reader->input;
 
@@ -660,7 +660,8 @@ static dataset_status_t read_point_binary (Reader *reader, Point *point)
 
 static dataset_status_t read_point_gnuplot (Reader *reader, Point *point)
 {
-   int lookahead, items_read;
+    int lookahead;
+    unsigned long items_read;
    char directive, c;
    bool two_newlines;
    double x, y;

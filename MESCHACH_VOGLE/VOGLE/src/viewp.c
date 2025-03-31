@@ -126,7 +126,7 @@ void
 viewport(float xlow, float xhigh, float ylow, float yhigh)
 {
    Token	*tok;
-   char	buf[35];
+   char	buf[45];
 
    if (!vdevice.initialised)
       verror(VERR_UNINIT, "viewport");

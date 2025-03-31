@@ -24,8 +24,6 @@
 ***************************************************************************/
 
 
-static	char	rcsid[] = "$Id: zcopy.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
-
 #include	"zmatrix.h"
 
 
@@ -157,7 +155,7 @@ ZVEC	*zmv_move(ZMAT *in,int i0,int j0,int m0,int n0,ZVEC *out,int i1)
 	-- out is resized if necessary */
 ZMAT	*zvm_move(ZVEC *in,int i0,ZMAT *out,int i1,int j1,int m1,int n1)
 {
-    int		dim0, i;
+    int		i;
 
     if ( ! in )
 	error(E_NULL,"zvm_move");
@@ -170,7 +168,6 @@ ZMAT	*zvm_move(ZVEC *in,int i0,ZMAT *out,int i1,int j1,int m1,int n1)
     else
 	out = zm_resize(out,max(i1+m1,out->m),max(j1+n1,out->n));
 
-    dim0 = m1*n1;
     for ( i = 0; i < m1; i++ )
 	MEM_COPY(&(in->ve[i0+i*n1]),&(out->me[i1+i][j1]),n1*sizeof(complex));
 

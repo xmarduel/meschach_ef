@@ -27,19 +27,9 @@ Graphics:
 - BUG: vogle ignores VIEWPORT specs
 - change MATLAB to OCTAVE for 1D and 2D
 - Cairo based plotting lib (giza?, kplot?) to enable Win32 plotting
-- Dislin ?
 
 Misc:
 -----
 
 - gmsh new file format for cube in 3D
 - AdvFunc clean
-
-
-Python
-------
-
-- shall I continue the "python classes" wrappers of the SWIG objects ?
-(lots of work but no real need). See PYTHON_WRAPPERS PyMAT etc... not finished anyway.
-
-

@@ -28,8 +28,6 @@
 	to use Karen George's suggestion to use unordered rows
 */
 
-static	char	rcsid[] = "$Id: spswap.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
-
 #include	"matrix.h"
 #include	"sparse.h"
 #include        "sparse2.h"

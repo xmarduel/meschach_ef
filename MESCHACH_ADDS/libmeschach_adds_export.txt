@@ -195,3 +195,4 @@ _xset_nowait
 _xset_with_funcs
 
 _str_build
+_str_replace

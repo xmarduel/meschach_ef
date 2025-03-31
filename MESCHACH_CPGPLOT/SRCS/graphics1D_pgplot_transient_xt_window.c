@@ -42,7 +42,7 @@ typedef struct XAW_WINPGPLOT_
    int pgplot_win;
 
    /* Xt id workproc */
-   int id_idleworkproc;
+   unsigned long id_idleworkproc;
 
    /* pointer to widgets */
    Widget * buttonStopRun;

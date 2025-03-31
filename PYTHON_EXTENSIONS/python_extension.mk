@@ -1,5 +1,5 @@
 
-SWIG_DIR = $(HOME)/x_local/bin/swig-4.0.2
+SWIG_DIR = $(HOME)/x_local/swig-4.3.0
 
 SWIG_EXE = $(SWIG_DIR)/swig -py3
 
@@ -23,24 +23,28 @@ LIB_MESCHACH_VOGLE       = $(DYLIBS_DIR)/libmeschach_vogle.dylib
 LIB_MESCHACH_LIBSCIPLOT  = $(DYLIBS_DIR)/libmeschach_libsciplot.dylib
 LIB_MESCHACH_THREADED    = $(DYLIBS_DIR)/libmeschach_threaded.dylib
 
-#CC_ARCH = -arch $(CURRENT_ARCH)
+LIB_GFORTRAN             = /usr/local/gfortran/lib/libgfortran.dylib
 
-# PYTHON 3.7 on my system
-PYTHON_HEADERS       = /Library/Frameworks/Python.framework/Versions/3.7/include/python3.7m
-PYTHON_FRAMEWORK_DIR = /Library/Frameworks/Python.framework/Versions/3.7
+
+PY_VER = 3.12
+
+# PYTHON 3.12 on my system
+PYTHON_HEADERS       = /Library/Frameworks/Python.framework/Versions/3.12/include/python3.12
+PYTHON_FRAMEWORK_DIR = /Library/Frameworks/Python.framework/Versions/3.12
 
 
 # CFLAGS already set for specific lib
 CFLAGS += -g -Wall -no-cpp-precomp -DANSI_C \
 	-I../..  \
 	-I$(PYTHON_HEADERS) \
-	-I/opt/X11/include
+	-I/opt/X11/include \
+	-I$(MESCHACH_EF)/EXTERNAL_LIBS/jansson-2.13/src
 
 INSTALL_DIR      = $(TOP)/PYTHON_EXTENSIONS
 
 
 $(SRC_WRAP) : $(SWIG_DEPENDANCIES)
-	@echo "---> create new wrapper file ...", $(SWIG_INC)
+	@echo "---> create new wrapper$(H file ...", $(SWIG_INC)
 	$(SWIG_EXE) $(SWIG_INC) -python $(SWIG_OPTIONS) $(SWIG_INTERFACE_FILE)
 
 $(OBJ_WRAP) : $(SRC_WRAP)
@@ -49,7 +53,7 @@ $(OBJ_WRAP) : $(SRC_WRAP)
 
 $(PYTHON_EXTENSION) : $(OBJ_WRAP) $(DYLIBS_LINKED_TO_BUNDLE)
 	@echo "--->make bundle ..."
-	$(CC) $(CC_ARCH) -bundle $(OBJ_WRAP) -o $(PYTHON_EXTENSION) $(DYLIBS_LINKED_TO_BUNDLE) -L$(PYTHON_FRAMEWORK_DIR)/lib -lpython3.7
+	$(CC) $(CC_ARCH) -bundle $(OBJ_WRAP) -o $(PYTHON_EXTENSION) $(DYLIBS_LINKED_TO_BUNDLE) -L$(PYTHON_FRAMEWORK_DIR)/lib -lpython3.12
 	mv $(PYTHON_EXTENSION) $(INSTALL_DIR)
 
 

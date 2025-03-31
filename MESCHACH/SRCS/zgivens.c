@@ -32,7 +32,6 @@
 	Complex version.
 */
 
-static	char	rcsid[] = "$Id: ";
 
 #include	"zmatrix.h"
 #include    "zmatrix2.h"

@@ -1,0 +1,17 @@
+Borland C++  Version 2.0 Copyright (c) 1991 Borland International
+mswin.c:
+Warning mswin.c 449: Parameter 'lParam' is never used in function About
+Warning mswin.c 621: Function should return a value in function mswin_clear
+Warning mswin.c 663: Function should return a value in function mswin_draw
+Warning mswin.c 682: Possibly incorrect assignment in function mswin_fill
+Warning mswin.c 728: Function should return a value in function mswin_fill
+Warning mswin.c 736: Function should return a value in function mswin_color
+Warning mswin.c 795: Function should return a value in function mswin_char
+Warning mswin.c 837: Function should return a value in function mswin_string
+Warning mswin.c 847: Parameter 'font' is never used in function mswin_font
+Warning mswin.c 855: Function should return a value in function mswin_frontbuf
+Warning mswin.c 902: Function should return a value in function mswin_swapbuf
+Warning mswin.c 961: Function should return a value in function mswin_verror
+Warning mswin.c 998: Function should return a value in function _mswin_devcpy
+
+        Available memory 170192

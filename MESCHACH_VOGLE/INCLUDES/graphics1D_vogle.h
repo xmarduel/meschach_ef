@@ -125,9 +125,9 @@ typedef struct VOPL_CONTOUR_DATA_
    int    font;
 
    /* drawing function */
-   void (*draw)(const struct VOPL_CONTOUR_DATA_ * pdata);
+   void (*draw)(struct VOPL_CONTOUR_DATA_ * pdata);
    /* it has a default "draw", but we can change it */
-   void (*set_drawfunc)(struct VOPL_CONTOUR_DATA_* pdata, void (*drawfunc)(const struct VOPL_CONTOUR_DATA_ *curvedata));
+   void (*set_drawfunc)(struct VOPL_CONTOUR_DATA_* pdata, void (*drawfunc)(struct VOPL_CONTOUR_DATA_ *curvedata));
 
    /* the raw values */
    VEC  *VALUES;
@@ -176,7 +176,7 @@ VOPL_CONTOUR_DATA  *contourdata_new(void);
 void               *contourdata_free (VOPL_CONTOUR_DATA *in);
 VOPL_CONTOUR_DATA  *contourdata_clone(VOPL_CONTOUR_DATA *in);
 
-void drawcontours_vopl1D(const VOPL_CONTOUR_DATA *pdata);
+void drawcontours_vopl1D(VOPL_CONTOUR_DATA *pdata);
 
 void set_drawfunc_voplcontours(VOPL_CONTOUR_DATA* q, VOPL_CONTOUR_DRAW_FUNC drawfunc);
 
@@ -257,8 +257,7 @@ typedef enum
 
 } VOPL_THREAD_TYPE;
 
-
-int  graphics1D_vopl_set_thread_type(int type); /* used for python driver */
+int  graphics1D_voplcurve_set_thread_type(int type); /* used for python driver */
 
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/

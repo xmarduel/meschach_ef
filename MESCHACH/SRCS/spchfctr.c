@@ -29,8 +29,6 @@
 
 */
 
-static char	rcsid[] = "$Id: spchfctr.c,v 1.2 2003/11/06 14:40:31 xavier Exp $";
-
 #include	"matrix.h"
 #include	"sparse.h"
 #include        "sparse2.h"

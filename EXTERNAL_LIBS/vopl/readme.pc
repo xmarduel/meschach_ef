@@ -1,0 +1,7 @@
+
+	To build a straight C version of the library use the build.bat
+	file. If you want the Fortran interfaces then use fbuild.bat.
+
+	In the makefiles (ie the ones ending in .msc), you'll have to 
+	change where -I option looks for the header file vogle.h. Also
+	you should have the vogle.lib in your library search path.

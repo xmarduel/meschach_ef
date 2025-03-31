@@ -30,8 +30,6 @@
 	factorisations.
 */
 
-static	char	rcsid[] = "$Id: hessen.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
-
 #include	"matrix.h"
 #include        "matrix2.h"
 

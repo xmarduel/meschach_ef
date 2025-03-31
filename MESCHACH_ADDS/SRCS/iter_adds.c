@@ -31,7 +31,7 @@ ITER_OUTPUT_INFO* iter_output_info(ITER_INFOe iter_output_type, const char* outp
 /* ------------------------------------------------------------------------------------------- */
 
 /* a new standard information : no output residuals in stdout */
-void iter_null_info(const ITER *ip, Real nres, VEC *res, VEC *Bres)
+void iter_null_info(ITER *ip, Real nres, VEC *res, VEC *Bres)
 {
    return;
 }
@@ -40,7 +40,7 @@ void iter_null_info(const ITER *ip, Real nres, VEC *res, VEC *Bres)
 /* ------------------------------------------------------------------------------------------- */
 
 /* a new standard information : output residuals in stdout (=iter_std_info") */
-void iter_std1_info(const ITER *ip, Real nres, VEC *res, VEC *Bres)
+void iter_std1_info(ITER *ip, Real nres, VEC *res, VEC *Bres)
 {
    /* check input */
    if ( !ip )  error(E_NULL, "iter_std1_info");
@@ -60,7 +60,7 @@ void iter_std1_info(const ITER *ip, Real nres, VEC *res, VEC *Bres)
 /* ------------------------------------------------------------------------------------------- */
 
 /* a new standard information : output residuals in a file */
-void iter_std2_info(const ITER *ip, Real nres, VEC *res, VEC *Bres)
+void iter_std2_info(ITER *ip, Real nres, VEC *res, VEC *Bres)
 {
 #ifdef MESCHACH__ITER_EXTENSIONS
    /* check input */
@@ -84,7 +84,7 @@ void iter_std2_info(const ITER *ip, Real nres, VEC *res, VEC *Bres)
 /* ------------------------------------------------------------------------------------------- */
 
 /* a new standard information : output residuals in a file + stdout */
-void iter_std3_info(const ITER *ip, Real nres, VEC *res, VEC *Bres)
+void iter_std3_info(ITER *ip, Real nres, VEC *res, VEC *Bres)
 {
 #ifdef MESCHACH__ITER_EXTENSIONS
    /* check input */

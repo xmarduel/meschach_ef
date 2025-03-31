@@ -1,0 +1,12 @@
+del src\*.obj
+del src\*.lib
+del src\*.map
+del src\msfort\*.asm
+del src\msfort\*.exe
+del src\msfort\*.obj
+del examples\*.obj
+del examples\*.exe
+del examples\*.map
+del gpp\*.obj
+del gpp\*.exe
+del gpp\*.map

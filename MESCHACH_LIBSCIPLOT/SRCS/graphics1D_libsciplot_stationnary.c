@@ -103,7 +103,7 @@ int graphics1D_libsciplot_init_multigrapher(const char *driver, Display * displa
 void graphics1D_libsciplot_initialize(const char *driver, int window_size_x, int window_size_y, int nx, int ny)
 {
    /* create a queue , set it in a static data  */
-   SVQueue *queue = svqueue_new(libsciplot_graphdata_clone, libsciplot_graphdata_free);
+   SVQueue *queue = svqueue_new((CLONE_FUNC)libsciplot_graphdata_clone, (FREED_FUNC)libsciplot_graphdata_free);
 
    svqueue_libsciplot_set_static(queue);
    

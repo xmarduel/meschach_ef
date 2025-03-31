@@ -18,6 +18,14 @@ extern "C"
 /*--------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------*/
 
+void * vopl_curve_with_xt_toolkit(void *pdata); /* function sent to the thread */
+void * vopl_contour_with_xt_toolkit(void *pdata); /* function sent to the thread */
+
+int  graphics1D_voplcontour_set_thread_type(int type);
+
+/*--------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------*/
+
 int  graphics1D_vopl_plotcurve(void);
 int  graphics1D_vopl_plotcontour(void);
 

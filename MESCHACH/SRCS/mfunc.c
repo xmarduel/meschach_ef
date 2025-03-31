@@ -32,8 +32,6 @@
 #include "matrix.h"
 #include "matrix2.h"
 
-static char	rcsid[] = "$Id: mfunc.c,v 1.1 2003/08/09 16:25:32 xavier Exp $";
-
 
 
 /* _m_pow -- computes integer powers of a square matrix A, A^p

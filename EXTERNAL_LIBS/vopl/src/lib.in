@@ -1,0 +1,17 @@
+vopl.lib
+Y
++adjustsc &
++axis &
++cubicsp &
++err &
++lsfit &
++mem &
++plot &
++savestr &
++scalers &
++spline &
++ilinfit &
++switches 
+
+
+

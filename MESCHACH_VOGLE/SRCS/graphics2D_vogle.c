@@ -325,7 +325,7 @@ VOGLE_SURFACE_DATA *surfacedata_new(void)
    out->show_miniref     = 1;
 
    /* the drawing function */
-   out->draw = drawscene2D;
+   out->draw = (VOGLE_DRAW_FUNC)drawscene2D;
 
    out->setup_view     = setup_view;
    out->setup_objects  = setup_objects;

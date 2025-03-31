@@ -8,7 +8,8 @@ extern "C"
 #endif
 
 char *str_build(const char* format, ...);
-   
+char *str_replace(const char* input, const char* substring, const char *replace);
+
 #ifdef __cplusplus
 }
 #endif

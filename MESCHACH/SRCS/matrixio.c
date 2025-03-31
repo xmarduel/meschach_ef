@@ -22,17 +22,12 @@
 **
 ***************************************************************************/
 
-
-/* 1.6 matrixio.c 11/25/87 */
-
 #include        "matrix.h"
 
 #if defined(__cplusplus) && defined(CODE_WARRIOR)
 inline int putc(int _C, FILE *_Str)  {return ((_Str->_Next
 	< _Str->_Wend ? (*_Str->_Next++ = _C) : fputc(_C, _Str))); }
 #endif
-
-static char rcsid[] = "$Id: matrixio.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 
 /* local variables */

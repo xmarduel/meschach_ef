@@ -1,0 +1,462 @@
+
+
+
+VOPL(3)                                                   VOPL(3)
+
+
+NAME
+       VOPL - A very ordinary plotting library.
+
+
+DESCRIPTION
+       VOPL  is a library of C routines for doing graph plots. It
+       handles histograms and
+        a variety of fits and scalings, together  with  providing
+       defaults  for  positioning  graph titles, axis titles, and
+       labels.  VOPL may be called from C or FORTRAN.
+
+       adjustscale(points, number, axis)
+              Adjust the auto scaling on axis axis for the points
+              in points.
+
+                   Fortran:
+                        subroutine adjustscale(points, number, axis)
+                        real points(number)
+                        integer number
+                        character *1 axis
+
+                   C:
+                        adjustscale(points, number, axis)
+                             float     points[];
+                             int  number;
+                             char axis;
+
+
+       range(min, max, axis)
+              Specify the range min to max for the axis axis.
+
+                   Fortran:
+                        subroutine range(min, max, axis)
+                        real min, max
+                        character *1 axis
+
+                   C:
+                        range(min, max, axis)
+                             float     min, max;
+                             char axis;
+
+
+       graphtitle(title)
+              Specify the title for the graph.
+
+                   Fortran:
+                        subroutine graphtitle(title)
+                        character*(*) title
+
+                   C:
+                        graphtitle(title)
+                             char *title;
+
+
+
+
+
+VOPL 1.2                 07 October 1993                        1
+
+
+
+
+
+VOPL(3)                                                   VOPL(3)
+
+
+       drawtitle()
+              Draw  the  graph  title.  Note:  this  is  done  by
+              drawaxes2, and drawaxes.
+
+                   Fortran:
+                        subroutine drawtitle()
+
+                   C:
+                        drawtitle()
+
+
+       axistitle(title, axis)
+              Specify the title for the axis axis.
+
+                   Fortran:
+                        subroutine axistitle(title, axis)
+                        character*(*) title
+                        character *1 axis
+
+                   C:
+                        axistitle(title, axis)
+                             char *title, axis;
+
+
+       hist2(x, y, n)
+              Display the 2-d histogram described by d. D  is  an
+              array  of  <ng>  groups  with  <ns> species in each
+              group. Names is an array with name for each  group.
+
+                   Fortran:
+                        subroutine hist2(d, ng, ns, names)
+                        real d(ns, ng)
+                        integer ng
+                        integer ns
+                        character*(*) names
+
+                   C:
+                        hist2(d, ng, ns, names)
+                             float     *d;
+                             int  ng;
+                             int  ns;
+                             char *names[];
+
+
+       histskip(h)
+              The  h argument points to an array of integers. The
+              array size should be the  same  as  the  number  of
+              groups,  and  a  non-zero value in an array element
+              will result in the group with the  same  number  as
+              the elemts index being skipped during the plot.
+
+                   Fortran:
+                        subroutine histskip(h)
+                        integer h(*)
+
+
+
+VOPL 1.2                 07 October 1993                        2
+
+
+
+
+
+VOPL(3)                                                   VOPL(3)
+
+
+                   C:
+                        histskip(h)
+                             int  *h;
+
+
+       plot2(x, y, n)
+              Plot the n points in the array x and y.
+
+                   Fortran:
+                        subroutine plot2(x, y, n)
+                        real x(n), y(n)
+                        integer n
+
+                   C:
+                        plot2(x, y, n)
+                             float     x[], y[];
+                             int  n;
+
+
+       fit(type)
+              Specify the fit type used to plot the data. Default
+              straight line fit.
+
+                   Fortran:
+                        subroutine fit(type)
+                        integer type
+
+                   C:
+                        fit(type)
+                             int type;
+
+                   Current fit types are:
+
+                        0    -    No lines at all.
+                        1    -    Straight line fit.
+                        2    -    Cubic spline fit.
+                        3    -    Least squares fit.
+                        4    -    Power equation fit.
+                        5    -    Saturated growth rate fit.
+
+
+       scaling(type, axis)
+              Specify the scaling type  for  axis  axis.  Default
+              linear.
+
+                   Fortran:
+                        subroutine scaling(type, axis)
+                        integer type
+                        character *1 axis
+
+                   C:
+                        scaling(type, axis)
+                             int  type;
+                             char axis;
+
+
+
+VOPL 1.2                 07 October 1993                        3
+
+
+
+
+
+VOPL(3)                                                   VOPL(3)
+
+
+                   Current  scaling  types are 0 for linear scal-
+              ing, 1 for logarithmic scaling.
+
+
+       endslopes(a, b)
+              Specify the endslopes for a cubic spline fit.
+
+                   Fortran:
+                        subroutine endslopes(a, b)
+                        real a, b
+
+                   C:
+                        endslopes(a, b)
+                             float     a, b;
+
+
+       degree(deg)
+              Specify  the  degree  for  the  least-squares  fit.
+              Default 3.
+
+                   Fortran:
+                        subroutine degree(deg)
+                        integer deg
+
+                   C:
+                        degree(deg)
+                             int  deg;
+
+
+       gridspacing(n, axis)
+              Specify  at  what n'th tickmarks the grid should be
+              drawn at. Default zero (no grid).
+
+                   Fortran:
+                        subroutine gridspacing(n, axis)
+                        integer n
+                        character *1 axis
+
+                   C:
+                        gridspacing(n, axis)
+                             int  n;
+                             char axis;
+
+
+       tickmarks(number, axis)
+              Specify the number of tickmarks on the axis axis.
+
+                   Fortran:
+                        subroutine tickmarks(number, axis)
+                        integer number
+                        character *1 axis
+
+                   C:
+                        tickmarks(number, axis)
+
+
+
+VOPL 1.2                 07 October 1993                        4
+
+
+
+
+
+VOPL(3)                                                   VOPL(3)
+
+
+                             int  number;
+                             char axis;
+
+
+       minorticks(number, axis)
+              Specify the number of minor tickmarks  between  the
+              major ticks on the axis axis.
+
+                   Fortran:
+                        subroutine minorticks(number, axis)
+                        integer number
+                        character *1 axis
+
+                   C:
+                        minorticks(number, axis)
+                             int  number;
+                             char axis;
+
+
+       drawaxis(axis)
+              Draw the axis given by axis.
+
+                   Fortran:
+                        subroutine drawaxis(axis)
+                        character *1 axis
+
+                   C:
+                        drawaxis(axis)
+                             char *axis;
+
+
+       drawaxes()
+              Draw the x, y, and z axes.
+
+                   Fortran:
+                        subroutine drawaxes()
+
+                   C:
+                        drawaxes()
+
+
+       drawaxes2()
+              Draw the x and y axes.
+
+                   Fortran:
+                        subroutine drawaxes2()
+
+                   C:
+                        drawaxes2()
+
+
+       annotation(format, axis)
+              Specify  the format for the labels at the tickmarks
+              on the axis. If  no  annotation  is  specified  the
+
+
+
+VOPL 1.2                 07 October 1993                        5
+
+
+
+
+
+VOPL(3)                                                   VOPL(3)
+
+
+              default is used. An empty string turns it off.
+
+                   Fortran:
+                        subroutine annotation(format, axis)
+                        character*(*) format
+                        character *1 axis
+
+                   C:
+                        annotation(format, axis)
+                             char *format, axis
+
+
+       graphprecision(number)
+              Specify  the  number  of  line segments making up a
+              curve in the graph.
+
+                   Fortran:
+                        subroutine graphprecision(number)
+                        integer number
+
+                   C:
+                        graphprecision(number)
+                             int  number;
+
+
+       marker(string)
+              Specify the current marker  string  which  will  be
+              drawn centered over data points.
+
+                   Fortran:
+                        subroutine marker(string)
+                        character*(*) string
+
+                   C:
+                        marker(string)
+                             char *string;
+
+
+       markerspacing(num)
+              Specify the marker spacing. Default 1.
+
+                   Fortran:
+                        subroutine markerspacing(num)
+                        integer num
+
+                   C:
+                        markerspacing(num)
+                             int  num;
+
+
+       markerscale(scale)
+              Specify  a  scaling factor for the size of markers.
+              Default 1.0.
+
+
+
+
+VOPL 1.2                 07 October 1993                        6
+
+
+
+
+
+VOPL(3)                                                   VOPL(3)
+
+
+                   Fortran:
+                        subroutine markscale(x, y)
+                        real x, y
+
+                   C:
+                        markscale(x, y)
+                             float     x, y;
+
+
+SEE ALSO
+       VOGLE(3),GPP(3)
+
+
+BUGS
+       The manual page isn't finished.  There isn't really any Z-
+       axis  stuff yet.  The Whole thing isn't finished and could
+       stand a total recode.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VOPL 1.2                 07 October 1993                        7
+
+

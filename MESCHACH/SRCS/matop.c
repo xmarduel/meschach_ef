@@ -23,12 +23,7 @@
 **
 ***************************************************************************/
 
-
-/* matop.c 1.3 11/25/87 */
-
 #include	"matrix.h"
-
-static	char	rcsid[] = "$Id: matop.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 
 /* m_add -- matrix addition -- may be in-situ */

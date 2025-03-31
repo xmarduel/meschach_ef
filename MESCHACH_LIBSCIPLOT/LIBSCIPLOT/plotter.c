@@ -1617,7 +1617,7 @@ extern void draw_y_axis_origin     (Multigrapher *multigrapher)
 
 extern void draw_frame_xlabel (Multigrapher *multigrapher)
 {
-   if ( (multigrapher->grid_spec != NO_AXES) && (multigrapher->x_axis.label != NULL)  && (multigrapher->x_axis.label != '\0') )
+   if ( (multigrapher->grid_spec != NO_AXES) && (multigrapher->x_axis.label != NULL  && *(multigrapher->x_axis.label) != '\0') )
    {
       double x_axis_font_size;
       double xloc;

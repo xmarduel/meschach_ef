@@ -31,7 +31,6 @@
   full advantage of specialised architectures (pipelining, vector
   processors etc).
   */
-static	char	*rcsid = "$Id: zmachine.c,v 1.3 2008/04/06 16:06:32 xavier Exp $";
 
 #include	"machine.h"
 #include    "zmatrix.h"

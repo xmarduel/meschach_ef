@@ -37,7 +37,7 @@ typedef struct XAW_WINVOGLE_
    int vogle_win;
 
    /* Xt id workproc */
-   int id_idleworkproc;
+   unsigned long id_idleworkproc;
 
    /* pointer to widgets */
    Widget * buttonStopRun;
@@ -530,7 +530,7 @@ void * vopl_curve_with_xt_toolkit_transient(void* data)
 
    int vogle_win = -1;
 
-   int id_idleworkproc;
+    unsigned long id_idleworkproc;
    /* on this separate thread, the Xt window ... */
    int ac    = 0;
    char **av = NULL;

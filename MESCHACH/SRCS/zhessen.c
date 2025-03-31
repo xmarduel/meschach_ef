@@ -31,7 +31,6 @@
 	Complex version
 */
 
-static	char	rcsid[] = "$Id: zhessen.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 #include  "zmatrix.h"
 #include  "zmatrix2.h"

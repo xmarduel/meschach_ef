@@ -22,9 +22,6 @@
 **
 ***************************************************************************/
 
-
-/* meminfo.c  revised  22/11/93 */
-
 /* 
   contains basic functions, types and arrays 
   to keep track of memory allocation/deallocation
@@ -39,8 +36,6 @@
 #include  "sparse.h"
 #include  "iter.h"
 #endif
-
-static char rcsid[] = "$Id: meminfo.c,v 1.5 2004/07/22 12:13:38 xavier Exp $";
 
 /* this array is defined further in this file */
 extern MEM_CONNECT mem_connect[MEM_CONNECT_MAX_LISTS];

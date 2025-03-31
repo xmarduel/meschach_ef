@@ -28,7 +28,6 @@
 	File for doing assorted I/O operations not invlolving
 	MAT/VEC/PERM objects
 */
-static	char	rcsid[] = "$Id: otherio.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 #include	"matrix.h"
 

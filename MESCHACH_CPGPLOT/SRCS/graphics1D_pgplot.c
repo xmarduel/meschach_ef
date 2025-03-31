@@ -297,9 +297,8 @@ void drawscene_pgplot1D(const PGPLOT_CURVE_DATA *dataplot )
 void graphics1D_cpgplot_initialize(const char *driver, int window_size_x, int window_size_y, int nx, int ny)
 {
    int k;
-	
    /* create a queue , set it in a static data  */
-   SVQueue *queue = svqueue_new(pgplot_graphdata_clone, pgplot_graphdata_free);
+   SVQueue *queue = svqueue_new((CLONE_FUNC)pgplot_graphdata_clone, (FREED_FUNC)pgplot_graphdata_free);
 	
    svqueue_pgplot_set_static(queue);
 	
@@ -307,7 +306,6 @@ void graphics1D_cpgplot_initialize(const char *driver, int window_size_x, int wi
    PGPLOT_GRAPH_DATA *pdata = pgplot_graphdata_new(nx,ny);
 	
    strncpy(pdata->driver, driver, 15);
-	
    pdata->window_size_x = window_size_x;
    pdata->window_size_y = window_size_y;
 	

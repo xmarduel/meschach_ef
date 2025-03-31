@@ -25,7 +25,6 @@
 
 #include	"matrix.h"
 #include	"zmatrix.h"
-static	char	rcsid[] = "$Id: zvecop.c,v 1.2 2003/12/08 20:05:20 xavier Exp $";
 
 
 
