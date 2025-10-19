@@ -111,7 +111,7 @@ Params_set_oneparam(MyParams, "finite_elements_params","name_ef", "P1" )    # Ty
 Params_set_oneparam(MyParams, "matrix_solver_params","resolution_method", "CG" )     # Methode : DIRECT-METHOD,CG,CGS,GMRES(k)
 Params_set_oneparam(MyParams, "matrix_solver_params","preconditionning", "NULL" )   # Precond : NULL, ICH, ILU
 
-Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/schwarz.msh" )  #  Mesh File ("name.dat")
+Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/GITHUB/meschach_ef/EF_MESHES/2D/schwarz.msh" )  #  Mesh File ("name.dat")
 Params_set_oneparam(MyParams, "geometry_params","meshtype", "gmsh" )  #  Mesh File ("name.dat")
 Params_set_oneparam(MyParams, "geometry_params","meshname", "" )  #  Mesh File ("name.dat")
 

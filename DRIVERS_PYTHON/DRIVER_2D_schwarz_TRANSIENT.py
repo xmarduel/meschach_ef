@@ -105,7 +105,7 @@ Params_set_oneparam(MyParams, "time_params", "DT",         0.1 )
 
 #- geometry-----------------------------------------------------------------------------
 
-Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/schwarz.msh" )  #  Mesh File ("name.dat")
+Params_set_oneparam(MyParams, "geometry_params", "meshfile", "/Users/xavier/GITHUB/meschach_ef/EF_MESHES/2D/schwarz.msh" )  #  Mesh File ("name.dat")
 Params_set_oneparam(MyParams, "geometry_params", "meshtype", "gmsh" )  #  Mesh File ("name.dat")
 Params_set_oneparam(MyParams, "geometry_params", "meshname", "" )  #  Mesh File ("name.dat")
 

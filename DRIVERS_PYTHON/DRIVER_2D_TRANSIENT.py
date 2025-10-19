@@ -87,9 +87,9 @@ Params_set_oneparam(MyParams, "time_params","DT",         0.02  ) #
 #- geometry-----------------------------------------------------------------------------
 
 #Params_set_oneparam(MyParams, "geometry_params","meshfile", "CUBE_12.emc2" )  #  Mesh File ("name.dat")
-Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/DEVELOPMENT/MESCHACH_WORK/EF_MESHES/2D/mesh2D.quad" )  #  Mesh File ("name.dat")
+Params_set_oneparam(MyParams, "geometry_params","meshfile", "/Users/xavier/GITHUB/meschach_ef/EF_MESHES/2D/mesh2D.quad" )  #  Mesh File ("name.dat")
 Params_set_oneparam(MyParams, "geometry_params","meshtype", "quad3" )  #  Mesh File ("name.dat")
-Params_set_oneparam(MyParams, "geometry_params","meshname", "MESH_20" )  #  Mesh File ("name.dat")
+Params_set_oneparam(MyParams, "geometry_params","meshname", "MESH_40" )  #  Mesh File ("name.dat")
 #Params_set_oneparam(MyParams, "geometry_params","meshfile", "cube2D_P1_v3.gmsh" )  #  Mesh File ("name.dat")
 
 Params_set_oneparam(MyParams, "graphics_output_params","GNUPLOT",     0) # GNUPLOT
