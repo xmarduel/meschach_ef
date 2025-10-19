@@ -196,3 +196,4 @@ _xset_with_funcs
 
 _str_build
 _str_replace
+_str_replace2

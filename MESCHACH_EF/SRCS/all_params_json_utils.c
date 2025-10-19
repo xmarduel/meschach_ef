@@ -219,7 +219,7 @@ int json_check_data(const char* path, const char* schema, char *res)
       return 1;
    }
 
-   FILE *tmp = fopen("schema_without_comments.json", "w");
+   FILE *tmp = fopen("input_without_comments.json", "w");
 
    fprintf(tmp, "%s", text);
    fclose(tmp);
@@ -227,13 +227,16 @@ int json_check_data(const char* path, const char* schema, char *res)
    char cmd[CMDSIZE];
    char PYTHON_EXE[16] = "python3";
    char CHECKER[32]    = "JSON_SCHEMAS/check_json.py";
-   char JSON_FILE[32]  = "schema_without_comments.json";
+   char JSON_FILE[32]  = "input_without_comments.json";
 
    char checker_abs_path[512];
    Params_get_absolute_path(CHECKER, checker_abs_path);
 
    snprintf(cmd, CMDSIZE, "%s %s %s %s", PYTHON_EXE, checker_abs_path, JSON_FILE, schema);
-
+   // snprintf(cmd, CMDSIZE, "%s", "python3 --version");
+    
+   printf("cmd = %s", cmd);
+    
    FILE *stream;
    char line[1024];
 

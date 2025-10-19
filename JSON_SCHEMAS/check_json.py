@@ -1,9 +1,8 @@
 import sys
+import json
 
 from jsonschema import validate as json_validate
 from jsonschema import Draft4Validator
-
-import json
 
 import clean_json
 

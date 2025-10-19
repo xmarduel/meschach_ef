@@ -1087,10 +1087,13 @@ static QUAD_MESH_DATA* Geom2D_quad_read_file(const char *meshfile , const char* 
 
    char schema_abs_path[512];
    Params_get_absolute_path(meshfile_schema, schema_abs_path);
+    
+   char meshfile_resolved[256];
+   Params_resolve_envvars(meshfile, meshfile_resolved);
 
-   int status = json_check_data(meshfile, schema_abs_path, validation_output);
+   int status = json_check_data(meshfile_resolved, schema_abs_path, validation_output);
 
-   printf("mesh %s : %s\n", meshfile, validation_output);
+   printf("mesh %s [%s] : %s\n", meshfile_resolved, meshfile, validation_output);
 
    if ( status != 0 )
    {

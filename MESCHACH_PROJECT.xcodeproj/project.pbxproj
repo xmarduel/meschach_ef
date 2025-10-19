@@ -361,6 +361,20 @@
 			remoteGlobalIDString = 2578204611CE717600293CB2;
 			remoteInfo = libsciplot;
 		};
+		251B6DC92D9EF2580021E5FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 257820A311CE717600293CB2;
+			remoteInfo = libmeschach;
+		};
+		251B6DCB2D9EF25F0021E5FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 257820A311CE717600293CB2;
+			remoteInfo = libmeschach;
+		};
 		251E82EF14B8FA930055F7BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 25459F160A7B655C004F50D1 /* Project object */;
@@ -3063,6 +3077,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				251B6DCC2D9EF25F0021E5FB /* PBXTargetDependency */,
 			);
 			name = libmeschach_threaded;
 			productName = libmeschach_threaded;
@@ -3219,6 +3234,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				251B6DCA2D9EF2580021E5FB /* PBXTargetDependency */,
 				2570D13311D89DDE00DB56B8 /* PBXTargetDependency */,
 				2578229511CE717700293CB2 /* PBXTargetDependency */,
 			);
@@ -3559,7 +3575,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo `pwd`; \necho \"this is the current folder\"; \nmake --directory MESCHACH_THREADED/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
+			shellScript = "echo `pwd`; make --directory MESCHACH_THREADED/SWIG_INTERFACES -f makefile_swig_python_extension all\n";
 		};
 		2578208411CE717600293CB2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3631,9 +3647,13 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
+				"$(SRCROOT)/MESCHACH_VOGLE/SWIG_INTERFACES/meschach_vogle_wrap.c",
 			);
 			outputPaths = (
+				"$(SRCROOT)/PYTHON_EXTENSIONS/meschach_vogle.so",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4076,6 +4096,16 @@
 			target = 2578204611CE717600293CB2 /* libsciplot */;
 			targetProxy = 2501C940132A28DB000265ED /* PBXContainerItemProxy */;
 		};
+		251B6DCA2D9EF2580021E5FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 257820A311CE717600293CB2 /* libmeschach */;
+			targetProxy = 251B6DC92D9EF2580021E5FB /* PBXContainerItemProxy */;
+		};
+		251B6DCC2D9EF25F0021E5FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 257820A311CE717600293CB2 /* libmeschach */;
+			targetProxy = 251B6DCB2D9EF25F0021E5FB /* PBXContainerItemProxy */;
+		};
 		251E82F014B8FA930055F7BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2578205811CE717600293CB2 /* libvogle-2.0 */;
@@ -4352,7 +4382,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CONFIGURATION_BUILD_DIR = MESCHACH_LIBS;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = "";
@@ -4367,8 +4397,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = .;
+				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = .;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_CFLAGS = (
@@ -4405,7 +4436,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CONFIGURATION_BUILD_DIR = MESCHACH_LIBS;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -4415,8 +4446,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = .;
+				INSTALL_PATH = /Users/xavier/x_local/lib;
 				LIBRARY_SEARCH_PATHS = .;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_CFLAGS = (

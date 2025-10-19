@@ -9,6 +9,7 @@ extern "C"
 
 char *str_build(const char* format, ...);
 char *str_replace(const char* input, const char* substring, const char *replace);
+void str_replace2(char* input, const char* substring, const char *replace);
 
 #ifdef __cplusplus
 }

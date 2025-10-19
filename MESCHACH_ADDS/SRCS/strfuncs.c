@@ -62,3 +62,11 @@ char *str_replace(const char* original, const char* pattern, const char *replace
     return returned;
   }
 }
+
+
+void str_replace2(char* original, const char* pattern, const char *replacement)
+{
+    char *res = str_replace(original, pattern, replacement);
+    strcpy(original, res);
+    
+}

@@ -8,6 +8,7 @@
 
 #include "MESCHACH_ADDS/INCLUDES/matrix_adds.h"
 #include "MESCHACH_ADDS/INCLUDES/eigen.h"
+#include "MESCHACH_ADDS/INCLUDES/strfuncs.h"
 
 #include "MESCHACH_EF/INCLUDES/all_params.h"
 #include "MESCHACH_EF/INCLUDES/all_params_datas.h"
@@ -72,6 +73,33 @@ void Params_get_absolute_path(const char* input_file, char* absolute_input_file)
       fprintf(stderr, "BUFSIZE of %d was too small. Aborting\n", BUFSIZE);
       exit(1);
    }
+}
+
+/*-----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------*/
+
+void Params_resolve_envvars(const char* string, char* resolved_string)
+{
+   char envvar_value[BUFSIZE];
+   char *envvar = "MESCHACH_EF";
+
+   // Make sure envar actually exists
+   if ( !getenv(envvar) )
+   {
+      fprintf(stderr, "The environment variable %s was not found.\n", envvar);
+      exit(1);
+   }
+
+   // Make sure the buffer is large enough to hold the environment variable value.
+   if (snprintf(envvar_value, BUFSIZE, "%s", getenv(envvar) ) >= BUFSIZE)
+   {
+      fprintf(stderr, "BUFSIZE of %d was too small. Aborting\n", BUFSIZE);
+      exit(1);
+   }
+
+   //printf("PATH: %s\n", path);
+    strcpy(resolved_string, string);
+    str_replace2(resolved_string, "${MESCHACH_EF}", envvar_value);
 }
 
 /*-----------------------------------------------------------------------------------------*/

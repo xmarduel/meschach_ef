@@ -1,0 +1,98 @@
+How to build on linux
+---------------------
+
+There are 2 makefiles provided for this task
+- Makefile_Debian
+- Makefile_Debian_PY_WRAPPERS
+
+The first one compiles static libraries from the sources and build
+the 5 "c drivers" demos executables. For this, you have to have -DHAVE_LUA
+because the c code use lua in order to interpret the functions "code".
+
+So copy the makefile "Makefile_Debian"
+in the root directory and type
+
+> make all
+
+
+
+The second one also compiles static libraries but with -fPIC option so that
+these libraries can be themselves linked to shared libraries. And it is the case
+as the python extension modules are built.
+One problem is that the external libraries (spooles etc) have to be also build
+with the -fPIC flag if they are not. This is unfortunately the case for
+- libamd
+- libspooles
+- liblua
+
+
+So first you should try to build the external libs as they are and
+use the Makefile_Debian makefile as a first try. Upon success, you can
+try then to build the pythons wrappers (and thus use the python demos)
+
+What need to be done with the makefile "Makefile_Debian_PY_WRAPPERS" ?
+
+- amd:
+------
+
+edit the makefile
+
+-C = gcc -arch x86_64
++#C = gcc -arch x86_64
++C = gcc
+
+-       libtool -s -o libamd.a amd_i_aat.o amd_i_1.o amd_i_2.o amd_i_dump.o \
++       ar rc -o libamd.a amd_i_aat.o amd_i_1.o amd_i_2.o amd_i_dump.o \
+            amd_i_postorder.o amd_i_post_tree.o amd_i_defaults.o amd_i_order.o \
+            amd_i_control.o amd_i_info.o amd_i_valid.o amd_l_aat.o amd_l_1.o \
+            amd_l_2.o amd_l_dump.o amd_l_postorder.o amd_l_post_tree.o \
+            amd_l_defaults.o amd_l_order.o amd_l_control.o amd_l_info.o \
+            amd_l_valid.o amd_i_transpose.o amd_l_transpose.o
+-
++       ranlib libamd.a
+
+
+?? what ?? I omit including -fPIC and it can be linked ??
+
+
+- spooles
+---------
+
+in Make.inc:
+
+-# CC = gcc -arch x86_64
+-# CC = /usr/lang-4.0/bin/cc
++CC = gcc
+
+
+-  CFLAGS = $(OPTLEVEL)
++  CFLAGS = $(OPTLEVEL) -fPIC
+
+
+- lua
+-----
+
+in Makefile:
+
+-CC= gcc -std=gnu99
++CC= gcc -std=gnu99 -fPIC
+
+
+Of course for the python module you have to install swig. Paths in the makefile
+are all for the Debian system.
+
+So copy the makefile "Makefile_Debian_PY_WRAPPERS" in the root directory and type
+> make lib
+> make exe
+> make py
+> make install
+
+
+- lapack (install with Debian package manager)
+-----------------------------------------------
+
+make alias for the installed libs folder (needs root rights)
+
+>ln -s liblapack.so.3 liblapack.so
+>ln -s libcblas.so.3 libcblas.so 
+
