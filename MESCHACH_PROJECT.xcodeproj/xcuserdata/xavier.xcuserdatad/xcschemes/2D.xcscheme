@@ -29,8 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -54,8 +52,38 @@
             ReferencedContainer = "container:MESCHACH_PROJECT.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "MESCHACH_EF"
+            value = "/Users/xavier/GITHUB/meschach_ef"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "DISPLAY"
+            value = ":0"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PYTHONPATH"
+            value = ".:/Users/xavier/GITHUB/meschach_ef/PYTHON_WRAPPERS:/Users/xavier/GITHUB/meschach_ef/PYTHON_EXTENSIONS"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "LD_LIBRARY_PATH"
+            value = "/Users/xavier/GITHUB/meschach_ef/MESCHACH_LIBS:/Users/xavier/GITHUB/meschach_ef/EXTERNAL_LIBS/pgplot"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "HOME"
+            value = "/Users/xavier"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PYTHON_EXE"
+            value = "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       displayScaleIsEnabled = "NO"

@@ -88,6 +88,11 @@
             value = "/usr/local/lib/hershey"
             isEnabled = "YES">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PYTHON_EXE"
+            value = "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction

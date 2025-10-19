@@ -84,6 +84,11 @@
             value = "/Users/xavier/GITHUB/meschach_ef/EXTERNAL_LIBS/pgplot/grfont.dat"
             isEnabled = "YES">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PYTHON_EXE"
+            value = "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction

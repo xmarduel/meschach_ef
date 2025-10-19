@@ -225,7 +225,7 @@ int json_check_data(const char* path, const char* schema, char *res)
    fclose(tmp);
 
    char cmd[CMDSIZE];
-   char PYTHON_EXE[16] = "python3";
+   char* PYTHON_EXE = getenv("PYTHON_EXE");
    char CHECKER[32]    = "JSON_SCHEMAS/check_json.py";
    char JSON_FILE[32]  = "input_without_comments.json";
 
